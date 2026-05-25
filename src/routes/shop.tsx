@@ -156,6 +156,7 @@ function ShopPage() {
             <div key={s.l} className="px-4 py-6 text-center">
               <div style={serif} className="text-4xl md:text-5xl text-ink leading-none">{s.n}</div>
               <div className="mt-2 text-xs md:text-sm text-body uppercase tracking-wider">{s.l}</div>
+              {s.sub && <div className="mt-1 text-[10px] text-body/60 normal-case tracking-normal">{s.sub}</div>}
             </div>
           ))}
         </div>
