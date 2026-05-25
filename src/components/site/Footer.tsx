@@ -18,9 +18,7 @@ export function Footer() {
           <Link to="/shop" className="py-1 hover:text-white">Shop</Link>
           <Link to="/why-tired" className="py-1 hover:text-white">Why You're Tired</Link>
           <Link to="/contact" className="py-1 hover:text-white">Contact</Link>
-          <Link to="/shipping" className="py-1 hover:text-white">Shipping & Returns</Link>
           <Link to="/privacy" className="py-1 hover:text-white">Privacy Policy</Link>
-          <Link to="/terms" className="py-1 hover:text-white">Terms of Service</Link>
         </div>
         <div className="text-sm space-y-2">
           <a href="mailto:support.circuit@gmail.com" className="block hover:text-white">support.circuit@gmail.com</a>
