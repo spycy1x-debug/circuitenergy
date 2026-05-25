@@ -7,7 +7,7 @@ import logoImg from "@/assets/logo.png";
 function Logo() {
   return (
     <Link to="/" className="flex items-center" aria-label="Circuit Energy home">
-      <img src={logoImg} alt="Circuit" className="h-12 md:h-16 w-auto object-contain" />
+      <img src={logoImg} alt="Circuit" className="h-12 md:h-16 w-auto object-contain mix-blend-multiply" />
     </Link>
   );
 }
