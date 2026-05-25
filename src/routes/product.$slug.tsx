@@ -5,7 +5,13 @@ import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
-import { useAddToCart, PRODUCTS } from "@/lib/cart";
+import { PRODUCTS } from "@/lib/cart";
+import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
+
+const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
+  neural: { productId: "8951258808474", buttonText: "Sharpen Your Mind" },
+  nmn: { productId: "8951254876314", buttonText: "Fix Your Energy" },
+};
 
 type ProductData = {
   id: "neural" | "nmn";
@@ -201,8 +207,6 @@ function ProductPage() {
   const [imgIdx, setImgIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
-  const { state, add } = useAddToCart();
-  const product = PRODUCTS[p.id];
   const related = PRODUCTS[p.related.id];
 
   return (
@@ -250,13 +254,9 @@ function ProductPage() {
               <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-12 flex items-center justify-center hover:bg-secondary"><Plus className="h-4 w-4"/></button>
             </div>
           </div>
-          <button
-            onClick={()=>add(product, qty)}
-            disabled={state!=="idle"}
-            className="mt-4 w-full inline-flex items-center justify-center rounded-md bg-primary px-6 py-4 text-base font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.01] disabled:opacity-80"
-          >
-            {state==="adding" ? "Adding..." : state==="added" ? "Added! ✓" : `Add to Cart — $${(p.price*qty).toFixed(2)}`}
-          </button>
+          <div className="mt-4 w-full">
+            <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+          </div>
 
           <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-muted-foreground">
             <Trust icon={Lock} text="Secure Checkout"/>
