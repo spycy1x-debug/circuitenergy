@@ -82,14 +82,14 @@ export const PRODUCTS = {
   neural: {
     id: "neural",
     name: "Circuit Neural Performance",
-    price: 44.99,
+    price: 42.99,
     image: neuralImg,
     slug: "neural-performance",
   },
   nmn: {
     id: "nmn",
     name: "Circuit NMN",
-    price: 59.99,
+    price: 49.99,
     image: nmnImg,
     slug: "nmn",
   },
