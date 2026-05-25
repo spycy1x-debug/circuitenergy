@@ -38,7 +38,7 @@ function ShopPage() {
             <h2 className="text-2xl mt-1">{p.title}</h2>
             <div className="mt-2 flex items-center gap-2 text-sm">
               <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-              <span className="text-muted-foreground">4.7 ({p.reviews})</span>
+              <span className="text-muted-foreground">{p.rating} ({p.reviews})</span>
             </div>
             <div className="text-2xl font-display font-bold text-ink mt-2">${p.price}</div>
             <p className="mt-3 text-body text-sm">{p.desc}</p>
