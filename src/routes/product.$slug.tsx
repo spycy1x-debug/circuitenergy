@@ -5,7 +5,7 @@ import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
-import { useAddToCart, PRODUCTS } from "@/lib/cart";
+import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
 const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
