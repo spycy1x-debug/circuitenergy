@@ -2,15 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
+import logoImg from "@/assets/logo.png";
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2 font-display font-bold text-xl tracking-tight text-ink">
-      <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink">
-        <span className="absolute h-1.5 w-1.5 rounded-full bg-primary -top-0.5 left-1" />
-        <span className="absolute h-1.5 w-1.5 rounded-full bg-primary bottom-0 -right-0.5" />
-      </span>
-      CIRCUIT
+    <Link to="/" className="flex items-center" aria-label="Circuit Energy home">
+      <img src={logoImg} alt="Circuit" className="h-9 md:h-10 w-auto object-contain" />
     </Link>
   );
 }
