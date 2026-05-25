@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Facebook, Music2 } from "lucide-react";
 
 export function Footer() {
   return (
@@ -8,11 +7,6 @@ export function Footer() {
         <div>
           <div className="text-white font-display font-bold text-xl tracking-tight">CIRCUIT</div>
           <p className="mt-3 text-sm text-[#999]">You're Not Tired. Your Cells Are.</p>
-          <div className="mt-5 flex gap-4">
-            <a href="#" aria-label="Instagram" className="hover:text-white"><Instagram className="h-5 w-5" /></a>
-            <a href="#" aria-label="TikTok" className="hover:text-white"><Music2 className="h-5 w-5" /></a>
-            <a href="#" aria-label="Facebook" className="hover:text-white"><Facebook className="h-5 w-5" /></a>
-          </div>
         </div>
         <div className="grid grid-cols-2 gap-2 text-sm">
           <Link to="/shop" className="py-1 hover:text-white">Shop</Link>
