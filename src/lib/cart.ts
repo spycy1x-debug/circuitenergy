@@ -75,19 +75,22 @@ export function useAddToCart() {
   return { state, add };
 }
 
+import neuralImg from "@/assets/neural-bottle.png";
+import nmnImg from "@/assets/nmn-bottle.png";
+
 export const PRODUCTS = {
   neural: {
     id: "neural",
     name: "Circuit Neural Performance",
     price: 44.99,
-    image: "/src/assets/neural-bottle.png",
+    image: neuralImg,
     slug: "neural-performance",
   },
   nmn: {
     id: "nmn",
     name: "Circuit NMN",
     price: 59.99,
-    image: "/src/assets/nmn-bottle.png",
+    image: nmnImg,
     slug: "nmn",
   },
 };
