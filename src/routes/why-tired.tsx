@@ -125,7 +125,7 @@ function WhyTiredPage() {
             Ready to <em style={serif} className="italic font-normal">fix it?</em>
           </h2>
           <p className="mt-5 text-lg text-body">
-            Start with Neural Performance for focus, NMN for cellular energy, or stack both.
+            Start with Neural Performance for ​, NMN for cellular ​, or stack both.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/shop" className="btn-primary">Shop Circuit</Link>
