@@ -21,12 +21,12 @@ export const Route = createFileRoute("/")({
 const tickerItems = ["Natural Ingredients", "No Artificial Additives", "Third-Party Tested", "60-Day Guarantee", "Made in USA", "500+ Reviews", "Clinically Studied Ingredients"];
 
 const benefits = [
-  { icon: Brain, title: "Razor-Sharp Focus", desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes." },
-  { icon: Zap, title: "No More Afternoon Crashes", desc: "Sustained energy from morning to evening. No 2pm wall. No jitters. Just consistent output that lasts all day." },
-  { icon: Shield, title: "Natural. No Artificial Additives.", desc: "Every ingredient in Circuit Neural Performance is high-quality and natural. No fillers, no proprietary blends, no compromises." },
-  { icon: Atom, title: "Fixes the Root Cause", desc: "Circuit NMN boosts NAD+ at the cellular level — the molecule your mitochondria need to produce energy. Not a band-aid. An actual fix." },
-  { icon: CalendarCheck, title: "Works Within 1-2 Weeks", desc: "Most users notice improvements in mental clarity and energy within 7-14 days of consistent daily use." },
-  { icon: MoonStar, title: "Wake Up Actually Rested", desc: "Better cellular energy and neurotransmitter balance means better sleep quality. You'll wake up feeling like yourself again." },
+  { icon: Brain, title: "Razor-Sharp Focus", desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Cognition" },
+  { icon: Zap, title: "No More Afternoon Crashes", desc: "Sustained energy from morning to evening. No 2pm wall. No jitters. Just consistent output that lasts all day.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Energy" },
+  { icon: Shield, title: "Natural. No Additives.", desc: "Every ingredient in Circuit Neural Performance is high-quality and natural. No fillers, no proprietary blends, no compromises.", accent: "var(--success)", tint: "oklch(0.38 0.09 140 / 0.12)", tag: "Clean" },
+  { icon: Atom, title: "Fixes the Root Cause", desc: "Circuit NMN boosts NAD+ at the cellular level — the molecule your mitochondria need to produce energy. Not a band-aid. An actual fix.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.12)", tag: "Cellular" },
+  { icon: CalendarCheck, title: "Works in 1-2 Weeks", desc: "Most users notice improvements in mental clarity and energy within 7-14 days of consistent daily use.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Fast" },
+  { icon: MoonStar, title: "Wake Up Actually Rested", desc: "Better cellular energy and neurotransmitter balance means better sleep quality. You'll wake up feeling like yourself again.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Recovery" },
 ];
 
 const painPoints = [
@@ -174,20 +174,38 @@ function HomePage() {
       </section>
 
       {/* WHY CIRCUIT */}
-      <section className="py-20 md:py-28">
-        <div className="container-x">
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute -top-40 -left-32 h-[480px] w-[480px] rounded-full blur-3xl opacity-30" style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }} />
+        <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 h-[520px] w-[520px] rounded-full blur-3xl opacity-25" style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }} />
+        <div className="container-x relative">
           <div className="max-w-3xl">
-            <h2 className="text-3xl md:text-5xl">Why You're Always Tired and Foggy<br className="hidden md:block"/> (And How to Actually Fix It)</h2>
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase mb-5 border border-border bg-secondary">
+              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--energy)" }} />
+              <span className="text-ink/80">The Circuit Advantage</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl">Why You're Always Tired and Foggy<br className="hidden md:block"/> <span className="italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>(And How to Actually Fix It)</span></h2>
             <p className="mt-5 text-lg text-body">Your brain and body run on the same fuel. When that fuel runs low, everything suffers — energy, focus, memory, mood.</p>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {benefits.map(({icon:Icon,title,desc})=>(
-              <div key={title} className="group rounded-xl border border-border bg-card p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                <div className="h-12 w-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-5">
-                  <Icon className="h-6 w-6"/>
+            {benefits.map(({icon:Icon,title,desc,accent,tint,tag}, idx)=>(
+              <div
+                key={title}
+                className="group relative rounded-2xl border border-border p-7 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                style={{ background: `linear-gradient(180deg, ${tint} 0%, var(--card) 70%)` }}
+              >
+                <div aria-hidden className="absolute -top-16 -right-16 h-40 w-40 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity" style={{ background: accent }} />
+                <div aria-hidden className="absolute top-0 left-0 right-0 h-1" style={{ background: accent }} />
+                <div className="relative flex items-start justify-between mb-5">
+                  <div className="h-14 w-14 rounded-xl flex items-center justify-center ring-1 ring-border bg-card shadow-sm" style={{ color: accent }}>
+                    <Icon className="h-7 w-7" strokeWidth={2}/>
+                  </div>
+                  <span className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full bg-ink/5 text-ink/60">{tag}</span>
                 </div>
-                <h3 className="text-xl mb-2">{title}</h3>
-                <p className="text-sm text-body leading-relaxed">{desc}</p>
+                <div className="relative">
+                  <div className="text-[11px] font-mono text-ink/40 mb-1">0{idx+1}</div>
+                  <h3 className="text-xl mb-2">{title}</h3>
+                  <p className="text-sm text-body leading-relaxed">{desc}</p>
+                </div>
               </div>
             ))}
           </div>
