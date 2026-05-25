@@ -60,33 +60,37 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="border-b border-border">
-        <div className="container-x py-12 md:py-20 grid gap-12 md:grid-cols-2 items-center">
-          <div>
-            <div className="inline-block rounded-full bg-destructive/10 text-destructive px-4 py-1.5 text-xs md:text-sm font-semibold mb-6">
-              Brain fog by 2pm? Can't focus? Exhausted no matter how much you sleep?
+      <section className="relative isolate overflow-hidden border-b border-border">
+        <img
+          src={heroImg}
+          alt="Circuit Energy lifestyle"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+        />
+        {/* Readability overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+
+        <div className="container-x relative py-24 md:py-36 lg:py-44">
+          <div className="max-w-2xl text-white">
+            <div className="inline-block rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-1.5 text-xs md:text-sm font-semibold mb-6">
+              Brain fog by 2pm? Exhausted no matter how much you sleep?
             </div>
-            <h1 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tight">
+            <h1 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tight text-white">
               Your Brain Isn't Broken.<br/>
-              <span className="text-primary">It's Under-Fueled.</span>
+              <span className="text-primary-foreground/90">It's Under-Fueled.</span>
             </h1>
-            <p className="mt-6 text-lg text-body max-w-xl">
+            <p className="mt-6 text-lg text-white/85 max-w-xl">
               Circuit combines cellular energy support and advanced cognitive enhancement — so you can think clearly, work sharply, and feel like yourself again.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/shop" className="btn-primary">Shop the Collection</Link>
-              <a href="#science" className="btn-outline">See How It Works</a>
+              <a href="#products" className="btn-white">See the Products</a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs md:text-sm text-muted-foreground">
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs md:text-sm text-white/80">
               {["No Artificial Additives","Works in 1-2 Weeks","60-Day Guarantee","500+ 4.7★ Reviews"].map((t)=>(
                 <div key={t} className="flex items-center gap-1.5"><Check className="h-4 w-4 text-success"/>{t}</div>
               ))}
-            </div>
-          </div>
-          <div className="relative">
-            <img src={heroImg} alt="Person holding Circuit supplement bottle with family in background" className="rounded-2xl shadow-2xl w-full object-cover" loading="eager" />
-            <div className="absolute -bottom-4 -right-4 md:bottom-6 md:right-6 bg-white shadow-xl rounded-full px-4 py-2 text-xs font-semibold flex items-center gap-1.5 border border-border">
-              <Sparkles className="h-4 w-4 text-primary"/>Most Popular: Neural Performance
             </div>
           </div>
         </div>
@@ -100,6 +104,39 @@ function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-primary"/>{t}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* PRODUCTS — moved directly below hero */}
+      <section id="products" className="bg-secondary py-20 md:py-28">
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-5xl">Fix Your Energy. Sharpen Your Mind.</h2>
+            <p className="mt-5 text-lg text-body">Two formulas. One mission: help you feel and think like yourself again.</p>
+          </div>
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            <ProductCard
+              hero
+              slug="neural-performance"
+              image={neuralImg}
+              title="Circuit Neural Performance"
+              subtitle="Focus & Cognitive Enhancement"
+              price="$44.99"
+              desc="A precision blend of 10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A, and more — for all-day mental clarity, sharp focus, and long-term brain health."
+              benefits={["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"]}
+              cta="Sharpen Your Mind"
+            />
+            <ProductCard
+              slug="nmn"
+              image={nmnImg}
+              title="Circuit NMN"
+              subtitle="Cellular Energy & Longevity"
+              price="$59.99"
+              desc="Boosts NAD+ for all-day cellular energy, reduced crashes, and healthy aging at the mitochondrial level. The foundation your body needs."
+              benefits={["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"]}
+              cta="Fix Your Energy"
+            />
+          </div>
         </div>
       </section>
 
