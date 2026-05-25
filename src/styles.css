@@ -36,6 +36,9 @@
   --color-ring: var(--ring);
   --color-ink: var(--ink);
   --color-body: var(--body);
+  --color-energy: var(--energy);
+  --color-energy-foreground: var(--energy-foreground);
+  --color-electric: var(--electric);
 }
 
 :root {
