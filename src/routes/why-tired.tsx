@@ -63,7 +63,7 @@ function WhyTiredPage() {
           {[
             { n: "50%", l: "NAD+ drop by age 40" },
             { n: "2pm", l: "the daily crash" },
-            { n: "20m", l: "average focus span" },
+            { n: "20m", l: "average ​ span" },
             { n: "0", l: "what caffeine restores" },
           ].map((s) => (
             <div key={s.l} className="px-4 py-6 text-center">
