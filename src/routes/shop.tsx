@@ -14,8 +14,8 @@ export const Route = createFileRoute("/shop")({
 });
 
 const products = [
-  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", reviews: 234, desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — for all-day mental clarity and sharp focus.", benefits: ["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"], cta: "Sharpen Your Mind" },
-  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", reviews: 198, desc: "500mg NMN per serving. Restores NAD+ for sustained cellular energy and reduced afternoon crashes.", benefits: ["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"], cta: "Fix Your Energy" },
+  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", rating: 4.7, reviews: 234, desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — for all-day mental clarity and sharp focus.", benefits: ["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"], cta: "Sharpen Your Mind" },
+  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", rating: 4.6, reviews: 198, desc: "500mg NMN per serving. Restores NAD+ for sustained cellular energy and reduced afternoon crashes.", benefits: ["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"], cta: "Fix Your Energy" },
 ];
 
 function ShopPage() {
@@ -38,7 +38,7 @@ function ShopPage() {
             <h2 className="text-2xl mt-1">{p.title}</h2>
             <div className="mt-2 flex items-center gap-2 text-sm">
               <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-              <span className="text-muted-foreground">4.7 ({p.reviews})</span>
+              <span className="text-muted-foreground">{p.rating} ({p.reviews})</span>
             </div>
             <div className="text-2xl font-display font-bold text-ink mt-2">${p.price}</div>
             <p className="mt-3 text-body text-sm">{p.desc}</p>
