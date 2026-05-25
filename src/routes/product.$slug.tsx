@@ -190,7 +190,10 @@ export const Route = createFileRoute("/product/$slug")({
   }),
   component: ProductPage,
   notFoundComponent: () => <div className="container-x py-20 text-center">Product not found.</div>,
-  errorComponent: ({ error }) => <div className="container-x py-20 text-center">{error.message}</div>,
+  errorComponent: ({ error }) => {
+    console.error(error);
+    return <div className="container-x py-20 text-center">Something went wrong. Please try again or return to the shop.</div>;
+  },
 });
 
 function ProductPage() {
