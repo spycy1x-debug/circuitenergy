@@ -31,24 +31,58 @@ export function Header() {
   ] as const;
 
   return (
-    <header className={`sticky top-0 z-40 bg-white transition-shadow ${scrolled ? "shadow-sm" : ""}`}>
-      <div className="container-x flex h-16 items-center justify-between">
+    <header
+      className={`sticky top-0 z-40 transition-all backdrop-blur-md ${scrolled ? "shadow-md" : "shadow-sm"}`}
+      style={{
+        background:
+          "linear-gradient(180deg, oklch(0.99 0.005 250 / 0.92) 0%, oklch(0.97 0.012 245 / 0.88) 100%)",
+        borderBottom: "1px solid oklch(0.9 0.015 245)",
+      }}
+    >
+      {/* Accent gradient stripe */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-[2px] opacity-80"
+        style={{ background: "var(--gradient-energy)" }}
+      />
+      {/* Subtle radial glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-12 left-1/3 h-32 w-[420px] rounded-full blur-3xl opacity-40"
+        style={{ background: "radial-gradient(circle, var(--energy), transparent 65%)" }}
+      />
+      <div className="container-x relative flex h-16 items-center justify-between">
         <div className="flex items-center gap-10">
           <Logo />
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-ink/80">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-semibold text-ink/75">
             {links.map((l) => (
-              <Link key={l.to} to={l.to} className="hover:text-ink transition-colors">{l.label}</Link>
+              <Link
+                key={l.to}
+                to={l.to}
+                className="relative py-1 hover:text-ink transition-colors [&.active]:text-ink group"
+              >
+                {l.label}
+                <span
+                  aria-hidden
+                  className="absolute left-0 right-0 -bottom-0.5 h-[2px] scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"
+                  style={{ background: "var(--gradient-energy)" }}
+                />
+              </Link>
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-4 text-ink/80">
-          <button aria-label="Search" className="hidden md:inline-flex hover:text-ink"><Search className="h-5 w-5" /></button>
-          <button aria-label="Account" className="hidden md:inline-flex hover:text-ink"><User className="h-5 w-5" /></button>
-          <Link to="/cart" aria-label="Cart" className="relative inline-flex items-center gap-1.5 hover:text-ink">
-            <ShoppingBag className="h-5 w-5" />
-            <span className="text-sm font-medium">({count})</span>
+        <div className="flex items-center gap-2 text-ink/80">
+          <button aria-label="Search" className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5 hover:text-ink transition-colors"><Search className="h-[18px] w-[18px]" /></button>
+          <button aria-label="Account" className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5 hover:text-ink transition-colors"><User className="h-[18px] w-[18px]" /></button>
+          <Link
+            to="/cart"
+            aria-label="Cart"
+            className="relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 ring-1 ring-ink/10 bg-white/60 hover:bg-white hover:ring-ink/20 hover:text-ink transition-all shadow-sm"
+          >
+            <ShoppingBag className="h-[18px] w-[18px]" />
+            <span className="text-sm font-semibold">({count})</span>
           </Link>
-          <button aria-label="Menu" className="md:hidden" onClick={() => setOpen((o) => !o)}>
+          <button aria-label="Menu" className="md:hidden h-9 w-9 inline-flex items-center justify-center rounded-full hover:bg-ink/5" onClick={() => setOpen((o) => !o)}>
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
