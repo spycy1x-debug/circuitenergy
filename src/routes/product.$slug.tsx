@@ -119,7 +119,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     name: "Circuit NMN",
     subtitle: "Cellular Energy & Longevity Support",
     price: 49.99,
-    rating: 4.7,
+    rating: 4.6,
     reviews: 198,
     badge: "Best Seller",
     images: [nmnImg, nmnTrio],
