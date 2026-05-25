@@ -14,8 +14,8 @@ export const Route = createFileRoute("/shop")({
 });
 
 const products = [
-  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", reviews: 234, desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — for all-day mental clarity and sharp focus.", benefits: ["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"], cta: "Sharpen Your Mind" },
-  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", reviews: 198, desc: "500mg NMN per serving. Restores NAD+ for sustained cellular energy and reduced afternoon crashes.", benefits: ["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"], cta: "Fix Your Energy" },
+  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", rating: 4.7, reviews: 234, desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — for all-day mental clarity and sharp focus.", benefits: ["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"], cta: "Sharpen Your Mind" },
+  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", rating: 4.6, reviews: 198, desc: "500mg NMN per serving. Restores NAD+ for sustained cellular energy and reduced afternoon crashes.", benefits: ["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"], cta: "Fix Your Energy" },
 ];
 
 function ShopPage() {
