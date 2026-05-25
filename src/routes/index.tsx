@@ -209,38 +209,8 @@ function HomePage() {
         </div>
       </section>
 
-      {/* PRODUCTS */}
-      <section className="bg-secondary py-20 md:py-28">
-        <div className="container-x">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-5xl">Fix Your Energy. Sharpen Your Mind.</h2>
-            <p className="mt-5 text-lg text-body">Two formulas. One mission: help you feel and think like yourself again.</p>
-          </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-2">
-            <ProductCard
-              hero
-              slug="neural-performance"
-              image={neuralImg}
-              title="Circuit Neural Performance"
-              subtitle="Focus & Cognitive Enhancement"
-              price="$44.99"
-              desc="A precision blend of 10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A, and more — for all-day mental clarity, sharp focus, and long-term brain health."
-              benefits={["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"]}
-              cta="Sharpen Your Mind"
-            />
-            <ProductCard
-              slug="nmn"
-              image={nmnImg}
-              title="Circuit NMN"
-              subtitle="Cellular Energy & Longevity"
-              price="$59.99"
-              desc="Boosts NAD+ for all-day cellular energy, reduced crashes, and healthy aging at the mitochondrial level. The foundation your body needs."
-              benefits={["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"]}
-              cta="Fix Your Energy"
-            />
-          </div>
-        </div>
-      </section>
+
+
 
       {/* HOW IT WORKS */}
       <section className="py-20 md:py-28">
