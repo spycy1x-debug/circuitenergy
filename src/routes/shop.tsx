@@ -151,7 +151,7 @@ function ShopPage() {
             { n: "60", l: "Day guarantee" },
             { n: "10k+", l: "Bottles shipped" },
             { n: "4.7★", l: "Average rating" },
-            { n: "Free", l: "US shipping" },
+            { n: "Free", l: "US shipping", sub: "orders over $75" },
           ].map((s) => (
             <div key={s.l} className="px-4 py-6 text-center">
               <div style={serif} className="text-4xl md:text-5xl text-ink leading-none">{s.n}</div>
