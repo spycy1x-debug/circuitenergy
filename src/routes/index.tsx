@@ -59,38 +59,71 @@ const faqs = [
 function HomePage() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative isolate overflow-hidden border-b border-border">
-        <img
-          src={heroImg}
-          alt="Circuit Energy lifestyle"
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="eager"
-        />
-        {/* Readability overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+      {/* HERO — split-screen, vibrant gradient + fully visible photo */}
+      <section className="relative isolate overflow-hidden border-b border-border" style={{ background: "var(--gradient-hero)" }}>
+        {/* Decorative glows */}
+        <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 h-[520px] w-[520px] rounded-full blur-3xl opacity-40" style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }} />
+        <div aria-hidden className="pointer-events-none absolute -bottom-40 right-1/3 h-[460px] w-[460px] rounded-full blur-3xl opacity-30" style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }} />
+        {/* Subtle grid */}
+        <div aria-hidden className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
 
-        <div className="container-x relative py-24 md:py-36 lg:py-44">
-          <div className="max-w-2xl text-white">
-            <div className="inline-block rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-1.5 text-xs md:text-sm font-semibold mb-6">
-              Brain fog by 2pm? Exhausted no matter how much you sleep?
+        <div className="container-x relative grid gap-10 md:gap-12 md:grid-cols-2 items-center py-16 md:py-24 lg:py-28">
+          {/* Copy */}
+          <div className="text-white relative">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] md:text-xs font-semibold tracking-wide uppercase mb-6 border border-white/15 bg-white/5 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "var(--energy)" }} />
+              <span className="text-white/90">Cellular Energy + Cognitive Performance</span>
             </div>
-            <h1 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tight text-white">
-              Your Brain Isn't Broken.<br/>
-              <span className="text-primary-foreground/90">It's Under-Fueled.</span>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-white">
+              Your Brain Isn't<br/>
+              Broken.{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10 italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                  It's Under-Fueled.
+                </span>
+              </span>
             </h1>
-            <p className="mt-6 text-lg text-white/85 max-w-xl">
-              Circuit combines cellular energy support and advanced cognitive enhancement — so you can think clearly, work sharply, and feel like yourself again.
+            <p className="mt-6 text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
+              Circuit pairs cellular NAD+ support with advanced nootropics — so you can think clearly, work sharply, and finally feel like yourself again.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/shop" className="btn-primary">Shop the Collection</Link>
+              <Link to="/shop" className="btn-primary shadow-xl shadow-black/30">Shop the Collection</Link>
               <a href="#products" className="btn-white">See the Products</a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs md:text-sm text-white/80">
-              {["No Artificial Additives","Works in 1-2 Weeks","60-Day Guarantee","500+ 4.7★ Reviews"].map((t)=>(
-                <div key={t} className="flex items-center gap-1.5"><Check className="h-4 w-4 text-success"/>{t}</div>
+            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
+              {[
+                { k: "500+", v: "Verified reviews" },
+                { k: "4.7★", v: "Avg. rating" },
+                { k: "60-Day", v: "Money-back" },
+                { k: "1-2 wks", v: "To feel it" },
+              ].map((s) => (
+                <div key={s.k} className="border-l-2 pl-3" style={{ borderColor: "var(--energy)" }}>
+                  <div className="text-white font-display text-xl md:text-2xl font-bold">{s.k}</div>
+                  <div className="text-[11px] md:text-xs text-white/60 uppercase tracking-wide">{s.v}</div>
+                </div>
               ))}
+            </div>
+          </div>
+
+          {/* Image — fully contained, never cropped */}
+          <div className="relative">
+            <div aria-hidden className="absolute inset-0 -m-6 rounded-[2rem] blur-2xl opacity-50" style={{ background: "var(--gradient-energy)" }} />
+            <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 shadow-2xl bg-white/5 backdrop-blur-sm">
+              <img
+                src={heroImg}
+                alt="Active people using Circuit Energy supplements"
+                className="w-full h-auto object-cover aspect-square"
+                loading="eager"
+              />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl bg-white/95 backdrop-blur px-4 py-3 shadow-lg">
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-body/60 font-semibold">Most Popular</div>
+                  <div className="text-sm font-display font-bold text-ink">Neural Performance</div>
+                </div>
+                <Link to="/product/$slug" params={{ slug: "neural-performance" }} className="text-xs font-semibold rounded-full px-3 py-1.5 text-white" style={{ background: "var(--gradient-energy)" }}>
+                  Shop →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
