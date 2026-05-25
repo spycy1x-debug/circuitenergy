@@ -207,8 +207,6 @@ function ProductPage() {
   const [imgIdx, setImgIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
-  const { state, add } = useAddToCart();
-  const product = PRODUCTS[p.id];
   const related = PRODUCTS[p.related.id];
 
   return (
