@@ -21,12 +21,12 @@ export const Route = createFileRoute("/")({
 const tickerItems = ["Natural Ingredients", "No Artificial Additives", "Third-Party Tested", "60-Day Guarantee", "Made in USA", "500+ Reviews", "Clinically Studied Ingredients"];
 
 const benefits = [
-  { icon: Brain, title: "Razor-Sharp Focus", desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes." },
-  { icon: Zap, title: "No More Afternoon Crashes", desc: "Sustained energy from morning to evening. No 2pm wall. No jitters. Just consistent output that lasts all day." },
-  { icon: Shield, title: "Natural. No Artificial Additives.", desc: "Every ingredient in Circuit Neural Performance is high-quality and natural. No fillers, no proprietary blends, no compromises." },
-  { icon: Atom, title: "Fixes the Root Cause", desc: "Circuit NMN boosts NAD+ at the cellular level — the molecule your mitochondria need to produce energy. Not a band-aid. An actual fix." },
-  { icon: CalendarCheck, title: "Works Within 1-2 Weeks", desc: "Most users notice improvements in mental clarity and energy within 7-14 days of consistent daily use." },
-  { icon: MoonStar, title: "Wake Up Actually Rested", desc: "Better cellular energy and neurotransmitter balance means better sleep quality. You'll wake up feeling like yourself again." },
+  { icon: Brain, title: "Razor-Sharp Focus", desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Cognition" },
+  { icon: Zap, title: "No More Afternoon Crashes", desc: "Sustained energy from morning to evening. No 2pm wall. No jitters. Just consistent output that lasts all day.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Energy" },
+  { icon: Shield, title: "Natural. No Additives.", desc: "Every ingredient in Circuit Neural Performance is high-quality and natural. No fillers, no proprietary blends, no compromises.", accent: "var(--success)", tint: "oklch(0.38 0.09 140 / 0.12)", tag: "Clean" },
+  { icon: Atom, title: "Fixes the Root Cause", desc: "Circuit NMN boosts NAD+ at the cellular level — the molecule your mitochondria need to produce energy. Not a band-aid. An actual fix.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.12)", tag: "Cellular" },
+  { icon: CalendarCheck, title: "Works in 1-2 Weeks", desc: "Most users notice improvements in mental clarity and energy within 7-14 days of consistent daily use.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Fast" },
+  { icon: MoonStar, title: "Wake Up Actually Rested", desc: "Better cellular energy and neurotransmitter balance means better sleep quality. You'll wake up feeling like yourself again.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Recovery" },
 ];
 
 const painPoints = [
