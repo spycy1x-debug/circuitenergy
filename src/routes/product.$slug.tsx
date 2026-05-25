@@ -6,6 +6,12 @@ import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
 import { useAddToCart, PRODUCTS } from "@/lib/cart";
+import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
+
+const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
+  neural: { productId: "8951258808474", buttonText: "Sharpen Your Mind" },
+  nmn: { productId: "8951254876314", buttonText: "Fix Your Energy" },
+};
 
 type ProductData = {
   id: "neural" | "nmn";
