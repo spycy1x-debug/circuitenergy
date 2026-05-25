@@ -264,25 +264,53 @@ function HomePage() {
 
 
       {/* HOW IT WORKS */}
-      <section className="py-20 md:py-28">
-        <div className="container-x">
+      <section className="py-20 md:py-28 bg-secondary relative overflow-hidden">
+        {/* Decorative glows */}
+        <div aria-hidden className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-[400px] w-[600px] rounded-full blur-3xl opacity-30" style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }} />
+        <div aria-hidden className="pointer-events-none absolute -bottom-20 left-1/4 h-[300px] w-[300px] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }} />
+
+        <div className="container-x relative">
           <div className="text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase mb-5 border border-border bg-white">
+              <CalendarCheck className="h-3.5 w-3.5" style={{ color: "var(--energy)" }} />
+              <span className="text-ink/80">Simple Routine</span>
+            </div>
             <h2 className="text-3xl md:text-5xl">How Circuit Works</h2>
-            <p className="mt-5 text-lg text-body">Simple to take. Powerful results.</p>
+            <p className="mt-5 text-lg text-body">Simple to take. Powerful results. Three steps to feeling like yourself again.</p>
           </div>
-          <div className="mt-14 grid gap-10 md:grid-cols-3">
+
+          <div className="mt-16 grid gap-8 md:grid-cols-3 relative">
+            {/* Connecting line for desktop */}
+            <div aria-hidden className="hidden md:block absolute top-16 left-[16.67%] right-[16.67%] h-0.5" style={{ background: "linear-gradient(90deg, var(--primary) 0%, var(--electric) 50%, var(--energy) 100%)" }} />
+
             {[
-              {icon:Pill,title:"Take Daily",desc:"One capsule of Neural Performance each morning. Two capsules of NMN each morning. With or without food. Consistency is everything."},
-              {icon:Brain,title:"Ingredients Activate",desc:"Alpha GPC, Huperzine A, and L-Theanine begin supporting neurotransmitter function. NMN converts to NAD+ and restores cellular energy production."},
-              {icon:Sparkles,title:"Feel the Difference",desc:"Within 1-2 weeks: sharper focus, no brain fog, no afternoon crashes, consistent energy all day."},
-            ].map((s,i)=>(
-              <div key={s.title} className="relative">
-                <div className="text-7xl font-display font-extrabold text-primary/10 leading-none">0{i+1}</div>
-                <div className="mt-[-2.5rem] relative">
-                  <div className="h-14 w-14 rounded-full bg-primary text-white flex items-center justify-center mb-5">
-                    <s.icon className="h-6 w-6"/>
+              {icon: Pill, title: "Take Daily", desc: "One capsule of Neural Performance each morning. Two capsules of NMN each morning. With or without food. Consistency is everything.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.08)"},
+              {icon: Brain, title: "Ingredients Activate", desc: "Alpha GPC, Huperzine A, and L-Theanine begin supporting neurotransmitter function. NMN converts to NAD+ and restores cellular energy production.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.08)"},
+              {icon: Sparkles, title: "Feel the Difference", desc: "Within 1-2 weeks: sharper focus, no brain fog, no afternoon crashes, consistent energy all day.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.1)"},
+            ].map((s, i) => (
+              <div key={s.title} className="relative flex flex-col items-center text-center group">
+                {/* Step number circle */}
+                <div className="relative z-10 mb-6">
+                  <div
+                    className="h-14 w-14 rounded-2xl flex items-center justify-center text-white font-display font-bold text-xl shadow-lg transition-transform duration-300 group-hover:scale-110"
+                    style={{ background: s.accent }}
+                  >
+                    0{i + 1}
                   </div>
-                  <h3 className="text-xl mb-2">{s.title}</h3>
+                </div>
+
+                {/* Card */}
+                <div
+                  className="rounded-2xl border border-border p-7 bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-full"
+                  style={{ background: `linear-gradient(180deg, ${s.tint} 0%, white 60%)` }}
+                >
+                  <div
+                    className="h-12 w-12 rounded-xl flex items-center justify-center mb-5 mx-auto"
+                    style={{ background: s.accent + "15", color: s.accent }}
+                  >
+                    <s.icon className="h-6 w-6" strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xl mb-3">{s.title}</h3>
                   <p className="text-body text-sm leading-relaxed">{s.desc}</p>
                 </div>
               </div>
