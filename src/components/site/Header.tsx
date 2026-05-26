@@ -4,14 +4,6 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
 import logoImg from "@/assets/logo.png";
 
-function Logo() {
-  return (
-    <Link to="/" className="flex items-center" aria-label="Circuit Energy home">
-      <img src={logoImg} alt="Circuit" className="h-12 md:h-16 w-auto object-contain" />
-    </Link>
-  );
-}
-
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -39,41 +31,54 @@ export function Header() {
         borderBottom: "1px solid oklch(0.9 0.015 245)",
       }}
     >
-      {/* Accent gradient stripe */}
       <div
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-[2px] opacity-80"
         style={{ background: "var(--gradient-energy)" }}
       />
-      {/* Subtle radial glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-12 left-1/3 h-32 w-[420px] rounded-full blur-3xl opacity-40"
         style={{ background: "radial-gradient(circle, var(--energy), transparent 65%)" }}
       />
-      <div className="container-x relative flex h-16 items-center justify-between">
-        <div className="flex items-center gap-10">
-          <Logo />
-          <nav className="hidden md:flex items-center gap-7 text-sm font-semibold text-ink/75">
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className="relative py-1 hover:text-ink transition-colors [&.active]:text-ink group"
-              >
-                {l.label}
-                <span
-                  aria-hidden
-                  className="absolute left-0 right-0 -bottom-0.5 h-[2px] scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"
-                  style={{ background: "var(--gradient-energy)" }}
-                />
-              </Link>
-            ))}
-          </nav>
+      <div className="container-x relative grid h-20 grid-cols-3 items-center">
+        {/* Left: menu */}
+        <div className="flex items-center justify-start">
+          <button
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-ink/5 hover:text-ink transition-colors"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
-        <div className="flex items-center gap-2 text-ink/80">
-          <button aria-label="Search" className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5 hover:text-ink transition-colors"><Search className="h-[18px] w-[18px]" /></button>
-          <button aria-label="Account" className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5 hover:text-ink transition-colors"><User className="h-[18px] w-[18px]" /></button>
+
+        {/* Center: logo */}
+        <div className="flex items-center justify-center">
+          <Link to="/" aria-label="Circuit Energy home" className="flex items-center">
+            <img
+              src={logoImg}
+              alt="Circuit"
+              className="h-14 sm:h-16 md:h-20 w-auto object-contain"
+            />
+          </Link>
+        </div>
+
+        {/* Right: actions */}
+        <div className="flex items-center justify-end gap-1.5 text-ink/80">
+          <button
+            aria-label="Search"
+            className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5 hover:text-ink transition-colors"
+          >
+            <Search className="h-[18px] w-[18px]" />
+          </button>
+          <button
+            aria-label="Account"
+            className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5 hover:text-ink transition-colors"
+          >
+            <User className="h-[18px] w-[18px]" />
+          </button>
           <Link
             to="/cart"
             aria-label="Cart"
@@ -82,16 +87,32 @@ export function Header() {
             <ShoppingBag className="h-[18px] w-[18px]" />
             <span className="text-sm font-semibold">({count})</span>
           </Link>
-          <button aria-label="Menu" className="md:hidden h-9 w-9 inline-flex items-center justify-center rounded-full hover:bg-ink/5" onClick={() => setOpen((o) => !o)}>
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
       </div>
+
+      {/* Slide-down nav panel */}
       {open && (
-        <nav className="md:hidden border-t border-border bg-white px-5 py-4 flex flex-col gap-3 text-sm font-medium">
+        <nav
+          className="border-t border-border bg-white/95 backdrop-blur-md px-5 py-4 flex flex-col gap-1 text-base font-medium"
+        >
           {links.map((l) => (
-            <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="py-1.5">{l.label}</Link>
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => setOpen(false)}
+              className="py-2 px-2 rounded-md hover:bg-ink/5 [&.active]:text-ink text-ink/80"
+            >
+              {l.label}
+            </Link>
           ))}
+          <div className="flex items-center gap-2 pt-3 mt-2 border-t border-border sm:hidden">
+            <button aria-label="Search" className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5">
+              <Search className="h-[18px] w-[18px]" />
+            </button>
+            <button aria-label="Account" className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5">
+              <User className="h-[18px] w-[18px]" />
+            </button>
+          </div>
         </nav>
       )}
     </header>
