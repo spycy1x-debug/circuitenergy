@@ -19,17 +19,35 @@ const SEARCH_INDEX: SearchItem[] = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
   const { count } = useCart();
   const navigate = useNavigate();
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      // Only hide/show if neither menu nor search is open
+      if (!open && !searchOpen) {
+        if (y > lastScrollY.current && y > 120) {
+          setHidden(true);
+        } else if (y < lastScrollY.current) {
+          setHidden(false);
+        }
+      }
+      lastScrollY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open, searchOpen]);
+
+  useEffect(() => {
+    if (open || searchOpen) setHidden(false);
+  }, [open, searchOpen]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
