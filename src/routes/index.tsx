@@ -460,8 +460,22 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
           <Sparkles className="h-3 w-3" /> Most Popular
         </div>
       )}
-      <div className="relative aspect-square rounded-2xl flex items-center justify-center mb-6 overflow-hidden bg-gradient-to-br from-secondary to-white ring-1 ring-border">
-        <img src={props.image} alt={props.title} className="max-h-80 object-contain transition-transform duration-500 group-hover:scale-105"/>
+      <div className="relative aspect-square rounded-2xl flex items-end justify-center mb-6 overflow-hidden bg-gradient-to-br from-secondary to-white ring-1 ring-border pb-8">
+        {/* Ground shadow ellipse */}
+        <div
+          aria-hidden
+          className="absolute left-1/2 bottom-6 -translate-x-1/2 h-6 w-[60%] rounded-[50%] bg-black/35 blur-xl transition-all duration-500 group-hover:w-[55%] group-hover:opacity-80"
+        />
+        <div
+          aria-hidden
+          className="absolute left-1/2 bottom-7 -translate-x-1/2 h-3 w-[45%] rounded-[50%] bg-black/25 blur-md"
+        />
+        <img
+          src={props.image}
+          alt={props.title}
+          className="relative max-h-80 object-contain transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-1"
+          style={{ filter: "drop-shadow(0 18px 12px rgba(0,0,0,0.25)) drop-shadow(0 30px 25px rgba(0,0,0,0.15))" }}
+        />
       </div>
       <div className="relative">
         <div className="text-xs uppercase tracking-[0.18em] text-primary font-bold">{props.subtitle}</div>
