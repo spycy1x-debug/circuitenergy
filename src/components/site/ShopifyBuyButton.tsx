@@ -81,6 +81,15 @@ export function ShopifyBuyButton({ productId, buttonText }: Props) {
               },
               text: { button: buttonText },
             },
+            productSet: {
+              styles: {
+                products: {
+                  "@media (min-width: 601px)": {
+                    "margin-left": "-20px",
+                  },
+                },
+              },
+            },
             modalProduct: {
               contents: { img: false, imgWithCarousel: true, button: false, buttonWithQuantity: true },
               styles: {
@@ -95,6 +104,7 @@ export function ShopifyBuyButton({ productId, buttonText }: Props) {
               },
               text: { button: "Add to cart" },
             },
+            option: {},
             cart: {
               styles: {
                 button: {
@@ -104,6 +114,7 @@ export function ShopifyBuyButton({ productId, buttonText }: Props) {
                 },
               },
               text: { total: "Subtotal", button: "Checkout" },
+              popup: false,
             },
             toggle: {
               styles: {
