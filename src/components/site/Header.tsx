@@ -87,7 +87,7 @@ export function Header() {
           className="pointer-events-none absolute -top-12 left-1/3 h-32 w-[420px] rounded-full blur-3xl opacity-40"
           style={{ background: "radial-gradient(circle, var(--energy), transparent 65%)" }}
         />
-        <div className="container-x relative grid h-32 md:h-44 grid-cols-3 items-center">
+        <div className="container-x relative grid h-20 md:h-24 grid-cols-3 items-center">
           <div className="flex items-center justify-start">
             <button
               aria-label="Menu"
@@ -104,7 +104,7 @@ export function Header() {
               <img
                 src={logoImg}
                 alt="Circuit"
-                className="block h-28 sm:h-32 md:h-40 w-auto object-contain"
+                className="block h-16 sm:h-20 md:h-24 w-auto object-contain"
               />
             </Link>
           </div>
@@ -138,7 +138,7 @@ export function Header() {
         {open && (
           <>
             <div
-              className="fixed inset-0 top-32 md:top-44 z-30 bg-ink/30 backdrop-blur-sm"
+              className="fixed inset-0 top-20 md:top-24 z-30 bg-ink/30 backdrop-blur-sm"
               onClick={() => setOpen(false)}
               aria-hidden
             />
