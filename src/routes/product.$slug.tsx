@@ -159,7 +159,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
       ],
     },
     use: {
-      dosage: "Take 2 capsules every morning, with or without food.",
+      dosage: "Take 1 capsule every morning, with or without food.",
       best: ["Take in the morning for all-day energy", "Stay consistent — effects compound over weeks"],
       timeline: [
         { period: "Week 1", text: "Subtle improvements in morning energy." },
