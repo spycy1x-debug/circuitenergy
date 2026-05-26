@@ -155,7 +155,7 @@ function HomePage() {
               title="Circuit Neural Performance"
               subtitle="Focus & Cognitive Enhancement"
               price="$42.99"
-              desc="A precision blend of 10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A, and more — for all-day mental clarity, sharp focus, and long-term brain health."
+              desc="A precision blend of **10 natural compounds** — **Alpha GPC**, **Bacopa**, **L-Theanine**, **Huperzine A**, and more — for **all-day mental clarity**, **sharp focus**, and **long-term brain health**."
               benefits={["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"]}
               cta="Sharpen Your Mind"
             />
@@ -165,7 +165,7 @@ function HomePage() {
               title="Circuit NMN"
               subtitle="Cellular Energy & Longevity"
               price="$49.99"
-              desc="Boosts NAD+ for all-day cellular energy, reduced crashes, and healthy aging at the mitochondrial level. The foundation your body needs."
+              desc="Boosts **NAD+** for **all-day cellular energy**, **reduced crashes**, and **healthy aging** at the **mitochondrial level**. The foundation your body needs."
               benefits={["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"]}
               cta="Fix Your Energy"
             />
