@@ -11,11 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhyTiredRouteImport } from './routes/why-tired'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/public/klaviyo-subscribe'
 
 const WhyTiredRoute = WhyTiredRouteImport.update({
@@ -26,6 +28,11 @@ const WhyTiredRoute = WhyTiredRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -53,6 +60,11 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
   path: '/product/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/admin/analytics',
+  path: '/admin/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicKlaviyoSubscribeRoute =
   ApiPublicKlaviyoSubscribeRouteImport.update({
     id: '/api/public/klaviyo-subscribe',
@@ -65,8 +77,10 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/product/$slug': typeof ProductSlugRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -75,8 +89,10 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/product/$slug': typeof ProductSlugRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -86,8 +102,10 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/product/$slug': typeof ProductSlugRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -98,8 +116,10 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/login'
     | '/shop'
     | '/why-tired'
+    | '/admin/analytics'
     | '/product/$slug'
     | '/api/public/klaviyo-subscribe'
   fileRoutesByTo: FileRoutesByTo
@@ -108,8 +128,10 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/login'
     | '/shop'
     | '/why-tired'
+    | '/admin/analytics'
     | '/product/$slug'
     | '/api/public/klaviyo-subscribe'
   id:
@@ -118,8 +140,10 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/login'
     | '/shop'
     | '/why-tired'
+    | '/admin/analytics'
     | '/product/$slug'
     | '/api/public/klaviyo-subscribe'
   fileRoutesById: FileRoutesById
@@ -129,8 +153,10 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
+  LoginRoute: typeof LoginRoute
   ShopRoute: typeof ShopRoute
   WhyTiredRoute: typeof WhyTiredRoute
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ProductSlugRoute: typeof ProductSlugRoute
   ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -149,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -186,6 +219,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/klaviyo-subscribe': {
       id: '/api/public/klaviyo-subscribe'
       path: '/api/public/klaviyo-subscribe'
@@ -201,8 +241,10 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
+  LoginRoute: LoginRoute,
   ShopRoute: ShopRoute,
   WhyTiredRoute: WhyTiredRoute,
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
   ProductSlugRoute: ProductSlugRoute,
   ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
 }
