@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero.png";
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
-import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
