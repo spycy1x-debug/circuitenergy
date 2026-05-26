@@ -148,7 +148,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
       ],
     },
     ingredients: {
-      serving: "Serving Size: 2 Capsules | Servings Per Container: 30",
+      serving: "Serving Size: 1 Capsule | Servings Per Container: 30",
       items: [{ name: "β-Nicotinamide Mononucleotide (NMN) — 500mg" }],
       other: "Other Ingredients: Vegetable cellulose (capsule), rice flour.",
       callouts: [
@@ -159,7 +159,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
       ],
     },
     use: {
-      dosage: "Take 2 capsules every morning, with or without food.",
+      dosage: "Take 1 capsule every morning, with or without food.",
       best: ["Take in the morning for all-day energy", "Stay consistent — effects compound over weeks"],
       timeline: [
         { period: "Week 1", text: "Subtle improvements in morning energy." },
