@@ -380,6 +380,65 @@ function HomePage() {
   );
 }
 
+function KlaviyoInlineForm() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setStatus("loading");
+    setMessage("");
+    try {
+      const res = await fetch("/api/public/klaviyo-subscribe", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+      setStatus("success");
+      setMessage("You're on the list — check your inbox shortly.");
+      setEmail("");
+    } catch {
+      setStatus("error");
+      setMessage("Network error. Please try again.");
+    }
+  };
+
+  return (
+    <>
+      <form className="mt-7 flex flex-col sm:flex-row gap-3 justify-center" onSubmit={onSubmit} noValidate>
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          maxLength={255}
+          placeholder="you@example.com"
+          autoComplete="email"
+          className="flex-1 max-w-sm rounded-md bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary"
+        />
+        <button
+          type="submit"
+          disabled={status === "loading" || status === "success"}
+          className="btn-primary inline-flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
+          {status === "success" ? "Subscribed" : status === "loading" ? "Subscribing…" : "Subscribe"}
+        </button>
+      </form>
+      {status === "error" && <p className="mt-3 text-sm text-[oklch(0.78_0.16_30)]">{message}</p>}
+      {status === "success" && <p className="mt-3 text-sm text-[oklch(0.85_0.15_150)]">{message}</p>}
+    </>
+  );
+}
+
 function ProductCard(props: { hero?: boolean; slug: string; image: string; title: string; subtitle: string; price: string; desc: string; benefits: string[]; cta: string }) {
   return (
     <div className={`relative rounded-2xl bg-white border ${props.hero ? "border-primary/40 shadow-xl" : "border-border"} p-8 flex flex-col`}>
