@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Search, User, ShoppingBag, Menu, X, ArrowUpRight, Sparkles, Zap, BookOpen, Mail, Home as HomeIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
 import logoImg from "@/assets/logo.png";
 
@@ -19,17 +19,35 @@ const SEARCH_INDEX: SearchItem[] = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
   const { count } = useCart();
   const navigate = useNavigate();
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      // Only hide/show if neither menu nor search is open
+      if (!open && !searchOpen) {
+        if (y > lastScrollY.current && y > 120) {
+          setHidden(true);
+        } else if (y < lastScrollY.current) {
+          setHidden(false);
+        }
+      }
+      lastScrollY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open, searchOpen]);
+
+  useEffect(() => {
+    if (open || searchOpen) setHidden(false);
+  }, [open, searchOpen]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -70,7 +88,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 transition-all backdrop-blur-md ${scrolled ? "shadow-md" : "shadow-sm"}`}
+        className={`sticky top-0 z-40 transition-all duration-300 backdrop-blur-md ${scrolled ? "shadow-md" : "shadow-sm"} ${hidden ? "-translate-y-full" : "translate-y-0"}`}
         style={{
           background:
             "linear-gradient(180deg, oklch(0.99 0.005 250 / 0.92) 0%, oklch(0.97 0.012 245 / 0.88) 100%)",
