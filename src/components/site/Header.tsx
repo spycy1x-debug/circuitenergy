@@ -104,7 +104,7 @@ export function Header() {
               <img
                 src={logoImg}
                 alt="Circuit"
-                className="h-20 sm:h-24 md:h-28 w-auto object-contain"
+                className="h-28 sm:h-32 md:h-40 w-auto object-contain"
               />
             </Link>
           </div>
