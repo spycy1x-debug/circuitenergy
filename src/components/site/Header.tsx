@@ -136,38 +136,161 @@ export function Header() {
         </div>
 
         {open && (
-          <nav className="border-t border-border bg-white/95 backdrop-blur-md px-5 py-4 flex flex-col gap-1 text-base font-medium">
-            {links.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                onClick={() => setOpen(false)}
-                className="py-2 px-2 rounded-md hover:bg-ink/5 [&.active]:text-ink text-ink/80"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <div className="flex items-center gap-2 pt-3 mt-2 border-t border-border sm:hidden">
-              <button
-                aria-label="Search"
-                onClick={() => {
-                  setOpen(false);
-                  setSearchOpen(true);
+          <>
+            <div
+              className="fixed inset-0 top-24 md:top-28 z-30 bg-ink/30 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
+              aria-hidden
+            />
+            <nav
+              className="relative z-40 border-t border-border overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(180deg, oklch(0.16 0.04 245) 0%, oklch(0.12 0.04 245) 100%)",
+              }}
+            >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -top-24 -left-20 h-72 w-[520px] rounded-full blur-3xl opacity-50"
+                style={{ background: "radial-gradient(circle, oklch(0.55 0.18 290 / 0.6), transparent 60%)" }}
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -bottom-24 -right-20 h-72 w-[520px] rounded-full blur-3xl opacity-50"
+                style={{ background: "radial-gradient(circle, oklch(0.6 0.18 55 / 0.5), transparent 60%)" }}
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(oklch(1 0 0 / 0.6) 1px, transparent 1px), linear-gradient(90deg, oklch(1 0 0 / 0.6) 1px, transparent 1px)",
+                  backgroundSize: "44px 44px",
                 }}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5"
-              >
-                <Search className="h-[18px] w-[18px]" />
-              </button>
-              <Link
-                to="/account"
-                aria-label="Account"
-                onClick={() => setOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-ink/5"
-              >
-                <User className="h-[18px] w-[18px]" />
-              </Link>
-            </div>
-          </nav>
+              />
+
+              <div className="container-x relative py-10 md:py-14 grid gap-10 md:grid-cols-[1.1fr_1fr]">
+                {/* Left: Navigation */}
+                <div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-semibold">
+                    Navigate
+                  </div>
+                  <ul className="mt-5 flex flex-col divide-y divide-white/10 border-y border-white/10">
+                    {[
+                      { to: "/", label: "Home", desc: "Back to the start", Icon: HomeIcon },
+                      { to: "/shop", label: "Shop", desc: "Neural Performance & NMN", Icon: Sparkles },
+                      { to: "/why-tired", label: "Why You're Tired", desc: "The science behind the slump", Icon: BookOpen },
+                      { to: "/contact", label: "Contact", desc: "Talk to the Circuit team", Icon: Mail },
+                    ].map(({ to, label, desc, Icon }) => (
+                      <li key={to}>
+                        <Link
+                          to={to}
+                          onClick={() => setOpen(false)}
+                          className="group flex items-center gap-4 py-4 text-white hover:bg-white/5 transition-colors -mx-2 px-2 rounded-xl"
+                        >
+                          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/15 backdrop-blur group-hover:bg-white/10 transition-colors">
+                            <Icon className="h-4 w-4 text-[oklch(0.85_0.15_70)]" />
+                          </span>
+                          <span className="flex-1">
+                            <span
+                              className="block text-2xl md:text-3xl leading-tight"
+                              style={{ fontFamily: '"Instrument Serif", Georgia, serif' }}
+                            >
+                              {label}
+                            </span>
+                            <span className="block text-xs text-white/55 mt-0.5">{desc}</span>
+                          </span>
+                          <ArrowUpRight className="h-4 w-4 text-white/40 group-hover:text-white group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6 flex items-center gap-2 sm:hidden">
+                    <button
+                      onClick={() => {
+                        setOpen(false);
+                        setSearchOpen(true);
+                      }}
+                      className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-white ring-1 ring-white/20 bg-white/5 hover:bg-white/10 transition-colors"
+                    >
+                      <Search className="h-4 w-4" /> Search
+                    </button>
+                    <Link
+                      to="/account"
+                      onClick={() => setOpen(false)}
+                      className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-white ring-1 ring-white/20 bg-white/5 hover:bg-white/10 transition-colors"
+                    >
+                      <User className="h-4 w-4" /> Account
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Right: Featured products */}
+                <div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-semibold">
+                    Featured
+                  </div>
+                  <div className="mt-5 grid gap-3">
+                    <Link
+                      to="/product/$slug"
+                      params={{ slug: "neural-performance" }}
+                      onClick={() => setOpen(false)}
+                      className="group relative overflow-hidden rounded-2xl p-5 ring-1 ring-white/15 bg-white/[0.04] hover:bg-white/[0.07] hover:ring-white/25 transition-all backdrop-blur"
+                    >
+                      <div
+                        aria-hidden
+                        className="absolute -top-10 -right-10 h-40 w-40 rounded-full blur-3xl opacity-60"
+                        style={{ background: "radial-gradient(circle, oklch(0.65 0.17 290 / 0.65), transparent 60%)" }}
+                      />
+                      <div className="relative flex items-start gap-3">
+                        <Sparkles className="h-5 w-5 text-[oklch(0.85_0.12_290)]" />
+                        <div className="flex-1">
+                          <div className="text-white font-semibold">Circuit Neural Performance</div>
+                          <div className="text-xs text-white/60 mt-1">Focus & cognitive enhancement — 10 natural compounds.</div>
+                          <div className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/90 group-hover:text-white">
+                            Shop now <ArrowUpRight className="h-3.5 w-3.5" />
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/product/$slug"
+                      params={{ slug: "nmn" }}
+                      onClick={() => setOpen(false)}
+                      className="group relative overflow-hidden rounded-2xl p-5 ring-1 ring-white/15 bg-white/[0.04] hover:bg-white/[0.07] hover:ring-white/25 transition-all backdrop-blur"
+                    >
+                      <div
+                        aria-hidden
+                        className="absolute -top-10 -right-10 h-40 w-40 rounded-full blur-3xl opacity-60"
+                        style={{ background: "radial-gradient(circle, oklch(0.7 0.18 55 / 0.6), transparent 60%)" }}
+                      />
+                      <div className="relative flex items-start gap-3">
+                        <Zap className="h-5 w-5 text-[oklch(0.85_0.15_70)]" />
+                        <div className="flex-1">
+                          <div className="text-white font-semibold">Circuit NMN</div>
+                          <div className="text-xs text-white/60 mt-1">Cellular energy & longevity — 500mg NMN per serving.</div>
+                          <div className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/90 group-hover:text-white">
+                            Shop now <ArrowUpRight className="h-3.5 w-3.5" />
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+
+                  <div className="mt-5 flex items-center gap-3 text-[11px] text-white/55">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.75_0.2_55)] animate-pulse" />
+                      Free shipping over $75
+                    </span>
+                    <span className="opacity-50">•</span>
+                    <span>60-day guarantee</span>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
