@@ -148,7 +148,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
       ],
     },
     ingredients: {
-      serving: "Serving Size: 2 Capsules | Servings Per Container: 30",
+      serving: "Serving Size: 1 Capsule | Servings Per Container: 30",
       items: [{ name: "β-Nicotinamide Mononucleotide (NMN) — 500mg" }],
       other: "Other Ingredients: Vegetable cellulose (capsule), rice flour.",
       callouts: [
