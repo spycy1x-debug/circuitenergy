@@ -87,7 +87,7 @@ export function Header() {
           className="pointer-events-none absolute -top-12 left-1/3 h-32 w-[420px] rounded-full blur-3xl opacity-40"
           style={{ background: "radial-gradient(circle, var(--energy), transparent 65%)" }}
         />
-        <div className="container-x relative grid h-24 md:h-28 grid-cols-3 items-center">
+        <div className="container-x relative grid h-28 md:h-36 grid-cols-3 items-center">
           <div className="flex items-center justify-start">
             <button
               aria-label="Menu"
@@ -100,11 +100,11 @@ export function Header() {
           </div>
 
           <div className="flex items-center justify-center">
-            <Link to="/" aria-label="Circuit Energy home" className="flex items-center">
+            <Link to="/" aria-label="Circuit Energy home" className="flex items-center justify-center">
               <img
                 src={logoImg}
                 alt="Circuit"
-                className="h-28 sm:h-32 md:h-40 w-auto object-contain"
+                className="block h-24 sm:h-28 md:h-32 w-auto object-contain"
               />
             </Link>
           </div>
