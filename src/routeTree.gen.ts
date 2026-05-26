@@ -16,6 +16,7 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/public/klaviyo-subscribe'
 
 const WhyTiredRoute = WhyTiredRouteImport.update({
   id: '/why-tired',
@@ -52,6 +53,12 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
   path: '/product/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicKlaviyoSubscribeRoute =
+  ApiPublicKlaviyoSubscribeRouteImport.update({
+    id: '/api/public/klaviyo-subscribe',
+    path: '/api/public/klaviyo-subscribe',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +68,7 @@ export interface FileRoutesByFullPath {
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +78,7 @@ export interface FileRoutesByTo {
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +89,7 @@ export interface FileRoutesById {
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +101,7 @@ export interface FileRouteTypes {
     | '/shop'
     | '/why-tired'
     | '/product/$slug'
+    | '/api/public/klaviyo-subscribe'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +111,7 @@ export interface FileRouteTypes {
     | '/shop'
     | '/why-tired'
     | '/product/$slug'
+    | '/api/public/klaviyo-subscribe'
   id:
     | '__root__'
     | '/'
@@ -109,6 +121,7 @@ export interface FileRouteTypes {
     | '/shop'
     | '/why-tired'
     | '/product/$slug'
+    | '/api/public/klaviyo-subscribe'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +132,7 @@ export interface RootRouteChildren {
   ShopRoute: typeof ShopRoute
   WhyTiredRoute: typeof WhyTiredRoute
   ProductSlugRoute: typeof ProductSlugRoute
+  ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/klaviyo-subscribe': {
+      id: '/api/public/klaviyo-subscribe'
+      path: '/api/public/klaviyo-subscribe'
+      fullPath: '/api/public/klaviyo-subscribe'
+      preLoaderRoute: typeof ApiPublicKlaviyoSubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,7 +204,18 @@ const rootRouteChildren: RootRouteChildren = {
   ShopRoute: ShopRoute,
   WhyTiredRoute: WhyTiredRoute,
   ProductSlugRoute: ProductSlugRoute,
+  ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
