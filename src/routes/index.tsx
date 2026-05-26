@@ -460,25 +460,8 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
           <Sparkles className="h-3 w-3" /> Most Popular
         </div>
       )}
-      <div
-        className="relative aspect-square rounded-2xl flex items-end justify-center mb-6 overflow-hidden ring-1 ring-border/60"
-        style={{
-          background: props.hero
-            ? "radial-gradient(120% 80% at 50% 10%, oklch(0.98 0.04 290) 0%, oklch(0.94 0.05 285) 45%, oklch(0.88 0.07 280) 100%)"
-            : "radial-gradient(120% 80% at 50% 10%, oklch(0.98 0.04 75) 0%, oklch(0.95 0.06 70) 45%, oklch(0.89 0.08 65) 100%)",
-        }}
-      >
-        {/* top highlight */}
-        <div aria-hidden className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent" />
-        {/* subtle grid */}
-        <div aria-hidden className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
-        {/* ground shadow under bottle */}
-        <div aria-hidden className="absolute bottom-[12%] left-1/2 -translate-x-1/2 h-6 w-2/3 rounded-[50%] bg-black/25 blur-2xl" />
-        <img
-          src={props.image}
-          alt={props.title}
-          className="relative max-h-[88%] object-contain drop-shadow-[0_25px_30px_rgba(0,0,0,0.18)] transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-1"
-        />
+      <div className="relative aspect-square rounded-2xl flex items-center justify-center mb-6 overflow-hidden bg-gradient-to-br from-secondary to-white ring-1 ring-border">
+        <img src={props.image} alt={props.title} className="max-h-80 object-contain transition-transform duration-500 group-hover:scale-105"/>
       </div>
       <div className="relative">
         <div className="text-xs uppercase tracking-[0.18em] text-primary font-bold">{props.subtitle}</div>
