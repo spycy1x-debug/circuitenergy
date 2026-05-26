@@ -155,7 +155,7 @@ function HomePage() {
               title="Circuit Neural Performance"
               subtitle="Focus & Cognitive Enhancement"
               price="$42.99"
-              desc="A precision blend of 10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A, and more — for all-day mental clarity, sharp focus, and long-term brain health."
+              desc="A precision blend of **10 natural compounds** — **Alpha GPC**, **Bacopa**, **L-Theanine**, **Huperzine A**, and more — for **all-day mental clarity**, **sharp focus**, and **long-term brain health**."
               benefits={["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"]}
               cta="Sharpen Your Mind"
             />
@@ -165,7 +165,7 @@ function HomePage() {
               title="Circuit NMN"
               subtitle="Cellular Energy & Longevity"
               price="$49.99"
-              desc="Boosts NAD+ for all-day cellular energy, reduced crashes, and healthy aging at the mitochondrial level. The foundation your body needs."
+              desc="Boosts **NAD+** for **all-day cellular energy**, **reduced crashes**, and **healthy aging** at the **mitochondrial level**. The foundation your body needs."
               benefits={["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"]}
               cta="Fix Your Energy"
             />
@@ -439,24 +439,60 @@ function KlaviyoInlineForm() {
   );
 }
 
+function renderBold(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={i} className="font-bold text-ink">{part.slice(2, -2)}</strong>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
+
 function ProductCard(props: { hero?: boolean; slug: string; image: string; title: string; subtitle: string; price: string; desc: string; benefits: string[]; cta: string }) {
   return (
-    <div className={`relative rounded-2xl bg-white border ${props.hero ? "border-primary/40 shadow-xl" : "border-border"} p-8 flex flex-col`}>
-      {props.hero && <div className="absolute -top-3 left-8 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">Most Popular</div>}
-      <div className="aspect-square bg-secondary rounded-xl flex items-center justify-center mb-6">
-        <img src={props.image} alt={props.title} className="max-h-80 object-contain"/>
+    <div className={`group relative rounded-3xl bg-white overflow-hidden border ${props.hero ? "border-primary/40 shadow-2xl" : "border-border shadow-md"} p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl`}>
+      {/* Decorative glow */}
+      <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-40 transition-opacity duration-500 group-hover:opacity-70" style={{ background: props.hero ? "var(--gradient-energy)" : "radial-gradient(circle, var(--electric), transparent 60%)" }} />
+      {props.hero && (
+        <div className="absolute top-5 right-5 z-10 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] font-bold px-3 py-1.5 rounded-full text-white shadow-lg" style={{ background: "var(--gradient-energy)" }}>
+          <Sparkles className="h-3 w-3" /> Most Popular
+        </div>
+      )}
+      <div className="relative aspect-square rounded-2xl flex items-center justify-center mb-6 overflow-hidden bg-gradient-to-br from-secondary to-white ring-1 ring-border">
+        <img src={props.image} alt={props.title} className="max-h-80 object-contain transition-transform duration-500 group-hover:scale-105"/>
       </div>
-      <div className="text-xs uppercase tracking-wider text-primary font-semibold">{props.subtitle}</div>
-      <h3 className="text-2xl mt-1">{props.title}</h3>
-      <div className="text-2xl font-display font-bold text-ink mt-2">{props.price}</div>
-      <p className="mt-3 text-body text-sm leading-relaxed">{props.desc}</p>
-      <ul className="mt-5 space-y-2">
-        {props.benefits.map(b=>(
-          <li key={b} className="flex items-center gap-2 text-sm text-body"><Check className="h-4 w-4 text-success"/>{b}</li>
-        ))}
-      </ul>
-      <div className="mt-auto pt-7">
-        <Link to="/product/$slug" params={{slug:props.slug}} className="btn-primary w-full">{props.cta}</Link>
+      <div className="relative">
+        <div className="text-xs uppercase tracking-[0.18em] text-primary font-bold">{props.subtitle}</div>
+        <h3 className="text-2xl md:text-3xl mt-1.5 leading-tight">{props.title}</h3>
+        <div className="mt-2 flex items-baseline gap-2">
+          <span className="text-3xl font-display font-bold text-ink">{props.price}</span>
+          <span className="text-sm text-muted-foreground">/ bottle</span>
+        </div>
+        <p className="mt-4 text-body text-sm leading-relaxed">{renderBold(props.desc)}</p>
+        <ul className="mt-5 space-y-2.5">
+          {props.benefits.map(b=>(
+            <li key={b} className="flex items-center gap-2.5 text-sm text-body">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success/15 shrink-0">
+                <Check className="h-3 w-3 text-success" strokeWidth={3}/>
+              </span>
+              {b}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="mt-auto pt-7 relative">
+        <Link
+          to="/product/$slug"
+          params={{slug:props.slug}}
+          className="group/btn relative inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 overflow-hidden"
+          style={{ background: props.hero ? "var(--gradient-energy)" : "linear-gradient(135deg, var(--primary), var(--electric))" }}
+        >
+          <span className="relative z-10">{props.cta}</span>
+          <span className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
+          <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
+        </Link>
         <p className="mt-3 text-xs text-muted-foreground text-center">60-day guarantee • Free shipping over $75</p>
       </div>
     </div>
