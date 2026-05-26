@@ -460,7 +460,7 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
           <Sparkles className="h-3 w-3" /> Most Popular
         </div>
       )}
-      <div className="relative aspect-square rounded-2xl flex items-center justify-center mb-6 overflow-hidden bg-white ring-1 ring-border">
+      <div className="relative aspect-square rounded-2xl flex items-center justify-center mb-6 overflow-hidden bg-gradient-to-br from-secondary to-white ring-1 ring-border">
         <img src={props.image} alt={props.title} className="max-h-80 object-contain transition-transform duration-500 group-hover:scale-105"/>
       </div>
       <div className="relative">
