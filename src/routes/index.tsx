@@ -372,10 +372,7 @@ function HomePage() {
         <div className="container-x max-w-2xl text-center">
           <h2 className="text-white text-2xl md:text-4xl">Stay in the Loop</h2>
           <p className="mt-3 text-white/70">Tips on beating fatigue, sharpening focus, and getting the most from Circuit.</p>
-          <form className="mt-7 flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e)=>{e.preventDefault();alert("Thanks for subscribing!");}}>
-            <input type="email" required placeholder="you@example.com" className="flex-1 max-w-sm rounded-md bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary"/>
-            <button className="btn-primary">Subscribe</button>
-          </form>
+          <KlaviyoInlineForm />
           <p className="mt-4 text-xs text-white/50">We respect your privacy. Unsubscribe anytime.</p>
         </div>
       </section>
