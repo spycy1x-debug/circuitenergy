@@ -88,7 +88,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 transition-all backdrop-blur-md ${scrolled ? "shadow-md" : "shadow-sm"}`}
+        className={`sticky top-0 z-40 transition-all duration-300 backdrop-blur-md ${scrolled ? "shadow-md" : "shadow-sm"} ${hidden ? "-translate-y-full" : "translate-y-0"}`}
         style={{
           background:
             "linear-gradient(180deg, oklch(0.99 0.005 250 / 0.92) 0%, oklch(0.97 0.012 245 / 0.88) 100%)",
