@@ -86,8 +86,8 @@ function ShopPage() {
                 </div>
               )}
               <div
-                className="relative aspect-square rounded-2xl flex items-center justify-center mb-6 overflow-hidden"
-                style={{ background: `linear-gradient(160deg, ${t.soft}, white)`, boxShadow: `inset 0 0 0 1px ${t.ring}33` }}
+                className="relative aspect-square rounded-2xl flex items-center justify-center mb-6 overflow-hidden bg-white"
+                style={{ boxShadow: `inset 0 0 0 1px ${t.ring}33` }}
               >
                 <div style={serif} className="absolute top-3 left-4 text-7xl leading-none" aria-hidden>
                   <span style={{ color: t.ring, opacity: 0.18 }}>{p.hero ? "01" : "02"}</span>
