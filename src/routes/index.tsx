@@ -284,7 +284,7 @@ function HomePage() {
             <div aria-hidden className="hidden md:block absolute top-16 left-[16.67%] right-[16.67%] h-0.5" style={{ background: "linear-gradient(90deg, var(--primary) 0%, var(--electric) 50%, var(--energy) 100%)" }} />
 
             {[
-              {icon: Pill, title: "Take Daily", desc: "One capsule of Neural Performance each morning. Two capsules of NMN each morning. With or without food. Consistency is everything.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.08)"},
+              {icon: Pill, title: "Take Daily", desc: "One capsule of Neural Performance each morning. One capsule of NMN each morning. With or without food. Consistency is everything.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.08)"},
               {icon: Brain, title: "Ingredients Activate", desc: "Alpha GPC, Huperzine A, and L-Theanine begin supporting neurotransmitter function. NMN converts to NAD+ and restores cellular energy production.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.08)"},
               {icon: Sparkles, title: "Feel the Difference", desc: "Within 1-2 weeks: sharper focus, no brain fog, no afternoon crashes, consistent energy all day.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.1)"},
             ].map((s, i) => (
