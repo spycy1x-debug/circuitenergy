@@ -351,36 +351,17 @@ function ProductPage() {
           )}
 
           {tab==="rev" && (
-            <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
-              <div className="rounded-xl bg-white p-6 border border-border h-fit">
-                <div className="text-5xl font-display font-bold text-ink">{p.rating}</div>
-                <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
-                <div className="text-sm text-muted-foreground mt-1">{p.reviews} reviews</div>
-                <div className="mt-5 space-y-1.5 text-xs">
-                  {[["5",79],["4",12],["3",6],["2",2],["1",1]].map(([s,pct])=>(
-                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden"><div className="h-full bg-primary" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
-                  ))}
+            <div className="max-w-2xl mx-auto">
+              <div className="rounded-xl bg-white p-10 border border-border text-center">
+                <div className="flex justify-center gap-1 mb-4">
+                  {Array.from({length:5}).map((_,s)=><Star key={s} className="h-6 w-6 fill-primary/15 text-primary/30"/>)}
                 </div>
-                <button className="mt-6 btn-outline w-full">Write a Review</button>
-              </div>
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {["Most Recent","Highest Rated","Most Helpful","Verified Only"].map(f=><button key={f} className="px-3 py-1.5 rounded-full border border-border hover:bg-white">{f}</button>)}
-                </div>
-                {extraReviews.slice(0, reviewsShown).map((r, i) => (
-                  <div key={i} className="rounded-xl bg-white p-6 border border-border">
-                    <div className="flex">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
-                    <h3 className="text-lg mt-2">"{r.title}"</h3>
-                    <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {r.name} · {r.date}</div>
-                    <p className="mt-4 text-body text-sm leading-relaxed">{r.body}</p>
-                    <div className="mt-4 text-xs text-muted-foreground">Was this helpful? Yes · No</div>
-                  </div>
-                ))}
-                {reviewsShown < extraReviews.length ? (
-                  <button onClick={() => setReviewsShown(n => Math.min(n + 3, extraReviews.length))} className="btn-outline">Load More Reviews</button>
-                ) : (
-                  <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
-                )}
+                <h3 className="text-xl font-display">No reviews yet</h3>
+                <p className="mt-3 text-sm text-body max-w-md mx-auto">
+                  Be the first to share your experience with {p.name}. Verified customer reviews
+                  will appear here once collected.
+                </p>
+                <button className="mt-6 btn-outline">Write a Review</button>
               </div>
             </div>
           )}
