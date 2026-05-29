@@ -8,10 +8,10 @@ import { useEffect, useState } from "react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Circuit Energy — Fix Brain Fog & Afternoon Crashes" },
-      { name: "description", content: "Circuit combines cellular energy support and cognitive enhancement so you can think clearly, work sharply, and feel like yourself again. 60-day guarantee." },
+      { title: "Circuit Energy — Support Your Energy & Mental Clarity" },
+      { name: "description", content: "Circuit pairs cellular energy support with cognitive ingredients to help you think clearly and feel your best. 60-day money-back guarantee." },
       { property: "og:title", content: "Circuit Energy — Your Brain Isn't Broken. It's Under-Fueled." },
-      { property: "og:description", content: "Premium supplements for chronic fatigue and brain fog. Works in 1-2 weeks. 500+ verified results." },
+      { property: "og:description", content: "Premium dietary supplements formulated to support energy and cognitive function. 60-day money-back guarantee. Made in the USA." },
       { property: "og:image", content: heroImg },
     ],
   }),
