@@ -86,10 +86,10 @@ function HomePage() {
             </div>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
               {[
-                { k: "500+", v: "Verified reviews" },
-                { k: "4.7★", v: "Avg. rating" },
+                { k: "Natural", v: "Ingredients" },
+                { k: "Made in", v: "the USA" },
                 { k: "60-Day", v: "Money-back" },
-                { k: "1-2 wks", v: "To feel it" },
+                { k: "1 Capsule", v: "Daily dose" },
               ].map((s) => (
                 <div key={s.k} className="border-l-2 pl-3" style={{ borderColor: "var(--energy)" }}>
                   <div className="text-white font-display text-xl md:text-2xl font-bold">{s.k}</div>
