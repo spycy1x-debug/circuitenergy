@@ -235,9 +235,9 @@ function HomePage() {
             <h2 className="text-3xl md:text-5xl">The Real Reason You're Foggy and Tired</h2>
             <div className="mt-6 space-y-4 text-body leading-relaxed">
               <p>It's not stress. It's not laziness. Your brain is running low on the raw materials it needs to function.</p>
-              <p><strong className="text-ink">Acetylcholine drives your focus, memory, and learning.</strong> Alpha GPC and Huperzine A in Circuit Neural Performance directly boost and preserve it — so your brain has the fuel to operate at full capacity.</p>
-              <p>L-Theanine and caffeine work together to deliver smooth, focused energy without jitters or crashes. Bacopa monnieri supports memory and learning over time. Phosphatidylserine keeps your brain cell membranes healthy and responsive.</p>
-              <p>And for the energy your body needs to keep up with your brain: <strong className="text-ink">Circuit NMN restores NAD+ at the cellular level</strong> — the molecule your mitochondria use to convert food into usable energy.</p>
+              <p><strong className="text-ink">Acetylcholine is associated with focus, memory, and learning.</strong> Alpha GPC and Huperzine A in Circuit Neural Performance are included to help support acetylcholine levels.*</p>
+              <p>L-Theanine and caffeine have been studied together for their potential to support calm, focused energy.* Bacopa monnieri has been studied for its role in supporting memory and learning.* Phosphatidylserine supports brain cell membrane integrity.*</p>
+              <p>And for the energy your body needs to keep up with your brain: <strong className="text-ink">Circuit NMN supplies NMN, a direct precursor to NAD+</strong> — the coenzyme your mitochondria use in energy metabolism.*</p>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {[
