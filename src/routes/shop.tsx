@@ -7,7 +7,7 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop — Circuit Energy Supplements" },
-      { name: "description", content: "Shop Circuit Neural Performance and Circuit NMN. Premium supplements that fix brain fog, afternoon crashes, and chronic fatigue at the root." },
+      { name: "description", content: "Shop Circuit Neural Performance and Circuit NMN — premium dietary supplements formulated to support daily energy and cognitive function." },
     ],
   }),
   component: ShopPage,
