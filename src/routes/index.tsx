@@ -150,7 +150,7 @@ function HomePage() {
               subtitle="Focus & Cognitive Enhancement"
               price="$42.99"
               desc="A precision blend of **10 natural compounds** — **Alpha GPC**, **Bacopa**, **L-Theanine**, **Huperzine A**, and more — for **all-day mental clarity**, **sharp focus**, and **long-term brain health**."
-              benefits={["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"]}
+              benefits={["Supports mental clarity*","Helps support focus and memory*","Smooth energy without jitters*","No artificial additives"]}
               cta="Sharpen Your Mind"
             />
             <ProductCard
