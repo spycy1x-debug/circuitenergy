@@ -160,7 +160,7 @@ function HomePage() {
               subtitle="Cellular Energy & Longevity"
               price="$49.99"
               desc="Boosts **NAD+** for **all-day cellular energy**, **reduced crashes**, and **healthy aging** at the **mitochondrial level**. The foundation your body needs."
-              benefits={["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"]}
+              benefits={["Helps support sustained daytime energy*","Supports cellular energy production*","Supports restful sleep*"]}
               cta="Fix Your Energy"
             />
           </div>
