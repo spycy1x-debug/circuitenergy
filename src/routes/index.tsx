@@ -354,7 +354,7 @@ function HomePage() {
       <section className="bg-primary text-white py-20 md:py-24">
         <div className="container-x text-center max-w-2xl">
           <h2 className="text-white text-3xl md:text-5xl">Stop Running on Empty.<br/>Start Thinking Clearly.</h2>
-          <p className="mt-5 text-white/90 text-lg">500+ people have fixed their energy and focus with Circuit. Join them.</p>
+          <p className="mt-5 text-white/90 text-lg">Join the community choosing Circuit to support their daily energy and focus.</p>
           <Link to="/shop" className="btn-white mt-8">Shop Circuit</Link>
           <p className="mt-5 text-white/70 text-xs">60-day money-back guarantee · Free shipping over $75</p>
         </div>
