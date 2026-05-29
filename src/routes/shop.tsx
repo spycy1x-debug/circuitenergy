@@ -16,8 +16,8 @@ export const Route = createFileRoute("/shop")({
 const serif = { fontFamily: '"Instrument Serif", Georgia, serif' };
 
 const products = [
-  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", rating: 4.7, reviews: 234, desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — for all-day mental clarity and sharp focus.", benefits: ["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"], cta: "Sharpen Your Mind", tone: "violet", italic: "​" },
-  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", rating: 4.6, reviews: 198, desc: "500mg NMN per serving. Restores NAD+ for sustained cellular energy and reduced afternoon crashes.", benefits: ["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"], cta: "Fix Your Energy", tone: "amber", italic: "​" },
+  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — formulated to help support mental clarity and focus.*", benefits: ["Supports mental clarity*","Helps support focus and memory*","Smooth energy without jitters*","No artificial additives"], cta: "Shop Neural Performance", tone: "violet", italic: "​" },
+  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", desc: "500mg NMN per serving. NMN is a precursor to NAD+, a coenzyme involved in cellular energy metabolism.*", benefits: ["Helps support sustained daytime energy*","Supports cellular energy production*","Supports restful sleep*"], cta: "Shop Circuit NMN", tone: "amber", italic: "​" },
 ];
 
 const tones: Record<string, { bg: string; ring: string; text: string; soft: string }> = {
