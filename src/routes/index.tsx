@@ -338,8 +338,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <TestimonialsSection />
+      {/* TESTIMONIALS — placeholder until real reviews are collected via review platform */}
 
       {/* FAQ */}
       <section className="py-20 md:py-28 bg-secondary">
