@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus } from "lucide-react";
 import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
