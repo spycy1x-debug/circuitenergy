@@ -2,31 +2,31 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero.png";
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
-import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Loader2 } from "lucide-react";
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Circuit Energy — Fix Brain Fog & Afternoon Crashes" },
-      { name: "description", content: "Circuit combines cellular energy support and cognitive enhancement so you can think clearly, work sharply, and feel like yourself again. 60-day guarantee." },
+      { title: "Circuit Energy — Support Your Energy & Mental Clarity" },
+      { name: "description", content: "Circuit pairs cellular energy support with cognitive ingredients to help you think clearly and feel your best. 60-day money-back guarantee." },
       { property: "og:title", content: "Circuit Energy — Your Brain Isn't Broken. It's Under-Fueled." },
-      { property: "og:description", content: "Premium supplements for chronic fatigue and brain fog. Works in 1-2 weeks. 500+ verified results." },
+      { property: "og:description", content: "Premium dietary supplements formulated to support energy and cognitive function. 60-day money-back guarantee. Made in the USA." },
       { property: "og:image", content: heroImg },
     ],
   }),
   component: HomePage,
 });
 
-const tickerItems = ["Natural Ingredients", "No Artificial Additives", "Third-Party Tested", "60-Day Guarantee", "Made in USA", "500+ Reviews", "Clinically Studied Ingredients"];
+const tickerItems = ["Natural Ingredients", "No Artificial Additives", "60-Day Guarantee", "Made in USA", "Research-Backed Ingredients"];
 
 const benefits = [
-  { icon: Brain, title: "Razor-Sharp Focus", desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Cognition" },
-  { icon: Zap, title: "No More Afternoon Crashes", desc: "Sustained energy from morning to evening. No 2pm wall. No jitters. Just consistent output that lasts all day.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Energy" },
-  { icon: Shield, title: "Natural. No Additives.", desc: "Every ingredient in Circuit Neural Performance is high-quality and natural. No fillers, no proprietary blends, no compromises.", accent: "var(--success)", tint: "oklch(0.38 0.09 140 / 0.12)", tag: "Clean" },
-  { icon: Atom, title: "Fixes the Root Cause", desc: "Circuit NMN boosts NAD+ at the cellular level — the molecule your mitochondria need to produce energy. Not a band-aid. An actual fix.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.12)", tag: "Cellular" },
-  { icon: CalendarCheck, title: "Works in 1-2 Weeks", desc: "Most users notice improvements in mental clarity and energy within 7-14 days of consistent daily use.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Fast" },
-  { icon: MoonStar, title: "Wake Up Actually Rested", desc: "Better cellular energy and neurotransmitter balance means better sleep quality. You'll wake up feeling like yourself again.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Recovery" },
+  { icon: Brain, title: "Sharp, Focused Thinking", desc: "Alpha GPC and Huperzine A are included to help support acetylcholine — the neurotransmitter associated with focus, learning, and memory.*", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Cognition" },
+  { icon: Zap, title: "Steady Daytime Energy", desc: "Formulated to help support sustained energy throughout the day, without the spike-and-crash pattern of caffeine alone.*", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Energy" },
+  { icon: Shield, title: "Natural. No Additives.", desc: "Every ingredient in Circuit Neural Performance is a high-quality, natural compound. No artificial fillers, no proprietary blends, no compromises.", accent: "var(--success)", tint: "oklch(0.38 0.09 140 / 0.12)", tag: "Clean" },
+  { icon: Atom, title: "Cellular-Level Support", desc: "Circuit NMN supplies NMN, a direct precursor to NAD+ — the coenzyme your mitochondria use in energy metabolism.* A foundational nutrient, not a stimulant.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.12)", tag: "Cellular" },
+  { icon: CalendarCheck, title: "Noticeable Over Time", desc: "Many customers report noticing changes in their mental clarity and energy levels with consistent daily use. Individual results may vary.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Routine" },
+  { icon: MoonStar, title: "Daily Wellness Routine", desc: "Designed to support healthy neurotransmitter and cellular energy systems as part of a balanced daily routine.*", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Recovery" },
 ];
 
 const painPoints = [
@@ -36,18 +36,10 @@ const painPoints = [
   "Brain fog makes work feel impossible",
 ];
 
-const testimonials = [
-  { title: "No more brain fog — I'm stunned", body: "I've been taking Neural Performance for 3 weeks and the afternoon fog is completely gone. I used to re-read the same email five times. Now I'm sharp straight through to dinner.", name: "Alex T., 34" },
-  { title: "Finally something that actually works", body: "Tried every focus supplement out there. Nothing came close until Circuit. The L-Theanine and caffeine combo is smooth — no jitters, just clear energy. I'm sharper at 4pm than I used to be at 10am.", name: "Sarah K., 42" },
-  { title: "I feel like myself again", body: "I forgot what it felt like to think clearly. Circuit brought it back. No jitters, no crash — just my brain working the way it used to before I turned 40.", name: "Marcus R., 47" },
-  { title: "My productivity has tripled", body: "The mental clarity from Neural Performance is on another level. I'm getting more done before lunch than I used to get done in a full day.", name: "Priya S., 38" },
-  { title: "Worth every single penny", body: "I was spending $6/day on coffee that just gave me anxiety. Circuit costs less and actually solves the problem. My only regret is not finding this sooner.", name: "Daniel W., 45" },
-  { title: "Skeptical but converted", body: "Didn't believe the hype. Tried it anyway. Week 3 I realized I hadn't crashed once. Week 4 I came back for more. This is the only supplement I'll never skip.", name: "Rachel B., 36" },
-];
 
 const faqs = [
   { q: "What's the difference between Neural Performance and NMN?", a: "They target different sides of the same problem. Neural Performance is formulated for cognitive function — focus, memory, mental clarity — using compounds like Alpha GPC, Bacopa monnieri, and Huperzine A that directly support brain chemistry. Circuit NMN works at the cellular level, restoring NAD+ so your mitochondria can produce energy efficiently. Together, they cover both your brain and your body." },
-  { q: "Does Neural Performance contain caffeine?", a: "Yes. Neural Performance contains caffeine paired with L-Theanine, which is clinically shown to smooth out caffeine's effects — giving you focused, jitter-free energy rather than a spike and crash. If you're sensitive to caffeine, start with one capsule and assess your tolerance." },
+  { q: "Does Neural Performance contain caffeine?", a: "Yes. Neural Performance contains caffeine paired with L-Theanine, a combination that has been studied for its potential to support calm, focused energy rather than a spike-and-crash pattern.* If you're sensitive to caffeine, start with one capsule and assess your tolerance." },
   { q: "When will I actually feel results?", a: "For Neural Performance, most people notice sharper focus and mental clarity within 7-14 days of consistent daily use, with some feeling a difference in 3-5 days — ingredients like Bacopa monnieri build in effect over time. For NMN, cellular energy benefits typically become noticeable within 2-4 weeks as NAD+ levels are restored. Taken together, many customers report meaningful improvements in both brain and body within the first 2 weeks." },
   { q: "Are the ingredients natural?", a: "Yes — for both products. Every ingredient in Circuit Neural Performance and Circuit NMN is a high-quality, natural compound. No artificial additives, no fillers, no proprietary blends hiding weak doses. What's on the label is what's in the capsule." },
   { q: "What if it doesn't work for me?", a: "Both Neural Performance and NMN are backed by our 60-day money-back guarantee. If you don't feel a noticeable difference after consistent use of either product, we'll refund every penny. No questions asked." },
@@ -92,10 +84,10 @@ function HomePage() {
             </div>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
               {[
-                { k: "500+", v: "Verified reviews" },
-                { k: "4.7★", v: "Avg. rating" },
+                { k: "Natural", v: "Ingredients" },
+                { k: "Made in", v: "the USA" },
                 { k: "60-Day", v: "Money-back" },
-                { k: "1-2 wks", v: "To feel it" },
+                { k: "1 Capsule", v: "Daily dose" },
               ].map((s) => (
                 <div key={s.k} className="border-l-2 pl-3" style={{ borderColor: "var(--energy)" }}>
                   <div className="text-white font-display text-xl md:text-2xl font-bold">{s.k}</div>
@@ -156,7 +148,7 @@ function HomePage() {
               subtitle="Focus & Cognitive Enhancement"
               price="$42.99"
               desc="A precision blend of **10 natural compounds** — **Alpha GPC**, **Bacopa**, **L-Theanine**, **Huperzine A**, and more — for **all-day mental clarity**, **sharp focus**, and **long-term brain health**."
-              benefits={["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"]}
+              benefits={["Supports mental clarity*","Helps support focus and memory*","Smooth energy without jitters*","No artificial additives"]}
               cta="Sharpen Your Mind"
             />
             <ProductCard
@@ -166,7 +158,7 @@ function HomePage() {
               subtitle="Cellular Energy & Longevity"
               price="$49.99"
               desc="Boosts **NAD+** for **all-day cellular energy**, **reduced crashes**, and **healthy aging** at the **mitochondrial level**. The foundation your body needs."
-              benefits={["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"]}
+              benefits={["Helps support sustained daytime energy*","Supports cellular energy production*","Supports restful sleep*"]}
               cta="Fix Your Energy"
             />
           </div>
@@ -183,8 +175,8 @@ function HomePage() {
               <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--energy)" }} />
               <span className="text-ink/80">The Circuit Advantage</span>
             </div>
-            <h2 className="text-3xl md:text-5xl">Why You're Always Tired and Foggy<br className="hidden md:block"/> <span className="italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>(And How to Actually Fix It)</span></h2>
-            <p className="mt-5 text-lg text-body">Your brain and body run on the same fuel. When that fuel runs low, everything suffers — energy, focus, memory, mood.</p>
+            <h2 className="text-3xl md:text-5xl">Why You Feel Tired and Foggy<br className="hidden md:block"/> <span className="italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>(And How Nutrition Can Help)</span></h2>
+            <p className="mt-5 text-lg text-body">Your brain and body run on the same fuel. When that fuel runs low, everything feels off — energy, focus, memory, mood.</p>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {benefits.map(({icon:Icon,title,desc,accent,tint,tag}, idx)=>(
@@ -241,15 +233,15 @@ function HomePage() {
             <h2 className="text-3xl md:text-5xl">The Real Reason You're Foggy and Tired</h2>
             <div className="mt-6 space-y-4 text-body leading-relaxed">
               <p>It's not stress. It's not laziness. Your brain is running low on the raw materials it needs to function.</p>
-              <p><strong className="text-ink">Acetylcholine drives your focus, memory, and learning.</strong> Alpha GPC and Huperzine A in Circuit Neural Performance directly boost and preserve it — so your brain has the fuel to operate at full capacity.</p>
-              <p>L-Theanine and caffeine work together to deliver smooth, focused energy without jitters or crashes. Bacopa monnieri supports memory and learning over time. Phosphatidylserine keeps your brain cell membranes healthy and responsive.</p>
-              <p>And for the energy your body needs to keep up with your brain: <strong className="text-ink">Circuit NMN restores NAD+ at the cellular level</strong> — the molecule your mitochondria use to convert food into usable energy.</p>
+              <p><strong className="text-ink">Acetylcholine is associated with focus, memory, and learning.</strong> Alpha GPC and Huperzine A in Circuit Neural Performance are included to help support acetylcholine levels.*</p>
+              <p>L-Theanine and caffeine have been studied together for their potential to support calm, focused energy.* Bacopa monnieri has been studied for its role in supporting memory and learning.* Phosphatidylserine supports brain cell membrane integrity.*</p>
+              <p>And for the energy your body needs to keep up with your brain: <strong className="text-ink">Circuit NMN supplies NMN, a direct precursor to NAD+</strong> — the coenzyme your mitochondria use in energy metabolism.*</p>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {[
-                "87% report improved focus within 2 weeks",
-                "Backed by 300+ peer-reviewed studies",
-                "Third-party tested for purity and potency",
+                "Key ingredients studied in published research",
+                "Formulated to support focus and energy*",
+                "Quality-controlled manufacturing in the USA",
                 "Natural ingredients, no artificial additives",
               ].map((s)=>(
                 <div key={s} className="rounded-lg bg-secondary p-4 text-sm font-medium text-ink">{s}</div>
@@ -344,8 +336,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <TestimonialsSection />
+      {/* TESTIMONIALS — placeholder until real reviews are collected via review platform */}
 
       {/* FAQ */}
       <section className="py-20 md:py-28 bg-secondary">
@@ -361,7 +352,7 @@ function HomePage() {
       <section className="bg-primary text-white py-20 md:py-24">
         <div className="container-x text-center max-w-2xl">
           <h2 className="text-white text-3xl md:text-5xl">Stop Running on Empty.<br/>Start Thinking Clearly.</h2>
-          <p className="mt-5 text-white/90 text-lg">500+ people have fixed their energy and focus with Circuit. Join them.</p>
+          <p className="mt-5 text-white/90 text-lg">Join the community choosing Circuit to support their daily energy and focus.</p>
           <Link to="/shop" className="btn-white mt-8">Shop Circuit</Link>
           <p className="mt-5 text-white/70 text-xs">60-day money-back guarantee · Free shipping over $75</p>
         </div>
@@ -514,52 +505,3 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-function TestimonialsSection() {
-  const [idx, setIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const perPage = typeof window !== "undefined" && window.innerWidth < 768 ? 1 : 3;
-  const max = testimonials.length - perPage;
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => setIdx((i) => (i >= max ? 0 : i + 1)), 5000);
-    return () => clearInterval(id);
-  }, [paused, max]);
-
-  return (
-    <section className="py-20 md:py-28" onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)}>
-      <div className="container-x">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-5xl">Real People. Real Results.</h2>
-          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-body">
-            <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-            <span>4.7 out of 5 · 500+ verified reviews</span>
-          </div>
-        </div>
-        <div className="mt-12 overflow-hidden">
-          <div className="flex transition-transform duration-500 ease-out" style={{transform:`translateX(-${idx*(100/perPage)}%)`}}>
-            {testimonials.map((t,i)=>(
-              <div key={i} className="shrink-0 w-full md:w-1/3 px-3">
-                <div className="h-full rounded-xl border border-border bg-card p-7">
-                  <div className="flex gap-0.5 mb-4">{[1,2,3,4,5].map(s=><Star key={s} className="h-4 w-4 fill-primary text-primary"/>)}</div>
-                  <h3 className="text-lg mb-3">{t.title}</h3>
-                  <p className="text-body text-sm leading-relaxed">"{t.body}"</p>
-                  <div className="mt-5 text-xs font-semibold text-muted-foreground">— {t.name}, Verified Purchase</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-8 flex items-center justify-center gap-4">
-          <button onClick={()=>setIdx(i=>Math.max(0,i-1))} aria-label="Previous" className="h-10 w-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary"><ChevronLeft className="h-4 w-4"/></button>
-          <div className="flex gap-1.5">
-            {Array.from({length:max+1}).map((_,i)=>(
-              <button key={i} onClick={()=>setIdx(i)} aria-label={`Slide ${i+1}`} className={`h-2 rounded-full transition-all ${i===idx?"w-6 bg-primary":"w-2 bg-border"}`}/>
-            ))}
-          </div>
-          <button onClick={()=>setIdx(i=>Math.min(max,i+1))} aria-label="Next" className="h-10 w-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary"><ChevronRight className="h-4 w-4"/></button>
-        </div>
-      </div>
-    </section>
-  );
-}
