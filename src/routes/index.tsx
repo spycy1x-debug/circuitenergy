@@ -36,8 +36,6 @@ const painPoints = [
   "Brain fog makes work feel impossible",
 ];
 
-// Real customer reviews will be populated here once collected through our review platform.
-const testimonials: { title: string; body: string; name: string }[] = [];
 
 const faqs = [
   { q: "What's the difference between Neural Performance and NMN?", a: "They target different sides of the same problem. Neural Performance is formulated for cognitive function — focus, memory, mental clarity — using compounds like Alpha GPC, Bacopa monnieri, and Huperzine A that directly support brain chemistry. Circuit NMN works at the cellular level, restoring NAD+ so your mitochondria can produce energy efficiently. Together, they cover both your brain and your body." },
