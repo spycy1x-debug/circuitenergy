@@ -392,14 +392,20 @@ function ProductPage() {
                 <div className="flex flex-wrap gap-2 text-xs">
                   {["Most Recent","Highest Rated","Most Helpful","Verified Only"].map(f=><button key={f} className="px-3 py-1.5 rounded-full border border-border hover:bg-white">{f}</button>)}
                 </div>
-                <div className="rounded-xl bg-white p-6 border border-border">
-                  <div className="flex">{[1,2,3,4,5].map(s=><Star key={s} className="h-4 w-4 fill-primary text-primary"/>)}</div>
-                  <h3 className="text-lg mt-2">"{p.sample.title}"</h3>
-                  <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {p.sample.name} · {p.sample.date}</div>
-                  <p className="mt-4 text-body text-sm leading-relaxed">{p.sample.body}</p>
-                  <div className="mt-4 text-xs text-muted-foreground">Was this helpful? Yes (52) · No (3)</div>
-                </div>
-                <button className="btn-outline">Load More Reviews</button>
+                {extraReviews.slice(0, reviewsShown).map((r, i) => (
+                  <div key={i} className="rounded-xl bg-white p-6 border border-border">
+                    <div className="flex">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
+                    <h3 className="text-lg mt-2">"{r.title}"</h3>
+                    <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {r.name} · {r.date}</div>
+                    <p className="mt-4 text-body text-sm leading-relaxed">{r.body}</p>
+                    <div className="mt-4 text-xs text-muted-foreground">Was this helpful? Yes · No</div>
+                  </div>
+                ))}
+                {reviewsShown < extraReviews.length ? (
+                  <button onClick={() => setReviewsShown(n => Math.min(n + 3, extraReviews.length))} className="btn-outline">Load More Reviews</button>
+                ) : (
+                  <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
+                )}
               </div>
             </div>
           )}
