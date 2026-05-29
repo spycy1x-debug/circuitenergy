@@ -105,13 +105,6 @@ function ShopPage() {
                 <h2 className="mt-2 text-3xl md:text-4xl text-ink leading-tight">
                   {parts[0]}<em style={serif} className="italic font-normal" >{p.italic}</em>{parts[1]}
                 </h2>
-                <div className="mt-3 flex items-center gap-3">
-                  <div className="flex">
-                    {[1,2,3,4].map(i => <Star key={i} className="h-4 w-4 fill-current" style={{ color: t.ring }} />)}
-                    <Star className="h-4 w-4 fill-current opacity-40" style={{ color: t.ring }} />
-                  </div>
-                  <span className="text-sm text-muted-foreground">{p.rating} ({p.reviews})</span>
-                </div>
                 <div className="mt-3 flex items-baseline gap-2">
                   <span style={serif} className="text-5xl text-ink leading-none">${p.price}</span>
                   <span className="text-sm text-muted-foreground">/ bottle</span>
