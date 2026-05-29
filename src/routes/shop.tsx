@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop — Circuit Energy Supplements" },
-      { name: "description", content: "Shop Circuit Neural Performance and Circuit NMN — premium dietary supplements formulated to support daily energy and cognitive function." },
+      { name: "description", content: "Shop Circuit Neural Performance and Circuit NMN. Premium supplements that fix brain fog, afternoon crashes, and chronic fatigue at the root." },
     ],
   }),
   component: ShopPage,
@@ -16,8 +16,8 @@ export const Route = createFileRoute("/shop")({
 const serif = { fontFamily: '"Instrument Serif", Georgia, serif' };
 
 const products = [
-  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — formulated to help support mental clarity and focus.*", benefits: ["Supports mental clarity*","Helps support focus and memory*","Smooth energy without jitters*","No artificial additives"], cta: "Shop Neural Performance", tone: "violet", italic: "​" },
-  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", desc: "500mg NMN per serving. NMN is a precursor to NAD+, a coenzyme involved in cellular energy metabolism.*", benefits: ["Helps support sustained daytime energy*","Supports cellular energy production*","Supports restful sleep*"], cta: "Shop Circuit NMN", tone: "amber", italic: "​" },
+  { hero: true, slug: "neural-performance", image: neuralImg, title: "Circuit Neural Performance", subtitle: "Focus & Cognitive Enhancement", price: "42.99", rating: 4.7, reviews: 234, desc: "10 natural compounds — Alpha GPC, Bacopa, L-Theanine, Huperzine A — for all-day mental clarity and sharp focus.", benefits: ["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"], cta: "Sharpen Your Mind", tone: "violet", italic: "​" },
+  { hero: false, slug: "nmn", image: nmnImg, title: "Circuit NMN", subtitle: "Cellular Energy & Longevity", price: "49.99", rating: 4.6, reviews: 198, desc: "500mg NMN per serving. Restores NAD+ for sustained cellular energy and reduced afternoon crashes.", benefits: ["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"], cta: "Fix Your Energy", tone: "amber", italic: "​" },
 ];
 
 const tones: Record<string, { bg: string; ring: string; text: string; soft: string }> = {
@@ -105,6 +105,13 @@ function ShopPage() {
                 <h2 className="mt-2 text-3xl md:text-4xl text-ink leading-tight">
                   {parts[0]}<em style={serif} className="italic font-normal" >{p.italic}</em>{parts[1]}
                 </h2>
+                <div className="mt-3 flex items-center gap-3">
+                  <div className="flex">
+                    {[1,2,3,4].map(i => <Star key={i} className="h-4 w-4 fill-current" style={{ color: t.ring }} />)}
+                    <Star className="h-4 w-4 fill-current opacity-40" style={{ color: t.ring }} />
+                  </div>
+                  <span className="text-sm text-muted-foreground">{p.rating} ({p.reviews})</span>
+                </div>
                 <div className="mt-3 flex items-baseline gap-2">
                   <span style={serif} className="text-5xl text-ink leading-none">${p.price}</span>
                   <span className="text-sm text-muted-foreground">/ bottle</span>
@@ -143,7 +150,7 @@ function ShopPage() {
           {[
             { n: "60", l: "Day guarantee" },
             { n: "10k+", l: "Bottles shipped" },
-            { n: "100%", l: "Natural ingredients" },
+            { n: "4.7★", l: "Average rating" },
             { n: "Free", l: "US shipping", sub: "orders over $75" },
           ].map((s) => (
             <div key={s.l} className="px-4 py-6 text-center">

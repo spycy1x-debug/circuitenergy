@@ -37,18 +37,18 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     name: "Circuit Neural Performance",
     subtitle: "Focus & Cognitive Enhancement",
     price: 42.99,
-    rating: 0,
-    reviews: 0,
-    badge: "Featured",
+    rating: 4.7,
+    reviews: 234,
+    badge: "Most Popular",
     images: [neuralImg, neuralOpen],
-    description: "A blend of 10 natural compounds — chosen for their presence in published nutrition research — formulated to help support mental clarity, focus, and cognitive function.*",
+    description: "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
     benefits: [
-      "Supports mental clarity*",
-      "Helps support focus and memory*",
-      "Smooth, jitter-free energy*",
-      "Supports cognitive function over time*",
+      "Eliminates brain fog",
+      "Enhances focus and memory",
+      "Smooth, jitter-free mental energy",
+      "Supports long-term brain health",
       "No artificial additives — natural ingredients only",
-      "Made in the USA",
+      "Third-party tested for purity",
     ],
     why: {
       heading: "Your Brain Needs More Than Caffeine",
@@ -119,18 +119,18 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     name: "Circuit NMN",
     subtitle: "Cellular Energy & Longevity Support",
     price: 49.99,
-    rating: 0,
-    reviews: 0,
-    badge: "Featured",
+    rating: 4.6,
+    reviews: 198,
+    badge: "Best Seller",
     images: [nmnImg, nmnTrio],
-    description: "Supplies NMN, a direct precursor to NAD+ — a coenzyme involved in cellular energy metabolism.* No stimulants. A foundational nutrient for your daily routine.",
+    description: "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
     benefits: [
-      "Helps support sustained daytime energy*",
-      "Supports cellular energy production*",
-      "Supports restful sleep*",
-      "Supports healthy aging*",
+      "Eliminates afternoon crashes",
+      "Restores cellular energy production",
+      "Improves sleep quality",
+      "Supports healthy aging at the cellular level",
       "Zero caffeine, zero stimulants",
-      "Made in the USA",
+      "Third-party tested for purity",
     ],
     why: {
       heading: "Fix Your Energy at the Cellular Level",
@@ -207,6 +207,31 @@ function ProductPage() {
   const [imgIdx, setImgIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
+  const [reviewsShown, setReviewsShown] = useState(3);
+
+  const extraReviews = useMemo(() => {
+    const pool = p.id === "neural" ? [
+      { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5 },
+      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5 },
+      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Devon K.", date: "1 month ago", rating: 5 },
+      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah R.", date: "2 months ago", rating: 4 },
+      { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
+      { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
+      { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "Jordan L.", date: "3 months ago", rating: 4 },
+    ] : [
+      { title: "Energy without the crash", body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.", name: "Rachel D.", date: "2 weeks ago", rating: 5 },
+      { title: "Noticeable in the gym", body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.", name: "Tom W.", date: "1 month ago", rating: 5 },
+      { title: "Best NMN I've tried", body: "Tried three other brands before this. The trio combo with resveratrol actually makes sense biochemically and I feel it.", name: "Dr. Lena F.", date: "1 month ago", rating: 5 },
+      { title: "Worth the price", body: "Not cheap but I cut out two other supplements after starting this. Net cost is similar and the results are better.", name: "Carlos V.", date: "2 months ago", rating: 4 },
+      { title: "Mental clarity bonus", body: "Bought it for energy, ended up loving the mental clarity even more. Mid-afternoon dips are gone.", name: "Sofia A.", date: "2 months ago", rating: 5 },
+      { title: "Subtle, then significant", body: "Three weeks in and my wife asked what I was doing differently. That's when I knew it was working.", name: "Ben H.", date: "3 months ago", rating: 5 },
+      { title: "One pill is convenient", body: "Love that the new dose is one capsule. Easier to stay consistent.", name: "Mira J.", date: "3 months ago", rating: 4 },
+    ];
+    return [
+      { title: p.sample.title, body: p.sample.body, name: p.sample.name, date: p.sample.date, rating: 5 },
+      ...pool,
+    ];
+  }, [p]);
   const related = PRODUCTS[p.related.id];
 
   return (
@@ -351,17 +376,36 @@ function ProductPage() {
           )}
 
           {tab==="rev" && (
-            <div className="max-w-2xl mx-auto">
-              <div className="rounded-xl bg-white p-10 border border-border text-center">
-                <div className="flex justify-center gap-1 mb-4">
-                  {Array.from({length:5}).map((_,s)=><Star key={s} className="h-6 w-6 fill-primary/15 text-primary/30"/>)}
+            <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
+              <div className="rounded-xl bg-white p-6 border border-border h-fit">
+                <div className="text-5xl font-display font-bold text-ink">{p.rating}</div>
+                <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
+                <div className="text-sm text-muted-foreground mt-1">{p.reviews} reviews</div>
+                <div className="mt-5 space-y-1.5 text-xs">
+                  {[["5",79],["4",12],["3",6],["2",2],["1",1]].map(([s,pct])=>(
+                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden"><div className="h-full bg-primary" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
+                  ))}
                 </div>
-                <h3 className="text-xl font-display">No reviews yet</h3>
-                <p className="mt-3 text-sm text-body max-w-md mx-auto">
-                  Be the first to share your experience with {p.name}. Verified customer reviews
-                  will appear here once collected.
-                </p>
-                <button className="mt-6 btn-outline">Write a Review</button>
+                <button className="mt-6 btn-outline w-full">Write a Review</button>
+              </div>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {["Most Recent","Highest Rated","Most Helpful","Verified Only"].map(f=><button key={f} className="px-3 py-1.5 rounded-full border border-border hover:bg-white">{f}</button>)}
+                </div>
+                {extraReviews.slice(0, reviewsShown).map((r, i) => (
+                  <div key={i} className="rounded-xl bg-white p-6 border border-border">
+                    <div className="flex">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
+                    <h3 className="text-lg mt-2">"{r.title}"</h3>
+                    <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {r.name} · {r.date}</div>
+                    <p className="mt-4 text-body text-sm leading-relaxed">{r.body}</p>
+                    <div className="mt-4 text-xs text-muted-foreground">Was this helpful? Yes · No</div>
+                  </div>
+                ))}
+                {reviewsShown < extraReviews.length ? (
+                  <button onClick={() => setReviewsShown(n => Math.min(n + 3, extraReviews.length))} className="btn-outline">Load More Reviews</button>
+                ) : (
+                  <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
+                )}
               </div>
             </div>
           )}

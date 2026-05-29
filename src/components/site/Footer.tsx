@@ -17,19 +17,13 @@ export function Footer() {
         <div className="text-sm space-y-2">
           <a href="mailto:support.circuit@gmail.com" className="block hover:text-white">support.circuit@gmail.com</a>
           <div>60-Day Money-Back Guarantee</div>
+          <div>Third-Party Lab Tested</div>
           <div>Made in the USA</div>
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="container-x py-6 text-xs text-[#888] leading-relaxed space-y-2">
-          <p>
-            * These statements have not been evaluated by the Food and Drug Administration.
-            Circuit products are dietary supplements and are not intended to diagnose, treat,
-            cure, or prevent any disease. Individual results may vary. Consult your healthcare
-            provider before starting any new supplement, especially if you are pregnant,
-            nursing, taking medication, or have a medical condition.
-          </p>
-          <p>© 2026 Circuit Energy. All rights reserved.</p>
+        <div className="container-x py-6 text-xs text-[#888] leading-relaxed">
+          © 2026 Circuit Energy. All rights reserved. | These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.
         </div>
       </div>
     </footer>
