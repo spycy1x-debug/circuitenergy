@@ -36,14 +36,8 @@ const painPoints = [
   "Brain fog makes work feel impossible",
 ];
 
-const testimonials = [
-  { title: "No more brain fog — I'm stunned", body: "I've been taking Neural Performance for 3 weeks and the afternoon fog is completely gone. I used to re-read the same email five times. Now I'm sharp straight through to dinner.", name: "Alex T., 34" },
-  { title: "Finally something that actually works", body: "Tried every focus supplement out there. Nothing came close until Circuit. The L-Theanine and caffeine combo is smooth — no jitters, just clear energy. I'm sharper at 4pm than I used to be at 10am.", name: "Sarah K., 42" },
-  { title: "I feel like myself again", body: "I forgot what it felt like to think clearly. Circuit brought it back. No jitters, no crash — just my brain working the way it used to before I turned 40.", name: "Marcus R., 47" },
-  { title: "My productivity has tripled", body: "The mental clarity from Neural Performance is on another level. I'm getting more done before lunch than I used to get done in a full day.", name: "Priya S., 38" },
-  { title: "Worth every single penny", body: "I was spending $6/day on coffee that just gave me anxiety. Circuit costs less and actually solves the problem. My only regret is not finding this sooner.", name: "Daniel W., 45" },
-  { title: "Skeptical but converted", body: "Didn't believe the hype. Tried it anyway. Week 3 I realized I hadn't crashed once. Week 4 I came back for more. This is the only supplement I'll never skip.", name: "Rachel B., 36" },
-];
+// Real customer reviews will be populated here once collected through our review platform.
+const testimonials: { title: string; body: string; name: string }[] = [];
 
 const faqs = [
   { q: "What's the difference between Neural Performance and NMN?", a: "They target different sides of the same problem. Neural Performance is formulated for cognitive function — focus, memory, mental clarity — using compounds like Alpha GPC, Bacopa monnieri, and Huperzine A that directly support brain chemistry. Circuit NMN works at the cellular level, restoring NAD+ so your mitochondria can produce energy efficiently. Together, they cover both your brain and your body." },
