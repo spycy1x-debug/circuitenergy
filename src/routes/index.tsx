@@ -241,9 +241,9 @@ function HomePage() {
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {[
-                "87% report improved focus within 2 weeks",
-                "Backed by 300+ peer-reviewed studies",
-                "Third-party tested for purity and potency",
+                "Key ingredients studied in published research",
+                "Formulated to support focus and energy*",
+                "Quality-controlled manufacturing in the USA",
                 "Natural ingredients, no artificial additives",
               ].map((s)=>(
                 <div key={s} className="rounded-lg bg-secondary p-4 text-sm font-medium text-ink">{s}</div>
