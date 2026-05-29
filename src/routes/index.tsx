@@ -177,8 +177,8 @@ function HomePage() {
               <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--energy)" }} />
               <span className="text-ink/80">The Circuit Advantage</span>
             </div>
-            <h2 className="text-3xl md:text-5xl">Why You're Always Tired and Foggy<br className="hidden md:block"/> <span className="italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>(And How to Actually Fix It)</span></h2>
-            <p className="mt-5 text-lg text-body">Your brain and body run on the same fuel. When that fuel runs low, everything suffers — energy, focus, memory, mood.</p>
+            <h2 className="text-3xl md:text-5xl">Why You Feel Tired and Foggy<br className="hidden md:block"/> <span className="italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>(And How Nutrition Can Help)</span></h2>
+            <p className="mt-5 text-lg text-body">Your brain and body run on the same fuel. When that fuel runs low, everything feels off — energy, focus, memory, mood.</p>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {benefits.map(({icon:Icon,title,desc,accent,tint,tag}, idx)=>(
