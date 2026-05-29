@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus } from "lucide-react";
 import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
@@ -207,6 +207,31 @@ function ProductPage() {
   const [imgIdx, setImgIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
+  const [reviewsShown, setReviewsShown] = useState(3);
+
+  const extraReviews = useMemo(() => {
+    const pool = p.id === "neural" ? [
+      { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5 },
+      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5 },
+      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Devon K.", date: "1 month ago", rating: 5 },
+      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah R.", date: "2 months ago", rating: 4 },
+      { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
+      { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
+      { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "Jordan L.", date: "3 months ago", rating: 4 },
+    ] : [
+      { title: "Energy without the crash", body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.", name: "Rachel D.", date: "2 weeks ago", rating: 5 },
+      { title: "Noticeable in the gym", body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.", name: "Tom W.", date: "1 month ago", rating: 5 },
+      { title: "Best NMN I've tried", body: "Tried three other brands before this. The trio combo with resveratrol actually makes sense biochemically and I feel it.", name: "Dr. Lena F.", date: "1 month ago", rating: 5 },
+      { title: "Worth the price", body: "Not cheap but I cut out two other supplements after starting this. Net cost is similar and the results are better.", name: "Carlos V.", date: "2 months ago", rating: 4 },
+      { title: "Mental clarity bonus", body: "Bought it for energy, ended up loving the mental clarity even more. Mid-afternoon dips are gone.", name: "Sofia A.", date: "2 months ago", rating: 5 },
+      { title: "Subtle, then significant", body: "Three weeks in and my wife asked what I was doing differently. That's when I knew it was working.", name: "Ben H.", date: "3 months ago", rating: 5 },
+      { title: "One pill is convenient", body: "Love that the new dose is one capsule. Easier to stay consistent.", name: "Mira J.", date: "3 months ago", rating: 4 },
+    ];
+    return [
+      { title: p.sample.title, body: p.sample.body, name: p.sample.name, date: p.sample.date, rating: 5 },
+      ...pool,
+    ];
+  }, [p]);
   const related = PRODUCTS[p.related.id];
 
   return (
@@ -367,14 +392,20 @@ function ProductPage() {
                 <div className="flex flex-wrap gap-2 text-xs">
                   {["Most Recent","Highest Rated","Most Helpful","Verified Only"].map(f=><button key={f} className="px-3 py-1.5 rounded-full border border-border hover:bg-white">{f}</button>)}
                 </div>
-                <div className="rounded-xl bg-white p-6 border border-border">
-                  <div className="flex">{[1,2,3,4,5].map(s=><Star key={s} className="h-4 w-4 fill-primary text-primary"/>)}</div>
-                  <h3 className="text-lg mt-2">"{p.sample.title}"</h3>
-                  <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {p.sample.name} · {p.sample.date}</div>
-                  <p className="mt-4 text-body text-sm leading-relaxed">{p.sample.body}</p>
-                  <div className="mt-4 text-xs text-muted-foreground">Was this helpful? Yes (52) · No (3)</div>
-                </div>
-                <button className="btn-outline">Load More Reviews</button>
+                {extraReviews.slice(0, reviewsShown).map((r, i) => (
+                  <div key={i} className="rounded-xl bg-white p-6 border border-border">
+                    <div className="flex">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
+                    <h3 className="text-lg mt-2">"{r.title}"</h3>
+                    <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {r.name} · {r.date}</div>
+                    <p className="mt-4 text-body text-sm leading-relaxed">{r.body}</p>
+                    <div className="mt-4 text-xs text-muted-foreground">Was this helpful? Yes · No</div>
+                  </div>
+                ))}
+                {reviewsShown < extraReviews.length ? (
+                  <button onClick={() => setReviewsShown(n => Math.min(n + 3, extraReviews.length))} className="btn-outline">Load More Reviews</button>
+                ) : (
+                  <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
+                )}
               </div>
             </div>
           )}
