@@ -240,6 +240,51 @@ function ProductPage() {
 
   return (
     <>
+      {showReviewForm && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={() => setShowReviewForm(false)}>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={e => e.stopPropagation()}>
+            <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
+                setUserReviews(prev => [{ ...form, date: "Just now" }, ...prev]);
+                setForm({ name: "", title: "", body: "", rating: 5 });
+                setShowReviewForm(false);
+                setTab("rev");
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="text-sm font-medium block mb-1">Rating</label>
+                <div className="flex gap-1">
+                  {[1,2,3,4,5].map(n => (
+                    <button key={n} type="button" onClick={() => setForm(f => ({...f, rating: n}))}>
+                      <Star className={`h-7 w-7 ${n <= form.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-medium block mb-1">Your name</label>
+                <input value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+              </div>
+              <div>
+                <label className="text-sm font-medium block mb-1">Title</label>
+                <input value={form.title} onChange={e => setForm(f => ({...f, title: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+              </div>
+              <div>
+                <label className="text-sm font-medium block mb-1">Review</label>
+                <textarea value={form.body} onChange={e => setForm(f => ({...f, body: e.target.value}))} rows={4} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+              </div>
+              <div className="flex gap-2 justify-end">
+                <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">Cancel</button>
+                <button type="submit" className="btn-primary">Submit Review</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
         <Link to="/" className="hover:text-ink">Home</Link><ChevronRight className="h-3 w-3"/>
         <Link to="/shop" className="hover:text-ink">Shop</Link><ChevronRight className="h-3 w-3"/>
