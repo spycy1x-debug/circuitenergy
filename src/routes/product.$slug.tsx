@@ -208,6 +208,9 @@ function ProductPage() {
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
   const [reviewsShown, setReviewsShown] = useState(3);
+  const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
 
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
