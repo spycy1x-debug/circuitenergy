@@ -231,10 +231,11 @@ function ProductPage() {
       { title: "One pill is convenient", body: "Love that the new dose is one capsule. Easier to stay consistent.", name: "Mira J.", date: "3 months ago", rating: 4 },
     ];
     return [
+      ...userReviews,
       { title: p.sample.title, body: p.sample.body, name: p.sample.name, date: p.sample.date, rating: 5 },
       ...pool,
     ];
-  }, [p]);
+  }, [p, userReviews]);
   const related = PRODUCTS[p.related.id];
 
   return (
