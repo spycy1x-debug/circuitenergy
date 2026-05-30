@@ -8,7 +8,7 @@ declare global {
 
 const SDK_URL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
 const DOMAIN = "xwkkv0-r0.myshopify.com";
-const STOREFRONT_ACCESS_TOKEN = "27b060f0e9c0b8a83808f0165c32c501";
+const STOREFRONT_ACCESS_TOKEN = "df40e9c0cbc7f17808d61a87c11403bc";
 
 let sdkPromise: Promise<any> | null = null;
 function loadSdk(): Promise<any> {
