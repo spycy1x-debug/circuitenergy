@@ -390,7 +390,7 @@ function ProductPage() {
                     <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden"><div className="h-full bg-primary" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
                   ))}
                 </div>
-                <button className="mt-6 btn-outline w-full">Write a Review</button>
+                <button onClick={() => setShowReviewForm(true)} className="mt-6 btn-outline w-full">Write a Review</button>
               </div>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2 text-xs">
