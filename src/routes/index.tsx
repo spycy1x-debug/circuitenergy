@@ -218,8 +218,8 @@ function HomePage() {
           <h2 className="text-white text-3xl md:text-5xl">Sound Familiar?</h2>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {painPoints.map((p)=>(
-              <div key={p} className="rounded-xl border border-white/10 bg-white/5 p-6">
-                <X className="h-5 w-5 text-destructive mb-3"/>
+              <div key={p} className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 hover:border-destructive/40 hover:from-destructive/10 hover:to-white/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="h-9 w-9 rounded-lg bg-destructive/15 text-destructive flex items-center justify-center mb-3 group-hover:bg-destructive/25 transition"><X className="h-5 w-5"/></div>
                 <p className="text-white/90 text-base font-medium leading-snug">{p}</p>
               </div>
             ))}
