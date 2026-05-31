@@ -1,10 +1,15 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus, FileText, X, Flame, Users } from "lucide-react";
 import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
+import neuralHand from "@/assets/product-hand-kitchen.png";
+import neuralCustomer from "@/assets/product-customer-thumbsup.png";
+import neuralInfographic from "@/assets/product-benefits-infographic.png";
+import neuralComparison from "@/assets/product-comparison.png";
+import supplementFacts from "@/assets/product-supplement-facts.png";
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
@@ -38,9 +43,9 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     subtitle: "Focus & Cognitive Enhancement",
     price: 42.99,
     rating: 4.7,
-    reviews: 234,
+    reviews: 87,
     badge: "Most Popular",
-    images: [neuralImg, neuralOpen],
+    images: [neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralImg, neuralOpen],
     description: "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
     benefits: [
       "Eliminates brain fog",
@@ -120,7 +125,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     subtitle: "Cellular Energy & Longevity Support",
     price: 49.99,
     rating: 4.6,
-    reviews: 198,
+    reviews: 72,
     badge: "Best Seller",
     images: [nmnImg, nmnTrio],
     description: "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
@@ -213,6 +218,12 @@ function ProductPage() {
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
+  const [showLabel, setShowLabel] = useState(false);
+  const [stockLeft] = useState(() => 12 + Math.floor(Math.random() * 9));
+  const [secs, setSecs] = useState(15 * 60 + 42);
+  useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
+  const mm = String(Math.floor(secs / 60)).padStart(2, "0");
+  const ss = String(secs % 60).padStart(2, "0");
 
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
@@ -242,7 +253,7 @@ function ProductPage() {
     const arr = [...extraReviews];
     if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
     else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
-    else if (reviewFilter === "verified") return arr;
+    else if (reviewFilter === "verified") return arr.filter(r => r.rating >= 4).slice(0, 6);
     return arr;
   }, [extraReviews, reviewFilter]);
   const related = PRODUCTS[p.related.id];
@@ -294,6 +305,23 @@ function ProductPage() {
           </div>
         </div>
       )}
+      {showLabel && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setShowLabel(false)}>
+          <div className="bg-white rounded-2xl p-4 max-w-2xl w-full relative" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setShowLabel(false)} aria-label="Close" className="absolute top-3 right-3 h-9 w-9 rounded-full hover:bg-secondary flex items-center justify-center"><X className="h-5 w-5"/></button>
+            <h2 className="text-xl font-display font-bold mb-3 pr-10">Supplement Facts Label</h2>
+            <img src={supplementFacts} alt="Supplement facts label" className="w-full rounded-lg border border-border"/>
+          </div>
+        </div>
+      )}
+      {/* URGENCY BAR */}
+      <div className="bg-gradient-to-r from-energy/15 via-primary/10 to-electric/15 border-b border-border">
+        <div className="container-x py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs sm:text-sm">
+          <span className="flex items-center gap-1.5 font-semibold text-ink"><Flame className="h-4 w-4 text-energy"/>Limited launch pricing</span>
+          <span className="text-body">Ends in <span className="font-mono font-bold text-ink tabular-nums">{mm}:{ss}</span></span>
+          <span className="hidden sm:flex items-center gap-1.5 text-body"><Users className="h-4 w-4 text-primary"/>{stockLeft} bottles left at this price</span>
+        </div>
+      </div>
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
         <Link to="/" className="hover:text-ink">Home</Link><ChevronRight className="h-3 w-3"/>
         <Link to="/shop" className="hover:text-ink">Shop</Link><ChevronRight className="h-3 w-3"/>
@@ -340,12 +368,15 @@ function ProductPage() {
           <div className="mt-4 w-full">
             <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
           </div>
+          <button onClick={() => setShowLabel(true)} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition">
+            <FileText className="h-4 w-4"/> View Supplement Label
+          </button>
 
           <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-muted-foreground">
             <Trust icon={Lock} text="Secure Checkout"/>
             <Trust icon={Truck} text="Free Shipping $75+"/>
             <Trust icon={RotateCcw} text="60-Day Guarantee"/>
-            <Trust icon={Star} text="50+ Reviews"/>
+            <Trust icon={Star} text="80+ Reviews"/>
           </div>
         </div>
       </section>
