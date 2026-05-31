@@ -217,7 +217,7 @@ function ProductPage() {
   const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
-  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified">("recent");
+  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
   const [stockLeft] = useState(() => 12 + Math.floor(Math.random() * 9));
