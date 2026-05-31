@@ -217,7 +217,7 @@ function ProductPage() {
   const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
-  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified">("recent");
+  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
   const [stockLeft] = useState(() => 12 + Math.floor(Math.random() * 9));
@@ -257,6 +257,7 @@ function ProductPage() {
     if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
     else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
     else if (reviewFilter === "verified") return arr.filter(r => r.rating >= 4).slice(0, 6);
+    else if (["1","2","3","4","5"].includes(reviewFilter)) return arr.filter(r => r.rating === Number(reviewFilter));
     return arr;
   }, [extraReviews, reviewFilter]);
   const related = PRODUCTS[p.related.id];
@@ -381,20 +382,17 @@ function ProductPage() {
               <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-12 flex items-center justify-center hover:bg-secondary"><Plus className="h-4 w-4"/></button>
             </div>
           </div>
-          <div className="mt-4 relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-energy via-energy/70 to-electric rounded-xl blur-md opacity-60 animate-pulse pointer-events-none"/>
-            <div className="relative rounded-xl bg-white p-1.5 border-2 border-energy/50 shadow-[0_12px_32px_-12px_rgba(255,107,44,0.55)]">
-              <div className="flex items-center justify-between px-2 pt-1 pb-2 text-[11px] font-bold uppercase tracking-wide">
-                <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in {hh}:{mm}:{ss} — ships today</span>
-                <span className="text-success hidden sm:flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>{stockLeft} left</span>
-              </div>
-              <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-2 text-[11px] sm:text-xs font-bold uppercase tracking-wide">
+              <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in <span className="font-mono tabular-nums">{hh}:{mm}:{ss}</span> — ships today</span>
+              <span className="flex items-center gap-1.5 text-success"><span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>{stockLeft} left</span>
             </div>
-            <div className="mt-2 flex items-center justify-center gap-4 text-[11px] text-muted-foreground">
-              <span className="flex items-center gap-1"><Lock className="h-3 w-3"/>SSL Secure</span>
-              <span>·</span>
+            <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
+              <span className="flex items-center gap-1"><Lock className="h-3 w-3"/>SSL Secure Checkout</span>
+              <span className="hidden sm:inline">·</span>
               <span className="flex items-center gap-1"><Truck className="h-3 w-3"/>Free shipping $75+</span>
-              <span>·</span>
+              <span className="hidden sm:inline">·</span>
               <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3"/>60-day refund</span>
             </div>
           </div>
@@ -540,10 +538,23 @@ function ProductPage() {
                 <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
                 <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews} verified reviews</div>
                 <div className="mt-5 space-y-1.5 text-xs">
-                  {[["5",79],["4",12],["3",6],["2",2],["1",1]].map(([s,pct])=>(
-                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border"><div className="h-full bg-gradient-to-r from-primary to-electric" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
+                  {([["5",79],["4",12],["3",6],["2",2],["1",1]] as const).map(([s,pct])=>(
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={()=>{setReviewFilter(s);setReviewsShown(3);}}
+                      className={`w-full flex items-center gap-2 rounded-md px-1.5 py-1 -mx-1.5 transition hover:bg-white text-left ${reviewFilter===s?"bg-white ring-1 ring-primary/40":""}`}
+                      aria-label={`Show ${s} star reviews`}
+                    >
+                      <span className="w-4 font-semibold">{s}★</span>
+                      <span className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border"><span className="block h-full bg-gradient-to-r from-primary to-electric" style={{width:`${pct}%`}}/></span>
+                      <span className="w-8 text-right text-muted-foreground">{pct}%</span>
+                    </button>
                   ))}
                 </div>
+                {["1","2","3","4","5"].includes(reviewFilter) && (
+                  <button onClick={()=>{setReviewFilter("recent");setReviewsShown(3);}} className="mt-2 text-xs text-primary hover:underline">Clear star filter</button>
+                )}
                 <div className="mt-5 pt-5 border-t border-border flex items-center gap-2 text-xs text-success font-semibold"><ShieldCheck className="h-4 w-4"/>97% would recommend</div>
                 <button onClick={() => setShowReviewForm(true)} className="mt-5 btn-primary w-full">Write a Review</button>
               </div>
@@ -579,7 +590,9 @@ function ProductPage() {
                   </div>
                   );
                 })}
-                {reviewsShown < sortedReviews.length ? (
+                {sortedReviews.length === 0 ? (
+                  <div className="rounded-xl border border-dashed border-border bg-white/50 p-8 text-center text-sm text-muted-foreground">No reviews match this filter yet.</div>
+                ) : reviewsShown < sortedReviews.length ? (
                   <button onClick={() => setReviewsShown(n => Math.min(n + 3, sortedReviews.length))} className="btn-outline">Load More Reviews</button>
                 ) : (
                   <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
