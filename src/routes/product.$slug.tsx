@@ -532,16 +532,20 @@ function ProductPage() {
 
           {tab==="rev" && (
             <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
-              <div className="rounded-xl bg-white p-6 border border-border h-fit">
-                <div className="text-5xl font-display font-bold text-ink">{p.rating}</div>
+              <div className="rounded-2xl bg-gradient-to-br from-white to-secondary p-6 border border-border h-fit shadow-sm">
+                <div className="flex items-baseline gap-2">
+                  <div className="text-5xl font-display font-bold text-ink">{p.rating}</div>
+                  <div className="text-sm text-muted-foreground">/ 5</div>
+                </div>
                 <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
-                <div className="text-sm text-muted-foreground mt-1">{p.reviews} reviews</div>
+                <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews} verified reviews</div>
                 <div className="mt-5 space-y-1.5 text-xs">
                   {[["5",79],["4",12],["3",6],["2",2],["1",1]].map(([s,pct])=>(
-                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden"><div className="h-full bg-primary" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
+                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border"><div className="h-full bg-gradient-to-r from-primary to-electric" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
                   ))}
                 </div>
-                <button onClick={() => setShowReviewForm(true)} className="mt-6 btn-outline w-full">Write a Review</button>
+                <div className="mt-5 pt-5 border-t border-border flex items-center gap-2 text-xs text-success font-semibold"><ShieldCheck className="h-4 w-4"/>97% would recommend</div>
+                <button onClick={() => setShowReviewForm(true)} className="mt-5 btn-primary w-full">Write a Review</button>
               </div>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2 text-xs">
@@ -549,20 +553,32 @@ function ProductPage() {
                     <button key={k} onClick={()=>{setReviewFilter(k);setReviewsShown(3);}} className={`px-3 py-1.5 rounded-full border transition ${reviewFilter===k?"border-primary bg-primary text-white":"border-border hover:bg-white"}`}>{l}</button>
                   ))}
                 </div>
-                {sortedReviews.slice(0, reviewsShown).map((r, i) => (
-                  <div key={i} className="rounded-xl bg-white p-6 border border-border">
-                    <div className="flex">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
-                    <h3 className="text-lg mt-2">"{r.title}"</h3>
-                    <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {r.name} · {r.date}</div>
-                    <p className="mt-4 text-body text-sm leading-relaxed">{r.body}</p>
-                    <div className="mt-4 text-xs text-muted-foreground flex items-center gap-2">
+                {sortedReviews.slice(0, reviewsShown).map((r, i) => {
+                  const initials = r.name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase();
+                  return (
+                  <div key={i} className="rounded-xl bg-white p-6 border border-border hover:shadow-md transition">
+                    <div className="flex items-start gap-3">
+                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-electric text-white font-bold text-sm flex items-center justify-center shrink-0">{initials}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="font-display font-bold text-ink text-sm">{r.name}</span>
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide bg-success/10 text-success px-1.5 py-0.5 rounded"><Check className="h-2.5 w-2.5"/>Verified</span>
+                          <span className="text-xs text-muted-foreground">· {r.date}</span>
+                        </div>
+                        <div className="flex mt-1">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
+                      </div>
+                    </div>
+                    <h3 className="text-base font-display font-bold mt-3">"{r.title}"</h3>
+                    <p className="mt-2 text-body text-sm leading-relaxed">{r.body}</p>
+                    <div className="mt-4 pt-3 border-t border-border text-xs text-muted-foreground flex items-center gap-2">
                       <span>Was this helpful?</span>
-                      <button onClick={()=>setHelpful(h=>({...h,[i]:"yes"}))} className={`px-2 py-1 rounded border transition ${helpful[i]==="yes"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}>Yes</button>
+                      <button onClick={()=>setHelpful(h=>({...h,[i]:"yes"}))} className={`px-2 py-1 rounded border transition inline-flex items-center gap-1 ${helpful[i]==="yes"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}><ThumbsUp className="h-3 w-3"/>Yes</button>
                       <button onClick={()=>setHelpful(h=>({...h,[i]:"no"}))} className={`px-2 py-1 rounded border transition ${helpful[i]==="no"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}>No</button>
                       {helpful[i] && <span className="text-success">Thanks for your feedback!</span>}
                     </div>
                   </div>
-                ))}
+                  );
+                })}
                 {reviewsShown < sortedReviews.length ? (
                   <button onClick={() => setReviewsShown(n => Math.min(n + 3, sortedReviews.length))} className="btn-outline">Load More Reviews</button>
                 ) : (
