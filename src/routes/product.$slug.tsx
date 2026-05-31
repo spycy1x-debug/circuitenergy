@@ -376,25 +376,35 @@ function ProductPage() {
           </ul>
 
 
-          <div className="mt-7 flex items-center gap-4">
-            <div className="inline-flex items-center border border-border rounded-md">
-              <button aria-label="Decrease" onClick={()=>setQty(q=>Math.max(1,q-1))} className="h-12 w-12 flex items-center justify-center hover:bg-secondary"><Minus className="h-4 w-4"/></button>
-              <span className="w-10 text-center font-semibold">{qty}</span>
-              <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-12 flex items-center justify-center hover:bg-secondary"><Plus className="h-4 w-4"/></button>
+          <div className="mt-7 rounded-2xl border border-border bg-gradient-to-b from-white to-secondary/40 p-5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)]">
+            {/* Stock progress */}
+            <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wide mb-1.5">
+              <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in <span className="font-mono tabular-nums text-ink">{hh}:{mm}:{ss}</span> — ships today</span>
+              <span className="flex items-center gap-1.5 text-ink"><span className="h-1.5 w-1.5 rounded-full bg-energy animate-pulse"/>Only {stockLeft} left</span>
             </div>
-          </div>
-          <div className="mt-4">
-            <div className="flex items-center justify-between mb-2 text-[11px] sm:text-xs font-bold uppercase tracking-wide">
-              <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in <span className="font-mono tabular-nums">{hh}:{mm}:{ss}</span> — ships today</span>
-              <span className="flex items-center gap-1.5 text-success"><span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>{stockLeft} left</span>
+            <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden mb-4">
+              <div className="h-full bg-gradient-to-r from-energy to-primary" style={{ width: `${Math.min(100, stockLeft * 5)}%` }}/>
             </div>
-            <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
-              <span className="flex items-center gap-1"><Lock className="h-3 w-3"/>SSL Secure Checkout</span>
-              <span className="hidden sm:inline">·</span>
-              <span className="flex items-center gap-1"><Truck className="h-3 w-3"/>Free shipping $75+</span>
-              <span className="hidden sm:inline">·</span>
-              <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3"/>60-day refund</span>
+
+            {/* Qty + button row */}
+            <div className="flex items-stretch gap-3">
+              <div className="inline-flex items-center bg-white border border-border rounded-xl shadow-sm">
+                <button aria-label="Decrease" onClick={()=>setQty(q=>Math.max(1,q-1))} className="h-12 w-11 flex items-center justify-center text-muted-foreground hover:text-ink rounded-l-xl"><Minus className="h-4 w-4"/></button>
+                <span className="w-8 text-center font-bold text-ink">{qty}</span>
+                <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-11 flex items-center justify-center text-muted-foreground hover:text-ink rounded-r-xl"><Plus className="h-4 w-4"/></button>
+              </div>
+              <div className="flex-1 min-w-0">
+                <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+              </div>
+            </div>
+
+            {/* Trust row */}
+            <div className="mt-4 pt-4 border-t border-border/70 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground">
+              <span className="flex items-center gap-1"><Lock className="h-3 w-3 text-success"/>SSL Secure Checkout</span>
+              <span className="hidden sm:inline opacity-40">·</span>
+              <span className="flex items-center gap-1"><Truck className="h-3 w-3 text-success"/>Free shipping $75+</span>
+              <span className="hidden sm:inline opacity-40">·</span>
+              <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3 text-success"/>60-day refund</span>
             </div>
           </div>
           <button onClick={() => setShowLabel(true)} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition">
