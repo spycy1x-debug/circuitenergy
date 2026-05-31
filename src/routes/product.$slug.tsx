@@ -382,20 +382,17 @@ function ProductPage() {
               <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-12 flex items-center justify-center hover:bg-secondary"><Plus className="h-4 w-4"/></button>
             </div>
           </div>
-          <div className="mt-4 relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-energy via-energy/70 to-electric rounded-xl blur-md opacity-60 animate-pulse pointer-events-none"/>
-            <div className="relative rounded-xl bg-white p-1.5 border-2 border-energy/50 shadow-[0_12px_32px_-12px_rgba(255,107,44,0.55)]">
-              <div className="flex items-center justify-between px-2 pt-1 pb-2 text-[11px] font-bold uppercase tracking-wide">
-                <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in {hh}:{mm}:{ss} — ships today</span>
-                <span className="text-success hidden sm:flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>{stockLeft} left</span>
-              </div>
-              <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-2 text-[11px] sm:text-xs font-bold uppercase tracking-wide">
+              <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in <span className="font-mono tabular-nums">{hh}:{mm}:{ss}</span> — ships today</span>
+              <span className="flex items-center gap-1.5 text-success"><span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>{stockLeft} left</span>
             </div>
-            <div className="mt-2 flex items-center justify-center gap-4 text-[11px] text-muted-foreground">
-              <span className="flex items-center gap-1"><Lock className="h-3 w-3"/>SSL Secure</span>
-              <span>·</span>
+            <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
+              <span className="flex items-center gap-1"><Lock className="h-3 w-3"/>SSL Secure Checkout</span>
+              <span className="hidden sm:inline">·</span>
               <span className="flex items-center gap-1"><Truck className="h-3 w-3"/>Free shipping $75+</span>
-              <span>·</span>
+              <span className="hidden sm:inline">·</span>
               <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3"/>60-day refund</span>
             </div>
           </div>
