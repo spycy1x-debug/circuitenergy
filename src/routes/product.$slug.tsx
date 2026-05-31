@@ -221,9 +221,11 @@ function ProductPage() {
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
   const [stockLeft] = useState(() => 12 + Math.floor(Math.random() * 9));
-  const [secs, setSecs] = useState(15 * 60 + 42);
+  const [viewers] = useState(() => 18 + Math.floor(Math.random() * 22));
+  const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
   useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
-  const mm = String(Math.floor(secs / 60)).padStart(2, "0");
+  const hh = String(Math.floor(secs / 3600)).padStart(2, "0");
+  const mm = String(Math.floor((secs % 3600) / 60)).padStart(2, "0");
   const ss = String(secs % 60).padStart(2, "0");
 
   const extraReviews = useMemo(() => {
@@ -316,11 +318,11 @@ function ProductPage() {
         </div>
       )}
       {/* URGENCY BAR */}
-      <div className="bg-gradient-to-r from-energy/15 via-primary/10 to-electric/15 border-b border-border">
+      <div className="bg-gradient-to-r from-energy via-primary to-electric text-white">
         <div className="container-x py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs sm:text-sm">
-          <span className="flex items-center gap-1.5 font-semibold text-ink"><Flame className="h-4 w-4 text-energy"/>Limited launch pricing</span>
-          <span className="text-body">Ends in <span className="font-mono font-bold text-ink tabular-nums">{mm}:{ss}</span></span>
-          <span className="hidden sm:flex items-center gap-1.5 text-body"><Users className="h-4 w-4 text-primary"/>{stockLeft} bottles left at this price</span>
+          <span className="flex items-center gap-1.5 font-bold"><Flame className="h-4 w-4"/>Limited launch pricing</span>
+          <span className="opacity-95">Ends in <span className="font-mono font-bold tabular-nums bg-white/15 px-2 py-0.5 rounded">{hh}:{mm}:{ss}</span></span>
+          <span className="hidden sm:flex items-center gap-1.5 opacity-95"><Users className="h-4 w-4"/>Only {stockLeft} bottles left at this price</span>
         </div>
       </div>
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
@@ -332,32 +334,45 @@ function ProductPage() {
       {/* SPLIT */}
       <section className="container-x pb-12 grid gap-10 md:grid-cols-[5fr_6fr] items-start">
         <div>
-          <div className="relative bg-secondary rounded-2xl aspect-square flex items-center justify-center overflow-hidden group">
-            <div className="absolute top-4 left-4 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full z-10">{p.badge}</div>
-            <img src={p.images[imgIdx]} alt={p.name} className="max-h-[500px] object-contain transition-transform duration-500 group-hover:scale-110"/>
+          <div className="relative bg-white rounded-2xl aspect-square overflow-hidden group border border-border shadow-sm">
+            <div className="absolute top-4 left-4 bg-gradient-to-r from-primary to-electric text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md">{p.badge}</div>
+            <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-semibold text-ink shadow">
+              <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"/><span className="relative inline-flex rounded-full h-2 w-2 bg-success"/></span>
+              {viewers} viewing now
+            </div>
+            <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
           </div>
-          <div className="mt-4 flex gap-3">
+          <div className="mt-4 grid grid-cols-6 gap-2">
             {p.images.map((src,i)=>(
-              <button key={i} onClick={()=>setImgIdx(i)} className={`h-20 w-20 rounded-lg bg-secondary border-2 ${imgIdx===i?"border-primary":"border-transparent"} flex items-center justify-center overflow-hidden`}>
-                <img src={src} alt="" className="max-h-16 object-contain"/>
+              <button key={i} onClick={()=>setImgIdx(i)} className={`aspect-square rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition`}>
+                <img src={src} alt="" className="w-full h-full object-cover"/>
               </button>
             ))}
           </div>
         </div>
         <div>
+          <div className="inline-flex items-center gap-1.5 bg-success/10 text-success text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>In Stock · Ships Today
+          </div>
           <h1 className="font-display text-3xl md:text-4xl">{p.name}</h1>
           <p className="mt-1 text-primary font-semibold">{p.subtitle}</p>
           <div className="mt-3 flex items-center gap-2 text-sm">
             <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-            <span className="text-body">{p.rating} ({p.reviews} reviews)</span>
+            <span className="text-body">{p.rating} · <button onClick={()=>setTab("rev")} className="underline hover:text-primary">{p.reviews} reviews</button></span>
           </div>
-          <div className="mt-5 text-3xl font-display font-bold text-ink">${p.price.toFixed(2)}</div>
+          <div className="mt-5 flex items-baseline gap-3">
+            <div className="text-3xl font-display font-bold text-ink">${p.price.toFixed(2)}</div>
+            <div className="text-lg text-muted-foreground line-through">${(p.price * 1.4).toFixed(2)}</div>
+            <div className="text-xs font-bold uppercase bg-energy/15 text-energy px-2 py-1 rounded">Save 30%</div>
+          </div>
+          <p className="mt-1 text-xs text-muted-foreground">or 4 interest-free payments of ${(p.price/4).toFixed(2)} with Shop Pay</p>
           <p className="mt-4 text-body leading-relaxed">{p.description}</p>
           <ul className="mt-6 space-y-2.5">
             {p.benefits.map(b=>(
               <li key={b} className="flex items-center gap-2 text-sm text-body"><Check className="h-4 w-4 text-success shrink-0"/>{b}</li>
             ))}
           </ul>
+
 
           <div className="mt-7 flex items-center gap-4">
             <div className="inline-flex items-center border border-border rounded-md">
