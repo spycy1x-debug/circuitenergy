@@ -342,9 +342,9 @@ function ProductPage() {
             </div>
             <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
           </div>
-          <div className="mt-4 grid grid-cols-6 gap-2">
+          <div className="mt-4 flex flex-wrap gap-2">
             {p.images.map((src,i)=>(
-              <button key={i} onClick={()=>setImgIdx(i)} className={`aspect-square rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition`}>
+              <button key={i} onClick={()=>setImgIdx(i)} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition`}>
                 <img src={src} alt="" className="w-full h-full object-cover"/>
               </button>
             ))}
