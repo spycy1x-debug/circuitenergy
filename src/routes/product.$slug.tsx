@@ -222,7 +222,7 @@ function ProductPage() {
   const [showLabel, setShowLabel] = useState(false);
   const stockLeft = p.id === "neural" ? 14 : 18;
   const headerStock = 12;
-  const [viewers] = useState(() => 18 + Math.floor(Math.random() * 22));
+  const viewers = 26;
   const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
   useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
   const hh = String(Math.floor(secs / 3600)).padStart(2, "0");
