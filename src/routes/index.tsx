@@ -323,25 +323,40 @@ function HomePage() {
       </section>
 
       {/* BEFORE/AFTER */}
-      <section className="py-20 md:py-28 bg-secondary">
-        <div className="container-x">
-          <h2 className="text-3xl md:text-5xl text-center">Life Before and After Circuit</h2>
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl bg-destructive/5 border border-destructive/20 p-8">
-              <h3 className="text-xl mb-5 text-destructive">Before Circuit</h3>
-              <ul className="space-y-3">
-                {["Brain fog by 10am","Can't focus for more than 20 minutes","Exhausted by 2pm every day","Coffee gives jitters, not clarity","Weekends spent recovering","Sleep doesn't help anymore"].map(i=>(
-                  <li key={i} className="flex gap-3 text-body"><X className="h-5 w-5 text-destructive shrink-0 mt-0.5"/>{i}</li>
-                ))}
-              </ul>
+      <section className="py-20 md:py-28 bg-secondary relative overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, var(--primary), transparent 60%)" }} />
+        <div className="container-x relative">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase mb-5 border border-border bg-white">
+              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--primary)" }} />
+              <span className="text-ink/80">The Transformation</span>
             </div>
-            <div className="rounded-2xl bg-success/5 border border-success/20 p-8">
-              <h3 className="text-xl mb-5 text-success">After Circuit</h3>
-              <ul className="space-y-3">
-                {["Sharp, clear thinking all morning","Deep focus that lasts for hours","Consistent energy morning to evening","Smooth, jitter-free mental energy","Weekends full of energy","Wake up actually rested"].map(i=>(
-                  <li key={i} className="flex gap-3 text-body"><Check className="h-5 w-5 text-success shrink-0 mt-0.5"/>{i}</li>
-                ))}
-              </ul>
+            <h2 className="text-3xl md:text-5xl">Life Before and After Circuit</h2>
+          </div>
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            <div className="relative rounded-2xl bg-gradient-to-br from-destructive/10 to-destructive/[0.02] border-2 border-destructive/20 p-8 overflow-hidden">
+              <div aria-hidden className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-destructive/10 blur-2xl"/>
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 rounded-full bg-destructive/15 text-destructive text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4">Before</div>
+                <h3 className="text-2xl mb-5 text-destructive font-display font-bold">Running on Empty</h3>
+                <ul className="space-y-3">
+                  {["Brain fog by 10am","Can't focus for more than 20 minutes","Exhausted by 2pm every day","Coffee gives jitters, not clarity","Weekends spent recovering","Sleep doesn't help anymore"].map(i=>(
+                    <li key={i} className="flex gap-3 text-body items-start"><span className="mt-0.5 h-5 w-5 rounded-full bg-destructive/15 text-destructive flex items-center justify-center shrink-0"><X className="h-3 w-3"/></span>{i}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="relative rounded-2xl bg-gradient-to-br from-success/10 to-success/[0.02] border-2 border-success/30 p-8 overflow-hidden shadow-lg">
+              <div aria-hidden className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-success/15 blur-2xl"/>
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 rounded-full bg-success/15 text-success text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4"><Sparkles className="h-3 w-3"/>After</div>
+                <h3 className="text-2xl mb-5 text-success font-display font-bold">Fully Charged</h3>
+                <ul className="space-y-3">
+                  {["Sharp, clear thinking all morning","Deep focus that lasts for hours","Consistent energy morning to evening","Smooth, jitter-free mental energy","Weekends full of energy","Wake up actually rested"].map(i=>(
+                    <li key={i} className="flex gap-3 text-body items-start"><span className="mt-0.5 h-5 w-5 rounded-full bg-success/15 text-success flex items-center justify-center shrink-0"><Check className="h-3 w-3"/></span>{i}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
