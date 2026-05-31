@@ -345,7 +345,7 @@ function ProductPage() {
             <Trust icon={Lock} text="Secure Checkout"/>
             <Trust icon={Truck} text="Free Shipping $75+"/>
             <Trust icon={RotateCcw} text="60-Day Guarantee"/>
-            <Trust icon={Star} text="500+ Reviews"/>
+            <Trust icon={Star} text="50+ Reviews"/>
           </div>
         </div>
       </section>
