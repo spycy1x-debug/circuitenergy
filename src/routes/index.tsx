@@ -484,9 +484,11 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
       <div className="relative">
         <div className="text-xs uppercase tracking-[0.18em] text-primary font-bold">{props.subtitle}</div>
         <h3 className="text-2xl md:text-3xl mt-1.5 leading-tight">{props.title}</h3>
-        <div className="mt-2 flex items-baseline gap-2">
+        <div className="mt-2 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
           <span className="text-3xl font-display font-bold text-ink">{props.price}</span>
-          <span className="text-sm text-muted-foreground">/ bottle</span>
+          <span className="text-base text-muted-foreground line-through">${(parseFloat(props.price.replace("$","")) * 1.4).toFixed(2)}</span>
+          <span className="text-[10px] font-bold uppercase tracking-wide bg-energy/15 text-energy px-2 py-0.5 rounded">Save 30%</span>
+          <span className="text-sm text-muted-foreground w-full sm:w-auto">/ bottle · Anniversary pricing</span>
         </div>
         <p className="mt-4 text-body text-sm leading-relaxed">{renderBold(props.desc)}</p>
         <ul className="mt-5 space-y-2.5">
