@@ -220,7 +220,8 @@ function ProductPage() {
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
-  const [stockLeft] = useState(() => 12 + Math.floor(Math.random() * 9));
+  const stockLeft = p.id === "neural" ? 14 : 18;
+  const headerStock = 12;
   const [viewers] = useState(() => 18 + Math.floor(Math.random() * 22));
   const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
   useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
