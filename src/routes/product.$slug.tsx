@@ -211,6 +211,8 @@ function ProductPage() {
   const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
+  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified">("recent");
+  const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
 
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
