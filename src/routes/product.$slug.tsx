@@ -428,37 +428,58 @@ function ProductPage() {
           {tab==="why" && (
             <div className="grid gap-10 md:grid-cols-2">
               <div>
+                <div className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3"><Brain className="h-3.5 w-3.5"/>The Science</div>
                 <h2 className="text-2xl md:text-3xl">{p.why.heading}</h2>
                 <div className="mt-5 space-y-4 text-body">{p.why.body.map((para,i)=><p key={i}>{para}</p>)}</div>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                {p.why.cards.map(c=>(
-                  <div key={c.t} className="rounded-xl bg-white p-5 border border-border">
-                    <h3 className="text-base mb-2">{c.t}</h3>
-                    <p className="text-sm text-body">{c.d}</p>
-                  </div>
-                ))}
+                {p.why.cards.map((c,i)=>{
+                  const icons = [Zap, Sparkles, ShieldCheck, Heart];
+                  const Icon = icons[i % icons.length];
+                  return (
+                    <div key={c.t} className="group rounded-xl bg-white p-5 border border-border hover:border-primary/40 hover:shadow-md transition relative overflow-hidden">
+                      <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-primary/10 to-electric/10 group-hover:scale-125 transition-transform"/>
+                      <div className="relative">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-electric text-white flex items-center justify-center mb-3 shadow-sm"><Icon className="h-5 w-5"/></div>
+                        <h3 className="text-base mb-2 font-display font-bold">{c.t}</h3>
+                        <p className="text-sm text-body">{c.d}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
 
           {tab==="ing" && (
             <div className="grid gap-10 md:grid-cols-2">
-              <div className="rounded-xl bg-white p-6 border-2 border-ink">
-                <h3 className="text-xl border-b-4 border-ink pb-2">Supplement Facts</h3>
+              <div className="rounded-xl bg-white p-6 border-2 border-ink shadow-sm">
+                <div className="flex items-center justify-between border-b-4 border-ink pb-2">
+                  <h3 className="text-xl">Supplement Facts</h3>
+                  <button onClick={() => setShowLabel(true)} className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"><FileText className="h-3.5 w-3.5"/>Full Label</button>
+                </div>
                 <p className="mt-2 text-sm text-body">{p.ingredients.serving}</p>
                 <ul className="mt-4 divide-y divide-border">
-                  {p.ingredients.items.map(it=><li key={it.name} className="py-2 text-sm">{it.name}</li>)}
+                  {p.ingredients.items.map((it,i)=>(
+                    <li key={it.name} className="py-2.5 text-sm flex items-center gap-2">
+                      <span className="h-5 w-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0">{i+1}</span>
+                      {it.name}
+                    </li>
+                  ))}
                 </ul>
                 <p className="mt-4 text-xs text-muted-foreground">{p.ingredients.other}</p>
               </div>
               <div>
+                <div className="inline-flex items-center gap-1.5 bg-electric/10 text-electric text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3"><Beaker className="h-3.5 w-3.5"/>What Each Does</div>
                 <h3 className="text-2xl mb-4">Key Ingredients</h3>
                 <div className="space-y-3">
                   {p.ingredients.callouts.map(c=>(
-                    <div key={c.name} className="rounded-lg bg-white p-4 border border-border">
-                      <div className="font-display font-semibold text-ink text-sm">{c.name}</div>
-                      <p className="text-sm text-body mt-1">{c.desc}</p>
+                    <div key={c.name} className="rounded-lg bg-white p-4 border border-border hover:border-primary/40 hover:shadow-sm transition flex gap-3">
+                      <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary/15 to-electric/15 text-primary flex items-center justify-center shrink-0"><Check className="h-4 w-4"/></div>
+                      <div>
+                        <div className="font-display font-bold text-ink text-sm">{c.name}</div>
+                        <p className="text-sm text-body mt-0.5">{c.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -468,28 +489,43 @@ function ProductPage() {
 
           {tab==="use" && (
             <div className="max-w-3xl space-y-6">
-              <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-2">Dosage</h3>
-                <p className="text-body">{p.use.dosage}</p>
-              </div>
-              <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-3">Best Practices</h3>
-                <ul className="space-y-2">{p.use.best.map(b=><li key={b} className="flex gap-2 text-body text-sm"><Check className="h-4 w-4 text-success mt-0.5 shrink-0"/>{b}</li>)}</ul>
-              </div>
-              <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-3">Timeline</h3>
-                <div className="space-y-3">
-                  {p.use.timeline.map(t=>(
-                    <div key={t.period} className="flex gap-4">
-                      <div className="w-24 shrink-0 font-display font-semibold text-primary text-sm">{t.period}</div>
-                      <div className="text-body text-sm">{t.text}</div>
-                    </div>
-                  ))}
+              <div className="rounded-2xl bg-gradient-to-br from-primary to-electric text-white p-6 shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center"><Clock className="h-6 w-6"/></div>
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider opacity-90">Daily Dosage</div>
+                    <p className="text-lg font-display font-bold">{p.use.dosage}</p>
+                  </div>
                 </div>
               </div>
-              <div className="rounded-xl bg-white p-6 border border-border text-sm text-body space-y-2">
-                <div><strong className="text-ink">Storage:</strong> {p.use.storage}</div>
-                <div><strong className="text-ink">Note:</strong> {p.use.note}</div>
+              <div className="rounded-xl bg-white p-6 border border-border">
+                <h3 className="text-lg mb-3 flex items-center gap-2"><ThumbsUp className="h-5 w-5 text-success"/>Best Practices</h3>
+                <ul className="space-y-2.5">{p.use.best.map(b=><li key={b} className="flex gap-2 text-body text-sm"><Check className="h-4 w-4 text-success mt-0.5 shrink-0"/>{b}</li>)}</ul>
+              </div>
+              <div className="rounded-xl bg-white p-6 border border-border">
+                <h3 className="text-lg mb-4 flex items-center gap-2"><Sparkles className="h-5 w-5 text-primary"/>What to Expect</h3>
+                <div className="relative pl-6">
+                  <div className="absolute left-[9px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-electric to-energy"/>
+                  <div className="space-y-5">
+                    {p.use.timeline.map((t,i)=>(
+                      <div key={t.period} className="relative">
+                        <div className="absolute -left-6 top-1 h-5 w-5 rounded-full bg-white border-2 border-primary flex items-center justify-center"><span className="h-2 w-2 rounded-full bg-primary"/></div>
+                        <div className="font-display font-bold text-primary text-sm">{t.period}</div>
+                        <div className="text-body text-sm mt-0.5">{t.text}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <div className="rounded-xl bg-white p-5 border border-border text-sm text-body flex gap-3">
+                  <ShieldCheck className="h-5 w-5 text-success shrink-0 mt-0.5"/>
+                  <div><div className="font-bold text-ink mb-0.5">Storage</div>{p.use.storage}</div>
+                </div>
+                <div className="rounded-xl bg-alert/5 p-5 border border-alert/20 text-sm text-body flex gap-3">
+                  <AlertCircle className="h-5 w-5 text-alert shrink-0 mt-0.5"/>
+                  <div><div className="font-bold text-ink mb-0.5">Note</div>{p.use.note}</div>
+                </div>
               </div>
             </div>
           )}
