@@ -247,12 +247,15 @@ function HomePage() {
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {[
-                "87% report improved focus within 2 weeks",
-                "Backed by 300+ peer-reviewed studies",
-                "Third-party tested for purity and potency",
-                "Natural ingredients, no artificial additives",
+                { t: "87%", s: "report improved focus within 2 weeks", c: "var(--primary)" },
+                { t: "300+", s: "peer-reviewed studies behind the formula", c: "var(--electric)" },
+                { t: "3rd", s: "party tested for purity and potency", c: "var(--success)" },
+                { t: "0", s: "artificial additives — natural ingredients only", c: "var(--energy)" },
               ].map((s)=>(
-                <div key={s} className="rounded-lg bg-secondary p-4 text-sm font-medium text-ink">{s}</div>
+                <div key={s.s} className="rounded-xl bg-white border border-border p-4 hover:shadow-md transition" style={{ boxShadow: `inset 3px 0 0 ${s.c}` }}>
+                  <div className="font-display text-2xl font-bold" style={{ color: s.c }}>{s.t}</div>
+                  <div className="mt-1 text-xs text-body leading-snug">{s.s}</div>
+                </div>
               ))}
             </div>
             <Link to="/product/$slug" params={{slug:"neural-performance"}} className="btn-primary mt-8">Shop Neural Performance</Link>
