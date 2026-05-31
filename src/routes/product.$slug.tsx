@@ -593,7 +593,9 @@ function ProductPage() {
                   </div>
                   );
                 })}
-                {reviewsShown < sortedReviews.length ? (
+                {sortedReviews.length === 0 ? (
+                  <div className="rounded-xl border border-dashed border-border bg-white/50 p-8 text-center text-sm text-muted-foreground">No reviews match this filter yet.</div>
+                ) : reviewsShown < sortedReviews.length ? (
                   <button onClick={() => setReviewsShown(n => Math.min(n + 3, sortedReviews.length))} className="btn-outline">Load More Reviews</button>
                 ) : (
                   <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
