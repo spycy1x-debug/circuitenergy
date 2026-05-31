@@ -218,6 +218,12 @@ function ProductPage() {
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
+  const [showLabel, setShowLabel] = useState(false);
+  const [stockLeft] = useState(() => 12 + Math.floor(Math.random() * 9));
+  const [secs, setSecs] = useState(15 * 60 + 42);
+  useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
+  const mm = String(Math.floor(secs / 60)).padStart(2, "0");
+  const ss = String(secs % 60).padStart(2, "0");
 
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
@@ -247,7 +253,7 @@ function ProductPage() {
     const arr = [...extraReviews];
     if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
     else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
-    else if (reviewFilter === "verified") return arr;
+    else if (reviewFilter === "verified") return arr.filter(r => r.rating >= 4).slice(0, 6);
     return arr;
   }, [extraReviews, reviewFilter]);
   const related = PRODUCTS[p.related.id];
