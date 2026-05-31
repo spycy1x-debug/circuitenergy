@@ -305,6 +305,23 @@ function ProductPage() {
           </div>
         </div>
       )}
+      {showLabel && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setShowLabel(false)}>
+          <div className="bg-white rounded-2xl p-4 max-w-2xl w-full relative" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setShowLabel(false)} aria-label="Close" className="absolute top-3 right-3 h-9 w-9 rounded-full hover:bg-secondary flex items-center justify-center"><X className="h-5 w-5"/></button>
+            <h2 className="text-xl font-display font-bold mb-3 pr-10">Supplement Facts Label</h2>
+            <img src={supplementFacts} alt="Supplement facts label" className="w-full rounded-lg border border-border"/>
+          </div>
+        </div>
+      )}
+      {/* URGENCY BAR */}
+      <div className="bg-gradient-to-r from-energy/15 via-primary/10 to-electric/15 border-b border-border">
+        <div className="container-x py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs sm:text-sm">
+          <span className="flex items-center gap-1.5 font-semibold text-ink"><Flame className="h-4 w-4 text-energy"/>Limited launch pricing</span>
+          <span className="text-body">Ends in <span className="font-mono font-bold text-ink tabular-nums">{mm}:{ss}</span></span>
+          <span className="hidden sm:flex items-center gap-1.5 text-body"><Users className="h-4 w-4 text-primary"/>{stockLeft} bottles left at this price</span>
+        </div>
+      </div>
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
         <Link to="/" className="hover:text-ink">Home</Link><ChevronRight className="h-3 w-3"/>
         <Link to="/shop" className="hover:text-ink">Shop</Link><ChevronRight className="h-3 w-3"/>
