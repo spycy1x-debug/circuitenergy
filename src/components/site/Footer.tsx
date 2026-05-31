@@ -15,7 +15,7 @@ export function Footer() {
           <Link to="/privacy" className="py-1 hover:text-white">Privacy Policy</Link>
         </div>
         <div className="text-sm space-y-2">
-          <a href="mailto:support.circuit@gmail.com" className="block hover:text-white">support.circuit@gmail.com</a>
+          <a href="mailto:support@circuitenergy.co" className="block hover:text-white">support@circuitenergy.co</a>
           <div>60-Day Money-Back Guarantee</div>
           <div>Third-Party Lab Tested</div>
           <div>Made in the USA</div>

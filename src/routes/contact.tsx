@@ -3,7 +3,7 @@ import { Mail, ShieldCheck, RotateCcw } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact Circuit Energy" }, { name: "description", content: "Get in touch with Circuit Energy. Email support.circuit@gmail.com for questions about your order, products, or guarantee." }] }),
+  head: () => ({ meta: [{ title: "Contact Circuit Energy" }, { name: "description", content: "Get in touch with Circuit Energy. Email support@circuitenergy.co for questions about your order, products, or guarantee." }] }),
   component: ContactPage,
 });
 
@@ -54,7 +54,7 @@ function ContactPage() {
             icon={<Mail className="h-5 w-5" />}
             title="Email Support"
           >
-            <a href="mailto:support.circuit@gmail.com" className="text-ink font-semibold hover:underline">support.circuit@gmail.com</a>
+            <a href="mailto:support@circuitenergy.co" className="text-ink font-semibold hover:underline">support@circuitenergy.co</a>
             <p className="text-xs text-muted-foreground mt-1">We typically respond within 24 hours.</p>
           </InfoCard>
           <InfoCard
