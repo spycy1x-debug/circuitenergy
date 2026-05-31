@@ -5,6 +5,7 @@ import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
+import neuralHeroClean from "@/assets/neural-hero-clean.png";
 import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
 import neuralInfographic from "@/assets/product-benefits-infographic.png";
@@ -45,7 +46,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     rating: 4.7,
     reviews: 87,
     badge: "Most Popular",
-    images: [neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralImg, neuralOpen],
+    images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralImg, neuralOpen],
     description: "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
     benefits: [
       "Eliminates brain fog",
