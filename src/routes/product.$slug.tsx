@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus, FileText, X, Flame, Users } from "lucide-react";
+import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus, FileText, X, Flame, Users, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
 import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
@@ -381,8 +381,22 @@ function ProductPage() {
               <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-12 flex items-center justify-center hover:bg-secondary"><Plus className="h-4 w-4"/></button>
             </div>
           </div>
-          <div className="mt-4 w-full">
-            <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+          <div className="mt-4 relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-energy via-energy/70 to-electric rounded-xl blur-md opacity-60 animate-pulse pointer-events-none"/>
+            <div className="relative rounded-xl bg-white p-1.5 border-2 border-energy/50 shadow-[0_12px_32px_-12px_rgba(255,107,44,0.55)]">
+              <div className="flex items-center justify-between px-2 pt-1 pb-2 text-[11px] font-bold uppercase tracking-wide">
+                <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in {hh}:{mm}:{ss} — ships today</span>
+                <span className="text-success hidden sm:flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>{stockLeft} left</span>
+              </div>
+              <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+            </div>
+            <div className="mt-2 flex items-center justify-center gap-4 text-[11px] text-muted-foreground">
+              <span className="flex items-center gap-1"><Lock className="h-3 w-3"/>SSL Secure</span>
+              <span>·</span>
+              <span className="flex items-center gap-1"><Truck className="h-3 w-3"/>Free shipping $75+</span>
+              <span>·</span>
+              <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3"/>60-day refund</span>
+            </div>
           </div>
           <button onClick={() => setShowLabel(true)} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition">
             <FileText className="h-4 w-4"/> View Supplement Label
@@ -414,37 +428,58 @@ function ProductPage() {
           {tab==="why" && (
             <div className="grid gap-10 md:grid-cols-2">
               <div>
+                <div className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3"><Brain className="h-3.5 w-3.5"/>The Science</div>
                 <h2 className="text-2xl md:text-3xl">{p.why.heading}</h2>
                 <div className="mt-5 space-y-4 text-body">{p.why.body.map((para,i)=><p key={i}>{para}</p>)}</div>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                {p.why.cards.map(c=>(
-                  <div key={c.t} className="rounded-xl bg-white p-5 border border-border">
-                    <h3 className="text-base mb-2">{c.t}</h3>
-                    <p className="text-sm text-body">{c.d}</p>
-                  </div>
-                ))}
+                {p.why.cards.map((c,i)=>{
+                  const icons = [Zap, Sparkles, ShieldCheck, Heart];
+                  const Icon = icons[i % icons.length];
+                  return (
+                    <div key={c.t} className="group rounded-xl bg-white p-5 border border-border hover:border-primary/40 hover:shadow-md transition relative overflow-hidden">
+                      <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-primary/10 to-electric/10 group-hover:scale-125 transition-transform"/>
+                      <div className="relative">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-electric text-white flex items-center justify-center mb-3 shadow-sm"><Icon className="h-5 w-5"/></div>
+                        <h3 className="text-base mb-2 font-display font-bold">{c.t}</h3>
+                        <p className="text-sm text-body">{c.d}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
 
           {tab==="ing" && (
             <div className="grid gap-10 md:grid-cols-2">
-              <div className="rounded-xl bg-white p-6 border-2 border-ink">
-                <h3 className="text-xl border-b-4 border-ink pb-2">Supplement Facts</h3>
+              <div className="rounded-xl bg-white p-6 border-2 border-ink shadow-sm">
+                <div className="flex items-center justify-between border-b-4 border-ink pb-2">
+                  <h3 className="text-xl">Supplement Facts</h3>
+                  <button onClick={() => setShowLabel(true)} className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"><FileText className="h-3.5 w-3.5"/>Full Label</button>
+                </div>
                 <p className="mt-2 text-sm text-body">{p.ingredients.serving}</p>
                 <ul className="mt-4 divide-y divide-border">
-                  {p.ingredients.items.map(it=><li key={it.name} className="py-2 text-sm">{it.name}</li>)}
+                  {p.ingredients.items.map((it,i)=>(
+                    <li key={it.name} className="py-2.5 text-sm flex items-center gap-2">
+                      <span className="h-5 w-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0">{i+1}</span>
+                      {it.name}
+                    </li>
+                  ))}
                 </ul>
                 <p className="mt-4 text-xs text-muted-foreground">{p.ingredients.other}</p>
               </div>
               <div>
+                <div className="inline-flex items-center gap-1.5 bg-electric/10 text-electric text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3"><Beaker className="h-3.5 w-3.5"/>What Each Does</div>
                 <h3 className="text-2xl mb-4">Key Ingredients</h3>
                 <div className="space-y-3">
                   {p.ingredients.callouts.map(c=>(
-                    <div key={c.name} className="rounded-lg bg-white p-4 border border-border">
-                      <div className="font-display font-semibold text-ink text-sm">{c.name}</div>
-                      <p className="text-sm text-body mt-1">{c.desc}</p>
+                    <div key={c.name} className="rounded-lg bg-white p-4 border border-border hover:border-primary/40 hover:shadow-sm transition flex gap-3">
+                      <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary/15 to-electric/15 text-primary flex items-center justify-center shrink-0"><Check className="h-4 w-4"/></div>
+                      <div>
+                        <div className="font-display font-bold text-ink text-sm">{c.name}</div>
+                        <p className="text-sm text-body mt-0.5">{c.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -454,44 +489,63 @@ function ProductPage() {
 
           {tab==="use" && (
             <div className="max-w-3xl space-y-6">
-              <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-2">Dosage</h3>
-                <p className="text-body">{p.use.dosage}</p>
-              </div>
-              <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-3">Best Practices</h3>
-                <ul className="space-y-2">{p.use.best.map(b=><li key={b} className="flex gap-2 text-body text-sm"><Check className="h-4 w-4 text-success mt-0.5 shrink-0"/>{b}</li>)}</ul>
-              </div>
-              <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-3">Timeline</h3>
-                <div className="space-y-3">
-                  {p.use.timeline.map(t=>(
-                    <div key={t.period} className="flex gap-4">
-                      <div className="w-24 shrink-0 font-display font-semibold text-primary text-sm">{t.period}</div>
-                      <div className="text-body text-sm">{t.text}</div>
-                    </div>
-                  ))}
+              <div className="rounded-2xl bg-gradient-to-br from-primary to-electric text-white p-6 shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center"><Clock className="h-6 w-6"/></div>
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider opacity-90">Daily Dosage</div>
+                    <p className="text-lg font-display font-bold">{p.use.dosage}</p>
+                  </div>
                 </div>
               </div>
-              <div className="rounded-xl bg-white p-6 border border-border text-sm text-body space-y-2">
-                <div><strong className="text-ink">Storage:</strong> {p.use.storage}</div>
-                <div><strong className="text-ink">Note:</strong> {p.use.note}</div>
+              <div className="rounded-xl bg-white p-6 border border-border">
+                <h3 className="text-lg mb-3 flex items-center gap-2"><ThumbsUp className="h-5 w-5 text-success"/>Best Practices</h3>
+                <ul className="space-y-2.5">{p.use.best.map(b=><li key={b} className="flex gap-2 text-body text-sm"><Check className="h-4 w-4 text-success mt-0.5 shrink-0"/>{b}</li>)}</ul>
+              </div>
+              <div className="rounded-xl bg-white p-6 border border-border">
+                <h3 className="text-lg mb-4 flex items-center gap-2"><Sparkles className="h-5 w-5 text-primary"/>What to Expect</h3>
+                <div className="relative pl-6">
+                  <div className="absolute left-[9px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-electric to-energy"/>
+                  <div className="space-y-5">
+                    {p.use.timeline.map((t,i)=>(
+                      <div key={t.period} className="relative">
+                        <div className="absolute -left-6 top-1 h-5 w-5 rounded-full bg-white border-2 border-primary flex items-center justify-center"><span className="h-2 w-2 rounded-full bg-primary"/></div>
+                        <div className="font-display font-bold text-primary text-sm">{t.period}</div>
+                        <div className="text-body text-sm mt-0.5">{t.text}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <div className="rounded-xl bg-white p-5 border border-border text-sm text-body flex gap-3">
+                  <ShieldCheck className="h-5 w-5 text-success shrink-0 mt-0.5"/>
+                  <div><div className="font-bold text-ink mb-0.5">Storage</div>{p.use.storage}</div>
+                </div>
+                <div className="rounded-xl bg-alert/5 p-5 border border-alert/20 text-sm text-body flex gap-3">
+                  <AlertCircle className="h-5 w-5 text-alert shrink-0 mt-0.5"/>
+                  <div><div className="font-bold text-ink mb-0.5">Note</div>{p.use.note}</div>
+                </div>
               </div>
             </div>
           )}
 
           {tab==="rev" && (
             <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
-              <div className="rounded-xl bg-white p-6 border border-border h-fit">
-                <div className="text-5xl font-display font-bold text-ink">{p.rating}</div>
+              <div className="rounded-2xl bg-gradient-to-br from-white to-secondary p-6 border border-border h-fit shadow-sm">
+                <div className="flex items-baseline gap-2">
+                  <div className="text-5xl font-display font-bold text-ink">{p.rating}</div>
+                  <div className="text-sm text-muted-foreground">/ 5</div>
+                </div>
                 <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
-                <div className="text-sm text-muted-foreground mt-1">{p.reviews} reviews</div>
+                <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews} verified reviews</div>
                 <div className="mt-5 space-y-1.5 text-xs">
                   {[["5",79],["4",12],["3",6],["2",2],["1",1]].map(([s,pct])=>(
-                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden"><div className="h-full bg-primary" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
+                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border"><div className="h-full bg-gradient-to-r from-primary to-electric" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
                   ))}
                 </div>
-                <button onClick={() => setShowReviewForm(true)} className="mt-6 btn-outline w-full">Write a Review</button>
+                <div className="mt-5 pt-5 border-t border-border flex items-center gap-2 text-xs text-success font-semibold"><ShieldCheck className="h-4 w-4"/>97% would recommend</div>
+                <button onClick={() => setShowReviewForm(true)} className="mt-5 btn-primary w-full">Write a Review</button>
               </div>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2 text-xs">
@@ -499,20 +553,32 @@ function ProductPage() {
                     <button key={k} onClick={()=>{setReviewFilter(k);setReviewsShown(3);}} className={`px-3 py-1.5 rounded-full border transition ${reviewFilter===k?"border-primary bg-primary text-white":"border-border hover:bg-white"}`}>{l}</button>
                   ))}
                 </div>
-                {sortedReviews.slice(0, reviewsShown).map((r, i) => (
-                  <div key={i} className="rounded-xl bg-white p-6 border border-border">
-                    <div className="flex">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
-                    <h3 className="text-lg mt-2">"{r.title}"</h3>
-                    <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {r.name} · {r.date}</div>
-                    <p className="mt-4 text-body text-sm leading-relaxed">{r.body}</p>
-                    <div className="mt-4 text-xs text-muted-foreground flex items-center gap-2">
+                {sortedReviews.slice(0, reviewsShown).map((r, i) => {
+                  const initials = r.name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase();
+                  return (
+                  <div key={i} className="rounded-xl bg-white p-6 border border-border hover:shadow-md transition">
+                    <div className="flex items-start gap-3">
+                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-electric text-white font-bold text-sm flex items-center justify-center shrink-0">{initials}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="font-display font-bold text-ink text-sm">{r.name}</span>
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide bg-success/10 text-success px-1.5 py-0.5 rounded"><Check className="h-2.5 w-2.5"/>Verified</span>
+                          <span className="text-xs text-muted-foreground">· {r.date}</span>
+                        </div>
+                        <div className="flex mt-1">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
+                      </div>
+                    </div>
+                    <h3 className="text-base font-display font-bold mt-3">"{r.title}"</h3>
+                    <p className="mt-2 text-body text-sm leading-relaxed">{r.body}</p>
+                    <div className="mt-4 pt-3 border-t border-border text-xs text-muted-foreground flex items-center gap-2">
                       <span>Was this helpful?</span>
-                      <button onClick={()=>setHelpful(h=>({...h,[i]:"yes"}))} className={`px-2 py-1 rounded border transition ${helpful[i]==="yes"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}>Yes</button>
+                      <button onClick={()=>setHelpful(h=>({...h,[i]:"yes"}))} className={`px-2 py-1 rounded border transition inline-flex items-center gap-1 ${helpful[i]==="yes"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}><ThumbsUp className="h-3 w-3"/>Yes</button>
                       <button onClick={()=>setHelpful(h=>({...h,[i]:"no"}))} className={`px-2 py-1 rounded border transition ${helpful[i]==="no"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}>No</button>
                       {helpful[i] && <span className="text-success">Thanks for your feedback!</span>}
                     </div>
                   </div>
-                ))}
+                  );
+                })}
                 {reviewsShown < sortedReviews.length ? (
                   <button onClick={() => setReviewsShown(n => Math.min(n + 3, sortedReviews.length))} className="btn-outline">Load More Reviews</button>
                 ) : (
