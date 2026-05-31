@@ -541,10 +541,23 @@ function ProductPage() {
                 <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
                 <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews} verified reviews</div>
                 <div className="mt-5 space-y-1.5 text-xs">
-                  {[["5",79],["4",12],["3",6],["2",2],["1",1]].map(([s,pct])=>(
-                    <div key={s} className="flex items-center gap-2"><span className="w-3">{s}★</span><div className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border"><div className="h-full bg-gradient-to-r from-primary to-electric" style={{width:`${pct}%`}}/></div><span className="w-8 text-right text-muted-foreground">{pct}%</span></div>
+                  {([["5",79],["4",12],["3",6],["2",2],["1",1]] as const).map(([s,pct])=>(
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={()=>{setReviewFilter(s);setReviewsShown(3);}}
+                      className={`w-full flex items-center gap-2 rounded-md px-1.5 py-1 -mx-1.5 transition hover:bg-white text-left ${reviewFilter===s?"bg-white ring-1 ring-primary/40":""}`}
+                      aria-label={`Show ${s} star reviews`}
+                    >
+                      <span className="w-4 font-semibold">{s}★</span>
+                      <span className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border"><span className="block h-full bg-gradient-to-r from-primary to-electric" style={{width:`${pct}%`}}/></span>
+                      <span className="w-8 text-right text-muted-foreground">{pct}%</span>
+                    </button>
                   ))}
                 </div>
+                {["1","2","3","4","5"].includes(reviewFilter) && (
+                  <button onClick={()=>{setReviewFilter("recent");setReviewsShown(3);}} className="mt-2 text-xs text-primary hover:underline">Clear star filter</button>
+                )}
                 <div className="mt-5 pt-5 border-t border-border flex items-center gap-2 text-xs text-success font-semibold"><ShieldCheck className="h-4 w-4"/>97% would recommend</div>
                 <button onClick={() => setShowReviewForm(true)} className="mt-5 btn-primary w-full">Write a Review</button>
               </div>
