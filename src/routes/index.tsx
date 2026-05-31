@@ -218,8 +218,8 @@ function HomePage() {
           <h2 className="text-white text-3xl md:text-5xl">Sound Familiar?</h2>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {painPoints.map((p)=>(
-              <div key={p} className="rounded-xl border border-white/10 bg-white/5 p-6">
-                <X className="h-5 w-5 text-destructive mb-3"/>
+              <div key={p} className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 hover:border-destructive/40 hover:from-destructive/10 hover:to-white/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="h-9 w-9 rounded-lg bg-destructive/15 text-destructive flex items-center justify-center mb-3 group-hover:bg-destructive/25 transition"><X className="h-5 w-5"/></div>
                 <p className="text-white/90 text-base font-medium leading-snug">{p}</p>
               </div>
             ))}
@@ -247,12 +247,15 @@ function HomePage() {
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {[
-                "87% report improved focus within 2 weeks",
-                "Backed by 300+ peer-reviewed studies",
-                "Third-party tested for purity and potency",
-                "Natural ingredients, no artificial additives",
+                { t: "87%", s: "report improved focus within 2 weeks", c: "var(--primary)" },
+                { t: "300+", s: "peer-reviewed studies behind the formula", c: "var(--electric)" },
+                { t: "3rd", s: "party tested for purity and potency", c: "var(--success)" },
+                { t: "0", s: "artificial additives — natural ingredients only", c: "var(--energy)" },
               ].map((s)=>(
-                <div key={s} className="rounded-lg bg-secondary p-4 text-sm font-medium text-ink">{s}</div>
+                <div key={s.s} className="rounded-xl bg-white border border-border p-4 hover:shadow-md transition" style={{ boxShadow: `inset 3px 0 0 ${s.c}` }}>
+                  <div className="font-display text-2xl font-bold" style={{ color: s.c }}>{s.t}</div>
+                  <div className="mt-1 text-xs text-body leading-snug">{s.s}</div>
+                </div>
               ))}
             </div>
             <Link to="/product/$slug" params={{slug:"neural-performance"}} className="btn-primary mt-8">Shop Neural Performance</Link>
@@ -320,25 +323,40 @@ function HomePage() {
       </section>
 
       {/* BEFORE/AFTER */}
-      <section className="py-20 md:py-28 bg-secondary">
-        <div className="container-x">
-          <h2 className="text-3xl md:text-5xl text-center">Life Before and After Circuit</h2>
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl bg-destructive/5 border border-destructive/20 p-8">
-              <h3 className="text-xl mb-5 text-destructive">Before Circuit</h3>
-              <ul className="space-y-3">
-                {["Brain fog by 10am","Can't focus for more than 20 minutes","Exhausted by 2pm every day","Coffee gives jitters, not clarity","Weekends spent recovering","Sleep doesn't help anymore"].map(i=>(
-                  <li key={i} className="flex gap-3 text-body"><X className="h-5 w-5 text-destructive shrink-0 mt-0.5"/>{i}</li>
-                ))}
-              </ul>
+      <section className="py-20 md:py-28 bg-secondary relative overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, var(--primary), transparent 60%)" }} />
+        <div className="container-x relative">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase mb-5 border border-border bg-white">
+              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--primary)" }} />
+              <span className="text-ink/80">The Transformation</span>
             </div>
-            <div className="rounded-2xl bg-success/5 border border-success/20 p-8">
-              <h3 className="text-xl mb-5 text-success">After Circuit</h3>
-              <ul className="space-y-3">
-                {["Sharp, clear thinking all morning","Deep focus that lasts for hours","Consistent energy morning to evening","Smooth, jitter-free mental energy","Weekends full of energy","Wake up actually rested"].map(i=>(
-                  <li key={i} className="flex gap-3 text-body"><Check className="h-5 w-5 text-success shrink-0 mt-0.5"/>{i}</li>
-                ))}
-              </ul>
+            <h2 className="text-3xl md:text-5xl">Life Before and After Circuit</h2>
+          </div>
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            <div className="relative rounded-2xl bg-gradient-to-br from-destructive/10 to-destructive/[0.02] border-2 border-destructive/20 p-8 overflow-hidden">
+              <div aria-hidden className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-destructive/10 blur-2xl"/>
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 rounded-full bg-destructive/15 text-destructive text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4">Before</div>
+                <h3 className="text-2xl mb-5 text-destructive font-display font-bold">Running on Empty</h3>
+                <ul className="space-y-3">
+                  {["Brain fog by 10am","Can't focus for more than 20 minutes","Exhausted by 2pm every day","Coffee gives jitters, not clarity","Weekends spent recovering","Sleep doesn't help anymore"].map(i=>(
+                    <li key={i} className="flex gap-3 text-body items-start"><span className="mt-0.5 h-5 w-5 rounded-full bg-destructive/15 text-destructive flex items-center justify-center shrink-0"><X className="h-3 w-3"/></span>{i}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="relative rounded-2xl bg-gradient-to-br from-success/10 to-success/[0.02] border-2 border-success/30 p-8 overflow-hidden shadow-lg">
+              <div aria-hidden className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-success/15 blur-2xl"/>
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 rounded-full bg-success/15 text-success text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4"><Sparkles className="h-3 w-3"/>After</div>
+                <h3 className="text-2xl mb-5 text-success font-display font-bold">Fully Charged</h3>
+                <ul className="space-y-3">
+                  {["Sharp, clear thinking all morning","Deep focus that lasts for hours","Consistent energy morning to evening","Smooth, jitter-free mental energy","Weekends full of energy","Wake up actually rested"].map(i=>(
+                    <li key={i} className="flex gap-3 text-body items-start"><span className="mt-0.5 h-5 w-5 rounded-full bg-success/15 text-success flex items-center justify-center shrink-0"><Check className="h-3 w-3"/></span>{i}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -502,13 +520,16 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-xl bg-white border border-border overflow-hidden">
+    <div className={`rounded-xl bg-white border overflow-hidden transition-all duration-300 ${open ? "border-primary/40 shadow-md" : "border-border hover:border-primary/20"}`}>
       <button onClick={()=>setOpen(o=>!o)} className="w-full flex items-center justify-between gap-4 p-5 text-left">
-        <span className="font-display font-semibold text-ink">{q}</span>
-        <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${open?"rotate-180":""}`}/>
+        <span className="font-display font-semibold text-ink flex items-center gap-3">
+          <span className={`h-7 w-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold transition ${open ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}>?</span>
+          {q}
+        </span>
+        <ChevronDown className={`h-5 w-5 shrink-0 transition-all duration-300 ${open?"rotate-180 text-primary":"text-muted-foreground"}`}/>
       </button>
       <div className={`grid transition-all duration-300 ease-in-out ${open?"grid-rows-[1fr] opacity-100":"grid-rows-[0fr] opacity-0"}`}>
-        <div className="overflow-hidden"><p className="px-5 pb-5 text-body text-sm leading-relaxed">{a}</p></div>
+        <div className="overflow-hidden"><p className="px-5 pb-5 pl-[60px] text-body text-sm leading-relaxed">{a}</p></div>
       </div>
     </div>
   );
