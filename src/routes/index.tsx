@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroImg from "@/assets/hero.png";
+import heroImg from "@/assets/hero-office-team.png";
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
@@ -11,14 +11,14 @@ export const Route = createFileRoute("/")({
       { title: "Circuit Energy — Fix Brain Fog & Afternoon Crashes" },
       { name: "description", content: "Circuit combines cellular energy support and cognitive enhancement so you can think clearly, work sharply, and feel like yourself again. 60-day guarantee." },
       { property: "og:title", content: "Circuit Energy — Your Brain Isn't Broken. It's Under-Fueled." },
-      { property: "og:description", content: "Premium supplements for chronic fatigue and brain fog. Works in 1-2 weeks. 50+ verified results." },
+      { property: "og:description", content: "Premium supplements for chronic fatigue and brain fog. Works in 1-2 weeks. 200+ verified results." },
       { property: "og:image", content: heroImg },
     ],
   }),
   component: HomePage,
 });
 
-const tickerItems = ["Natural Ingredients", "No Artificial Additives", "Third-Party Tested", "60-Day Guarantee", "Made in USA", "50+ Reviews", "Clinically Studied Ingredients"];
+const tickerItems = ["Natural Ingredients", "No Artificial Additives", "Third-Party Tested", "60-Day Guarantee", "Made in USA", "200+ Reviews", "Clinically Studied Ingredients"];
 
 const benefits = [
   { icon: Brain, title: "Razor-Sharp Focus", desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Cognition" },
@@ -92,7 +92,7 @@ function HomePage() {
             </div>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
               {[
-                { k: "50+", v: "Verified reviews" },
+                { k: "200+", v: "Verified reviews" },
                 { k: "4.7★", v: "Avg. rating" },
                 { k: "60-Day", v: "Money-back" },
                 { k: "1-2 wks", v: "To feel it" },
@@ -361,7 +361,7 @@ function HomePage() {
       <section className="bg-primary text-white py-20 md:py-24">
         <div className="container-x text-center max-w-2xl">
           <h2 className="text-white text-3xl md:text-5xl">Stop Running on Empty.<br/>Start Thinking Clearly.</h2>
-          <p className="mt-5 text-white/90 text-lg">50+ people have fixed their energy and focus with Circuit. Join them.</p>
+          <p className="mt-5 text-white/90 text-lg">200+ people have fixed their energy and focus with Circuit. Join them.</p>
           <Link to="/shop" className="btn-white mt-8">Shop Circuit</Link>
           <p className="mt-5 text-white/70 text-xs">60-day money-back guarantee · Free shipping over $75</p>
         </div>
@@ -533,7 +533,7 @@ function TestimonialsSection() {
           <h2 className="text-3xl md:text-5xl">Real People. Real Results.</h2>
           <div className="mt-4 flex items-center justify-center gap-2 text-sm text-body">
             <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-            <span>4.7 out of 5 · 50+ verified reviews</span>
+            <span>4.7 out of 5 · 200+ verified reviews</span>
           </div>
         </div>
         <div className="mt-12 overflow-hidden">
