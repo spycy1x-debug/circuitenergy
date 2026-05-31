@@ -324,7 +324,7 @@ function ProductPage() {
         <div className="container-x py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs sm:text-sm">
           <span className="flex items-center gap-1.5 font-bold"><Flame className="h-4 w-4"/>Limited anniversary pricing</span>
           <span className="opacity-95">Ends in <span className="font-mono font-bold tabular-nums bg-white/15 px-2 py-0.5 rounded">{hh}:{mm}:{ss}</span></span>
-          <span className="hidden sm:flex items-center gap-1.5 opacity-95"><Users className="h-4 w-4"/>Only {stockLeft} bottles left at this price</span>
+          <span className="hidden sm:flex items-center gap-1.5 opacity-95"><Users className="h-4 w-4"/>Only {headerStock} bottles left at this price</span>
         </div>
       </div>
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
