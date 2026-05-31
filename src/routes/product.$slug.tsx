@@ -448,19 +448,26 @@ function ProductPage() {
               </div>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2 text-xs">
-                  {["Most Recent","Highest Rated","Most Helpful","Verified Only"].map(f=><button key={f} className="px-3 py-1.5 rounded-full border border-border hover:bg-white">{f}</button>)}
+                  {([["recent","Most Recent"],["highest","Highest Rated"],["helpful","Most Helpful"],["verified","Verified Only"]] as const).map(([k,l])=>(
+                    <button key={k} onClick={()=>{setReviewFilter(k);setReviewsShown(3);}} className={`px-3 py-1.5 rounded-full border transition ${reviewFilter===k?"border-primary bg-primary text-white":"border-border hover:bg-white"}`}>{l}</button>
+                  ))}
                 </div>
-                {extraReviews.slice(0, reviewsShown).map((r, i) => (
+                {sortedReviews.slice(0, reviewsShown).map((r, i) => (
                   <div key={i} className="rounded-xl bg-white p-6 border border-border">
                     <div className="flex">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
                     <h3 className="text-lg mt-2">"{r.title}"</h3>
                     <div className="text-xs text-muted-foreground mt-1">Verified Purchase — {r.name} · {r.date}</div>
                     <p className="mt-4 text-body text-sm leading-relaxed">{r.body}</p>
-                    <div className="mt-4 text-xs text-muted-foreground">Was this helpful? Yes · No</div>
+                    <div className="mt-4 text-xs text-muted-foreground flex items-center gap-2">
+                      <span>Was this helpful?</span>
+                      <button onClick={()=>setHelpful(h=>({...h,[i]:"yes"}))} className={`px-2 py-1 rounded border transition ${helpful[i]==="yes"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}>Yes</button>
+                      <button onClick={()=>setHelpful(h=>({...h,[i]:"no"}))} className={`px-2 py-1 rounded border transition ${helpful[i]==="no"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}>No</button>
+                      {helpful[i] && <span className="text-success">Thanks for your feedback!</span>}
+                    </div>
                   </div>
                 ))}
-                {reviewsShown < extraReviews.length ? (
-                  <button onClick={() => setReviewsShown(n => Math.min(n + 3, extraReviews.length))} className="btn-outline">Load More Reviews</button>
+                {reviewsShown < sortedReviews.length ? (
+                  <button onClick={() => setReviewsShown(n => Math.min(n + 3, sortedReviews.length))} className="btn-outline">Load More Reviews</button>
                 ) : (
                   <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
                 )}
