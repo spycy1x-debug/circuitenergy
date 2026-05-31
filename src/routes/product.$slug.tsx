@@ -1,10 +1,15 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus, FileText, X, Flame, Users } from "lucide-react";
 import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
+import neuralHand from "@/assets/product-hand-kitchen.png";
+import neuralCustomer from "@/assets/product-customer-thumbsup.png";
+import neuralInfographic from "@/assets/product-benefits-infographic.png";
+import neuralComparison from "@/assets/product-comparison.png";
+import supplementFacts from "@/assets/product-supplement-facts.png";
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
@@ -38,9 +43,9 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     subtitle: "Focus & Cognitive Enhancement",
     price: 42.99,
     rating: 4.7,
-    reviews: 234,
+    reviews: 87,
     badge: "Most Popular",
-    images: [neuralImg, neuralOpen],
+    images: [neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralImg, neuralOpen],
     description: "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
     benefits: [
       "Eliminates brain fog",
@@ -120,7 +125,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     subtitle: "Cellular Energy & Longevity Support",
     price: 49.99,
     rating: 4.6,
-    reviews: 198,
+    reviews: 72,
     badge: "Best Seller",
     images: [nmnImg, nmnTrio],
     description: "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
