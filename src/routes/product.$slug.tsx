@@ -368,12 +368,15 @@ function ProductPage() {
           <div className="mt-4 w-full">
             <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
           </div>
+          <button onClick={() => setShowLabel(true)} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition">
+            <FileText className="h-4 w-4"/> View Supplement Label
+          </button>
 
           <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-muted-foreground">
             <Trust icon={Lock} text="Secure Checkout"/>
             <Trust icon={Truck} text="Free Shipping $75+"/>
             <Trust icon={RotateCcw} text="60-Day Guarantee"/>
-            <Trust icon={Star} text="50+ Reviews"/>
+            <Trust icon={Star} text="80+ Reviews"/>
           </div>
         </div>
       </section>
