@@ -238,6 +238,13 @@ function ProductPage() {
       ...pool,
     ];
   }, [p, userReviews]);
+  const sortedReviews = useMemo(() => {
+    const arr = [...extraReviews];
+    if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
+    else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
+    else if (reviewFilter === "verified") return arr;
+    return arr;
+  }, [extraReviews, reviewFilter]);
   const related = PRODUCTS[p.related.id];
 
   return (
