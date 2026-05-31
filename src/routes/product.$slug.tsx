@@ -257,6 +257,7 @@ function ProductPage() {
     if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
     else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
     else if (reviewFilter === "verified") return arr.filter(r => r.rating >= 4).slice(0, 6);
+    else if (["1","2","3","4","5"].includes(reviewFilter)) return arr.filter(r => r.rating === Number(reviewFilter));
     return arr;
   }, [extraReviews, reviewFilter]);
   const related = PRODUCTS[p.related.id];
