@@ -520,13 +520,16 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-xl bg-white border border-border overflow-hidden">
+    <div className={`rounded-xl bg-white border overflow-hidden transition-all duration-300 ${open ? "border-primary/40 shadow-md" : "border-border hover:border-primary/20"}`}>
       <button onClick={()=>setOpen(o=>!o)} className="w-full flex items-center justify-between gap-4 p-5 text-left">
-        <span className="font-display font-semibold text-ink">{q}</span>
-        <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${open?"rotate-180":""}`}/>
+        <span className="font-display font-semibold text-ink flex items-center gap-3">
+          <span className={`h-7 w-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold transition ${open ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}>?</span>
+          {q}
+        </span>
+        <ChevronDown className={`h-5 w-5 shrink-0 transition-all duration-300 ${open?"rotate-180 text-primary":"text-muted-foreground"}`}/>
       </button>
       <div className={`grid transition-all duration-300 ease-in-out ${open?"grid-rows-[1fr] opacity-100":"grid-rows-[0fr] opacity-0"}`}>
-        <div className="overflow-hidden"><p className="px-5 pb-5 text-body text-sm leading-relaxed">{a}</p></div>
+        <div className="overflow-hidden"><p className="px-5 pb-5 pl-[60px] text-body text-sm leading-relaxed">{a}</p></div>
       </div>
     </div>
   );
