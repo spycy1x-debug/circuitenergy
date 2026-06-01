@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { AnnouncementBar } from "@/components/site/AnnouncementBar";
+import { AnniversaryBar } from "@/components/site/AnniversaryBar";
 import { UrgencyBar } from "@/components/site/UrgencyBar";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -108,8 +109,9 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <Header />
       <AnnouncementBar />
+      <Header />
+      <AnniversaryBar />
       <main><Outlet /></main>
       <Footer />
     </QueryClientProvider>
