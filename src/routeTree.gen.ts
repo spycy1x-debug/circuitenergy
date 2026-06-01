@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhyTiredRouteImport } from './routes/why-tired'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
@@ -28,6 +29,11 @@ const WhyTiredRoute = WhyTiredRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/why-tired': typeof WhyTiredRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
+    | '/privacy'
     | '/shop'
     | '/why-tired'
     | '/admin/analytics'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
+    | '/privacy'
     | '/shop'
     | '/why-tired'
     | '/admin/analytics'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
+    | '/privacy'
     | '/shop'
     | '/why-tired'
     | '/admin/analytics'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   LoginRoute: typeof LoginRoute
+  PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
   WhyTiredRoute: typeof WhyTiredRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   LoginRoute: LoginRoute,
+  PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
   WhyTiredRoute: WhyTiredRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
