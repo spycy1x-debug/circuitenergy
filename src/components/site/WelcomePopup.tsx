@@ -83,7 +83,7 @@ export function WelcomePopup() {
 
           <p className="mt-2 text-sm leading-relaxed text-gray-400">
             Get 30% off{" "}
-            <span className="text-white">Neural Performance</span> — today
+            <span className="text-white">all Circuit products</span> — today
             only. Limited spots available.
           </p>
 
