@@ -6,8 +6,20 @@ const KEY = "urgencyBarExpiresAt";
 
 export function UrgencyBar() {
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [claimed, setClaimed] = useState(false);
 
   useEffect(() => {
+    const check = () => setClaimed(sessionStorage.getItem("personalDiscountClaimed") === "1");
+    check();
+    window.addEventListener("personalDiscountClaimed", check);
+    return () => window.removeEventListener("personalDiscountClaimed", check);
+  }, []);
+
+  useEffect(() => {
+    if (!claimed) {
+      setRemaining(null);
+      return;
+    }
     let expires = Number(sessionStorage.getItem(KEY));
     if (!expires || isNaN(expires) || expires < Date.now()) {
       expires = Date.now() + DURATION_MS;
@@ -17,9 +29,9 @@ export function UrgencyBar() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [claimed]);
 
-  if (remaining === null || remaining <= 0) return null;
+  if (!claimed || remaining === null || remaining <= 0) return null;
 
   const total = Math.ceil(remaining / 1000);
   const mm = String(Math.floor(total / 60)).padStart(2, "0");

@@ -89,7 +89,15 @@ export function WelcomePopup() {
 
           <Link
             to="/product/neural-performance"
-            onClick={close}
+            onClick={() => {
+              sessionStorage.setItem("personalDiscountClaimed", "1");
+              sessionStorage.setItem(
+                "urgencyBarExpiresAt",
+                String(Date.now() + 15 * 60 * 1000)
+              );
+              window.dispatchEvent(new Event("personalDiscountClaimed"));
+              close();
+            }}
             className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-b from-[#e84458] to-[#c8243a] px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-[#DC3545]/30 transition-all hover:shadow-[#DC3545]/50 hover:brightness-110 active:scale-[0.98]"
           >
             Claim Now →
