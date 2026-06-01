@@ -46,7 +46,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     rating: 4.7,
     reviews: 87,
     badge: "Most Popular",
-    images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralImg, neuralOpen],
+    images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralOpen],
     description: "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
     benefits: [
       "Eliminates brain fog",
