@@ -418,7 +418,7 @@ function ProductPage() {
       </section>
 
       {/* TABS */}
-      <section className="bg-secondary py-16">
+      <section id="product-tabs" className="bg-secondary py-16 scroll-mt-24">
         <div className="container-x">
           <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
             {[
