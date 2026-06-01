@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { AnnouncementBar } from "@/components/site/AnnouncementBar";
+import { AnniversaryBar } from "@/components/site/AnniversaryBar";
 import { UrgencyBar } from "@/components/site/UrgencyBar";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
