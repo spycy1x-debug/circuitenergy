@@ -240,6 +240,19 @@ function ProductPage() {
       { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "JordanLuxe27", date: "3 months ago", rating: 4 },
       { title: "Sharper meetings", body: "I run a small agency and back-to-back client calls used to wreck me. I'm clear-headed straight through now.", name: "Thandiwe O.", date: "3 months ago", rating: 5 },
       { title: "Wife noticed first", body: "She said I seemed 'more present' before I even told her I was trying something new. That's when I knew.", name: "Cole Vandermeer", date: "4 months ago", rating: 5 },
+      { title: "Finally a clean nootropic", body: "No racing heart, no comedown. Just a smooth lift in focus that lasts the whole workday. I've cancelled my Adderall refill request.", name: "Dr. Elena Vasquez", date: "4 months ago", rating: 5 },
+      { title: "ADHD-friendly", body: "I have ADHD and most focus supplements either do nothing or wind me up. This one quiets the noise without flattening me. Huge for getting through admin work.", name: "Reese N.", date: "5 months ago", rating: 5 },
+      { title: "Took it for a month before reviewing", body: "Wanted to be fair. Day 30: clearer mornings, sharper recall, less midday fog. Will reorder.", name: "Anastasia Liu-Park", date: "5 months ago", rating: 5 },
+      { title: "Good, not life-changing", body: "Definitely helps with focus but I wouldn't say it transformed my life. Solid 4 stars from me.", name: "Mike R.", date: "5 months ago", rating: 4 },
+      { title: "Helped me finish my thesis", body: "PhD candidate here. The last six weeks of writing would have been miserable without this. Sustained focus is real.", name: "Kwame A.", date: "6 months ago", rating: 5 },
+      { title: "Calm energy", body: "I describe it as 'caffeine without the personality change.' My partner appreciates it.", name: "Sam P.", date: "6 months ago", rating: 5 },
+      { title: "Better than my old stack", body: "Was taking five different things. This replaced four of them. Cleaner mornings.", name: "Naoko Whitfield", date: "6 months ago", rating: 5 },
+      { title: "Subtle in the best way", body: "If you're looking for a buzz, this isn't it. If you want to think more clearly without noticing you're trying, it's exactly it.", name: "Greg.", date: "7 months ago", rating: 4 },
+      { title: "Reading speed up", body: "I read a lot for work. Noticed I was getting through dense reports faster around week 2. Not a placebo.", name: "Adaeze Okonkwo", date: "7 months ago", rating: 5 },
+      { title: "Mid-morning is now my best window", body: "Used to crash around 10am after my first coffee. Now I get a solid 3-hour deep work block. Game changer.", name: "Tyler M.", date: "8 months ago", rating: 5 },
+      { title: "Subscribed", body: "Worth the money. Subscribed and don't plan to stop.", name: "Lila", date: "8 months ago", rating: 5 },
+      { title: "Helped with postpartum brain fog", body: "Cleared the haze after having my second. Cleared with my doctor first. Felt like myself again within 3 weeks.", name: "Brianna Esposito", date: "9 months ago", rating: 5 },
+      { title: "Honest 4 stars", body: "Works well. Wish it were a touch cheaper. Will keep buying though.", name: "Drew K.", date: "9 months ago", rating: 4 },
     ] : [
       { title: "Energy without the crash", body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.", name: "Rachel D.", date: "2 weeks ago", rating: 5 },
       { title: "Noticeable in the gym", body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.", name: "TomLiftsHeavy", date: "1 month ago", rating: 5 },
@@ -357,7 +370,7 @@ function ProductPage() {
           <p className="mt-1 text-primary font-semibold">{p.subtitle}</p>
           <div className="mt-3 flex items-center gap-2 text-sm">
             <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-            <span className="text-body">{p.rating} · <button onClick={()=>setTab("rev")} className="underline hover:text-primary">{p.reviews} reviews</button></span>
+            <span className="text-body">{p.rating} · <button onClick={()=>{setTab("rev"); setTimeout(()=>document.getElementById("product-tabs")?.scrollIntoView({behavior:"smooth",block:"start"}),50);}} className="underline hover:text-primary">{p.reviews} reviews</button></span>
           </div>
           <div className="mt-5 flex items-baseline gap-3">
             <div className="text-3xl font-display font-bold text-ink">${p.price.toFixed(2)}</div>
@@ -418,7 +431,7 @@ function ProductPage() {
       </section>
 
       {/* TABS */}
-      <section className="bg-secondary py-16">
+      <section id="product-tabs" className="bg-secondary py-16 scroll-mt-24">
         <div className="container-x">
           <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
             {[
