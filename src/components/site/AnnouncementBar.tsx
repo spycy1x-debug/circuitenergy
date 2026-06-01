@@ -1,18 +1,28 @@
 import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Zap } from "lucide-react";
 
-const messages = [
-  "30% OFF SITEWIDE",
-  "FREE SHIPPING OVER $75",
-  "60-DAY MONEY-BACK GUARANTEE",
-];
+const DURATION_MS = 10 * 60 * 60 * 1000; // 10 hours
+const KEY = "anniversarySaleExpiresAt";
 
 export function AnnouncementBar() {
-  const [i, setI] = useState(0);
+  const [remaining, setRemaining] = useState<number | null>(null);
+
   useEffect(() => {
-    const id = setInterval(() => setI((p) => (p + 1) % messages.length), 4500);
+    let expires = Number(typeof window !== "undefined" ? localStorage.getItem(KEY) : 0);
+    if (!expires || isNaN(expires) || expires < Date.now()) {
+      expires = Date.now() + DURATION_MS;
+      localStorage.setItem(KEY, String(expires));
+    }
+    const tick = () => setRemaining(Math.max(0, expires - Date.now()));
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
+
+  const total = Math.max(0, Math.ceil((remaining ?? 0) / 1000));
+  const hh = String(Math.floor(total / 3600)).padStart(2, "0");
+  const mm = String(Math.floor((total % 3600) / 60)).padStart(2, "0");
+  const ss = String(total % 60).padStart(2, "0");
 
   return (
     <div className="relative overflow-hidden bg-[#0a0a0d] text-white border-b border-white/5">
@@ -25,9 +35,9 @@ export function AnnouncementBar() {
       <style>{`@keyframes annShimmer { 0% { transform: translateX(0); } 100% { transform: translateX(400%); } }`}</style>
 
       <div className="container-x relative py-2.5 flex items-center justify-center gap-3 sm:gap-4 text-[11px] sm:text-xs">
-        {/* Anniversary badge */}
-        <span className="relative hidden sm:flex h-6 items-center gap-1.5 rounded-md bg-gradient-to-br from-[#ff5a6e] to-[#a01a2a] px-2 shadow-[0_0_14px_rgba(220,53,69,0.55)]">
-          <Sparkles className="h-3 w-3 text-white" strokeWidth={2.5} />
+        {/* Lightning bolt badge */}
+        <span className="relative flex h-6 items-center gap-1.5 rounded-md bg-gradient-to-br from-[#ff5a6e] to-[#a01a2a] px-2 shadow-[0_0_14px_rgba(220,53,69,0.55)]">
+          <Zap className="h-3 w-3 text-white" fill="currentColor" strokeWidth={0} />
           <span className="font-bold uppercase tracking-[0.18em] text-white text-[10px]">
             Anniversary Sale
           </span>
@@ -35,13 +45,29 @@ export function AnnouncementBar() {
 
         <span className="hidden sm:inline h-3.5 w-px bg-white/15" />
 
-        {/* Rotating message */}
-        <span
-          key={i}
-          className="font-semibold uppercase tracking-[0.22em] text-white animate-in fade-in slide-in-from-bottom-1 duration-500"
-        >
-          <span className="sm:hidden mr-1.5">✦</span>
-          {messages[i]}
+        <span className="hidden sm:inline font-semibold uppercase tracking-[0.22em] text-white">
+          30% Off Sitewide
+        </span>
+
+        <span className="h-3.5 w-px bg-white/15" />
+
+        <span className="flex items-center gap-2 text-white/70">
+          <span className="hidden sm:inline uppercase tracking-wider text-[10px] text-white/50">
+            Ends in
+          </span>
+          <span className="flex items-center gap-1 font-mono font-bold tabular-nums">
+            <span className="inline-flex min-w-[2.1em] justify-center rounded-md bg-white/[0.08] px-1.5 py-0.5 text-white ring-1 ring-white/10">
+              {hh}
+            </span>
+            <span className="text-white/40">:</span>
+            <span className="inline-flex min-w-[2.1em] justify-center rounded-md bg-white/[0.08] px-1.5 py-0.5 text-white ring-1 ring-white/10">
+              {mm}
+            </span>
+            <span className="text-white/40">:</span>
+            <span className="inline-flex min-w-[2.1em] justify-center rounded-md bg-white/[0.08] px-1.5 py-0.5 text-white ring-1 ring-white/10">
+              {ss}
+            </span>
+          </span>
         </span>
       </div>
     </div>
