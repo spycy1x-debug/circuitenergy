@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Sparkles, Check } from "lucide-react";
-
-const CODE = "WELCOME30";
+import { X, Zap } from "lucide-react";
 
 export function WelcomePopup() {
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem("welcomePopupDismissed");
@@ -26,14 +23,6 @@ export function WelcomePopup() {
       setVisible(false);
       sessionStorage.setItem("welcomePopupDismissed", "1");
     }, 300);
-  };
-
-  const copyCode = async () => {
-    try {
-      await navigator.clipboard.writeText(CODE);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    } catch {}
   };
 
   if (!visible) return null;
@@ -80,7 +69,7 @@ export function WelcomePopup() {
         <div className="relative flex flex-col items-center px-7 pb-7 pt-8 text-center">
           {/* Icon badge */}
           <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#DC3545] to-[#a01a2a] shadow-lg shadow-[#DC3545]/40">
-            <Sparkles className="h-7 w-7 text-white" strokeWidth={2.2} />
+            <Zap className="h-7 w-7 text-white" strokeWidth={2.2} />
           </div>
 
           {/* Eyebrow */}
@@ -93,39 +82,17 @@ export function WelcomePopup() {
           </h3>
 
           <p className="mt-2 text-sm leading-relaxed text-gray-400">
-            Unlock your welcome discount on{" "}
-            <span className="text-white">Neural Performance</span> — limited
-            time only.
+            Get 30% off{" "}
+            <span className="text-white">Neural Performance</span> — today
+            only. Limited spots available.
           </p>
-
-          {/* Coupon code */}
-          <button
-            onClick={copyCode}
-            className="group mt-5 flex w-full items-center justify-between rounded-lg border border-dashed border-white/20 bg-white/[0.03] px-4 py-3 transition-all hover:border-[#DC3545]/60 hover:bg-white/[0.06]"
-          >
-            <span className="text-[10px] font-medium uppercase tracking-wider text-gray-500">
-              Code
-            </span>
-            <span className="font-mono text-base font-bold tracking-[0.2em] text-white">
-              {CODE}
-            </span>
-            <span className="flex items-center gap-1 text-[11px] font-semibold text-[#ff8896] group-hover:text-white">
-              {copied ? (
-                <>
-                  <Check className="h-3 w-3" /> Copied
-                </>
-              ) : (
-                "Copy"
-              )}
-            </span>
-          </button>
 
           <Link
             to="/product/neural-performance"
             onClick={close}
-            className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-b from-[#e84458] to-[#c8243a] px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-[#DC3545]/30 transition-all hover:shadow-[#DC3545]/50 hover:brightness-110 active:scale-[0.98]"
+            className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-b from-[#e84458] to-[#c8243a] px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-[#DC3545]/30 transition-all hover:shadow-[#DC3545]/50 hover:brightness-110 active:scale-[0.98]"
           >
-            Claim My 30% Off →
+            Claim Now →
           </Link>
 
           <button
