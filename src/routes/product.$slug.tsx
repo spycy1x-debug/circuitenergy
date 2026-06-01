@@ -520,9 +520,15 @@ function ProductPage() {
                 </div>
               </div>
               <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-3 flex items-center gap-2"><ThumbsUp className="h-5 w-5 text-success"/>Best Practices</h3>
-                <ul className="space-y-2.5">{p.use.best.map(b=><li key={b} className="flex gap-2 text-body text-sm"><Check className="h-4 w-4 text-success mt-0.5 shrink-0"/>{b}</li>)}</ul>
+                <h3 className="text-lg mb-4 flex items-center gap-2"><ThumbsUp className="h-5 w-5 text-success"/>Best Practices</h3>
+                <ul className="space-y-3">{p.use.best.map(b=>(
+                  <li key={b} className="flex gap-3 items-start group">
+                    <span className="h-6 w-6 rounded-full bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition"><Check className="h-3.5 w-3.5 text-success"/></span>
+                    <span className="text-ink/85 text-sm leading-relaxed font-medium">{b}</span>
+                  </li>
+                ))}</ul>
               </div>
+
               <div className="rounded-xl bg-white p-6 border border-border">
                 <h3 className="text-lg mb-4 flex items-center gap-2"><Sparkles className="h-5 w-5 text-primary"/>What to Expect</h3>
                 <div className="relative pl-6">
