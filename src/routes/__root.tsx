@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { AnnouncementBar } from "@/components/site/AnnouncementBar";
+import { UrgencyBar } from "@/components/site/UrgencyBar";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WelcomePopup } from "@/components/site/WelcomePopup";
@@ -109,6 +110,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <WelcomePopup />
       <AnnouncementBar />
+      <UrgencyBar />
       <Header />
       <main><Outlet /></main>
       <Footer />
