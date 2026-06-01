@@ -416,15 +416,27 @@ function ProductPage() {
       {/* TABS */}
       <section className="bg-secondary py-16">
         <div className="container-x">
-          <div className="flex flex-wrap gap-2 mb-8 border-b border-border">
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
             {[
-              {k:"why",l:"Why You Need This"},
-              {k:"ing",l:"Ingredients"},
-              {k:"use",l:"How to Use"},
-              {k:"rev",l:"Reviews"},
-            ].map(t=>(
-              <button key={t.k} onClick={()=>setTab(t.k as typeof tab)} className={`px-5 py-3 text-sm font-semibold border-b-2 -mb-px transition ${tab===t.k?"border-primary text-ink":"border-transparent text-muted-foreground hover:text-ink"}`}>{t.l}</button>
-            ))}
+              {k:"why",l:"Why You Need This",Icon:Brain},
+              {k:"ing",l:"Ingredients",Icon:Beaker},
+              {k:"use",l:"How to Use",Icon:Clock},
+              {k:"rev",l:"Reviews",Icon:Star},
+            ].map(t=>{
+              const active = tab===t.k;
+              return (
+                <button
+                  key={t.k}
+                  onClick={()=>setTab(t.k as typeof tab)}
+                  className={`group relative inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${active
+                    ? "bg-gradient-to-r from-primary to-electric text-white shadow-lg shadow-primary/25 scale-[1.03]"
+                    : "bg-white text-ink border border-border hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"}`}
+                >
+                  <t.Icon className={`h-4 w-4 ${active ? "text-white" : "text-primary"}`}/>
+                  <span>{t.l}</span>
+                </button>
+              );
+            })}
           </div>
 
           {tab==="why" && (
@@ -432,8 +444,15 @@ function ProductPage() {
               <div>
                 <div className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3"><Brain className="h-3.5 w-3.5"/>The Science</div>
                 <h2 className="text-2xl md:text-3xl">{p.why.heading}</h2>
-                <div className="mt-5 space-y-4 text-body">{p.why.body.map((para,i)=><p key={i}>{para}</p>)}</div>
+                <div className="mt-5 space-y-4">
+                  {p.why.body.map((para,i)=>(
+                    i===0
+                      ? <p key={i} className="text-lg md:text-xl font-display font-semibold text-ink leading-snug border-l-4 border-primary pl-4">{para}</p>
+                      : <p key={i} className="text-body leading-relaxed">{para}</p>
+                  ))}
+                </div>
               </div>
+
               <div className="grid sm:grid-cols-2 gap-4">
                 {p.why.cards.map((c,i)=>{
                   const icons = [Zap, Sparkles, ShieldCheck, Heart];
@@ -501,9 +520,15 @@ function ProductPage() {
                 </div>
               </div>
               <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-3 flex items-center gap-2"><ThumbsUp className="h-5 w-5 text-success"/>Best Practices</h3>
-                <ul className="space-y-2.5">{p.use.best.map(b=><li key={b} className="flex gap-2 text-body text-sm"><Check className="h-4 w-4 text-success mt-0.5 shrink-0"/>{b}</li>)}</ul>
+                <h3 className="text-lg mb-4 flex items-center gap-2"><ThumbsUp className="h-5 w-5 text-success"/>Best Practices</h3>
+                <ul className="space-y-3">{p.use.best.map(b=>(
+                  <li key={b} className="flex gap-3 items-start group">
+                    <span className="h-6 w-6 rounded-full bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition"><Check className="h-3.5 w-3.5 text-success"/></span>
+                    <span className="text-ink/85 text-sm leading-relaxed font-medium">{b}</span>
+                  </li>
+                ))}</ul>
               </div>
+
               <div className="rounded-xl bg-white p-6 border border-border">
                 <h3 className="text-lg mb-4 flex items-center gap-2"><Sparkles className="h-5 w-5 text-primary"/>What to Expect</h3>
                 <div className="relative pl-6">
