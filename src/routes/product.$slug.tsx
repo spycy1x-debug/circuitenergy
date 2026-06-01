@@ -357,7 +357,7 @@ function ProductPage() {
           <p className="mt-1 text-primary font-semibold">{p.subtitle}</p>
           <div className="mt-3 flex items-center gap-2 text-sm">
             <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-            <span className="text-body">{p.rating} · <button onClick={()=>setTab("rev")} className="underline hover:text-primary">{p.reviews} reviews</button></span>
+            <span className="text-body">{p.rating} · <button onClick={()=>{setTab("rev"); setTimeout(()=>document.getElementById("product-tabs")?.scrollIntoView({behavior:"smooth",block:"start"}),50);}} className="underline hover:text-primary">{p.reviews} reviews</button></span>
           </div>
           <div className="mt-5 flex items-baseline gap-3">
             <div className="text-3xl font-display font-bold text-ink">${p.price.toFixed(2)}</div>
