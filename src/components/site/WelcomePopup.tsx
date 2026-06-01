@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X } from "lucide-react";
+import { X, Sparkles, Check } from "lucide-react";
+
+const CODE = "WELCOME30";
 
 export function WelcomePopup() {
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem("welcomePopupDismissed");
@@ -25,6 +28,14 @@ export function WelcomePopup() {
     }, 300);
   };
 
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(CODE);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {}
+  };
+
   if (!visible) return null;
 
   return (
@@ -32,51 +43,97 @@ export function WelcomePopup() {
       className="fixed inset-0 z-[100] flex items-center justify-center px-4"
       onClick={close}
     >
-      {/* Overlay */}
+      {/* Overlay with blur */}
       <div
-        className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-          mounted ? "opacity-60" : "opacity-0"
+        className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
+          mounted ? "opacity-100" : "opacity-0"
         }`}
       />
 
       {/* Card */}
       <div
-        className={`relative w-full max-w-[340px] overflow-hidden rounded-xl bg-[#1A1A1A] shadow-2xl transition-all duration-300 ${
+        className={`relative w-full max-w-[380px] overflow-hidden rounded-2xl bg-[#101014] shadow-[0_30px_80px_-20px_rgba(220,53,69,0.5)] ring-1 ring-white/10 transition-all duration-500 ${
           mounted
             ? "translate-y-0 scale-100 opacity-100"
-            : "translate-y-6 scale-95 opacity-0"
+            : "translate-y-8 scale-95 opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Red top accent bar */}
-        <div className="h-1 w-full bg-[#DC3545]" />
+        {/* Glowing red accent */}
+        <div className="relative h-1.5 w-full bg-gradient-to-r from-[#DC3545] via-[#ff5a6e] to-[#DC3545]">
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+        </div>
+
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-[#DC3545]/30 blur-3xl" />
 
         {/* Close button */}
         <button
           onClick={close}
-          className="absolute right-3 top-3 text-gray-400 transition-colors hover:text-gray-200"
+          className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/5 text-gray-400 transition-all hover:bg-white/10 hover:text-white"
           aria-label="Close"
         >
-          <X size={16} strokeWidth={2.5} />
+          <X size={14} strokeWidth={2.5} />
         </button>
 
         {/* Content */}
-        <div className="flex flex-col items-center px-6 pb-6 pt-5 text-center">
-          <span className="mb-2 text-xl">⚡</span>
+        <div className="relative flex flex-col items-center px-7 pb-7 pt-8 text-center">
+          {/* Icon badge */}
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#DC3545] to-[#a01a2a] shadow-lg shadow-[#DC3545]/40">
+            <Sparkles className="h-7 w-7 text-white" strokeWidth={2.2} />
+          </div>
 
-          <h3 className="text-lg font-bold text-white">Welcome Gift</h3>
+          {/* Eyebrow */}
+          <span className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff8896]">
+            Exclusive Offer
+          </span>
 
-          <p className="mt-1 text-sm leading-relaxed text-gray-400">
-            Get 30% off Neural Performance — today only
+          <h3 className="text-2xl font-bold leading-tight text-white">
+            Save 30% Today
+          </h3>
+
+          <p className="mt-2 text-sm leading-relaxed text-gray-400">
+            Unlock your welcome discount on{" "}
+            <span className="text-white">Neural Performance</span> — limited
+            time only.
           </p>
+
+          {/* Coupon code */}
+          <button
+            onClick={copyCode}
+            className="group mt-5 flex w-full items-center justify-between rounded-lg border border-dashed border-white/20 bg-white/[0.03] px-4 py-3 transition-all hover:border-[#DC3545]/60 hover:bg-white/[0.06]"
+          >
+            <span className="text-[10px] font-medium uppercase tracking-wider text-gray-500">
+              Code
+            </span>
+            <span className="font-mono text-base font-bold tracking-[0.2em] text-white">
+              {CODE}
+            </span>
+            <span className="flex items-center gap-1 text-[11px] font-semibold text-[#ff8896] group-hover:text-white">
+              {copied ? (
+                <>
+                  <Check className="h-3 w-3" /> Copied
+                </>
+              ) : (
+                "Copy"
+              )}
+            </span>
+          </button>
 
           <Link
             to="/product/neural-performance"
             onClick={close}
-            className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-[#DC3545] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#c02a3a] hover:shadow-lg active:scale-[0.98]"
+            className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-b from-[#e84458] to-[#c8243a] px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-[#DC3545]/30 transition-all hover:shadow-[#DC3545]/50 hover:brightness-110 active:scale-[0.98]"
           >
-            Claim Now
+            Claim My 30% Off →
           </Link>
+
+          <button
+            onClick={close}
+            className="mt-3 text-[11px] text-gray-500 transition-colors hover:text-gray-300"
+          >
+            No thanks, I'll pay full price
+          </button>
         </div>
       </div>
     </div>
