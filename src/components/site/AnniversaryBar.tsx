@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { Zap } from "lucide-react";
 
-const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
-const KEY = "anniversarySaleExpiresAt_v2";
+// Universal rolling 24h window — same countdown for every visitor,
+// anchored to UTC day so it ticks down in sync worldwide.
+const CYCLE_MS = 24 * 60 * 60 * 1000;
+
+function getExpires() {
+  const now = Date.now();
+  return Math.ceil(now / CYCLE_MS) * CYCLE_MS;
+}
 
 export function AnniversaryBar() {
   const [remaining, setRemaining] = useState<number | null>(null);
 
   useEffect(() => {
-    let expires = Number(typeof window !== "undefined" ? localStorage.getItem(KEY) : 0);
-    if (!expires || isNaN(expires) || expires < Date.now()) {
-      expires = Date.now() + DURATION_MS;
-      localStorage.setItem(KEY, String(expires));
-    }
-    const tick = () => setRemaining(Math.max(0, expires - Date.now()));
+    const tick = () => setRemaining(Math.max(0, getExpires() - Date.now()));
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
