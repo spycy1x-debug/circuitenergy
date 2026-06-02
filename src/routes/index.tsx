@@ -3,7 +3,8 @@ import heroAsset from "@/assets/hero-kitchen.png.asset.json";
 const heroImg = heroAsset.url;
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
-import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2, ShoppingCart } from "lucide-react";
+import { useAddToCart, PRODUCTS } from "@/lib/cart";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
