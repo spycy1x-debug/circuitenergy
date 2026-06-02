@@ -3,7 +3,8 @@ import heroAsset from "@/assets/hero-kitchen.png.asset.json";
 const heroImg = heroAsset.url;
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
-import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2, ShoppingCart } from "lucide-react";
+import { useAddToCart, PRODUCTS } from "@/lib/cart";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
@@ -504,19 +505,37 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
         </ul>
       </div>
       <div className="mt-auto pt-7 relative">
-        <Link
-          to="/product/$slug"
-          params={{slug:props.slug}}
-          className="group/btn relative inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 overflow-hidden"
-          style={{ background: props.hero ? "var(--gradient-energy)" : "linear-gradient(135deg, var(--primary), var(--electric))" }}
-        >
-          <span className="relative z-10">{props.cta}</span>
-          <span className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
-          <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
-        </Link>
+        <AddToCartButton slug={props.slug} hero={props.hero} label={props.cta} />
         <p className="mt-3 text-xs text-muted-foreground text-center">60-day guarantee • Free shipping over $75</p>
       </div>
     </div>
+  );
+}
+
+function AddToCartButton({ slug, hero, label }: { slug: string; hero?: boolean; label: string }) {
+  const { state, add } = useAddToCart();
+  const product = slug === "nmn" ? PRODUCTS.nmn : PRODUCTS.neural;
+  const isAdding = state === "adding";
+  const isAdded = state === "added";
+  return (
+    <button
+      type="button"
+      onClick={() => add({ id: product.id, name: product.name, price: product.price, image: product.image })}
+      disabled={isAdding}
+      className="group/btn relative inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 overflow-hidden disabled:opacity-90 disabled:cursor-wait"
+      style={{ background: hero ? "var(--gradient-energy)" : "linear-gradient(135deg, var(--primary), var(--electric))" }}
+      aria-label={`Add ${product.name} to cart`}
+    >
+      {isAdding ? (
+        <Loader2 className="relative z-10 h-5 w-5 animate-spin" />
+      ) : isAdded ? (
+        <Check className="relative z-10 h-5 w-5" strokeWidth={3} />
+      ) : (
+        <ShoppingCart className="relative z-10 h-5 w-5" />
+      )}
+      <span className="relative z-10">{isAdded ? "Added to Cart" : isAdding ? "Adding…" : `Add to Cart — ${label}`}</span>
+      <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
+    </button>
   );
 }
 
