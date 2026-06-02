@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Zap } from "lucide-react";
 
-const DURATION_MS = 10 * 60 * 60 * 1000; // 10 hours
-const KEY = "anniversarySaleExpiresAt";
+const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+const KEY = "anniversarySaleExpiresAt_v2";
 
 export function AnniversaryBar() {
   const [remaining, setRemaining] = useState<number | null>(null);
