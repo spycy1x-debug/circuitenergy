@@ -39,6 +39,8 @@ function loadSdk(): Promise<any> {
 
 export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
+  const onAddToCartRef = useRef(onAddToCart);
+  useEffect(() => { onAddToCartRef.current = onAddToCart; }, [onAddToCart]);
 
   useEffect(() => {
     let cancelled = false;
