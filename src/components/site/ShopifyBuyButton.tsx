@@ -62,7 +62,7 @@ export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) 
           moneyFormat: "%24%7B%7Bamount%7D%7D",
           events: {
             addVariantToCart: () => {
-              onAddToCart?.();
+              onAddToCartRef.current?.();
             },
           },
           options: {
