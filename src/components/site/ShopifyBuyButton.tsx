@@ -39,6 +39,8 @@ function loadSdk(): Promise<any> {
 
 export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
+  const onAddToCartRef = useRef(onAddToCart);
+  useEffect(() => { onAddToCartRef.current = onAddToCart; }, [onAddToCart]);
 
   useEffect(() => {
     let cancelled = false;
@@ -60,7 +62,7 @@ export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) 
           moneyFormat: "%24%7B%7Bamount%7D%7D",
           events: {
             addVariantToCart: () => {
-              onAddToCart?.();
+              onAddToCartRef.current?.();
             },
           },
           options: {
@@ -145,7 +147,7 @@ export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) 
       cancelled = true;
       if (node) node.innerHTML = "";
     };
-  }, [productId, buttonText, onAddToCart]);
+  }, [productId, buttonText]);
 
   return <div ref={nodeRef} className="w-full shopify-buy-button-wrapper" />;
 }
