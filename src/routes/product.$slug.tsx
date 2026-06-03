@@ -1,6 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
 import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus, FileText, X, Flame, Users, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
+
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+    gtag?: (...args: any[]) => void;
+  }
+}
 import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
@@ -412,7 +419,49 @@ function ProductPage() {
                 <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-11 flex items-center justify-center text-muted-foreground hover:text-ink rounded-r-xl"><Plus className="h-4 w-4"/></button>
               </div>
               <div className="flex-1 min-w-0">
-                <ShopifyBuyButton productId={SHOPIFY_BUY[p.id].productId} buttonText={SHOPIFY_BUY[p.id].buttonText} />
+                <ShopifyBuyButton
+                  productId={SHOPIFY_BUY[p.id].productId}
+                  buttonText={SHOPIFY_BUY[p.id].buttonText}
+                  onAddToCart={() => {
+                    if (p.id === "neural") {
+                      window.fbq?.('track', 'AddToCart', {
+                        content_name: 'Circuit Neural Performance',
+                        content_ids: ['neural-performance'],
+                        content_type: 'product',
+                        value: 42.99,
+                        currency: 'USD',
+                      });
+                      window.gtag?.('event', 'add_to_cart', {
+                        currency: 'USD',
+                        value: 42.99,
+                        items: [{
+                          item_id: 'neural-performance',
+                          item_name: 'Circuit Neural Performance',
+                          price: 42.99,
+                          quantity: 1,
+                        }],
+                      });
+                    } else {
+                      window.fbq?.('track', 'AddToCart', {
+                        content_name: 'Circuit NMN',
+                        content_ids: ['circuit-nmn'],
+                        content_type: 'product',
+                        value: 49.99,
+                        currency: 'USD',
+                      });
+                      window.gtag?.('event', 'add_to_cart', {
+                        currency: 'USD',
+                        value: 49.99,
+                        items: [{
+                          item_id: 'circuit-nmn',
+                          item_name: 'Circuit NMN',
+                          price: 49.99,
+                          quantity: 1,
+                        }],
+                      });
+                    }
+                  }}
+                />
               </div>
             </div>
 

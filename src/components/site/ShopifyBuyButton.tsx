@@ -6,6 +6,13 @@ declare global {
   }
 }
 
+type Props = {
+  productId: string;
+  buttonText: string;
+  onAddToCart?: () => void;
+};
+
+
 const SDK_URL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
 const DOMAIN = "xwkkv0-r0.myshopify.com";
 const STOREFRONT_ACCESS_TOKEN = "df40e9c0cbc7f17808d61a87c11403bc";
@@ -30,12 +37,7 @@ function loadSdk(): Promise<any> {
   return sdkPromise;
 }
 
-type Props = {
-  productId: string;
-  buttonText: string;
-};
-
-export function ShopifyBuyButton({ productId, buttonText }: Props) {
+export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -56,6 +58,11 @@ export function ShopifyBuyButton({ productId, buttonText }: Props) {
           id: productId,
           node,
           moneyFormat: "%24%7B%7Bamount%7D%7D",
+          events: {
+            addVariantToCart: () => {
+              onAddToCart?.();
+            },
+          },
           options: {
             product: {
               contents: { img: false, title: false, price: false },
@@ -138,7 +145,7 @@ export function ShopifyBuyButton({ productId, buttonText }: Props) {
       cancelled = true;
       if (node) node.innerHTML = "";
     };
-  }, [productId, buttonText]);
+  }, [productId, buttonText, onAddToCart]);
 
   return <div ref={nodeRef} className="w-full shopify-buy-button-wrapper" />;
 }
