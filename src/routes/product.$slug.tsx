@@ -422,45 +422,8 @@ function ProductPage() {
                 <ShopifyBuyButton
                   productId={SHOPIFY_BUY[p.id].productId}
                   buttonText={SHOPIFY_BUY[p.id].buttonText}
-                  onAddToCart={() => {
-                    if (p.id === "neural") {
-                      window.fbq?.('track', 'AddToCart', {
-                        content_name: 'Circuit Neural Performance',
-                        content_ids: ['neural-performance'],
-                        content_type: 'product',
-                        value: 42.99,
-                        currency: 'USD',
-                      });
-                      window.gtag?.('event', 'add_to_cart', {
-                        currency: 'USD',
-                        value: 42.99,
-                        items: [{
-                          item_id: 'neural-performance',
-                          item_name: 'Circuit Neural Performance',
-                          price: 42.99,
-                          quantity: 1,
-                        }],
-                      });
-                    } else {
-                      window.fbq?.('track', 'AddToCart', {
-                        content_name: 'Circuit NMN',
-                        content_ids: ['circuit-nmn'],
-                        content_type: 'product',
-                        value: 49.99,
-                        currency: 'USD',
-                      });
-                      window.gtag?.('event', 'add_to_cart', {
-                        currency: 'USD',
-                        value: 49.99,
-                        items: [{
-                          item_id: 'circuit-nmn',
-                          item_name: 'Circuit NMN',
-                          price: 49.99,
-                          quantity: 1,
-                        }],
-                      });
-                    }
-                  }}
+                  productName={p.name}
+                  price={p.price}
                 />
               </div>
             </div>

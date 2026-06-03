@@ -3,15 +3,18 @@ import { useEffect, useRef } from "react";
 declare global {
   interface Window {
     ShopifyBuy?: any;
+    fbq?: (...args: any[]) => void;
+    gtag?: (...args: any[]) => void;
   }
 }
 
 type Props = {
   productId: string;
   buttonText: string;
+  productName?: string;
+  price?: number;
   onAddToCart?: () => void;
 };
-
 
 const SDK_URL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
 const DOMAIN = "xwkkv0-r0.myshopify.com";
@@ -37,10 +40,52 @@ function loadSdk(): Promise<any> {
   return sdkPromise;
 }
 
-export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) {
+export function ShopifyBuyButton({ productId, buttonText, productName, price, onAddToCart }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const onAddToCartRef = useRef(onAddToCart);
   useEffect(() => { onAddToCartRef.current = onAddToCart; }, [onAddToCart]);
+
+  // MutationObserver: watch for the SDK-rendered button and bind click directly.
+  // More reliable than SDK event hooks which vary by SDK version.
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (!node) return;
+
+    const firePixels = () => {
+      const value = price ?? 0;
+      const name = productName ?? buttonText;
+
+      window.fbq?.("track", "AddToCart", {
+        content_ids: [productId],
+        content_name: name,
+        content_type: "product",
+        value,
+        currency: "USD",
+      });
+
+      window.gtag?.("event", "add_to_cart", {
+        currency: "USD",
+        value,
+        items: [{ item_id: productId, item_name: name, price: value, quantity: 1 }],
+      });
+
+      onAddToCartRef.current?.();
+    };
+
+    const bindButton = () => {
+      // The SDK renders .shopify-buy__btn — bind once using a data flag
+      node.querySelectorAll<HTMLButtonElement>(".shopify-buy__btn:not([data-pixel-bound])").forEach((btn) => {
+        btn.dataset.pixelBound = "true";
+        btn.addEventListener("click", firePixels);
+      });
+    };
+
+    const observer = new MutationObserver(bindButton);
+    observer.observe(node, { childList: true, subtree: true });
+    bindButton(); // catch buttons already in DOM
+
+    return () => observer.disconnect();
+  }, [productId, buttonText, productName, price]);
 
   useEffect(() => {
     let cancelled = false;
@@ -60,11 +105,6 @@ export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) 
           id: productId,
           node,
           moneyFormat: "%24%7B%7Bamount%7D%7D",
-          events: {
-            addVariantToCart: () => {
-              onAddToCartRef.current?.();
-            },
-          },
           options: {
             product: {
               contents: { img: false, title: false, price: false },
@@ -97,9 +137,7 @@ export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) 
             productSet: {
               styles: {
                 products: {
-                  "@media (min-width: 601px)": {
-                    "margin-left": "-20px",
-                  },
+                  "@media (min-width: 601px)": { "margin-left": "-20px" },
                 },
               },
             },
