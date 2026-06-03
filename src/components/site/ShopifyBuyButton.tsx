@@ -145,7 +145,7 @@ export function ShopifyBuyButton({ productId, buttonText, onAddToCart }: Props) 
       cancelled = true;
       if (node) node.innerHTML = "";
     };
-  }, [productId, buttonText]);
+  }, [productId, buttonText, onAddToCart]);
 
   return <div ref={nodeRef} className="w-full shopify-buy-button-wrapper" />;
 }
