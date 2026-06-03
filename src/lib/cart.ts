@@ -62,12 +62,44 @@ export function useCart() {
   return { items: parsed, count, subtotal };
 }
 
+function fireAddToCartPixels(item: Omit<CartItem, "qty">, qty: number) {
+  const value = parseFloat((item.price * qty).toFixed(2));
+
+  // Meta Pixel — AddToCart
+  if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+    (window as any).fbq("track", "AddToCart", {
+      content_ids: [item.id],
+      content_name: item.name,
+      content_type: "product",
+      value,
+      currency: "USD",
+    });
+  }
+
+  // Google Analytics 4 — add_to_cart
+  if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+    (window as any).gtag("event", "add_to_cart", {
+      currency: "USD",
+      value,
+      items: [
+        {
+          item_id: item.id,
+          item_name: item.name,
+          price: item.price,
+          quantity: qty,
+        },
+      ],
+    });
+  }
+}
+
 export function useAddToCart() {
   const [state, setState] = useState<"idle" | "adding" | "added">("idle");
   const add = (item: Omit<CartItem, "qty">, qty = 1) => {
     setState("adding");
     setTimeout(() => {
       cart.add(item, qty);
+      fireAddToCartPixels(item, qty);
       setState("added");
       setTimeout(() => setState("idle"), 1800);
     }, 300);
