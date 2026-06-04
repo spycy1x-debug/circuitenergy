@@ -393,10 +393,22 @@ function ProductPage() {
             <div className="text-xs font-bold uppercase bg-energy/15 text-energy px-2 py-1 rounded">Save 30%</div>
           </div>
           <p className="mt-1 text-xs text-muted-foreground">or 4 interest-free payments of ${(p.price/4).toFixed(2)} with Shop Pay</p>
-          <p className="mt-4 text-body leading-relaxed">{p.description}</p>
-          <ul className="mt-6 space-y-2.5">
-            {p.benefits.map(b=>(
-              <li key={b} className="flex items-center gap-2 text-sm text-body"><Check className="h-4 w-4 text-success shrink-0"/>{b}</li>
+          <div className="mt-5 relative rounded-2xl border border-border/70 bg-gradient-to-br from-secondary/50 via-white to-primary/5 p-5 shadow-[0_4px_18px_-12px_rgba(0,0,0,0.15)]">
+            <div className="absolute left-0 top-4 bottom-4 w-1 rounded-r-full bg-gradient-to-b from-primary to-electric"/>
+            <p className="text-[15px] leading-relaxed text-ink/90 font-medium pl-2">{p.description}</p>
+          </div>
+          <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {p.benefits.map((b, i)=>(
+              <li
+                key={b}
+                className="group flex items-start gap-2.5 rounded-xl border border-border/60 bg-white/80 backdrop-blur px-3 py-2.5 text-sm text-ink hover:border-success/40 hover:bg-success/[0.04] hover:shadow-[0_6px_18px_-12px_rgba(16,185,129,0.45)] transition-all"
+                style={{ animation: `fadeInUp 0.4s ease-out ${i * 60}ms both` }}
+              >
+                <span className="h-6 w-6 shrink-0 rounded-full bg-gradient-to-br from-success/25 to-success/10 ring-1 ring-success/30 flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform">
+                  <Check className="h-3.5 w-3.5 text-success" strokeWidth={3}/>
+                </span>
+                <span className="font-medium leading-snug">{b}</span>
+              </li>
             ))}
           </ul>
 
