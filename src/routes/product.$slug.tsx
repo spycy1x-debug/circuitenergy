@@ -319,6 +319,11 @@ function ProductPage() {
       { title: "One pill is convenient", body: "Love that the new dose is one capsule. Easier to stay consistent.", name: "Mira J.", date: "3 months ago", rating: 4 },
       { title: "Back to my 5am runs", body: "Hadn't run before work in two years. Five weeks in and I'm hitting the trail again at sunrise without dragging.", name: "Imani Okafor-Reed", date: "4 months ago", rating: 5 },
       { title: "Not a placebo", body: "I'm a chemist and a skeptic. Ran my own little A/B with two weeks off mid-bottle. The drop-off was obvious.", name: "Yusuf K.", date: "4 months ago", rating: 5 },
+      { title: "Steady but slow", body: "Took about three weeks before I felt anything meaningful. Now I get a gentle energy lift but it's not night-and-day. Still reordering.", name: "Marisol P.", date: "5 months ago", rating: 3 },
+      { title: "Good, not great for me", body: "Sleep improved, energy bumped a bit. Was hoping for more given the price point. Friend in his 50s loves it.", name: "Devon W.", date: "6 months ago", rating: 3 },
+      { title: "Better with consistency", body: "Skipped a few days here and there and lost the effect. Works if you take it every morning without fail, which is on me.", name: "Hina T.", date: "7 months ago", rating: 3 },
+      { title: "Felt mild effects", body: "Honestly expected a bigger shift. I do feel a touch more rested but it's subtle. Customer service was great though.", name: "Curtis O.", date: "8 months ago", rating: 2 },
+      { title: "Worked the first month", body: "Strong start, then it plateaued for me. Might cycle off and try again. Quality seems high regardless.", name: "Annika R.", date: "9 months ago", rating: 2 },
     ];
     return [
       ...userReviews,
