@@ -26,6 +26,23 @@ const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: str
   nmn: { productId: "8951254876314", buttonText: "Fix Your Energy" },
 };
 
+function timeAgo(iso: string) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "Just now";
+  if (m < 60) return `${m} minute${m===1?"":"s"} ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h} hour${h===1?"":"s"} ago`;
+  const d = Math.floor(h / 24);
+  if (d < 7) return `${d} day${d===1?"":"s"} ago`;
+  const w = Math.floor(d / 7);
+  if (w < 5) return `${w} week${w===1?"":"s"} ago`;
+  const mo = Math.floor(d / 30);
+  if (mo < 12) return `${mo} month${mo===1?"":"s"} ago`;
+  const y = Math.floor(d / 365);
+  return `${y} year${y===1?"":"s"} ago`;
+}
+
 type ProductData = {
   id: "neural" | "nmn";
   name: string;
@@ -222,6 +239,25 @@ function ProductPage() {
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
   const [reviewsShown, setReviewsShown] = useState(3);
   const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
+  useEffect(() => {
+    let cancelled = false;
+    import("@/integrations/supabase/client").then(({ supabase }) => {
+      supabase
+        .from("product_reviews")
+        .select("name,title,body,rating,created_at")
+        .eq("product_id", p.id)
+        .order("created_at", { ascending: false })
+        .limit(50)
+        .then(({ data }) => {
+          if (cancelled || !data) return;
+          setUserReviews(data.map((r: any) => ({
+            name: r.name, title: r.title, body: r.body, rating: r.rating,
+            date: timeAgo(r.created_at),
+          })));
+        });
+    });
+    return () => { cancelled = true; };
+  }, [p.id]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
@@ -268,6 +304,11 @@ function ProductPage() {
       { title: "Subscribed", body: "Worth the money. Subscribed and don't plan to stop.", name: "Lila", date: "8 months ago", rating: 5 },
       { title: "Helped with postpartum brain fog", body: "Cleared the haze after having my second. Cleared with my doctor first. Felt like myself again within 3 weeks.", name: "Brianna Esposito", date: "9 months ago", rating: 5 },
       { title: "Honest 4 stars", body: "Works well. Wish it were a touch cheaper. Will keep buying though.", name: "Drew K.", date: "9 months ago", rating: 4 },
+      { title: "Decent, takes patience", body: "Took me almost a month to notice anything. Once it kicked in it was solid, but the slow ramp surprised me. Wish that was clearer up front.", name: "Patrick H.", date: "5 months ago", rating: 3 },
+      { title: "Helps a little", body: "I get a mild lift in focus but nothing dramatic for me personally. Friend swears by it though, so might just be my body chemistry.", name: "Eliza M.", date: "7 months ago", rating: 3 },
+      { title: "Capsule size is bigger than I expected", body: "The effect is real and I do feel sharper, just wish the capsule was a touch smaller. Manageable, not a dealbreaker.", name: "Yoon-Seo C.", date: "4 months ago", rating: 3 },
+      { title: "Subtle for me", body: "Did notice cleaner mornings but I expected more after reading the reviews. Possibly works better stacked with their NMN.", name: "Robert F.", date: "6 months ago", rating: 2 },
+      { title: "Mixed feelings", body: "First bottle felt great, second one less so. Could be tolerance, could be me. Support team was friendly when I reached out.", name: "Janelle K.", date: "8 months ago", rating: 2 },
     ] : [
       { title: "Energy without the crash", body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.", name: "Rachel D.", date: "2 weeks ago", rating: 5 },
       { title: "Noticeable in the gym", body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.", name: "TomLiftsHeavy", date: "1 month ago", rating: 5 },
@@ -278,6 +319,11 @@ function ProductPage() {
       { title: "One pill is convenient", body: "Love that the new dose is one capsule. Easier to stay consistent.", name: "Mira J.", date: "3 months ago", rating: 4 },
       { title: "Back to my 5am runs", body: "Hadn't run before work in two years. Five weeks in and I'm hitting the trail again at sunrise without dragging.", name: "Imani Okafor-Reed", date: "4 months ago", rating: 5 },
       { title: "Not a placebo", body: "I'm a chemist and a skeptic. Ran my own little A/B with two weeks off mid-bottle. The drop-off was obvious.", name: "Yusuf K.", date: "4 months ago", rating: 5 },
+      { title: "Steady but slow", body: "Took about three weeks before I felt anything meaningful. Now I get a gentle energy lift but it's not night-and-day. Still reordering.", name: "Marisol P.", date: "5 months ago", rating: 3 },
+      { title: "Good, not great for me", body: "Sleep improved, energy bumped a bit. Was hoping for more given the price point. Friend in his 50s loves it.", name: "Devon W.", date: "6 months ago", rating: 3 },
+      { title: "Better with consistency", body: "Skipped a few days here and there and lost the effect. Works if you take it every morning without fail, which is on me.", name: "Hina T.", date: "7 months ago", rating: 3 },
+      { title: "Felt mild effects", body: "Honestly expected a bigger shift. I do feel a touch more rested but it's subtle. Customer service was great though.", name: "Curtis O.", date: "8 months ago", rating: 2 },
+      { title: "Worked the first month", body: "Strong start, then it plateaued for me. Might cycle off and try again. Quality seems high regardless.", name: "Annika R.", date: "9 months ago", rating: 2 },
     ];
     return [
       ...userReviews,
@@ -302,13 +348,22 @@ function ProductPage() {
           <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={e => e.stopPropagation()}>
             <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
-                setUserReviews(prev => [{ ...form, date: "Just now" }, ...prev]);
+                const payload = { ...form };
+                setUserReviews(prev => [{ ...payload, date: "Just now" }, ...prev]);
                 setForm({ name: "", title: "", body: "", rating: 5 });
                 setShowReviewForm(false);
                 setTab("rev");
+                const { supabase } = await import("@/integrations/supabase/client");
+                await supabase.from("product_reviews").insert({
+                  product_id: p.id,
+                  name: payload.name.trim().slice(0, 80),
+                  title: payload.title.trim().slice(0, 120),
+                  body: payload.body.trim().slice(0, 2000),
+                  rating: payload.rating,
+                });
               }}
               className="space-y-4"
             >
