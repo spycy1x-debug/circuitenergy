@@ -260,7 +260,7 @@ function ProductPage() {
   }, [p.id]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
-  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2">("recent");
+  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
   const [stockLeft, setStockLeft] = useState(22);
@@ -326,7 +326,7 @@ function ProductPage() {
       { title: "Worked the first month", body: "Strong start, then it plateaued for me. Might cycle off and try again. Quality seems high regardless.", name: "Annika R.", date: "9 months ago", rating: 2 },
     ];
     return [
-      ...userReviews.filter(r => r.rating >= 2),
+      ...userReviews,
       { title: p.sample.title, body: p.sample.body, name: p.sample.name, date: p.sample.date, rating: 5 },
       ...pool,
     ];
@@ -336,7 +336,7 @@ function ProductPage() {
     if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
     else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
     else if (reviewFilter === "verified") return arr.filter(r => r.rating >= 4).slice(0, 6);
-    else if (["2","3","4","5"].includes(reviewFilter)) return arr.filter(r => r.rating === Number(reviewFilter));
+    else if (["1","2","3","4","5"].includes(reviewFilter)) return arr.filter(r => r.rating === Number(reviewFilter));
     return arr;
   }, [extraReviews, reviewFilter]);
   const related = PRODUCTS[p.related.id];
@@ -671,7 +671,7 @@ function ProductPage() {
                 <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
                 <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews} verified reviews</div>
                 <div className="mt-5 space-y-1.5 text-xs">
-                  {([["5",80],["4",13],["3",5],["2",2]] as const).map(([s,pct])=>(
+                  {([["5",79],["4",12],["3",6],["2",2],["1",1]] as const).map(([s,pct])=>(
                     <button
                       key={s}
                       type="button"
@@ -685,7 +685,7 @@ function ProductPage() {
                     </button>
                   ))}
                 </div>
-                {["2","3","4","5"].includes(reviewFilter) && (
+                {["1","2","3","4","5"].includes(reviewFilter) && (
                   <button onClick={()=>{setReviewFilter("recent");setReviewsShown(3);}} className="mt-2 text-xs text-primary hover:underline">Clear star filter</button>
                 )}
                 <div className="mt-5 pt-5 border-t border-border flex items-center gap-2 text-xs text-success font-semibold"><ShieldCheck className="h-4 w-4"/>97% would recommend</div>
