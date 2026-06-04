@@ -222,6 +222,25 @@ function ProductPage() {
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
   const [reviewsShown, setReviewsShown] = useState(3);
   const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
+  useEffect(() => {
+    let cancelled = false;
+    import("@/integrations/supabase/client").then(({ supabase }) => {
+      supabase
+        .from("product_reviews")
+        .select("name,title,body,rating,created_at")
+        .eq("product_id", p.id)
+        .order("created_at", { ascending: false })
+        .limit(50)
+        .then(({ data }) => {
+          if (cancelled || !data) return;
+          setUserReviews(data.map((r: any) => ({
+            name: r.name, title: r.title, body: r.body, rating: r.rating,
+            date: timeAgo(r.created_at),
+          })));
+        });
+    });
+    return () => { cancelled = true; };
+  }, [p.id]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
