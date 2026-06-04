@@ -338,13 +338,22 @@ function ProductPage() {
           <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={e => e.stopPropagation()}>
             <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
-                setUserReviews(prev => [{ ...form, date: "Just now" }, ...prev]);
+                const payload = { ...form };
+                setUserReviews(prev => [{ ...payload, date: "Just now" }, ...prev]);
                 setForm({ name: "", title: "", body: "", rating: 5 });
                 setShowReviewForm(false);
                 setTab("rev");
+                const { supabase } = await import("@/integrations/supabase/client");
+                await supabase.from("product_reviews").insert({
+                  product_id: p.id,
+                  name: payload.name.trim().slice(0, 80),
+                  title: payload.title.trim().slice(0, 120),
+                  body: payload.body.trim().slice(0, 2000),
+                  rating: payload.rating,
+                });
               }}
               className="space-y-4"
             >
