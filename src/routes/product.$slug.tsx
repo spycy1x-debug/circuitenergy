@@ -304,6 +304,11 @@ function ProductPage() {
       { title: "Subscribed", body: "Worth the money. Subscribed and don't plan to stop.", name: "Lila", date: "8 months ago", rating: 5 },
       { title: "Helped with postpartum brain fog", body: "Cleared the haze after having my second. Cleared with my doctor first. Felt like myself again within 3 weeks.", name: "Brianna Esposito", date: "9 months ago", rating: 5 },
       { title: "Honest 4 stars", body: "Works well. Wish it were a touch cheaper. Will keep buying though.", name: "Drew K.", date: "9 months ago", rating: 4 },
+      { title: "Decent, takes patience", body: "Took me almost a month to notice anything. Once it kicked in it was solid, but the slow ramp surprised me. Wish that was clearer up front.", name: "Patrick H.", date: "5 months ago", rating: 3 },
+      { title: "Helps a little", body: "I get a mild lift in focus but nothing dramatic for me personally. Friend swears by it though, so might just be my body chemistry.", name: "Eliza M.", date: "7 months ago", rating: 3 },
+      { title: "Capsule size is bigger than I expected", body: "The effect is real and I do feel sharper, just wish the capsule was a touch smaller. Manageable, not a dealbreaker.", name: "Yoon-Seo C.", date: "4 months ago", rating: 3 },
+      { title: "Subtle for me", body: "Did notice cleaner mornings but I expected more after reading the reviews. Possibly works better stacked with their NMN.", name: "Robert F.", date: "6 months ago", rating: 2 },
+      { title: "Mixed feelings", body: "First bottle felt great, second one less so. Could be tolerance, could be me. Support team was friendly when I reached out.", name: "Janelle K.", date: "8 months ago", rating: 2 },
     ] : [
       { title: "Energy without the crash", body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.", name: "Rachel D.", date: "2 weeks ago", rating: 5 },
       { title: "Noticeable in the gym", body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.", name: "TomLiftsHeavy", date: "1 month ago", rating: 5 },
