@@ -97,6 +97,7 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
           moneyFormat: "%24%7B%7Bamount%7D%7D",
           options: {
             product: {
+              iframe: false,
               contents: { img: false, title: false, price: false },
               styles: {
                 product: { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" } },
