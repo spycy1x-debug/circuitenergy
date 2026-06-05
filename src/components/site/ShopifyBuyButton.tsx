@@ -20,6 +20,41 @@ const SDK_URL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storef
 const DOMAIN = "xwkkv0-r0.myshopify.com";
 const STOREFRONT_ACCESS_TOKEN = "df40e9c0cbc7f17808d61a87c11403bc";
 
+// Inject button CSS once — iframe:false removes the SDK's style isolation
+// so we need to supply the styles directly to the parent document.
+function injectBuyButtonStyles() {
+  if (typeof document === "undefined" || document.getElementById("shopify-buy-btn-override")) return;
+  const style = document.createElement("style");
+  style.id = "shopify-buy-btn-override";
+  style.textContent = `
+    .shopify-buy__btn {
+      display: block !important;
+      width: 100% !important;
+      padding: 20px 24px !important;
+      font-size: 17px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      background-color: #FF6B2C !important;
+      color: #fff !important;
+      border: none !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      box-shadow: 0 10px 24px -8px rgba(255,107,44,0.55), 0 2px 0 rgba(0,0,0,0.06) inset !important;
+      transition: transform 120ms ease, background-color 120ms ease, box-shadow 120ms ease !important;
+    }
+    .shopify-buy__btn:hover {
+      background-color: #E85A1C !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 14px 28px -8px rgba(255,107,44,0.7) !important;
+    }
+    .shopify-buy__btn:active { transform: scale(0.99) !important; }
+    .shopify-buy__product { width: 100% !important; }
+    .shopify-buy__btn-wrapper { width: 100% !important; margin: 0 !important; }
+  `;
+  document.head.appendChild(style);
+}
+
 let sdkPromise: Promise<any> | null = null;
 function loadSdk(): Promise<any> {
   if (typeof window === "undefined") return Promise.resolve(null);
@@ -55,6 +90,8 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
     const node = nodeRef.current;
     if (!node) return;
     node.innerHTML = "";
+
+    injectBuyButtonStyles();
 
     loadSdk().then((ShopifyBuy) => {
       if (cancelled || !ShopifyBuy || !node) return;
