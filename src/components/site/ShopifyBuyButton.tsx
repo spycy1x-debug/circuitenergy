@@ -45,8 +45,6 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
   const onAddToCartRef = useRef(onAddToCart);
   useEffect(() => { onAddToCartRef.current = onAddToCart; }, [onAddToCart]);
 
-  // MutationObserver: watch for the SDK-rendered button and bind click directly.
-  // More reliable than SDK event hooks which vary by SDK version.
   useEffect(() => {
     const node = nodeRef.current;
     if (!node) return;
@@ -54,7 +52,6 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
     const firePixels = () => {
       const value = price ?? 0;
       const name = productName ?? buttonText;
-
       window.fbq?.("track", "AddToCart", {
         content_ids: [productId],
         content_name: name,
@@ -62,18 +59,15 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
         value,
         currency: "USD",
       });
-
       window.gtag?.("event", "add_to_cart", {
         currency: "USD",
         value,
         items: [{ item_id: productId, item_name: name, price: value, quantity: 1 }],
       });
-
       onAddToCartRef.current?.();
     };
 
     const bindButton = () => {
-      // The SDK renders .shopify-buy__btn — bind once using a data flag
       node.querySelectorAll<HTMLButtonElement>(".shopify-buy__btn:not([data-pixel-bound])").forEach((btn) => {
         btn.dataset.pixelBound = "true";
         btn.addEventListener("click", firePixels);
@@ -82,8 +76,7 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
 
     const observer = new MutationObserver(bindButton);
     observer.observe(node, { childList: true, subtree: true });
-    bindButton(); // catch buttons already in DOM
-
+    bindButton();
     return () => observer.disconnect();
   }, [productId, buttonText, productName, price]);
 
@@ -95,10 +88,7 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
 
     loadSdk().then((ShopifyBuy) => {
       if (cancelled || !ShopifyBuy || !node) return;
-      const client = ShopifyBuy.buildClient({
-        domain: DOMAIN,
-        storefrontAccessToken: STOREFRONT_ACCESS_TOKEN,
-      });
+      const client = ShopifyBuy.buildClient({ domain: DOMAIN, storefrontAccessToken: STOREFRONT_ACCESS_TOKEN });
       ShopifyBuy.UI.onReady(client).then((ui: any) => {
         if (cancelled) return;
         ui.createComponent("product", {
@@ -109,22 +99,11 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
             product: {
               contents: { img: false, title: false, price: false },
               styles: {
-                product: {
-                  "@media (min-width: 601px)": {
-                    "max-width": "100%",
-                    "margin-left": "0",
-                    "margin-bottom": "0",
-                  },
-                },
+                product: { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" } },
                 button: {
-                  "font-size": "17px",
-                  "font-weight": "800",
-                  "letter-spacing": "0.04em",
-                  "text-transform": "uppercase",
-                  "padding": "20px 24px",
-                  "width": "100%",
-                  "border-radius": "10px",
-                  "background-color": "#FF6B2C",
+                  "font-size": "17px", "font-weight": "800", "letter-spacing": "0.04em",
+                  "text-transform": "uppercase", "padding": "20px 24px", "width": "100%",
+                  "border-radius": "10px", "background-color": "#FF6B2C",
                   "box-shadow": "0 10px 24px -8px rgba(255,107,44,0.55), 0 2px 0 rgba(0,0,0,0.06) inset",
                   "transition": "transform 120ms ease, background-color 120ms ease, box-shadow 120ms ease",
                   ":hover": { "background-color": "#E85A1C", "transform": "translateY(-1px)", "box-shadow": "0 14px 28px -8px rgba(255,107,44,0.7)" },
@@ -134,57 +113,29 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
               },
               text: { button: buttonText },
             },
-            productSet: {
-              styles: {
-                products: {
-                  "@media (min-width: 601px)": { "margin-left": "-20px" },
-                },
-              },
-            },
             modalProduct: {
               contents: { img: false, imgWithCarousel: true, button: false, buttonWithQuantity: true },
               styles: {
-                product: {
-                  "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" },
-                },
-                button: {
-                  "background-color": "#708090",
-                  ":hover": { "background-color": "#657382" },
-                  ":focus": { "background-color": "#657382" },
-                },
+                product: { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" } },
+                button: { "background-color": "#708090", ":hover": { "background-color": "#657382" }, ":focus": { "background-color": "#657382" } },
               },
               text: { button: "Add to cart" },
             },
             option: {},
             cart: {
-              styles: {
-                button: {
-                  "background-color": "#708090",
-                  ":hover": { "background-color": "#657382" },
-                  ":focus": { "background-color": "#657382" },
-                },
-              },
+              styles: { button: { "background-color": "#708090", ":hover": { "background-color": "#657382" }, ":focus": { "background-color": "#657382" } } },
               text: { total: "Subtotal", button: "Checkout" },
               popup: false,
             },
             toggle: {
-              styles: {
-                toggle: {
-                  "background-color": "#708090",
-                  ":hover": { "background-color": "#657382" },
-                  ":focus": { "background-color": "#657382" },
-                },
-              },
+              styles: { toggle: { "background-color": "#708090", ":hover": { "background-color": "#657382" }, ":focus": { "background-color": "#657382" } } },
             },
           },
         });
       });
     });
 
-    return () => {
-      cancelled = true;
-      if (node) node.innerHTML = "";
-    };
+    return () => { cancelled = true; if (node) node.innerHTML = ""; };
   }, [productId, buttonText]);
 
   return <div ref={nodeRef} className="w-full shopify-buy-button-wrapper" />;
