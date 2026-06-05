@@ -43,41 +43,11 @@ function loadSdk(): Promise<any> {
 export function ShopifyBuyButton({ productId, buttonText, productName, price, onAddToCart }: Props) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const onAddToCartRef = useRef(onAddToCart);
+  const latestTrackingRef = useRef({ productId, buttonText, productName, price });
+
   useEffect(() => { onAddToCartRef.current = onAddToCart; }, [onAddToCart]);
-
   useEffect(() => {
-    const node = nodeRef.current;
-    if (!node) return;
-
-    const firePixels = () => {
-      const value = price ?? 0;
-      const name = productName ?? buttonText;
-      window.fbq?.("track", "AddToCart", {
-        content_ids: [productId],
-        content_name: name,
-        content_type: "product",
-        value,
-        currency: "USD",
-      });
-      window.gtag?.("event", "add_to_cart", {
-        currency: "USD",
-        value,
-        items: [{ item_id: productId, item_name: name, price: value, quantity: 1 }],
-      });
-      onAddToCartRef.current?.();
-    };
-
-    const bindButton = () => {
-      node.querySelectorAll<HTMLButtonElement>(".shopify-buy__btn:not([data-pixel-bound])").forEach((btn) => {
-        btn.dataset.pixelBound = "true";
-        btn.addEventListener("click", firePixels);
-      });
-    };
-
-    const observer = new MutationObserver(bindButton);
-    observer.observe(node, { childList: true, subtree: true });
-    bindButton();
-    return () => observer.disconnect();
+    latestTrackingRef.current = { productId, buttonText, productName, price };
   }, [productId, buttonText, productName, price]);
 
   useEffect(() => {
@@ -91,6 +61,29 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
       const client = ShopifyBuy.buildClient({ domain: DOMAIN, storefrontAccessToken: STOREFRONT_ACCESS_TOKEN });
       ShopifyBuy.UI.onReady(client).then((ui: any) => {
         if (cancelled) return;
+
+        const firePixels = () => {
+          const latest = latestTrackingRef.current;
+          const value = latest.price ?? 0;
+          const name = latest.productName ?? latest.buttonText;
+
+          window.fbq?.("track", "AddToCart", {
+            content_ids: [latest.productId],
+            content_name: name,
+            content_type: "product",
+            value,
+            currency: "USD",
+          });
+
+          window.gtag?.("event", "add_to_cart", {
+            currency: "USD",
+            value,
+            items: [{ item_id: latest.productId, item_name: name, price: value, quantity: 1 }],
+          });
+
+          onAddToCartRef.current?.();
+        };
+
         ui.createComponent("product", {
           id: productId,
           node,
@@ -99,6 +92,9 @@ export function ShopifyBuyButton({ productId, buttonText, productName, price, on
             product: {
               iframe: false,
               contents: { img: false, title: false, price: false },
+              events: {
+                addVariantToCart: firePixels,
+              },
               styles: {
                 product: { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" } },
                 button: {
