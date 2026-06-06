@@ -117,32 +117,28 @@ export function Header() {
           </div>
 
           <div className="flex items-center justify-center">
-            <Link to="/" aria-label="Circuit Energy home" className="flex items-center">
-              {/* Circuit logo: neural-network circle replaces the "C" */}
-              <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{ flexShrink: 0 }}>
-                <circle cx="17" cy="17" r="15.5" stroke="#7a8eaa" strokeWidth="1.4"/>
-                {/* center node */}
-                <circle cx="17" cy="17" r="1.8" fill="#7a8eaa"/>
-                {/* outer nodes */}
-                <circle cx="11" cy="9"  r="1.4" fill="#7a8eaa"/>
-                <circle cx="23" cy="8"  r="1.4" fill="#7a8eaa"/>
-                <circle cx="26" cy="17" r="1.4" fill="#7a8eaa"/>
-                <circle cx="22" cy="25" r="1.4" fill="#7a8eaa"/>
-                <circle cx="11" cy="25" r="1.4" fill="#7a8eaa"/>
-                <circle cx="8"  cy="16" r="1.4" fill="#7a8eaa"/>
-                {/* spokes to center */}
-                <line x1="17" y1="17" x2="11" y2="9"  stroke="#7a8eaa" strokeWidth="0.9"/>
-                <line x1="17" y1="17" x2="23" y2="8"  stroke="#7a8eaa" strokeWidth="0.9"/>
-                <line x1="17" y1="17" x2="26" y2="17" stroke="#7a8eaa" strokeWidth="0.9"/>
-                <line x1="17" y1="17" x2="22" y2="25" stroke="#7a8eaa" strokeWidth="0.9"/>
-                <line x1="17" y1="17" x2="11" y2="25" stroke="#7a8eaa" strokeWidth="0.9"/>
-                <line x1="17" y1="17" x2="8"  y2="16" stroke="#7a8eaa" strokeWidth="0.9"/>
-                {/* perimeter connections */}
-                <line x1="11" y1="9"  x2="23" y2="8"  stroke="#7a8eaa" strokeWidth="0.9"/>
-                <line x1="8"  y1="16" x2="11" y2="9"  stroke="#7a8eaa" strokeWidth="0.9"/>
-                <line x1="8"  y1="16" x2="11" y2="25" stroke="#7a8eaa" strokeWidth="0.9"/>
+            <Link to="/" aria-label="Circuit Energy home" className="flex items-center" style={{ gap: 0 }}>
+              {/* Neural-network circle — replaces the "C" in CIRCUIT */}
+              <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{ flexShrink: 0, marginRight: '-1px' }}>
+                {/* outer ring */}
+                <circle cx="20" cy="20" r="18" stroke="#8090b8" strokeWidth="1.5"/>
+                {/* nodes */}
+                <circle cx="15" cy="9"  r="2.2" fill="#8090b8"/>
+                <circle cx="27" cy="8"  r="2.2" fill="#8090b8"/>
+                <circle cx="32" cy="19" r="2.2" fill="#8090b8"/>
+                <circle cx="24" cy="31" r="2.2" fill="#8090b8"/>
+                <circle cx="11" cy="30" r="2.2" fill="#8090b8"/>
+                <circle cx="20" cy="20" r="2.2" fill="#8090b8"/>
+                {/* connections */}
+                <line x1="15" y1="9"  x2="27" y2="8"  stroke="#8090b8" strokeWidth="1.1"/>
+                <line x1="15" y1="9"  x2="20" y2="20" stroke="#8090b8" strokeWidth="1.1"/>
+                <line x1="27" y1="8"  x2="32" y2="19" stroke="#8090b8" strokeWidth="1.1"/>
+                <line x1="32" y1="19" x2="20" y2="20" stroke="#8090b8" strokeWidth="1.1"/>
+                <line x1="20" y1="20" x2="24" y2="31" stroke="#8090b8" strokeWidth="1.1"/>
+                <line x1="20" y1="20" x2="11" y2="30" stroke="#8090b8" strokeWidth="1.1"/>
+                <line x1="11" y1="30" x2="24" y2="31" stroke="#8090b8" strokeWidth="1.1"/>
               </svg>
-              <span style={{ fontFamily: "'Montserrat','Inter',sans-serif", fontWeight: 800, fontSize: '1.45rem', letterSpacing: '0.05em', color: '#0a0a0a', textTransform: 'uppercase', marginLeft: '1px' }}>
+              <span style={{ fontFamily: "'Montserrat','Inter',sans-serif", fontWeight: 700, fontSize: '1.55rem', letterSpacing: '0.04em', color: '#0a0a0a' }}>
                 IRCUIT
               </span>
             </Link>
