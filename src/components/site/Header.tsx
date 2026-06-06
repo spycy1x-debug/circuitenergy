@@ -2,7 +2,6 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Search, User, ShoppingBag, Menu, X, ArrowUpRight, Sparkles, Zap, BookOpen, Mail, Home as HomeIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
-import logoImg from "@/assets/logo.png";
 
 type SearchItem = { label: string; sub: string; to: string; params?: Record<string, string> };
 
@@ -118,12 +117,15 @@ export function Header() {
           </div>
 
           <div className="flex items-center justify-center">
-            <Link to="/" aria-label="Circuit Energy home" className="flex items-center justify-center">
-              <img
-                src={logoImg}
-                alt="Circuit"
-                className="block h-28 sm:h-32 md:h-40 w-auto object-contain"
-              />
+            <Link to="/" aria-label="Circuit Energy home" className="flex items-center justify-center gap-2">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="14" cy="14" r="13" stroke="#111" strokeWidth="1.5"/>
+                <path d="M14 6l2.5 5h-2v4.5l-4-4.5h2V6z" fill="#111"/>
+                <circle cx="14" cy="20" r="1.5" fill="#111"/>
+              </svg>
+              <span style={{ fontFamily: "'Montserrat','Inter',sans-serif", fontWeight: 700, fontSize: '1.15rem', letterSpacing: '-0.02em', color: '#111', textTransform: 'uppercase' }}>
+                Circuit
+              </span>
             </Link>
           </div>
 
