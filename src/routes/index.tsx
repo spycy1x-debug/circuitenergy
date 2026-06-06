@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import heroAsset from "@/assets/hero-kitchen.png.asset.json";
+import heroAsset from "@/assets/hero-founder.png.asset.json";
 const heroImg = heroAsset.url;
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
