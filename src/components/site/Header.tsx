@@ -117,14 +117,33 @@ export function Header() {
           </div>
 
           <div className="flex items-center justify-center">
-            <Link to="/" aria-label="Circuit Energy home" className="flex items-center justify-center gap-2">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="14" cy="14" r="13" stroke="#111" strokeWidth="1.5"/>
-                <path d="M14 6l2.5 5h-2v4.5l-4-4.5h2V6z" fill="#111"/>
-                <circle cx="14" cy="20" r="1.5" fill="#111"/>
+            <Link to="/" aria-label="Circuit Energy home" className="flex items-center">
+              {/* Circuit logo: neural-network circle replaces the "C" */}
+              <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <circle cx="17" cy="17" r="15.5" stroke="#7a8eaa" strokeWidth="1.4"/>
+                {/* center node */}
+                <circle cx="17" cy="17" r="1.8" fill="#7a8eaa"/>
+                {/* outer nodes */}
+                <circle cx="11" cy="9"  r="1.4" fill="#7a8eaa"/>
+                <circle cx="23" cy="8"  r="1.4" fill="#7a8eaa"/>
+                <circle cx="26" cy="17" r="1.4" fill="#7a8eaa"/>
+                <circle cx="22" cy="25" r="1.4" fill="#7a8eaa"/>
+                <circle cx="11" cy="25" r="1.4" fill="#7a8eaa"/>
+                <circle cx="8"  cy="16" r="1.4" fill="#7a8eaa"/>
+                {/* spokes to center */}
+                <line x1="17" y1="17" x2="11" y2="9"  stroke="#7a8eaa" strokeWidth="0.9"/>
+                <line x1="17" y1="17" x2="23" y2="8"  stroke="#7a8eaa" strokeWidth="0.9"/>
+                <line x1="17" y1="17" x2="26" y2="17" stroke="#7a8eaa" strokeWidth="0.9"/>
+                <line x1="17" y1="17" x2="22" y2="25" stroke="#7a8eaa" strokeWidth="0.9"/>
+                <line x1="17" y1="17" x2="11" y2="25" stroke="#7a8eaa" strokeWidth="0.9"/>
+                <line x1="17" y1="17" x2="8"  y2="16" stroke="#7a8eaa" strokeWidth="0.9"/>
+                {/* perimeter connections */}
+                <line x1="11" y1="9"  x2="23" y2="8"  stroke="#7a8eaa" strokeWidth="0.9"/>
+                <line x1="8"  y1="16" x2="11" y2="9"  stroke="#7a8eaa" strokeWidth="0.9"/>
+                <line x1="8"  y1="16" x2="11" y2="25" stroke="#7a8eaa" strokeWidth="0.9"/>
               </svg>
-              <span style={{ fontFamily: "'Montserrat','Inter',sans-serif", fontWeight: 700, fontSize: '1.15rem', letterSpacing: '-0.02em', color: '#111', textTransform: 'uppercase' }}>
-                Circuit
+              <span style={{ fontFamily: "'Montserrat','Inter',sans-serif", fontWeight: 800, fontSize: '1.45rem', letterSpacing: '0.05em', color: '#0a0a0a', textTransform: 'uppercase', marginLeft: '1px' }}>
+                IRCUIT
               </span>
             </Link>
           </div>
