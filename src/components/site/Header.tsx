@@ -122,7 +122,7 @@ export function Header() {
               <img
                 src={logoImg}
                 alt="Circuit"
-                className="h-10 w-auto"
+                className="h-9 w-auto"
                 style={{ mixBlendMode: 'multiply' }}
               />
             </Link>
