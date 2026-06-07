@@ -129,7 +129,7 @@ function WhyTiredPage() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/shop" className="btn-primary">Shop Circuit</Link>
-            <Link to="/product/$slug" params={{ slug: "circuit-nmn" }} className="btn-outline">View NMN</Link>
+            <Link to="/product/$slug" params={{ slug: "nmn" }} className="btn-outline">View NMN</Link>
           </div>
         </div>
       </section>
