@@ -88,7 +88,8 @@ export function WelcomePopup() {
           </p>
 
           <Link
-            to="/product/neural-performance"
+            to="/product/$slug"
+            params={{ slug: "neural-performance" }}
             onClick={() => {
               sessionStorage.setItem("personalDiscountClaimed", "1");
               sessionStorage.setItem(
