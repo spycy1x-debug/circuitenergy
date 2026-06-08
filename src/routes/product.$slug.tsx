@@ -263,15 +263,29 @@ function ProductPage() {
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
-  const [stockLeft, setStockLeft] = useState(22);
+  // Deterministic, globally-shared values derived from wall-clock time so
+  // every visitor sees the same numbers. Viewers rotate each minute; stock
+  // decrements each hour and resets at 22 after reaching 1.
+  const hash = (n: number) => {
+    let x = (n | 0) ^ 0x9e3779b9;
+    x = Math.imul(x ^ (x >>> 16), 0x85ebca6b);
+    x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35);
+    return ((x ^ (x >>> 16)) >>> 0);
+  };
+  const computeViewers = () => 22 + (hash(Math.floor(Date.now() / 60_000)) % 17);
+  const computeStock = () => {
+    const hoursSinceEpoch = Math.floor(Date.now() / (60 * 60 * 1000));
+    return 22 - (hoursSinceEpoch % 22);
+  };
+  const [viewers, setViewers] = useState(computeViewers);
+  const [stockLeft, setStockLeft] = useState(computeStock);
   const headerStock = 12;
-  const [viewers, setViewers] = useState(() => 22 + Math.floor(Math.random() * 17));
   useEffect(() => {
-    const t = setInterval(() => setViewers(22 + Math.floor(Math.random() * 17)), 60_000);
+    const t = setInterval(() => setViewers(computeViewers()), 60_000);
     return () => clearInterval(t);
   }, []);
   useEffect(() => {
-    const t = setInterval(() => setStockLeft(s => (s <= 1 ? 22 : s - 1)), 60 * 60 * 1000);
+    const t = setInterval(() => setStockLeft(computeStock()), 60 * 60 * 1000);
     return () => clearInterval(t);
   }, []);
   const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
