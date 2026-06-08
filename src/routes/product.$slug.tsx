@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, Minus, Plus, FileText, X, Flame, Users, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
+import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronRight, ChevronLeft, Minus, Plus, FileText, X, Flame, Users, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
 
 declare global {
   interface Window {
@@ -13,7 +13,8 @@ import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
 import neuralHeroClean from "@/assets/neural-hero-clean.png";
-import neuralHand from "@/assets/product-hand-kitchen.png";
+import neuralHandAsset from "@/assets/neural-comparison-chart.png.asset.json";
+const neuralHand = neuralHandAsset.url;
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
 import neuralInfographic from "@/assets/product-benefits-infographic.png";
 import neuralComparison from "@/assets/product-comparison.png";
@@ -437,6 +438,20 @@ function ProductPage() {
               {viewers} viewing now
             </div>
             <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+            <button
+              onClick={() => setImgIdx((i) => (i - 1 + p.images.length) % p.images.length)}
+              aria-label="Previous image"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 backdrop-blur border border-border shadow flex items-center justify-center hover:bg-white hover:scale-105 transition"
+            >
+              <ChevronLeft className="h-5 w-5 text-ink"/>
+            </button>
+            <button
+              onClick={() => setImgIdx((i) => (i + 1) % p.images.length)}
+              aria-label="Next image"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 backdrop-blur border border-border shadow flex items-center justify-center hover:bg-white hover:scale-105 transition"
+            >
+              <ChevronRight className="h-5 w-5 text-ink"/>
+            </button>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {p.images.map((src,i)=>(
