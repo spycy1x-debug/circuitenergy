@@ -438,6 +438,20 @@ function ProductPage() {
               {viewers} viewing now
             </div>
             <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+            <button
+              onClick={() => setImgIdx((i) => (i - 1 + p.images.length) % p.images.length)}
+              aria-label="Previous image"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 backdrop-blur border border-border shadow flex items-center justify-center hover:bg-white hover:scale-105 transition"
+            >
+              <ChevronLeft className="h-5 w-5 text-ink"/>
+            </button>
+            <button
+              onClick={() => setImgIdx((i) => (i + 1) % p.images.length)}
+              aria-label="Next image"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 backdrop-blur border border-border shadow flex items-center justify-center hover:bg-white hover:scale-105 transition"
+            >
+              <ChevronRight className="h-5 w-5 text-ink"/>
+            </button>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {p.images.map((src,i)=>(
