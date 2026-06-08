@@ -16,7 +16,7 @@ import neuralHeroClean from "@/assets/neural-hero-clean.png";
 import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
 import neuralInfographic from "@/assets/product-benefits-infographic.png";
-import neuralComparisonAsset from "@/assets/neural-comparison-new.png.asset.json";
+import neuralComparisonAsset from "@/assets/neural-comparison-v2.png.asset.json";
 const neuralComparison = neuralComparisonAsset.url;
 import supplementFacts from "@/assets/product-supplement-facts.png";
 import { PRODUCTS } from "@/lib/cart";
