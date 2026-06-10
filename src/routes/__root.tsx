@@ -95,6 +95,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
           }}
         />
         <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Uwey6R"></script>
+        <script id="pixel-script-poptin" src="https://cdn.popt.in/pixel.js?id=01c9dc654d29a" async="true"></script>
       </head>
       <body>
         <noscript>
