@@ -96,7 +96,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `setTimeout(function(){if(document.getElementById('pixel-script-poptin'))return;var s=document.createElement('script');s.id='pixel-script-poptin';s.src='https://cdn.popt.in/pixel.js?id=01c9dc654d29a';s.async=true;document.head.appendChild(s);},2000);`,
+            __html: `setTimeout(function(){if(document.getElementById('pixel-script-poptin'))return;var s=document.createElement('script');s.id='pixel-script-poptin';s.src='https://cdn.popt.in/pixel.js?id=01c9dc654d29a';s.async=true;document.head.appendChild(s);},500);`,
           }}
         />
         <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Uwey6R"></script>
