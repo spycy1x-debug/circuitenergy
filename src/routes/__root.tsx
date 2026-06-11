@@ -94,11 +94,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
             __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1969968856965318');fbq('track', 'PageView');`,
           }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `setTimeout(function(){if(document.getElementById('pixel-script-poptin'))return;var s=document.createElement('script');s.id='pixel-script-poptin';s.src='https://cdn.popt.in/pixel.js?id=01c9dc654d29a';s.async=true;document.head.appendChild(s);},500);`,
-          }}
-        />
+        <script id="pixel-script-poptin" async src="https://cdn.popt.in/pixel.js?id=01c9dc654d29a"></script>
         <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Uwey6R"></script>
       </head>
       <body>
