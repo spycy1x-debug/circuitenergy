@@ -12,10 +12,12 @@ import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
-import nmnHand from "@/assets/nmn-hand-kitchen.jpg";
-import nmnInfographic from "@/assets/nmn-benefits-infographic.jpg";
-import nmnCustomer from "@/assets/nmn-customer.jpg";
-import nmnComparison from "@/assets/nmn-comparison.jpg";
+import nmnBuiltDifferentAsset from "@/assets/nmn-built-different.jpg.asset.json";
+import nmnWomanBalconyAsset from "@/assets/nmn-woman-balcony.png.asset.json";
+import nmnEnergizeRepairAsset from "@/assets/nmn-energize-repair.png.asset.json";
+const nmnBuiltDifferent = nmnBuiltDifferentAsset.url;
+const nmnWomanBalcony = nmnWomanBalconyAsset.url;
+const nmnEnergizeRepair = nmnEnergizeRepairAsset.url;
 import neuralHeroClean from "@/assets/neural-hero-clean.png";
 import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
@@ -157,7 +159,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     rating: 4.6,
     reviews: 72,
     badge: "Best Seller",
-    images: [nmnImg, nmnHand, nmnInfographic, nmnComparison, nmnCustomer, nmnTrio],
+    images: [nmnImg, nmnBuiltDifferent, nmnWomanBalcony, nmnEnergizeRepair, nmnTrio],
     description: "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
     benefits: [
       "Eliminates afternoon crashes",
