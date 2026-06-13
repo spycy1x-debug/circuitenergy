@@ -246,7 +246,6 @@ export const Route = createFileRoute("/product/$slug")({
 
 function ProductPage() {
   const p = Route.useLoaderData() as ProductData;
-  const p = Route.useLoaderData() as ProductData;
   const [imgIdx, setImgIdx] = useState(0);
   const [showImageLightbox, setShowImageLightbox] = useState(false);
   const [qty, setQty] = useState(1);
