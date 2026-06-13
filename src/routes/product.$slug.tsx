@@ -12,15 +12,26 @@ import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
+import nmnBuiltDifferentAsset from "@/assets/nmn-built-different.jpg.asset.json";
+import nmnWomanBalconyAsset from "@/assets/nmn-woman-balcony.png.asset.json";
+import nmnEnergizeRepairAsset from "@/assets/nmn-energize-repair.png.asset.json";
+import nmnKitchenHandAsset from "@/assets/nmn-kitchen-hand.png.asset.json";
+import nmnNadChartAsset from "@/assets/nmn-nad-chart.png.asset.json";
 import neuralHeroClean from "@/assets/neural-hero-clean.png";
 import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
 import neuralInfographic from "@/assets/product-benefits-infographic.png";
 import neuralComparisonAsset from "@/assets/neural-comparison-v2.png.asset.json";
+const nmnBuiltDifferent = nmnBuiltDifferentAsset.url;
+const nmnWomanBalcony = nmnWomanBalconyAsset.url;
+const nmnEnergizeRepair = nmnEnergizeRepairAsset.url;
+const nmnKitchenHand = nmnKitchenHandAsset.url;
+const nmnNadChart = nmnNadChartAsset.url;
 const neuralComparison = neuralComparisonAsset.url;
 import supplementFacts from "@/assets/product-supplement-facts.png";
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
+
 
 const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
   neural: { productId: "8951258808474", buttonText: "Sharpen Your Mind" },
@@ -153,7 +164,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     rating: 4.6,
     reviews: 72,
     badge: "Best Seller",
-    images: [nmnImg, nmnTrio],
+    images: [nmnImg, nmnBuiltDifferent, nmnWomanBalcony, nmnEnergizeRepair, nmnKitchenHand, nmnNadChart, nmnTrio],
     description: "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
     benefits: [
       "Eliminates afternoon crashes",
@@ -235,7 +246,9 @@ export const Route = createFileRoute("/product/$slug")({
 
 function ProductPage() {
   const p = Route.useLoaderData() as ProductData;
+  const p = Route.useLoaderData() as ProductData;
   const [imgIdx, setImgIdx] = useState(0);
+  const [showImageLightbox, setShowImageLightbox] = useState(false);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
   const [reviewsShown, setReviewsShown] = useState(3);
@@ -421,6 +434,14 @@ function ProductPage() {
           </div>
         </div>
       )}
+      {showImageLightbox && (
+        <div className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4" onClick={() => setShowImageLightbox(false)}>
+          <div className="relative max-w-5xl w-full" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setShowImageLightbox(false)} aria-label="Close image" className="absolute top-3 right-3 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink"><X className="h-5 w-5"/></button>
+            <img src={p.images[imgIdx]} alt={`${p.name} image ${imgIdx + 1}`} className="w-full max-h-[85vh] object-contain rounded-2xl bg-white"/>
+          </div>
+        </div>
+      )}
       {/* URGENCY BAR moved to global root */}
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
         <Link to="/" className="hover:text-ink">Home</Link><ChevronRight className="h-3 w-3"/>
@@ -437,14 +458,16 @@ function ProductPage() {
               <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"/><span className="relative inline-flex rounded-full h-2 w-2 bg-success"/></span>
               {viewers} viewing now
             </div>
-            <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+            <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in p-4 sm:p-6">
+              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"/>
+            </button>
             <button onClick={()=>setImgIdx((imgIdx - 1 + p.images.length) % p.images.length)} aria-label="Previous image" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronLeft className="h-5 w-5"/></button>
             <button onClick={()=>setImgIdx((imgIdx + 1) % p.images.length)} aria-label="Next image" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronRight className="h-5 w-5"/></button>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {p.images.map((src,i)=>(
-              <button key={i} onClick={()=>setImgIdx(i)} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition`}>
-                <img src={src} alt="" className="w-full h-full object-cover"/>
+              <button key={i} onClick={()=>setImgIdx(i)} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition p-1`}>
+                <img src={src} alt={`${p.name} thumbnail ${i + 1}`} className="w-full h-full object-contain"/>
               </button>
             ))}
           </div>
