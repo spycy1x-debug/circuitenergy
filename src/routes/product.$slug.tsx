@@ -12,30 +12,406 @@ import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import nmnTrio from "@/assets/nmn-trio.png";
-import nmnBuiltDifferentAsset from "@/assets/nmn-built-different.jpg.asset.json";
-import nmnWomanBalconyAsset from "@/assets/nmn-woman-balcony.png.asset.json";
-import nmnEnergizeRepairAsset from "@/assets/nmn-energize-repair.png.asset.json";
-import nmnKitchenHandAsset from "@/assets/nmn-kitchen-hand.png.asset.json";
-import nmnNadChartAsset from "@/assets/nmn-nad-chart.png.asset.json";
-const nmnBuiltDifferent = nmnBuiltDifferentAsset.url;
-const nmnWomanBalcony = nmnWomanBalconyAsset.url;
-const nmnEnergizeRepair = nmnEnergizeRepairAsset.url;
-const nmnKitchenHand = nmnKitchenHandAsset.url;
-const nmnNadChart = nmnNadChartAsset.url;
-...
+import neuralHeroClean from "@/assets/neural-hero-clean.png";
+import neuralHand from "@/assets/product-hand-kitchen.png";
+import neuralCustomer from "@/assets/product-customer-thumbsup.png";
+import neuralInfographic from "@/assets/product-benefits-infographic.png";
+import neuralComparisonAsset from "@/assets/neural-comparison-v2.png.asset.json";
+const neuralComparison = neuralComparisonAsset.url;
+import supplementFacts from "@/assets/product-supplement-facts.png";
+import { PRODUCTS } from "@/lib/cart";
+import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
+
+const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
+  neural: { productId: "8951258808474", buttonText: "Sharpen Your Mind" },
+  nmn: { productId: "8951254876314", buttonText: "Fix Your Energy" },
+};
+
+function timeAgo(iso: string) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "Just now";
+  if (m < 60) return `${m} minute${m===1?"":"s"} ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h} hour${h===1?"":"s"} ago`;
+  const d = Math.floor(h / 24);
+  if (d < 7) return `${d} day${d===1?"":"s"} ago`;
+  const w = Math.floor(d / 7);
+  if (w < 5) return `${w} week${w===1?"":"s"} ago`;
+  const mo = Math.floor(d / 30);
+  if (mo < 12) return `${mo} month${mo===1?"":"s"} ago`;
+  const y = Math.floor(d / 365);
+  return `${y} year${y===1?"":"s"} ago`;
+}
+
+type ProductData = {
+  id: "neural" | "nmn";
+  name: string;
+  subtitle: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  badge: string;
+  images: string[];
+  description: string;
+  benefits: string[];
+  why: { heading: string; body: string[]; cards: { t: string; d: string }[] };
+  ingredients: { serving: string; items: { name: string }[]; other: string; callouts: { name: string; desc: string }[] };
+  use: { dosage: string; best: string[]; timeline: { period: string; text: string }[]; storage: string; note: string };
+  related: { id: "neural" | "nmn"; blurb: string };
+  sample: { title: string; body: string; name: string; date: string };
+};
+
+const PRODUCT_DATA: Record<string, ProductData> = {
+  "neural-performance": {
+    id: "neural",
+    name: "Circuit Neural Performance",
+    subtitle: "Focus & Cognitive Enhancement",
+    price: 42.99,
+    rating: 4.7,
+    reviews: 87,
+    badge: "Most Popular",
+    images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralOpen],
+    description: "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
+    benefits: [
+      "Eliminates brain fog",
+      "Enhances focus and memory",
+      "Smooth, jitter-free mental energy",
+      "Supports long-term brain health",
+      "No artificial additives — natural ingredients only",
+      "Third-party tested for purity",
+    ],
+    why: {
+      heading: "Your Brain Needs More Than Caffeine",
+      body: [
+        "If you're dealing with brain fog, poor focus, or mental fatigue, it's not a willpower problem — it's a chemistry problem.",
+        "Your brain relies on neurotransmitters like acetylcholine and dopamine to think, focus, and retain information. As we age, stress accumulates, and poor nutrition compounds the issue — these critical compounds decline. The result is the fog, the forgetfulness, the inability to focus for more than 20 minutes.",
+        "Circuit Neural Performance addresses this directly. Alpha GPC and Huperzine A work together to boost and preserve acetylcholine. L-Tyrosine supports dopamine production under stress. Bacopa monnieri has been clinically studied for memory and learning. L-Theanine smooths caffeine's effects for jitter-free focus. Phosphatidylserine keeps your brain cell membranes healthy.",
+        "All natural. No artificial additives. One capsule a day.",
+      ],
+      cards: [
+        { t: "Razor-Sharp Focus", d: "Alpha GPC and Huperzine A directly support the neurotransmitter behind focus and memory. Think clearly for hours." },
+        { t: "Brain Fog Gone", d: "GABA and L-Theanine promote calm, clear-headed thinking. No more mental static." },
+        { t: "Stress-Proof Thinking", d: "L-Tyrosine helps maintain cognitive function under pressure, stress, and sleep deprivation." },
+        { t: "Long-Term Brain Health", d: "Bacopa monnieri and Phosphatidylserine support memory, learning, and brain cell health over time." },
+      ],
+    },
+    ingredients: {
+      serving: "Serving Size: 1 Capsule | Servings Per Container: 30",
+      items: [
+        { name: "Niacin (as Niacinamide)" },
+        { name: "Vitamin B6 (as Pyridoxine Hydrochloride)" },
+        { name: "GABA (Gamma-Aminobutyric Acid)" },
+        { name: "L-Tyrosine" },
+        { name: "Caffeine" },
+        { name: "Bacopa Monnieri Extract (whole herb)" },
+        { name: "Phosphatidylserine 20% (sunflower)" },
+        { name: "Alpha GPC (Alpha-glycerylphosphorylcholine) Powder" },
+        { name: "L-Theanine" },
+        { name: "Huperzine A 1% (Huperzia serrata, whole herb)" },
+      ],
+      other: "Other Ingredients: No artificial additives. Natural capsule. Manufactured in USA.",
+      callouts: [
+        { name: "Alpha GPC", desc: "Boosts acetylcholine — the neurotransmitter behind focus and memory." },
+        { name: "Huperzine A", desc: "Inhibits the enzyme that breaks down acetylcholine, keeping levels elevated longer." },
+        { name: "L-Theanine + Caffeine", desc: "The clinically validated stack for smooth, focused energy without jitters." },
+        { name: "Bacopa Monnieri", desc: "Clinically studied for memory, learning, and reducing mental fatigue." },
+        { name: "Phosphatidylserine", desc: "Supports brain cell membrane integrity for faster, sharper thinking." },
+        { name: "L-Tyrosine", desc: "Supports dopamine and norepinephrine under stress." },
+        { name: "GABA", desc: "Promotes calm focus without sedation." },
+        { name: "B Vitamins (Niacin + B6)", desc: "Essential for energy metabolism and neurotransmitter synthesis." },
+      ],
+    },
+    use: {
+      dosage: "Take 1 capsule daily with 6-8 oz of water.",
+      best: [
+        "Take in the morning for all-day cognitive support",
+        "Consistency is key — effects build over time",
+        "Consult your healthcare professional if on medication or have a medical condition",
+      ],
+      timeline: [
+        { period: "Days 1–7", text: "Some users notice improved clarity and smoother energy." },
+        { period: "Week 2–3", text: "Most users report significantly reduced brain fog and improved focus." },
+        { period: "Week 4+", text: "Full benefits realized — memory, focus, and mental endurance at their best." },
+      ],
+      storage: "Store in a cool, dry place away from direct sunlight.",
+      note: "Contains caffeine. Avoid taking in the evening if sensitive to caffeine.",
+    },
+    related: { id: "nmn", blurb: "Pair with Neural Performance for complete energy and cognitive support." },
+    sample: {
+      title: "Brain fog is completely gone",
+      body: "I've been taking Neural Performance every morning for 5 weeks. The difference in my focus is night and day. I work in finance and need to stay sharp all day — this delivers. No jitters, no crash, just clear thinking from 8am to 6pm. I stacked it with Circuit NMN and the combination is incredible.",
+      name: "James L.",
+      date: "April 2, 2026",
+    },
+  },
+  "nmn": {
+    id: "nmn",
+    name: "Circuit NMN",
+    subtitle: "Cellular Energy & Longevity Support",
+    price: 49.99,
+    rating: 4.6,
+    reviews: 72,
     badge: "Best Seller",
-    images: [nmnImg, nmnBuiltDifferent, nmnWomanBalcony, nmnEnergizeRepair, nmnKitchenHand, nmnNadChart, nmnTrio],
+    images: [nmnImg, nmnTrio],
     description: "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
-...
+    benefits: [
+      "Eliminates afternoon crashes",
+      "Restores cellular energy production",
+      "Improves sleep quality",
+      "Supports healthy aging at the cellular level",
+      "Zero caffeine, zero stimulants",
+      "Third-party tested for purity",
+    ],
+    why: {
+      heading: "Fix Your Energy at the Cellular Level",
+      body: [
+        "If you're tired of being tired, this is why.",
+        "By age 40, your body's NAD+ levels have declined by 50%. NAD+ is the molecule every cell in your body uses to produce energy. Without it, your mitochondria can't function efficiently. That's why coffee doesn't work anymore. That's why you crash every afternoon. That's why you wake up exhausted.",
+        "NMN is a direct NAD+ precursor — meaning it converts into NAD+ in your cells. Research shows it restores cellular energy production, improves cognitive function, and supports healthy aging. Circuit NMN delivers 500mg per capsule — the dose shown in studies to meaningfully boost NAD+ levels.",
+        "No fillers. No proprietary blends. Just pure, third-party tested NMN at the dose that actually works.",
+      ],
+      cards: [
+        { t: "No More Crashes", d: "Sustained cellular energy from morning through evening — no afternoon wall." },
+        { t: "Mental Clarity Returns", d: "Restored NAD+ supports cognitive function and mental sharpness." },
+        { t: "Better Sleep", d: "Improved cellular function leads to deeper, more restorative sleep." },
+        { t: "Science-Backed Dosing", d: "500mg NMN per serving — the dose studied to meaningfully raise NAD+ levels." },
+      ],
+    },
+    ingredients: {
+      serving: "Serving Size: 1 Capsule | Servings Per Container: 30",
+      items: [{ name: "β-Nicotinamide Mononucleotide (NMN) — 500mg" }],
+      other: "Other Ingredients: Vegetable cellulose (capsule), rice flour.",
+      callouts: [
+        { name: "Third-party tested", desc: "Independently verified for purity and potency." },
+        { name: "Non-GMO", desc: "Sourced without genetic modification." },
+        { name: "No fillers", desc: "Only NMN and clean capsule ingredients." },
+        { name: "Made in USA", desc: "Manufactured in an FDA-registered facility." },
+      ],
+    },
+    use: {
+      dosage: "Take 1 capsule every morning, with or without food.",
+      best: ["Take in the morning for all-day energy", "Stay consistent — effects compound over weeks"],
+      timeline: [
+        { period: "Week 1", text: "Subtle improvements in morning energy." },
+        { period: "Week 2–3", text: "Afternoon crashes eliminated, clarity improved." },
+        { period: "Week 4+", text: "Full benefits realized — sustained energy and recovery." },
+      ],
+      storage: "Store in a cool, dry place.",
+      note: "Contains zero caffeine or stimulants.",
+    },
+    related: { id: "neural", blurb: "Pair with NMN for complete cognitive and energy support." },
+    sample: {
+      title: "I have energy again",
+      body: "After 3 weeks on Circuit NMN, the afternoon crashes are gone. I'm 46 and feel like I did at 30. I wake up rested, get through the day without coffee number three, and still have energy for the gym after work.",
+      name: "Sarah M.",
+      date: "March 18, 2026",
+    },
+  },
+};
+
+export const Route = createFileRoute("/product/$slug")({
+  loader: ({ params }) => {
+    const p = PRODUCT_DATA[params.slug];
+    if (!p) throw notFound();
+    return p;
+  },
+  head: ({ loaderData }) => ({
+    meta: loaderData ? [
+      { title: `${loaderData.name} — Circuit Energy` },
+      { name: "description", content: loaderData.description.slice(0, 160) },
+      { property: "og:title", content: loaderData.name },
+      { property: "og:description", content: loaderData.description.slice(0, 160) },
+      { property: "og:image", content: loaderData.images[0] },
+    ] : [],
+  }),
+  component: ProductPage,
+  notFoundComponent: () => <div className="container-x py-20 text-center">Product not found.</div>,
+  errorComponent: ({ error }) => {
+    console.error(error);
+    return <div className="container-x py-20 text-center">Something went wrong. Please try again or return to the shop.</div>;
+  },
+});
+
 function ProductPage() {
   const p = Route.useLoaderData() as ProductData;
   const [imgIdx, setImgIdx] = useState(0);
-  const [showImageLightbox, setShowImageLightbox] = useState(false);
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
   const [reviewsShown, setReviewsShown] = useState(3);
   const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
-...
+  useEffect(() => {
+    let cancelled = false;
+    import("@/integrations/supabase/client").then(({ supabase }) => {
+      supabase
+        .from("product_reviews")
+        .select("name,title,body,rating,created_at")
+        .eq("product_id", p.id)
+        .order("created_at", { ascending: false })
+        .limit(50)
+        .then(({ data }) => {
+          if (cancelled || !data) return;
+          setUserReviews(data.map((r: any) => ({
+            name: r.name, title: r.title, body: r.body, rating: r.rating,
+            date: timeAgo(r.created_at),
+          })));
+        });
+    });
+    return () => { cancelled = true; };
+  }, [p.id]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
+  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
+  const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
+  const [showLabel, setShowLabel] = useState(false);
+  // Deterministic, globally-shared values derived from wall-clock time so
+  // every visitor sees the same numbers. Viewers rotate each minute; stock
+  // decrements each hour and resets at 22 after reaching 1.
+  const hash = (n: number) => {
+    let x = (n | 0) ^ 0x9e3779b9;
+    x = Math.imul(x ^ (x >>> 16), 0x85ebca6b);
+    x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35);
+    return ((x ^ (x >>> 16)) >>> 0);
+  };
+  const computeViewers = () => 22 + (hash(Math.floor(Date.now() / 60_000)) % 17);
+  const computeStock = () => {
+    const hoursSinceEpoch = Math.floor(Date.now() / (60 * 60 * 1000));
+    return 22 - (hoursSinceEpoch % 22);
+  };
+  const [viewers, setViewers] = useState(computeViewers);
+  const [stockLeft, setStockLeft] = useState(computeStock);
+  const headerStock = 12;
+  useEffect(() => {
+    const t = setInterval(() => setViewers(computeViewers()), 60_000);
+    return () => clearInterval(t);
+  }, []);
+  useEffect(() => {
+    const t = setInterval(() => setStockLeft(computeStock()), 60 * 60 * 1000);
+    return () => clearInterval(t);
+  }, []);
+  const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
+  useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
+  const hh = String(Math.floor(secs / 3600)).padStart(2, "0");
+  const mm = String(Math.floor((secs % 3600) / 60)).padStart(2, "0");
+  const ss = String(secs % 60).padStart(2, "0");
+
+  const extraReviews = useMemo(() => {
+    const pool = p.id === "neural" ? [
+      { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5 },
+      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5 },
+      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5 },
+      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4 },
+      { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
+      { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
+      { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "JordanLuxe27", date: "3 months ago", rating: 4 },
+      { title: "Sharper meetings", body: "I run a small agency and back-to-back client calls used to wreck me. I'm clear-headed straight through now.", name: "Thandiwe O.", date: "3 months ago", rating: 5 },
+      { title: "Wife noticed first", body: "She said I seemed 'more present' before I even told her I was trying something new. That's when I knew.", name: "Cole Vandermeer", date: "4 months ago", rating: 5 },
+      { title: "Finally a clean nootropic", body: "No racing heart, no comedown. Just a smooth lift in focus that lasts the whole workday. I've cancelled my Adderall refill request.", name: "Dr. Elena Vasquez", date: "4 months ago", rating: 5 },
+      { title: "ADHD-friendly", body: "I have ADHD and most focus supplements either do nothing or wind me up. This one quiets the noise without flattening me. Huge for getting through admin work.", name: "Reese N.", date: "5 months ago", rating: 5 },
+      { title: "Took it for a month before reviewing", body: "Wanted to be fair. Day 30: clearer mornings, sharper recall, less midday fog. Will reorder.", name: "Anastasia Liu-Park", date: "5 months ago", rating: 5 },
+      { title: "Good, not life-changing", body: "Definitely helps with focus but I wouldn't say it transformed my life. Solid 4 stars from me.", name: "Mike R.", date: "5 months ago", rating: 4 },
+      { title: "Helped me finish my thesis", body: "PhD candidate here. The last six weeks of writing would have been miserable without this. Sustained focus is real.", name: "Kwame A.", date: "6 months ago", rating: 5 },
+      { title: "Calm energy", body: "I describe it as 'caffeine without the personality change.' My partner appreciates it.", name: "Sam P.", date: "6 months ago", rating: 5 },
+      { title: "Better than my old stack", body: "Was taking five different things. This replaced four of them. Cleaner mornings.", name: "Naoko Whitfield", date: "6 months ago", rating: 5 },
+      { title: "Subtle in the best way", body: "If you're looking for a buzz, this isn't it. If you want to think more clearly without noticing you're trying, it's exactly it.", name: "Greg.", date: "7 months ago", rating: 4 },
+      { title: "Reading speed up", body: "I read a lot for work. Noticed I was getting through dense reports faster around week 2. Not a placebo.", name: "Adaeze Okonkwo", date: "7 months ago", rating: 5 },
+      { title: "Mid-morning is now my best window", body: "Used to crash around 10am after my first coffee. Now I get a solid 3-hour deep work block. Game changer.", name: "Tyler M.", date: "8 months ago", rating: 5 },
+      { title: "Subscribed", body: "Worth the money. Subscribed and don't plan to stop.", name: "Lila", date: "8 months ago", rating: 5 },
+      { title: "Helped with postpartum brain fog", body: "Cleared the haze after having my second. Cleared with my doctor first. Felt like myself again within 3 weeks.", name: "Brianna Esposito", date: "9 months ago", rating: 5 },
+      { title: "Honest 4 stars", body: "Works well. Wish it were a touch cheaper. Will keep buying though.", name: "Drew K.", date: "9 months ago", rating: 4 },
+      { title: "Decent, takes patience", body: "Took me almost a month to notice anything. Once it kicked in it was solid, but the slow ramp surprised me. Wish that was clearer up front.", name: "Patrick H.", date: "5 months ago", rating: 3 },
+      { title: "Helps a little", body: "I get a mild lift in focus but nothing dramatic for me personally. Friend swears by it though, so might just be my body chemistry.", name: "Eliza M.", date: "7 months ago", rating: 3 },
+      { title: "Capsule size is bigger than I expected", body: "The effect is real and I do feel sharper, just wish the capsule was a touch smaller. Manageable, not a dealbreaker.", name: "Yoon-Seo C.", date: "4 months ago", rating: 3 },
+      { title: "Subtle for me", body: "Did notice cleaner mornings but I expected more after reading the reviews. Possibly works better stacked with their NMN.", name: "Robert F.", date: "6 months ago", rating: 2 },
+      { title: "Mixed feelings", body: "First bottle felt great, second one less so. Could be tolerance, could be me. Support team was friendly when I reached out.", name: "Janelle K.", date: "8 months ago", rating: 2 },
+    ] : [
+      { title: "Energy without the crash", body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.", name: "Rachel D.", date: "2 weeks ago", rating: 5 },
+      { title: "Noticeable in the gym", body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.", name: "TomLiftsHeavy", date: "1 month ago", rating: 5 },
+      { title: "Best NMN I've tried", body: "Tried three other brands before this. The dose actually makes sense biochemically and I feel it.", name: "Dr. Lena Fioravanti", date: "1 month ago", rating: 5 },
+      { title: "Worth the price", body: "Not cheap but I cut out two other supplements after starting this. Net cost is similar and the results are better.", name: "Carlos V.", date: "2 months ago", rating: 4 },
+      { title: "Mental clarity bonus", body: "Bought it for energy, ended up loving the mental clarity even more. Mid-afternoon dips are gone.", name: "Sofia A.", date: "2 months ago", rating: 5 },
+      { title: "Subtle, then significant", body: "Three weeks in and my wife asked what I was doing differently. That's when I knew it was working.", name: "Benji Halloran", date: "3 months ago", rating: 5 },
+      { title: "One pill is convenient", body: "Love that the new dose is one capsule. Easier to stay consistent.", name: "Mira J.", date: "3 months ago", rating: 4 },
+      { title: "Back to my 5am runs", body: "Hadn't run before work in two years. Five weeks in and I'm hitting the trail again at sunrise without dragging.", name: "Imani Okafor-Reed", date: "4 months ago", rating: 5 },
+      { title: "Not a placebo", body: "I'm a chemist and a skeptic. Ran my own little A/B with two weeks off mid-bottle. The drop-off was obvious.", name: "Yusuf K.", date: "4 months ago", rating: 5 },
+      { title: "Steady but slow", body: "Took about three weeks before I felt anything meaningful. Now I get a gentle energy lift but it's not night-and-day. Still reordering.", name: "Marisol P.", date: "5 months ago", rating: 3 },
+      { title: "Good, not great for me", body: "Sleep improved, energy bumped a bit. Was hoping for more given the price point. Friend in his 50s loves it.", name: "Devon W.", date: "6 months ago", rating: 3 },
+      { title: "Better with consistency", body: "Skipped a few days here and there and lost the effect. Works if you take it every morning without fail, which is on me.", name: "Hina T.", date: "7 months ago", rating: 3 },
+      { title: "Felt mild effects", body: "Honestly expected a bigger shift. I do feel a touch more rested but it's subtle. Customer service was great though.", name: "Curtis O.", date: "8 months ago", rating: 2 },
+      { title: "Worked the first month", body: "Strong start, then it plateaued for me. Might cycle off and try again. Quality seems high regardless.", name: "Annika R.", date: "9 months ago", rating: 2 },
+    ];
+    return [
+      ...userReviews,
+      { title: p.sample.title, body: p.sample.body, name: p.sample.name, date: p.sample.date, rating: 5 },
+      ...pool,
+    ];
+  }, [p, userReviews]);
+  const sortedReviews = useMemo(() => {
+    const arr = [...extraReviews];
+    if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
+    else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
+    else if (reviewFilter === "verified") return arr.filter(r => r.rating >= 4).slice(0, 6);
+    else if (["1","2","3","4","5"].includes(reviewFilter)) return arr.filter(r => r.rating === Number(reviewFilter));
+    return arr;
+  }, [extraReviews, reviewFilter]);
+  const related = PRODUCTS[p.related.id];
+
+  return (
+    <>
+      {showReviewForm && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={() => setShowReviewForm(false)}>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={e => e.stopPropagation()}>
+            <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
+                const payload = { ...form };
+                setUserReviews(prev => [{ ...payload, date: "Just now" }, ...prev]);
+                setForm({ name: "", title: "", body: "", rating: 5 });
+                setShowReviewForm(false);
+                setTab("rev");
+                const { supabase } = await import("@/integrations/supabase/client");
+                await supabase.from("product_reviews").insert({
+                  product_id: p.id,
+                  name: payload.name.trim().slice(0, 80),
+                  title: payload.title.trim().slice(0, 120),
+                  body: payload.body.trim().slice(0, 2000),
+                  rating: payload.rating,
+                });
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="text-sm font-medium block mb-1">Rating</label>
+                <div className="flex gap-1">
+                  {[1,2,3,4,5].map(n => (
+                    <button key={n} type="button" onClick={() => setForm(f => ({...f, rating: n}))}>
+                      <Star className={`h-7 w-7 ${n <= form.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-medium block mb-1">Your name</label>
+                <input value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+              </div>
+              <div>
+                <label className="text-sm font-medium block mb-1">Title</label>
+                <input value={form.title} onChange={e => setForm(f => ({...f, title: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+              </div>
+              <div>
+                <label className="text-sm font-medium block mb-1">Review</label>
+                <textarea value={form.body} onChange={e => setForm(f => ({...f, body: e.target.value}))} rows={4} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+              </div>
+              <div className="flex gap-2 justify-end">
+                <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">Cancel</button>
+                <button type="submit" className="btn-primary">Submit Review</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
       {showLabel && (
         <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setShowLabel(false)}>
           <div className="bg-white rounded-2xl p-4 max-w-2xl w-full relative" onClick={e => e.stopPropagation()}>
@@ -45,17 +421,14 @@ function ProductPage() {
           </div>
         </div>
       )}
-      {showImageLightbox && (
-        <div className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4" onClick={() => setShowImageLightbox(false)}>
-          <div className="relative max-w-5xl w-full" onClick={e => e.stopPropagation()}>
-            <button onClick={() => setShowImageLightbox(false)} aria-label="Close image" className="absolute top-3 right-3 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink"><X className="h-5 w-5"/></button>
-            <img src={p.images[imgIdx]} alt={`${p.name} image ${imgIdx + 1}`} className="w-full max-h-[85vh] object-contain rounded-2xl bg-white"/>
-          </div>
-        </div>
-      )}
       {/* URGENCY BAR moved to global root */}
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
-...
+        <Link to="/" className="hover:text-ink">Home</Link><ChevronRight className="h-3 w-3"/>
+        <Link to="/shop" className="hover:text-ink">Shop</Link><ChevronRight className="h-3 w-3"/>
+        <span className="text-ink">{p.name}</span>
+      </div>
+
+      {/* SPLIT */}
       <section className="container-x pb-12 grid gap-10 md:grid-cols-[5fr_6fr] items-start">
         <div>
           <div className="relative bg-white rounded-2xl aspect-square overflow-hidden group border border-border shadow-sm">
@@ -64,16 +437,14 @@ function ProductPage() {
               <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"/><span className="relative inline-flex rounded-full h-2 w-2 bg-success"/></span>
               {viewers} viewing now
             </div>
-            <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in p-4 sm:p-6">
-              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"/>
-            </button>
+            <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
             <button onClick={()=>setImgIdx((imgIdx - 1 + p.images.length) % p.images.length)} aria-label="Previous image" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronLeft className="h-5 w-5"/></button>
             <button onClick={()=>setImgIdx((imgIdx + 1) % p.images.length)} aria-label="Next image" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronRight className="h-5 w-5"/></button>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {p.images.map((src,i)=>(
-              <button key={i} onClick={()=>setImgIdx(i)} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition p-1`}>
-                <img src={src} alt={`${p.name} thumbnail ${i + 1}`} className="w-full h-full object-contain"/>
+              <button key={i} onClick={()=>setImgIdx(i)} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition`}>
+                <img src={src} alt="" className="w-full h-full object-cover"/>
               </button>
             ))}
           </div>
