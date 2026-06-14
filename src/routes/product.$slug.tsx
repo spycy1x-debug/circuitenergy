@@ -301,6 +301,16 @@ function ProductPage() {
     const t = setInterval(() => setStockLeft(computeStock()), 60 * 60 * 1000);
     return () => clearInterval(t);
   }, []);
+  useEffect(() => {
+    if (!showImageLightbox) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") setImgIdx((idx) => (idx - 1 + p.images.length) % p.images.length);
+      if (e.key === "ArrowRight") setImgIdx((idx) => (idx + 1) % p.images.length);
+      if (e.key === "Escape") setShowImageLightbox(false);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [showImageLightbox, p.images.length]);
   const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
   useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
   const hh = String(Math.floor(secs / 3600)).padStart(2, "0");
@@ -434,10 +444,17 @@ function ProductPage() {
         </div>
       )}
       {showImageLightbox && (
-        <div className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4" onClick={() => setShowImageLightbox(false)}>
-          <div className="relative max-w-5xl w-full" onClick={e => e.stopPropagation()}>
-            <button onClick={() => setShowImageLightbox(false)} aria-label="Close image" className="absolute top-3 right-3 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink"><X className="h-5 w-5"/></button>
-            <img src={p.images[imgIdx]} alt={`${p.name} image ${imgIdx + 1}`} className="w-full max-h-[85vh] object-contain rounded-2xl bg-white"/>
+        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setShowImageLightbox(false)}>
+          <button onClick={() => setShowImageLightbox(false)} aria-label="Close image" className="absolute top-4 right-4 z-20 h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"><X className="h-5 w-5"/></button>
+          <button onClick={(e) => { e.stopPropagation(); setImgIdx((imgIdx - 1 + p.images.length) % p.images.length); }} aria-label="Previous image" className="absolute left-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"><ChevronLeft className="h-6 w-6"/></button>
+          <button onClick={(e) => { e.stopPropagation(); setImgIdx((imgIdx + 1) % p.images.length); }} aria-label="Next image" className="absolute right-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"><ChevronRight className="h-6 w-6"/></button>
+          <div className="w-full h-full flex items-center justify-center p-12" onClick={e => e.stopPropagation()}>
+            <img src={p.images[imgIdx]} alt={`${p.name} image ${imgIdx + 1}`} className="max-w-full max-h-full object-contain"/>
+          </div>
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+            {p.images.map((src, i) => (
+              <button key={i} onClick={(e) => { e.stopPropagation(); setImgIdx(i); }} className={`h-2 rounded-full transition-all ${imgIdx === i ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/60"}`} aria-label={`Go to image ${i + 1}`}/>
+            ))}
           </div>
         </div>
       )}
@@ -465,7 +482,7 @@ function ProductPage() {
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {p.images.map((src,i)=>(
-              <button key={i} onClick={()=>setImgIdx(i)} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition p-1`}>
+              <button key={i} onClick={()=>{setImgIdx(i); setShowImageLightbox(true);}} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition p-1`}>
                 <img src={src} alt={`${p.name} thumbnail ${i + 1}`} className="w-full h-full object-contain"/>
               </button>
             ))}
