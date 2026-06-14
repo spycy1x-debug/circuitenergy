@@ -301,6 +301,16 @@ function ProductPage() {
     const t = setInterval(() => setStockLeft(computeStock()), 60 * 60 * 1000);
     return () => clearInterval(t);
   }, []);
+  useEffect(() => {
+    if (!showImageLightbox) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") setImgIdx((idx) => (idx - 1 + p.images.length) % p.images.length);
+      if (e.key === "ArrowRight") setImgIdx((idx) => (idx + 1) % p.images.length);
+      if (e.key === "Escape") setShowImageLightbox(false);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [showImageLightbox, p.images.length]);
   const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
   useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
   const hh = String(Math.floor(secs / 3600)).padStart(2, "0");
