@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronLeft, ChevronRight, Minus, Plus, FileText, X, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
+import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronLeft, ChevronRight, Minus, Plus, FileText, X, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp, MessageCircle, Coffee } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 declare global {
@@ -766,47 +766,49 @@ function ProductPage() {
       </section>
 
       {/* FAQ */}
-      <section className="container-x py-20">
-        <h2 className="text-2xl md:text-3xl text-center mb-10">Questions, answered</h2>
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="q1">
-              <AccordionTrigger>How fast will I feel it?</AccordionTrigger>
-              <AccordionContent>
-                Most people notice cleaner, calmer energy within the first few days. The deeper benefits — sharper focus, better memory, no afternoon slump — build over 2–4 weeks as ingredients like Bacopa monnieri reach full effect. Consistency is what makes it work, which is why most customers start with a 3-month supply.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q2">
-              <AccordionTrigger>Does it contain caffeine? Will it keep me up at night?</AccordionTrigger>
-              <AccordionContent>
-                Yes — a low dose of natural caffeine, deliberately paired with L-Theanine for smooth, calm focus without the jitters or crash. For best results, take it in the morning or before 2pm so it won't affect your sleep.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q3">
-              <AccordionTrigger>Can I take it with my morning coffee?</AccordionTrigger>
-              <AccordionContent>
-                Absolutely. Many customers take Circuit instead of their 2nd or 3rd coffee. If you're caffeine-sensitive, start with Circuit alone for the first few days to feel your baseline.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q4">
-              <AccordionTrigger>Is it safe? What's in it?</AccordionTrigger>
-              <AccordionContent>
-                Circuit is made in an FDA-registered, cGMP-certified US facility and third-party lab tested for purity. It contains 10 clinically studied compounds and no artificial additives. If you're pregnant, nursing, on medication, or have a medical condition, check with your healthcare provider first.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q5">
-              <AccordionTrigger>How long does one bottle last?</AccordionTrigger>
-              <AccordionContent>
-                Each bottle is a 30-day supply — one capsule daily.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="q6">
-              <AccordionTrigger>What if it doesn't work for me?</AccordionTrigger>
-              <AccordionContent>
-                Try it risk-free for 60 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(ellipse at 20% 80%, oklch(0.7 0.16 200 / 0.12), transparent 50%), radial-gradient(ellipse at 80% 20%, oklch(0.72 0.18 55 / 0.10), transparent 50%), linear-gradient(180deg, oklch(0.98 0.01 240) 0%, oklch(0.96 0.02 235) 100%)",
+          }}
+        />
+        <div className="container-x py-20 md:py-28">
+          <div className="text-center max-w-xl mx-auto">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs uppercase tracking-[0.2em] font-semibold text-primary">
+              <MessageCircle className="h-3.5 w-3.5" />
+              FAQ
+            </span>
+            <h2 className="text-3xl md:text-4xl mt-4">Questions, answered</h2>
+            <p className="mt-3 text-body">Everything you need to know before you start feeling better.</p>
+          </div>
+
+          <div className="mt-12 max-w-3xl mx-auto space-y-4">
+            {[
+              { icon: Zap, q: "How fast will I feel it?", a: "Most people notice cleaner, calmer energy within the first few days. The deeper benefits — sharper focus, better memory, no afternoon slump — build over 2–4 weeks as ingredients like Bacopa monnieri reach full effect. Consistency is what makes it work, which is why most customers start with a 3-month supply." },
+              { icon: Coffee, q: "Does it contain caffeine? Will it keep me up at night?", a: "Yes — a low dose of natural caffeine, deliberately paired with L-Theanine for smooth, calm focus without the jitters or crash. For best results, take it in the morning or before 2pm so it won't affect your sleep." },
+              { icon: Beaker, q: "Can I take it with my morning coffee?", a: "Absolutely. Many customers take Circuit instead of their 2nd or 3rd coffee. If you're caffeine-sensitive, start with Circuit alone for the first few days to feel your baseline." },
+              { icon: ShieldCheck, q: "Is it safe? What's in it?", a: "Circuit is made in an FDA-registered, cGMP-certified US facility and third-party lab tested for purity. It contains 10 clinically studied compounds and no artificial additives. If you're pregnant, nursing, on medication, or have a medical condition, check with your healthcare provider first." },
+              { icon: Clock, q: "How long does one bottle last?", a: "Each bottle is a 30-day supply — one capsule daily." },
+              { icon: RotateCcw, q: "What if it doesn't work for me?", a: "Try it risk-free for 60 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it." },
+            ].map((item, i) => (
+              <div key={i} className="group rounded-2xl bg-white border border-border/80 p-1 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
+                <div className="rounded-xl bg-gradient-to-r from-white to-secondary/30 p-5 md:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                      <item.icon className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-display font-bold text-ink text-base md:text-lg leading-snug">{item.q}</h3>
+                      <p className="mt-2 text-body text-sm leading-relaxed">{item.a}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
