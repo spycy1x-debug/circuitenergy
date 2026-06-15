@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronLeft, ChevronRight, Minus, Plus, FileText, X, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
+import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronLeft, ChevronRight, Minus, Plus, FileText, X, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp, MessageCircle, Coffee } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 declare global {
