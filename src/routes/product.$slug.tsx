@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronLeft, ChevronRight, Minus, Plus, FileText, X, Flame, Users, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
+import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronLeft, ChevronRight, Minus, Plus, FileText, X, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp } from "lucide-react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 declare global {
   interface Window {
@@ -276,31 +277,6 @@ function ProductPage() {
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
-  // Deterministic, globally-shared values derived from wall-clock time so
-  // every visitor sees the same numbers. Viewers rotate each minute; stock
-  // decrements each hour and resets at 22 after reaching 1.
-  const hash = (n: number) => {
-    let x = (n | 0) ^ 0x9e3779b9;
-    x = Math.imul(x ^ (x >>> 16), 0x85ebca6b);
-    x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35);
-    return ((x ^ (x >>> 16)) >>> 0);
-  };
-  const computeViewers = () => 22 + (hash(Math.floor(Date.now() / 60_000)) % 17);
-  const computeStock = () => {
-    const hoursSinceEpoch = Math.floor(Date.now() / (60 * 60 * 1000));
-    return 22 - (hoursSinceEpoch % 22);
-  };
-  const [viewers, setViewers] = useState(computeViewers);
-  const [stockLeft, setStockLeft] = useState(computeStock);
-  const headerStock = 12;
-  useEffect(() => {
-    const t = setInterval(() => setViewers(computeViewers()), 60_000);
-    return () => clearInterval(t);
-  }, []);
-  useEffect(() => {
-    const t = setInterval(() => setStockLeft(computeStock()), 60 * 60 * 1000);
-    return () => clearInterval(t);
-  }, []);
   useEffect(() => {
     if (!showImageLightbox) return;
     const handler = (e: KeyboardEvent) => {
@@ -311,11 +287,6 @@ function ProductPage() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [showImageLightbox, p.images.length]);
-  const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
-  useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
-  const hh = String(Math.floor(secs / 3600)).padStart(2, "0");
-  const mm = String(Math.floor((secs % 3600) / 60)).padStart(2, "0");
-  const ss = String(secs % 60).padStart(2, "0");
 
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
@@ -470,10 +441,6 @@ function ProductPage() {
         <div>
           <div className="relative bg-white rounded-2xl aspect-square overflow-hidden group border border-border shadow-sm">
             <div className="absolute top-4 left-4 bg-gradient-to-r from-primary to-electric text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md">{p.badge}</div>
-            <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[11px] font-semibold text-ink shadow">
-              <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"/><span className="relative inline-flex rounded-full h-2 w-2 bg-success"/></span>
-              {viewers} viewing now
-            </div>
             <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in p-4 sm:p-6">
               <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"/>
             </button>
@@ -525,15 +492,6 @@ function ProductPage() {
 
 
           <div className="mt-7 rounded-2xl border border-border bg-gradient-to-b from-white to-secondary/40 p-5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)]">
-            {/* Stock progress */}
-            <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wide mb-1.5">
-              <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in <span className="font-mono tabular-nums text-ink">{hh}:{mm}:{ss}</span> — ships today</span>
-              <span className="flex items-center gap-1.5 text-ink"><span className="h-1.5 w-1.5 rounded-full bg-energy animate-pulse"/>Only {stockLeft} left</span>
-            </div>
-            <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden mb-4">
-              <div className="h-full bg-gradient-to-r from-energy to-primary" style={{ width: `${Math.min(100, stockLeft * 5)}%` }}/>
-            </div>
-
             {/* Qty + button row */}
             <div className="flex items-stretch gap-3">
               <div className="inline-flex items-center bg-white border border-border rounded-xl shadow-sm">
@@ -804,6 +762,51 @@ function ProductPage() {
             <p className="mt-1 text-body text-sm">{p.related.blurb}</p>
           </div>
           <Link to="/product/$slug" params={{slug:related.slug}} className="btn-primary">View Product</Link>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="container-x py-20">
+        <h2 className="text-2xl md:text-3xl text-center mb-10">Questions, answered</h2>
+        <div className="max-w-3xl mx-auto">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="q1">
+              <AccordionTrigger>How fast will I feel it?</AccordionTrigger>
+              <AccordionContent>
+                Most people notice cleaner, calmer energy within the first few days. The deeper benefits — sharper focus, better memory, no afternoon slump — build over 2–4 weeks as ingredients like Bacopa monnieri reach full effect. Consistency is what makes it work, which is why most customers start with a 3-month supply.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q2">
+              <AccordionTrigger>Does it contain caffeine? Will it keep me up at night?</AccordionTrigger>
+              <AccordionContent>
+                Yes — a low dose of natural caffeine, deliberately paired with L-Theanine for smooth, calm focus without the jitters or crash. For best results, take it in the morning or before 2pm so it won't affect your sleep.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q3">
+              <AccordionTrigger>Can I take it with my morning coffee?</AccordionTrigger>
+              <AccordionContent>
+                Absolutely. Many customers take Circuit instead of their 2nd or 3rd coffee. If you're caffeine-sensitive, start with Circuit alone for the first few days to feel your baseline.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q4">
+              <AccordionTrigger>Is it safe? What's in it?</AccordionTrigger>
+              <AccordionContent>
+                Circuit is made in an FDA-registered, cGMP-certified US facility and third-party lab tested for purity. It contains 10 clinically studied compounds and no artificial additives. If you're pregnant, nursing, on medication, or have a medical condition, check with your healthcare provider first.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q5">
+              <AccordionTrigger>How long does one bottle last?</AccordionTrigger>
+              <AccordionContent>
+                Each bottle is a 30-day supply — one capsule daily.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q6">
+              <AccordionTrigger>What if it doesn't work for me?</AccordionTrigger>
+              <AccordionContent>
+                Try it risk-free for 60 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 
