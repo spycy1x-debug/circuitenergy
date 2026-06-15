@@ -276,31 +276,6 @@ function ProductPage() {
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
-  // Deterministic, globally-shared values derived from wall-clock time so
-  // every visitor sees the same numbers. Viewers rotate each minute; stock
-  // decrements each hour and resets at 22 after reaching 1.
-  const hash = (n: number) => {
-    let x = (n | 0) ^ 0x9e3779b9;
-    x = Math.imul(x ^ (x >>> 16), 0x85ebca6b);
-    x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35);
-    return ((x ^ (x >>> 16)) >>> 0);
-  };
-  const computeViewers = () => 22 + (hash(Math.floor(Date.now() / 60_000)) % 17);
-  const computeStock = () => {
-    const hoursSinceEpoch = Math.floor(Date.now() / (60 * 60 * 1000));
-    return 22 - (hoursSinceEpoch % 22);
-  };
-  const [viewers, setViewers] = useState(computeViewers);
-  const [stockLeft, setStockLeft] = useState(computeStock);
-  const headerStock = 12;
-  useEffect(() => {
-    const t = setInterval(() => setViewers(computeViewers()), 60_000);
-    return () => clearInterval(t);
-  }, []);
-  useEffect(() => {
-    const t = setInterval(() => setStockLeft(computeStock()), 60 * 60 * 1000);
-    return () => clearInterval(t);
-  }, []);
   useEffect(() => {
     if (!showImageLightbox) return;
     const handler = (e: KeyboardEvent) => {
@@ -311,11 +286,6 @@ function ProductPage() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [showImageLightbox, p.images.length]);
-  const [secs, setSecs] = useState(15 * 3600 + 42 * 60);
-  useEffect(() => { const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000); return () => clearInterval(t); }, []);
-  const hh = String(Math.floor(secs / 3600)).padStart(2, "0");
-  const mm = String(Math.floor((secs % 3600) / 60)).padStart(2, "0");
-  const ss = String(secs % 60).padStart(2, "0");
 
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
