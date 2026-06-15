@@ -491,15 +491,6 @@ function ProductPage() {
 
 
           <div className="mt-7 rounded-2xl border border-border bg-gradient-to-b from-white to-secondary/40 p-5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)]">
-            {/* Stock progress */}
-            <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wide mb-1.5">
-              <span className="flex items-center gap-1.5 text-energy"><Flame className="h-3.5 w-3.5"/>Order in <span className="font-mono tabular-nums text-ink">{hh}:{mm}:{ss}</span> — ships today</span>
-              <span className="flex items-center gap-1.5 text-ink"><span className="h-1.5 w-1.5 rounded-full bg-energy animate-pulse"/>Only {stockLeft} left</span>
-            </div>
-            <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden mb-4">
-              <div className="h-full bg-gradient-to-r from-energy to-primary" style={{ width: `${Math.min(100, stockLeft * 5)}%` }}/>
-            </div>
-
             {/* Qty + button row */}
             <div className="flex items-stretch gap-3">
               <div className="inline-flex items-center bg-white border border-border rounded-xl shadow-sm">
