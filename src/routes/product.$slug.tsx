@@ -260,7 +260,7 @@ function ProductPage() {
   const [qty, setQty] = useState(1);
   const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
   const [reviewsShown, setReviewsShown] = useState(3);
-  const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number}>>([]);
+  const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number;image?:string}>>([]);
   useEffect(() => {
     let cancelled = false;
     import("@/integrations/supabase/client").then(({ supabase }) => {
