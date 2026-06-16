@@ -776,6 +776,11 @@ function ProductPage() {
                     </div>
                     <h3 className="text-base font-display font-bold mt-3">"{r.title}"</h3>
                     <p className="mt-2 text-body text-sm leading-relaxed">{r.body}</p>
+                    {r.image && (
+                      <a href={r.image} target="_blank" rel="noreferrer" className="mt-3 inline-block">
+                        <img src={r.image} alt={`Photo from ${r.name}`} loading="lazy" className="h-28 w-28 object-cover rounded-lg border border-border hover:opacity-90 transition"/>
+                      </a>
+                    )}
                     <div className="mt-4 pt-3 border-t border-border text-xs text-muted-foreground flex items-center gap-2">
                       <span>Was this helpful?</span>
                       <button onClick={()=>setHelpful(h=>({...h,[i]:"yes"}))} className={`px-2 py-1 rounded border transition inline-flex items-center gap-1 ${helpful[i]==="yes"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}><ThumbsUp className="h-3 w-3"/>Yes</button>
