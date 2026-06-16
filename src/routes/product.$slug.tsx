@@ -281,7 +281,7 @@ function ProductPage() {
     return () => { cancelled = true; };
   }, [p.id]);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [form, setForm] = useState({ name: "", title: "", body: "", rating: 5 });
+  const [form, setForm] = useState<{name:string;title:string;body:string;rating:number;image?:string}>({ name: "", title: "", body: "", rating: 5 });
   const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
   const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
   const [showLabel, setShowLabel] = useState(false);
