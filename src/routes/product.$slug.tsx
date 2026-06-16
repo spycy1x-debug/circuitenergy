@@ -405,6 +405,27 @@ function ProductPage() {
                 <label className="text-sm font-medium block mb-1">Review</label>
                 <textarea value={form.body} onChange={e => setForm(f => ({...f, body: e.target.value}))} rows={4} className="w-full px-3 py-2 border border-border rounded-lg" required/>
               </div>
+              <div>
+                <label className="text-sm font-medium block mb-1">Add a photo <span className="text-muted-foreground font-normal">(optional)</span></label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = () => setForm(f => ({...f, image: reader.result as string}));
+                    reader.readAsDataURL(file);
+                  }}
+                  className="w-full text-sm file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-secondary file:text-ink file:font-semibold hover:file:bg-secondary/80"
+                />
+                {form.image && (
+                  <div className="mt-2 relative inline-block">
+                    <img src={form.image} alt="Preview" className="h-20 w-20 object-cover rounded-lg border border-border"/>
+                    <button type="button" onClick={() => setForm(f => ({...f, image: undefined}))} className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-ink text-white flex items-center justify-center text-xs"><X className="h-3 w-3"/></button>
+                  </div>
+                )}
+              </div>
               <div className="flex gap-2 justify-end">
                 <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">Cancel</button>
                 <button type="submit" className="btn-primary">Submit Review</button>
