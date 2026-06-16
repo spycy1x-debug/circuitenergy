@@ -705,25 +705,6 @@ function ProductPage() {
           )}
 
           {tab==="rev" && (
-            <>
-              {p.id === "neural" && (
-                <div className="mb-8 rounded-2xl bg-secondary/60 p-5 border border-border">
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <div className="text-sm font-display font-bold text-ink">Customer Photos</div>
-                      <div className="text-xs text-muted-foreground">Real Circuit owners — tap a photo to view</div>
-                    </div>
-                    <span className="text-xs font-semibold text-primary">{[reviewWomanBathroom, reviewWomanLaptop, reviewManGym, reviewBottleKitchen].length} photos</span>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {[reviewWomanBathroom, reviewWomanLaptop, reviewManGym, reviewBottleKitchen].map((src, i) => (
-                      <a key={i} href={src} target="_blank" rel="noreferrer" className="group block aspect-square overflow-hidden rounded-xl border border-border bg-white">
-                        <img src={src} alt={`Customer photo ${i+1}`} loading="lazy" className="h-full w-full object-cover transition group-hover:scale-105"/>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
             <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
               <div className="rounded-2xl bg-gradient-to-br from-white to-secondary p-6 border border-border h-fit shadow-sm">
                 <div className="flex items-baseline gap-2">
