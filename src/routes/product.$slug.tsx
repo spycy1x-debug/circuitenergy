@@ -30,6 +30,14 @@ const nmnKitchenHand = nmnKitchenHandAsset.url;
 const nmnNadChart = nmnNadChartAsset.url;
 const neuralComparison = neuralComparisonAsset.url;
 import supplementFacts from "@/assets/product-supplement-facts.png";
+import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
+import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
+import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
+import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+const reviewWomanBathroom = reviewWomanBathroomAsset.url;
+const reviewWomanLaptop = reviewWomanLaptopAsset.url;
+const reviewManGym = reviewManGymAsset.url;
+const reviewBottleKitchen = reviewBottleKitchenAsset.url;
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
