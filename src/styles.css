@@ -42,50 +42,47 @@
 }
 
 :root {
-  --radius: 0.5rem;
-  /* Slate gray-blue #708090 */
-  --primary: oklch(0.59 0.025 245);
-  --primary-foreground: oklch(1 0 0);
-  --primary-dark: oklch(0.5 0.03 245);
+  --radius: 0.75rem;
+  /* Slate brand */
+  --primary: #6A7786;
+  --primary-foreground: #FFFFFF;
+  --primary-dark: #2C353F;
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.15 0 0);
-  --ink: oklch(0 0 0);
-  --body: oklch(0.27 0 0); /* #333333 */
+  --background: #FFFFFF;
+  --foreground: #2C353F;
+  --ink: #2C353F;
+  --body: #39424B;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
+  --card: #FFFFFF;
+  --card-foreground: #2C353F;
+  --popover: #FFFFFF;
+  --popover-foreground: #2C353F;
 
-  /* #F8F9FA */
-  --secondary: oklch(0.978 0.002 247);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.978 0.002 247);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.978 0.002 247);
-  --accent-foreground: oklch(0.15 0 0);
+  --secondary: #F2F4F5;
+  --secondary-foreground: #2C353F;
+  --muted: #F2F4F5;
+  --muted-foreground: #6A7786;
+  --accent: #F2F4F5;
+  --accent-foreground: #2C353F;
 
-  /* #DC3545 soft red */
-  --destructive: oklch(0.6 0.21 25);
-  --destructive-foreground: oklch(1 0 0);
-  --alert: oklch(0.6 0.21 25);
+  --destructive: #D14343;
+  --destructive-foreground: #FFFFFF;
+  --alert: #D14343;
 
-  /* #2D5016 dark green */
-  --success: oklch(0.38 0.09 140);
-  --success-foreground: oklch(1 0 0);
+  --success: #2E9E6B;
+  --success-foreground: #FFFFFF;
 
-  --border: oklch(0.92 0.005 247);
-  --input: oklch(0.92 0.005 247);
-  --ring: oklch(0.59 0.025 245);
+  --border: #D7DCE0;
+  --input: #D7DCE0;
+  --ring: #6A7786;
 
-  /* Vibrant accents for visual energy */
-  --energy: oklch(0.72 0.18 55); /* warm amber-orange */
-  --energy-foreground: oklch(0.15 0 0);
-  --electric: oklch(0.7 0.16 200); /* electric cyan-blue */
-  --gradient-hero: linear-gradient(135deg, oklch(0.22 0.04 245) 0%, oklch(0.32 0.06 230) 50%, oklch(0.45 0.08 200) 100%);
-  --gradient-energy: linear-gradient(135deg, var(--energy) 0%, oklch(0.65 0.2 30) 100%);
-  --gradient-soft: linear-gradient(180deg, oklch(0.98 0.01 240) 0%, oklch(0.95 0.02 220) 100%);
+  /* CTA — warm accent, scarcity = pop */
+  --energy: #F5853F;
+  --energy-foreground: #FFFFFF;
+  --electric: #6A7786;
+  --gradient-hero: linear-gradient(135deg, #2C353F 0%, #39424B 50%, #6A7786 100%);
+  --gradient-energy: linear-gradient(135deg, #F5853F 0%, #E0742E 100%);
+  --gradient-soft: linear-gradient(180deg, #FFFFFF 0%, #F2F4F5 100%);
 }
 
 @layer base {
@@ -110,7 +107,7 @@
 @layer utilities {
   .container-x { @apply mx-auto max-w-[1280px] px-5 md:px-8; }
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-100;
+    @apply inline-flex items-center justify-center rounded-md bg-energy px-6 py-3 text-base font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-95 hover:scale-[1.02] active:scale-100;
   }
   .btn-outline {
     @apply inline-flex items-center justify-center rounded-md border border-ink/80 bg-transparent px-6 py-3 text-base font-semibold text-ink transition-all duration-200 hover:bg-ink hover:text-white;
