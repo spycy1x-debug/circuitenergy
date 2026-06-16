@@ -794,6 +794,7 @@ function ProductPage() {
                 )}
               </div>
             </div>
+            </>
           )}
         </div>
       </section>
