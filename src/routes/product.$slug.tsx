@@ -300,10 +300,10 @@ function ProductPage() {
     const pool = p.id === "neural" ? [
       { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5, image: reviewManGym },
       { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5, image: reviewWomanBathroom },
-      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5 },
-      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4 },
+      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5, image: reviewBottleKitchen },
+      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4, image: reviewWomanLaptop },
       { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
-      { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5, image: reviewWomanLaptop },
+      { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
       { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "JordanLuxe27", date: "3 months ago", rating: 4 },
       { title: "Sharper meetings", body: "I run a small agency and back-to-back client calls used to wreck me. I'm clear-headed straight through now.", name: "Thandiwe O.", date: "3 months ago", rating: 5 },
       { title: "Wife noticed first", body: "She said I seemed 'more present' before I even told her I was trying something new. That's when I knew.", name: "Cole Vandermeer", date: "4 months ago", rating: 5 },
@@ -705,25 +705,6 @@ function ProductPage() {
           )}
 
           {tab==="rev" && (
-            <>
-              {p.id === "neural" && (
-                <div className="mb-8 rounded-2xl bg-secondary/60 p-5 border border-border">
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <div className="text-sm font-display font-bold text-ink">Customer Photos</div>
-                      <div className="text-xs text-muted-foreground">Real Circuit owners — tap a photo to view</div>
-                    </div>
-                    <span className="text-xs font-semibold text-primary">{[reviewWomanBathroom, reviewWomanLaptop, reviewManGym, reviewBottleKitchen].length} photos</span>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {[reviewWomanBathroom, reviewWomanLaptop, reviewManGym, reviewBottleKitchen].map((src, i) => (
-                      <a key={i} href={src} target="_blank" rel="noreferrer" className="group block aspect-square overflow-hidden rounded-xl border border-border bg-white">
-                        <img src={src} alt={`Customer photo ${i+1}`} loading="lazy" className="h-full w-full object-cover transition group-hover:scale-105"/>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
             <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
               <div className="rounded-2xl bg-gradient-to-br from-white to-secondary p-6 border border-border h-fit shadow-sm">
                 <div className="flex items-baseline gap-2">
@@ -799,7 +780,6 @@ function ProductPage() {
                 )}
               </div>
             </div>
-            </>
           )}
         </div>
       </section>
