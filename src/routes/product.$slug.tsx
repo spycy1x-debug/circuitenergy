@@ -470,8 +470,8 @@ function ProductPage() {
         <div>
           <div className="relative bg-white rounded-2xl aspect-square overflow-hidden group border border-border shadow-sm">
             <div className="absolute top-4 left-4 bg-gradient-to-r from-primary to-electric text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md">{p.badge}</div>
-            <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in p-4 sm:p-6">
-              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"/>
+            <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in">
+              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
             </button>
             <button onClick={()=>setImgIdx((imgIdx - 1 + p.images.length) % p.images.length)} aria-label="Previous image" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronLeft className="h-5 w-5"/></button>
             <button onClick={()=>setImgIdx((imgIdx + 1) % p.images.length)} aria-label="Next image" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronRight className="h-5 w-5"/></button>
