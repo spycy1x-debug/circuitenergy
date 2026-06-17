@@ -1649,7 +1649,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
         {BUNDLES.map((b) => {
           const isSelected = selected === b.id;
           const isPopular = !!b.popular;
-          const popularSelected = isPopular; // popular card always uses dark slate treatment
+          const popularSelected = isSelected; // popular card always uses dark slate treatment
           const baseBorder = isSelected && !isPopular ? "border-2 border-[#F5853F]" : "border border-[#D7DCE0]";
           const cardBg = popularSelected ? "bg-[#2C353F] text-white" : "bg-white";
           return (
@@ -1704,7 +1704,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                 </div>
                 <div className="shrink-0">
                   <span
-                    className={`inline-block rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#2C353F] text-white"}`}
+                    className={`inline-block rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#F5853F] text-white"}`}
                   >
                     SAVE ${b.save}
                   </span>
