@@ -3,7 +3,16 @@ import { Mail, ShieldCheck, RotateCcw } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact Circuit Energy" }, { name: "description", content: "Get in touch with Circuit Energy. Email support@circuitenergy.co for questions about your order, products, or guarantee." }] }),
+  head: () => ({
+    meta: [
+      { title: "Contact Circuit Energy" },
+      {
+        name: "description",
+        content:
+          "Get in touch with Circuit Energy. Email support@circuitenergy.co for questions about your order, products, or guarantee.",
+      },
+    ],
+  }),
   component: ContactPage,
 });
 
@@ -38,10 +47,18 @@ function ContactPage() {
             We're listening
           </span>
           <h1 className="mt-6 text-5xl md:text-7xl leading-[0.95] text-white">
-            Get in <em style={serif} className="italic font-normal text-[oklch(0.85_0.15_200)]">touch</em>.
+            Get in{" "}
+            <em style={serif} className="italic font-normal text-[oklch(0.85_0.15_200)]">
+              touch
+            </em>
+            .
           </h1>
           <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl">
-            Questions about your order, the products, or our guarantee? Real humans, <em style={serif} className="italic text-white">fast replies</em>.
+            Questions about your order, the products, or our guarantee? Real humans,{" "}
+            <em style={serif} className="italic text-white">
+              fast replies
+            </em>
+            .
           </p>
         </div>
       </section>
@@ -49,31 +66,23 @@ function ContactPage() {
       {/* CONTENT */}
       <section className="container-x py-16 md:py-20 grid gap-10 lg:grid-cols-2 items-start">
         <div className="space-y-4">
-          <InfoCard
-            tone="amber"
-            icon={<Mail className="h-5 w-5" />}
-            title="Email Support"
-          >
-            <a href="mailto:support@circuitenergy.co" className="text-ink font-semibold hover:underline">support@circuitenergy.co</a>
+          <InfoCard tone="amber" icon={<Mail className="h-5 w-5" />} title="Email Support">
+            <a href="mailto:support@circuitenergy.co" className="text-ink font-semibold hover:underline">
+              support@circuitenergy.co
+            </a>
             <p className="text-xs text-muted-foreground mt-1">We typically respond within 24 hours.</p>
           </InfoCard>
-          <InfoCard
-            tone="emerald"
-            icon={<ShieldCheck className="h-5 w-5" />}
-            title="60-Day Guarantee"
-          >
+          <InfoCard tone="emerald" icon={<ShieldCheck className="h-5 w-5" />} title="30-Day Guarantee">
             <p className="text-sm text-body">Not satisfied? We'll refund every penny — no questions asked.</p>
           </InfoCard>
-          <InfoCard
-            tone="violet"
-            icon={<RotateCcw className="h-5 w-5" />}
-            title="Easy Returns"
-          >
-            <p className="text-sm text-body">Hassle-free returns within 60 days of purchase.</p>
+          <InfoCard tone="violet" icon={<RotateCcw className="h-5 w-5" />} title="Easy Returns">
+            <p className="text-sm text-body">Hassle-free returns within 30 days of purchase.</p>
           </InfoCard>
 
-          <div className="rounded-2xl p-6 mt-2 text-white relative overflow-hidden"
-            style={{ background: "linear-gradient(135deg, oklch(0.25 0.06 250), oklch(0.18 0.05 245))" }}>
+          <div
+            className="rounded-2xl p-6 mt-2 text-white relative overflow-hidden"
+            style={{ background: "linear-gradient(135deg, oklch(0.25 0.06 250), oklch(0.18 0.05 245))" }}
+          >
             <div style={serif} className="text-3xl md:text-4xl leading-tight">
               "Best support team I've ever <em className="italic">dealt with</em>."
             </div>
@@ -82,22 +91,32 @@ function ContactPage() {
         </div>
 
         <form
-          onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSent(true);
+          }}
           className="relative rounded-3xl p-8 md:p-10 overflow-hidden"
           style={{
             background: "linear-gradient(160deg, oklch(0.98 0.03 70), white 60%, oklch(0.97 0.02 290))",
-            boxShadow: "0 20px 60px -20px oklch(0.2 0.05 245 / 0.25), inset 0 0 0 1px oklch(0.9 0.02 245)"
+            boxShadow: "0 20px 60px -20px oklch(0.2 0.05 245 / 0.25), inset 0 0 0 1px oklch(0.9 0.02 245)",
           }}
         >
-          <div aria-hidden className="absolute -top-20 -right-20 h-56 w-56 rounded-full blur-3xl opacity-50"
-            style={{ background: "oklch(0.85 0.12 55)" }} />
+          <div
+            aria-hidden
+            className="absolute -top-20 -right-20 h-56 w-56 rounded-full blur-3xl opacity-50"
+            style={{ background: "oklch(0.85 0.12 55)" }}
+          />
           <div className="relative">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[oklch(0.45_0.15_55)]">
               <span className="h-px w-6 bg-[oklch(0.75_0.18_55)]" />
               Send a message
             </div>
             <h2 className="mt-2 text-4xl md:text-5xl text-ink leading-tight">
-              Say <em style={serif} className="italic font-normal">hello</em>.
+              Say{" "}
+              <em style={serif} className="italic font-normal">
+                hello
+              </em>
+              .
             </h2>
 
             {sent ? (
@@ -106,10 +125,18 @@ function ContactPage() {
               </div>
             ) : (
               <div className="mt-6 space-y-4">
-                <Field label="Name"><input required className="input" /></Field>
-                <Field label="Email"><input type="email" required className="input" /></Field>
-                <Field label="Subject"><input required className="input" /></Field>
-                <Field label="Message"><textarea required rows={5} className="input resize-none" /></Field>
+                <Field label="Name">
+                  <input required className="input" />
+                </Field>
+                <Field label="Email">
+                  <input type="email" required className="input" />
+                </Field>
+                <Field label="Subject">
+                  <input required className="input" />
+                </Field>
+                <Field label="Message">
+                  <textarea required rows={5} className="input resize-none" />
+                </Field>
                 <button className="btn-primary w-full mt-2">Send Message →</button>
               </div>
             )}
@@ -122,12 +149,22 @@ function ContactPage() {
 }
 
 const tones: Record<string, { bg: string; ring: string; text: string }> = {
-  amber:   { bg: "oklch(0.96 0.06 70)",  ring: "oklch(0.75 0.18 55)",  text: "oklch(0.45 0.15 55)" },
-  violet:  { bg: "oklch(0.96 0.04 290)", ring: "oklch(0.65 0.17 290)", text: "oklch(0.42 0.16 290)" },
+  amber: { bg: "oklch(0.96 0.06 70)", ring: "oklch(0.75 0.18 55)", text: "oklch(0.45 0.15 55)" },
+  violet: { bg: "oklch(0.96 0.04 290)", ring: "oklch(0.65 0.17 290)", text: "oklch(0.42 0.16 290)" },
   emerald: { bg: "oklch(0.96 0.05 160)", ring: "oklch(0.65 0.15 160)", text: "oklch(0.4 0.12 160)" },
 };
 
-function InfoCard({ tone, icon, title, children }: { tone: keyof typeof tones; icon: React.ReactNode; title: string; children: React.ReactNode }) {
+function InfoCard({
+  tone,
+  icon,
+  title,
+  children,
+}: {
+  tone: keyof typeof tones;
+  icon: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
+}) {
   const t = tones[tone];
   return (
     <div
@@ -141,7 +178,9 @@ function InfoCard({ tone, icon, title, children }: { tone: keyof typeof tones; i
         {icon}
       </div>
       <div>
-        <div style={serif} className="text-2xl text-ink leading-tight">{title}</div>
+        <div style={serif} className="text-2xl text-ink leading-tight">
+          {title}
+        </div>
         <div className="mt-1">{children}</div>
       </div>
     </div>
