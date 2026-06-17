@@ -30,10 +30,14 @@ const nmnKitchenHand = nmnKitchenHandAsset.url;
 const nmnNadChart = nmnNadChartAsset.url;
 const neuralComparison = neuralComparisonAsset.url;
 import supplementFacts from "@/assets/product-supplement-facts.png";
-import reviewManSelfieAsset from "@/assets/review-man-selfie.png.asset.json";
-import reviewNightstandAsset from "@/assets/review-nightstand.png.asset.json";
-const reviewManSelfie = reviewManSelfieAsset.url;
-const reviewNightstand = reviewNightstandAsset.url;
+import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
+import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
+import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
+import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+const reviewWomanBathroom = reviewWomanBathroomAsset.url;
+const reviewWomanLaptop = reviewWomanLaptopAsset.url;
+const reviewManGym = reviewManGymAsset.url;
+const reviewBottleKitchen = reviewBottleKitchenAsset.url;
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
@@ -294,10 +298,10 @@ function ProductPage() {
 
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
-      { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5, image: reviewManSelfie },
-      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5 },
-      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5, image: reviewNightstand },
-      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4 },
+      { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5, image: reviewManGym },
+      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5, image: reviewWomanBathroom },
+      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5, image: reviewBottleKitchen },
+      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4, image: reviewWomanLaptop },
       { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
       { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
       { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "JordanLuxe27", date: "3 months ago", rating: 4 },
