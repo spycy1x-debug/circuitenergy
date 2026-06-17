@@ -526,6 +526,11 @@ function ProductPage() {
           </ul>
 
 
+          {p.id === "neural" ? (
+            <div className="mt-7">
+              <BundleSelector thumbnail={p.images[0]} productName={p.name} />
+            </div>
+          ) : (
           <div className="mt-7 rounded-2xl border border-border bg-gradient-to-b from-white to-secondary/40 p-5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)]">
             {/* Qty + button row */}
             <div className="flex items-stretch gap-3">
@@ -553,6 +558,7 @@ function ProductPage() {
               <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3 text-success"/>60-day refund</span>
             </div>
           </div>
+          )}
           <button onClick={() => setShowLabel(true)} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition">
             <FileText className="h-4 w-4"/> View Supplement Label
           </button>
@@ -869,6 +875,114 @@ function Trust({ icon: Icon, text }: { icon: typeof Lock; text: string }) {
     <div className="flex items-center gap-2 rounded-lg bg-secondary px-3 py-2.5">
       <Icon className="h-4 w-4 text-primary"/>
       <span className="text-ink font-medium">{text}</span>
+    </div>
+  );
+}
+
+type BundleOpt = {
+  id: "1" | "2" | "3";
+  bottles: number;
+  variantId: string;
+  price: number;
+  compare: number;
+  save: number;
+  detail: string;
+  freeShipping: boolean;
+  popular?: boolean;
+};
+
+const BUNDLES: BundleOpt[] = [
+  { id: "1", bottles: 1, variantId: "48341605810330", price: 42.99, compare: 59.00, save: 16, detail: "30 capsules · 30-day supply", freeShipping: false },
+  { id: "2", bottles: 2, variantId: "48341605843098", price: 79.99, compare: 118.00, save: 38, detail: "60 capsules · 60-day supply", freeShipping: true, popular: true },
+  { id: "3", bottles: 3, variantId: "48341605875866", price: 109.99, compare: 177.00, save: 67, detail: "90 capsules · 90-day supply", freeShipping: true },
+];
+
+function BundleSelector({ thumbnail, productName }: { thumbnail: string; productName: string }) {
+  const [selected, setSelected] = useState<"1" | "2" | "3">("2");
+  const active = BUNDLES.find(b => b.id === selected)!;
+
+  const handleAddToCart = () => {
+    if (typeof window === "undefined") return;
+    window.fbq?.("track", "AddToCart", {
+      content_ids: [active.variantId],
+      content_name: `${productName} - ${active.bottles} Bottle${active.bottles > 1 ? "s" : ""}`,
+      content_type: "product",
+      value: active.price,
+      currency: "USD",
+    });
+    window.gtag?.("event", "add_to_cart", {
+      currency: "USD",
+      value: active.price,
+      items: [{ item_id: active.variantId, item_name: `${productName} ${active.bottles}-pack`, price: active.price, quantity: 1 }],
+    });
+    window.location.href = `https://xwkkv0-r0.myshopify.com/cart/${active.variantId}:1`;
+  };
+
+  return (
+    <div>
+      <h2 className="text-center text-sm font-bold uppercase tracking-[0.2em] text-[#2C353F] mb-5">Choose Your Package</h2>
+      <div className="space-y-3">
+        {BUNDLES.map((b) => {
+          const isSelected = selected === b.id;
+          const isPopular = !!b.popular;
+          const popularSelected = isPopular; // popular card always uses dark slate treatment
+          const baseBorder = isSelected && !isPopular ? "border-2 border-[#F5853F]" : "border border-[#D7DCE0]";
+          const cardBg = popularSelected ? "bg-[#2C353F] text-white" : "bg-white";
+          return (
+            <div key={b.id} className={isPopular ? "relative pt-3" : "relative"}>
+              {isPopular && (
+                <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
+                  <span className="inline-block bg-gradient-to-r from-[#F5C24A] to-[#E0A526] text-[#2C353F] text-[10px] font-extrabold tracking-wider uppercase px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
+                    ★ Most Popular · Best Value
+                  </span>
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={() => setSelected(b.id)}
+                aria-pressed={isSelected}
+                className={`w-full text-left rounded-[14px] ${baseBorder} ${cardBg} ${isPopular ? "mt-2" : ""} px-3 sm:px-4 py-3.5 flex items-center gap-3 sm:gap-4 transition-all hover:shadow-md`}
+              >
+                <div className={`shrink-0 h-5 w-5 rounded-full border-2 ${isSelected ? (popularSelected ? "border-[#F5853F] bg-[#F5853F]" : "border-[#F5853F] bg-[#F5853F]") : (popularSelected ? "border-white/50" : "border-[#D7DCE0]")} flex items-center justify-center`}>
+                  {isSelected && <span className="h-2 w-2 rounded-full bg-white" />}
+                </div>
+                <div className={`shrink-0 h-14 w-14 sm:h-16 sm:w-16 rounded-lg ${popularSelected ? "bg-white/10" : "bg-secondary"} overflow-hidden flex items-center justify-center p-1`}>
+                  <img src={thumbnail} alt="" className="h-full w-full object-contain"/>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className={`font-extrabold text-[15px] sm:text-base ${popularSelected ? "text-white" : "text-[#2C353F]"}`}>
+                    {b.bottles} {b.bottles === 1 ? "BOTTLE" : "BOTTLES"}
+                  </div>
+                  <div className="mt-1 flex items-baseline gap-2 flex-wrap">
+                    <span className={`text-xl sm:text-2xl font-extrabold ${popularSelected ? "text-white" : "text-[#2C353F]"}`}>${b.price.toFixed(2)}</span>
+                    <span className={`text-sm line-through ${popularSelected ? "text-white/50" : "text-[#8A95A1]"}`}>${b.compare.toFixed(2)}</span>
+                  </div>
+                  <div className={`mt-0.5 text-[11px] sm:text-xs ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}>{b.detail}</div>
+                  {b.freeShipping && (
+                    <div className="mt-1 text-[11px] sm:text-xs font-bold text-[#2E9E6B]">✓ FREE SHIPPING</div>
+                  )}
+                </div>
+                <div className="shrink-0">
+                  <span className={`inline-block rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#2C353F] text-white"}`}>
+                    SAVE ${b.save}
+                  </span>
+                </div>
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      <button
+        type="button"
+        onClick={handleAddToCart}
+        className="mt-5 w-full rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-base sm:text-[17px] py-4 sm:py-[18px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] transition-colors"
+      >
+        Add to Cart
+      </button>
+      <p className="mt-2.5 text-center text-[11px] sm:text-xs text-[#6A7786]">
+        60-day money-back guarantee · Secure checkout
+      </p>
     </div>
   );
 }
