@@ -1723,7 +1723,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
         Add to Cart
       </button>
       <p className="mt-2.5 text-center text-[11px] sm:text-xs text-[#6A7786]">
-        60-day money-back guarantee · Secure checkout
+        30-day money-back guarantee · Secure checkout
       </p>
     </div>
   );

@@ -46,7 +46,7 @@ const tickerItems = [
   "Natural Ingredients",
   "No Artificial Additives",
   "Third-Party Tested",
-  "60-Day Guarantee",
+  "30-Day Guarantee",
   "Made in USA",
   "200+ Reviews",
   "Clinically Studied Ingredients",
