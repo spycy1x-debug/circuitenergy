@@ -119,8 +119,8 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     name: "Circuit Neural Performance",
     subtitle: "Focus & Cognitive Enhancement",
     price: 42.99,
-    rating: 4.7,
-    reviews: 87,
+    rating: 4.8,
+    reviews: 500,
     badge: "Most Popular",
     images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralOpen],
     description:
@@ -218,7 +218,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     subtitle: "Cellular Energy & Longevity Support",
     price: 49.99,
     rating: 4.6,
-    reviews: 72,
+    reviews: 400,
     badge: "Best Seller",
     images: [nmnImg, nmnBuiltDifferent, nmnWomanBalcony, nmnEnergizeRepair, nmnKitchenHand, nmnNadChart, nmnTrio],
     description:
@@ -960,9 +960,9 @@ function ProductPage() {
           <div className="mt-3 flex items-center gap-2 text-sm">
             <div className="flex">
               {[1, 2, 3, 4].map((i) => (
-                <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
               ))}
-              <Star className="h-4 w-4 fill-primary/40 text-primary" />
+              <Star className="h-4 w-4 fill-yellow-400/40 text-yellow-400" />
             </div>
             <span className="text-body">
               {p.rating} ·{" "}
