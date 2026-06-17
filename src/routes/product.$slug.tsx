@@ -526,6 +526,11 @@ function ProductPage() {
           </ul>
 
 
+          {p.id === "neural" ? (
+            <div className="mt-7">
+              <BundleSelector thumbnail={p.images[0]} productName={p.name} />
+            </div>
+          ) : (
           <div className="mt-7 rounded-2xl border border-border bg-gradient-to-b from-white to-secondary/40 p-5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)]">
             {/* Qty + button row */}
             <div className="flex items-stretch gap-3">
@@ -553,6 +558,7 @@ function ProductPage() {
               <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3 text-success"/>60-day refund</span>
             </div>
           </div>
+          )}
           <button onClick={() => setShowLabel(true)} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition">
             <FileText className="h-4 w-4"/> View Supplement Label
           </button>
