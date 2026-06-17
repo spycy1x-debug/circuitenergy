@@ -303,9 +303,11 @@ function ProductPage() {
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
       { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5, image: reviewManGym },
-      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5, image: reviewWomanBathroom },
+      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5, image: reviewWomanLaptop },
       { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5, image: reviewBottleKitchen },
-      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4, image: reviewWomanLaptop },
+      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4, image: reviewWomanBathroom },
+      { title: "On my nightstand every night", body: "I keep it right next to my water glass so I never forget. Mornings feel less foggy and I'm out the door faster.", name: "Trent H.", date: "2 months ago", rating: 5, image: reviewNightstand },
+      { title: "Late shift survivor", body: "I work nights and this has been a game changer for staying sharp during the 3am dead zone. No crash after.", name: "Greg M.", date: "2 months ago", rating: 5, image: reviewManSelfie },
       { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
       { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
       { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "JordanLuxe27", date: "3 months ago", rating: 4 },
