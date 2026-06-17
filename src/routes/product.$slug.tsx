@@ -1,6 +1,29 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useMemo, useEffect } from "react";
-import { Star, Check, ShieldCheck, Truck, RotateCcw, Lock, ChevronLeft, ChevronRight, Minus, Plus, FileText, X, Brain, Zap, Sparkles, Heart, Beaker, Clock, AlertCircle, ThumbsUp, MessageCircle, Coffee } from "lucide-react";
+import {
+  Star,
+  Check,
+  ShieldCheck,
+  Truck,
+  RotateCcw,
+  Lock,
+  ChevronLeft,
+  ChevronRight,
+  Minus,
+  Plus,
+  FileText,
+  X,
+  Brain,
+  Zap,
+  Sparkles,
+  Heart,
+  Beaker,
+  Clock,
+  AlertCircle,
+  ThumbsUp,
+  MessageCircle,
+  Coffee,
+} from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 declare global {
@@ -45,7 +68,6 @@ const reviewManSelfie = reviewManSelfieAsset.url;
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
-
 const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
   neural: { productId: "8951258808474", buttonText: "Sharpen Your Mind" },
   nmn: { productId: "8951254876314", buttonText: "Fix Your Energy" },
@@ -55,17 +77,17 @@ function timeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
   const m = Math.floor(diff / 60000);
   if (m < 1) return "Just now";
-  if (m < 60) return `${m} minute${m===1?"":"s"} ago`;
+  if (m < 60) return `${m} minute${m === 1 ? "" : "s"} ago`;
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h} hour${h===1?"":"s"} ago`;
+  if (h < 24) return `${h} hour${h === 1 ? "" : "s"} ago`;
   const d = Math.floor(h / 24);
-  if (d < 7) return `${d} day${d===1?"":"s"} ago`;
+  if (d < 7) return `${d} day${d === 1 ? "" : "s"} ago`;
   const w = Math.floor(d / 7);
-  if (w < 5) return `${w} week${w===1?"":"s"} ago`;
+  if (w < 5) return `${w} week${w === 1 ? "" : "s"} ago`;
   const mo = Math.floor(d / 30);
-  if (mo < 12) return `${mo} month${mo===1?"":"s"} ago`;
+  if (mo < 12) return `${mo} month${mo === 1 ? "" : "s"} ago`;
   const y = Math.floor(d / 365);
-  return `${y} year${y===1?"":"s"} ago`;
+  return `${y} year${y === 1 ? "" : "s"} ago`;
 }
 
 type ProductData = {
@@ -80,7 +102,12 @@ type ProductData = {
   description: string;
   benefits: string[];
   why: { heading: string; body: string[]; cards: { t: string; d: string }[] };
-  ingredients: { serving: string; items: { name: string }[]; other: string; callouts: { name: string; desc: string }[] };
+  ingredients: {
+    serving: string;
+    items: { name: string }[];
+    other: string;
+    callouts: { name: string; desc: string }[];
+  };
   use: { dosage: string; best: string[]; timeline: { period: string; text: string }[]; storage: string; note: string };
   related: { id: "neural" | "nmn"; blurb: string };
   sample: { title: string; body: string; name: string; date: string };
@@ -96,7 +123,8 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     reviews: 87,
     badge: "Most Popular",
     images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralOpen],
-    description: "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
+    description:
+      "A precision blend of 10 clinically studied, natural compounds designed to restore mental clarity, sharpen focus, and support long-term brain health. One capsule. All day performance.",
     benefits: [
       "Eliminates brain fog",
       "Enhances focus and memory",
@@ -114,10 +142,19 @@ const PRODUCT_DATA: Record<string, ProductData> = {
         "All natural. No artificial additives. One capsule a day.",
       ],
       cards: [
-        { t: "Razor-Sharp Focus", d: "Alpha GPC and Huperzine A directly support the neurotransmitter behind focus and memory. Think clearly for hours." },
+        {
+          t: "Razor-Sharp Focus",
+          d: "Alpha GPC and Huperzine A directly support the neurotransmitter behind focus and memory. Think clearly for hours.",
+        },
         { t: "Brain Fog Gone", d: "GABA and L-Theanine promote calm, clear-headed thinking. No more mental static." },
-        { t: "Stress-Proof Thinking", d: "L-Tyrosine helps maintain cognitive function under pressure, stress, and sleep deprivation." },
-        { t: "Long-Term Brain Health", d: "Bacopa monnieri and Phosphatidylserine support memory, learning, and brain cell health over time." },
+        {
+          t: "Stress-Proof Thinking",
+          d: "L-Tyrosine helps maintain cognitive function under pressure, stress, and sleep deprivation.",
+        },
+        {
+          t: "Long-Term Brain Health",
+          d: "Bacopa monnieri and Phosphatidylserine support memory, learning, and brain cell health over time.",
+        },
       ],
     },
     ingredients: {
@@ -137,8 +174,14 @@ const PRODUCT_DATA: Record<string, ProductData> = {
       other: "Other Ingredients: No artificial additives. Natural capsule. Manufactured in USA.",
       callouts: [
         { name: "Alpha GPC", desc: "Boosts acetylcholine — the neurotransmitter behind focus and memory." },
-        { name: "Huperzine A", desc: "Inhibits the enzyme that breaks down acetylcholine, keeping levels elevated longer." },
-        { name: "L-Theanine + Caffeine", desc: "The clinically validated stack for smooth, focused energy without jitters." },
+        {
+          name: "Huperzine A",
+          desc: "Inhibits the enzyme that breaks down acetylcholine, keeping levels elevated longer.",
+        },
+        {
+          name: "L-Theanine + Caffeine",
+          desc: "The clinically validated stack for smooth, focused energy without jitters.",
+        },
         { name: "Bacopa Monnieri", desc: "Clinically studied for memory, learning, and reducing mental fatigue." },
         { name: "Phosphatidylserine", desc: "Supports brain cell membrane integrity for faster, sharper thinking." },
         { name: "L-Tyrosine", desc: "Supports dopamine and norepinephrine under stress." },
@@ -169,7 +212,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
       date: "April 2, 2026",
     },
   },
-  "nmn": {
+  nmn: {
     id: "nmn",
     name: "Circuit NMN",
     subtitle: "Cellular Energy & Longevity Support",
@@ -178,7 +221,8 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     reviews: 72,
     badge: "Best Seller",
     images: [nmnImg, nmnBuiltDifferent, nmnWomanBalcony, nmnEnergizeRepair, nmnKitchenHand, nmnNadChart, nmnTrio],
-    description: "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
+    description:
+      "Boost NAD+ for sustained energy, reduced afternoon crashes, and cellular repair. No stimulants. No crashes. Just your body producing energy the way it should.",
     benefits: [
       "Eliminates afternoon crashes",
       "Restores cellular energy production",
@@ -199,7 +243,10 @@ const PRODUCT_DATA: Record<string, ProductData> = {
         { t: "No More Crashes", d: "Sustained cellular energy from morning through evening — no afternoon wall." },
         { t: "Mental Clarity Returns", d: "Restored NAD+ supports cognitive function and mental sharpness." },
         { t: "Better Sleep", d: "Improved cellular function leads to deeper, more restorative sleep." },
-        { t: "Science-Backed Dosing", d: "500mg NMN per serving — the dose studied to meaningfully raise NAD+ levels." },
+        {
+          t: "Science-Backed Dosing",
+          d: "500mg NMN per serving — the dose studied to meaningfully raise NAD+ levels.",
+        },
       ],
     },
     ingredients: {
@@ -241,19 +288,23 @@ export const Route = createFileRoute("/product/$slug")({
     return p;
   },
   head: ({ loaderData }) => ({
-    meta: loaderData ? [
-      { title: `${loaderData.name} — Circuit Energy` },
-      { name: "description", content: loaderData.description.slice(0, 160) },
-      { property: "og:title", content: loaderData.name },
-      { property: "og:description", content: loaderData.description.slice(0, 160) },
-      { property: "og:image", content: loaderData.images[0] },
-    ] : [],
+    meta: loaderData
+      ? [
+          { title: `${loaderData.name} — Circuit Energy` },
+          { name: "description", content: loaderData.description.slice(0, 160) },
+          { property: "og:title", content: loaderData.name },
+          { property: "og:description", content: loaderData.description.slice(0, 160) },
+          { property: "og:image", content: loaderData.images[0] },
+        ]
+      : [],
   }),
   component: ProductPage,
   notFoundComponent: () => <div className="container-x py-20 text-center">Product not found.</div>,
   errorComponent: ({ error }) => {
     console.error(error);
-    return <div className="container-x py-20 text-center">Something went wrong. Please try again or return to the shop.</div>;
+    return (
+      <div className="container-x py-20 text-center">Something went wrong. Please try again or return to the shop.</div>
+    );
   },
 });
 
@@ -262,9 +313,11 @@ function ProductPage() {
   const [imgIdx, setImgIdx] = useState(0);
   const [showImageLightbox, setShowImageLightbox] = useState(false);
   const [qty, setQty] = useState(1);
-  const [tab, setTab] = useState<"why"|"ing"|"use"|"rev">("why");
+  const [tab, setTab] = useState<"why" | "ing" | "use" | "rev">("why");
   const [reviewsShown, setReviewsShown] = useState(3);
-  const [userReviews, setUserReviews] = useState<Array<{title:string;body:string;name:string;date:string;rating:number;image?:string}>>([]);
+  const [userReviews, setUserReviews] = useState<
+    Array<{ title: string; body: string; name: string; date: string; rating: number; image?: string }>
+  >([]);
   useEffect(() => {
     let cancelled = false;
     import("@/integrations/supabase/client").then(({ supabase }) => {
@@ -276,18 +329,32 @@ function ProductPage() {
         .limit(50)
         .then(({ data }) => {
           if (cancelled || !data) return;
-          setUserReviews(data.map((r: any) => ({
-            name: r.name, title: r.title, body: r.body, rating: r.rating,
-            date: timeAgo(r.created_at),
-          })));
+          setUserReviews(
+            data.map((r: any) => ({
+              name: r.name,
+              title: r.title,
+              body: r.body,
+              rating: r.rating,
+              date: timeAgo(r.created_at),
+            })),
+          );
         });
     });
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [p.id]);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [form, setForm] = useState<{name:string;title:string;body:string;rating:number;image?:string}>({ name: "", title: "", body: "", rating: 5 });
-  const [reviewFilter, setReviewFilter] = useState<"recent"|"highest"|"helpful"|"verified"|"5"|"4"|"3"|"2"|"1">("recent");
-  const [helpful, setHelpful] = useState<Record<number, "yes"|"no">>({});
+  const [form, setForm] = useState<{ name: string; title: string; body: string; rating: number; image?: string }>({
+    name: "",
+    title: "",
+    body: "",
+    rating: 5,
+  });
+  const [reviewFilter, setReviewFilter] = useState<
+    "recent" | "highest" | "helpful" | "verified" | "5" | "4" | "3" | "2" | "1"
+  >("recent");
+  const [helpful, setHelpful] = useState<Record<number, "yes" | "no">>({});
   const [showLabel, setShowLabel] = useState(false);
   useEffect(() => {
     if (!showImageLightbox) return;
@@ -301,52 +368,319 @@ function ProductPage() {
   }, [showImageLightbox, p.images.length]);
 
   const extraReviews = useMemo(() => {
-    const pool = p.id === "neural" ? [
-      { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5, image: reviewManGym },
-      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5, image: reviewWomanLaptop },
-      { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5, image: reviewBottleKitchen },
-      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4, image: reviewWomanBathroom },
-      { title: "On my nightstand every night", body: "I keep it right next to my water glass so I never forget. Mornings feel less foggy and I'm out the door faster.", name: "Trent H.", date: "2 months ago", rating: 5, image: reviewNightstand },
-      { title: "Late shift survivor", body: "I work nights and this has been a game changer for staying sharp during the 3am dead zone. No crash after.", name: "Greg M.", date: "2 months ago", rating: 5, image: reviewManSelfie },
-      { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
-      { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
-      { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "JordanLuxe27", date: "3 months ago", rating: 4 },
-      { title: "Sharper meetings", body: "I run a small agency and back-to-back client calls used to wreck me. I'm clear-headed straight through now.", name: "Thandiwe O.", date: "3 months ago", rating: 5 },
-      { title: "Wife noticed first", body: "She said I seemed 'more present' before I even told her I was trying something new. That's when I knew.", name: "Cole Vandermeer", date: "4 months ago", rating: 5 },
-      { title: "Finally a clean nootropic", body: "No racing heart, no comedown. Just a smooth lift in focus that lasts the whole workday. I've cancelled my Adderall refill request.", name: "Dr. Elena Vasquez", date: "4 months ago", rating: 5 },
-      { title: "ADHD-friendly", body: "I have ADHD and most focus supplements either do nothing or wind me up. This one quiets the noise without flattening me. Huge for getting through admin work.", name: "Reese N.", date: "5 months ago", rating: 5 },
-      { title: "Took it for a month before reviewing", body: "Wanted to be fair. Day 30: clearer mornings, sharper recall, less midday fog. Will reorder.", name: "Anastasia Liu-Park", date: "5 months ago", rating: 5 },
-      { title: "Good, not life-changing", body: "Definitely helps with focus but I wouldn't say it transformed my life. Solid 4 stars from me.", name: "Mike R.", date: "5 months ago", rating: 4 },
-      { title: "Helped me finish my thesis", body: "PhD candidate here. The last six weeks of writing would have been miserable without this. Sustained focus is real.", name: "Kwame A.", date: "6 months ago", rating: 5 },
-      { title: "Calm energy", body: "I describe it as 'caffeine without the personality change.' My partner appreciates it.", name: "Sam P.", date: "6 months ago", rating: 5 },
-      { title: "Better than my old stack", body: "Was taking five different things. This replaced four of them. Cleaner mornings.", name: "Naoko Whitfield", date: "6 months ago", rating: 5 },
-      { title: "Subtle in the best way", body: "If you're looking for a buzz, this isn't it. If you want to think more clearly without noticing you're trying, it's exactly it.", name: "Greg.", date: "7 months ago", rating: 4 },
-      { title: "Reading speed up", body: "I read a lot for work. Noticed I was getting through dense reports faster around week 2. Not a placebo.", name: "Adaeze Okonkwo", date: "7 months ago", rating: 5 },
-      { title: "Mid-morning is now my best window", body: "Used to crash around 10am after my first coffee. Now I get a solid 3-hour deep work block. Game changer.", name: "Tyler M.", date: "8 months ago", rating: 5 },
-      { title: "Subscribed", body: "Worth the money. Subscribed and don't plan to stop.", name: "Lila", date: "8 months ago", rating: 5 },
-      { title: "Helped with postpartum brain fog", body: "Cleared the haze after having my second. Cleared with my doctor first. Felt like myself again within 3 weeks.", name: "Brianna Esposito", date: "9 months ago", rating: 5 },
-      { title: "Honest 4 stars", body: "Works well. Wish it were a touch cheaper. Will keep buying though.", name: "Drew K.", date: "9 months ago", rating: 4 },
-      { title: "Decent, takes patience", body: "Took me almost a month to notice anything. Once it kicked in it was solid, but the slow ramp surprised me. Wish that was clearer up front.", name: "Patrick H.", date: "5 months ago", rating: 3 },
-      { title: "Helps a little", body: "I get a mild lift in focus but nothing dramatic for me personally. Friend swears by it though, so might just be my body chemistry.", name: "Eliza M.", date: "7 months ago", rating: 3 },
-      { title: "Capsule size is bigger than I expected", body: "The effect is real and I do feel sharper, just wish the capsule was a touch smaller. Manageable, not a dealbreaker.", name: "Yoon-Seo C.", date: "4 months ago", rating: 3 },
-      { title: "Subtle for me", body: "Did notice cleaner mornings but I expected more after reading the reviews. Possibly works better stacked with their NMN.", name: "Robert F.", date: "6 months ago", rating: 2 },
-      { title: "Mixed feelings", body: "First bottle felt great, second one less so. Could be tolerance, could be me. Support team was friendly when I reached out.", name: "Janelle K.", date: "8 months ago", rating: 2 },
-    ] : [
-      { title: "Energy without the crash", body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.", name: "Rachel D.", date: "2 weeks ago", rating: 5 },
-      { title: "Noticeable in the gym", body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.", name: "TomLiftsHeavy", date: "1 month ago", rating: 5 },
-      { title: "Best NMN I've tried", body: "Tried three other brands before this. The dose actually makes sense biochemically and I feel it.", name: "Dr. Lena Fioravanti", date: "1 month ago", rating: 5 },
-      { title: "Worth the price", body: "Not cheap but I cut out two other supplements after starting this. Net cost is similar and the results are better.", name: "Carlos V.", date: "2 months ago", rating: 4 },
-      { title: "Mental clarity bonus", body: "Bought it for energy, ended up loving the mental clarity even more. Mid-afternoon dips are gone.", name: "Sofia A.", date: "2 months ago", rating: 5 },
-      { title: "Subtle, then significant", body: "Three weeks in and my wife asked what I was doing differently. That's when I knew it was working.", name: "Benji Halloran", date: "3 months ago", rating: 5 },
-      { title: "One pill is convenient", body: "Love that the new dose is one capsule. Easier to stay consistent.", name: "Mira J.", date: "3 months ago", rating: 4 },
-      { title: "Back to my 5am runs", body: "Hadn't run before work in two years. Five weeks in and I'm hitting the trail again at sunrise without dragging.", name: "Imani Okafor-Reed", date: "4 months ago", rating: 5 },
-      { title: "Not a placebo", body: "I'm a chemist and a skeptic. Ran my own little A/B with two weeks off mid-bottle. The drop-off was obvious.", name: "Yusuf K.", date: "4 months ago", rating: 5 },
-      { title: "Steady but slow", body: "Took about three weeks before I felt anything meaningful. Now I get a gentle energy lift but it's not night-and-day. Still reordering.", name: "Marisol P.", date: "5 months ago", rating: 3 },
-      { title: "Good, not great for me", body: "Sleep improved, energy bumped a bit. Was hoping for more given the price point. Friend in his 50s loves it.", name: "Devon W.", date: "6 months ago", rating: 3 },
-      { title: "Better with consistency", body: "Skipped a few days here and there and lost the effect. Works if you take it every morning without fail, which is on me.", name: "Hina T.", date: "7 months ago", rating: 3 },
-      { title: "Felt mild effects", body: "Honestly expected a bigger shift. I do feel a touch more rested but it's subtle. Customer service was great though.", name: "Curtis O.", date: "8 months ago", rating: 2 },
-      { title: "Worked the first month", body: "Strong start, then it plateaued for me. Might cycle off and try again. Quality seems high regardless.", name: "Annika R.", date: "9 months ago", rating: 2 },
-    ];
+    const pool =
+      p.id === "neural"
+        ? [
+            {
+              title: "Genuine focus, no jitters",
+              body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.",
+              name: "Marcus T.",
+              date: "3 weeks ago",
+              rating: 5,
+              image: reviewManGym,
+            },
+            {
+              title: "Brain fog lifted in days",
+              body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.",
+              name: "Priya S.",
+              date: "1 month ago",
+              rating: 5,
+              image: reviewWomanLaptop,
+            },
+            {
+              title: "Great for deep work",
+              body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.",
+              name: "Dev_Kuroda",
+              date: "1 month ago",
+              rating: 5,
+              image: reviewBottleKitchen,
+            },
+            {
+              title: "Subtle but real",
+              body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.",
+              name: "Hannah Reinholt",
+              date: "2 months ago",
+              rating: 4,
+              image: reviewWomanBathroom,
+            },
+            {
+              title: "On my nightstand every night",
+              body: "I keep it right next to my water glass so I never forget. Mornings feel less foggy and I'm out the door faster.",
+              name: "Trent H.",
+              date: "2 months ago",
+              rating: 5,
+              image: reviewNightstand,
+            },
+            {
+              title: "Late shift survivor",
+              body: "I work nights and this has been a game changer for staying sharp during the 3am dead zone. No crash after.",
+              name: "Greg M.",
+              date: "2 months ago",
+              rating: 5,
+              image: reviewManSelfie,
+            },
+            {
+              title: "Replaced two other supplements",
+              body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.",
+              name: "Olivier B.",
+              date: "2 months ago",
+              rating: 5,
+            },
+            {
+              title: "Solid for studying",
+              body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.",
+              name: "Aisha M.",
+              date: "3 months ago",
+              rating: 5,
+            },
+            {
+              title: "Took a few weeks",
+              body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.",
+              name: "JordanLuxe27",
+              date: "3 months ago",
+              rating: 4,
+            },
+            {
+              title: "Sharper meetings",
+              body: "I run a small agency and back-to-back client calls used to wreck me. I'm clear-headed straight through now.",
+              name: "Thandiwe O.",
+              date: "3 months ago",
+              rating: 5,
+            },
+            {
+              title: "Wife noticed first",
+              body: "She said I seemed 'more present' before I even told her I was trying something new. That's when I knew.",
+              name: "Cole Vandermeer",
+              date: "4 months ago",
+              rating: 5,
+            },
+            {
+              title: "Finally a clean nootropic",
+              body: "No racing heart, no comedown. Just a smooth lift in focus that lasts the whole workday. I've cancelled my Adderall refill request.",
+              name: "Dr. Elena Vasquez",
+              date: "4 months ago",
+              rating: 5,
+            },
+            {
+              title: "ADHD-friendly",
+              body: "I have ADHD and most focus supplements either do nothing or wind me up. This one quiets the noise without flattening me. Huge for getting through admin work.",
+              name: "Reese N.",
+              date: "5 months ago",
+              rating: 5,
+            },
+            {
+              title: "Took it for a month before reviewing",
+              body: "Wanted to be fair. Day 30: clearer mornings, sharper recall, less midday fog. Will reorder.",
+              name: "Anastasia Liu-Park",
+              date: "5 months ago",
+              rating: 5,
+            },
+            {
+              title: "Good, not life-changing",
+              body: "Definitely helps with focus but I wouldn't say it transformed my life. Solid 4 stars from me.",
+              name: "Mike R.",
+              date: "5 months ago",
+              rating: 4,
+            },
+            {
+              title: "Helped me finish my thesis",
+              body: "PhD candidate here. The last six weeks of writing would have been miserable without this. Sustained focus is real.",
+              name: "Kwame A.",
+              date: "6 months ago",
+              rating: 5,
+            },
+            {
+              title: "Calm energy",
+              body: "I describe it as 'caffeine without the personality change.' My partner appreciates it.",
+              name: "Sam P.",
+              date: "6 months ago",
+              rating: 5,
+            },
+            {
+              title: "Better than my old stack",
+              body: "Was taking five different things. This replaced four of them. Cleaner mornings.",
+              name: "Naoko Whitfield",
+              date: "6 months ago",
+              rating: 5,
+            },
+            {
+              title: "Subtle in the best way",
+              body: "If you're looking for a buzz, this isn't it. If you want to think more clearly without noticing you're trying, it's exactly it.",
+              name: "Greg.",
+              date: "7 months ago",
+              rating: 4,
+            },
+            {
+              title: "Reading speed up",
+              body: "I read a lot for work. Noticed I was getting through dense reports faster around week 2. Not a placebo.",
+              name: "Adaeze Okonkwo",
+              date: "7 months ago",
+              rating: 5,
+            },
+            {
+              title: "Mid-morning is now my best window",
+              body: "Used to crash around 10am after my first coffee. Now I get a solid 3-hour deep work block. Game changer.",
+              name: "Tyler M.",
+              date: "8 months ago",
+              rating: 5,
+            },
+            {
+              title: "Subscribed",
+              body: "Worth the money. Subscribed and don't plan to stop.",
+              name: "Lila",
+              date: "8 months ago",
+              rating: 5,
+            },
+            {
+              title: "Helped with postpartum brain fog",
+              body: "Cleared the haze after having my second. Cleared with my doctor first. Felt like myself again within 3 weeks.",
+              name: "Brianna Esposito",
+              date: "9 months ago",
+              rating: 5,
+            },
+            {
+              title: "Honest 4 stars",
+              body: "Works well. Wish it were a touch cheaper. Will keep buying though.",
+              name: "Drew K.",
+              date: "9 months ago",
+              rating: 4,
+            },
+            {
+              title: "Decent, takes patience",
+              body: "Took me almost a month to notice anything. Once it kicked in it was solid, but the slow ramp surprised me. Wish that was clearer up front.",
+              name: "Patrick H.",
+              date: "5 months ago",
+              rating: 3,
+            },
+            {
+              title: "Helps a little",
+              body: "I get a mild lift in focus but nothing dramatic for me personally. Friend swears by it though, so might just be my body chemistry.",
+              name: "Eliza M.",
+              date: "7 months ago",
+              rating: 3,
+            },
+            {
+              title: "Capsule size is bigger than I expected",
+              body: "The effect is real and I do feel sharper, just wish the capsule was a touch smaller. Manageable, not a dealbreaker.",
+              name: "Yoon-Seo C.",
+              date: "4 months ago",
+              rating: 3,
+            },
+            {
+              title: "Subtle for me",
+              body: "Did notice cleaner mornings but I expected more after reading the reviews. Possibly works better stacked with their NMN.",
+              name: "Robert F.",
+              date: "6 months ago",
+              rating: 2,
+            },
+            {
+              title: "Mixed feelings",
+              body: "First bottle felt great, second one less so. Could be tolerance, could be me. Support team was friendly when I reached out.",
+              name: "Janelle K.",
+              date: "8 months ago",
+              rating: 2,
+            },
+          ]
+        : [
+            {
+              title: "Energy without the crash",
+              body: "47 and finally feel like I did in my 30s. Steady all-day energy, not a spike and crash. Sleep is also better.",
+              name: "Rachel D.",
+              date: "2 weeks ago",
+              rating: 5,
+            },
+            {
+              title: "Noticeable in the gym",
+              body: "Recovery between sets feels better and I'm not gassed by the third lift. Real difference after 3 weeks.",
+              name: "TomLiftsHeavy",
+              date: "1 month ago",
+              rating: 5,
+            },
+            {
+              title: "Best NMN I've tried",
+              body: "Tried three other brands before this. The dose actually makes sense biochemically and I feel it.",
+              name: "Dr. Lena Fioravanti",
+              date: "1 month ago",
+              rating: 5,
+            },
+            {
+              title: "Worth the price",
+              body: "Not cheap but I cut out two other supplements after starting this. Net cost is similar and the results are better.",
+              name: "Carlos V.",
+              date: "2 months ago",
+              rating: 4,
+            },
+            {
+              title: "Mental clarity bonus",
+              body: "Bought it for energy, ended up loving the mental clarity even more. Mid-afternoon dips are gone.",
+              name: "Sofia A.",
+              date: "2 months ago",
+              rating: 5,
+            },
+            {
+              title: "Subtle, then significant",
+              body: "Three weeks in and my wife asked what I was doing differently. That's when I knew it was working.",
+              name: "Benji Halloran",
+              date: "3 months ago",
+              rating: 5,
+            },
+            {
+              title: "One pill is convenient",
+              body: "Love that the new dose is one capsule. Easier to stay consistent.",
+              name: "Mira J.",
+              date: "3 months ago",
+              rating: 4,
+            },
+            {
+              title: "Back to my 5am runs",
+              body: "Hadn't run before work in two years. Five weeks in and I'm hitting the trail again at sunrise without dragging.",
+              name: "Imani Okafor-Reed",
+              date: "4 months ago",
+              rating: 5,
+            },
+            {
+              title: "Not a placebo",
+              body: "I'm a chemist and a skeptic. Ran my own little A/B with two weeks off mid-bottle. The drop-off was obvious.",
+              name: "Yusuf K.",
+              date: "4 months ago",
+              rating: 5,
+            },
+            {
+              title: "Steady but slow",
+              body: "Took about three weeks before I felt anything meaningful. Now I get a gentle energy lift but it's not night-and-day. Still reordering.",
+              name: "Marisol P.",
+              date: "5 months ago",
+              rating: 3,
+            },
+            {
+              title: "Good, not great for me",
+              body: "Sleep improved, energy bumped a bit. Was hoping for more given the price point. Friend in his 50s loves it.",
+              name: "Devon W.",
+              date: "6 months ago",
+              rating: 3,
+            },
+            {
+              title: "Better with consistency",
+              body: "Skipped a few days here and there and lost the effect. Works if you take it every morning without fail, which is on me.",
+              name: "Hina T.",
+              date: "7 months ago",
+              rating: 3,
+            },
+            {
+              title: "Felt mild effects",
+              body: "Honestly expected a bigger shift. I do feel a touch more rested but it's subtle. Customer service was great though.",
+              name: "Curtis O.",
+              date: "8 months ago",
+              rating: 2,
+            },
+            {
+              title: "Worked the first month",
+              body: "Strong start, then it plateaued for me. Might cycle off and try again. Quality seems high regardless.",
+              name: "Annika R.",
+              date: "9 months ago",
+              rating: 2,
+            },
+          ];
     return [
       ...userReviews,
       { title: p.sample.title, body: p.sample.body, name: p.sample.name, date: p.sample.date, rating: 5 },
@@ -355,10 +689,11 @@ function ProductPage() {
   }, [p, userReviews]);
   const sortedReviews = useMemo(() => {
     const arr = [...extraReviews];
-    if (reviewFilter === "highest") arr.sort((a,b)=>b.rating-a.rating);
-    else if (reviewFilter === "helpful") arr.sort((a,b)=>b.body.length-a.body.length);
-    else if (reviewFilter === "verified") return arr.filter(r => r.rating >= 4).slice(0, 6);
-    else if (["1","2","3","4","5"].includes(reviewFilter)) return arr.filter(r => r.rating === Number(reviewFilter));
+    if (reviewFilter === "highest") arr.sort((a, b) => b.rating - a.rating);
+    else if (reviewFilter === "helpful") arr.sort((a, b) => b.body.length - a.body.length);
+    else if (reviewFilter === "verified") return arr.filter((r) => r.rating >= 4).slice(0, 6);
+    else if (["1", "2", "3", "4", "5"].includes(reviewFilter))
+      return arr.filter((r) => r.rating === Number(reviewFilter));
     return arr;
   }, [extraReviews, reviewFilter]);
   const related = PRODUCTS[p.related.id];
@@ -366,15 +701,18 @@ function ProductPage() {
   return (
     <>
       {showReviewForm && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={() => setShowReviewForm(false)}>
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={e => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+          onClick={() => setShowReviewForm(false)}
+        >
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
                 if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
                 const payload = { ...form };
-                setUserReviews(prev => [{ ...payload, date: "Just now" }, ...prev]);
+                setUserReviews((prev) => [{ ...payload, date: "Just now" }, ...prev]);
                 setForm({ name: "", title: "", body: "", rating: 5 });
                 setShowReviewForm(false);
                 setTab("rev");
@@ -392,27 +730,47 @@ function ProductPage() {
               <div>
                 <label className="text-sm font-medium block mb-1">Rating</label>
                 <div className="flex gap-1">
-                  {[1,2,3,4,5].map(n => (
-                    <button key={n} type="button" onClick={() => setForm(f => ({...f, rating: n}))}>
-                      <Star className={`h-7 w-7 ${n <= form.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <button key={n} type="button" onClick={() => setForm((f) => ({ ...f, rating: n }))}>
+                      <Star
+                        className={`h-7 w-7 ${n <= form.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}
+                      />
                     </button>
                   ))}
                 </div>
               </div>
               <div>
                 <label className="text-sm font-medium block mb-1">Your name</label>
-                <input value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+                <input
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  className="w-full px-3 py-2 border border-border rounded-lg"
+                  required
+                />
               </div>
               <div>
                 <label className="text-sm font-medium block mb-1">Title</label>
-                <input value={form.title} onChange={e => setForm(f => ({...f, title: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+                <input
+                  value={form.title}
+                  onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+                  className="w-full px-3 py-2 border border-border rounded-lg"
+                  required
+                />
               </div>
               <div>
                 <label className="text-sm font-medium block mb-1">Review</label>
-                <textarea value={form.body} onChange={e => setForm(f => ({...f, body: e.target.value}))} rows={4} className="w-full px-3 py-2 border border-border rounded-lg" required/>
+                <textarea
+                  value={form.body}
+                  onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-border rounded-lg"
+                  required
+                />
               </div>
               <div>
-                <label className="text-sm font-medium block mb-1">Add a photo <span className="text-muted-foreground font-normal">(optional)</span></label>
+                <label className="text-sm font-medium block mb-1">
+                  Add a photo <span className="text-muted-foreground font-normal">(optional)</span>
+                </label>
                 <input
                   type="file"
                   accept="image/*"
@@ -420,54 +778,126 @@ function ProductPage() {
                     const file = e.target.files?.[0];
                     if (!file) return;
                     const reader = new FileReader();
-                    reader.onload = () => setForm(f => ({...f, image: reader.result as string}));
+                    reader.onload = () => setForm((f) => ({ ...f, image: reader.result as string }));
                     reader.readAsDataURL(file);
                   }}
                   className="w-full text-sm file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-secondary file:text-ink file:font-semibold hover:file:bg-secondary/80"
                 />
                 {form.image && (
                   <div className="mt-2 relative inline-block">
-                    <img src={form.image} alt="Preview" className="h-20 w-20 object-cover rounded-lg border border-border"/>
-                    <button type="button" onClick={() => setForm(f => ({...f, image: undefined}))} className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-ink text-white flex items-center justify-center text-xs"><X className="h-3 w-3"/></button>
+                    <img
+                      src={form.image}
+                      alt="Preview"
+                      className="h-20 w-20 object-cover rounded-lg border border-border"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setForm((f) => ({ ...f, image: undefined }))}
+                      className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-ink text-white flex items-center justify-center text-xs"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
                   </div>
                 )}
               </div>
               <div className="flex gap-2 justify-end">
-                <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">Cancel</button>
-                <button type="submit" className="btn-primary">Submit Review</button>
+                <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">
+                  Cancel
+                </button>
+                <button type="submit" className="btn-primary">
+                  Submit Review
+                </button>
               </div>
             </form>
           </div>
         </div>
       )}
       {showLabel && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setShowLabel(false)}>
-          <div className="bg-white rounded-2xl p-4 max-w-2xl w-full relative" onClick={e => e.stopPropagation()}>
-            <button onClick={() => setShowLabel(false)} aria-label="Close" className="absolute top-3 right-3 h-9 w-9 rounded-full hover:bg-secondary flex items-center justify-center"><X className="h-5 w-5"/></button>
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+          onClick={() => setShowLabel(false)}
+        >
+          <div className="bg-white rounded-2xl p-4 max-w-2xl w-full relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setShowLabel(false)}
+              aria-label="Close"
+              className="absolute top-3 right-3 h-9 w-9 rounded-full hover:bg-secondary flex items-center justify-center"
+            >
+              <X className="h-5 w-5" />
+            </button>
             <h2 className="text-xl font-display font-bold mb-3 pr-10">Supplement Facts Label</h2>
-            <img src={supplementFacts} alt="Supplement facts label" className="w-full rounded-lg border border-border"/>
+            <img
+              src={supplementFacts}
+              alt="Supplement facts label"
+              className="w-full rounded-lg border border-border"
+            />
           </div>
         </div>
       )}
       {showImageLightbox && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setShowImageLightbox(false)}>
-          <button onClick={() => setShowImageLightbox(false)} aria-label="Close image" className="absolute top-4 right-4 z-20 h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"><X className="h-5 w-5"/></button>
-          <button onClick={(e) => { e.stopPropagation(); setImgIdx((imgIdx - 1 + p.images.length) % p.images.length); }} aria-label="Previous image" className="absolute left-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"><ChevronLeft className="h-6 w-6"/></button>
-          <button onClick={(e) => { e.stopPropagation(); setImgIdx((imgIdx + 1) % p.images.length); }} aria-label="Next image" className="absolute right-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"><ChevronRight className="h-6 w-6"/></button>
-          <div className="w-full h-full flex items-center justify-center p-12" onClick={e => e.stopPropagation()}>
-            <img src={p.images[imgIdx]} alt={`${p.name} image ${imgIdx + 1}`} className="max-w-full max-h-full object-contain"/>
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+          onClick={() => setShowImageLightbox(false)}
+        >
+          <button
+            onClick={() => setShowImageLightbox(false)}
+            aria-label="Close image"
+            className="absolute top-4 right-4 z-20 h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setImgIdx((imgIdx - 1 + p.images.length) % p.images.length);
+            }}
+            aria-label="Previous image"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setImgIdx((imgIdx + 1) % p.images.length);
+            }}
+            aria-label="Next image"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur flex items-center justify-center text-white transition"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+          <div className="w-full h-full flex items-center justify-center p-12" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={p.images[imgIdx]}
+              alt={`${p.name} image ${imgIdx + 1}`}
+              className="max-w-full max-h-full object-contain"
+            />
           </div>
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
             {p.images.map((src, i) => (
-              <button key={i} onClick={(e) => { e.stopPropagation(); setImgIdx(i); }} className={`h-2 rounded-full transition-all ${imgIdx === i ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/60"}`} aria-label={`Go to image ${i + 1}`}/>
+              <button
+                key={i}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setImgIdx(i);
+                }}
+                className={`h-2 rounded-full transition-all ${imgIdx === i ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/60"}`}
+                aria-label={`Go to image ${i + 1}`}
+              />
             ))}
           </div>
         </div>
       )}
       {/* URGENCY BAR moved to global root */}
       <div className="container-x py-4 text-xs text-muted-foreground flex items-center gap-1.5">
-        <Link to="/" className="hover:text-ink">Home</Link><ChevronRight className="h-3 w-3"/>
-        <Link to="/shop" className="hover:text-ink">Shop</Link><ChevronRight className="h-3 w-3"/>
+        <Link to="/" className="hover:text-ink">
+          Home
+        </Link>
+        <ChevronRight className="h-3 w-3" />
+        <Link to="/shop" className="hover:text-ink">
+          Shop
+        </Link>
+        <ChevronRight className="h-3 w-3" />
         <span className="text-ink">{p.name}</span>
       </div>
 
@@ -475,99 +905,175 @@ function ProductPage() {
       <section className="container-x pb-12 grid gap-10 md:grid-cols-[5fr_6fr] items-start">
         <div>
           <div className="relative bg-white rounded-2xl aspect-square overflow-hidden group border border-border shadow-sm">
-            <div className="absolute top-4 left-4 bg-gradient-to-r from-primary to-electric text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md">{p.badge}</div>
-            <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in">
-              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+            <div className="absolute top-4 left-4 bg-gradient-to-r from-primary to-electric text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md">
+              {p.badge}
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowImageLightbox(true)}
+              aria-label={`Open ${p.name} image ${imgIdx + 1}`}
+              className="absolute inset-0 z-0 cursor-zoom-in"
+            >
+              <img
+                src={p.images[imgIdx]}
+                alt={p.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
             </button>
-            <button onClick={()=>setImgIdx((imgIdx - 1 + p.images.length) % p.images.length)} aria-label="Previous image" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronLeft className="h-5 w-5"/></button>
-            <button onClick={()=>setImgIdx((imgIdx + 1) % p.images.length)} aria-label="Next image" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronRight className="h-5 w-5"/></button>
+            <button
+              onClick={() => setImgIdx((imgIdx - 1 + p.images.length) % p.images.length)}
+              aria-label="Previous image"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={() => setImgIdx((imgIdx + 1) % p.images.length)}
+              aria-label="Next image"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
-            {p.images.map((src,i)=>(
-              <button key={i} onClick={()=>{setImgIdx(i); setShowImageLightbox(true);}} className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx===i?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/40"} overflow-hidden transition p-1`}>
-                <img src={src} alt={`${p.name} thumbnail ${i + 1}`} className="w-full h-full object-contain"/>
+            {p.images.map((src, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  setImgIdx(i);
+                  setShowImageLightbox(true);
+                }}
+                className={`h-16 w-16 sm:h-20 sm:w-20 rounded-lg bg-white border-2 ${imgIdx === i ? "border-primary ring-2 ring-primary/20" : "border-border hover:border-primary/40"} overflow-hidden transition p-1`}
+              >
+                <img src={src} alt={`${p.name} thumbnail ${i + 1}`} className="w-full h-full object-contain" />
               </button>
             ))}
           </div>
         </div>
         <div>
           <div className="inline-flex items-center gap-1.5 bg-success/10 text-success text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse"/>In Stock · Ships Today
+            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
+            In Stock · Ships Today
           </div>
           <h1 className="font-display text-3xl md:text-4xl">{p.name}</h1>
           <p className="mt-1 text-primary font-semibold">{p.subtitle}</p>
           <div className="mt-3 flex items-center gap-2 text-sm">
-            <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-            <span className="text-body">{p.rating} · <button onClick={()=>{setTab("rev"); setTimeout(()=>document.getElementById("product-tabs")?.scrollIntoView({behavior:"smooth",block:"start"}),50);}} className="underline hover:text-primary">{p.reviews} reviews</button></span>
+            <div className="flex">
+              {[1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+              ))}
+              <Star className="h-4 w-4 fill-primary/40 text-primary" />
+            </div>
+            <span className="text-body">
+              {p.rating} ·{" "}
+              <button
+                onClick={() => {
+                  setTab("rev");
+                  setTimeout(
+                    () =>
+                      document.getElementById("product-tabs")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+                    50,
+                  );
+                }}
+                className="underline hover:text-primary"
+              >
+                {p.reviews} reviews
+              </button>
+            </span>
           </div>
           <div className="mt-5 flex items-baseline gap-3">
             <div className="text-3xl font-display font-bold text-ink">${p.price.toFixed(2)}</div>
             <div className="text-lg text-muted-foreground line-through">${(p.price * 1.4).toFixed(2)}</div>
             <div className="text-xs font-bold uppercase bg-energy/15 text-energy px-2 py-1 rounded">Save 30%</div>
           </div>
-          <p className="mt-1 text-xs text-muted-foreground">or 4 interest-free payments of ${(p.price/4).toFixed(2)} with Shop Pay</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            or 4 interest-free payments of ${(p.price / 4).toFixed(2)} with Shop Pay
+          </p>
           <div className="mt-5 relative rounded-2xl border border-border/70 bg-gradient-to-br from-secondary/50 via-white to-primary/5 p-5 shadow-[0_4px_18px_-12px_rgba(0,0,0,0.15)]">
-            <div className="absolute left-0 top-4 bottom-4 w-1 rounded-r-full bg-gradient-to-b from-primary to-electric"/>
+            <div className="absolute left-0 top-4 bottom-4 w-1 rounded-r-full bg-gradient-to-b from-primary to-electric" />
             <p className="text-[15px] leading-relaxed text-ink/90 font-medium pl-2">{p.description}</p>
           </div>
           <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {p.benefits.map((b, i)=>(
+            {p.benefits.map((b, i) => (
               <li
                 key={b}
                 className="group flex items-start gap-2.5 rounded-xl border border-border/60 bg-white/80 backdrop-blur px-3 py-2.5 text-sm text-ink hover:border-success/40 hover:bg-success/[0.04] hover:shadow-[0_6px_18px_-12px_rgba(16,185,129,0.45)] transition-all"
                 style={{ animation: `fadeInUp 0.4s ease-out ${i * 60}ms both` }}
               >
                 <span className="h-6 w-6 shrink-0 rounded-full bg-gradient-to-br from-success/25 to-success/10 ring-1 ring-success/30 flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform">
-                  <Check className="h-3.5 w-3.5 text-success" strokeWidth={3}/>
+                  <Check className="h-3.5 w-3.5 text-success" strokeWidth={3} />
                 </span>
                 <span className="font-medium leading-snug">{b}</span>
               </li>
             ))}
           </ul>
 
-
           {p.id === "neural" ? (
             <div className="mt-7">
               <BundleSelector thumbnail={p.images[0]} productName={p.name} />
             </div>
           ) : (
-          <div className="mt-7 rounded-2xl border border-border bg-gradient-to-b from-white to-secondary/40 p-5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)]">
-            {/* Qty + button row */}
-            <div className="flex items-stretch gap-3">
-              <div className="inline-flex items-center bg-white border border-border rounded-xl shadow-sm">
-                <button aria-label="Decrease" onClick={()=>setQty(q=>Math.max(1,q-1))} className="h-12 w-11 flex items-center justify-center text-muted-foreground hover:text-ink rounded-l-xl"><Minus className="h-4 w-4"/></button>
-                <span className="w-8 text-center font-bold text-ink">{qty}</span>
-                <button aria-label="Increase" onClick={()=>setQty(q=>Math.min(10,q+1))} className="h-12 w-11 flex items-center justify-center text-muted-foreground hover:text-ink rounded-r-xl"><Plus className="h-4 w-4"/></button>
+            <div className="mt-7 rounded-2xl border border-border bg-gradient-to-b from-white to-secondary/40 p-5 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.12)]">
+              {/* Qty + button row */}
+              <div className="flex items-stretch gap-3">
+                <div className="inline-flex items-center bg-white border border-border rounded-xl shadow-sm">
+                  <button
+                    aria-label="Decrease"
+                    onClick={() => setQty((q) => Math.max(1, q - 1))}
+                    className="h-12 w-11 flex items-center justify-center text-muted-foreground hover:text-ink rounded-l-xl"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <span className="w-8 text-center font-bold text-ink">{qty}</span>
+                  <button
+                    aria-label="Increase"
+                    onClick={() => setQty((q) => Math.min(10, q + 1))}
+                    className="h-12 w-11 flex items-center justify-center text-muted-foreground hover:text-ink rounded-r-xl"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <ShopifyBuyButton
+                    productId={SHOPIFY_BUY[p.id].productId}
+                    buttonText={SHOPIFY_BUY[p.id].buttonText}
+                    productName={p.name}
+                    price={p.price}
+                  />
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <ShopifyBuyButton
-                  productId={SHOPIFY_BUY[p.id].productId}
-                  buttonText={SHOPIFY_BUY[p.id].buttonText}
-                  productName={p.name}
-                  price={p.price}
-                />
-              </div>
-            </div>
 
-            {/* Trust row */}
-            <div className="mt-4 pt-4 border-t border-border/70 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground">
-              <span className="flex items-center gap-1"><Lock className="h-3 w-3 text-success"/>SSL Secure Checkout</span>
-              <span className="hidden sm:inline opacity-40">·</span>
-              <span className="flex items-center gap-1"><Truck className="h-3 w-3 text-success"/>Free shipping $75+</span>
-              <span className="hidden sm:inline opacity-40">·</span>
-              <span className="flex items-center gap-1"><RotateCcw className="h-3 w-3 text-success"/>60-day refund</span>
+              {/* Trust row */}
+              <div className="mt-4 pt-4 border-t border-border/70 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <Lock className="h-3 w-3 text-success" />
+                  SSL Secure Checkout
+                </span>
+                <span className="hidden sm:inline opacity-40">·</span>
+                <span className="flex items-center gap-1">
+                  <Truck className="h-3 w-3 text-success" />
+                  Free shipping $75+
+                </span>
+                <span className="hidden sm:inline opacity-40">·</span>
+                <span className="flex items-center gap-1">
+                  <RotateCcw className="h-3 w-3 text-success" />
+                  60-day refund
+                </span>
+              </div>
             </div>
-          </div>
           )}
-          <button onClick={() => setShowLabel(true)} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition">
-            <FileText className="h-4 w-4"/> View Supplement Label
+          <button
+            onClick={() => setShowLabel(true)}
+            className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-md text-sm font-semibold text-ink hover:bg-secondary transition"
+          >
+            <FileText className="h-4 w-4" /> View Supplement Label
           </button>
 
           <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-muted-foreground">
-            <Trust icon={Lock} text="Secure Checkout"/>
-            <Trust icon={Truck} text="Free Shipping $75+"/>
-            <Trust icon={RotateCcw} text="60-Day Guarantee"/>
-            <Trust icon={Star} text="80+ Reviews"/>
+            <Trust icon={Lock} text="Secure Checkout" />
+            <Trust icon={Truck} text="Free Shipping $75+" />
+            <Trust icon={RotateCcw} text="60-Day Guarantee" />
+            <Trust icon={Star} text="80+ Reviews" />
           </div>
         </div>
       </section>
@@ -577,50 +1083,69 @@ function ProductPage() {
         <div className="container-x">
           <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
             {[
-              {k:"why",l:"Why You Need This",Icon:Brain},
-              {k:"ing",l:"Ingredients",Icon:Beaker},
-              {k:"use",l:"How to Use",Icon:Clock},
-              {k:"rev",l:"Reviews",Icon:Star},
-            ].map(t=>{
-              const active = tab===t.k;
+              { k: "why", l: "Why You Need This", Icon: Brain },
+              { k: "ing", l: "Ingredients", Icon: Beaker },
+              { k: "use", l: "How to Use", Icon: Clock },
+              { k: "rev", l: "Reviews", Icon: Star },
+            ].map((t) => {
+              const active = tab === t.k;
               return (
                 <button
                   key={t.k}
-                  onClick={()=>setTab(t.k as typeof tab)}
-                  className={`group relative inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${active
-                    ? "bg-gradient-to-r from-primary to-electric text-white shadow-lg shadow-primary/25 scale-[1.03]"
-                    : "bg-white text-ink border border-border hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"}`}
+                  onClick={() => setTab(t.k as typeof tab)}
+                  className={`group relative inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    active
+                      ? "bg-gradient-to-r from-primary to-electric text-white shadow-lg shadow-primary/25 scale-[1.03]"
+                      : "bg-white text-ink border border-border hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
+                  }`}
                 >
-                  <t.Icon className={`h-4 w-4 ${active ? "text-white" : "text-primary"}`}/>
+                  <t.Icon className={`h-4 w-4 ${active ? "text-white" : "text-primary"}`} />
                   <span>{t.l}</span>
                 </button>
               );
             })}
           </div>
 
-          {tab==="why" && (
+          {tab === "why" && (
             <div className="grid gap-10 md:grid-cols-2">
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3"><Brain className="h-3.5 w-3.5"/>The Science</div>
+                <div className="inline-flex items-center gap-1.5 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3">
+                  <Brain className="h-3.5 w-3.5" />
+                  The Science
+                </div>
                 <h2 className="text-2xl md:text-3xl">{p.why.heading}</h2>
                 <div className="mt-5 space-y-4">
-                  {p.why.body.map((para,i)=>(
-                    i===0
-                      ? <p key={i} className="text-lg md:text-xl font-display font-semibold text-ink leading-snug border-l-4 border-primary pl-4">{para}</p>
-                      : <p key={i} className="text-body leading-relaxed">{para}</p>
-                  ))}
+                  {p.why.body.map((para, i) =>
+                    i === 0 ? (
+                      <p
+                        key={i}
+                        className="text-lg md:text-xl font-display font-semibold text-ink leading-snug border-l-4 border-primary pl-4"
+                      >
+                        {para}
+                      </p>
+                    ) : (
+                      <p key={i} className="text-body leading-relaxed">
+                        {para}
+                      </p>
+                    ),
+                  )}
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                {p.why.cards.map((c,i)=>{
+                {p.why.cards.map((c, i) => {
                   const icons = [Zap, Sparkles, ShieldCheck, Heart];
                   const Icon = icons[i % icons.length];
                   return (
-                    <div key={c.t} className="group rounded-xl bg-white p-5 border border-border hover:border-primary/40 hover:shadow-md transition relative overflow-hidden">
-                      <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-primary/10 to-electric/10 group-hover:scale-125 transition-transform"/>
+                    <div
+                      key={c.t}
+                      className="group rounded-xl bg-white p-5 border border-border hover:border-primary/40 hover:shadow-md transition relative overflow-hidden"
+                    >
+                      <div className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-primary/10 to-electric/10 group-hover:scale-125 transition-transform" />
                       <div className="relative">
-                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-electric text-white flex items-center justify-center mb-3 shadow-sm"><Icon className="h-5 w-5"/></div>
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-electric text-white flex items-center justify-center mb-3 shadow-sm">
+                          <Icon className="h-5 w-5" />
+                        </div>
                         <h3 className="text-base mb-2 font-display font-bold">{c.t}</h3>
                         <p className="text-sm text-body">{c.d}</p>
                       </div>
@@ -631,18 +1156,26 @@ function ProductPage() {
             </div>
           )}
 
-          {tab==="ing" && (
+          {tab === "ing" && (
             <div className="grid gap-10 md:grid-cols-2">
               <div className="rounded-xl bg-white p-6 border-2 border-ink shadow-sm">
                 <div className="flex items-center justify-between border-b-4 border-ink pb-2">
                   <h3 className="text-xl">Supplement Facts</h3>
-                  <button onClick={() => setShowLabel(true)} className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"><FileText className="h-3.5 w-3.5"/>Full Label</button>
+                  <button
+                    onClick={() => setShowLabel(true)}
+                    className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+                  >
+                    <FileText className="h-3.5 w-3.5" />
+                    Full Label
+                  </button>
                 </div>
                 <p className="mt-2 text-sm text-body">{p.ingredients.serving}</p>
                 <ul className="mt-4 divide-y divide-border">
-                  {p.ingredients.items.map((it,i)=>(
+                  {p.ingredients.items.map((it, i) => (
                     <li key={it.name} className="py-2.5 text-sm flex items-center gap-2">
-                      <span className="h-5 w-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0">{i+1}</span>
+                      <span className="h-5 w-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0">
+                        {i + 1}
+                      </span>
                       {it.name}
                     </li>
                   ))}
@@ -650,12 +1183,20 @@ function ProductPage() {
                 <p className="mt-4 text-xs text-muted-foreground">{p.ingredients.other}</p>
               </div>
               <div>
-                <div className="inline-flex items-center gap-1.5 bg-electric/10 text-electric text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3"><Beaker className="h-3.5 w-3.5"/>What Each Does</div>
+                <div className="inline-flex items-center gap-1.5 bg-electric/10 text-electric text-xs font-bold uppercase tracking-wide px-2.5 py-1 rounded-full mb-3">
+                  <Beaker className="h-3.5 w-3.5" />
+                  What Each Does
+                </div>
                 <h3 className="text-2xl mb-4">Key Ingredients</h3>
                 <div className="space-y-3">
-                  {p.ingredients.callouts.map(c=>(
-                    <div key={c.name} className="rounded-lg bg-white p-4 border border-border hover:border-primary/40 hover:shadow-sm transition flex gap-3">
-                      <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary/15 to-electric/15 text-primary flex items-center justify-center shrink-0"><Check className="h-4 w-4"/></div>
+                  {p.ingredients.callouts.map((c) => (
+                    <div
+                      key={c.name}
+                      className="rounded-lg bg-white p-4 border border-border hover:border-primary/40 hover:shadow-sm transition flex gap-3"
+                    >
+                      <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary/15 to-electric/15 text-primary flex items-center justify-center shrink-0">
+                        <Check className="h-4 w-4" />
+                      </div>
                       <div>
                         <div className="font-display font-bold text-ink text-sm">{c.name}</div>
                         <p className="text-sm text-body mt-0.5">{c.desc}</p>
@@ -667,11 +1208,13 @@ function ProductPage() {
             </div>
           )}
 
-          {tab==="use" && (
+          {tab === "use" && (
             <div className="max-w-3xl space-y-6">
               <div className="rounded-2xl bg-gradient-to-br from-primary to-electric text-white p-6 shadow-lg">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center"><Clock className="h-6 w-6"/></div>
+                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center">
+                    <Clock className="h-6 w-6" />
+                  </div>
                   <div>
                     <div className="text-xs font-bold uppercase tracking-wider opacity-90">Daily Dosage</div>
                     <p className="text-lg font-display font-bold">{p.use.dosage}</p>
@@ -679,23 +1222,35 @@ function ProductPage() {
                 </div>
               </div>
               <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-4 flex items-center gap-2"><ThumbsUp className="h-5 w-5 text-success"/>Best Practices</h3>
-                <ul className="space-y-3">{p.use.best.map(b=>(
-                  <li key={b} className="flex gap-3 items-start group">
-                    <span className="h-6 w-6 rounded-full bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition"><Check className="h-3.5 w-3.5 text-success"/></span>
-                    <span className="text-ink/85 text-sm leading-relaxed font-medium">{b}</span>
-                  </li>
-                ))}</ul>
+                <h3 className="text-lg mb-4 flex items-center gap-2">
+                  <ThumbsUp className="h-5 w-5 text-success" />
+                  Best Practices
+                </h3>
+                <ul className="space-y-3">
+                  {p.use.best.map((b) => (
+                    <li key={b} className="flex gap-3 items-start group">
+                      <span className="h-6 w-6 rounded-full bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition">
+                        <Check className="h-3.5 w-3.5 text-success" />
+                      </span>
+                      <span className="text-ink/85 text-sm leading-relaxed font-medium">{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div className="rounded-xl bg-white p-6 border border-border">
-                <h3 className="text-lg mb-4 flex items-center gap-2"><Sparkles className="h-5 w-5 text-primary"/>What to Expect</h3>
+                <h3 className="text-lg mb-4 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" />
+                  What to Expect
+                </h3>
                 <div className="relative pl-6">
-                  <div className="absolute left-[9px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-electric to-energy"/>
+                  <div className="absolute left-[9px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-electric to-energy" />
                   <div className="space-y-5">
-                    {p.use.timeline.map((t,i)=>(
+                    {p.use.timeline.map((t, i) => (
                       <div key={t.period} className="relative">
-                        <div className="absolute -left-6 top-1 h-5 w-5 rounded-full bg-white border-2 border-primary flex items-center justify-center"><span className="h-2 w-2 rounded-full bg-primary"/></div>
+                        <div className="absolute -left-6 top-1 h-5 w-5 rounded-full bg-white border-2 border-primary flex items-center justify-center">
+                          <span className="h-2 w-2 rounded-full bg-primary" />
+                        </div>
                         <div className="font-display font-bold text-primary text-sm">{t.period}</div>
                         <div className="text-body text-sm mt-0.5">{t.text}</div>
                       </div>
@@ -705,90 +1260,188 @@ function ProductPage() {
               </div>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="rounded-xl bg-white p-5 border border-border text-sm text-body flex gap-3">
-                  <ShieldCheck className="h-5 w-5 text-success shrink-0 mt-0.5"/>
-                  <div><div className="font-bold text-ink mb-0.5">Storage</div>{p.use.storage}</div>
+                  <ShieldCheck className="h-5 w-5 text-success shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-bold text-ink mb-0.5">Storage</div>
+                    {p.use.storage}
+                  </div>
                 </div>
                 <div className="rounded-xl bg-alert/5 p-5 border border-alert/20 text-sm text-body flex gap-3">
-                  <AlertCircle className="h-5 w-5 text-alert shrink-0 mt-0.5"/>
-                  <div><div className="font-bold text-ink mb-0.5">Note</div>{p.use.note}</div>
+                  <AlertCircle className="h-5 w-5 text-alert shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-bold text-ink mb-0.5">Note</div>
+                    {p.use.note}
+                  </div>
                 </div>
               </div>
             </div>
           )}
 
-          {tab==="rev" && (
+          {tab === "rev" && (
             <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
               <div className="rounded-2xl bg-gradient-to-br from-white to-secondary p-6 border border-border h-fit shadow-sm">
                 <div className="flex items-baseline gap-2">
                   <div className="text-5xl font-display font-bold text-ink">{p.rating}</div>
                   <div className="text-sm text-muted-foreground">/ 5</div>
                 </div>
-                <div className="flex mt-2">{[1,2,3,4].map(i=><Star key={i} className="h-5 w-5 fill-primary text-primary"/>)}<Star className="h-5 w-5 fill-primary/40 text-primary"/></div>
+                <div className="flex mt-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                  ))}
+                  <Star className="h-5 w-5 fill-primary/40 text-primary" />
+                </div>
                 <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews} verified reviews</div>
                 <div className="mt-5 space-y-1.5 text-xs">
-                  {([["5",79],["4",12],["3",6],["2",2],["1",1]] as const).map(([s,pct])=>(
+                  {(
+                    [
+                      ["5", 79],
+                      ["4", 12],
+                      ["3", 6],
+                      ["2", 2],
+                      ["1", 1],
+                    ] as const
+                  ).map(([s, pct]) => (
                     <button
                       key={s}
                       type="button"
-                      onClick={()=>{setReviewFilter(s);setReviewsShown(3);}}
-                      className={`w-full flex items-center gap-2 rounded-md px-1.5 py-1 -mx-1.5 transition hover:bg-white text-left ${reviewFilter===s?"bg-white ring-1 ring-primary/40":""}`}
+                      onClick={() => {
+                        setReviewFilter(s);
+                        setReviewsShown(3);
+                      }}
+                      className={`w-full flex items-center gap-2 rounded-md px-1.5 py-1 -mx-1.5 transition hover:bg-white text-left ${reviewFilter === s ? "bg-white ring-1 ring-primary/40" : ""}`}
                       aria-label={`Show ${s} star reviews`}
                     >
                       <span className="w-4 font-semibold">{s}★</span>
-                      <span className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border"><span className="block h-full bg-gradient-to-r from-primary to-electric" style={{width:`${pct}%`}}/></span>
+                      <span className="flex-1 h-2 bg-white rounded-full overflow-hidden border border-border">
+                        <span
+                          className="block h-full bg-gradient-to-r from-primary to-electric"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </span>
                       <span className="w-8 text-right text-muted-foreground">{pct}%</span>
                     </button>
                   ))}
                 </div>
-                {["1","2","3","4","5"].includes(reviewFilter) && (
-                  <button onClick={()=>{setReviewFilter("recent");setReviewsShown(3);}} className="mt-2 text-xs text-primary hover:underline">Clear star filter</button>
+                {["1", "2", "3", "4", "5"].includes(reviewFilter) && (
+                  <button
+                    onClick={() => {
+                      setReviewFilter("recent");
+                      setReviewsShown(3);
+                    }}
+                    className="mt-2 text-xs text-primary hover:underline"
+                  >
+                    Clear star filter
+                  </button>
                 )}
-                <div className="mt-5 pt-5 border-t border-border flex items-center gap-2 text-xs text-success font-semibold"><ShieldCheck className="h-4 w-4"/>97% would recommend</div>
-                <button onClick={() => setShowReviewForm(true)} className="mt-5 btn-primary w-full">Write a Review</button>
+                <div className="mt-5 pt-5 border-t border-border flex items-center gap-2 text-xs text-success font-semibold">
+                  <ShieldCheck className="h-4 w-4" />
+                  97% would recommend
+                </div>
+                <button onClick={() => setShowReviewForm(true)} className="mt-5 btn-primary w-full">
+                  Write a Review
+                </button>
               </div>
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-2 text-xs">
-                  {([["recent","Most Recent"],["highest","Highest Rated"],["helpful","Most Helpful"],["verified","Verified Only"]] as const).map(([k,l])=>(
-                    <button key={k} onClick={()=>{setReviewFilter(k);setReviewsShown(3);}} className={`px-3 py-1.5 rounded-full border transition ${reviewFilter===k?"border-primary bg-primary text-white":"border-border hover:bg-white"}`}>{l}</button>
+                  {(
+                    [
+                      ["recent", "Most Recent"],
+                      ["highest", "Highest Rated"],
+                      ["helpful", "Most Helpful"],
+                      ["verified", "Verified Only"],
+                    ] as const
+                  ).map(([k, l]) => (
+                    <button
+                      key={k}
+                      onClick={() => {
+                        setReviewFilter(k);
+                        setReviewsShown(3);
+                      }}
+                      className={`px-3 py-1.5 rounded-full border transition ${reviewFilter === k ? "border-primary bg-primary text-white" : "border-border hover:bg-white"}`}
+                    >
+                      {l}
+                    </button>
                   ))}
                 </div>
                 {sortedReviews.slice(0, reviewsShown).map((r, i) => {
-                  const initials = r.name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase();
+                  const initials = r.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")
+                    .slice(0, 2)
+                    .toUpperCase();
                   return (
-                  <div key={i} className="rounded-xl bg-white p-6 border border-border hover:shadow-md transition">
-                    <div className="flex items-start gap-3">
-                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-electric text-white font-bold text-sm flex items-center justify-center shrink-0">{initials}</div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-display font-bold text-ink text-sm">{r.name}</span>
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide bg-success/10 text-success px-1.5 py-0.5 rounded"><Check className="h-2.5 w-2.5"/>Verified</span>
-                          <span className="text-xs text-muted-foreground">· {r.date}</span>
+                    <div key={i} className="rounded-xl bg-white p-6 border border-border hover:shadow-md transition">
+                      <div className="flex items-start gap-3">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-electric text-white font-bold text-sm flex items-center justify-center shrink-0">
+                          {initials}
                         </div>
-                        <div className="flex mt-1">{Array.from({length:5}).map((_,s)=><Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}/>)}</div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="font-display font-bold text-ink text-sm">{r.name}</span>
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide bg-success/10 text-success px-1.5 py-0.5 rounded">
+                              <Check className="h-2.5 w-2.5" />
+                              Verified
+                            </span>
+                            <span className="text-xs text-muted-foreground">· {r.date}</span>
+                          </div>
+                          <div className="flex mt-1">
+                            {Array.from({ length: 5 }).map((_, s) => (
+                              <Star
+                                key={s}
+                                className={`h-4 w-4 ${s < r.rating ? "fill-primary text-primary" : "fill-primary/20 text-primary/30"}`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <h3 className="text-base font-display font-bold mt-3">"{r.title}"</h3>
+                      <p className="mt-2 text-body text-sm leading-relaxed">{r.body}</p>
+                      {r.image && (
+                        <a href={r.image} target="_blank" rel="noreferrer" className="mt-3 inline-block">
+                          <img
+                            src={r.image}
+                            alt={`Photo from ${r.name}`}
+                            loading="lazy"
+                            className="h-28 w-28 object-cover rounded-lg border border-border hover:opacity-90 transition"
+                          />
+                        </a>
+                      )}
+                      <div className="mt-4 pt-3 border-t border-border text-xs text-muted-foreground flex items-center gap-2">
+                        <span>Was this helpful?</span>
+                        <button
+                          onClick={() => setHelpful((h) => ({ ...h, [i]: "yes" }))}
+                          className={`px-2 py-1 rounded border transition inline-flex items-center gap-1 ${helpful[i] === "yes" ? "border-primary text-primary bg-primary/5" : "border-border hover:bg-secondary"}`}
+                        >
+                          <ThumbsUp className="h-3 w-3" />
+                          Yes
+                        </button>
+                        <button
+                          onClick={() => setHelpful((h) => ({ ...h, [i]: "no" }))}
+                          className={`px-2 py-1 rounded border transition ${helpful[i] === "no" ? "border-primary text-primary bg-primary/5" : "border-border hover:bg-secondary"}`}
+                        >
+                          No
+                        </button>
+                        {helpful[i] && <span className="text-success">Thanks for your feedback!</span>}
                       </div>
                     </div>
-                    <h3 className="text-base font-display font-bold mt-3">"{r.title}"</h3>
-                    <p className="mt-2 text-body text-sm leading-relaxed">{r.body}</p>
-                    {r.image && (
-                      <a href={r.image} target="_blank" rel="noreferrer" className="mt-3 inline-block">
-                        <img src={r.image} alt={`Photo from ${r.name}`} loading="lazy" className="h-28 w-28 object-cover rounded-lg border border-border hover:opacity-90 transition"/>
-                      </a>
-                    )}
-                    <div className="mt-4 pt-3 border-t border-border text-xs text-muted-foreground flex items-center gap-2">
-                      <span>Was this helpful?</span>
-                      <button onClick={()=>setHelpful(h=>({...h,[i]:"yes"}))} className={`px-2 py-1 rounded border transition inline-flex items-center gap-1 ${helpful[i]==="yes"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}><ThumbsUp className="h-3 w-3"/>Yes</button>
-                      <button onClick={()=>setHelpful(h=>({...h,[i]:"no"}))} className={`px-2 py-1 rounded border transition ${helpful[i]==="no"?"border-primary text-primary bg-primary/5":"border-border hover:bg-secondary"}`}>No</button>
-                      {helpful[i] && <span className="text-success">Thanks for your feedback!</span>}
-                    </div>
-                  </div>
                   );
                 })}
                 {sortedReviews.length === 0 ? (
-                  <div className="rounded-xl border border-dashed border-border bg-white/50 p-8 text-center text-sm text-muted-foreground">No reviews match this filter yet.</div>
+                  <div className="rounded-xl border border-dashed border-border bg-white/50 p-8 text-center text-sm text-muted-foreground">
+                    No reviews match this filter yet.
+                  </div>
                 ) : reviewsShown < sortedReviews.length ? (
-                  <button onClick={() => setReviewsShown(n => Math.min(n + 3, sortedReviews.length))} className="btn-outline">Load More Reviews</button>
+                  <button
+                    onClick={() => setReviewsShown((n) => Math.min(n + 3, sortedReviews.length))}
+                    className="btn-outline"
+                  >
+                    Load More Reviews
+                  </button>
                 ) : (
-                  <div className="text-center text-sm text-muted-foreground py-2">You've reached the end of the reviews.</div>
+                  <div className="text-center text-sm text-muted-foreground py-2">
+                    You've reached the end of the reviews.
+                  </div>
                 )}
               </div>
             </div>
@@ -801,13 +1454,17 @@ function ProductPage() {
         <h2 className="text-2xl md:text-3xl">Complete Your Stack</h2>
         <div className="mt-6 rounded-2xl border border-border p-6 flex flex-col sm:flex-row items-center gap-6">
           <div className="h-32 w-32 bg-secondary rounded-xl flex items-center justify-center shrink-0">
-            <img src={related.image} alt={related.name} className="max-h-28 object-contain"/>
+            <img src={related.image} alt={related.name} className="max-h-28 object-contain" />
           </div>
           <div className="flex-1 text-center sm:text-left">
-            <h3 className="text-xl">{related.name} — ${related.price.toFixed(2)}</h3>
+            <h3 className="text-xl">
+              {related.name} — ${related.price.toFixed(2)}
+            </h3>
             <p className="mt-1 text-body text-sm">{p.related.blurb}</p>
           </div>
-          <Link to="/product/$slug" params={{slug:related.slug}} className="btn-primary">View Product</Link>
+          <Link to="/product/$slug" params={{ slug: related.slug }} className="btn-primary">
+            View Product
+          </Link>
         </div>
       </section>
 
@@ -833,14 +1490,41 @@ function ProductPage() {
 
           <div className="mt-12 max-w-3xl mx-auto space-y-4">
             {[
-              { icon: Zap, q: "How fast will I feel it?", a: "Most people notice cleaner, calmer energy within the first few days. The deeper benefits — sharper focus, better memory, no afternoon slump — build over 2–4 weeks as ingredients like Bacopa monnieri reach full effect. Consistency is what makes it work, which is why most customers start with a 3-month supply." },
-              { icon: Coffee, q: "Does it contain caffeine? Will it keep me up at night?", a: "Yes — a low dose of natural caffeine, deliberately paired with L-Theanine for smooth, calm focus without the jitters or crash. For best results, take it in the morning or before 2pm so it won't affect your sleep." },
-              { icon: Beaker, q: "Can I take it with my morning coffee?", a: "Absolutely. Many customers take Circuit instead of their 2nd or 3rd coffee. If you're caffeine-sensitive, start with Circuit alone for the first few days to feel your baseline." },
-              { icon: ShieldCheck, q: "Is it safe? What's in it?", a: "Circuit is made in an FDA-registered, cGMP-certified US facility and third-party lab tested for purity. It contains 10 clinically studied compounds and no artificial additives. If you're pregnant, nursing, on medication, or have a medical condition, check with your healthcare provider first." },
-              { icon: Clock, q: "How long does one bottle last?", a: "Each bottle is a 30-day supply — one capsule daily." },
-              { icon: RotateCcw, q: "What if it doesn't work for me?", a: "Try it risk-free for 60 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it." },
+              {
+                icon: Zap,
+                q: "How fast will I feel it?",
+                a: "Most people notice cleaner, calmer energy within the first few days. The deeper benefits — sharper focus, better memory, no afternoon slump — build over 2–4 weeks as ingredients like Bacopa monnieri reach full effect. Consistency is what makes it work, which is why most customers start with a 3-month supply.",
+              },
+              {
+                icon: Coffee,
+                q: "Does it contain caffeine? Will it keep me up at night?",
+                a: "Yes — a low dose of natural caffeine, deliberately paired with L-Theanine for smooth, calm focus without the jitters or crash. For best results, take it in the morning or before 2pm so it won't affect your sleep.",
+              },
+              {
+                icon: Beaker,
+                q: "Can I take it with my morning coffee?",
+                a: "Absolutely. Many customers take Circuit instead of their 2nd or 3rd coffee. If you're caffeine-sensitive, start with Circuit alone for the first few days to feel your baseline.",
+              },
+              {
+                icon: ShieldCheck,
+                q: "Is it safe? What's in it?",
+                a: "Circuit is made in an FDA-registered, cGMP-certified US facility and third-party lab tested for purity. It contains 10 clinically studied compounds and no artificial additives. If you're pregnant, nursing, on medication, or have a medical condition, check with your healthcare provider first.",
+              },
+              {
+                icon: Clock,
+                q: "How long does one bottle last?",
+                a: "Each bottle is a 30-day supply — one capsule daily.",
+              },
+              {
+                icon: RotateCcw,
+                q: "What if it doesn't work for me?",
+                a: "Try it risk-free for 60 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.",
+              },
             ].map((item, i) => (
-              <div key={i} className="group rounded-2xl bg-white border border-border/80 p-1 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
+              <div
+                key={i}
+                className="group rounded-2xl bg-white border border-border/80 p-1 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+              >
                 <div className="rounded-xl bg-gradient-to-r from-white to-secondary/30 p-5 md:p-6">
                   <div className="flex items-start gap-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
@@ -861,9 +1545,12 @@ function ProductPage() {
       {/* GUARANTEE */}
       <section className="bg-secondary py-16">
         <div className="container-x text-center max-w-2xl">
-          <ShieldCheck className="h-12 w-12 text-success mx-auto"/>
+          <ShieldCheck className="h-12 w-12 text-success mx-auto" />
           <h2 className="text-2xl md:text-4xl mt-4">60-Day Money-Back Guarantee</h2>
-          <p className="mt-4 text-body">Try {p.name} risk-free for 60 days. If you don't feel a noticeable difference in your focus and mental clarity, we'll refund every penny. No questions asked.</p>
+          <p className="mt-4 text-body">
+            Try {p.name} risk-free for 60 days. If you don't feel a noticeable difference in your focus and mental
+            clarity, we'll refund every penny. No questions asked.
+          </p>
         </div>
       </section>
     </>
@@ -873,7 +1560,7 @@ function ProductPage() {
 function Trust({ icon: Icon, text }: { icon: typeof Lock; text: string }) {
   return (
     <div className="flex items-center gap-2 rounded-lg bg-secondary px-3 py-2.5">
-      <Icon className="h-4 w-4 text-primary"/>
+      <Icon className="h-4 w-4 text-primary" />
       <span className="text-ink font-medium">{text}</span>
     </div>
   );
@@ -892,14 +1579,42 @@ type BundleOpt = {
 };
 
 const BUNDLES: BundleOpt[] = [
-  { id: "1", bottles: 1, variantId: "48341605810330", price: 42.99, compare: 59.00, save: 16, detail: "30 capsules · 30-day supply", freeShipping: false },
-  { id: "2", bottles: 2, variantId: "48341605843098", price: 79.99, compare: 118.00, save: 38, detail: "60 capsules · 60-day supply", freeShipping: true, popular: true },
-  { id: "3", bottles: 3, variantId: "48341605875866", price: 109.99, compare: 177.00, save: 67, detail: "90 capsules · 90-day supply", freeShipping: true },
+  {
+    id: "1",
+    bottles: 1,
+    variantId: "48341605810330",
+    price: 42.99,
+    compare: 59.0,
+    save: 16,
+    detail: "30 capsules · 30-day supply",
+    freeShipping: false,
+  },
+  {
+    id: "2",
+    bottles: 2,
+    variantId: "48341729607834",
+    price: 79.99,
+    compare: 118.0,
+    save: 38,
+    detail: "60 capsules · 60-day supply",
+    freeShipping: true,
+    popular: true,
+  },
+  {
+    id: "3",
+    bottles: 3,
+    variantId: "48341729050778",
+    price: 109.99,
+    compare: 177.0,
+    save: 67,
+    detail: "90 capsules · 90-day supply",
+    freeShipping: true,
+  },
 ];
 
 function BundleSelector({ thumbnail, productName }: { thumbnail: string; productName: string }) {
   const [selected, setSelected] = useState<"1" | "2" | "3">("2");
-  const active = BUNDLES.find(b => b.id === selected)!;
+  const active = BUNDLES.find((b) => b.id === selected)!;
 
   const handleAddToCart = () => {
     if (typeof window === "undefined") return;
@@ -913,14 +1628,23 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
     window.gtag?.("event", "add_to_cart", {
       currency: "USD",
       value: active.price,
-      items: [{ item_id: active.variantId, item_name: `${productName} ${active.bottles}-pack`, price: active.price, quantity: 1 }],
+      items: [
+        {
+          item_id: active.variantId,
+          item_name: `${productName} ${active.bottles}-pack`,
+          price: active.price,
+          quantity: 1,
+        },
+      ],
     });
     window.location.href = `https://xwkkv0-r0.myshopify.com/cart/${active.variantId}:1`;
   };
 
   return (
     <div>
-      <h2 className="text-center text-sm font-bold uppercase tracking-[0.2em] text-[#2C353F] mb-5">Choose Your Package</h2>
+      <h2 className="text-center text-sm font-bold uppercase tracking-[0.2em] text-[#2C353F] mb-5">
+        Choose Your Package
+      </h2>
       <div className="space-y-3">
         {BUNDLES.map((b) => {
           const isSelected = selected === b.id;
@@ -943,27 +1667,45 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                 aria-pressed={isSelected}
                 className={`w-full text-left rounded-[14px] ${baseBorder} ${cardBg} ${isPopular ? "mt-2" : ""} px-3 sm:px-4 py-3.5 flex items-center gap-3 sm:gap-4 transition-all hover:shadow-md`}
               >
-                <div className={`shrink-0 h-5 w-5 rounded-full border-2 ${isSelected ? (popularSelected ? "border-[#F5853F] bg-[#F5853F]" : "border-[#F5853F] bg-[#F5853F]") : (popularSelected ? "border-white/50" : "border-[#D7DCE0]")} flex items-center justify-center`}>
+                <div
+                  className={`shrink-0 h-5 w-5 rounded-full border-2 ${isSelected ? (popularSelected ? "border-[#F5853F] bg-[#F5853F]" : "border-[#F5853F] bg-[#F5853F]") : popularSelected ? "border-white/50" : "border-[#D7DCE0]"} flex items-center justify-center`}
+                >
                   {isSelected && <span className="h-2 w-2 rounded-full bg-white" />}
                 </div>
-                <div className={`shrink-0 h-14 w-14 sm:h-16 sm:w-16 rounded-lg ${popularSelected ? "bg-white/10" : "bg-secondary"} overflow-hidden flex items-center justify-center p-1`}>
-                  <img src={thumbnail} alt="" className="h-full w-full object-contain"/>
+                <div
+                  className={`shrink-0 h-14 w-14 sm:h-16 sm:w-16 rounded-lg ${popularSelected ? "bg-white/10" : "bg-secondary"} overflow-hidden flex items-center justify-center p-1`}
+                >
+                  <img src={thumbnail} alt="" className="h-full w-full object-contain" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className={`font-extrabold text-[15px] sm:text-base ${popularSelected ? "text-white" : "text-[#2C353F]"}`}>
+                  <div
+                    className={`font-extrabold text-[15px] sm:text-base ${popularSelected ? "text-white" : "text-[#2C353F]"}`}
+                  >
                     {b.bottles} {b.bottles === 1 ? "BOTTLE" : "BOTTLES"}
                   </div>
                   <div className="mt-1 flex items-baseline gap-2 flex-wrap">
-                    <span className={`text-xl sm:text-2xl font-extrabold ${popularSelected ? "text-white" : "text-[#2C353F]"}`}>${b.price.toFixed(2)}</span>
-                    <span className={`text-sm line-through ${popularSelected ? "text-white/50" : "text-[#8A95A1]"}`}>${b.compare.toFixed(2)}</span>
+                    <span
+                      className={`text-xl sm:text-2xl font-extrabold ${popularSelected ? "text-white" : "text-[#2C353F]"}`}
+                    >
+                      ${b.price.toFixed(2)}
+                    </span>
+                    <span className={`text-sm line-through ${popularSelected ? "text-white/50" : "text-[#8A95A1]"}`}>
+                      ${b.compare.toFixed(2)}
+                    </span>
                   </div>
-                  <div className={`mt-0.5 text-[11px] sm:text-xs ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}>{b.detail}</div>
+                  <div
+                    className={`mt-0.5 text-[11px] sm:text-xs ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}
+                  >
+                    {b.detail}
+                  </div>
                   {b.freeShipping && (
                     <div className="mt-1 text-[11px] sm:text-xs font-bold text-[#2E9E6B]">✓ FREE SHIPPING</div>
                   )}
                 </div>
                 <div className="shrink-0">
-                  <span className={`inline-block rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#2C353F] text-white"}`}>
+                  <span
+                    className={`inline-block rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#2C353F] text-white"}`}
+                  >
                     SAVE ${b.save}
                   </span>
                 </div>
