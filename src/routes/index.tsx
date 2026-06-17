@@ -3,31 +3,104 @@ import heroAsset from "@/assets/hero-founder.png.asset.json";
 const heroImg = heroAsset.url;
 import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
-import { Brain, Zap, Shield, Atom, CalendarCheck, MoonStar, Pill, Sparkles, Check, X, ChevronDown, Star, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import {
+  Brain,
+  Zap,
+  Shield,
+  Atom,
+  CalendarCheck,
+  MoonStar,
+  Pill,
+  Sparkles,
+  Check,
+  X,
+  ChevronDown,
+  Star,
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Circuit Energy — Fix Brain Fog & Afternoon Crashes" },
-      { name: "description", content: "Circuit combines cellular energy support and cognitive enhancement so you can think clearly, work sharply, and feel like yourself again. 60-day guarantee." },
+      {
+        name: "description",
+        content:
+          "Circuit combines cellular energy support and cognitive enhancement so you can think clearly, work sharply, and feel like yourself again. 60-day guarantee.",
+      },
       { property: "og:title", content: "Circuit Energy — Your Brain Isn't Broken. It's Under-Fueled." },
-      { property: "og:description", content: "Premium supplements for chronic fatigue and brain fog. Works in 1-2 weeks. 200+ verified results." },
+      {
+        property: "og:description",
+        content: "Premium supplements for chronic fatigue and brain fog. Works in 1-2 weeks. 200+ verified results.",
+      },
       { property: "og:image", content: heroImg },
     ],
   }),
   component: HomePage,
 });
 
-const tickerItems = ["Natural Ingredients", "No Artificial Additives", "Third-Party Tested", "60-Day Guarantee", "Made in USA", "200+ Reviews", "Clinically Studied Ingredients"];
+const tickerItems = [
+  "Natural Ingredients",
+  "No Artificial Additives",
+  "Third-Party Tested",
+  "60-Day Guarantee",
+  "Made in USA",
+  "200+ Reviews",
+  "Clinically Studied Ingredients",
+];
 
 const benefits = [
-  { icon: Brain, title: "Razor-Sharp Focus", desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Cognition" },
-  { icon: Zap, title: "No More Afternoon Crashes", desc: "Sustained energy from morning to evening. No 2pm wall. No jitters. Just consistent output that lasts all day.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Energy" },
-  { icon: Shield, title: "Natural. No Additives.", desc: "Every ingredient in Circuit Neural Performance is high-quality and natural. No fillers, no proprietary blends, no compromises.", accent: "var(--success)", tint: "oklch(0.38 0.09 140 / 0.12)", tag: "Clean" },
-  { icon: Atom, title: "Fixes the Root Cause", desc: "Circuit NMN boosts NAD+ at the cellular level — the molecule your mitochondria need to produce energy. Not a band-aid. An actual fix.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.12)", tag: "Cellular" },
-  { icon: CalendarCheck, title: "Works in 1-2 Weeks", desc: "Most users notice improvements in mental clarity and energy within 7-14 days of consistent daily use.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.14)", tag: "Fast" },
-  { icon: MoonStar, title: "Wake Up Actually Rested", desc: "Better cellular energy and neurotransmitter balance means better sleep quality. You'll wake up feeling like yourself again.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.12)", tag: "Recovery" },
+  {
+    icon: Brain,
+    title: "Razor-Sharp Focus",
+    desc: "Alpha GPC and Huperzine A boost acetylcholine — the neurotransmitter behind focus, learning, and memory. Think clearly for hours, not minutes.",
+    accent: "var(--electric)",
+    tint: "oklch(0.7 0.16 200 / 0.12)",
+    tag: "Cognition",
+  },
+  {
+    icon: Zap,
+    title: "No More Afternoon Crashes",
+    desc: "Sustained energy from morning to evening. No 2pm wall. No jitters. Just consistent output that lasts all day.",
+    accent: "var(--energy)",
+    tint: "oklch(0.72 0.18 55 / 0.14)",
+    tag: "Energy",
+  },
+  {
+    icon: Shield,
+    title: "Natural. No Additives.",
+    desc: "Every ingredient in Circuit Neural Performance is high-quality and natural. No fillers, no proprietary blends, no compromises.",
+    accent: "var(--success)",
+    tint: "oklch(0.38 0.09 140 / 0.12)",
+    tag: "Clean",
+  },
+  {
+    icon: Atom,
+    title: "Fixes the Root Cause",
+    desc: "Circuit NMN boosts NAD+ at the cellular level — the molecule your mitochondria need to produce energy. Not a band-aid. An actual fix.",
+    accent: "var(--primary)",
+    tint: "oklch(0.59 0.025 245 / 0.12)",
+    tag: "Cellular",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Works in 1-2 Weeks",
+    desc: "Most users notice improvements in mental clarity and energy within 7-14 days of consistent daily use.",
+    accent: "var(--energy)",
+    tint: "oklch(0.72 0.18 55 / 0.14)",
+    tag: "Fast",
+  },
+  {
+    icon: MoonStar,
+    title: "Wake Up Actually Rested",
+    desc: "Better cellular energy and neurotransmitter balance means better sleep quality. You'll wake up feeling like yourself again.",
+    accent: "var(--electric)",
+    tint: "oklch(0.7 0.16 200 / 0.12)",
+    tag: "Recovery",
+  },
 ];
 
 const painPoints = [
@@ -38,35 +111,102 @@ const painPoints = [
 ];
 
 const testimonials = [
-  { title: "No more brain fog — I'm stunned", body: "I've been taking Neural Performance for 3 weeks and the afternoon fog is completely gone. I used to re-read the same email five times. Now I'm sharp straight through to dinner.", name: "Alex T., 34" },
-  { title: "Finally something that actually works", body: "Tried every focus supplement out there. Nothing came close until Circuit. The L-Theanine and caffeine combo is smooth — no jitters, just clear energy. I'm sharper at 4pm than I used to be at 10am.", name: "Sarah K., 42" },
-  { title: "I feel like myself again", body: "I forgot what it felt like to think clearly. Circuit brought it back. No jitters, no crash — just my brain working the way it used to before I turned 40.", name: "Marcus R., 47" },
-  { title: "My productivity has tripled", body: "The mental clarity from Neural Performance is on another level. I'm getting more done before lunch than I used to get done in a full day.", name: "Priya S., 38" },
-  { title: "Worth every single penny", body: "I was spending $6/day on coffee that just gave me anxiety. Circuit costs less and actually solves the problem. My only regret is not finding this sooner.", name: "Daniel W., 45" },
-  { title: "Skeptical but converted", body: "Didn't believe the hype. Tried it anyway. Week 3 I realized I hadn't crashed once. Week 4 I came back for more. This is the only supplement I'll never skip.", name: "Rachel B., 36" },
+  {
+    title: "No more brain fog — I'm stunned",
+    body: "I've been taking Neural Performance for 3 weeks and the afternoon fog is completely gone. I used to re-read the same email five times. Now I'm sharp straight through to dinner.",
+    name: "Alex T., 34",
+  },
+  {
+    title: "Finally something that actually works",
+    body: "Tried every focus supplement out there. Nothing came close until Circuit. The L-Theanine and caffeine combo is smooth — no jitters, just clear energy. I'm sharper at 4pm than I used to be at 10am.",
+    name: "Sarah K., 42",
+  },
+  {
+    title: "I feel like myself again",
+    body: "I forgot what it felt like to think clearly. Circuit brought it back. No jitters, no crash — just my brain working the way it used to before I turned 40.",
+    name: "Marcus R., 47",
+  },
+  {
+    title: "My productivity has tripled",
+    body: "The mental clarity from Neural Performance is on another level. I'm getting more done before lunch than I used to get done in a full day.",
+    name: "Priya S., 38",
+  },
+  {
+    title: "Worth every single penny",
+    body: "I was spending $6/day on coffee that just gave me anxiety. Circuit costs less and actually solves the problem. My only regret is not finding this sooner.",
+    name: "Daniel W., 45",
+  },
+  {
+    title: "Skeptical but converted",
+    body: "Didn't believe the hype. Tried it anyway. Week 3 I realized I hadn't crashed once. Week 4 I came back for more. This is the only supplement I'll never skip.",
+    name: "Rachel B., 36",
+  },
 ];
 
 const faqs = [
-  { q: "What's the difference between Neural Performance and NMN?", a: "They target different sides of the same problem. Neural Performance is formulated for cognitive function — focus, memory, mental clarity — using compounds like Alpha GPC, Bacopa monnieri, and Huperzine A that directly support brain chemistry. Circuit NMN works at the cellular level, restoring NAD+ so your mitochondria can produce energy efficiently. Together, they cover both your brain and your body." },
-  { q: "Does Neural Performance contain caffeine?", a: "Yes. Neural Performance contains caffeine paired with L-Theanine, which is clinically shown to smooth out caffeine's effects — giving you focused, jitter-free energy rather than a spike and crash. If you're sensitive to caffeine, start with one capsule and assess your tolerance." },
-  { q: "When will I actually feel results?", a: "For Neural Performance, most people notice sharper focus and mental clarity within 7-14 days of consistent daily use, with some feeling a difference in 3-5 days — ingredients like Bacopa monnieri build in effect over time. For NMN, cellular energy benefits typically become noticeable within 2-4 weeks as NAD+ levels are restored. Taken together, many customers report meaningful improvements in both brain and body within the first 2 weeks." },
-  { q: "Are the ingredients natural?", a: "Yes — for both products. Every ingredient in Circuit Neural Performance and Circuit NMN is a high-quality, natural compound. No artificial additives, no fillers, no proprietary blends hiding weak doses. What's on the label is what's in the capsule." },
-  { q: "What if it doesn't work for me?", a: "Both Neural Performance and NMN are backed by our 60-day money-back guarantee. If you don't feel a noticeable difference after consistent use of either product, we'll refund every penny. No questions asked." },
-  { q: "How do I take Circuit supplements?", a: "Neural Performance: take 1 capsule daily with 6-8 oz of water, preferably in the morning. NMN: take 1 capsule daily with water, ideally in the morning with food for best absorption. If taking both, they can be taken together at the same time. For best results, take at the same time each day. Consult your healthcare professional if you have any medical conditions." },
-  { q: "Can I take Neural Performance and NMN together?", a: "Yes — they're designed to complement each other. Neural Performance supports cognitive function and brain chemistry; NMN supports cellular energy production by restoring NAD+. There are no known interactions between the two, and many customers take both daily for comprehensive mental and physical performance." },
-  { q: "How long does one bottle last?", a: "Each bottle of Neural Performance and each bottle of NMN contains 30 capsules. At the recommended dose of 1 capsule per day, each bottle lasts 30 days. If you're taking both, plan on one bottle of each per month." },
+  {
+    q: "What's the difference between Neural Performance and NMN?",
+    a: "They target different sides of the same problem. Neural Performance is formulated for cognitive function — focus, memory, mental clarity — using compounds like Alpha GPC, Bacopa monnieri, and Huperzine A that directly support brain chemistry. Circuit NMN works at the cellular level, restoring NAD+ so your mitochondria can produce energy efficiently. Together, they cover both your brain and your body.",
+  },
+  {
+    q: "Does Neural Performance contain caffeine?",
+    a: "Yes. Neural Performance contains caffeine paired with L-Theanine, which is clinically shown to smooth out caffeine's effects — giving you focused, jitter-free energy rather than a spike and crash. If you're sensitive to caffeine, start with one capsule and assess your tolerance.",
+  },
+  {
+    q: "When will I actually feel results?",
+    a: "For Neural Performance, most people notice sharper focus and mental clarity within 7-14 days of consistent daily use, with some feeling a difference in 3-5 days — ingredients like Bacopa monnieri build in effect over time. For NMN, cellular energy benefits typically become noticeable within 2-4 weeks as NAD+ levels are restored. Taken together, many customers report meaningful improvements in both brain and body within the first 2 weeks.",
+  },
+  {
+    q: "Are the ingredients natural?",
+    a: "Yes — for both products. Every ingredient in Circuit Neural Performance and Circuit NMN is a high-quality, natural compound. No artificial additives, no fillers, no proprietary blends hiding weak doses. What's on the label is what's in the capsule.",
+  },
+  {
+    q: "What if it doesn't work for me?",
+    a: "Both Neural Performance and NMN are backed by our 60-day money-back guarantee. If you don't feel a noticeable difference after consistent use of either product, we'll refund every penny. No questions asked.",
+  },
+  {
+    q: "How do I take Circuit supplements?",
+    a: "Neural Performance: take 1 capsule daily with 6-8 oz of water, preferably in the morning. NMN: take 1 capsule daily with water, ideally in the morning with food for best absorption. If taking both, they can be taken together at the same time. For best results, take at the same time each day. Consult your healthcare professional if you have any medical conditions.",
+  },
+  {
+    q: "Can I take Neural Performance and NMN together?",
+    a: "Yes — they're designed to complement each other. Neural Performance supports cognitive function and brain chemistry; NMN supports cellular energy production by restoring NAD+. There are no known interactions between the two, and many customers take both daily for comprehensive mental and physical performance.",
+  },
+  {
+    q: "How long does one bottle last?",
+    a: "Each bottle of Neural Performance and each bottle of NMN contains 30 capsules. At the recommended dose of 1 capsule per day, each bottle lasts 30 days. If you're taking both, plan on one bottle of each per month.",
+  },
 ];
 
 function HomePage() {
   return (
     <>
       {/* HERO — split-screen, vibrant gradient + fully visible photo */}
-      <section className="relative isolate overflow-hidden border-b border-border" style={{ background: "var(--gradient-hero)" }}>
+      <section
+        className="relative isolate overflow-hidden border-b border-border"
+        style={{ background: "var(--gradient-hero)" }}
+      >
         {/* Decorative glows */}
-        <div aria-hidden className="pointer-events-none absolute -top-32 -left-32 h-[520px] w-[520px] rounded-full blur-3xl opacity-40" style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }} />
-        <div aria-hidden className="pointer-events-none absolute -bottom-40 right-1/3 h-[460px] w-[460px] rounded-full blur-3xl opacity-30" style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }} />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-32 -left-32 h-[520px] w-[520px] rounded-full blur-3xl opacity-40"
+          style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-40 right-1/3 h-[460px] w-[460px] rounded-full blur-3xl opacity-30"
+          style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }}
+        />
         {/* Subtle grid */}
-        <div aria-hidden className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
 
         <div className="container-x relative grid gap-10 md:gap-12 md:grid-cols-2 items-center py-16 md:py-24 lg:py-28">
           {/* Copy */}
@@ -76,26 +216,40 @@ function HomePage() {
               <span className="text-white/90">Cellular Energy + Cognitive Performance</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-white">
-              Your Brain Isn't<br/>
+              Your Brain Isn't
+              <br />
               Broken.{" "}
               <span className="relative inline-block">
-                <span className="relative z-10 italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                <span
+                  className="relative z-10 italic font-display"
+                  style={{
+                    background: "var(--gradient-energy)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
                   It's Under-Fueled.
                 </span>
               </span>
             </h1>
             <p className="mt-6 text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
-              Circuit pairs cellular NAD+ support with advanced nootropics — so you can think clearly, work sharply, and finally feel like yourself again.
+              Circuit pairs cellular NAD+ support with advanced nootropics — so you can think clearly, work sharply, and
+              finally feel like yourself again.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/shop" className="btn-primary shadow-xl shadow-black/30">Shop the Collection</Link>
-              <a href="#products" className="btn-white">See the Products</a>
+              <Link to="/shop" className="btn-primary shadow-xl shadow-black/30">
+                Shop the Collection
+              </Link>
+              <a href="#products" className="btn-white">
+                See the Products
+              </a>
             </div>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
               {[
-                { k: "200+", v: "Verified reviews" },
-                { k: "4.7★", v: "Avg. rating" },
-                { k: "60-Day", v: "Money-back" },
+                { k: "500+", v: "Verified reviews" },
+                { k: "4.8★", v: "Avg. rating" },
+                { k: "30-Day", v: "Money-back" },
                 { k: "1-2 wks", v: "To feel it" },
               ].map((s) => (
                 <div key={s.k} className="border-l-2 pl-3" style={{ borderColor: "var(--energy)" }}>
@@ -108,7 +262,11 @@ function HomePage() {
 
           {/* Image — fully contained, never cropped */}
           <div className="relative">
-            <div aria-hidden className="absolute inset-0 -m-6 rounded-[2rem] blur-2xl opacity-50" style={{ background: "var(--gradient-energy)" }} />
+            <div
+              aria-hidden
+              className="absolute inset-0 -m-6 rounded-[2rem] blur-2xl opacity-50"
+              style={{ background: "var(--gradient-energy)" }}
+            />
             <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 shadow-2xl bg-white/5 backdrop-blur-sm">
               <img
                 src={heroImg}
@@ -121,7 +279,12 @@ function HomePage() {
                   <div className="text-[10px] uppercase tracking-wider text-body/60 font-semibold">Most Popular</div>
                   <div className="text-sm font-display font-bold text-ink">Neural Performance</div>
                 </div>
-                <Link to="/product/$slug" params={{ slug: "neural-performance" }} className="text-xs font-semibold rounded-full px-3 py-1.5 text-white" style={{ background: "var(--gradient-energy)" }}>
+                <Link
+                  to="/product/$slug"
+                  params={{ slug: "neural-performance" }}
+                  className="text-xs font-semibold rounded-full px-3 py-1.5 text-white"
+                  style={{ background: "var(--gradient-energy)" }}
+                >
                   Shop →
                 </Link>
               </div>
@@ -135,7 +298,8 @@ function HomePage() {
         <div className="flex w-max marquee">
           {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((t, i) => (
             <div key={i} className="flex items-center gap-3 px-6 text-sm font-medium whitespace-nowrap">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary"/>{t}
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              {t}
             </div>
           ))}
         </div>
@@ -146,7 +310,9 @@ function HomePage() {
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-5xl">Fix Your Energy. Sharpen Your Mind.</h2>
-            <p className="mt-5 text-lg text-body">Two formulas. One mission: help you feel and think like yourself again.</p>
+            <p className="mt-5 text-lg text-body">
+              Two formulas. One mission: help you feel and think like yourself again.
+            </p>
           </div>
           <div className="mt-14 grid gap-8 md:grid-cols-2">
             <ProductCard
@@ -157,7 +323,12 @@ function HomePage() {
               subtitle="Focus & Cognitive Enhancement"
               price="$42.99"
               desc="A precision blend of **10 natural compounds** — **Alpha GPC**, **Bacopa**, **L-Theanine**, **Huperzine A**, and more — for **all-day mental clarity**, **sharp focus**, and **long-term brain health**."
-              benefits={["Eliminates brain fog","Enhances focus and memory","Smooth energy without jitters","No artificial additives"]}
+              benefits={[
+                "Eliminates brain fog",
+                "Enhances focus and memory",
+                "Smooth energy without jitters",
+                "No artificial additives",
+              ]}
               cta="Sharpen Your Mind"
             />
             <ProductCard
@@ -167,7 +338,7 @@ function HomePage() {
               subtitle="Cellular Energy & Longevity"
               price="$49.99"
               desc="Boosts **NAD+** for **all-day cellular energy**, **reduced crashes**, and **healthy aging** at the **mitochondrial level**. The foundation your body needs."
-              benefits={["Eliminates afternoon crashes","Restores cellular energy","Improves sleep quality"]}
+              benefits={["Eliminates afternoon crashes", "Restores cellular energy", "Improves sleep quality"]}
               cta="Fix Your Energy"
             />
           </div>
@@ -176,34 +347,68 @@ function HomePage() {
 
       {/* WHY CIRCUIT */}
       <section className="relative py-20 md:py-28 overflow-hidden">
-        <div aria-hidden className="pointer-events-none absolute -top-40 -left-32 h-[480px] w-[480px] rounded-full blur-3xl opacity-30" style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }} />
-        <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 h-[520px] w-[520px] rounded-full blur-3xl opacity-25" style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }} />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 -left-32 h-[480px] w-[480px] rounded-full blur-3xl opacity-30"
+          style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-40 -right-32 h-[520px] w-[520px] rounded-full blur-3xl opacity-25"
+          style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }}
+        />
         <div className="container-x relative">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase mb-5 border border-border bg-secondary">
               <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--energy)" }} />
               <span className="text-ink/80">The Circuit Advantage</span>
             </div>
-            <h2 className="text-3xl md:text-5xl">Why You're Always Tired and Foggy<br className="hidden md:block"/> <span className="italic font-display" style={{ background: "var(--gradient-energy)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>(And How to Actually Fix It)</span></h2>
-            <p className="mt-5 text-lg text-body">Your brain and body run on the same fuel. When that fuel runs low, everything suffers — energy, focus, memory, mood.</p>
+            <h2 className="text-3xl md:text-5xl">
+              Why You're Always Tired and Foggy
+              <br className="hidden md:block" />{" "}
+              <span
+                className="italic font-display"
+                style={{
+                  background: "var(--gradient-energy)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                }}
+              >
+                (And How to Actually Fix It)
+              </span>
+            </h2>
+            <p className="mt-5 text-lg text-body">
+              Your brain and body run on the same fuel. When that fuel runs low, everything suffers — energy, focus,
+              memory, mood.
+            </p>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {benefits.map(({icon:Icon,title,desc,accent,tint,tag}, idx)=>(
+            {benefits.map(({ icon: Icon, title, desc, accent, tint, tag }, idx) => (
               <div
                 key={title}
                 className="group relative rounded-2xl border border-border p-7 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                 style={{ background: `linear-gradient(180deg, ${tint} 0%, var(--card) 70%)` }}
               >
-                <div aria-hidden className="absolute -top-16 -right-16 h-40 w-40 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity" style={{ background: accent }} />
+                <div
+                  aria-hidden
+                  className="absolute -top-16 -right-16 h-40 w-40 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity"
+                  style={{ background: accent }}
+                />
                 <div aria-hidden className="absolute top-0 left-0 right-0 h-1" style={{ background: accent }} />
                 <div className="relative flex items-start justify-between mb-5">
-                  <div className="h-14 w-14 rounded-xl flex items-center justify-center ring-1 ring-border bg-card shadow-sm" style={{ color: accent }}>
-                    <Icon className="h-7 w-7" strokeWidth={2}/>
+                  <div
+                    className="h-14 w-14 rounded-xl flex items-center justify-center ring-1 ring-border bg-card shadow-sm"
+                    style={{ color: accent }}
+                  >
+                    <Icon className="h-7 w-7" strokeWidth={2} />
                   </div>
-                  <span className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full bg-ink/5 text-ink/60">{tag}</span>
+                  <span className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full bg-ink/5 text-ink/60">
+                    {tag}
+                  </span>
                 </div>
                 <div className="relative">
-                  <div className="text-[11px] font-mono text-ink/40 mb-1">0{idx+1}</div>
+                  <div className="text-[11px] font-mono text-ink/40 mb-1">0{idx + 1}</div>
                   <h3 className="text-xl mb-2">{title}</h3>
                   <p className="text-sm text-body leading-relaxed">{desc}</p>
                 </div>
@@ -218,16 +423,29 @@ function HomePage() {
         <div className="container-x">
           <h2 className="text-white text-3xl md:text-5xl">Sound Familiar?</h2>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {painPoints.map((p)=>(
-              <div key={p} className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 hover:border-destructive/40 hover:from-destructive/10 hover:to-white/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="h-9 w-9 rounded-lg bg-destructive/15 text-destructive flex items-center justify-center mb-3 group-hover:bg-destructive/25 transition"><X className="h-5 w-5"/></div>
+            {painPoints.map((p) => (
+              <div
+                key={p}
+                className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 hover:border-destructive/40 hover:from-destructive/10 hover:to-white/5 transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="h-9 w-9 rounded-lg bg-destructive/15 text-destructive flex items-center justify-center mb-3 group-hover:bg-destructive/25 transition">
+                  <X className="h-5 w-5" />
+                </div>
                 <p className="text-white/90 text-base font-medium leading-snug">{p}</p>
               </div>
             ))}
           </div>
           <div className="mt-10 max-w-2xl">
-            <p className="text-white/80 text-lg">You've tried everything — more coffee, energy drinks, vitamins, better sleep. Nothing works for more than an hour.</p>
-            <a href="#science" className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary hover:bg-primary-dark text-white px-6 py-3 font-semibold transition">Here's Why →</a>
+            <p className="text-white/80 text-lg">
+              You've tried everything — more coffee, energy drinks, vitamins, better sleep. Nothing works for more than
+              an hour.
+            </p>
+            <a
+              href="#science"
+              className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary hover:bg-primary-dark text-white px-6 py-3 font-semibold transition"
+            >
+              Here's Why →
+            </a>
           </div>
         </div>
       </section>
@@ -236,15 +454,29 @@ function HomePage() {
       <section id="science" className="py-20 md:py-28">
         <div className="container-x grid gap-12 md:grid-cols-2 items-center">
           <div className="relative bg-secondary rounded-2xl p-10 flex justify-center">
-            <img src={neuralImg} alt="Circuit Neural Performance bottle" className="max-h-[520px] object-contain"/>
+            <img src={neuralImg} alt="Circuit Neural Performance bottle" className="max-h-[520px] object-contain" />
           </div>
           <div>
             <h2 className="text-3xl md:text-5xl">The Real Reason You're Foggy and Tired</h2>
             <div className="mt-6 space-y-4 text-body leading-relaxed">
-              <p>It's not stress. It's not laziness. Your brain is running low on the raw materials it needs to function.</p>
-              <p><strong className="text-ink">Acetylcholine drives your focus, memory, and learning.</strong> Alpha GPC and Huperzine A in Circuit Neural Performance directly boost and preserve it — so your brain has the fuel to operate at full capacity.</p>
-              <p>L-Theanine and caffeine work together to deliver smooth, focused energy without jitters or crashes. Bacopa monnieri supports memory and learning over time. Phosphatidylserine keeps your brain cell membranes healthy and responsive.</p>
-              <p>And for the energy your body needs to keep up with your brain: <strong className="text-ink">Circuit NMN restores NAD+ at the cellular level</strong> — the molecule your mitochondria use to convert food into usable energy.</p>
+              <p>
+                It's not stress. It's not laziness. Your brain is running low on the raw materials it needs to function.
+              </p>
+              <p>
+                <strong className="text-ink">Acetylcholine drives your focus, memory, and learning.</strong> Alpha GPC
+                and Huperzine A in Circuit Neural Performance directly boost and preserve it — so your brain has the
+                fuel to operate at full capacity.
+              </p>
+              <p>
+                L-Theanine and caffeine work together to deliver smooth, focused energy without jitters or crashes.
+                Bacopa monnieri supports memory and learning over time. Phosphatidylserine keeps your brain cell
+                membranes healthy and responsive.
+              </p>
+              <p>
+                And for the energy your body needs to keep up with your brain:{" "}
+                <strong className="text-ink">Circuit NMN restores NAD+ at the cellular level</strong> — the molecule
+                your mitochondria use to convert food into usable energy.
+              </p>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4">
               {[
@@ -252,26 +484,39 @@ function HomePage() {
                 { t: "300+", s: "peer-reviewed studies behind the formula", c: "var(--electric)" },
                 { t: "3rd", s: "party tested for purity and potency", c: "var(--success)" },
                 { t: "0", s: "artificial additives — natural ingredients only", c: "var(--energy)" },
-              ].map((s)=>(
-                <div key={s.s} className="rounded-xl bg-white border border-border p-4 hover:shadow-md transition" style={{ boxShadow: `inset 3px 0 0 ${s.c}` }}>
-                  <div className="font-display text-2xl font-bold" style={{ color: s.c }}>{s.t}</div>
+              ].map((s) => (
+                <div
+                  key={s.s}
+                  className="rounded-xl bg-white border border-border p-4 hover:shadow-md transition"
+                  style={{ boxShadow: `inset 3px 0 0 ${s.c}` }}
+                >
+                  <div className="font-display text-2xl font-bold" style={{ color: s.c }}>
+                    {s.t}
+                  </div>
                   <div className="mt-1 text-xs text-body leading-snug">{s.s}</div>
                 </div>
               ))}
             </div>
-            <Link to="/product/$slug" params={{slug:"neural-performance"}} className="btn-primary mt-8">Shop Neural Performance</Link>
+            <Link to="/product/$slug" params={{ slug: "neural-performance" }} className="btn-primary mt-8">
+              Shop Neural Performance
+            </Link>
           </div>
         </div>
       </section>
 
-
-
-
       {/* HOW IT WORKS */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden">
         {/* Decorative glows */}
-        <div aria-hidden className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-[400px] w-[600px] rounded-full blur-3xl opacity-30" style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }} />
-        <div aria-hidden className="pointer-events-none absolute -bottom-20 left-1/4 h-[300px] w-[300px] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }} />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-[400px] w-[600px] rounded-full blur-3xl opacity-30"
+          style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-20 left-1/4 h-[300px] w-[300px] rounded-full blur-3xl opacity-20"
+          style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }}
+        />
 
         <div className="container-x relative">
           <div className="text-center max-w-2xl mx-auto">
@@ -280,17 +525,43 @@ function HomePage() {
               <span className="text-ink/80">Simple Routine</span>
             </div>
             <h2 className="text-3xl md:text-5xl">How Circuit Works</h2>
-            <p className="mt-5 text-lg text-body">Simple to take. Powerful results. Three steps to feeling like yourself again.</p>
+            <p className="mt-5 text-lg text-body">
+              Simple to take. Powerful results. Three steps to feeling like yourself again.
+            </p>
           </div>
 
           <div className="mt-16 grid gap-8 md:grid-cols-3 relative">
             {/* Connecting line for desktop */}
-            <div aria-hidden className="hidden md:block absolute top-16 left-[16.67%] right-[16.67%] h-0.5" style={{ background: "linear-gradient(90deg, var(--primary) 0%, var(--electric) 50%, var(--energy) 100%)" }} />
+            <div
+              aria-hidden
+              className="hidden md:block absolute top-16 left-[16.67%] right-[16.67%] h-0.5"
+              style={{
+                background: "linear-gradient(90deg, var(--primary) 0%, var(--electric) 50%, var(--energy) 100%)",
+              }}
+            />
 
             {[
-              {icon: Pill, title: "Take Daily", desc: "One capsule of Neural Performance each morning. One capsule of NMN each morning. With or without food. Consistency is everything.", accent: "var(--primary)", tint: "oklch(0.59 0.025 245 / 0.08)"},
-              {icon: Brain, title: "Ingredients Activate", desc: "Alpha GPC, Huperzine A, and L-Theanine begin supporting neurotransmitter function. NMN converts to NAD+ and restores cellular energy production.", accent: "var(--electric)", tint: "oklch(0.7 0.16 200 / 0.08)"},
-              {icon: Sparkles, title: "Feel the Difference", desc: "Within 1-2 weeks: sharper focus, no brain fog, no afternoon crashes, consistent energy all day.", accent: "var(--energy)", tint: "oklch(0.72 0.18 55 / 0.1)"},
+              {
+                icon: Pill,
+                title: "Take Daily",
+                desc: "One capsule of Neural Performance each morning. One capsule of NMN each morning. With or without food. Consistency is everything.",
+                accent: "var(--primary)",
+                tint: "oklch(0.59 0.025 245 / 0.08)",
+              },
+              {
+                icon: Brain,
+                title: "Ingredients Activate",
+                desc: "Alpha GPC, Huperzine A, and L-Theanine begin supporting neurotransmitter function. NMN converts to NAD+ and restores cellular energy production.",
+                accent: "var(--electric)",
+                tint: "oklch(0.7 0.16 200 / 0.08)",
+              },
+              {
+                icon: Sparkles,
+                title: "Feel the Difference",
+                desc: "Within 1-2 weeks: sharper focus, no brain fog, no afternoon crashes, consistent energy all day.",
+                accent: "var(--energy)",
+                tint: "oklch(0.72 0.18 55 / 0.1)",
+              },
             ].map((s, i) => (
               <div key={s.title} className="relative flex flex-col items-center text-center group">
                 {/* Step number circle */}
@@ -325,7 +596,11 @@ function HomePage() {
 
       {/* BEFORE/AFTER */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden">
-        <div aria-hidden className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full blur-3xl opacity-20" style={{ background: "radial-gradient(circle, var(--primary), transparent 60%)" }} />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full blur-3xl opacity-20"
+          style={{ background: "radial-gradient(circle, var(--primary), transparent 60%)" }}
+        />
         <div className="container-x relative">
           <div className="text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide uppercase mb-5 border border-border bg-white">
@@ -336,25 +611,57 @@ function HomePage() {
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             <div className="relative rounded-2xl bg-gradient-to-br from-destructive/10 to-destructive/[0.02] border-2 border-destructive/20 p-8 overflow-hidden">
-              <div aria-hidden className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-destructive/10 blur-2xl"/>
+              <div
+                aria-hidden
+                className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-destructive/10 blur-2xl"
+              />
               <div className="relative">
-                <div className="inline-flex items-center gap-2 rounded-full bg-destructive/15 text-destructive text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4">Before</div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-destructive/15 text-destructive text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4">
+                  Before
+                </div>
                 <h3 className="text-2xl mb-5 text-destructive font-display font-bold">Running on Empty</h3>
                 <ul className="space-y-3">
-                  {["Brain fog by 10am","Can't focus for more than 20 minutes","Exhausted by 2pm every day","Coffee gives jitters, not clarity","Weekends spent recovering","Sleep doesn't help anymore"].map(i=>(
-                    <li key={i} className="flex gap-3 text-body items-start"><span className="mt-0.5 h-5 w-5 rounded-full bg-destructive/15 text-destructive flex items-center justify-center shrink-0"><X className="h-3 w-3"/></span>{i}</li>
+                  {[
+                    "Brain fog by 10am",
+                    "Can't focus for more than 20 minutes",
+                    "Exhausted by 2pm every day",
+                    "Coffee gives jitters, not clarity",
+                    "Weekends spent recovering",
+                    "Sleep doesn't help anymore",
+                  ].map((i) => (
+                    <li key={i} className="flex gap-3 text-body items-start">
+                      <span className="mt-0.5 h-5 w-5 rounded-full bg-destructive/15 text-destructive flex items-center justify-center shrink-0">
+                        <X className="h-3 w-3" />
+                      </span>
+                      {i}
+                    </li>
                   ))}
                 </ul>
               </div>
             </div>
             <div className="relative rounded-2xl bg-gradient-to-br from-success/10 to-success/[0.02] border-2 border-success/30 p-8 overflow-hidden shadow-lg">
-              <div aria-hidden className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-success/15 blur-2xl"/>
+              <div aria-hidden className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-success/15 blur-2xl" />
               <div className="relative">
-                <div className="inline-flex items-center gap-2 rounded-full bg-success/15 text-success text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4"><Sparkles className="h-3 w-3"/>After</div>
+                <div className="inline-flex items-center gap-2 rounded-full bg-success/15 text-success text-[11px] font-bold uppercase tracking-wider px-3 py-1 mb-4">
+                  <Sparkles className="h-3 w-3" />
+                  After
+                </div>
                 <h3 className="text-2xl mb-5 text-success font-display font-bold">Fully Charged</h3>
                 <ul className="space-y-3">
-                  {["Sharp, clear thinking all morning","Deep focus that lasts for hours","Consistent energy morning to evening","Smooth, jitter-free mental energy","Weekends full of energy","Wake up actually rested"].map(i=>(
-                    <li key={i} className="flex gap-3 text-body items-start"><span className="mt-0.5 h-5 w-5 rounded-full bg-success/15 text-success flex items-center justify-center shrink-0"><Check className="h-3 w-3"/></span>{i}</li>
+                  {[
+                    "Sharp, clear thinking all morning",
+                    "Deep focus that lasts for hours",
+                    "Consistent energy morning to evening",
+                    "Smooth, jitter-free mental energy",
+                    "Weekends full of energy",
+                    "Wake up actually rested",
+                  ].map((i) => (
+                    <li key={i} className="flex gap-3 text-body items-start">
+                      <span className="mt-0.5 h-5 w-5 rounded-full bg-success/15 text-success flex items-center justify-center shrink-0">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      {i}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -371,7 +678,9 @@ function HomePage() {
         <div className="container-x max-w-3xl">
           <h2 className="text-3xl md:text-5xl text-center">Questions, Answered</h2>
           <div className="mt-12 space-y-3">
-            {faqs.map((f,i)=><FaqItem key={i} q={f.q} a={f.a}/>)}
+            {faqs.map((f, i) => (
+              <FaqItem key={i} q={f.q} a={f.a} />
+            ))}
           </div>
         </div>
       </section>
@@ -379,9 +688,17 @@ function HomePage() {
       {/* FINAL CTA */}
       <section className="bg-primary text-white py-20 md:py-24">
         <div className="container-x text-center max-w-2xl">
-          <h2 className="text-white text-3xl md:text-5xl">Stop Running on Empty.<br/>Start Thinking Clearly.</h2>
-          <p className="mt-5 text-white/90 text-lg">9,000+ people have fixed their energy and focus with Circuit. Join them.</p>
-          <Link to="/shop" className="btn-white mt-8">Shop Circuit</Link>
+          <h2 className="text-white text-3xl md:text-5xl">
+            Stop Running on Empty.
+            <br />
+            Start Thinking Clearly.
+          </h2>
+          <p className="mt-5 text-white/90 text-lg">
+            9,000+ people have fixed their energy and focus with Circuit. Join them.
+          </p>
+          <Link to="/shop" className="btn-white mt-8">
+            Shop Circuit
+          </Link>
           <p className="mt-5 text-white/70 text-xs">60-day money-back guarantee · Free shipping over $75</p>
         </div>
       </section>
@@ -390,7 +707,9 @@ function HomePage() {
       <section className="bg-[#0c0c0c] text-white py-16">
         <div className="container-x max-w-2xl text-center">
           <h2 className="text-white text-2xl md:text-4xl">Stay in the Loop</h2>
-          <p className="mt-3 text-white/70">Tips on beating fatigue, sharpening focus, and getting the most from Circuit.</p>
+          <p className="mt-3 text-white/70">
+            Tips on beating fatigue, sharpening focus, and getting the most from Circuit.
+          </p>
           <KlaviyoInlineForm />
           <p className="mt-4 text-xs text-white/50">We respect your privacy. Unsubscribe anytime.</p>
         </div>
@@ -462,41 +781,74 @@ function renderBold(text: string) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) =>
     part.startsWith("**") && part.endsWith("**") ? (
-      <strong key={i} className="font-bold text-ink">{part.slice(2, -2)}</strong>
+      <strong key={i} className="font-bold text-ink">
+        {part.slice(2, -2)}
+      </strong>
     ) : (
       <span key={i}>{part}</span>
-    )
+    ),
   );
 }
 
-function ProductCard(props: { hero?: boolean; slug: string; image: string; title: string; subtitle: string; price: string; desc: string; benefits: string[]; cta: string }) {
+function ProductCard(props: {
+  hero?: boolean;
+  slug: string;
+  image: string;
+  title: string;
+  subtitle: string;
+  price: string;
+  desc: string;
+  benefits: string[];
+  cta: string;
+}) {
   return (
-    <div className={`group relative rounded-3xl bg-white overflow-hidden border ${props.hero ? "border-primary/40 shadow-2xl" : "border-border shadow-md"} p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl`}>
+    <div
+      className={`group relative rounded-3xl bg-white overflow-hidden border ${props.hero ? "border-primary/40 shadow-2xl" : "border-border shadow-md"} p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl`}
+    >
       {/* Decorative glow */}
-      <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-40 transition-opacity duration-500 group-hover:opacity-70" style={{ background: props.hero ? "var(--gradient-energy)" : "radial-gradient(circle, var(--electric), transparent 60%)" }} />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-40 transition-opacity duration-500 group-hover:opacity-70"
+        style={{
+          background: props.hero
+            ? "var(--gradient-energy)"
+            : "radial-gradient(circle, var(--electric), transparent 60%)",
+        }}
+      />
       {props.hero && (
-        <div className="absolute top-5 right-5 z-10 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] font-bold px-3 py-1.5 rounded-full text-white shadow-lg" style={{ background: "var(--gradient-energy)" }}>
+        <div
+          className="absolute top-5 right-5 z-10 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] font-bold px-3 py-1.5 rounded-full text-white shadow-lg"
+          style={{ background: "var(--gradient-energy)" }}
+        >
           <Sparkles className="h-3 w-3" /> Most Popular
         </div>
       )}
       <div className="relative aspect-square rounded-2xl mb-6 overflow-hidden ring-1 ring-border">
-        <img src={props.image} alt={props.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+        <img
+          src={props.image}
+          alt={props.title}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
       </div>
       <div className="relative">
         <div className="text-xs uppercase tracking-[0.18em] text-primary font-bold">{props.subtitle}</div>
         <h3 className="text-2xl md:text-3xl mt-1.5 leading-tight">{props.title}</h3>
         <div className="mt-2 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
           <span className="text-3xl font-display font-bold text-ink">{props.price}</span>
-          <span className="text-base text-muted-foreground line-through">${(parseFloat(props.price.replace("$","")) * 1.4).toFixed(2)}</span>
-          <span className="text-[10px] font-bold uppercase tracking-wide bg-energy/15 text-energy px-2 py-0.5 rounded">Save 30%</span>
+          <span className="text-base text-muted-foreground line-through">
+            ${(parseFloat(props.price.replace("$", "")) * 1.4).toFixed(2)}
+          </span>
+          <span className="text-[10px] font-bold uppercase tracking-wide bg-energy/15 text-energy px-2 py-0.5 rounded">
+            Save 30%
+          </span>
           <span className="text-sm text-muted-foreground w-full sm:w-auto">/ bottle</span>
         </div>
         <p className="mt-4 text-body text-sm leading-relaxed">{renderBold(props.desc)}</p>
         <ul className="mt-5 space-y-2.5">
-          {props.benefits.map(b=>(
+          {props.benefits.map((b) => (
             <li key={b} className="flex items-center gap-2.5 text-sm text-body">
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success/15 shrink-0">
-                <Check className="h-3 w-3 text-success" strokeWidth={3}/>
+                <Check className="h-3 w-3 text-success" strokeWidth={3} />
               </span>
               {b}
             </li>
@@ -506,13 +858,20 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
       <div className="mt-auto pt-7 relative">
         <Link
           to="/product/$slug"
-          params={{slug:props.slug}}
+          params={{ slug: props.slug }}
           className="group/btn relative inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 overflow-hidden"
-          style={{ background: props.hero ? "var(--gradient-energy)" : "linear-gradient(135deg, var(--primary), var(--electric))" }}
+          style={{
+            background: props.hero
+              ? "var(--gradient-energy)"
+              : "linear-gradient(135deg, var(--primary), var(--electric))",
+          }}
         >
           <span className="relative z-10">{props.cta}</span>
           <span className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
-          <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
+          <span
+            aria-hidden
+            className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full"
+          />
         </Link>
         <p className="mt-3 text-xs text-muted-foreground text-center">60-day guarantee • Free shipping over $75</p>
       </div>
@@ -523,16 +882,31 @@ function ProductCard(props: { hero?: boolean; slug: string; image: string; title
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`rounded-xl bg-white border overflow-hidden transition-all duration-300 ${open ? "border-primary/40 shadow-md" : "border-border hover:border-primary/20"}`}>
-      <button onClick={()=>setOpen(o=>!o)} className="w-full flex items-center justify-between gap-4 p-5 text-left">
+    <div
+      className={`rounded-xl bg-white border overflow-hidden transition-all duration-300 ${open ? "border-primary/40 shadow-md" : "border-border hover:border-primary/20"}`}
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="w-full flex items-center justify-between gap-4 p-5 text-left"
+      >
         <span className="font-display font-semibold text-ink flex items-center gap-3">
-          <span className={`h-7 w-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold transition ${open ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}>?</span>
+          <span
+            className={`h-7 w-7 shrink-0 rounded-full flex items-center justify-center text-xs font-bold transition ${open ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}
+          >
+            ?
+          </span>
           {q}
         </span>
-        <ChevronDown className={`h-5 w-5 shrink-0 transition-all duration-300 ${open?"rotate-180 text-primary":"text-muted-foreground"}`}/>
+        <ChevronDown
+          className={`h-5 w-5 shrink-0 transition-all duration-300 ${open ? "rotate-180 text-primary" : "text-muted-foreground"}`}
+        />
       </button>
-      <div className={`grid transition-all duration-300 ease-in-out ${open?"grid-rows-[1fr] opacity-100":"grid-rows-[0fr] opacity-0"}`}>
-        <div className="overflow-hidden"><p className="px-5 pb-5 pl-[60px] text-body text-sm leading-relaxed">{a}</p></div>
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <p className="px-5 pb-5 pl-[60px] text-body text-sm leading-relaxed">{a}</p>
+        </div>
       </div>
     </div>
   );
@@ -551,21 +925,33 @@ function TestimonialsSection() {
   }, [paused, max]);
 
   return (
-    <section className="py-20 md:py-28" onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)}>
+    <section className="py-20 md:py-28" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <div className="container-x">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-5xl">Real People. Real Results.</h2>
           <div className="mt-4 flex items-center justify-center gap-2 text-sm text-body">
-            <div className="flex">{[1,2,3,4].map(i=><Star key={i} className="h-4 w-4 fill-primary text-primary"/>)}<Star className="h-4 w-4 fill-primary/40 text-primary"/></div>
-            <span>4.7 out of 5 · 200+ verified reviews</span>
+            <div className="flex">
+              {[1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+              ))}
+              <Star className="h-4 w-4 fill-primary/40 text-primary" />
+            </div>
+            <span>4.8 out of 5 · 500+ verified reviews</span>
           </div>
         </div>
         <div className="mt-12 overflow-hidden">
-          <div className="flex transition-transform duration-500 ease-out" style={{transform:`translateX(-${idx*(100/perPage)}%)`}}>
-            {testimonials.map((t,i)=>(
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${idx * (100 / perPage)}%)` }}
+          >
+            {testimonials.map((t, i) => (
               <div key={i} className="shrink-0 w-full md:w-1/3 px-3">
                 <div className="h-full rounded-xl border border-border bg-card p-7">
-                  <div className="flex gap-0.5 mb-4">{[1,2,3,4,5].map(s=><Star key={s} className="h-4 w-4 fill-primary text-primary"/>)}</div>
+                  <div className="flex gap-0.5 mb-4">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
                   <h3 className="text-lg mb-3">{t.title}</h3>
                   <p className="text-body text-sm leading-relaxed">"{t.body}"</p>
                   <div className="mt-5 text-xs font-semibold text-muted-foreground">— {t.name}, Verified Purchase</div>
@@ -575,13 +961,30 @@ function TestimonialsSection() {
           </div>
         </div>
         <div className="mt-8 flex items-center justify-center gap-4">
-          <button onClick={()=>setIdx(i=>Math.max(0,i-1))} aria-label="Previous" className="h-10 w-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary"><ChevronLeft className="h-4 w-4"/></button>
+          <button
+            onClick={() => setIdx((i) => Math.max(0, i - 1))}
+            aria-label="Previous"
+            className="h-10 w-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
           <div className="flex gap-1.5">
-            {Array.from({length:max+1}).map((_,i)=>(
-              <button key={i} onClick={()=>setIdx(i)} aria-label={`Slide ${i+1}`} className={`h-2 rounded-full transition-all ${i===idx?"w-6 bg-primary":"w-2 bg-border"}`}/>
+            {Array.from({ length: max + 1 }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIdx(i)}
+                aria-label={`Slide ${i + 1}`}
+                className={`h-2 rounded-full transition-all ${i === idx ? "w-6 bg-primary" : "w-2 bg-border"}`}
+              />
             ))}
           </div>
-          <button onClick={()=>setIdx(i=>Math.min(max,i+1))} aria-label="Next" className="h-10 w-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary"><ChevronRight className="h-4 w-4"/></button>
+          <button
+            onClick={() => setIdx((i) => Math.min(max, i + 1))}
+            aria-label="Next"
+            className="h-10 w-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
     </section>
