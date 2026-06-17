@@ -34,10 +34,14 @@ import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.j
 import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
 import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
 import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewNightstandAsset from "@/assets/review-nightstand-bottle.png.asset.json";
+import reviewManSelfieAsset from "@/assets/review-man-selfie.png.asset.json";
 const reviewWomanBathroom = reviewWomanBathroomAsset.url;
 const reviewWomanLaptop = reviewWomanLaptopAsset.url;
 const reviewManGym = reviewManGymAsset.url;
 const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const reviewNightstand = reviewNightstandAsset.url;
+const reviewManSelfie = reviewManSelfieAsset.url;
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
