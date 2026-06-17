@@ -34,10 +34,14 @@ import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.j
 import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
 import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
 import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewNightstandAsset from "@/assets/review-nightstand-bottle.png.asset.json";
+import reviewManSelfieAsset from "@/assets/review-man-selfie.png.asset.json";
 const reviewWomanBathroom = reviewWomanBathroomAsset.url;
 const reviewWomanLaptop = reviewWomanLaptopAsset.url;
 const reviewManGym = reviewManGymAsset.url;
 const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const reviewNightstand = reviewNightstandAsset.url;
+const reviewManSelfie = reviewManSelfieAsset.url;
 import { PRODUCTS } from "@/lib/cart";
 import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
 
@@ -299,9 +303,11 @@ function ProductPage() {
   const extraReviews = useMemo(() => {
     const pool = p.id === "neural" ? [
       { title: "Genuine focus, no jitters", body: "I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone.", name: "Marcus T.", date: "3 weeks ago", rating: 5, image: reviewManGym },
-      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5, image: reviewWomanBathroom },
+      { title: "Brain fog lifted in days", body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.", name: "Priya S.", date: "1 month ago", rating: 5, image: reviewWomanLaptop },
       { title: "Great for deep work", body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.", name: "Dev_Kuroda", date: "1 month ago", rating: 5, image: reviewBottleKitchen },
-      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4, image: reviewWomanLaptop },
+      { title: "Subtle but real", body: "Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got.", name: "Hannah Reinholt", date: "2 months ago", rating: 4, image: reviewWomanBathroom },
+      { title: "On my nightstand every night", body: "I keep it right next to my water glass so I never forget. Mornings feel less foggy and I'm out the door faster.", name: "Trent H.", date: "2 months ago", rating: 5, image: reviewNightstand },
+      { title: "Late shift survivor", body: "I work nights and this has been a game changer for staying sharp during the 3am dead zone. No crash after.", name: "Greg M.", date: "2 months ago", rating: 5, image: reviewManSelfie },
       { title: "Replaced two other supplements", body: "Cleaner formula than what I was stacking before. One capsule is a huge plus.", name: "Olivier B.", date: "2 months ago", rating: 5 },
       { title: "Solid for studying", body: "Med school grind is brutal. This has become part of my morning routine. Memory recall during practice exams is sharper.", name: "Aisha M.", date: "3 months ago", rating: 5 },
       { title: "Took a few weeks", body: "First week I felt nothing. By week three the mental clarity was undeniable. Stick with it.", name: "JordanLuxe27", date: "3 months ago", rating: 4 },
@@ -470,8 +476,8 @@ function ProductPage() {
         <div>
           <div className="relative bg-white rounded-2xl aspect-square overflow-hidden group border border-border shadow-sm">
             <div className="absolute top-4 left-4 bg-gradient-to-r from-primary to-electric text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md">{p.badge}</div>
-            <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in p-4 sm:p-6">
-              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"/>
+            <button type="button" onClick={() => setShowImageLightbox(true)} aria-label={`Open ${p.name} image ${imgIdx + 1}`} className="absolute inset-0 z-0 cursor-zoom-in">
+              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
             </button>
             <button onClick={()=>setImgIdx((imgIdx - 1 + p.images.length) % p.images.length)} aria-label="Previous image" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronLeft className="h-5 w-5"/></button>
             <button onClick={()=>setImgIdx((imgIdx + 1) % p.images.length)} aria-label="Next image" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white/90 hover:bg-white shadow-md border border-border flex items-center justify-center text-ink transition"><ChevronRight className="h-5 w-5"/></button>
