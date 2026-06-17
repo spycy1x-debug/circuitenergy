@@ -8,8 +8,7 @@ export const Route = createFileRoute("/account")({
       { title: "Join the Circuit list — Circuit Energy" },
       {
         name: "description",
-        content:
-          "Subscribe to the Circuit email list for early access, founder notes, and energy-science deep dives.",
+        content: "Subscribe to the Circuit email list for early access, founder notes, and energy-science deep dives.",
       },
     ],
   }),
@@ -87,15 +86,11 @@ function AccountPage() {
           list
         </h1>
         <p className="mt-5 text-white/75 text-lg">
-          Early access drops, founder notes, and the occasional deep dive on
-          why you're tired and how to actually fix it.
+          Early access drops, founder notes, and the occasional deep dive on why you're tired and how to actually fix
+          it.
         </p>
 
-        <form
-          onSubmit={onSubmit}
-          className="mt-10 grid gap-3 text-left"
-          noValidate
-        >
+        <form onSubmit={onSubmit} className="mt-10 grid gap-3 text-left" noValidate>
           <label className="block">
             <span className="text-xs uppercase tracking-[0.18em] text-white/55 font-semibold">
               First name <span className="opacity-50 normal-case tracking-normal">(optional)</span>
@@ -112,9 +107,7 @@ function AccountPage() {
           </label>
 
           <label className="block">
-            <span className="text-xs uppercase tracking-[0.18em] text-white/55 font-semibold">
-              Email
-            </span>
+            <span className="text-xs uppercase tracking-[0.18em] text-white/55 font-semibold">Email</span>
             <div className="relative mt-2">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
               <input
@@ -140,12 +133,8 @@ function AccountPage() {
             {status === "success" ? "Subscribed" : status === "loading" ? "Subscribing…" : "Subscribe"}
           </button>
 
-          {status === "error" && (
-            <p className="text-sm text-[oklch(0.78_0.16_30)] text-center">{message}</p>
-          )}
-          {status === "success" && (
-            <p className="text-sm text-[oklch(0.85_0.15_150)] text-center">{message}</p>
-          )}
+          {status === "error" && <p className="text-sm text-[oklch(0.78_0.16_30)] text-center">{message}</p>}
+          {status === "success" && <p className="text-sm text-[oklch(0.85_0.15_150)] text-center">{message}</p>}
 
           <p className="text-xs text-white/45 text-center">
             No spam, unsubscribe anytime. We use Klaviyo to send our emails.
@@ -175,7 +164,7 @@ function AccountPage() {
           >
             <ShieldCheck className="h-5 w-5 text-[oklch(0.85_0.15_150)]" />
             <div className="mt-2 text-sm font-semibold text-white">Support</div>
-            <div className="text-xs text-white/60">60-day guarantee</div>
+            <div className="text-xs text-white/60">30-day guarantee</div>
           </Link>
         </div>
       </div>

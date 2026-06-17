@@ -1057,7 +1057,7 @@ function ProductPage() {
                 <span className="hidden sm:inline opacity-40">·</span>
                 <span className="flex items-center gap-1">
                   <RotateCcw className="h-3 w-3 text-success" />
-                  60-day refund
+                  30-day refund
                 </span>
               </div>
             </div>
@@ -1072,8 +1072,8 @@ function ProductPage() {
           <div className="mt-6 grid grid-cols-2 gap-3 text-xs text-muted-foreground">
             <Trust icon={Lock} text="Secure Checkout" />
             <Trust icon={Truck} text="Free Shipping $75+" />
-            <Trust icon={RotateCcw} text="60-Day Guarantee" />
-            <Trust icon={Star} text="80+ Reviews" />
+            <Trust icon={RotateCcw} text="30-Day Guarantee" />
+            <Trust icon={Star} text="500+ Reviews" />
           </div>
         </div>
       </section>
@@ -1546,9 +1546,9 @@ function ProductPage() {
       <section className="bg-secondary py-16">
         <div className="container-x text-center max-w-2xl">
           <ShieldCheck className="h-12 w-12 text-success mx-auto" />
-          <h2 className="text-2xl md:text-4xl mt-4">60-Day Money-Back Guarantee</h2>
+          <h2 className="text-2xl md:text-4xl mt-4">30-Day Money-Back Guarantee</h2>
           <p className="mt-4 text-body">
-            Try {p.name} risk-free for 60 days. If you don't feel a noticeable difference in your focus and mental
+            Try {p.name} risk-free for 30 days. If you don't feel a noticeable difference in your focus and mental
             clarity, we'll refund every penny. No questions asked.
           </p>
         </div>
