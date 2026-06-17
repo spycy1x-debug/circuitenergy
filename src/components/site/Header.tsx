@@ -1,5 +1,17 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Search, User, ShoppingBag, Menu, X, ArrowUpRight, Sparkles, Zap, BookOpen, Mail, Home as HomeIcon } from "lucide-react";
+import {
+  Search,
+  User,
+  ShoppingBag,
+  Menu,
+  X,
+  ArrowUpRight,
+  Sparkles,
+  Zap,
+  BookOpen,
+  Mail,
+  Home as HomeIcon,
+} from "lucide-react";
 import logoImg from "@/assets/logo.png";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
@@ -9,7 +21,12 @@ type SearchItem = { label: string; sub: string; to: string; params?: Record<stri
 const SEARCH_INDEX: SearchItem[] = [
   { label: "Home", sub: "Circuit Energy home page", to: "/" },
   { label: "Shop", sub: "All Circuit supplements", to: "/shop" },
-  { label: "Circuit Neural Performance", sub: "Focus & cognitive enhancement", to: "/product/$slug", params: { slug: "neural-performance" } },
+  {
+    label: "Circuit Neural Performance",
+    sub: "Focus & cognitive enhancement",
+    to: "/product/$slug",
+    params: { slug: "neural-performance" },
+  },
   { label: "Circuit NMN", sub: "Cellular energy & longevity", to: "/product/$slug", params: { slug: "nmn" } },
   { label: "Why You're Tired", sub: "The science behind the slump", to: "/why-tired" },
   { label: "Contact", sub: "Get in touch with the team", to: "/contact" },
@@ -73,9 +90,7 @@ export function Header() {
   ] as const;
 
   const filtered = q.trim()
-    ? SEARCH_INDEX.filter((i) =>
-        (i.label + " " + i.sub).toLowerCase().includes(q.toLowerCase())
-      )
+    ? SEARCH_INDEX.filter((i) => (i.label + " " + i.sub).toLowerCase().includes(q.toLowerCase()))
     : SEARCH_INDEX;
 
   const goToFirst = () => {
@@ -90,8 +105,7 @@ export function Header() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 backdrop-blur-md ${scrolled ? "shadow-md" : "shadow-sm"} ${hidden ? "-translate-y-full" : "translate-y-0"}`}
         style={{
-          background:
-            "linear-gradient(180deg, oklch(0.99 0.005 250 / 0.92) 0%, oklch(0.97 0.012 245 / 0.88) 100%)",
+          background: "linear-gradient(180deg, oklch(0.99 0.005 250 / 0.92) 0%, oklch(0.97 0.012 245 / 0.88) 100%)",
           borderBottom: "1px solid oklch(0.9 0.015 245)",
         }}
       >
@@ -119,12 +133,7 @@ export function Header() {
 
           <div className="flex items-center justify-center">
             <Link to="/" aria-label="Circuit Energy home" className="flex items-center justify-center">
-              <img
-                src={logoImg}
-                alt="Circuit"
-                className="h-14 w-auto"
-                style={{ mixBlendMode: 'multiply' }}
-              />
+              <img src={logoImg} alt="Circuit" className="h-14 w-auto" style={{ mixBlendMode: "multiply" }} />
             </Link>
           </div>
 
@@ -164,8 +173,7 @@ export function Header() {
             <nav
               className="relative z-40 border-t border-border overflow-hidden"
               style={{
-                background:
-                  "linear-gradient(180deg, oklch(0.16 0.04 245) 0%, oklch(0.12 0.04 245) 100%)",
+                background: "linear-gradient(180deg, oklch(0.16 0.04 245) 0%, oklch(0.12 0.04 245) 100%)",
               }}
             >
               <div
@@ -191,14 +199,17 @@ export function Header() {
               <div className="container-x relative py-10 md:py-14 grid gap-10 md:grid-cols-[1.1fr_1fr]">
                 {/* Left: Navigation */}
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-semibold">
-                    Navigate
-                  </div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-semibold">Navigate</div>
                   <ul className="mt-5 flex flex-col divide-y divide-white/10 border-y border-white/10">
                     {[
                       { to: "/", label: "Home", desc: "Back to the start", Icon: HomeIcon },
                       { to: "/shop", label: "Shop", desc: "Neural Performance & NMN", Icon: Sparkles },
-                      { to: "/why-tired", label: "Why You're Tired", desc: "The science behind the slump", Icon: BookOpen },
+                      {
+                        to: "/why-tired",
+                        label: "Why You're Tired",
+                        desc: "The science behind the slump",
+                        Icon: BookOpen,
+                      },
                       { to: "/contact", label: "Contact", desc: "Talk to the Circuit team", Icon: Mail },
                     ].map(({ to, label, desc, Icon }) => (
                       <li key={to}>
@@ -247,9 +258,7 @@ export function Header() {
 
                 {/* Right: Featured products */}
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-semibold">
-                    Featured
-                  </div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/50 font-semibold">Featured</div>
                   <div className="mt-5 grid gap-3">
                     <Link
                       to="/product/$slug"
@@ -266,7 +275,9 @@ export function Header() {
                         <Sparkles className="h-5 w-5 text-[oklch(0.85_0.12_290)]" />
                         <div className="flex-1">
                           <div className="text-white font-semibold">Circuit Neural Performance</div>
-                          <div className="text-xs text-white/60 mt-1">Focus & cognitive enhancement — 10 natural compounds.</div>
+                          <div className="text-xs text-white/60 mt-1">
+                            Focus & cognitive enhancement — 10 natural compounds.
+                          </div>
                           <div className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/90 group-hover:text-white">
                             Shop now <ArrowUpRight className="h-3.5 w-3.5" />
                           </div>
@@ -289,7 +300,9 @@ export function Header() {
                         <Zap className="h-5 w-5 text-[oklch(0.85_0.15_70)]" />
                         <div className="flex-1">
                           <div className="text-white font-semibold">Circuit NMN</div>
-                          <div className="text-xs text-white/60 mt-1">Cellular energy & longevity — 500mg NMN per serving.</div>
+                          <div className="text-xs text-white/60 mt-1">
+                            Cellular energy & longevity — 500mg NMN per serving.
+                          </div>
                           <div className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/90 group-hover:text-white">
                             Shop now <ArrowUpRight className="h-3.5 w-3.5" />
                           </div>
@@ -304,7 +317,7 @@ export function Header() {
                       Free shipping over $75
                     </span>
                     <span className="opacity-50">•</span>
-                    <span>60-day guarantee</span>
+                    <span>30-day guarantee</span>
                   </div>
                 </div>
               </div>
@@ -347,9 +360,7 @@ export function Header() {
               </button>
             </form>
             <ul className="max-h-80 overflow-y-auto py-2">
-              {filtered.length === 0 && (
-                <li className="px-4 py-6 text-sm text-ink/60">No results for "{q}".</li>
-              )}
+              {filtered.length === 0 && <li className="px-4 py-6 text-sm text-ink/60">No results for "{q}".</li>}
               {filtered.map((item) => (
                 <li key={item.label}>
                   <Link
