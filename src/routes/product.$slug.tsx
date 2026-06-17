@@ -977,7 +977,7 @@ function ProductPage() {
                 }}
                 className="underline hover:text-primary"
               >
-                {p.reviews} reviews
+                {p.reviews}+ reviews
               </button>
             </span>
           </div>
@@ -1290,7 +1290,7 @@ function ProductPage() {
                   ))}
                   <Star className="h-5 w-5 fill-primary/40 text-primary" />
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews} verified reviews</div>
+                <div className="text-sm text-muted-foreground mt-1">Based on {p.reviews}+ verified reviews</div>
                 <div className="mt-5 space-y-1.5 text-xs">
                   {(
                     [
