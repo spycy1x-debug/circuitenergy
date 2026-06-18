@@ -1728,9 +1728,10 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
       <button
         type="button"
         onClick={handleAddToCart}
-        className="mt-5 w-full rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-base sm:text-[17px] py-4 sm:py-[18px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] transition-colors"
+        disabled={adding}
+        className="mt-5 w-full rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-base sm:text-[17px] py-4 sm:py-[18px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] transition-all hover:-translate-y-[1px] active:translate-y-0 disabled:opacity-70 disabled:cursor-wait"
       >
-        Add to Cart
+        {adding ? "Adding…" : "Add to Cart"}
       </button>
       <p className="mt-2.5 text-center text-[11px] sm:text-xs text-[#6A7786]">
         30-day money-back guarantee · Secure checkout
