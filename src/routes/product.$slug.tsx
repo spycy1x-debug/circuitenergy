@@ -1627,28 +1627,27 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
   const [selected, setSelected] = useState<"1" | "2" | "3">("2");
   const active = BUNDLES.find((b) => b.id === selected)!;
 
-  const handleAddToCart = () => {
-    if (typeof window === "undefined") return;
-    window.fbq?.("track", "AddToCart", {
-      content_ids: [active.variantId],
-      content_name: `${productName} - ${active.bottles} Bottle${active.bottles > 1 ? "s" : ""}`,
-      content_type: "product",
-      value: active.price,
-      currency: "USD",
-    });
-    window.gtag?.("event", "add_to_cart", {
-      currency: "USD",
-      value: active.price,
-      items: [
+  const [adding, setAdding] = useState(false);
+  const handleAddToCart = async () => {
+    if (adding) return;
+    setAdding(true);
+    try {
+      await shopifyCart.add(
         {
-          item_id: active.variantId,
-          item_name: `${productName} ${active.bottles}-pack`,
-          price: active.price,
-          quantity: 1,
+          variantId: active.variantId,
+          productTitle: productName,
+          variantTitle: `${active.bottles} Bottle${active.bottles > 1 ? "s" : ""}`,
+          image: thumbnail,
+          unitPrice: active.price,
         },
-      ],
-    });
-    window.location.href = `https://xwkkv0-r0.myshopify.com/cart/${active.variantId}:1`;
+        1,
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Could not add to cart. Please try again.");
+    } finally {
+      setAdding(false);
+    }
   };
 
   return (
