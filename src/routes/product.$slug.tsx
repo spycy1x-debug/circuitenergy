@@ -1593,7 +1593,7 @@ const BUNDLES: BundleOpt[] = [
   {
     id: "1",
     bottles: 1,
-    variantId: "48341605810330",
+    variantId: "gid://shopify/ProductVariant/48341605810330",
     price: 42.99,
     compare: 59.0,
     save: 16,
@@ -1603,7 +1603,7 @@ const BUNDLES: BundleOpt[] = [
   {
     id: "2",
     bottles: 2,
-    variantId: "48341729607834",
+    variantId: "gid://shopify/ProductVariant/48341729607834",
     price: 79.99,
     compare: 118.0,
     save: 38,
@@ -1614,7 +1614,7 @@ const BUNDLES: BundleOpt[] = [
   {
     id: "3",
     bottles: 3,
-    variantId: "48341729050778",
+    variantId: "gid://shopify/ProductVariant/48341729050778",
     price: 109.99,
     compare: 177.0,
     save: 67,
