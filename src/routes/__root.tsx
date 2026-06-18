@@ -117,6 +117,7 @@ function RootComponent() {
       <AnniversaryBar />
       <main><Outlet /></main>
       <Footer />
+      <CartDrawer />
     </QueryClientProvider>
   );
 }
