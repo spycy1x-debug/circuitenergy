@@ -1529,7 +1529,7 @@ function ProductPage() {
               {
                 icon: RotateCcw,
                 q: "What if it doesn't work for me?",
-                a: "Try it risk-free for 60 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.",
+                a: "Try it risk-free for 30 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.",
               },
             ].map((item, i) => (
               <div
