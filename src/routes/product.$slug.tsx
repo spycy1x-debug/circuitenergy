@@ -1031,14 +1031,25 @@ function ProductPage() {
                   </button>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <ShopifyBuyButton
-                    productId={SHOPIFY_BUY[p.id].productId}
-                    buttonText={SHOPIFY_BUY[p.id].buttonText}
-                    productName={p.name}
-                    price={p.price}
-                  />
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await shopifyCart.add(
+                        {
+                          variantId: NMN_VARIANT_GID,
+                          productTitle: p.name,
+                          variantTitle: "",
+                          image: p.images[0],
+                          unitPrice: p.price,
+                        },
+                        qty,
+                      );
+                    }}
+                    className="w-full h-12 rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-[15px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] hover:-translate-y-[1px] active:translate-y-0 transition-all"
+                  >
+                    Add to Cart
+                  </button>
                 </div>
-              </div>
 
               {/* Trust row */}
               <div className="mt-4 pt-4 border-t border-border/70 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground">
