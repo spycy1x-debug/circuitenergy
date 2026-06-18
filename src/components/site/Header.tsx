@@ -163,14 +163,18 @@ export function Header() {
             >
               <User className="h-[18px] w-[18px]" />
             </Link>
-            <Link
-              to="/cart"
-              aria-label="Cart"
-              className="relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 ring-1 ring-ink/10 bg-white/60 hover:bg-white hover:ring-ink/20 hover:text-ink transition-all shadow-sm"
+            <button
+              type="button"
+              onClick={() => shopifyCart.open()}
+              aria-label="Open cart"
+              className={`relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 ring-1 ring-ink/10 bg-white/60 hover:bg-white hover:ring-ink/20 hover:text-ink active:scale-95 transition-all shadow-sm ${pulse ? "cart-bump" : ""}`}
             >
               <ShoppingBag className="h-[18px] w-[18px]" />
-              <span className="text-sm font-semibold">({count})</span>
-            </Link>
+              <span className="text-sm font-semibold tabular-nums">({totalCount})</span>
+              {pulse && (
+                <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-[#F5853F] ring-2 ring-white animate-ping" />
+              )}
+            </button>
           </div>
         </div>
 
