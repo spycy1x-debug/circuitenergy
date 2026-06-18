@@ -42,6 +42,16 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
   const { count } = useCart();
+  const { count: shopifyCount, bump } = useShopifyCart();
+  const totalCount = shopifyCount || count;
+  const [pulse, setPulse] = useState(false);
+  useEffect(() => {
+    if (bump > 0) {
+      setPulse(true);
+      const t = setTimeout(() => setPulse(false), 600);
+      return () => clearTimeout(t);
+    }
+  }, [bump]);
   const navigate = useNavigate();
   const lastScrollY = useRef(0);
 
