@@ -15,6 +15,7 @@ import {
 import logoImg from "@/assets/logo.png";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
+import { shopifyCart, useShopifyCart } from "@/lib/shopify-cart";
 
 type SearchItem = { label: string; sub: string; to: string; params?: Record<string, string> };
 
