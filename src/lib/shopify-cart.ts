@@ -159,7 +159,7 @@ async function addLines(cartId: string, variantId: string, quantity: number) {
   const errs = data.cartLinesAdd.userErrors || [];
   if (errs.some((e) => /cart not found|does not exist/i.test(e.message))) return false;
   if (errs.length) throw new Error(errs[0].message);
-  mapCart(data.cartCreate?.cart || data.cartLinesAdd.cart);
+  mapCart(data.cartLinesAdd.cart);
   return true;
 }
 
