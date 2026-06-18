@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Circuit combines cellular energy support and cognitive enhancement so you can think clearly, work sharply, and feel like yourself again. 60-day guarantee.",
+          "Circuit combines cellular energy support and cognitive enhancement so you can think clearly, work sharply, and feel like yourself again. 30-day guarantee.",
       },
       { property: "og:title", content: "Circuit Energy — Your Brain Isn't Broken. It's Under-Fueled." },
       {
@@ -162,7 +162,7 @@ const faqs = [
   },
   {
     q: "What if it doesn't work for me?",
-    a: "Both Neural Performance and NMN are backed by our 60-day money-back guarantee. If you don't feel a noticeable difference after consistent use of either product, we'll refund every penny. No questions asked.",
+    a: "Both Neural Performance and NMN are backed by our 30-day money-back guarantee. If you don't feel a noticeable difference after consistent use of either product, we'll refund every penny. No questions asked.",
   },
   {
     q: "How do I take Circuit supplements?",
@@ -699,7 +699,7 @@ function HomePage() {
           <Link to="/shop" className="btn-white mt-8">
             Shop Circuit
           </Link>
-          <p className="mt-5 text-white/70 text-xs">60-day money-back guarantee · Free shipping over $75</p>
+          <p className="mt-5 text-white/70 text-xs">30-day money-back guarantee · Free shipping over $75</p>
         </div>
       </section>
 
@@ -873,7 +873,7 @@ function ProductCard(props: {
             className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full"
           />
         </Link>
-        <p className="mt-3 text-xs text-muted-foreground text-center">60-day guarantee • Free shipping over $75</p>
+        <p className="mt-3 text-xs text-muted-foreground text-center">30-day guarantee • Free shipping over $75</p>
       </div>
     </div>
   );

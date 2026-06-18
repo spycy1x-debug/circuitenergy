@@ -148,7 +148,7 @@ function ShopPage() {
       <section className="border-y border-ink/10 bg-[oklch(0.97_0.01_70)]">
         <div className="container-x grid grid-cols-2 md:grid-cols-4 divide-x divide-ink/10">
           {[
-            { n: "60", l: "Day guarantee" },
+            { n: "30", l: "Day guarantee" },
             { n: "10k+", l: "Bottles shipped" },
             { n: "4.7★", l: "Average rating" },
             { n: "Free", l: "US shipping", sub: "orders over $75" },

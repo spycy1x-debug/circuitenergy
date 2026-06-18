@@ -66,12 +66,9 @@ const reviewBottleKitchen = reviewBottleKitchenAsset.url;
 const reviewNightstand = reviewNightstandAsset.url;
 const reviewManSelfie = reviewManSelfieAsset.url;
 import { PRODUCTS } from "@/lib/cart";
-import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
+import { shopifyCart } from "@/lib/shopify-cart";
 
-const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
-  neural: { productId: "8951258808474", buttonText: "Sharpen Your Mind" },
-  nmn: { productId: "8951254876314", buttonText: "Fix Your Energy" },
-};
+const NMN_VARIANT_GID = "gid://shopify/ProductVariant/48124189704346";
 
 function timeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
@@ -1034,14 +1031,28 @@ function ProductPage() {
                   </button>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <ShopifyBuyButton
-                    productId={SHOPIFY_BUY[p.id].productId}
-                    buttonText={SHOPIFY_BUY[p.id].buttonText}
-                    productName={p.name}
-                    price={p.price}
-                  />
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await shopifyCart.add(
+                        {
+                          variantId: NMN_VARIANT_GID,
+                          productTitle: p.name,
+                          variantTitle: "",
+                          image: p.images[0],
+                          unitPrice: p.price,
+                        },
+                        qty,
+                      );
+                    }}
+                    className="w-full h-12 rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-[15px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] hover:-translate-y-[1px] active:translate-y-0 transition-all"
+                  >
+                    Add to Cart
+                  </button>
                 </div>
               </div>
+
+
 
               {/* Trust row */}
               <div className="mt-4 pt-4 border-t border-border/70 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground">
@@ -1518,7 +1529,7 @@ function ProductPage() {
               {
                 icon: RotateCcw,
                 q: "What if it doesn't work for me?",
-                a: "Try it risk-free for 60 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.",
+                a: "Try it risk-free for 30 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.",
               },
             ].map((item, i) => (
               <div
@@ -1582,7 +1593,7 @@ const BUNDLES: BundleOpt[] = [
   {
     id: "1",
     bottles: 1,
-    variantId: "48341605810330",
+    variantId: "gid://shopify/ProductVariant/48341605810330",
     price: 42.99,
     compare: 59.0,
     save: 16,
@@ -1592,7 +1603,7 @@ const BUNDLES: BundleOpt[] = [
   {
     id: "2",
     bottles: 2,
-    variantId: "48341729607834",
+    variantId: "gid://shopify/ProductVariant/48341729607834",
     price: 79.99,
     compare: 118.0,
     save: 38,
@@ -1603,7 +1614,7 @@ const BUNDLES: BundleOpt[] = [
   {
     id: "3",
     bottles: 3,
-    variantId: "48341729050778",
+    variantId: "gid://shopify/ProductVariant/48341729050778",
     price: 109.99,
     compare: 177.0,
     save: 67,
@@ -1616,28 +1627,27 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
   const [selected, setSelected] = useState<"1" | "2" | "3">("2");
   const active = BUNDLES.find((b) => b.id === selected)!;
 
-  const handleAddToCart = () => {
-    if (typeof window === "undefined") return;
-    window.fbq?.("track", "AddToCart", {
-      content_ids: [active.variantId],
-      content_name: `${productName} - ${active.bottles} Bottle${active.bottles > 1 ? "s" : ""}`,
-      content_type: "product",
-      value: active.price,
-      currency: "USD",
-    });
-    window.gtag?.("event", "add_to_cart", {
-      currency: "USD",
-      value: active.price,
-      items: [
+  const [adding, setAdding] = useState(false);
+  const handleAddToCart = async () => {
+    if (adding) return;
+    setAdding(true);
+    try {
+      await shopifyCart.add(
         {
-          item_id: active.variantId,
-          item_name: `${productName} ${active.bottles}-pack`,
-          price: active.price,
-          quantity: 1,
+          variantId: active.variantId,
+          productTitle: productName,
+          variantTitle: `${active.bottles} Bottle${active.bottles > 1 ? "s" : ""}`,
+          image: thumbnail,
+          unitPrice: active.price,
         },
-      ],
-    });
-    window.location.href = `https://xwkkv0-r0.myshopify.com/cart/${active.variantId}:1`;
+        1,
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Could not add to cart. Please try again.");
+    } finally {
+      setAdding(false);
+    }
   };
 
   return (
@@ -1718,9 +1728,10 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
       <button
         type="button"
         onClick={handleAddToCart}
-        className="mt-5 w-full rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-base sm:text-[17px] py-4 sm:py-[18px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] transition-colors"
+        disabled={adding}
+        className="mt-5 w-full rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-base sm:text-[17px] py-4 sm:py-[18px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] transition-all hover:-translate-y-[1px] active:translate-y-0 disabled:opacity-70 disabled:cursor-wait"
       >
-        Add to Cart
+        {adding ? "Adding…" : "Add to Cart"}
       </button>
       <p className="mt-2.5 text-center text-[11px] sm:text-xs text-[#6A7786]">
         30-day money-back guarantee · Secure checkout

@@ -15,6 +15,7 @@ import {
 import logoImg from "@/assets/logo.png";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
+import { shopifyCart, useShopifyCart } from "@/lib/shopify-cart";
 
 type SearchItem = { label: string; sub: string; to: string; params?: Record<string, string> };
 
@@ -41,6 +42,16 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
   const { count } = useCart();
+  const { count: shopifyCount, bump } = useShopifyCart();
+  const totalCount = shopifyCount || count;
+  const [pulse, setPulse] = useState(false);
+  useEffect(() => {
+    if (bump > 0) {
+      setPulse(true);
+      const t = setTimeout(() => setPulse(false), 600);
+      return () => clearTimeout(t);
+    }
+  }, [bump]);
   const navigate = useNavigate();
   const lastScrollY = useRef(0);
 
@@ -152,14 +163,18 @@ export function Header() {
             >
               <User className="h-[18px] w-[18px]" />
             </Link>
-            <Link
-              to="/cart"
-              aria-label="Cart"
-              className="relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 ring-1 ring-ink/10 bg-white/60 hover:bg-white hover:ring-ink/20 hover:text-ink transition-all shadow-sm"
+            <button
+              type="button"
+              onClick={() => shopifyCart.open()}
+              aria-label="Open cart"
+              className={`relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 ring-1 ring-ink/10 bg-white/60 hover:bg-white hover:ring-ink/20 hover:text-ink active:scale-95 transition-all shadow-sm ${pulse ? "cart-bump" : ""}`}
             >
               <ShoppingBag className="h-[18px] w-[18px]" />
-              <span className="text-sm font-semibold">({count})</span>
-            </Link>
+              <span className="text-sm font-semibold tabular-nums">({totalCount})</span>
+              {pulse && (
+                <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-[#F5853F] ring-2 ring-white animate-ping" />
+              )}
+            </button>
           </div>
         </div>
 

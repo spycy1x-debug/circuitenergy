@@ -15,6 +15,7 @@ import { UrgencyBar } from "@/components/site/UrgencyBar";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WelcomePopup } from "@/components/site/WelcomePopup";
+import { CartDrawer } from "@/components/site/CartDrawer";
 
 function NotFoundComponent() {
   return (
@@ -116,6 +117,7 @@ function RootComponent() {
       <AnniversaryBar />
       <main><Outlet /></main>
       <Footer />
+      <CartDrawer />
     </QueryClientProvider>
   );
 }
