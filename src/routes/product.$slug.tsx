@@ -1050,6 +1050,9 @@ function ProductPage() {
                     Add to Cart
                   </button>
                 </div>
+              </div>
+
+
 
               {/* Trust row */}
               <div className="mt-4 pt-4 border-t border-border/70 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[11px] font-medium text-muted-foreground">
