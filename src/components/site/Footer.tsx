@@ -21,6 +21,14 @@ export function Footer() {
           <Link to="/privacy" className="py-1 hover:text-white">
             Privacy Policy
           </Link>
+          <a
+            href="https://crystal-arithmetic-b9d.notion.site/Return-Refund-Policy-3820dd83dbc080bfb93ac8dd79b1d27d?pvs=73"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-1 hover:text-white"
+          >
+            Return Policy
+          </a>
         </div>
         <div className="text-sm space-y-2">
           <a href="mailto:support@circuitenergy.co" className="block hover:text-white">
