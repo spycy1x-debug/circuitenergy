@@ -66,12 +66,9 @@ const reviewBottleKitchen = reviewBottleKitchenAsset.url;
 const reviewNightstand = reviewNightstandAsset.url;
 const reviewManSelfie = reviewManSelfieAsset.url;
 import { PRODUCTS } from "@/lib/cart";
-import { ShopifyBuyButton } from "@/components/site/ShopifyBuyButton";
+import { shopifyCart } from "@/lib/shopify-cart";
 
-const SHOPIFY_BUY: Record<"neural" | "nmn", { productId: string; buttonText: string }> = {
-  neural: { productId: "8951258808474", buttonText: "Sharpen Your Mind" },
-  nmn: { productId: "8951254876314", buttonText: "Fix Your Energy" },
-};
+const NMN_VARIANT_GID = "gid://shopify/ProductVariant/48124189704346";
 
 function timeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
