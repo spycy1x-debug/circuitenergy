@@ -83,6 +83,16 @@ import { shopifyCart } from "@/lib/shopify-cart";
 
 const NMN_VARIANT_GID = "gid://shopify/ProductVariant/48124189704346";
 
+type ProductData = {
+  id: "neural" | "nmn";
+  name: string;
+  rating: number;
+  reviews: number;
+  images: string[];
+  related: { id: "neural" | "nmn"; blurb: string };
+  sample: { title: string; body: string; name: string; date: string };
+};
+
 type ReviewItem = {
   title: string;
   body: string;
@@ -94,6 +104,46 @@ type ReviewItem = {
   helpfulCount?: number;
   notHelpfulCount?: number;
 };
+
+const PRODUCT_DATA: Record<string, ProductData> = {
+  "neural-performance": {
+    id: "neural",
+    name: "Circuit Neural Performance",
+    rating: 4.8,
+    reviews: 500,
+    images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralOpen],
+    related: { id: "nmn", blurb: "Pair with Neural Performance for complete energy and cognitive support." },
+    sample: {
+      title: "Brain fog is completely gone",
+      body: "I've been taking Neural Performance every morning for 5 weeks. The difference in my focus is night and day. No jitters, no crash, just clear thinking from 8am to 6pm.",
+      name: "James L.",
+      date: "April 2, 2026",
+    },
+  },
+  nmn: {
+    id: "nmn",
+    name: "Circuit NMN",
+    rating: 4.6,
+    reviews: 400,
+    images: [nmnImg, nmnBuiltDifferent, nmnWomanBalcony, nmnEnergizeRepair, nmnKitchenHand, nmnNadChart, nmnTrio],
+    related: { id: "neural", blurb: "Pair with NMN for complete energy and cognitive support." },
+    sample: {
+      title: "More energy, less drag",
+      body: "Steadier energy, better mornings, and less of that afternoon fade. It took a few weeks, but it was worth it.",
+      name: "Rachel D.",
+      date: "March 16, 2026",
+    },
+  },
+};
+
+export const Route = createFileRoute("/product/$slug")({
+  loader: ({ params }) => {
+    const product = PRODUCT_DATA[params.slug];
+    if (!product) throw notFound();
+    return product;
+  },
+  component: ProductPage,
+});
 
 function timeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
