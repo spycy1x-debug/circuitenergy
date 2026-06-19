@@ -817,7 +817,6 @@ function ProductPage() {
           </div>
         </div>
       )}
-...
           {tab === "rev" && (
             <section className="rounded-[2rem] border border-border bg-secondary/40 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
               <div className="mx-auto max-w-3xl text-center">
