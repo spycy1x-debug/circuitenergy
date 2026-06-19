@@ -774,7 +774,7 @@ function ProductPage() {
     return arr.sort((a, b) => parseRelativeDate(a.date) - parseRelativeDate(b.date));
   }, [extraReviews, reviewFilter]);
 
-  const related = PRODUCTS[p.related.id];
+  const related = PRODUCTS[p.related.id as keyof typeof PRODUCTS];
   const ratingBreakdown = ratingBreakdownFor(p.id);
   const recommendation = p.id === "neural" ? 97 : 95;
   const displayedReviews = sortedReviews.slice(0, reviewsShown);
