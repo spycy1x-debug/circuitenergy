@@ -998,7 +998,7 @@ function ProductPage() {
                       const reviewKey = `${r.name}-${r.title}-${i}`;
                       const initials = r.name
                         .split(" ")
-                        .map((n) => n[0])
+                        .map((n: string) => n[0])
                         .join("")
                         .slice(0, 2)
                         .toUpperCase();
