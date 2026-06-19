@@ -249,15 +249,6 @@ function ProductPage() {
     };
   }, [p.id]);
 
-  // Reset the page when navigating between products (same route, no remount)
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setImgIdx(0);
-    setTab("why");
-    setReviewsShown(8);
-    setReviewFilter("recent");
-  }, [p.id]);
-
   useEffect(() => {
     if (!showImageLightbox) return;
     const handler = (e: KeyboardEvent) => {
