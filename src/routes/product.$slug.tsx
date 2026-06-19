@@ -1071,8 +1071,6 @@ function ProductPage() {
               </div>
             </section>
           )}
-        </div>
-      </section>
 
       {/* RELATED */}
       <section className="container-x py-20">
