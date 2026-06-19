@@ -750,24 +750,22 @@ function ProductPage() {
             },
           ];
 
-    return [
-      ...userReviews,
-      {
-        title: p.sample.title,
-        body: p.sample.body,
-        name: p.sample.name,
-        date: p.sample.date,
-        rating: 5,
-        verified: true,
-        helpfulCount: 26,
-        notHelpfulCount: 1,
-      },
-      ...pool,
-    ];
+    const sampleReview: ReviewItem = {
+      title: p.sample.title,
+      body: p.sample.body,
+      name: p.sample.name,
+      date: p.sample.date,
+      rating: 5,
+      verified: true,
+      helpfulCount: 26,
+      notHelpfulCount: 1,
+    };
+
+    return [...userReviews, sampleReview, ...pool];
   }, [p, userReviews]);
 
-  const sortedReviews = useMemo(() => {
-    const arr = [...extraReviews];
+  const sortedReviews = useMemo<ReviewItem[]>(() => {
+    const arr: ReviewItem[] = [...extraReviews];
     if (reviewFilter === "highest") return arr.sort((a, b) => b.rating - a.rating);
     if (reviewFilter === "lowest") return arr.sort((a, b) => a.rating - b.rating);
     if (reviewFilter === "verified") return arr.filter((r) => r.verified);
