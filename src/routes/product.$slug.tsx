@@ -781,344 +781,57 @@ function ProductPage() {
   const photoCount = extraReviews.filter((review) => review.image).length;
   const verifiedCount = extraReviews.filter((review) => review.verified).length;
 
+  const benefits = p.id === "neural"
+    ? [
+        { icon: Brain, title: "Eliminates brain fog", desc: "Wakes up tired, foggy mornings — fast." },
+        { icon: Zap, title: "Enhances focus & memory", desc: "Sharper recall, longer attention spans." },
+        { icon: Sparkles, title: "Smooth jitter-free energy", desc: "Calm focus without the caffeine crash." },
+        { icon: Heart, title: "Supports long-term brain health", desc: "Clinically-studied nootropics for the long game." },
+        { icon: Check, title: "No artificial additives", desc: "Clean label. No fillers, dyes, or junk." },
+        { icon: Beaker, title: "Third-party tested", desc: "Independently lab-verified for purity & potency." },
+      ]
+    : [
+        { icon: Zap, title: "All-day cellular energy", desc: "Boosts NAD+ for cleaner, steadier output." },
+        { icon: Heart, title: "Supports healthy aging", desc: "Targets the mitochondrial decline behind fatigue." },
+        { icon: Sparkles, title: "Sharper recovery", desc: "Faster bounce-back from workouts and stress." },
+        { icon: Brain, title: "Mental clarity bonus", desc: "Users report fewer afternoon dips and clearer thinking." },
+        { icon: Check, title: "No artificial additives", desc: "Pure 500mg NMN. Nothing else." },
+        { icon: Beaker, title: "Third-party tested", desc: "Lab-verified purity in every batch." },
+      ];
+
+  const ingredients = p.id === "neural"
+    ? [
+        { name: "Bacopa Monnieri", dose: "300mg", desc: "Clinically shown to improve memory and information processing." },
+        { name: "Lion's Mane Mushroom", dose: "500mg", desc: "Supports nerve growth factor (NGF) and long-term brain health." },
+        { name: "L-Theanine", dose: "200mg", desc: "Promotes calm, focused energy — pairs with caffeine for zero jitters." },
+        { name: "Natural Caffeine", dose: "75mg", desc: "Smooth, low-dose lift from green coffee bean — no crash." },
+        { name: "Rhodiola Rosea", dose: "250mg", desc: "Adaptogen that fights mental fatigue under stress." },
+        { name: "Citicoline (CDP-Choline)", dose: "250mg", desc: "Raises acetylcholine for sharper focus and recall." },
+      ]
+    : [
+        { name: "NMN (β-Nicotinamide Mononucleotide)", dose: "500mg", desc: "The direct NAD+ precursor — fuels cellular energy and longevity." },
+        { name: "Resveratrol", dose: "150mg", desc: "Activates sirtuins; works synergistically with NMN." },
+        { name: "TMG (Trimethylglycine)", dose: "100mg", desc: "Methyl donor that supports NMN metabolism." },
+      ];
+
+  const tabs: { id: "why" | "ing" | "use" | "rev"; label: string }[] = [
+    { id: "why", label: "Why You Need This" },
+    { id: "ing", label: "Ingredients" },
+    { id: "use", label: "How to Use" },
+    { id: "rev", label: `Reviews (${p.reviews}+)` },
+  ];
+
+  const trustBadges = [
+    { icon: Lock, title: "Secure Checkout", sub: "256-bit SSL" },
+    { icon: Truck, title: "Free Shipping", sub: "On orders $75+" },
+    { icon: ShieldCheck, title: "30-Day Guarantee", sub: "Risk-free trial" },
+    { icon: Star, title: `${p.reviews}+ Reviews`, sub: `${p.rating}/5 average` },
+  ];
+
   return (
     <>
       {showReviewForm && (
-        <div
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
-          onClick={() => setShowReviewForm(false)}
-        >
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
-            <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
-                const payload: ReviewItem = { ...form, date: "Just now", verified: true, helpfulCount: 0, notHelpfulCount: 0 };
-                setUserReviews((prev) => [payload, ...prev]);
-                setForm({ name: "", title: "", body: "", rating: 5 });
-                setShowReviewForm(false);
-                setTab("rev");
-                const { supabase } = await import("@/integrations/supabase/client");
-                await supabase.from("product_reviews").insert({
-                  product_id: p.id,
-                  name: payload.name.trim().slice(0, 80),
-                  title: payload.title.trim().slice(0, 120),
-                  body: payload.body.trim().slice(0, 2000),
-                  rating: payload.rating,
-                });
-              }}
-            >
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium block mb-1">Name</label>
-                  <input
-                    className="w-full rounded-md border border-border px-3 py-2"
-                    value={form.name}
-                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium block mb-1">Title</label>
-                  <input
-                    className="w-full rounded-md border border-border px-3 py-2"
-                    value={form.title}
-                    onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium block mb-1">Rating</label>
-                  <div className="flex gap-2">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <button
-                        type="button"
-                        key={n}
-                        onClick={() => setForm((f) => ({ ...f, rating: n }))}
-                        className="p-1"
-                      >
-                        <Star className={`h-6 w-6 ${n <= form.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <label className="text-sm font-medium block mb-1">Review</label>
-                  <textarea
-                    className="w-full rounded-md border border-border px-3 py-2 min-h-[120px]"
-                    value={form.body}
-                    onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
-                    required
-                  />
-                </div>
-                <div className="flex gap-3 justify-end">
-                  <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">
-                    Cancel
-                  </button>
-                  <button type="submit" className="btn-primary">
-                    Submit Review
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-          {tab === "rev" && (
-            <section className="rounded-[2rem] border border-border bg-secondary/40 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-              <div className="mx-auto max-w-3xl text-center">
-                <p className="text-xs font-semibold uppercase tracking-[0.34em] text-primary">Join the Circuit</p>
-                <h2 className="mt-4 text-3xl font-display font-bold text-foreground sm:text-4xl">Customer proof that feels earned</h2>
-                <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-                  See how thousands of customers are building sharper focus, cleaner energy, and better daily performance with Circuit Neural Performance.
-                </p>
-              </div>
 
-              <div className="mt-10 grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start">
-                <aside className="lg:sticky lg:top-24 space-y-4">
-                  <div className="rounded-[1.5rem] border border-border bg-card p-6 shadow-sm shadow-primary/5">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">Average rating</p>
-                        <div className="mt-3 flex items-end gap-3">
-                          <span className="text-6xl font-display font-bold leading-none text-foreground">{p.rating}</span>
-                          <span className="pb-2 text-sm text-muted-foreground">out of 5</span>
-                        </div>
-                      </div>
-                      <div className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-foreground">
-                        {p.reviews}+ reviews
-                      </div>
-                    </div>
-
-                    <div className="mt-4 flex items-center gap-1">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-5 w-5 ${i < Math.round(p.rating) ? "fill-energy text-energy" : "fill-muted text-muted"}`}
-                        />
-                      ))}
-                    </div>
-
-                    <div className="mt-5 rounded-2xl border border-border bg-secondary/70 p-4">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-success">
-                        <ShieldCheck className="h-4 w-4" />
-                        <span>{recommendation}% Would Recommend</span>
-                      </div>
-                      <div className="mt-2 text-xs leading-6 text-muted-foreground">
-                        Based on {verifiedCount}+ verified reviews and consistent repeat orders.
-                      </div>
-                    </div>
-
-                    <div className="mt-6 space-y-3">
-                      {ratingBreakdown.map((row) => (
-                        <button
-                          key={row.stars}
-                          type="button"
-                          onClick={() => {
-                            setReviewFilter(String(row.stars) as "5" | "4" | "3" | "2" | "1");
-                            setReviewsShown(8);
-                          }}
-                          className={`flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left transition ${reviewFilter === String(row.stars) ? "bg-secondary ring-1 ring-primary/25" : "hover:bg-secondary/70"}`}
-                        >
-                          <span className="w-7 text-sm font-semibold text-foreground">{row.stars}</span>
-                          <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-secondary">
-                            <div className="h-full rounded-full bg-primary" style={{ width: `${row.pct}%` }} />
-                          </div>
-                          <span className="w-10 text-right text-xs text-muted-foreground">{row.pct}%</span>
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="mt-6 grid grid-cols-2 gap-3 text-center">
-                      <div className="rounded-2xl border border-border bg-secondary/70 p-3">
-                        <div className="text-lg font-display font-bold text-foreground">{photoCount}</div>
-                        <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">With photos</div>
-                      </div>
-                      <div className="rounded-2xl border border-border bg-secondary/70 p-3">
-                        <div className="text-lg font-display font-bold text-foreground">{verifiedCount}</div>
-                        <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Verified</div>
-                      </div>
-                    </div>
-
-                    <button onClick={() => setShowReviewForm(true)} className="mt-6 btn-primary w-full">
-                      Write a Review
-                    </button>
-                  </div>
-                </aside>
-
-                <div>
-                  <div className="rounded-[1.5rem] border border-border bg-card p-4 shadow-sm shadow-primary/5 sm:p-5">
-                    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">Filter reviews</p>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {(
-                            [
-                              ["recent", "Most Recent"],
-                              ["highest", "Highest Rated"],
-                              ["lowest", "Lowest Rated"],
-                              ["verified", "Verified Only"],
-                              ["photos", "With Photos"],
-                            ] as const
-                          ).map(([key, label]) => (
-                            <button
-                              key={key}
-                              type="button"
-                              onClick={() => {
-                                setReviewFilter(key);
-                                setReviewsShown(8);
-                              }}
-                              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition ${reviewFilter === key ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-foreground hover:bg-secondary"}`}
-                            >
-                              {key === "photos" ? <ImageIcon className="h-4 w-4" /> : <SlidersHorizontal className="h-4 w-4" />}
-                              {label}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {(["1", "2", "3", "4", "5"] as const).includes(reviewFilter as any) && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setReviewFilter("recent");
-                            setReviewsShown(8);
-                          }}
-                          className="text-sm font-medium text-primary hover:underline"
-                        >
-                          Clear star filter
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="mt-6 columns-1 gap-5 md:columns-2">
-                    {displayedReviews.map((r, i) => {
-                      const reviewKey = `${r.name}-${r.title}-${i}`;
-                      const initials = r.name
-                        .split(" ")
-                        .map((n: string) => n[0])
-                        .join("")
-                        .slice(0, 2)
-                        .toUpperCase();
-
-                      return (
-                        <article
-                          key={reviewKey}
-                          className="mb-5 break-inside-avoid rounded-[1.5rem] border border-border bg-card shadow-sm shadow-primary/5 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10"
-                        >
-                          {r.image && (
-                            <div className="overflow-hidden rounded-t-[1.5rem] border-b border-border bg-secondary">
-                              <img
-                                src={r.image}
-                                alt={`${r.name} sharing Circuit Neural Performance`}
-                                loading="lazy"
-                                className="aspect-[4/5] w-full object-cover"
-                              />
-                            </div>
-                          )}
-
-                          <div className="p-5 sm:p-6">
-                            <div className="flex items-start gap-3">
-                              {r.image ? (
-                                <div className="h-11 w-11 shrink-0 overflow-hidden rounded-full border border-border bg-secondary">
-                                  <img src={r.image} alt={`${r.name} avatar`} className="h-full w-full object-cover" loading="lazy" />
-                                </div>
-                              ) : (
-                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-secondary text-sm font-semibold text-foreground">
-                                  {initials}
-                                </div>
-                              )}
-
-                              <div className="min-w-0 flex-1">
-                                <div className="flex flex-wrap items-center gap-2">
-                                  <span className="text-sm font-semibold text-foreground">{r.name}</span>
-                                  {r.verified && (
-                                    <span className="inline-flex items-center gap-1 rounded-full border border-success/20 bg-success/10 px-2.5 py-1 text-[11px] font-semibold text-success">
-                                      <Check className="h-3 w-3" />
-                                      Verified
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                                  <div className="flex items-center gap-0.5">
-                                    {Array.from({ length: 5 }).map((_, s) => (
-                                      <Star
-                                        key={s}
-                                        className={`h-3.5 w-3.5 ${s < r.rating ? "fill-energy text-energy" : "fill-muted text-muted"}`}
-                                      />
-                                    ))}
-                                  </div>
-                                  <span>•</span>
-                                  <span>{r.date}</span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h3 className="mt-4 text-lg font-display font-bold text-foreground">{r.title}</h3>
-                            <p className="mt-3 text-sm leading-7 text-muted-foreground">{r.body}</p>
-
-                            <div className="mt-5 border-t border-border pt-4">
-                              <div className="flex flex-wrap items-center justify-between gap-3">
-                                <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">Was this helpful?</span>
-                                <div className="flex flex-wrap gap-2">
-                                  <button
-                                    type="button"
-                                    onClick={() => setHelpful((h) => ({ ...h, [reviewKey]: "yes" }))}
-                                    className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition ${helpful[reviewKey] === "yes" ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-foreground hover:bg-secondary"}`}
-                                  >
-                                    <ThumbsUp className="h-4 w-4" />
-                                    Yes
-                                    <span className="text-[11px] opacity-80">{(r.helpfulCount || 0) + (helpful[reviewKey] === "yes" ? 1 : 0)}</span>
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={() => setHelpful((h) => ({ ...h, [reviewKey]: "no" }))}
-                                    className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition ${helpful[reviewKey] === "no" ? "border-border bg-secondary text-foreground" : "border-border bg-background text-foreground hover:bg-secondary"}`}
-                                  >
-                                    <ThumbsDown className="h-4 w-4" />
-                                    No
-                                    <span className="text-[11px] opacity-80">{(r.notHelpfulCount || 0) + (helpful[reviewKey] === "no" ? 1 : 0)}</span>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      );
-                    })}
-                  </div>
-
-                  {sortedReviews.length === 0 ? (
-                    <div className="mt-6 rounded-[1.5rem] border border-dashed border-border bg-card p-10 text-center text-sm text-muted-foreground">
-                      No reviews match this filter yet.
-                    </div>
-                  ) : reviewsShown < sortedReviews.length ? (
-                    <div className="mt-6 flex justify-center">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (isLoadingMore) return;
-                          setIsLoadingMore(true);
-                          window.setTimeout(() => {
-                            setReviewsShown((n) => Math.min(n + 4, sortedReviews.length));
-                            setIsLoadingMore(false);
-                          }, 260);
-                        }}
-                        className="inline-flex min-w-[240px] items-center justify-center rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground shadow-sm transition hover:-translate-y-0.5 hover:bg-secondary disabled:opacity-70"
-                        disabled={isLoadingMore}
-                      >
-                        {isLoadingMore ? "Loading Reviews..." : "Load More Reviews"}
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="mt-6 text-center text-sm text-muted-foreground">You've reached the end of the reviews.</div>
-                  )}
-                </div>
-              </div>
-            </section>
-          )}
 
       {/* RELATED */}
       <section className="container-x py-20">
