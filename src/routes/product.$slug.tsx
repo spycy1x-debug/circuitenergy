@@ -49,6 +49,7 @@ import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
 import neuralInfographic from "@/assets/product-benefits-infographic.png";
 import neuralComparison from "@/assets/neural-built-different.png";
+import whyFoggy from "@/assets/why-foggy.png";
 import neuralPdp2 from "@/assets/neural-pdp-2-thumbsup.png";
 import neuralPdp3 from "@/assets/neural-pdp-3-infographic.png";
 import neuralPdp4 from "@/assets/neural-pdp-4-comparison.png";
@@ -1088,6 +1089,7 @@ function ProductPage() {
 
         <div className="mt-10">
           {tab === "why" && (
+            <div className="space-y-12">
             <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
               <div className="lg:col-span-2 space-y-6">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">The Science</p>
@@ -1138,6 +1140,18 @@ function ProductPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {p.id === "neural" && (
+              <div className="overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-sm">
+                <img
+                  src={whyFoggy}
+                  alt="Why your brain feels foggy — common causes and the nootropics that support mental clarity"
+                  className="w-full h-auto"
+                  loading="lazy"
+                />
+              </div>
+            )}
             </div>
           )}
 
