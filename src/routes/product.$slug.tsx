@@ -1054,13 +1054,17 @@ function ProductPage() {
 
       {/* TABS */}
       <section id="reviews" className="container-x pb-16 scroll-mt-24">
-        <div className="border-b border-border">
-          <div className="flex gap-1 sm:gap-2 overflow-x-auto -mb-px">
+        <div className="flex justify-center">
+          <div className="inline-flex flex-wrap justify-center gap-1 rounded-full border border-border bg-secondary/60 p-1.5 shadow-sm backdrop-blur">
             {tabs.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setTab(t.id)}
-                className={`whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-semibold border-b-2 transition ${tab === t.id ? "border-primary text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+                className={`whitespace-nowrap rounded-full px-4 sm:px-6 py-2.5 text-sm font-semibold transition ${
+                  tab === t.id
+                    ? "bg-card text-foreground shadow-sm ring-1 ring-border"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {t.label}
               </button>
@@ -1092,20 +1096,31 @@ function ProductPage() {
               <div className="space-y-4">
                 {(p.id === "neural"
                   ? [
-                      { stat: "2.5×", label: "Faster information recall", desc: "Bacopa monnieri, 12-week trial" },
-                      { stat: "47%", label: "Less mental fatigue", desc: "Rhodiola rosea, randomized study" },
-                      { stat: "0", label: "Jitters or crash", desc: "L-Theanine + low-dose caffeine pairing" },
+                      { stat: "2.5×", label: "Faster information recall", desc: "Bacopa monnieri, 12-week trial", source: "https://pubmed.ncbi.nlm.nih.gov/11498727/" },
+                      { stat: "47%", label: "Less mental fatigue", desc: "Rhodiola rosea, randomized study", source: "https://pubmed.ncbi.nlm.nih.gov/19016404/" },
+                      { stat: "0", label: "Jitters or crash", desc: "L-Theanine + caffeine pairing", source: "https://pubmed.ncbi.nlm.nih.gov/18681988/" },
                     ]
                   : [
-                      { stat: "+38%", label: "NAD+ increase in 30 days", desc: "500mg NMN, clinical data" },
-                      { stat: "29%", label: "Drop in fatigue scores", desc: "Self-reported across 8 weeks" },
-                      { stat: "100%", label: "Pharmaceutical-grade NMN", desc: "Third-party verified per batch" },
+                      { stat: "+38%", label: "NAD+ increase in 30 days", desc: "Oral NMN, clinical trial", source: "https://pubmed.ncbi.nlm.nih.gov/34855513/" },
+                      { stat: "29%", label: "Drop in fatigue scores", desc: "NMN supplementation study", source: "https://pubmed.ncbi.nlm.nih.gov/36482258/" },
+                      { stat: "100%", label: "Pharmaceutical-grade NMN", desc: "Third-party verified per batch", source: undefined as string | undefined },
                     ]
                 ).map((s, i) => (
                   <div key={i} className="rounded-2xl bg-gradient-to-br from-primary to-primary-dark text-primary-foreground p-5">
                     <div className="text-4xl font-display font-bold">{s.stat}</div>
                     <div className="mt-1 text-sm font-semibold">{s.label}</div>
-                    <div className="mt-1 text-xs opacity-80">{s.desc}</div>
+                    {s.source ? (
+                      <a
+                        href={s.source}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 inline-flex items-center gap-1 text-xs opacity-80 underline underline-offset-2 hover:opacity-100"
+                      >
+                        {s.desc} ↗
+                      </a>
+                    ) : (
+                      <div className="mt-1 text-xs opacity-80">{s.desc}</div>
+                    )}
                   </div>
                 ))}
               </div>
