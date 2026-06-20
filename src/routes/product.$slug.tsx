@@ -888,11 +888,45 @@ function ProductPage() {
       : [];
 
   const formulaBreakdown = [
-    { label: "Memory", pct: 40 },
+    { label: "Energy", pct: 40 },
     { label: "Focus", pct: 30 },
-    { label: "Energy", pct: 20 },
+    { label: "Memory", pct: 20 },
     { label: "Calm", pct: 10 },
   ];
+
+  const featuredIngredients = [
+    { name: "Alpha-GPC", tagline: "Primary Focus Ingredient", desc: "Raises acetylcholine — the neurotransmitter behind focus, memory, and mental clarity.", icon: Brain },
+    { name: "L-Theanine + Caffeine", tagline: "Smooth Energy Complex", desc: "The classic pairing for calm, sustained alertness — energy without the jitters or crash.", icon: Zap },
+    { name: "Bacopa Monnieri", tagline: "Long-Term Memory Support", desc: "Clinically studied to improve memory and information-processing speed over time.", icon: Sparkles },
+  ];
+
+  const outcomes =
+    p.id === "neural"
+      ? [
+          { icon: Coffee, title: "No more 2pm crash", desc: "Steady energy that carries you through the afternoon." },
+          { icon: Target, title: "Locked in during meetings", desc: "Hold focus and follow the thread without drifting." },
+          { icon: Clock, title: "Work or study longer", desc: "Sustained concentration without feeling wired." },
+          { icon: Brain, title: "Clearer thinking under pressure", desc: "Stay sharp and composed when the day gets heavy." },
+        ]
+      : [
+          { icon: Zap, title: "More energy that lasts", desc: "Cellular fuel for steadier all-day vitality." },
+          { icon: Sparkles, title: "Better mornings", desc: "Wake up feeling more restored and ready." },
+          { icon: Heart, title: "Healthy aging support", desc: "Support the pathways that keep you feeling like you." },
+          { icon: Clock, title: "Consistent over time", desc: "Benefits that compound with daily use." },
+        ];
+
+  const timeline =
+    p.id === "neural"
+      ? [
+          { when: "Week 1", points: ["More consistent energy", "Fewer afternoon slumps"] },
+          { when: "Weeks 2–4", points: ["Sharper focus during work", "Easier task completion"] },
+          { when: "Month 2+", points: ["More reliable mental performance", "Calmer, clearer thinking"] },
+        ]
+      : [
+          { when: "Week 1", points: ["Subtle lift in daily energy", "Easier mornings"] },
+          { when: "Weeks 2–4", points: ["Steadier stamina", "Less afternoon fade"] },
+          { when: "Month 2+", points: ["Compounding cellular benefits", "More consistent vitality"] },
+        ];
 
   const synergyPoints = [
     "Alpha-GPC + Huperzine A work together to raise and preserve acetylcholine.",
@@ -1187,6 +1221,51 @@ function ProductPage() {
         </div>
       </section>
 
+      {/* OUTCOMES — what you'll actually feel */}
+      <section className="container-x pb-12">
+        <div className="max-w-2xl">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Real-world results</p>
+          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">What you'll actually feel</h2>
+          <p className="mt-3 text-body">The ingredients are the how. This is the why — what daily life looks like on Circuit.</p>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {outcomes.map(({ icon: OIcon, title, desc }) => (
+            <div key={title} className="rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:shadow-lg">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-electric/10 text-primary ring-1 ring-primary/15">
+                <OIcon className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold text-foreground">{title}</h3>
+              <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* What users notice — timeline */}
+        <div className="mt-12 rounded-[1.75rem] border border-border bg-secondary/40 p-6 sm:p-8">
+          <h3 className="font-display text-2xl font-bold text-foreground">What users notice</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Most people feel it build in stages with consistent daily use.</p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {timeline.map((t, i) => (
+              <div key={t.when} className="relative rounded-2xl border border-border bg-card p-5">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">{i + 1}</span>
+                  <span className="font-display font-bold text-foreground">{t.when}</span>
+                </div>
+                <ul className="mt-3 space-y-2">
+                  {t.points.map((pt) => (
+                    <li key={pt} className="flex items-start gap-2 text-sm leading-6 text-muted-foreground">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground">Individual results vary. Consistency is what makes it work.</p>
+        </div>
+      </section>
+
       {/* TABS */}
       <section id="reviews" className="container-x pb-16 scroll-mt-24">
         <div className="flex justify-center">
@@ -1287,6 +1366,27 @@ function ProductPage() {
                     : "Real, research-backed ingredients. No fillers, no junk — just what works."}
                 </p>
               </div>
+
+              {p.id === "neural" && (
+                <div className="grid gap-4 md:grid-cols-3">
+                  {featuredIngredients.map(({ name, tagline, desc, icon: FIcon }) => (
+                    <div
+                      key={name}
+                      className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary to-primary-dark p-6 text-primary-foreground shadow-lg"
+                    >
+                      <div aria-hidden className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-white/10 blur-xl" />
+                      <div className="relative">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/20">
+                          <FIcon className="h-6 w-6" />
+                        </div>
+                        <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-energy">{tagline}</p>
+                        <h3 className="mt-1 font-display text-xl font-bold">{name}</h3>
+                        <p className="mt-2 text-sm leading-6 text-primary-foreground/85">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {p.id === "neural" && (
                 <div className="rounded-2xl border border-border bg-secondary/40 p-6">
