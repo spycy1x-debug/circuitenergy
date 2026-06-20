@@ -770,12 +770,18 @@ function ProductPage() {
 
   const sortedReviews = useMemo<ReviewItem[]>(() => {
     const arr: ReviewItem[] = [...extraReviews];
-    if (reviewFilter === "highest") return arr.sort((a, b) => b.rating - a.rating);
+    if (reviewFilter === "highest")
+      return arr.sort(
+        (a, b) =>
+          Number(Boolean(b.image)) - Number(Boolean(a.image)) ||
+          b.rating - a.rating ||
+          parseRelativeDate(b.date) - parseRelativeDate(a.date),
+      );
     if (reviewFilter === "lowest") return arr.sort((a, b) => a.rating - b.rating);
     if (reviewFilter === "verified") return arr.filter((r) => r.verified);
     if (reviewFilter === "photos") return arr.filter((r) => Boolean(r.image));
     if (["1", "2", "3", "4", "5"].includes(reviewFilter)) return arr.filter((r) => r.rating === Number(reviewFilter));
-    return arr.sort((a, b) => parseRelativeDate(a.date) - parseRelativeDate(b.date));
+    return arr.sort((a, b) => parseRelativeDate(b.date) - parseRelativeDate(a.date));
   }, [extraReviews, reviewFilter]);
 
   const related = PRODUCTS[p.related.id as keyof typeof PRODUCTS];
@@ -805,12 +811,16 @@ function ProductPage() {
 
   const ingredients = p.id === "neural"
     ? [
-        { name: "Bacopa Monnieri", dose: "300mg", desc: "Clinically shown to improve memory and information processing." },
-        { name: "Lion's Mane Mushroom", dose: "500mg", desc: "Supports nerve growth factor (NGF) and long-term brain health." },
-        { name: "L-Theanine", dose: "200mg", desc: "Promotes calm, focused energy — pairs with caffeine for zero jitters." },
-        { name: "Natural Caffeine", dose: "75mg", desc: "Smooth, low-dose lift from green coffee bean — no crash." },
-        { name: "Rhodiola Rosea", dose: "250mg", desc: "Adaptogen that fights mental fatigue under stress." },
-        { name: "Citicoline (CDP-Choline)", dose: "250mg", desc: "Raises acetylcholine for sharper focus and recall." },
+        { name: "Alpha-GPC", dose: "", desc: "Boosts acetylcholine — the neurotransmitter behind focus, memory, and mental sharpness." },
+        { name: "Bacopa Monnieri", dose: "", desc: "Clinically shown to improve memory and information-processing speed." },
+        { name: "L-Theanine", dose: "", desc: "Promotes calm, focused energy — pairs with caffeine for zero jitters." },
+        { name: "Caffeine", dose: "", desc: "A smooth, low-dose lift for alertness — no spike, no crash." },
+        { name: "Phosphatidylserine", dose: "", desc: "Supports brain-cell membranes for memory and long-term cognitive health." },
+        { name: "L-Tyrosine", dose: "", desc: "Helps sustain focus and dopamine under stress and heavy mental load." },
+        { name: "Huperzine A", dose: "", desc: "Preserves acetylcholine for sustained recall and clarity." },
+        { name: "GABA", dose: "", desc: "A calming neurotransmitter that quiets mental static for clearer thinking." },
+        { name: "Vitamin B6", dose: "5mg", desc: "Cofactor for neurotransmitter synthesis and healthy brain metabolism." },
+        { name: "Niacin (B3)", dose: "8mg", desc: "Supports cellular energy production that powers focus." },
       ]
     : [
         { name: "NMN (β-Nicotinamide Mononucleotide)", dose: "500mg", desc: "The direct NAD+ precursor — fuels cellular energy and longevity." },
@@ -1101,7 +1111,7 @@ function ProductPage() {
                 {(p.id === "neural"
                   ? [
                       { stat: "2.5×", label: "Faster information recall", desc: "Bacopa monnieri, 12-week trial", source: "https://pubmed.ncbi.nlm.nih.gov/11498727/" },
-                      { stat: "47%", label: "Less mental fatigue", desc: "Rhodiola rosea, randomized study", source: "https://pubmed.ncbi.nlm.nih.gov/19016404/" },
+                      { stat: "Sharper", label: "Focus & memory from Alpha-GPC", desc: "Alpha-GPC, clinical study", source: "https://pubmed.ncbi.nlm.nih.gov/12637119/" },
                       { stat: "0", label: "Jitters or crash", desc: "L-Theanine + caffeine pairing", source: "https://pubmed.ncbi.nlm.nih.gov/18681988/" },
                     ]
                   : [
@@ -1148,7 +1158,9 @@ function ProductPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-baseline gap-2">
                           <h3 className="font-display font-bold text-lg text-foreground">{ing.name}</h3>
-                          <span className="inline-flex items-center rounded-full bg-energy/15 text-energy text-[11px] font-bold px-2 py-0.5">{ing.dose}</span>
+                          {ing.dose && (
+                            <span className="inline-flex items-center rounded-full bg-energy/15 text-energy text-[11px] font-bold px-2 py-0.5">{ing.dose}</span>
+                          )}
                         </div>
                         <p className="mt-2 text-sm text-muted-foreground leading-6">{ing.desc}</p>
                       </div>
@@ -1211,10 +1223,13 @@ function ProductPage() {
           {tab === "rev" && p.id === "neural" && (
             <section className="rounded-[2rem] border border-border bg-secondary/40 px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
               <div className="mx-auto max-w-3xl text-center">
-                <p className="text-xs font-semibold uppercase tracking-[0.34em] text-primary">Join the Circuit</p>
-                <h2 className="mt-4 text-3xl font-display font-bold text-foreground sm:text-4xl">Customer proof that feels earned</h2>
-                <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-                  See how thousands of customers are building sharper focus, cleaner energy, and better daily performance with Circuit Neural Performance.
+                <h2 className="text-4xl font-display font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                  Join the Circuit
+                </h2>
+                <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">Customer proof that feels earned.</p>
+                <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+                  See how thousands are building sharper focus, cleaner energy, and better daily performance with Circuit
+                  Neural Performance. Join the Circuit and describe your experience below.
                 </p>
               </div>
 
@@ -1233,10 +1248,22 @@ function ProductPage() {
                         {p.reviews}+ reviews
                       </div>
                     </div>
-                    <div className="mt-4 flex items-center gap-1">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`h-5 w-5 ${i < Math.round(p.rating) ? "fill-energy text-energy" : "fill-muted text-muted"}`} />
-                      ))}
+                    <div className="mt-4">
+                      <span className="relative inline-flex items-center">
+                        <span className="flex items-center gap-1 text-muted">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <Star key={i} className="h-5 w-5 fill-current" />
+                          ))}
+                        </span>
+                        <span
+                          className="absolute inset-0 flex items-center gap-1 overflow-hidden text-energy"
+                          style={{ width: `${(p.rating / 5) * 100}%` }}
+                        >
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <Star key={i} className="h-5 w-5 shrink-0 fill-current" />
+                          ))}
+                        </span>
+                      </span>
                     </div>
                     <div className="mt-5 rounded-2xl border border-border bg-secondary/70 p-4">
                       <div className="flex items-center gap-2 text-sm font-semibold text-success">
@@ -1372,7 +1399,6 @@ function ProductPage() {
                                   >
                                     <ThumbsUp className="h-4 w-4" />
                                     Yes
-                                    <span className="text-[11px] opacity-80">{(r.helpfulCount || 0) + (helpful[reviewKey] === "yes" ? 1 : 0)}</span>
                                   </button>
                                   <button
                                     type="button"
@@ -1381,7 +1407,6 @@ function ProductPage() {
                                   >
                                     <ThumbsDown className="h-4 w-4" />
                                     No
-                                    <span className="text-[11px] opacity-80">{(r.notHelpfulCount || 0) + (helpful[reviewKey] === "no" ? 1 : 0)}</span>
                                   </button>
                                 </div>
                               </div>
