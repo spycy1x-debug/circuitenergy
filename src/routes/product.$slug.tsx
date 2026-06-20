@@ -972,18 +972,42 @@ function ProductPage() {
 
           {/* RIGHT — purchase column */}
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 text-primary px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em]">
+              <span className="h-1.5 w-1.5 rounded-full bg-energy" />
               {p.id === "neural" ? "Best Seller · Focus Formula" : "Cellular Energy · Longevity"}
             </div>
-            <h1 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-display font-bold leading-tight">{p.name}</h1>
-            <div className="mt-3 flex items-center gap-3">
-              <div className="flex items-center gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className={`h-4 w-4 ${i < Math.round(p.rating) ? "fill-energy text-energy" : "fill-muted text-muted"}`} />
-                ))}
-              </div>
-              <span className="text-sm text-muted-foreground">{p.rating} · {p.reviews}+ reviews</span>
-            </div>
+            <h1 className="mt-4 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">{p.name}</h1>
+            <button
+              type="button"
+              onClick={() => {
+                setTab("rev");
+                requestAnimationFrame(() =>
+                  document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth" }),
+                );
+              }}
+              className="mt-4 group inline-flex items-center gap-2.5 rounded-full"
+              aria-label={`${p.rating} out of 5 stars from ${p.reviews}+ reviews — view reviews`}
+            >
+              <span className="relative inline-flex items-center">
+                <span className="flex items-center gap-0.5 text-muted">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-[18px] w-[18px] fill-current" />
+                  ))}
+                </span>
+                <span
+                  className="absolute inset-0 flex items-center gap-0.5 overflow-hidden text-energy"
+                  style={{ width: `${(p.rating / 5) * 100}%` }}
+                >
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-[18px] w-[18px] shrink-0 fill-current" />
+                  ))}
+                </span>
+              </span>
+              <span className="text-sm font-semibold text-foreground">{p.rating}</span>
+              <span className="text-sm text-muted-foreground underline-offset-4 group-hover:text-foreground group-hover:underline">
+                {p.reviews}+ reviews
+              </span>
+            </button>
             <p className="mt-4 text-body leading-relaxed">
               {p.id === "neural"
                 ? "10 clinically-studied nootropics in one capsule. Sharper focus, cleaner energy, and a noticeably quieter mind — without jitters or crash."
@@ -1029,7 +1053,7 @@ function ProductPage() {
       </section>
 
       {/* TABS */}
-      <section className="container-x pb-16">
+      <section id="reviews" className="container-x pb-16 scroll-mt-24">
         <div className="border-b border-border">
           <div className="flex gap-1 sm:gap-2 overflow-x-auto -mb-px">
             {tabs.map((t) => (

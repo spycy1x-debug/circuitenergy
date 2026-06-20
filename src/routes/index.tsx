@@ -181,26 +181,39 @@ const faqs = [
 function HomePage() {
   return (
     <>
-      {/* HERO — split-screen, vibrant gradient + fully visible photo */}
-      <section
-        className="relative isolate overflow-hidden border-b border-border"
-        style={{ background: "var(--gradient-hero)" }}
-      >
-        {/* Decorative glows */}
+      {/* HERO — full-bleed background image with overlaid copy */}
+      <section className="relative isolate overflow-hidden border-b border-border flex items-center min-h-[600px] md:min-h-[680px] lg:min-h-[720px]">
+        {/* Background photo */}
+        <img
+          src={heroImg}
+          alt="Focused professional using Circuit Neural Performance"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-[70%_center]"
+          loading="eager"
+        />
+        {/* Readability scrim — dark on the left, fading toward the image on the right */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 -left-32 h-[520px] w-[520px] rounded-full blur-3xl opacity-40"
-          style={{ background: "radial-gradient(circle, var(--electric), transparent 60%)" }}
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(12,17,23,0.94) 0%, rgba(12,17,23,0.82) 34%, rgba(12,17,23,0.5) 60%, rgba(12,17,23,0.2) 85%, rgba(12,17,23,0.1) 100%)",
+          }}
+        />
+        {/* Bottom fade + subtle energy glow for the performance feel */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 -z-10 h-40"
+          style={{ background: "linear-gradient(to top, rgba(12,17,23,0.85), transparent)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-40 right-1/3 h-[460px] w-[460px] rounded-full blur-3xl opacity-30"
+          className="pointer-events-none absolute -bottom-40 -left-20 -z-10 h-[460px] w-[460px] rounded-full blur-3xl opacity-25"
           style={{ background: "radial-gradient(circle, var(--energy), transparent 60%)" }}
         />
         {/* Subtle grid */}
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 -z-10 opacity-[0.05]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
@@ -208,14 +221,13 @@ function HomePage() {
           }}
         />
 
-        <div className="container-x relative grid gap-10 md:gap-12 md:grid-cols-2 items-center py-16 md:py-24 lg:py-28">
-          {/* Copy */}
-          <div className="text-white relative">
-            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] md:text-xs font-semibold tracking-wide uppercase mb-6 border border-white/15 bg-white/5 backdrop-blur-sm">
+        <div className="container-x relative py-20 md:py-24 lg:py-28">
+          <div className="max-w-2xl text-white">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] md:text-xs font-semibold tracking-wide uppercase mb-6 border border-white/15 bg-white/10 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "var(--energy)" }} />
               <span className="text-white/90">Cellular Energy + Cognitive Performance</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-white">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
               Your Brain Isn't
               <br />
               Broken.{" "}
@@ -233,13 +245,17 @@ function HomePage() {
                 </span>
               </span>
             </h1>
-            <p className="mt-6 text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
+            <p className="mt-6 text-base md:text-lg text-white/85 max-w-xl leading-relaxed">
               Circuit pairs cellular NAD+ support with advanced nootropics — so you can think clearly, work sharply, and
               finally feel like yourself again.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/shop" className="btn-primary shadow-xl shadow-black/30">
-                Shop the Collection
+              <Link
+                to="/product/$slug"
+                params={{ slug: "neural-performance" }}
+                className="btn-primary shadow-xl shadow-black/30"
+              >
+                Shop Neural Performance
               </Link>
               <a href="#products" className="btn-white">
                 See the Products
@@ -254,40 +270,9 @@ function HomePage() {
               ].map((s) => (
                 <div key={s.k} className="border-l-2 pl-3" style={{ borderColor: "var(--energy)" }}>
                   <div className="text-white font-display text-xl md:text-2xl font-bold">{s.k}</div>
-                  <div className="text-[11px] md:text-xs text-white/60 uppercase tracking-wide">{s.v}</div>
+                  <div className="text-[11px] md:text-xs text-white/70 uppercase tracking-wide">{s.v}</div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Image — fully contained, never cropped */}
-          <div className="relative">
-            <div
-              aria-hidden
-              className="absolute inset-0 -m-6 rounded-[2rem] blur-2xl opacity-50"
-              style={{ background: "var(--gradient-energy)" }}
-            />
-            <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 shadow-2xl bg-white/5 backdrop-blur-sm">
-              <img
-                src={heroImg}
-                alt="Active people using Circuit Energy supplements"
-                className="w-full h-auto object-cover aspect-square"
-                loading="eager"
-              />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl bg-white/95 backdrop-blur px-4 py-3 shadow-lg">
-                <div>
-                  <div className="text-[10px] uppercase tracking-wider text-body/60 font-semibold">Most Popular</div>
-                  <div className="text-sm font-display font-bold text-ink">Neural Performance</div>
-                </div>
-                <Link
-                  to="/product/$slug"
-                  params={{ slug: "neural-performance" }}
-                  className="text-xs font-semibold rounded-full px-3 py-1.5 text-white"
-                  style={{ background: "var(--gradient-energy)" }}
-                >
-                  Shop →
-                </Link>
-              </div>
             </div>
           </div>
         </div>
@@ -419,30 +404,49 @@ function HomePage() {
       </section>
 
       {/* PROBLEM */}
-      <section className="bg-[#1A1A1A] text-white py-20 md:py-28">
-        <div className="container-x">
-          <h2 className="text-white text-3xl md:text-5xl">Sound Familiar?</h2>
+      <section className="relative overflow-hidden py-20 md:py-28" style={{ background: "#0D1218" }}>
+        {/* ambient glow */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 h-[480px] w-[760px] rounded-full blur-3xl opacity-20"
+          style={{ background: "radial-gradient(circle, var(--destructive), transparent 65%)" }}
+        />
+        <div className="container-x relative">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-[0.18em] uppercase mb-5 border border-white/15 bg-white/5">
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--destructive)" }} />
+              <span className="text-white/80">The Problem</span>
+            </div>
+            <h2 className="text-white text-3xl md:text-5xl font-display leading-tight">Sound Familiar?</h2>
+            <p className="mt-4 text-white/60 text-lg">
+              If any of these hit a little too close to home, you're not lazy or broken — your brain is running on empty.
+            </p>
+          </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {painPoints.map((p) => (
+            {painPoints.map((p, idx) => (
               <div
                 key={p}
-                className="group relative rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 hover:border-destructive/40 hover:from-destructive/10 hover:to-white/5 transition-all duration-300 hover:-translate-y-1"
+                className="group relative rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-destructive/40 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.8)]"
               >
-                <div className="h-9 w-9 rounded-lg bg-destructive/15 text-destructive flex items-center justify-center mb-3 group-hover:bg-destructive/25 transition">
-                  <X className="h-5 w-5" />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="h-11 w-11 rounded-xl bg-destructive/15 text-destructive flex items-center justify-center ring-1 ring-destructive/20 group-hover:bg-destructive/25 transition">
+                    <X className="h-5 w-5" strokeWidth={2.5} />
+                  </div>
+                  <span className="font-mono text-xs text-white/25">0{idx + 1}</span>
                 </div>
-                <p className="text-white/90 text-base font-medium leading-snug">{p}</p>
+                <p className="text-white text-base font-semibold leading-snug">{p}</p>
               </div>
             ))}
           </div>
-          <div className="mt-10 max-w-2xl">
-            <p className="text-white/80 text-lg">
-              You've tried everything — more coffee, energy drinks, vitamins, better sleep. Nothing works for more than
-              an hour.
+          <div className="mt-12 flex flex-col items-start gap-6 rounded-2xl border border-white/10 bg-white/[0.03] p-7 md:flex-row md:items-center md:justify-between">
+            <p className="text-white/80 text-lg max-w-2xl">
+              You've tried everything — more coffee, energy drinks, vitamins, better sleep.{" "}
+              <span className="text-white font-semibold">Nothing works for more than an hour.</span>
             </p>
             <a
               href="#science"
-              className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary hover:bg-primary-dark text-white px-6 py-3 font-semibold transition"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-white shadow-xl shadow-black/30 transition hover:-translate-y-0.5"
+              style={{ background: "var(--gradient-energy)" }}
             >
               Here's Why →
             </a>
