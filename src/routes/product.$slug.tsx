@@ -1042,16 +1042,16 @@ function ProductPage() {
           <span className="text-foreground">{p.name}</span>
         </nav>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
-          {/* LEFT — image + benefits */}
-          <div>
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 lg:items-start">
+          {/* Image gallery */}
+          <div className="order-1">
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setShowImageLightbox(true)}
-                className="block w-full rounded-3xl overflow-hidden bg-gradient-to-br from-secondary to-secondary/40 aspect-square p-6 group"
+                className="block w-full rounded-3xl overflow-hidden bg-gradient-to-br from-secondary to-secondary/40 aspect-square group"
               >
-                <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
+                <img src={p.images[imgIdx]} alt={p.name} className="mx-auto w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]" />
               </button>
               <button
                 type="button"
@@ -1075,15 +1075,16 @@ function ProductPage() {
                 <button
                   key={i}
                   onClick={() => setImgIdx(i)}
-                  className={`aspect-square rounded-xl overflow-hidden border-2 transition ${imgIdx === i ? "border-primary" : "border-border hover:border-primary/40"} bg-secondary p-1.5`}
+                  className={`aspect-square overflow-hidden rounded-xl border-2 transition ${imgIdx === i ? "border-primary" : "border-border hover:border-primary/40"}`}
                 >
-                  <img src={src} alt={`view ${i + 1}`} className="w-full h-full object-contain" />
+                  <img src={src} alt={`view ${i + 1}`} className="h-full w-full object-cover object-center" />
                 </button>
               ))}
             </div>
+          </div>
 
-            {/* Premium benefit chips */}
-            <div className="mt-8">
+          {/* Premium benefit chips */}
+          <div className="order-3 mt-2 lg:mt-8">
               <div className="flex items-center gap-2 mb-4">
                 <div className="h-px flex-1 bg-border" />
                 <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">What you get</span>
@@ -1106,10 +1107,9 @@ function ProductPage() {
                 ))}
               </div>
             </div>
-          </div>
 
           {/* RIGHT — purchase column */}
-          <div>
+          <div className="order-2">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 text-primary px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em]">
               <span className="h-1.5 w-1.5 rounded-full bg-energy" />
               {p.id === "neural" ? "Best Seller · Focus Formula" : "Cellular Energy · Longevity"}
