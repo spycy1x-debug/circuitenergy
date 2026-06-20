@@ -1693,3 +1693,56 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
     </div>
   );
 }
+
+function NmnBuyBlock({ thumbnail }: { thumbnail: string }) {
+  const [adding, setAdding] = useState(false);
+  const handleAdd = async () => {
+    if (adding) return;
+    setAdding(true);
+    try {
+      await shopifyCart.add(
+        {
+          variantId: NMN_VARIANT_GID,
+          productTitle: "Circuit NMN",
+          variantTitle: "1 Bottle",
+          image: thumbnail,
+          unitPrice: 49.99,
+        },
+        1,
+      );
+    } catch (e) {
+      console.error(e);
+      alert("Could not add to cart. Please try again.");
+    } finally {
+      setAdding(false);
+    }
+  };
+  return (
+    <div>
+      <div className="rounded-[14px] border-2 border-[#F5853F] bg-white px-4 py-4 flex items-center gap-4">
+        <div className="h-16 w-16 shrink-0 rounded-lg bg-secondary overflow-hidden flex items-center justify-center p-1">
+          <img src={thumbnail} alt="" className="h-full w-full object-contain" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="font-extrabold text-[#2C353F]">1 BOTTLE · 30-DAY SUPPLY</div>
+          <div className="mt-1 flex items-baseline gap-2">
+            <span className="text-2xl font-extrabold text-[#2C353F]">$49.99</span>
+            <span className="text-sm line-through text-[#8A95A1]">$65.00</span>
+          </div>
+          <div className="mt-0.5 text-xs text-[#6A7786]">30 capsules · 500mg NMN</div>
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={handleAdd}
+        disabled={adding}
+        className="mt-5 w-full rounded-[12px] bg-[#F5853F] hover:bg-[#E0742E] text-white font-extrabold tracking-wider uppercase text-base sm:text-[17px] py-4 sm:py-[18px] shadow-[0_10px_24px_-8px_rgba(245,133,63,0.55)] transition-all hover:-translate-y-[1px] active:translate-y-0 disabled:opacity-70 disabled:cursor-wait"
+      >
+        {adding ? "Adding…" : "Add to Cart"}
+      </button>
+      <p className="mt-2.5 text-center text-[11px] sm:text-xs text-[#6A7786]">
+        30-day money-back guarantee · Secure checkout
+      </p>
+    </div>
+  );
+}
