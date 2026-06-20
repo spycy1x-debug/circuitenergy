@@ -49,6 +49,10 @@ import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
 import neuralInfographic from "@/assets/product-benefits-infographic.png";
 import neuralComparison from "@/assets/neural-built-different.png";
+import neuralPdp2 from "@/assets/neural-pdp-2-thumbsup.png";
+import neuralPdp3 from "@/assets/neural-pdp-3-infographic.png";
+import neuralPdp4 from "@/assets/neural-pdp-4-comparison.png";
+import neuralPdp5 from "@/assets/neural-pdp-5-handkitchen.png";
 const nmnWomanBalcony = nmnWomanBalconyAsset.url;
 const nmnEnergizeRepair = nmnEnergizeRepairAsset.url;
 const nmnKitchenHand = nmnKitchenHandAsset.url;
@@ -111,7 +115,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     name: "Circuit Neural Performance",
     rating: 4.8,
     reviews: 500,
-    images: [neuralHeroClean, neuralHand, neuralInfographic, neuralComparison, neuralCustomer, neuralOpen],
+    images: [neuralHeroClean, neuralPdp2, neuralPdp3, neuralPdp4, neuralPdp5, neuralOpen],
     related: { id: "nmn", blurb: "Pair with Neural Performance for complete energy and cognitive support." },
     sample: {
       title: "Brain fog is completely gone",
