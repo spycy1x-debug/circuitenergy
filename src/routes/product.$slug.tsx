@@ -26,6 +26,8 @@ import {
   Coffee,
   SlidersHorizontal,
   Image as ImageIcon,
+  Target,
+  Waves,
 } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
@@ -216,6 +218,7 @@ function ProductPage() {
   const [helpful, setHelpful] = useState<Record<string, "yes" | "no">>({});
   const [showLabel, setShowLabel] = useState(false);
   const [showStudies, setShowStudies] = useState(false);
+  const [showResearch, setShowResearch] = useState(false);
   const studies =
     p.id === "neural"
       ? [
@@ -844,6 +847,59 @@ function ProductPage() {
         { name: "TMG (Trimethylglycine)", icon: Beaker, dose: "100mg", desc: "Methyl donor that supports NMN metabolism." },
       ];
 
+  const ingredientGroups =
+    p.id === "neural"
+      ? [
+          {
+            cat: "Memory & Learning",
+            icon: Brain,
+            items: [
+              { name: "Alpha-GPC", tag: "Clinically studied ingredient", desc: "Increases acetylcholine, a neurotransmitter central to memory formation and mental clarity." },
+              { name: "Bacopa Monnieri", tag: "Clinically studied ingredient", desc: "Shown to improve memory and information-processing speed with consistent use." },
+              { name: "Huperzine A", tag: "Clinically studied ingredient", desc: "Helps preserve acetylcholine for sustained recall and clarity." },
+            ],
+          },
+          {
+            cat: "Focus & Drive",
+            icon: Target,
+            items: [
+              { name: "L-Tyrosine", tag: "Clinically studied ingredient", desc: "Supports dopamine and focus during stress and heavy mental load." },
+              { name: "Phosphatidylserine", tag: "Clinically studied ingredient", desc: "Supports brain-cell membranes for sharper focus and long-term cognition." },
+            ],
+          },
+          {
+            cat: "Clean Energy",
+            icon: Zap,
+            items: [
+              { name: "Caffeine", tag: "Low, balanced dose", desc: "A smooth lift for alertness — paired with L-Theanine for no spike or crash." },
+              { name: "Niacin (B3)", tag: "Essential cofactor", desc: "Supports cellular energy production that powers focus." },
+              { name: "Vitamin B6", tag: "Essential cofactor", desc: "Cofactor for neurotransmitter synthesis and healthy brain metabolism." },
+            ],
+          },
+          {
+            cat: "Calm Focus",
+            icon: Waves,
+            items: [
+              { name: "L-Theanine", tag: "Clinically studied ingredient", desc: "Promotes calm, focused energy and balances caffeine for zero jitters." },
+              { name: "GABA", tag: "Calming neurotransmitter", desc: "Quiets mental static so you can think clearly under pressure." },
+            ],
+          },
+        ]
+      : [];
+
+  const formulaBreakdown = [
+    { label: "Memory", pct: 40 },
+    { label: "Focus", pct: 30 },
+    { label: "Energy", pct: 20 },
+    { label: "Calm", pct: 10 },
+  ];
+
+  const synergyPoints = [
+    "Alpha-GPC + Huperzine A work together to raise and preserve acetylcholine.",
+    "L-Theanine balances caffeine for smooth, jitter-free energy.",
+    "L-Tyrosine sustains focus and dopamine during periods of stress.",
+  ];
+
   const tabs: { id: "why" | "ing" | "use" | "rev"; label: string }[] = [
     { id: "why", label: "Why You Need This" },
     { id: "ing", label: "Ingredients" },
@@ -955,13 +1011,31 @@ function ProductPage() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
           {/* LEFT — image + benefits */}
           <div>
-            <button
-              type="button"
-              onClick={() => setShowImageLightbox(true)}
-              className="block w-full rounded-3xl overflow-hidden bg-gradient-to-br from-secondary to-secondary/40 aspect-square p-6 group"
-            >
-              <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
-            </button>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowImageLightbox(true)}
+                className="block w-full rounded-3xl overflow-hidden bg-gradient-to-br from-secondary to-secondary/40 aspect-square p-6 group"
+              >
+                <img src={p.images[imgIdx]} alt={p.name} className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
+              </button>
+              <button
+                type="button"
+                aria-label="Previous image"
+                onClick={() => setImgIdx((i) => (i - 1 + p.images.length) % p.images.length)}
+                className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-card/90 text-foreground shadow-md ring-1 ring-border backdrop-blur transition hover:bg-card"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next image"
+                onClick={() => setImgIdx((i) => (i + 1) % p.images.length)}
+                className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-card/90 text-foreground shadow-md ring-1 ring-border backdrop-blur transition hover:bg-card"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
             <div className="mt-4 grid grid-cols-5 gap-2.5">
               {p.images.slice(0, 5).map((src, i) => (
                 <button
@@ -1069,7 +1143,7 @@ function ProductPage() {
               )}
             </div>
 
-            <p className="mt-4 text-body leading-relaxed">
+            <p className="mt-4 text-base md:text-lg font-semibold text-foreground leading-relaxed">
               {p.id === "neural"
                 ? "10 clinically-studied nootropics in one capsule. Sharper focus, cleaner energy, and a noticeably quieter mind — without jitters or crash."
                 : "500mg of pure NMN per serving. Replenish NAD+, restore cellular energy, and support healthy aging from the inside out."}
@@ -1135,9 +1209,9 @@ function ProductPage() {
 
         <div className="mt-10">
           {tab === "why" && (
-            <div className="space-y-12">
-            <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
-              <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-10">
+            <div className={p.id === "neural" ? "grid lg:grid-cols-2 gap-8 lg:gap-12 items-center" : ""}>
+              <div className="space-y-6">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">The Science</p>
                 <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight">
                   Your brain isn't broken. It's <span className="text-primary">under-fueled.</span>
@@ -1155,7 +1229,18 @@ function ProductPage() {
                     : "NMN is the most direct precursor to NAD+, the molecule your cells use to produce energy. Restoring NAD+ supports mitochondrial function, DNA repair, and the longevity pathways that keep you feeling like yourself for decades longer."}
                 </p>
               </div>
-              <div className="space-y-4">
+              {p.id === "neural" && (
+                <div className="overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-sm">
+                  <img
+                    src={whyFoggy}
+                    alt="Why your brain feels foggy — common causes and the nootropics that support mental clarity"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+            </div>
+              <div className="grid gap-4 sm:grid-cols-3">
                 {(p.id === "neural"
                   ? [
                       { stat: "2.5×", label: "Faster information recall", desc: "Bacopa monnieri, 12-week trial", source: "https://pubmed.ncbi.nlm.nih.gov/11498727/" },
@@ -1187,59 +1272,151 @@ function ProductPage() {
                 ))}
               </div>
             </div>
-
-            {p.id === "neural" && (
-              <div className="mx-auto max-w-md overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-sm">
-                <img
-                  src={whyFoggy}
-                  alt="Why your brain feels foggy — common causes and the nootropics that support mental clarity"
-                  className="w-full h-auto"
-                  loading="lazy"
-                />
-              </div>
-            )}
-            </div>
           )}
 
           {tab === "ing" && (
-            <div>
+            <div className="space-y-10">
               <div className="max-w-2xl">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Inside the bottle</p>
-                <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">Every ingredient earns its place.</h2>
-                <p className="mt-3 text-body">Real, research-backed ingredients. No fillers, no junk — just what works.</p>
+                <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">
+                  {p.id === "neural" ? "Built for focus. Backed by science." : "Every ingredient earns its place."}
+                </h2>
+                <p className="mt-3 text-body">
+                  {p.id === "neural"
+                    ? "Real, research-backed ingredients grouped by what they do for your brain. No fillers, no junk."
+                    : "Real, research-backed ingredients. No fillers, no junk — just what works."}
+                </p>
               </div>
-              <div className="mt-8 grid md:grid-cols-2 gap-4">
-                {ingredients.map((ing, i) => {
-                  const IngIcon = ing.icon ?? Beaker;
-                  return (
-                  <div key={i} className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:shadow-lg hover:border-primary/30">
-                    <div aria-hidden className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-electric opacity-0 transition group-hover:opacity-100" />
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-electric/10 text-primary ring-1 ring-primary/15 group-hover:from-primary group-hover:to-primary-dark group-hover:text-primary-foreground transition">
-                        <IngIcon className="h-6 w-6" />
+
+              {p.id === "neural" && (
+                <div className="rounded-2xl border border-border bg-secondary/40 p-6">
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">What the formula prioritizes</p>
+                  <div className="mt-4 space-y-3">
+                    {formulaBreakdown.map((f) => (
+                      <div key={f.label} className="flex items-center gap-3">
+                        <span className="w-20 text-sm font-semibold text-foreground">{f.label}</span>
+                        <span className="h-2.5 flex-1 overflow-hidden rounded-full bg-secondary">
+                          <span className="block h-full rounded-full bg-gradient-to-r from-primary to-electric" style={{ width: `${f.pct}%` }} />
+                        </span>
+                        <span className="w-10 text-right text-xs text-muted-foreground">{f.pct}%</span>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-baseline gap-2">
-                          <h3 className="font-display font-bold text-lg text-foreground">{ing.name}</h3>
-                          {ing.dose && (
-                            <span className="inline-flex items-center rounded-full bg-energy/15 text-energy text-[11px] font-bold px-2 py-0.5">{ing.dose}</span>
-                          )}
-                        </div>
-                        <p className="mt-2 text-sm text-muted-foreground leading-6">{ing.desc}</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                  );
-                })}
+                </div>
+              )}
+
+              {p.id === "neural" ? (
+                <div className="space-y-8">
+                  {ingredientGroups.map((group) => {
+                    const GIcon = group.icon;
+                    return (
+                      <div key={group.cat}>
+                        <div className="mb-4 flex items-center gap-2.5">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/15">
+                            <GIcon className="h-5 w-5" />
+                          </span>
+                          <h3 className="font-display text-xl font-bold text-foreground">{group.cat}</h3>
+                        </div>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          {group.items.map((item) => (
+                            <div
+                              key={item.name}
+                              className="rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg"
+                            >
+                              <h4 className="font-display text-lg font-bold text-foreground">{item.name}</h4>
+                              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.desc}</p>
+                              <div className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-success">
+                                <Check className="h-3.5 w-3.5" />
+                                {item.tag}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2">
+                  {ingredients.map((ing, i) => {
+                    const IngIcon = ing.icon ?? Beaker;
+                    return (
+                      <div key={i} className="group rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg">
+                        <div className="flex items-start gap-4">
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-electric/10 text-primary ring-1 ring-primary/15">
+                            <IngIcon className="h-6 w-6" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-baseline gap-2">
+                              <h3 className="font-display text-lg font-bold text-foreground">{ing.name}</h3>
+                              {ing.dose && (
+                                <span className="inline-flex items-center rounded-full bg-energy/15 text-energy text-[11px] font-bold px-2 py-0.5">{ing.dose}</span>
+                              )}
+                            </div>
+                            <p className="mt-2 text-sm leading-6 text-muted-foreground">{ing.desc}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {p.id === "neural" && (
+                <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6">
+                  <div className="flex items-center gap-2 text-primary">
+                    <Sparkles className="h-5 w-5" />
+                    <h3 className="font-display text-lg font-bold">Designed to work together</h3>
+                  </div>
+                  <ul className="mt-4 space-y-2.5">
+                    {synergyPoints.map((pt) => (
+                      <li key={pt} className="flex items-start gap-2 text-sm leading-6 text-foreground">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowLabel(true)}
+                  className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold hover:bg-secondary"
+                >
+                  <FileText className="h-4 w-4" />
+                  View Full Supplement Facts
+                </button>
+                {p.id === "neural" && (
+                  <button
+                    type="button"
+                    onClick={() => setShowResearch((v) => !v)}
+                    className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold hover:bg-secondary"
+                    aria-expanded={showResearch}
+                  >
+                    Backed by 20+ published studies
+                    <ChevronRight className={`h-4 w-4 transition-transform ${showResearch ? "rotate-90" : ""}`} />
+                  </button>
+                )}
               </div>
-              <button
-                type="button"
-                onClick={() => setShowLabel(true)}
-                className="mt-8 inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold hover:bg-secondary"
-              >
-                <FileText className="h-4 w-4" />
-                View Full Supplement Facts
-              </button>
+              {p.id === "neural" && showResearch && (
+                <ul className="grid gap-2 rounded-2xl border border-border bg-secondary/40 p-5 sm:grid-cols-2">
+                  {studies.map((st) => (
+                    <li key={st.url}>
+                      <a
+                        href={st.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-foreground hover:text-primary"
+                      >
+                        <span className="h-1.5 w-1.5 rounded-full bg-energy" />
+                        {st.name} ↗
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
 
