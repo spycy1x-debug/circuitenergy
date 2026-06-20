@@ -215,6 +215,22 @@ function ProductPage() {
   >("recent");
   const [helpful, setHelpful] = useState<Record<string, "yes" | "no">>({});
   const [showLabel, setShowLabel] = useState(false);
+  const [showStudies, setShowStudies] = useState(false);
+  const studies =
+    p.id === "neural"
+      ? [
+          { name: "Alpha-GPC & cognitive function", url: "https://pubmed.ncbi.nlm.nih.gov/12637119/" },
+          { name: "Bacopa monnieri & memory", url: "https://pubmed.ncbi.nlm.nih.gov/11498727/" },
+          { name: "L-Theanine + caffeine & focus", url: "https://pubmed.ncbi.nlm.nih.gov/18681988/" },
+          { name: "Phosphatidylserine & memory", url: "https://pubmed.ncbi.nlm.nih.gov/20523044/" },
+          { name: "L-Tyrosine & cognition under stress", url: "https://pubmed.ncbi.nlm.nih.gov/26424423/" },
+          { name: "Huperzine A & memory", url: "https://pubmed.ncbi.nlm.nih.gov/18065589/" },
+        ]
+      : [
+          { name: "Oral NMN raises NAD+ levels", url: "https://pubmed.ncbi.nlm.nih.gov/34855513/" },
+          { name: "NMN supplementation & fatigue", url: "https://pubmed.ncbi.nlm.nih.gov/36482258/" },
+          { name: "Resveratrol & sirtuin activation", url: "https://pubmed.ncbi.nlm.nih.gov/16732220/" },
+        ];
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [form, setForm] = useState<{ name: string; title: string; body: string; rating: number; image?: string }>({
@@ -789,7 +805,6 @@ function ProductPage() {
   const ratingBreakdown = ratingBreakdownFor(p.id);
   const recommendation = p.id === "neural" ? 97 : 95;
   const displayedReviews = sortedReviews.slice(0, reviewsShown);
-  const photoCount = extraReviews.filter((review) => review.image).length;
   const verifiedCount = extraReviews.filter((review) => review.verified).length;
 
   const benefits = p.id === "neural"
@@ -812,21 +827,21 @@ function ProductPage() {
 
   const ingredients = p.id === "neural"
     ? [
-        { name: "Alpha-GPC", dose: "", desc: "Boosts acetylcholine — the neurotransmitter behind focus, memory, and mental sharpness." },
-        { name: "Bacopa Monnieri", dose: "", desc: "Clinically shown to improve memory and information-processing speed." },
-        { name: "L-Theanine", dose: "", desc: "Promotes calm, focused energy — pairs with caffeine for zero jitters." },
-        { name: "Caffeine", dose: "", desc: "A smooth, low-dose lift for alertness — no spike, no crash." },
-        { name: "Phosphatidylserine", dose: "", desc: "Supports brain-cell membranes for memory and long-term cognitive health." },
-        { name: "L-Tyrosine", dose: "", desc: "Helps sustain focus and dopamine under stress and heavy mental load." },
-        { name: "Huperzine A", dose: "", desc: "Preserves acetylcholine for sustained recall and clarity." },
-        { name: "GABA", dose: "", desc: "A calming neurotransmitter that quiets mental static for clearer thinking." },
-        { name: "Vitamin B6", dose: "5mg", desc: "Cofactor for neurotransmitter synthesis and healthy brain metabolism." },
-        { name: "Niacin (B3)", dose: "8mg", desc: "Supports cellular energy production that powers focus." },
+        { name: "Alpha-GPC", icon: Brain, dose: "", desc: "Boosts acetylcholine — the neurotransmitter behind focus, memory, and mental sharpness." },
+        { name: "Bacopa Monnieri", icon: Sparkles, dose: "", desc: "Clinically shown to improve memory and information-processing speed." },
+        { name: "L-Theanine", icon: Heart, dose: "", desc: "Promotes calm, focused energy — pairs with caffeine for zero jitters." },
+        { name: "Caffeine", icon: Zap, dose: "", desc: "A smooth, low-dose lift for alertness — no spike, no crash." },
+        { name: "Phosphatidylserine", icon: ShieldCheck, dose: "", desc: "Supports brain-cell membranes for memory and long-term cognitive health." },
+        { name: "L-Tyrosine", icon: Brain, dose: "", desc: "Helps sustain focus and dopamine under stress and heavy mental load." },
+        { name: "Huperzine A", icon: Sparkles, dose: "", desc: "Preserves acetylcholine for sustained recall and clarity." },
+        { name: "GABA", icon: Heart, dose: "", desc: "A calming neurotransmitter that quiets mental static for clearer thinking." },
+        { name: "Vitamin B6", icon: Beaker, dose: "", desc: "Cofactor for neurotransmitter synthesis and healthy brain metabolism." },
+        { name: "Niacin (B3)", icon: Zap, dose: "", desc: "Supports cellular energy production that powers focus." },
       ]
     : [
-        { name: "NMN (β-Nicotinamide Mononucleotide)", dose: "500mg", desc: "The direct NAD+ precursor — fuels cellular energy and longevity." },
-        { name: "Resveratrol", dose: "150mg", desc: "Activates sirtuins; works synergistically with NMN." },
-        { name: "TMG (Trimethylglycine)", dose: "100mg", desc: "Methyl donor that supports NMN metabolism." },
+        { name: "NMN (β-Nicotinamide Mononucleotide)", icon: Zap, dose: "500mg", desc: "The direct NAD+ precursor — fuels cellular energy and longevity." },
+        { name: "Resveratrol", icon: Sparkles, dose: "150mg", desc: "Activates sirtuins; works synergistically with NMN." },
+        { name: "TMG (Trimethylglycine)", icon: Beaker, dose: "100mg", desc: "Methyl donor that supports NMN metabolism." },
       ];
 
   const tabs: { id: "why" | "ing" | "use" | "rev"; label: string }[] = [
@@ -1023,6 +1038,37 @@ function ProductPage() {
                 {p.reviews}+ reviews
               </span>
             </button>
+
+            <div className="mt-2">
+              <button
+                type="button"
+                onClick={() => setShowStudies((v) => !v)}
+                className="inline-flex items-center gap-1.5 font-display italic text-xs text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary"
+                aria-expanded={showStudies}
+              >
+                <FileText className="h-3.5 w-3.5" />
+                Backed by published research
+                <ChevronRight className={`h-3 w-3 transition-transform ${showStudies ? "rotate-90" : ""}`} />
+              </button>
+              {showStudies && (
+                <ul className="mt-3 space-y-1.5 rounded-xl border border-border bg-secondary/40 p-4">
+                  {studies.map((st) => (
+                    <li key={st.url}>
+                      <a
+                        href={st.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-foreground hover:text-primary"
+                      >
+                        <span className="h-1.5 w-1.5 rounded-full bg-energy" />
+                        {st.name} ↗
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
             <p className="mt-4 text-body leading-relaxed">
               {p.id === "neural"
                 ? "10 clinically-studied nootropics in one capsule. Sharper focus, cleaner energy, and a noticeably quieter mind — without jitters or crash."
@@ -1143,7 +1189,7 @@ function ProductPage() {
             </div>
 
             {p.id === "neural" && (
-              <div className="overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-sm">
+              <div className="mx-auto max-w-md overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-sm">
                 <img
                   src={whyFoggy}
                   alt="Why your brain feels foggy — common causes and the nootropics that support mental clarity"
@@ -1160,14 +1206,17 @@ function ProductPage() {
               <div className="max-w-2xl">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Inside the bottle</p>
                 <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">Every ingredient earns its place.</h2>
-                <p className="mt-3 text-body">Clinically-studied dosages. No fillers, no proprietary blends, no junk.</p>
+                <p className="mt-3 text-body">Real, research-backed ingredients. No fillers, no junk — just what works.</p>
               </div>
               <div className="mt-8 grid md:grid-cols-2 gap-4">
-                {ingredients.map((ing, i) => (
-                  <div key={i} className="group rounded-2xl border border-border bg-card p-5 hover:shadow-md hover:border-primary/30 transition">
+                {ingredients.map((ing, i) => {
+                  const IngIcon = ing.icon ?? Beaker;
+                  return (
+                  <div key={i} className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:shadow-lg hover:border-primary/30">
+                    <div aria-hidden className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-electric opacity-0 transition group-hover:opacity-100" />
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition">
-                        <Beaker className="h-6 w-6" />
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-electric/10 text-primary ring-1 ring-primary/15 group-hover:from-primary group-hover:to-primary-dark group-hover:text-primary-foreground transition">
+                        <IngIcon className="h-6 w-6" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-baseline gap-2">
@@ -1180,7 +1229,8 @@ function ProductPage() {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
               <button
                 type="button"
@@ -1303,16 +1353,6 @@ function ProductPage() {
                           <span className="w-10 text-right text-xs text-muted-foreground">{row.pct}%</span>
                         </button>
                       ))}
-                    </div>
-                    <div className="mt-6 grid grid-cols-2 gap-3 text-center">
-                      <div className="rounded-2xl border border-border bg-secondary/70 p-3">
-                        <div className="text-lg font-display font-bold text-foreground">{photoCount}</div>
-                        <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">With photos</div>
-                      </div>
-                      <div className="rounded-2xl border border-border bg-secondary/70 p-3">
-                        <div className="text-lg font-display font-bold text-foreground">{verifiedCount}</div>
-                        <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Verified</div>
-                      </div>
                     </div>
                     <button onClick={() => setShowReviewForm(true)} className="mt-6 btn-primary w-full">Write a Review</button>
                   </div>
