@@ -853,6 +853,8 @@ function ProductPage() {
           {
             cat: "Memory & Learning",
             icon: Brain,
+            chip: "bg-electric/15 text-electric",
+            borderL: "border-l-electric",
             items: [
               { name: "Alpha-GPC", tag: "Clinically studied ingredient", desc: "Increases acetylcholine, a neurotransmitter central to memory formation and mental clarity." },
               { name: "Bacopa Monnieri", tag: "Clinically studied ingredient", desc: "Shown to improve memory and information-processing speed with consistent use." },
@@ -862,6 +864,8 @@ function ProductPage() {
           {
             cat: "Focus & Drive",
             icon: Target,
+            chip: "bg-energy/15 text-energy",
+            borderL: "border-l-energy",
             items: [
               { name: "L-Tyrosine", tag: "Clinically studied ingredient", desc: "Supports dopamine and focus during stress and heavy mental load." },
               { name: "Phosphatidylserine", tag: "Clinically studied ingredient", desc: "Supports brain-cell membranes for sharper focus and long-term cognition." },
@@ -870,6 +874,8 @@ function ProductPage() {
           {
             cat: "Clean Energy",
             icon: Zap,
+            chip: "bg-success/15 text-success",
+            borderL: "border-l-success",
             items: [
               { name: "Caffeine", tag: "Low, balanced dose", desc: "A smooth lift for alertness — paired with L-Theanine for no spike or crash." },
               { name: "Niacin (B3)", tag: "Essential cofactor", desc: "Supports cellular energy production that powers focus." },
@@ -879,6 +885,8 @@ function ProductPage() {
           {
             cat: "Calm Focus",
             icon: Waves,
+            chip: "bg-primary/15 text-primary",
+            borderL: "border-l-primary",
             items: [
               { name: "L-Theanine", tag: "Clinically studied ingredient", desc: "Promotes calm, focused energy and balances caffeine for zero jitters." },
               { name: "GABA", tag: "Calming neurotransmitter", desc: "Quiets mental static so you can think clearly under pressure." },
@@ -1091,12 +1099,15 @@ function ProductPage() {
                 <div className="h-px flex-1 bg-border" />
               </div>
               <div className="grid sm:grid-cols-2 gap-3">
-                {benefits.map((b, i) => (
+                {benefits.map((b, i) => {
+                  const chip = ["bg-energy/15 text-energy", "bg-electric/15 text-electric", "bg-success/15 text-success", "bg-primary/15 text-primary"][i % 4];
+                  const bord = ["border-l-energy", "border-l-electric", "border-l-success", "border-l-primary"][i % 4];
+                  return (
                   <div
                     key={i}
-                    className="group flex items-start gap-3 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/30 hover:shadow-sm"
+                    className={`group flex items-start gap-3 rounded-2xl border border-l-4 border-border ${bord} bg-card p-4 transition hover:-translate-y-0.5 hover:shadow-sm`}
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${chip}`}>
                       <b.icon className="h-5 w-5" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1104,7 +1115,8 @@ function ProductPage() {
                       <div className="mt-1 text-xs text-muted-foreground leading-snug">{b.desc}</div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -1229,15 +1241,36 @@ function ProductPage() {
           <p className="mt-3 text-body">The ingredients are the how. This is the why — what daily life looks like on Circuit.</p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {outcomes.map(({ icon: OIcon, title, desc }) => (
-            <div key={title} className="rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:shadow-lg">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-electric/10 text-primary ring-1 ring-primary/15">
-                <OIcon className="h-6 w-6" />
+          {outcomes.map(({ icon: OIcon, title, desc }, i) => {
+            const featured = i === 0;
+            const chipAccents = ["", "bg-energy/15 text-energy", "bg-electric/15 text-electric", "bg-success/15 text-success"];
+            if (featured) {
+              return (
+                <div
+                  key={title}
+                  className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-6 text-primary-foreground shadow-lg sm:col-span-2 lg:col-span-1"
+                >
+                  <div aria-hidden className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-white/10 blur-xl" />
+                  <div className="relative">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/20">
+                      <OIcon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-4 font-display text-xl font-bold">{title}</h3>
+                    <p className="mt-1.5 text-sm leading-6 text-primary-foreground/85">{desc}</p>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <div key={title} className="rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:shadow-lg">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${chipAccents[i % chipAccents.length]}`}>
+                  <OIcon className="h-6 w-6" />
+                </div>
+                <h3 className="mt-4 font-display text-lg font-bold text-foreground">{title}</h3>
+                <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{desc}</p>
               </div>
-              <h3 className="mt-4 font-display text-lg font-bold text-foreground">{title}</h3>
-              <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* What users notice — timeline */}
@@ -1412,7 +1445,7 @@ function ProductPage() {
                     return (
                       <div key={group.cat}>
                         <div className="mb-4 flex items-center gap-2.5">
-                          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/15">
+                          <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${group.chip}`}>
                             <GIcon className="h-5 w-5" />
                           </span>
                           <h3 className="font-display text-xl font-bold text-foreground">{group.cat}</h3>
@@ -1421,7 +1454,7 @@ function ProductPage() {
                           {group.items.map((item) => (
                             <div
                               key={item.name}
-                              className="rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg"
+                              className={`rounded-2xl border border-l-4 border-border ${group.borderL} bg-card p-5 transition hover:-translate-y-0.5 hover:shadow-lg`}
                             >
                               <h4 className="font-display text-lg font-bold text-foreground">{item.name}</h4>
                               <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.desc}</p>
