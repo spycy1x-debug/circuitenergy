@@ -302,7 +302,7 @@ function ProductPage() {
             {
               title: "Brain fog lifted in days",
               body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.",
-              name: "Priya S.",
+              name: "Sarah K.",
               date: "1 month ago",
               rating: 5,
               image: reviewWomanBathroom,
@@ -313,7 +313,7 @@ function ProductPage() {
             {
               title: "Great for deep work",
               body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.",
-              name: "Dev K.",
+              name: "David K.",
               date: "1 month ago",
               rating: 5,
               image: reviewBottleKitchen,
@@ -379,7 +379,7 @@ function ProductPage() {
             {
               title: "Solid for studying",
               body: "This has become part of my morning routine. Memory recall during practice exams is sharper and I stay focused for longer blocks.",
-              name: "Aisha M.",
+              name: "Ashley M.",
               date: "3 months ago",
               rating: 5,
               image: reviewWomanGymCloseup,
