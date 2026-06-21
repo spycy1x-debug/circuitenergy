@@ -73,6 +73,12 @@ import reviewWomanCarSelfieAsset from "@/assets/review-woman-car-selfie.png.asse
 import reviewYoungManMirrorAsset from "@/assets/review-young-man-mirror.png.asset.json";
 import reviewWomanMugKitchenAsset from "@/assets/review-woman-mug-kitchen.png.asset.json";
 import reviewWomanGymCloseupAsset from "@/assets/review-woman-gym-closeup.png.asset.json";
+import reviewUploadedWomanMirrorAsset from "@/assets/review-uploaded-woman-mirror.png.asset.json";
+import reviewUploadedManOfficeDarkAsset from "@/assets/review-uploaded-man-office-dark.png.asset.json";
+import reviewUploadedManKitchenSmileAsset from "@/assets/review-uploaded-man-kitchen-smile.png.asset.json";
+import reviewUploadedManGymSelfieAsset from "@/assets/review-uploaded-man-gym-selfie.png.asset.json";
+import reviewUploadedManOfficeBlueAsset from "@/assets/review-uploaded-man-office-blue.png.asset.json";
+import reviewUploadedBottleCoffeeAsset from "@/assets/review-uploaded-bottle-coffee.png.asset.json";
 const reviewWomanBathroom = reviewWomanBathroomAsset.url;
 const reviewWomanLaptop = reviewWomanLaptopAsset.url;
 const reviewManGym = reviewManGymAsset.url;
@@ -85,6 +91,12 @@ const reviewWomanCarSelfie = reviewWomanCarSelfieAsset.url;
 const reviewYoungManMirror = reviewYoungManMirrorAsset.url;
 const reviewWomanMugKitchen = reviewWomanMugKitchenAsset.url;
 const reviewWomanGymCloseup = reviewWomanGymCloseupAsset.url;
+const reviewUploadedWomanMirror = reviewUploadedWomanMirrorAsset.url;
+const reviewUploadedManOfficeDark = reviewUploadedManOfficeDarkAsset.url;
+const reviewUploadedManKitchenSmile = reviewUploadedManKitchenSmileAsset.url;
+const reviewUploadedManGymSelfie = reviewUploadedManGymSelfieAsset.url;
+const reviewUploadedManOfficeBlue = reviewUploadedManOfficeBlueAsset.url;
+const reviewUploadedBottleCoffee = reviewUploadedBottleCoffeeAsset.url;
 import { PRODUCTS } from "@/lib/cart";
 import { shopifyCart } from "@/lib/shopify-cart";
 
@@ -110,6 +122,7 @@ type ReviewItem = {
   verified?: boolean;
   helpfulCount?: number;
   notHelpfulCount?: number;
+  customerPhoto?: boolean;
 };
 
 const PRODUCT_DATA: Record<string, ProductData> = {
@@ -241,6 +254,7 @@ function ProductPage() {
     title: "",
     body: "",
     rating: 5,
+    image: undefined,
   });
 
   useEffect(() => {
