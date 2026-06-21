@@ -957,7 +957,7 @@ function ProductPage() {
   ];
 
   return (
-    <>
+    <div className="product-page">
       {showReviewForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={() => setShowReviewForm(false)}>
           <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
@@ -1950,7 +1950,7 @@ function ProductPage() {
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
