@@ -302,7 +302,7 @@ function ProductPage() {
             {
               title: "Brain fog lifted in days",
               body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.",
-              name: "Priya S.",
+              name: "Sarah K.",
               date: "1 month ago",
               rating: 5,
               image: reviewWomanBathroom,
@@ -313,7 +313,7 @@ function ProductPage() {
             {
               title: "Great for deep work",
               body: "I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real.",
-              name: "Dev K.",
+              name: "David K.",
               date: "1 month ago",
               rating: 5,
               image: reviewBottleKitchen,
@@ -379,7 +379,7 @@ function ProductPage() {
             {
               title: "Solid for studying",
               body: "This has become part of my morning routine. Memory recall during practice exams is sharper and I stay focused for longer blocks.",
-              name: "Aisha M.",
+              name: "Ashley M.",
               date: "3 months ago",
               rating: 5,
               image: reviewWomanGymCloseup,
@@ -629,6 +629,146 @@ function ProductPage() {
               verified: true,
               helpfulCount: 3,
               notHelpfulCount: 4,
+            },
+            {
+              title: "ok so i was wrong about this",
+              body: "bought it bc my coworker wouldnt shut up about it lol. took it for like 10 days and didnt think anything was happening. then i forgot to take it on a tuesday and felt SO foggy by lunch. ordered another bottle that night.",
+              name: "Kayla R.",
+              date: "3 weeks ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 34,
+              notHelpfulCount: 1,
+            },
+            {
+              title: "doesnt feel like much at first",
+              body: "honestly thought it wasnt doing anything for the first two weeks. but my partner pointed out i wasnt complaining about being tired anymore. small thing but yeah it works i guess",
+              name: "Megan T.",
+              date: "1 month ago",
+              rating: 4,
+              verified: true,
+              helpfulCount: 19,
+              notHelpfulCount: 1,
+            },
+            {
+              title: "Took it before my LSAT and",
+              body: "i was studying 6 hrs a day and this was the only thing that kept my brain from melting by hour 4. cant say it made me smarter but i could actually focus which is half the battle",
+              name: "Justin P.",
+              date: "1 month ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 22,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "wish I had found this sooner",
+              body: "I'm 38 and was convinced the afternoon crash was just my life now. Three weeks in and I'm getting through 4pm meetings without zoning out. Not life changing but def life improving lol",
+              name: "Erin H.",
+              date: "1 month ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 17,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "Husband stole my bottle",
+              body: "Bought it for myself, he tried one, now he's asking when im reordering. guess i need 2 bottles next time",
+              name: "Nicole G.",
+              date: "2 months ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 26,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "not magic but real",
+              body: "look, you arent gonna feel high or anything. but my brain feels less.. sticky? hard to describe. like the gears turn easier",
+              name: "Brandon S.",
+              date: "2 months ago",
+              rating: 4,
+              verified: true,
+              helpfulCount: 14,
+              notHelpfulCount: 1,
+            },
+            {
+              title: "Helps me get out of bed",
+              body: "I am NOT a morning person. This + a small coffee and im actually functional before 9am which is a miracle.",
+              name: "Stephanie L.",
+              date: "2 months ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 12,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "Solid product, sketchy delivery",
+              body: "Product is great, 5 stars there. Knocked one off because the box showed up dented and the seal was loose. Customer service replaced it no questions tho",
+              name: "Mark D.",
+              date: "3 months ago",
+              rating: 4,
+              verified: true,
+              helpfulCount: 9,
+              notHelpfulCount: 2,
+            },
+            {
+              title: "for the dads out there",
+              body: "two kids under 5 and a full time job. i was running on fumes. this isn't going to give me my 20s back but it gave me back like 70% of my attention span and thats enough",
+              name: "Chris W.",
+              date: "3 months ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 28,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "Better than Alpha Brain imo",
+              body: "Tried the obvious competitors. This one doesnt feel sketchy or overstimulating. just clean. price is fair for what you get.",
+              name: "Anthony R.",
+              date: "3 months ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 18,
+              notHelpfulCount: 1,
+            },
+            {
+              title: "Honestly didnt do much for me",
+              body: "Maybe its my body chemistry but i took the whole bottle and barely noticed. Glad it works for others, just being honest about my experience.",
+              name: "Tasha B.",
+              date: "4 months ago",
+              rating: 2,
+              verified: true,
+              helpfulCount: 7,
+              notHelpfulCount: 3,
+            },
+            {
+              title: "5 stars for the support team",
+              body: "Had a question about taking it with my meds and they actually answered with real info not just \"talk to your doctor\". Product is also great, been on it 6 weeks",
+              name: "Donna F.",
+              date: "4 months ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 11,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "creative work feels easier",
+              body: "im a graphic designer and the part of my brain that comes up with ideas felt kinda locked up for months. cant say for sure its this but things have been flowing since i started",
+              name: "Jasmine W.",
+              date: "5 months ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 13,
+              notHelpfulCount: 1,
+            },
+            {
+              title: "Tried it skeptically",
+              body: "I usually roll my eyes at nootropics. This one is the first that didnt feel like marketing. Took 3 weeks to ramp but the focus is real and theres no crash",
+              name: "Ethan B.",
+              date: "5 months ago",
+              rating: 5,
+              verified: true,
+              helpfulCount: 15,
+              notHelpfulCount: 0,
             },
           ]
         : [
@@ -957,7 +1097,7 @@ function ProductPage() {
   ];
 
   return (
-    <>
+    <div className="product-page">
       {showReviewForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={() => setShowReviewForm(false)}>
           <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
@@ -1950,7 +2090,7 @@ function ProductPage() {
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

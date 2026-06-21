@@ -135,3 +135,11 @@
   100% { transform: scale(1); }
 }
 .cart-bump { animation: cartBump 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* Product page: slightly bolden subtext for readability */
+.product-page p,
+.product-page li,
+.product-page .text-sm,
+.product-page .text-xs,
+.product-page .text-muted-foreground { font-weight: 500; }
+.product-page .text-muted-foreground { color: color-mix(in oklab, hsl(var(--muted-foreground)) 88%, hsl(var(--foreground))); }
