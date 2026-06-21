@@ -182,6 +182,22 @@ function timeAgo(iso: string) {
   return `${y} year${y === 1 ? "" : "s"} ago`;
 }
 
+async function fileToReviewDataUrl(file: File) {
+  const bitmap = await createImageBitmap(file);
+  const maxSide = 1200;
+  const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Could not prepare image");
+  ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
+  return canvas.toDataURL("image/jpeg", 0.82);
+}
+
 function parseRelativeDate(input: string) {
   if (input === "Just now") return Date.now();
   const match = input.match(/(\d+)\s+(minute|hour|day|week|month|year)/i);
@@ -1117,15 +1133,22 @@ function ProductPage() {
     <div className="product-page">
       {showReviewForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={() => setShowReviewForm(false)}>
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
                 if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
-                const payload: ReviewItem = { ...form, date: "Just now", verified: true, helpfulCount: 0, notHelpfulCount: 0 };
+                const payload: ReviewItem = {
+                  ...form,
+                  date: "Just now",
+                  verified: true,
+                  helpfulCount: 0,
+                  notHelpfulCount: 0,
+                  customerPhoto: Boolean(form.image),
+                };
                 setUserReviews((prev) => [payload, ...prev]);
-                setForm({ name: "", title: "", body: "", rating: 5 });
+                setForm({ name: "", title: "", body: "", rating: 5, image: undefined });
                 setShowReviewForm(false);
                 setTab("rev");
                 const { supabase } = await import("@/integrations/supabase/client");
@@ -1135,6 +1158,7 @@ function ProductPage() {
                   title: payload.title.trim().slice(0, 120),
                   body: payload.body.trim().slice(0, 2000),
                   rating: payload.rating,
+                  image_url: payload.image,
                 });
               }}
             >
@@ -1160,6 +1184,34 @@ function ProductPage() {
                 <div>
                   <label className="text-sm font-medium block mb-1">Review</label>
                   <textarea className="w-full rounded-md border border-border px-3 py-2 min-h-[120px]" value={form.body} onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))} required />
+                </div>
+                <div>
+                  <label className="text-sm font-medium block mb-1">Add photo</label>
+                  <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-border bg-secondary/40 px-4 py-5 text-center transition hover:bg-secondary/70">
+                    <ImageIcon className="h-5 w-5 text-primary" />
+                    <span className="mt-2 text-sm font-medium text-foreground">Upload a review image</span>
+                    <span className="mt-1 text-xs text-muted-foreground">JPG or PNG, optimized automatically</span>
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/jpg,image/webp"
+                      className="sr-only"
+                      onChange={async (event) => {
+                        const file = event.target.files?.[0];
+                        if (!file) return;
+                        const image = await fileToReviewDataUrl(file);
+                        setForm((f) => ({ ...f, image }));
+                      }}
+                    />
+                  </label>
+                  {form.image && (
+                    <div className="mt-3 overflow-hidden rounded-xl border border-border bg-secondary">
+                      <img src={form.image} alt="Review upload preview" className="aspect-[4/5] w-full object-cover" />
+                      <div className="flex items-center justify-between px-3 py-2">
+                        <span className="text-xs font-medium text-muted-foreground">Photo attached</span>
+                        <button type="button" onClick={() => setForm((f) => ({ ...f, image: undefined }))} className="text-xs font-semibold text-primary hover:underline">Remove</button>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="flex gap-3 justify-end">
                   <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">Cancel</button>
