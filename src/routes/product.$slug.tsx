@@ -262,7 +262,7 @@ function ProductPage() {
     import("@/integrations/supabase/client").then(({ supabase }) => {
       supabase
         .from("product_reviews")
-        .select("name,title,body,rating,created_at")
+        .select("name,title,body,rating,created_at,image_url")
         .eq("product_id", p.id)
         .order("created_at", { ascending: false })
         .limit(50)
@@ -275,6 +275,8 @@ function ProductPage() {
               body: r.body,
               rating: r.rating,
               date: timeAgo(r.created_at),
+              image: r.image_url || undefined,
+              customerPhoto: Boolean(r.image_url),
               verified: true,
               helpfulCount: Math.max(2, Math.floor(r.rating * 1.5)),
               notHelpfulCount: 0,
@@ -937,6 +939,7 @@ function ProductPage() {
       verified: true,
       helpfulCount: 26,
       notHelpfulCount: 1,
+      customerPhoto: false,
     };
 
     return [...userReviews, sampleReview, ...pool];
@@ -1869,7 +1872,7 @@ function ProductPage() {
                         <article key={reviewKey} className="mb-5 break-inside-avoid rounded-[1.5rem] border border-border bg-card shadow-sm shadow-primary/5 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
                           {r.image && (
                             <div className="overflow-hidden rounded-t-[1.5rem] border-b border-border bg-secondary">
-                              <img src={r.image} alt={`${r.name} sharing Circuit Neural Performance`} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+                              <img src={r.image} alt={`${r.name} sharing Circuit Neural Performance`} loading="lazy" className={`w-full ${r.customerPhoto ? "aspect-[4/5] object-cover" : "aspect-[4/5] object-cover"}`} />
                             </div>
                           )}
                           <div className="p-5 sm:p-6">
