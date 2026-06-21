@@ -629,6 +629,7 @@ function ProductPage() {
               verified: true,
               helpfulCount: 3,
               notHelpfulCount: 4,
+            },
             {
               title: "ok so i was wrong about this",
               body: "bought it bc my coworker wouldnt shut up about it lol. took it for like 10 days and didnt think anything was happening. then i forgot to take it on a tuesday and felt SO foggy by lunch. ordered another bottle that night.",
