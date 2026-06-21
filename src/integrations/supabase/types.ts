@@ -19,6 +19,7 @@ export type Database = {
           body: string
           created_at: string
           id: string
+          image_url: string | null
           name: string
           product_id: string
           rating: number
@@ -28,6 +29,7 @@ export type Database = {
           body: string
           created_at?: string
           id?: string
+          image_url?: string | null
           name: string
           product_id: string
           rating: number
@@ -37,6 +39,7 @@ export type Database = {
           body?: string
           created_at?: string
           id?: string
+          image_url?: string | null
           name?: string
           product_id?: string
           rating?: number

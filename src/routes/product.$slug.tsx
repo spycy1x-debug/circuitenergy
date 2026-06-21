@@ -73,6 +73,12 @@ import reviewWomanCarSelfieAsset from "@/assets/review-woman-car-selfie.png.asse
 import reviewYoungManMirrorAsset from "@/assets/review-young-man-mirror.png.asset.json";
 import reviewWomanMugKitchenAsset from "@/assets/review-woman-mug-kitchen.png.asset.json";
 import reviewWomanGymCloseupAsset from "@/assets/review-woman-gym-closeup.png.asset.json";
+import reviewUploadedWomanMirrorAsset from "@/assets/review-uploaded-woman-mirror.png.asset.json";
+import reviewUploadedManOfficeDarkAsset from "@/assets/review-uploaded-man-office-dark.png.asset.json";
+import reviewUploadedManKitchenSmileAsset from "@/assets/review-uploaded-man-kitchen-smile.png.asset.json";
+import reviewUploadedManGymSelfieAsset from "@/assets/review-uploaded-man-gym-selfie.png.asset.json";
+import reviewUploadedManOfficeBlueAsset from "@/assets/review-uploaded-man-office-blue.png.asset.json";
+import reviewUploadedBottleCoffeeAsset from "@/assets/review-uploaded-bottle-coffee.png.asset.json";
 const reviewWomanBathroom = reviewWomanBathroomAsset.url;
 const reviewWomanLaptop = reviewWomanLaptopAsset.url;
 const reviewManGym = reviewManGymAsset.url;
@@ -85,6 +91,12 @@ const reviewWomanCarSelfie = reviewWomanCarSelfieAsset.url;
 const reviewYoungManMirror = reviewYoungManMirrorAsset.url;
 const reviewWomanMugKitchen = reviewWomanMugKitchenAsset.url;
 const reviewWomanGymCloseup = reviewWomanGymCloseupAsset.url;
+const reviewUploadedWomanMirror = reviewUploadedWomanMirrorAsset.url;
+const reviewUploadedManOfficeDark = reviewUploadedManOfficeDarkAsset.url;
+const reviewUploadedManKitchenSmile = reviewUploadedManKitchenSmileAsset.url;
+const reviewUploadedManGymSelfie = reviewUploadedManGymSelfieAsset.url;
+const reviewUploadedManOfficeBlue = reviewUploadedManOfficeBlueAsset.url;
+const reviewUploadedBottleCoffee = reviewUploadedBottleCoffeeAsset.url;
 import { PRODUCTS } from "@/lib/cart";
 import { shopifyCart } from "@/lib/shopify-cart";
 
@@ -110,6 +122,7 @@ type ReviewItem = {
   verified?: boolean;
   helpfulCount?: number;
   notHelpfulCount?: number;
+  customerPhoto?: boolean;
 };
 
 const PRODUCT_DATA: Record<string, ProductData> = {
@@ -167,6 +180,22 @@ function timeAgo(iso: string) {
   if (mo < 12) return `${mo} month${mo === 1 ? "" : "s"} ago`;
   const y = Math.floor(d / 365);
   return `${y} year${y === 1 ? "" : "s"} ago`;
+}
+
+async function fileToReviewDataUrl(file: File) {
+  const bitmap = await createImageBitmap(file);
+  const maxSide = 1200;
+  const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Could not prepare image");
+  ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
+  return canvas.toDataURL("image/jpeg", 0.82);
 }
 
 function parseRelativeDate(input: string) {
@@ -241,6 +270,7 @@ function ProductPage() {
     title: "",
     body: "",
     rating: 5,
+    image: undefined,
   });
 
   useEffect(() => {
@@ -248,7 +278,7 @@ function ProductPage() {
     import("@/integrations/supabase/client").then(({ supabase }) => {
       supabase
         .from("product_reviews")
-        .select("name,title,body,rating,created_at")
+        .select("name,title,body,rating,created_at,image_url")
         .eq("product_id", p.id)
         .order("created_at", { ascending: false })
         .limit(50)
@@ -261,6 +291,8 @@ function ProductPage() {
               body: r.body,
               rating: r.rating,
               date: timeAgo(r.created_at),
+              image: r.image_url || undefined,
+              customerPhoto: Boolean(r.image_url),
               verified: true,
               helpfulCount: Math.max(2, Math.floor(r.rating * 1.5)),
               notHelpfulCount: 0,
@@ -295,6 +327,7 @@ function ProductPage() {
               date: "3 weeks ago",
               rating: 5,
               image: reviewManGym,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 31,
               notHelpfulCount: 1,
@@ -306,6 +339,7 @@ function ProductPage() {
               date: "1 month ago",
               rating: 5,
               image: reviewWomanBathroom,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 28,
               notHelpfulCount: 0,
@@ -317,6 +351,7 @@ function ProductPage() {
               date: "1 month ago",
               rating: 5,
               image: reviewBottleKitchen,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 24,
               notHelpfulCount: 1,
@@ -328,6 +363,7 @@ function ProductPage() {
               date: "2 months ago",
               rating: 4,
               image: reviewWomanLaptop,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 18,
               notHelpfulCount: 2,
@@ -339,6 +375,7 @@ function ProductPage() {
               date: "2 months ago",
               rating: 5,
               image: reviewManSelfie,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 21,
               notHelpfulCount: 1,
@@ -350,6 +387,7 @@ function ProductPage() {
               date: "2 months ago",
               rating: 5,
               image: reviewWomanKitchenSelfie,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 22,
               notHelpfulCount: 1,
@@ -361,6 +399,7 @@ function ProductPage() {
               date: "2 months ago",
               rating: 5,
               image: reviewManGlassesSofa,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 17,
               notHelpfulCount: 0,
@@ -372,6 +411,7 @@ function ProductPage() {
               date: "3 months ago",
               rating: 5,
               image: reviewWomanCarSelfie,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 19,
               notHelpfulCount: 0,
@@ -383,6 +423,7 @@ function ProductPage() {
               date: "3 months ago",
               rating: 5,
               image: reviewWomanGymCloseup,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 20,
               notHelpfulCount: 1,
@@ -394,6 +435,7 @@ function ProductPage() {
               date: "3 months ago",
               rating: 5,
               image: reviewYoungManMirror,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 14,
               notHelpfulCount: 0,
@@ -405,6 +447,7 @@ function ProductPage() {
               date: "3 months ago",
               rating: 5,
               image: reviewWomanMugKitchen,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 23,
               notHelpfulCount: 1,
@@ -416,9 +459,70 @@ function ProductPage() {
               date: "2 months ago",
               rating: 5,
               image: reviewNightstand,
+              customerPhoto: true,
               verified: true,
               helpfulCount: 13,
               notHelpfulCount: 1,
+            },
+            {
+              title: "Desk-day focus is way better",
+              body: "I'm in meetings most of the day and this keeps me sharper without that over-caffeinated feeling. The difference is most obvious around 2 or 3pm.",
+              name: "Andre W.",
+              date: "2 weeks ago",
+              rating: 5,
+              image: reviewUploadedManOfficeDark,
+              customerPhoto: true,
+              verified: true,
+              helpfulCount: 16,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "Way more dialed in at work",
+              body: "Started taking it before work and noticed I wasn't bouncing between tabs as much. My attention just feels more steady all morning.",
+              name: "Ethan R.",
+              date: "3 weeks ago",
+              rating: 5,
+              image: reviewUploadedManOfficeBlue,
+              customerPhoto: true,
+              verified: true,
+              helpfulCount: 15,
+              notHelpfulCount: 1,
+            },
+            {
+              title: "Gym then laptop and I'm still locked in",
+              body: "I train early and usually fade by lunch. This has been helping me stay mentally on for the whole second half of the day too.",
+              name: "Logan S.",
+              date: "3 weeks ago",
+              rating: 5,
+              image: reviewUploadedManGymSelfie,
+              customerPhoto: true,
+              verified: true,
+              helpfulCount: 18,
+              notHelpfulCount: 0,
+            },
+            {
+              title: "Actually helped my morning brain",
+              body: "I'm useless for the first hour after waking up and this has made that window much less painful. Subtle, but real.",
+              name: "Natalie C.",
+              date: "4 weeks ago",
+              rating: 5,
+              image: reviewUploadedWomanMirror,
+              customerPhoto: true,
+              verified: true,
+              helpfulCount: 21,
+              notHelpfulCount: 1,
+            },
+            {
+              title: "One of the few products I actually keep by my coffee",
+              body: "I take it with coffee most mornings and it's become a really easy routine. Cleaner focus, less mental drag.",
+              name: "Mason D.",
+              date: "1 month ago",
+              rating: 5,
+              image: reviewUploadedBottleCoffee,
+              customerPhoto: true,
+              verified: true,
+              helpfulCount: 12,
+              notHelpfulCount: 0,
             },
             {
               title: "Replaced two other supplements",
@@ -923,6 +1027,7 @@ function ProductPage() {
       verified: true,
       helpfulCount: 26,
       notHelpfulCount: 1,
+      customerPhoto: false,
     };
 
     return [...userReviews, sampleReview, ...pool];
@@ -1100,15 +1205,22 @@ function ProductPage() {
     <div className="product-page">
       {showReviewForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={() => setShowReviewForm(false)}>
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-2xl font-display font-bold mb-4">Write a Review</h2>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
                 if (!form.name.trim() || !form.title.trim() || !form.body.trim()) return;
-                const payload: ReviewItem = { ...form, date: "Just now", verified: true, helpfulCount: 0, notHelpfulCount: 0 };
+                const payload: ReviewItem = {
+                  ...form,
+                  date: "Just now",
+                  verified: true,
+                  helpfulCount: 0,
+                  notHelpfulCount: 0,
+                  customerPhoto: Boolean(form.image),
+                };
                 setUserReviews((prev) => [payload, ...prev]);
-                setForm({ name: "", title: "", body: "", rating: 5 });
+                setForm({ name: "", title: "", body: "", rating: 5, image: undefined });
                 setShowReviewForm(false);
                 setTab("rev");
                 const { supabase } = await import("@/integrations/supabase/client");
@@ -1118,6 +1230,7 @@ function ProductPage() {
                   title: payload.title.trim().slice(0, 120),
                   body: payload.body.trim().slice(0, 2000),
                   rating: payload.rating,
+                  image_url: payload.image,
                 });
               }}
             >
@@ -1143,6 +1256,34 @@ function ProductPage() {
                 <div>
                   <label className="text-sm font-medium block mb-1">Review</label>
                   <textarea className="w-full rounded-md border border-border px-3 py-2 min-h-[120px]" value={form.body} onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))} required />
+                </div>
+                <div>
+                  <label className="text-sm font-medium block mb-1">Add photo</label>
+                  <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-border bg-secondary/40 px-4 py-5 text-center transition hover:bg-secondary/70">
+                    <ImageIcon className="h-5 w-5 text-primary" />
+                    <span className="mt-2 text-sm font-medium text-foreground">Upload a review image</span>
+                    <span className="mt-1 text-xs text-muted-foreground">JPG or PNG, optimized automatically</span>
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/jpg,image/webp"
+                      className="sr-only"
+                      onChange={async (event) => {
+                        const file = event.target.files?.[0];
+                        if (!file) return;
+                        const image = await fileToReviewDataUrl(file);
+                        setForm((f) => ({ ...f, image }));
+                      }}
+                    />
+                  </label>
+                  {form.image && (
+                    <div className="mt-3 overflow-hidden rounded-xl border border-border bg-secondary">
+                      <img src={form.image} alt="Review upload preview" className="aspect-[4/5] w-full object-cover" />
+                      <div className="flex items-center justify-between px-3 py-2">
+                        <span className="text-xs font-medium text-muted-foreground">Photo attached</span>
+                        <button type="button" onClick={() => setForm((f) => ({ ...f, image: undefined }))} className="text-xs font-semibold text-primary hover:underline">Remove</button>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="flex gap-3 justify-end">
                   <button type="button" onClick={() => setShowReviewForm(false)} className="btn-outline">Cancel</button>
@@ -1855,7 +1996,7 @@ function ProductPage() {
                         <article key={reviewKey} className="mb-5 break-inside-avoid rounded-[1.5rem] border border-border bg-card shadow-sm shadow-primary/5 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
                           {r.image && (
                             <div className="overflow-hidden rounded-t-[1.5rem] border-b border-border bg-secondary">
-                              <img src={r.image} alt={`${r.name} sharing Circuit Neural Performance`} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+                              <img src={r.image} alt={`${r.name} sharing Circuit Neural Performance`} loading="lazy" className={`w-full ${r.customerPhoto ? "aspect-[4/5] object-cover" : "aspect-[4/5] object-cover"}`} />
                             </div>
                           )}
                           <div className="p-5 sm:p-6">
