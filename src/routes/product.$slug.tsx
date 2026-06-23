@@ -2252,6 +2252,7 @@ type BundleOpt = {
   compare: number;
   save: number;
   detail: string;
+  perBottle?: number;
   freeShipping: boolean;
   popular?: boolean;
 };
