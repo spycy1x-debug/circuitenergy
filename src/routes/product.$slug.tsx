@@ -2252,6 +2252,7 @@ type BundleOpt = {
   compare: number;
   save: number;
   detail: string;
+  perBottle?: number;
   freeShipping: boolean;
   popular?: boolean;
 };
@@ -2274,6 +2275,7 @@ const BUNDLES: BundleOpt[] = [
     price: 79.99,
     compare: 118.0,
     save: 38,
+    perBottle: 38.99,
     detail: "60 capsules · 60-day supply",
     freeShipping: true,
     popular: true,
@@ -2285,6 +2287,7 @@ const BUNDLES: BundleOpt[] = [
     price: 109.99,
     compare: 177.0,
     save: 67,
+    perBottle: 36.66,
     detail: "90 capsules · 90-day supply",
     freeShipping: true,
   },
@@ -2374,6 +2377,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                     className={`mt-0.5 text-[11px] sm:text-xs ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}
                   >
                     {b.detail}
+                    {b.perBottle && ` · $${b.perBottle.toFixed(2)} per bottle`}
                   </div>
                   {b.freeShipping && (
                     <div className="mt-1 text-[11px] sm:text-xs font-bold text-[#2E9E6B]">✓ FREE SHIPPING</div>
