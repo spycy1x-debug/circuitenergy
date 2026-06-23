@@ -2370,17 +2370,22 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                     <span
                       className={`text-xl sm:text-2xl font-extrabold ${popularSelected ? "text-white" : "text-[#2C353F]"}`}
                     >
-                      ${b.price.toFixed(2)}
+                      ${displayPrice.toFixed(2)}
                     </span>
+                    {b.perBottle && (
+                      <span className={`text-xs font-bold ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}>
+                        per bottle
+                      </span>
+                    )}
                     <span className={`text-sm line-through ${popularSelected ? "text-white/50" : "text-[#8A95A1]"}`}>
-                      ${b.compare.toFixed(2)}
+                      ${displayCompare.toFixed(2)}
                     </span>
                   </div>
                   <div
                     className={`mt-0.5 text-[11px] sm:text-xs ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}
                   >
                     {b.detail}
-                    {b.perBottle && ` · $${b.perBottle.toFixed(2)} per bottle`}
+                    {b.perBottle && ` · $${b.price.toFixed(2)} total`}
                   </div>
                   {b.freeShipping && (
                     <div className="mt-1 text-[11px] sm:text-xs font-bold text-[#2E9E6B]">✓ FREE SHIPPING</div>
@@ -2390,7 +2395,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                   <span
                     className={`inline-block rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#F5853F] text-white"}`}
                   >
-                    SAVE ${b.save}
+                    SAVE ${displaySave}
                   </span>
                 </div>
               </button>
