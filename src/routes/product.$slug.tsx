@@ -2377,6 +2377,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                     className={`mt-0.5 text-[11px] sm:text-xs ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}
                   >
                     {b.detail}
+                    {b.perBottle && ` · $${b.perBottle.toFixed(2)} per bottle`}
                   </div>
                   {b.freeShipping && (
                     <div className="mt-1 text-[11px] sm:text-xs font-bold text-[#2E9E6B]">✓ FREE SHIPPING</div>
