@@ -2330,6 +2330,9 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
           const isSelected = selected === b.id;
           const isPopular = !!b.popular;
           const popularSelected = isSelected; // popular card always uses dark slate treatment
+          const displayPrice = b.perBottle ?? b.price;
+          const displayCompare = b.compare / b.bottles;
+          const displaySave = Math.round(displayCompare - displayPrice);
           const baseBorder = isSelected && !isPopular ? "border-2 border-[#F5853F]" : "border border-[#D7DCE0]";
           const cardBg = popularSelected ? "bg-[#2C353F] text-white" : "bg-white";
           return (
