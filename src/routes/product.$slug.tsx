@@ -1057,12 +1057,10 @@ function ProductPage() {
 
   const benefits = p.id === "neural"
     ? [
-        { icon: Brain, title: "Eliminates brain fog", desc: "Wakes up tired, foggy mornings — fast." },
-        { icon: Zap, title: "Enhances focus & memory", desc: "Sharper recall, longer attention spans." },
-        { icon: Sparkles, title: "Smooth jitter-free energy", desc: "Calm focus without the caffeine crash." },
-        { icon: Heart, title: "Supports long-term brain health", desc: "Clinically-studied nootropics for the long game." },
-        { icon: Check, title: "No artificial additives", desc: "Clean label. No fillers, dyes, or junk." },
-        { icon: Beaker, title: "Third-party tested", desc: "Independently lab-verified for purity & potency." },
+        { icon: Brain, title: "Clears brain fog", desc: "Wake up sharp. Stay sharp all day." },
+        { icon: Target, title: "Locks in focus", desc: "Hold the thread through long, heavy work blocks." },
+        { icon: Sparkles, title: "Sharper recall", desc: "Names, numbers, details — there when you need them." },
+        { icon: ShieldCheck, title: "No jitters. No crash.", desc: "Calm clarity, not caffeine anxiety." },
       ]
     : [
         { icon: Zap, title: "All-day cellular energy", desc: "Boosts NAD+ for cleaner, steadier output." },
@@ -1140,12 +1138,6 @@ function ProductPage() {
         ]
       : [];
 
-  const formulaBreakdown = [
-    { label: "Energy", pct: 40 },
-    { label: "Focus", pct: 30 },
-    { label: "Memory", pct: 20 },
-    { label: "Calm", pct: 10 },
-  ];
 
   const featuredIngredients = [
     { name: "Alpha-GPC", tagline: "Primary Focus Ingredient", desc: "Raises acetylcholine — the neurotransmitter behind focus, memory, and mental clarity.", icon: Brain },
@@ -1156,10 +1148,10 @@ function ProductPage() {
   const outcomes =
     p.id === "neural"
       ? [
-          { icon: Coffee, title: "No more 2pm crash", desc: "Steady energy that carries you through the afternoon." },
-          { icon: Target, title: "Locked in during meetings", desc: "Hold focus and follow the thread without drifting." },
-          { icon: Clock, title: "Work or study longer", desc: "Sustained concentration without feeling wired." },
-          { icon: Brain, title: "Clearer thinking under pressure", desc: "Stay sharp and composed when the day gets heavy." },
+          { icon: Brain, title: "Fog lifts by mid-morning", desc: "That heavy, scattered feeling — gone." },
+          { icon: Target, title: "Locked in during deep work", desc: "Stay on one thing without drifting off." },
+          { icon: Sparkles, title: "Recall comes back", desc: "Names, details, where you left off — right there." },
+          { icon: Clock, title: "Clear all the way to 6pm", desc: "No 2pm slump. No second-coffee panic." },
         ]
       : [
           { icon: Zap, title: "More energy that lasts", desc: "Cellular fuel for steadier all-day vitality." },
@@ -1171,9 +1163,9 @@ function ProductPage() {
   const timeline =
     p.id === "neural"
       ? [
-          { when: "Week 1", points: ["More consistent energy", "Fewer afternoon slumps"] },
-          { when: "Weeks 2–4", points: ["Sharper focus during work", "Easier task completion"] },
-          { when: "Month 2+", points: ["More reliable mental performance", "Calmer, clearer thinking"] },
+          { when: "Week 1", points: ["Mornings feel less foggy", "Easier to start the first task"] },
+          { when: "Weeks 2–4", points: ["Sharper focus through the workday", "Recall comes back without effort"] },
+          { when: "Month 2+", points: ["Clear thinking becomes your baseline", "No more dependence on the 3pm coffee"] },
         ]
       : [
           { when: "Week 1", points: ["Subtle lift in daily energy", "Easier mornings"] },
@@ -1182,9 +1174,9 @@ function ProductPage() {
         ];
 
   const synergyPoints = [
-    "Alpha-GPC + Huperzine A work together to raise and preserve acetylcholine.",
-    "L-Theanine balances caffeine for smooth, jitter-free energy.",
-    "L-Tyrosine sustains focus and dopamine during periods of stress.",
+    "Alpha-GPC + Huperzine A raise and protect acetylcholine — the chemistry of clear thinking.",
+    "L-Theanine smooths out caffeine so focus comes without the edge.",
+    "L-Tyrosine keeps you sharp when the day gets heavy.",
   ];
 
   const tabs: { id: "why" | "ing" | "use" | "rev"; label: string }[] = [
@@ -1472,7 +1464,7 @@ function ProductPage() {
 
             <p className="mt-4 text-base md:text-lg font-semibold text-foreground leading-relaxed">
               {p.id === "neural"
-                ? "10 clinically-studied nootropics in one capsule. Sharper focus, cleaner energy, and a noticeably quieter mind — without jitters or crash."
+                ? "One capsule. Brain fog clears. Focus stays on all day — no jitters, no crash."
                 : "500mg of pure NMN per serving. Replenish NAD+, restore cellular energy, and support healthy aging from the inside out."}
             </p>
 
@@ -1515,11 +1507,11 @@ function ProductPage() {
       </section>
 
       {/* OUTCOMES — what you'll actually feel */}
-      <section className="container-x pb-12">
+      <section className="container-x pb-16 pt-4">
         <div className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Real-world results</p>
-          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">What you'll actually feel</h2>
-          <p className="mt-3 text-body">The ingredients are the how. This is the why — what daily life looks like on Circuit.</p>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">What changes</p>
+          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">{p.id === "neural" ? "The fog lifts. The day gets easier." : "What you'll actually feel"}</h2>
+          <p className="mt-3 text-body">{p.id === "neural" ? "Built for the person who lives in their head all day." : "The ingredients are the how. This is the why — what daily life looks like on Circuit."}</p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {outcomes.map(({ icon: OIcon, title, desc }, i) => {
@@ -1555,9 +1547,9 @@ function ProductPage() {
         </div>
 
         {/* What users notice — timeline */}
-        <div className="mt-12 rounded-[1.75rem] border border-border bg-secondary/40 p-6 sm:p-8">
-          <h3 className="font-display text-2xl font-bold text-foreground">What users notice</h3>
-          <p className="mt-2 text-sm text-muted-foreground">Most people feel it build in stages with consistent daily use.</p>
+        <div className="mt-14 rounded-[1.75rem] border border-border bg-secondary/40 p-6 sm:p-8">
+          <h3 className="font-display text-2xl font-bold text-foreground">{p.id === "neural" ? "What to expect, week by week" : "What users notice"}</h3>
+          <p className="mt-2 text-sm text-muted-foreground">{p.id === "neural" ? "Most people feel the fog start to lift in the first week. It builds from there." : "Most people feel it build in stages with consistent daily use."}</p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {timeline.map((t, i) => (
               <div key={t.when} className="relative rounded-2xl border border-border bg-card p-5">
@@ -1607,18 +1599,18 @@ function ProductPage() {
               <div className="space-y-6">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">The Science</p>
                 <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight">
-                  Your brain isn't broken. It's <span className="text-primary">under-fueled.</span>
+                  {p.id === "neural" ? <>You're not lazy. Your brain is <span className="text-primary">under-fueled.</span></> : <>Your brain isn't broken. It's <span className="text-primary">under-fueled.</span></>}
                 </h2>
                 <div className="rounded-2xl border-l-4 border-energy bg-energy/5 px-6 py-5">
                   <p className="text-lg leading-relaxed text-foreground font-medium">
                     {p.id === "neural"
-                      ? "By 30, your brain produces 25% less of the neurotransmitters responsible for focus, memory, and motivation."
+                      ? "By 30, your brain makes 25% less of the chemistry behind focus and recall. That's the fog."
                       : "By 50, your NAD+ levels drop to half of what they were in your 20s — and that decline is the engine of cellular fatigue."}
                   </p>
                 </div>
                 <p className="text-body leading-7">
                   {p.id === "neural"
-                    ? "Most nootropics overload you with caffeine and call it a day. Circuit Neural Performance takes a different approach: a precise stack of 10 clinically-studied compounds that work together to restore the chemistry your brain is missing — without the jitters, crash, or anxiety."
+                    ? "Most nootropics just dump more caffeine on the problem. Circuit restores the chemistry your brain is actually missing — so the fog lifts and focus stays on."
                     : "NMN is the most direct precursor to NAD+, the molecule your cells use to produce energy. Restoring NAD+ supports mitochondrial function, DNA repair, and the longevity pathways that keep you feeling like yourself for decades longer."}
                 </p>
               </div>
@@ -1672,11 +1664,11 @@ function ProductPage() {
               <div className="max-w-2xl">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Inside the bottle</p>
                 <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">
-                  {p.id === "neural" ? "Built for focus. Backed by science." : "Every ingredient earns its place."}
+                  {p.id === "neural" ? "Every ingredient earns its place." : "Every ingredient earns its place."}
                 </h2>
                 <p className="mt-3 text-body">
                   {p.id === "neural"
-                    ? "Real, research-backed ingredients grouped by what they do for your brain. No fillers, no junk."
+                    ? "Clinically studied compounds for clear thinking. No fillers. No fluff."
                     : "Real, research-backed ingredients. No fillers, no junk — just what works."}
                 </p>
               </div>
@@ -1702,22 +1694,6 @@ function ProductPage() {
                 </div>
               )}
 
-              {p.id === "neural" && (
-                <div className="rounded-2xl border border-border bg-secondary/40 p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">What the formula prioritizes</p>
-                  <div className="mt-4 space-y-3">
-                    {formulaBreakdown.map((f) => (
-                      <div key={f.label} className="flex items-center gap-3">
-                        <span className="w-20 text-sm font-semibold text-foreground">{f.label}</span>
-                        <span className="h-2.5 flex-1 overflow-hidden rounded-full bg-secondary">
-                          <span className="block h-full rounded-full bg-gradient-to-r from-primary to-electric" style={{ width: `${f.pct}%` }} />
-                        </span>
-                        <span className="w-10 text-right text-xs text-muted-foreground">{f.pct}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {p.id === "neural" ? (
                 <div className="space-y-8">
@@ -1881,10 +1857,9 @@ function ProductPage() {
                 <h2 className="text-4xl font-display font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                   Join the Circuit
                 </h2>
-                <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">Customer proof that feels earned.</p>
+                <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">Real people. Real workdays. Real clarity.</p>
                 <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-                  See how thousands are building sharper focus, cleaner energy, and better daily performance with Circuit
-                  Neural Performance. Join the Circuit and describe your experience below.
+                  From founders to engineers to parents juggling both — here's what cleared their fog.
                 </p>
               </div>
 
@@ -2163,7 +2138,7 @@ function ProductPage() {
               FAQ
             </span>
             <h2 className="text-3xl md:text-4xl mt-4">Questions, answered</h2>
-            <p className="mt-3 text-body">Everything you need to know before you start feeling better.</p>
+            <p className="mt-3 text-body">The short version of what you need to know.</p>
           </div>
 
           <div className="mt-12 max-w-3xl mx-auto space-y-4">
@@ -2171,32 +2146,27 @@ function ProductPage() {
               {
                 icon: Zap,
                 q: "How fast will I feel it?",
-                a: "Most people notice cleaner, calmer energy within the first few days. The deeper benefits — sharper focus, better memory, no afternoon slump — build over 2–4 weeks as ingredients like Bacopa monnieri reach full effect. Consistency is what makes it work, which is why most customers start with a 3-month supply.",
+                a: "Most people notice clearer mornings in the first few days. Sharper focus and recall build over 2–4 weeks of daily use.",
               },
               {
                 icon: Coffee,
-                q: "Does it contain caffeine? Will it keep me up at night?",
-                a: "Yes — a low dose of natural caffeine, deliberately paired with L-Theanine for smooth, calm focus without the jitters or crash. For best results, take it in the morning or before 2pm so it won't affect your sleep.",
-              },
-              {
-                icon: Beaker,
-                q: "Can I take it with my morning coffee?",
-                a: "Absolutely. Many customers take Circuit instead of their 2nd or 3rd coffee. If you're caffeine-sensitive, start with Circuit alone for the first few days to feel your baseline.",
+                q: "Can I take it with my coffee?",
+                a: "Yes. Many people use Circuit instead of their second or third cup. Take it before 2pm so it doesn't affect your sleep.",
               },
               {
                 icon: ShieldCheck,
-                q: "Is it safe? What's in it?",
-                a: "Circuit is made in an FDA-registered, cGMP-certified US facility and third-party lab tested for purity. It contains 10 clinically studied compounds and no artificial additives. If you're pregnant, nursing, on medication, or have a medical condition, check with your healthcare provider first.",
+                q: "Is it safe?",
+                a: "Made in an FDA-registered, cGMP-certified US facility and third-party lab tested. If you're pregnant, nursing, or on medication, check with your doctor first.",
               },
               {
                 icon: Clock,
                 q: "How long does one bottle last?",
-                a: "Each bottle is a 30-day supply — one capsule daily.",
+                a: "30 days. One capsule a day.",
               },
               {
                 icon: RotateCcw,
                 q: "What if it doesn't work for me?",
-                a: "Try it risk-free for 30 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.",
+                a: "Try it for 30 days. If the fog doesn't lift, email us for a full refund — keep the bottle.",
               },
             ].map((item, i) => (
               <div
@@ -2226,8 +2196,7 @@ function ProductPage() {
           <ShieldCheck className="h-12 w-12 text-success mx-auto" />
           <h2 className="text-2xl md:text-4xl mt-4">30-Day Money-Back Guarantee</h2>
           <p className="mt-4 text-body">
-            Try {p.name} risk-free for 30 days. If you don't feel a noticeable difference in your focus and mental
-            clarity, we'll refund every penny. No questions asked.
+            Try {p.name} for 30 days. If the fog doesn't lift, we refund every penny — no questions asked.
           </p>
         </div>
       </section>
