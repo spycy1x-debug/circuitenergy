@@ -1468,7 +1468,7 @@ function ProductPage() {
 
             <p className="mt-4 text-base md:text-lg font-semibold text-foreground leading-relaxed">
               {p.id === "neural"
-                ? "One capsule. Brain fog clears. Focus stays on all day — no jitters, no crash."
+                ? "That foggy, scattered, can't-focus feeling? It clears. One capsule keeps you locked in with clean, steady energy — no jitters, no crash."
                 : "500mg of pure NMN per serving. Replenish NAD+, restore cellular energy, and support healthy aging from the inside out."}
             </p>
 
