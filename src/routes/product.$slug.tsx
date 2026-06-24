@@ -1700,22 +1700,6 @@ function ProductPage() {
                 </div>
               )}
 
-              {p.id === "neural" && (
-                <div className="rounded-2xl border border-border bg-secondary/40 p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">What the formula prioritizes</p>
-                  <div className="mt-4 space-y-3">
-                    {formulaBreakdown.map((f) => (
-                      <div key={f.label} className="flex items-center gap-3">
-                        <span className="w-20 text-sm font-semibold text-foreground">{f.label}</span>
-                        <span className="h-2.5 flex-1 overflow-hidden rounded-full bg-secondary">
-                          <span className="block h-full rounded-full bg-gradient-to-r from-primary to-electric" style={{ width: `${f.pct}%` }} />
-                        </span>
-                        <span className="w-10 text-right text-xs text-muted-foreground">{f.pct}%</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {p.id === "neural" ? (
                 <div className="space-y-8">
