@@ -1553,9 +1553,9 @@ function ProductPage() {
         </div>
 
         {/* What users notice — timeline */}
-        <div className="mt-12 rounded-[1.75rem] border border-border bg-secondary/40 p-6 sm:p-8">
-          <h3 className="font-display text-2xl font-bold text-foreground">What users notice</h3>
-          <p className="mt-2 text-sm text-muted-foreground">Most people feel it build in stages with consistent daily use.</p>
+        <div className="mt-14 rounded-[1.75rem] border border-border bg-secondary/40 p-6 sm:p-8">
+          <h3 className="font-display text-2xl font-bold text-foreground">{p.id === "neural" ? "What to expect, week by week" : "What users notice"}</h3>
+          <p className="mt-2 text-sm text-muted-foreground">{p.id === "neural" ? "Most people feel the fog start to lift in the first week. It builds from there." : "Most people feel it build in stages with consistent daily use."}</p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {timeline.map((t, i) => (
               <div key={t.when} className="relative rounded-2xl border border-border bg-card p-5">
