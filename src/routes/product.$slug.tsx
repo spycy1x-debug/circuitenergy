@@ -1605,18 +1605,18 @@ function ProductPage() {
               <div className="space-y-6">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">The Science</p>
                 <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight">
-                  Your brain isn't broken. It's <span className="text-primary">under-fueled.</span>
+                  {p.id === "neural" ? <>You're not lazy. Your brain is <span className="text-primary">under-fueled.</span></> : <>Your brain isn't broken. It's <span className="text-primary">under-fueled.</span></>}
                 </h2>
                 <div className="rounded-2xl border-l-4 border-energy bg-energy/5 px-6 py-5">
                   <p className="text-lg leading-relaxed text-foreground font-medium">
                     {p.id === "neural"
-                      ? "By 30, your brain produces 25% less of the neurotransmitters responsible for focus, memory, and motivation."
+                      ? "By 30, your brain makes 25% less of the chemistry behind focus and recall. That's the fog."
                       : "By 50, your NAD+ levels drop to half of what they were in your 20s — and that decline is the engine of cellular fatigue."}
                   </p>
                 </div>
                 <p className="text-body leading-7">
                   {p.id === "neural"
-                    ? "Most nootropics overload you with caffeine and call it a day. Circuit Neural Performance takes a different approach: a precise stack of 10 clinically-studied compounds that work together to restore the chemistry your brain is missing — without the jitters, crash, or anxiety."
+                    ? "Most nootropics just dump more caffeine on the problem. Circuit restores the chemistry your brain is actually missing — so the fog lifts and focus stays on."
                     : "NMN is the most direct precursor to NAD+, the molecule your cells use to produce energy. Restoring NAD+ supports mitochondrial function, DNA repair, and the longevity pathways that keep you feeling like yourself for decades longer."}
                 </p>
               </div>
