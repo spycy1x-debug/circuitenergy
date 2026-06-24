@@ -2153,32 +2153,27 @@ function ProductPage() {
               {
                 icon: Zap,
                 q: "How fast will I feel it?",
-                a: "Most people notice cleaner, calmer energy within the first few days. The deeper benefits — sharper focus, better memory, no afternoon slump — build over 2–4 weeks as ingredients like Bacopa monnieri reach full effect. Consistency is what makes it work, which is why most customers start with a 3-month supply.",
+                a: "Most people notice clearer mornings in the first few days. Sharper focus and recall build over 2–4 weeks of daily use.",
               },
               {
                 icon: Coffee,
-                q: "Does it contain caffeine? Will it keep me up at night?",
-                a: "Yes — a low dose of natural caffeine, deliberately paired with L-Theanine for smooth, calm focus without the jitters or crash. For best results, take it in the morning or before 2pm so it won't affect your sleep.",
-              },
-              {
-                icon: Beaker,
-                q: "Can I take it with my morning coffee?",
-                a: "Absolutely. Many customers take Circuit instead of their 2nd or 3rd coffee. If you're caffeine-sensitive, start with Circuit alone for the first few days to feel your baseline.",
+                q: "Can I take it with my coffee?",
+                a: "Yes. Many people use Circuit instead of their second or third cup. Take it before 2pm so it doesn't affect your sleep.",
               },
               {
                 icon: ShieldCheck,
-                q: "Is it safe? What's in it?",
-                a: "Circuit is made in an FDA-registered, cGMP-certified US facility and third-party lab tested for purity. It contains 10 clinically studied compounds and no artificial additives. If you're pregnant, nursing, on medication, or have a medical condition, check with your healthcare provider first.",
+                q: "Is it safe?",
+                a: "Made in an FDA-registered, cGMP-certified US facility and third-party lab tested. If you're pregnant, nursing, or on medication, check with your doctor first.",
               },
               {
                 icon: Clock,
                 q: "How long does one bottle last?",
-                a: "Each bottle is a 30-day supply — one capsule daily.",
+                a: "30 days. One capsule a day.",
               },
               {
                 icon: RotateCcw,
                 q: "What if it doesn't work for me?",
-                a: "Try it risk-free for 30 days. If you don't feel a noticeable difference in your focus and clarity, email us for a full refund — and keep the bottle. The only way to lose is to not try it.",
+                a: "Try it for 30 days. If the fog doesn't lift, email us for a full refund — keep the bottle.",
               },
             ].map((item, i) => (
               <div
