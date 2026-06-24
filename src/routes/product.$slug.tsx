@@ -1057,12 +1057,10 @@ function ProductPage() {
 
   const benefits = p.id === "neural"
     ? [
-        { icon: Brain, title: "Eliminates brain fog", desc: "Wakes up tired, foggy mornings — fast." },
-        { icon: Zap, title: "Enhances focus & memory", desc: "Sharper recall, longer attention spans." },
-        { icon: Sparkles, title: "Smooth jitter-free energy", desc: "Calm focus without the caffeine crash." },
-        { icon: Heart, title: "Supports long-term brain health", desc: "Clinically-studied nootropics for the long game." },
-        { icon: Check, title: "No artificial additives", desc: "Clean label. No fillers, dyes, or junk." },
-        { icon: Beaker, title: "Third-party tested", desc: "Independently lab-verified for purity & potency." },
+        { icon: Brain, title: "Clears brain fog", desc: "Wake up sharp. Stay sharp all day." },
+        { icon: Target, title: "Locks in focus", desc: "Hold the thread through long, heavy work blocks." },
+        { icon: Sparkles, title: "Sharper recall", desc: "Names, numbers, details — there when you need them." },
+        { icon: ShieldCheck, title: "No jitters. No crash.", desc: "Calm clarity, not caffeine anxiety." },
       ]
     : [
         { icon: Zap, title: "All-day cellular energy", desc: "Boosts NAD+ for cleaner, steadier output." },
