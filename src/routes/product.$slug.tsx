@@ -1399,7 +1399,11 @@ function ProductPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-energy" />
               {p.id === "neural" ? "Best Seller · Focus Formula" : "Cellular Energy · Longevity"}
             </div>
-            <h1 className="mt-4 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">{p.name}</h1>
+            <h1 className="mt-4 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">
+              {p.id === "neural"
+                ? "Cut through brain fog and get more done — without the crash."
+                : p.name}
+            </h1>
             <button
               type="button"
               onClick={() => {
