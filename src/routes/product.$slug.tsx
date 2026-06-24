@@ -1399,7 +1399,11 @@ function ProductPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-energy" />
               {p.id === "neural" ? "Best Seller · Focus Formula" : "Cellular Energy · Longevity"}
             </div>
-            <h1 className="mt-4 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">{p.name}</h1>
+            <h1 className="mt-4 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">
+              {p.id === "neural"
+                ? "Cut through brain fog and get more done — without the crash."
+                : p.name}
+            </h1>
             <button
               type="button"
               onClick={() => {
@@ -1464,7 +1468,7 @@ function ProductPage() {
 
             <p className="mt-4 text-base md:text-lg font-semibold text-foreground leading-relaxed">
               {p.id === "neural"
-                ? "One capsule. Brain fog clears. Focus stays on all day — no jitters, no crash."
+                ? "That foggy, scattered, can't-focus feeling? It clears. One capsule keeps you locked in with clean, steady energy — no jitters, no crash."
                 : "500mg of pure NMN per serving. Replenish NAD+, restore cellular energy, and support healthy aging from the inside out."}
             </p>
 
@@ -1510,8 +1514,8 @@ function ProductPage() {
       <section className="container-x pb-16 pt-4">
         <div className="max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">What changes</p>
-          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">{p.id === "neural" ? "The fog lifts. The day gets easier." : "What you'll actually feel"}</h2>
-          <p className="mt-3 text-body">{p.id === "neural" ? "Built for the person who lives in their head all day." : "The ingredients are the how. This is the why — what daily life looks like on Circuit."}</p>
+          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">{p.id === "neural" ? "Fog out. Focus in." : "What you'll actually feel"}</h2>
+          <p className="mt-3 text-body">{p.id === "neural" ? "Built for back-to-back meetings, deep work, and the 4pm deadline." : "The ingredients are the how. This is the why — what daily life looks like on Circuit."}</p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {outcomes.map(({ icon: OIcon, title, desc }, i) => {
@@ -1599,18 +1603,18 @@ function ProductPage() {
               <div className="space-y-6">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">The Science</p>
                 <h2 className="text-3xl md:text-4xl font-display font-bold leading-tight">
-                  {p.id === "neural" ? <>You're not lazy. Your brain is <span className="text-primary">under-fueled.</span></> : <>Your brain isn't broken. It's <span className="text-primary">under-fueled.</span></>}
+                  {p.id === "neural" ? <>You're not tired. Your brain is <span className="text-primary">under-fueled.</span></> : <>Your brain isn't broken. It's <span className="text-primary">under-fueled.</span></>}
                 </h2>
                 <div className="rounded-2xl border-l-4 border-energy bg-energy/5 px-6 py-5">
                   <p className="text-lg leading-relaxed text-foreground font-medium">
                     {p.id === "neural"
-                      ? "By 30, your brain makes 25% less of the chemistry behind focus and recall. That's the fog."
+                      ? "By 30, your brain makes 25% less of the chemistry behind focus and attention. That's the fog."
                       : "By 50, your NAD+ levels drop to half of what they were in your 20s — and that decline is the engine of cellular fatigue."}
                   </p>
                 </div>
                 <p className="text-body leading-7">
                   {p.id === "neural"
-                    ? "Most nootropics just dump more caffeine on the problem. Circuit restores the chemistry your brain is actually missing — so the fog lifts and focus stays on."
+                    ? "Coffee just masks it. Circuit restores the chemistry your brain is actually missing — so the fog lifts and focus stays on through the whole workday."
                     : "NMN is the most direct precursor to NAD+, the molecule your cells use to produce energy. Restoring NAD+ supports mitochondrial function, DNA repair, and the longevity pathways that keep you feeling like yourself for decades longer."}
                 </p>
               </div>
@@ -1820,8 +1824,8 @@ function ProductPage() {
                   {(p.id === "neural"
                     ? [
                         { icon: Coffee, title: "Take 1 capsule in the morning", desc: "With water, ideally with breakfast. Pairs beautifully with your first coffee." },
-                        { icon: Clock, title: "Wait 30–60 minutes", desc: "You'll start to feel a smooth, calm lift in focus. No jitters. No crash later." },
-                        { icon: Sparkles, title: "Repeat daily for 2–4 weeks", desc: "Deeper benefits (memory, long-term clarity) compound with consistent use." },
+                        { icon: Clock, title: "Wait 30–60 minutes", desc: "The fog lifts. Focus locks in — calm, steady, and crash-free." },
+                        { icon: Sparkles, title: "Repeat daily for 2–4 weeks", desc: "Deeper focus and steadier energy compound with consistent use." },
                       ]
                     : [
                         { icon: Coffee, title: "Take 1 capsule daily", desc: "With or without food, ideally in the morning. NMN absorbs well either way." },
@@ -1857,9 +1861,9 @@ function ProductPage() {
                 <h2 className="text-4xl font-display font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                   Join the Circuit
                 </h2>
-                <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">Real people. Real workdays. Real clarity.</p>
+                <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">Real people. Real workdays. Real focus.</p>
                 <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-                  From founders to engineers to parents juggling both — here's what cleared their fog.
+                  From founders to engineers to parents juggling both — here's what happens when the fog lifts.
                 </p>
               </div>
 
