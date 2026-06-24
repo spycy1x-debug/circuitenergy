@@ -1154,10 +1154,10 @@ function ProductPage() {
   const outcomes =
     p.id === "neural"
       ? [
-          { icon: Coffee, title: "No more 2pm crash", desc: "Steady energy that carries you through the afternoon." },
-          { icon: Target, title: "Locked in during meetings", desc: "Hold focus and follow the thread without drifting." },
-          { icon: Clock, title: "Work or study longer", desc: "Sustained concentration without feeling wired." },
-          { icon: Brain, title: "Clearer thinking under pressure", desc: "Stay sharp and composed when the day gets heavy." },
+          { icon: Brain, title: "Fog lifts by mid-morning", desc: "That heavy, scattered feeling — gone." },
+          { icon: Target, title: "Locked in during deep work", desc: "Stay on one thing without drifting off." },
+          { icon: Sparkles, title: "Recall comes back", desc: "Names, details, where you left off — right there." },
+          { icon: Clock, title: "Clear all the way to 6pm", desc: "No 2pm slump. No second-coffee panic." },
         ]
       : [
           { icon: Zap, title: "More energy that lasts", desc: "Cellular fuel for steadier all-day vitality." },
