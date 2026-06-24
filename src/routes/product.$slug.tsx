@@ -2145,7 +2145,7 @@ function ProductPage() {
               FAQ
             </span>
             <h2 className="text-3xl md:text-4xl mt-4">Questions, answered</h2>
-            <p className="mt-3 text-body">Everything you need to know before you start feeling better.</p>
+            <p className="mt-3 text-body">The short version of what you need to know.</p>
           </div>
 
           <div className="mt-12 max-w-3xl mx-auto space-y-4">
