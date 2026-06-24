@@ -1670,11 +1670,11 @@ function ProductPage() {
               <div className="max-w-2xl">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Inside the bottle</p>
                 <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">
-                  {p.id === "neural" ? "Built for focus. Backed by science." : "Every ingredient earns its place."}
+                  {p.id === "neural" ? "Every ingredient earns its place." : "Every ingredient earns its place."}
                 </h2>
                 <p className="mt-3 text-body">
                   {p.id === "neural"
-                    ? "Real, research-backed ingredients grouped by what they do for your brain. No fillers, no junk."
+                    ? "Clinically studied compounds for clear thinking. No fillers. No fluff."
                     : "Real, research-backed ingredients. No fillers, no junk — just what works."}
                 </p>
               </div>
