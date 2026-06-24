@@ -1820,8 +1820,8 @@ function ProductPage() {
                   {(p.id === "neural"
                     ? [
                         { icon: Coffee, title: "Take 1 capsule in the morning", desc: "With water, ideally with breakfast. Pairs beautifully with your first coffee." },
-                        { icon: Clock, title: "Wait 30–60 minutes", desc: "You'll start to feel a smooth, calm lift in focus. No jitters. No crash later." },
-                        { icon: Sparkles, title: "Repeat daily for 2–4 weeks", desc: "Deeper benefits (memory, long-term clarity) compound with consistent use." },
+                        { icon: Clock, title: "Wait 30–60 minutes", desc: "The fog lifts. Focus locks in — calm, steady, and crash-free." },
+                        { icon: Sparkles, title: "Repeat daily for 2–4 weeks", desc: "Deeper focus and steadier energy compound with consistent use." },
                       ]
                     : [
                         { icon: Coffee, title: "Take 1 capsule daily", desc: "With or without food, ideally in the morning. NMN absorbs well either way." },
