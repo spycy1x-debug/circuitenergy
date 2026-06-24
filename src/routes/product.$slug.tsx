@@ -1857,10 +1857,9 @@ function ProductPage() {
                 <h2 className="text-4xl font-display font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                   Join the Circuit
                 </h2>
-                <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">Customer proof that feels earned.</p>
+                <p className="mt-4 text-lg font-semibold text-foreground sm:text-xl">Real people. Real workdays. Real clarity.</p>
                 <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-                  See how thousands are building sharper focus, cleaner energy, and better daily performance with Circuit
-                  Neural Performance. Join the Circuit and describe your experience below.
+                  From founders to engineers to parents juggling both — here's what cleared their fog.
                 </p>
               </div>
 
