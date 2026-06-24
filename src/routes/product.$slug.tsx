@@ -1138,12 +1138,6 @@ function ProductPage() {
         ]
       : [];
 
-  const formulaBreakdown = [
-    { label: "Energy", pct: 40 },
-    { label: "Focus", pct: 30 },
-    { label: "Memory", pct: 20 },
-    { label: "Calm", pct: 10 },
-  ];
 
   const featuredIngredients = [
     { name: "Alpha-GPC", tagline: "Primary Focus Ingredient", desc: "Raises acetylcholine — the neurotransmitter behind focus, memory, and mental clarity.", icon: Brain },
