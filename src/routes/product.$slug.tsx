@@ -1169,9 +1169,9 @@ function ProductPage() {
   const timeline =
     p.id === "neural"
       ? [
-          { when: "Week 1", points: ["More consistent energy", "Fewer afternoon slumps"] },
-          { when: "Weeks 2–4", points: ["Sharper focus during work", "Easier task completion"] },
-          { when: "Month 2+", points: ["More reliable mental performance", "Calmer, clearer thinking"] },
+          { when: "Week 1", points: ["Mornings feel less foggy", "Easier to start the first task"] },
+          { when: "Weeks 2–4", points: ["Sharper focus through the workday", "Recall comes back without effort"] },
+          { when: "Month 2+", points: ["Clear thinking becomes your baseline", "No more dependence on the 3pm coffee"] },
         ]
       : [
           { when: "Week 1", points: ["Subtle lift in daily energy", "Easier mornings"] },
@@ -1180,9 +1180,9 @@ function ProductPage() {
         ];
 
   const synergyPoints = [
-    "Alpha-GPC + Huperzine A work together to raise and preserve acetylcholine.",
-    "L-Theanine balances caffeine for smooth, jitter-free energy.",
-    "L-Tyrosine sustains focus and dopamine during periods of stress.",
+    "Alpha-GPC + Huperzine A raise and protect acetylcholine — the chemistry of clear thinking.",
+    "L-Theanine smooths out caffeine so focus comes without the edge.",
+    "L-Tyrosine keeps you sharp when the day gets heavy.",
   ];
 
   const tabs: { id: "why" | "ing" | "use" | "rev"; label: string }[] = [
