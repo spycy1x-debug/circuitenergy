@@ -1470,7 +1470,7 @@ function ProductPage() {
 
             <p className="mt-4 text-base md:text-lg font-semibold text-foreground leading-relaxed">
               {p.id === "neural"
-                ? "10 clinically-studied nootropics in one capsule. Sharper focus, cleaner energy, and a noticeably quieter mind — without jitters or crash."
+                ? "One capsule. Brain fog clears. Focus stays on all day — no jitters, no crash."
                 : "500mg of pure NMN per serving. Replenish NAD+, restore cellular energy, and support healthy aging from the inside out."}
             </p>
 
