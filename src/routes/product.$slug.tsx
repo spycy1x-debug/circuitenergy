@@ -198,7 +198,36 @@ async function fileToReviewDataUrl(file: File) {
   return canvas.toDataURL("image/jpeg", 0.82);
 }
 
-function parseRelativeDate(input: string) {
+function hashString(str: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+function randomReviewDate(seed: string): string {
+  const now = Date.now();
+  const start = new Date("2025-01-01T00:00:00.000Z").getTime();
+  const lastWeek = now - 7 * 24 * 60 * 60 * 1000;
+  const fourMonthsAgo = now - 120 * 24 * 60 * 60 * 1000;
+  const h = hashString(seed);
+  const recent = seededRandom(h) < 0.7;
+  const min = recent ? fourMonthsAgo : start;
+  const max = recent ? lastWeek : fourMonthsAgo;
+  const r = seededRandom(h + 1);
+  return new Date(min + r * (max - min)).toISOString();
+}
+
+function parseReviewDate(input: string): number {
+  const iso = Date.parse(input);
+  if (!Number.isNaN(iso)) return iso;
   if (input === "Just now") return Date.now();
   const match = input.match(/(\d+)\s+(minute|hour|day|week|month|year)/i);
   if (!match) return Date.now();
@@ -213,6 +242,13 @@ function parseRelativeDate(input: string) {
     year: 365 * 24 * 60 * 60 * 1000,
   };
   return Date.now() - value * (multipliers[unit] || 0);
+}
+
+function formatReviewDate(input: string): string {
+  if (input === "Just now") return input;
+  const parsed = Date.parse(input);
+  if (!Number.isNaN(parsed)) return timeAgo(input);
+  return input;
 }
 
 function ratingBreakdownFor(productId: ProductData["id"]) {
@@ -290,7 +326,7 @@ function ProductPage() {
               title: r.title,
               body: r.body,
               rating: r.rating,
-              date: timeAgo(r.created_at),
+              date: r.created_at,
               image: r.image_url || undefined,
               customerPhoto: Boolean(r.image_url),
               verified: true,
@@ -317,7 +353,7 @@ function ProductPage() {
   }, [showImageLightbox, p.images.length]);
 
   const extraReviews = useMemo(() => {
-    const pool: ReviewItem[] =
+    const rawPool: ReviewItem[] =
       p.id === "neural"
         ? [
             {
@@ -1018,11 +1054,13 @@ function ProductPage() {
             },
           ];
 
+    const pool = rawPool.map((r) => ({ ...r, date: randomReviewDate(r.title + r.name) }));
+
     const sampleReview: ReviewItem = {
       title: p.sample.title,
       body: p.sample.body,
       name: p.sample.name,
-      date: p.sample.date,
+      date: randomReviewDate(p.sample.title + p.sample.name),
       rating: 5,
       verified: true,
       helpfulCount: 26,
@@ -1040,13 +1078,13 @@ function ProductPage() {
         (a, b) =>
           Number(Boolean(b.image)) - Number(Boolean(a.image)) ||
           b.rating - a.rating ||
-          parseRelativeDate(b.date) - parseRelativeDate(a.date),
+          parseReviewDate(b.date) - parseReviewDate(a.date),
       );
     if (reviewFilter === "lowest") return arr.sort((a, b) => a.rating - b.rating);
     if (reviewFilter === "verified") return arr.filter((r) => r.verified);
     if (reviewFilter === "photos") return arr.filter((r) => Boolean(r.image));
     if (["1", "2", "3", "4", "5"].includes(reviewFilter)) return arr.filter((r) => r.rating === Number(reviewFilter));
-    return arr.sort((a, b) => parseRelativeDate(b.date) - parseRelativeDate(a.date));
+    return arr.sort((a, b) => parseReviewDate(b.date) - parseReviewDate(a.date));
   }, [extraReviews, reviewFilter]);
 
   const related = PRODUCTS[p.related.id as keyof typeof PRODUCTS];
@@ -2006,7 +2044,7 @@ function ProductPage() {
                                     ))}
                                   </div>
                                   <span>•</span>
-                                  <span>{r.date}</span>
+                                  <span>{formatReviewDate(r.date)}</span>
                                 </div>
                               </div>
                             </div>
@@ -2088,7 +2126,7 @@ function ProductPage() {
                     {Array.from({ length: 5 }).map((_, s) => (
                       <Star key={s} className={`h-4 w-4 ${s < r.rating ? "fill-energy text-energy" : "fill-muted text-muted"}`} />
                     ))}
-                    <span className="text-xs text-muted-foreground">{r.date}</span>
+                    <span className="text-xs text-muted-foreground">{formatReviewDate(r.date)}</span>
                   </div>
                   <h3 className="mt-2 font-display font-bold text-lg">{r.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground leading-7">{r.body}</p>
