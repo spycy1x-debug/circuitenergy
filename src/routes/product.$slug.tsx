@@ -2256,56 +2256,63 @@ function Trust({ icon: Icon, text }: { icon: typeof Lock; text: string }) {
 }
 
 type BundleOpt = {
-  id: "1" | "2" | "3";
+  id: string;
+  label: string;
   bottles: number;
   variantId: string;
   price: number;
   compare: number;
-  save: number;
+  perBottle: number;
   detail: string;
-  perBottle?: number;
   freeShipping: boolean;
+  badge?: string;
+  badgeColor?: "gold" | "green";
   popular?: boolean;
 };
 
 const BUNDLES: BundleOpt[] = [
   {
     id: "1",
+    label: "1 BOTTLE",
     bottles: 1,
     variantId: "gid://shopify/ProductVariant/48341605810330",
     price: 42.99,
     compare: 59.0,
-    save: 16,
+    perBottle: 42.99,
     detail: "30 capsules · 30-day supply",
     freeShipping: false,
   },
   {
     id: "2",
+    label: "2 BOTTLES",
     bottles: 2,
     variantId: "gid://shopify/ProductVariant/48341729607834",
-    price: 79.99,
+    price: 64.99,
     compare: 118.0,
-    save: 38,
-    perBottle: 38.99,
+    perBottle: 32.5,
     detail: "60 capsules · 60-day supply",
     freeShipping: true,
+    badge: "MOST POPULAR",
+    badgeColor: "gold",
     popular: true,
   },
   {
-    id: "3",
-    bottles: 3,
-    variantId: "gid://shopify/ProductVariant/48341729050778",
-    price: 109.99,
-    compare: 177.0,
-    save: 67,
-    perBottle: 36.66,
-    detail: "90 capsules · 90-day supply",
+    id: "4",
+    label: "Buy 3, Get 1 FREE (4 Bottles)",
+    bottles: 4,
+    variantId: "gid://shopify/ProductVariant/48507443708058",
+    price: 89.99,
+    compare: 236.0,
+    perBottle: 22.5,
+    detail: "120 capsules · 120-day supply",
     freeShipping: true,
+    badge: "BEST VALUE",
+    badgeColor: "green",
   },
 ];
 
 function BundleSelector({ thumbnail, productName }: { thumbnail: string; productName: string }) {
-  const [selected, setSelected] = useState<"1" | "2" | "3">("2");
+  const [selected, setSelected] = useState<string>("2");
   const active = BUNDLES.find((b) => b.id === selected)!;
 
   const [adding, setAdding] = useState(false);
@@ -2317,7 +2324,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
         {
           variantId: active.variantId,
           productTitle: productName,
-          variantTitle: `${active.bottles} Bottle${active.bottles > 1 ? "s" : ""}`,
+          variantTitle: active.label,
           image: thumbnail,
           unitPrice: active.price,
         },
@@ -2334,24 +2341,27 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
   return (
     <div>
       <h2 className="text-center text-sm font-bold uppercase tracking-[0.2em] text-[#2C353F] mb-5">
-        Choose Your Package
+        Choose Your Offer
       </h2>
       <div className="space-y-3">
         {BUNDLES.map((b) => {
           const isSelected = selected === b.id;
-          const isPopular = !!b.popular;
-          const popularSelected = isSelected; // popular card always uses dark slate treatment
-          const displayPrice = b.perBottle ?? b.price;
+          const popularSelected = isSelected;
+          const displayPrice = b.perBottle;
           const displayCompare = b.compare / b.bottles;
           const displaySave = Math.round(displayCompare - displayPrice);
-          const baseBorder = isSelected && !isPopular ? "border-2 border-[#F5853F]" : "border border-[#D7DCE0]";
+          const baseBorder = isSelected ? "border-2 border-[#F5853F]" : "border border-[#D7DCE0]";
           const cardBg = popularSelected ? "bg-[#2C353F] text-white" : "bg-white";
+          const badgeGradient =
+            b.badgeColor === "green"
+              ? "from-[#2E9E6B] to-[#258B5C]"
+              : "from-[#F5C24A] to-[#E0A526]";
           return (
-            <div key={b.id} className={isPopular ? "relative pt-3" : "relative"}>
-              {isPopular && (
+            <div key={b.id} className={b.badge ? "relative pt-3" : "relative"}>
+              {b.badge && (
                 <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
-                  <span className="inline-block bg-gradient-to-r from-[#F5C24A] to-[#E0A526] text-[#2C353F] text-[10px] font-extrabold tracking-wider uppercase px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
-                    ★ Most Popular · Best Value
+                  <span className={`inline-block bg-gradient-to-r ${badgeGradient} text-white text-[10px] font-extrabold tracking-wider uppercase px-3 py-1 rounded-full shadow-sm whitespace-nowrap`}>
+                    ★ {b.badge}
                   </span>
                 </div>
               )}
@@ -2359,7 +2369,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                 type="button"
                 onClick={() => setSelected(b.id)}
                 aria-pressed={isSelected}
-                className={`w-full text-left rounded-[14px] ${baseBorder} ${cardBg} ${isPopular ? "mt-2" : ""} px-3 sm:px-4 py-3.5 flex items-center gap-3 sm:gap-4 transition-all hover:shadow-md`}
+                className={`w-full text-left rounded-[14px] ${baseBorder} ${cardBg} ${b.badge ? "mt-2" : ""} px-3 sm:px-4 py-3.5 flex items-center gap-3 sm:gap-4 transition-all hover:shadow-md`}
               >
                 <div
                   className={`shrink-0 h-5 w-5 rounded-full border-2 ${isSelected ? (popularSelected ? "border-[#F5853F] bg-[#F5853F]" : "border-[#F5853F] bg-[#F5853F]") : popularSelected ? "border-white/50" : "border-[#D7DCE0]"} flex items-center justify-center`}
@@ -2375,7 +2385,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                   <div
                     className={`font-extrabold text-[15px] sm:text-base ${popularSelected ? "text-white" : "text-[#2C353F]"}`}
                   >
-                    {b.bottles} {b.bottles === 1 ? "BOTTLE" : "BOTTLES"}
+                    {b.label}
                   </div>
                   <div className="mt-1 flex items-baseline gap-2 flex-wrap">
                     <span
@@ -2383,31 +2393,27 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
                     >
                       ${displayPrice.toFixed(2)}
                     </span>
-                    {b.perBottle && (
-                      <span className={`text-xs font-bold ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}>
-                        per bottle
-                      </span>
-                    )}
+                    <span className={`text-xs font-bold ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}>
+                      per bottle
+                    </span>
                     <span className={`text-sm line-through ${popularSelected ? "text-white/50" : "text-[#8A95A1]"}`}>
                       ${displayCompare.toFixed(2)}
                     </span>
+                  </div>
+                  <div className="mt-1 flex items-center gap-2 flex-wrap">
+                    <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#F5853F] text-white"}`}>
+                      SAVE ${displaySave} per bottle
+                    </span>
+                    {b.freeShipping && (
+                      <span className="text-[11px] sm:text-xs font-bold text-[#2E9E6B]">✓ FREE SHIPPING</span>
+                    )}
                   </div>
                   <div
                     className={`mt-0.5 text-[11px] sm:text-xs ${popularSelected ? "text-white/70" : "text-[#6A7786]"}`}
                   >
                     {b.detail}
-                    {b.perBottle && ` · $${b.price.toFixed(2)} total`}
+                    {` · $${b.price.toFixed(2)} total`}
                   </div>
-                  {b.freeShipping && (
-                    <div className="mt-1 text-[11px] sm:text-xs font-bold text-[#2E9E6B]">✓ FREE SHIPPING</div>
-                  )}
-                </div>
-                <div className="shrink-0">
-                  <span
-                    className={`inline-block rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs font-extrabold tracking-wide ${popularSelected ? "bg-[#F5853F] text-white" : "bg-[#F5853F] text-white"}`}
-                  >
-                    SAVE ${displaySave}
-                  </span>
                 </div>
               </button>
             </div>
