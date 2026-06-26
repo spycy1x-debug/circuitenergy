@@ -24,7 +24,7 @@ export function WelcomePopup() {
 
   const openKlaviyoForm = () => {
     window._klOnsite = window._klOnsite || [];
-    window._klOnsite.push(["openForm", "VaWGDp"]);
+    window._klOnsite.push(["openForm", "SqNmXt"]);
     close();
   };
 
