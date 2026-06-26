@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
-import { X, Zap } from "lucide-react";
+import { X, Mail } from "lucide-react";
+
+declare global {
+  interface Window {
+    _klOnsite?: unknown[];
+  }
+}
 
 export function WelcomePopup() {
   const [visible, setVisible] = useState(false);
@@ -16,6 +21,12 @@ export function WelcomePopup() {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  const openKlaviyoForm = () => {
+    window._klOnsite = window._klOnsite || [];
+    window._klOnsite.push(["openForm", "VaWGDp"]);
+    close();
+  };
 
   const close = () => {
     setMounted(false);
@@ -41,20 +52,20 @@ export function WelcomePopup() {
 
       {/* Card */}
       <div
-        className={`relative w-full max-w-[380px] overflow-hidden rounded-2xl bg-[#101014] shadow-[0_30px_80px_-20px_rgba(220,53,69,0.5)] ring-1 ring-white/10 transition-all duration-500 ${
+        className={`relative w-full max-w-[380px] overflow-hidden rounded-2xl bg-[#101014] shadow-[0_30px_80px_-20px_rgba(245,133,63,0.45)] ring-1 ring-white/10 transition-all duration-500 ${
           mounted
             ? "translate-y-0 scale-100 opacity-100"
             : "translate-y-8 scale-95 opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Glowing red accent */}
-        <div className="relative h-1.5 w-full bg-gradient-to-r from-[#DC3545] via-[#ff5a6e] to-[#DC3545]">
+        {/* Glowing accent */}
+        <div className="relative h-1.5 w-full bg-gradient-to-r from-[#F5853F] via-[#ff9f6e] to-[#F5853F]">
           <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-white/40 to-transparent" />
         </div>
 
         {/* Ambient glow */}
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-[#DC3545]/30 blur-3xl" />
+        <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-[#F5853F]/25 blur-3xl" />
 
         {/* Close button */}
         <button
@@ -68,47 +79,36 @@ export function WelcomePopup() {
         {/* Content */}
         <div className="relative flex flex-col items-center px-7 pb-7 pt-8 text-center">
           {/* Icon badge */}
-          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#DC3545] to-[#a01a2a] shadow-lg shadow-[#DC3545]/40">
-            <Zap className="h-7 w-7 text-white" strokeWidth={2.2} />
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#F5853F] to-[#c75e28] shadow-lg shadow-[#F5853F]/40">
+            <Mail className="h-7 w-7 text-white" strokeWidth={2.2} />
           </div>
 
           {/* Eyebrow */}
-          <span className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff8896]">
-            Exclusive Offer
+          <span className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffb384]">
+            Join the List
           </span>
 
           <h3 className="text-2xl font-bold leading-tight text-white">
-            Save 30% Today
+            Unlock Exclusive Perks
           </h3>
 
           <p className="mt-2 text-sm leading-relaxed text-gray-400">
-            Get 30% off{" "}
-            <span className="text-white">all Circuit products</span> — today
-            only. Limited spots available.
+            Get early access to new formulas, member-only discounts, and
+            science-backed energy tips.
           </p>
 
-          <Link
-            to="/product/$slug"
-            params={{ slug: "neural-performance" }}
-            onClick={() => {
-              sessionStorage.setItem("personalDiscountClaimed", "1");
-              sessionStorage.setItem(
-                "urgencyBarExpiresAt",
-                String(Date.now() + 15 * 60 * 1000)
-              );
-              window.dispatchEvent(new Event("personalDiscountClaimed"));
-              close();
-            }}
-            className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-b from-[#e84458] to-[#c8243a] px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-[#DC3545]/30 transition-all hover:shadow-[#DC3545]/50 hover:brightness-110 active:scale-[0.98]"
+          <button
+            onClick={openKlaviyoForm}
+            className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-b from-[#ff9a65] to-[#e07030] px-5 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-[#F5853F]/30 transition-all hover:shadow-[#F5853F]/50 hover:brightness-110 active:scale-[0.98]"
           >
-            Claim Now →
-          </Link>
+            Sign Up Free →
+          </button>
 
           <button
             onClick={close}
             className="mt-3 text-[11px] text-gray-500 transition-colors hover:text-gray-300"
           >
-            No thanks, I'll pay full price
+            No thanks, I’ll miss out
           </button>
         </div>
       </div>
