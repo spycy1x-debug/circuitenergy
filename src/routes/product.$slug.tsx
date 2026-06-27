@@ -1551,23 +1551,15 @@ function ProductPage() {
               View Supplement Label
             </button>
 
-            {/* Trust badges — bigger, popped */}
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            {/* Trust badges — minimal inline row */}
+            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border pt-4 text-xs text-muted-foreground">
               {trustBadges.map((t, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 rounded-2xl border border-border bg-gradient-to-br from-secondary/60 to-card p-3.5 hover:border-primary/30 transition"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-                    <t.icon className="h-5 w-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-sm font-bold text-foreground leading-tight">{t.title}</div>
-                    <div className="text-[11px] text-muted-foreground leading-tight mt-0.5">{t.sub}</div>
-                  </div>
-                </div>
+                <li key={i} className="inline-flex items-center gap-1.5">
+                  <t.icon className="h-3.5 w-3.5 text-primary" />
+                  <span className="font-semibold text-foreground">{t.title}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>
