@@ -5,7 +5,6 @@ import neuralImg from "@/assets/neural-bottle.png";
 import nmnImg from "@/assets/nmn-bottle.png";
 import {
   Coffee,
-  TrendingDown,
   Leaf,
   Pill,
   ShieldCheck,
