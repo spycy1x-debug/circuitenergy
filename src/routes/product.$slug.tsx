@@ -1409,21 +1409,20 @@ function ProductPage() {
                 <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">What you get</span>
                 <div className="h-px flex-1 bg-border" />
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 gap-2.5">
                 {benefits.map((b, i) => {
                   const chip = ["bg-energy/15 text-energy", "bg-electric/15 text-electric", "bg-success/15 text-success", "bg-primary/15 text-primary"][i % 4];
-                  const bord = ["border-l-energy", "border-l-electric", "border-l-success", "border-l-primary"][i % 4];
                   return (
                   <div
                     key={i}
-                    className={`group flex items-start gap-3 rounded-2xl border border-l-4 border-border ${bord} bg-card p-4 transition hover:-translate-y-0.5 hover:shadow-sm`}
+                    className="group flex items-start gap-3 rounded-xl bg-secondary/40 p-3 transition hover:bg-secondary/70"
                   >
-                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${chip}`}>
-                      <b.icon className="h-5 w-5" />
+                    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${chip}`}>
+                      <b.icon className="h-4.5 w-4.5" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-bold text-foreground leading-tight">{b.title}</div>
-                      <div className="mt-1 text-xs text-muted-foreground leading-snug">{b.desc}</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground leading-snug">{b.desc}</div>
                     </div>
                   </div>
                   );
@@ -1518,32 +1517,20 @@ function ProductPage() {
             </p>
 
             {p.id === "neural" && (
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border bg-white p-4 shadow-sm">
-                  <div className="flex items-center gap-1.5 text-energy">
+              <figure className="mt-5 border-l-2 border-energy/70 pl-4">
+                <blockquote className="text-[15px] font-semibold text-foreground leading-snug">
+                  "Brain fog lifted in days. By day 4 I wasn't reaching for a third coffee."
+                </blockquote>
+                <figcaption className="mt-1.5 flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-0.5 text-energy">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                      <Star key={i} className="h-3 w-3 fill-current" />
                     ))}
-                    <span className="ml-1 text-xs font-bold text-foreground">Verified</span>
-                  </div>
-                  <p className="mt-2 text-sm font-semibold text-[#2C353F] leading-snug">
-                    "Genuine focus, no jitters. This is the first nootropic where I actually feel calm focus instead of caffeine anxiety."
-                  </p>
-                  <p className="mt-2 text-xs font-bold text-[#6A7786]">— Marcus T.</p>
-                </div>
-                <div className="rounded-2xl border border-border bg-white p-4 shadow-sm">
-                  <div className="flex items-center gap-1.5 text-energy">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                    ))}
-                    <span className="ml-1 text-xs font-bold text-foreground">Verified</span>
-                  </div>
-                  <p className="mt-2 text-sm font-semibold text-[#2C353F] leading-snug">
-                    "Brain fog lifted in days. By day 4 I wasn't reaching for a third coffee. Reading retention is noticeably better."
-                  </p>
-                  <p className="mt-2 text-xs font-bold text-[#6A7786]">— Sarah K.</p>
-                </div>
-              </div>
+                  </span>
+                  <span className="font-bold text-[#6A7786]">Sarah K.</span>
+                  <span className="text-muted-foreground/70">· Verified buyer</span>
+                </figcaption>
+              </figure>
             )}
 
             <div className="mt-6">
@@ -1563,23 +1550,15 @@ function ProductPage() {
               View Supplement Label
             </button>
 
-            {/* Trust badges — bigger, popped */}
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            {/* Trust badges — minimal inline row */}
+            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border pt-4 text-xs text-muted-foreground">
               {trustBadges.map((t, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 rounded-2xl border border-border bg-gradient-to-br from-secondary/60 to-card p-3.5 hover:border-primary/30 transition"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-                    <t.icon className="h-5 w-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-sm font-bold text-foreground leading-tight">{t.title}</div>
-                    <div className="text-[11px] text-muted-foreground leading-tight mt-0.5">{t.sub}</div>
-                  </div>
-                </div>
+                <li key={i} className="inline-flex items-center gap-1.5">
+                  <t.icon className="h-3.5 w-3.5 text-primary" />
+                  <span className="font-semibold text-foreground">{t.title}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>
