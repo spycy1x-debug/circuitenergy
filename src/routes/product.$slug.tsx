@@ -1409,21 +1409,20 @@ function ProductPage() {
                 <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">What you get</span>
                 <div className="h-px flex-1 bg-border" />
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 gap-2.5">
                 {benefits.map((b, i) => {
                   const chip = ["bg-energy/15 text-energy", "bg-electric/15 text-electric", "bg-success/15 text-success", "bg-primary/15 text-primary"][i % 4];
-                  const bord = ["border-l-energy", "border-l-electric", "border-l-success", "border-l-primary"][i % 4];
                   return (
                   <div
                     key={i}
-                    className={`group flex items-start gap-3 rounded-2xl border border-l-4 border-border ${bord} bg-card p-4 transition hover:-translate-y-0.5 hover:shadow-sm`}
+                    className="group flex items-start gap-3 rounded-xl bg-secondary/40 p-3 transition hover:bg-secondary/70"
                   >
-                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${chip}`}>
-                      <b.icon className="h-5 w-5" />
+                    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${chip}`}>
+                      <b.icon className="h-4.5 w-4.5" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-bold text-foreground leading-tight">{b.title}</div>
-                      <div className="mt-1 text-xs text-muted-foreground leading-snug">{b.desc}</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground leading-snug">{b.desc}</div>
                     </div>
                   </div>
                   );
