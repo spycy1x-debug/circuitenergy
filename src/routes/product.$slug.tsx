@@ -1437,7 +1437,14 @@ function ProductPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-energy" />
               {p.id === "neural" ? "Best Seller · Focus Formula" : "Cellular Energy · Longevity"}
             </div>
-            <h1 className="mt-4 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">
+
+            {p.id === "neural" && (
+              <p className="mt-4 text-sm md:text-base font-semibold text-[#6A7786] italic tracking-tight">
+                Sharp at 9am. Useless by 3pm. That crash isn't a character flaw — it's your brain running out of fuel.
+              </p>
+            )}
+
+            <h1 className="mt-3 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">
               {p.id === "neural"
                 ? "Cut through brain fog and get more done — without the crash."
                 : p.name}
@@ -1509,6 +1516,35 @@ function ProductPage() {
                 ? "That foggy, scattered, can't-focus feeling? It clears. One capsule keeps you locked in with clean, steady energy — no jitters, no crash."
                 : "500mg of pure NMN per serving. Replenish NAD+, restore cellular energy, and support healthy aging from the inside out."}
             </p>
+
+            {p.id === "neural" && (
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-2xl border border-border bg-white p-4 shadow-sm">
+                  <div className="flex items-center gap-1.5 text-energy">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                    ))}
+                    <span className="ml-1 text-xs font-bold text-foreground">Verified</span>
+                  </div>
+                  <p className="mt-2 text-sm font-semibold text-[#2C353F] leading-snug">
+                    "Genuine focus, no jitters. This is the first nootropic where I actually feel calm focus instead of caffeine anxiety."
+                  </p>
+                  <p className="mt-2 text-xs font-bold text-[#6A7786]">— Marcus T.</p>
+                </div>
+                <div className="rounded-2xl border border-border bg-white p-4 shadow-sm">
+                  <div className="flex items-center gap-1.5 text-energy">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                    ))}
+                    <span className="ml-1 text-xs font-bold text-foreground">Verified</span>
+                  </div>
+                  <p className="mt-2 text-sm font-semibold text-[#2C353F] leading-snug">
+                    "Brain fog lifted in days. By day 4 I wasn't reaching for a third coffee. Reading retention is noticeably better."
+                  </p>
+                  <p className="mt-2 text-xs font-bold text-[#6A7786]">— Sarah K.</p>
+                </div>
+              </div>
+            )}
 
             <div className="mt-6">
               {p.id === "neural" ? (
