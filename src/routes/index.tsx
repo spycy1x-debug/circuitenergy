@@ -614,5 +614,4 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-// keep symbol referenced to avoid tree-shake warnings on unused decorative icons
-void TrendingDown;
+
