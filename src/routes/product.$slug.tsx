@@ -1441,7 +1441,7 @@ function ProductPage() {
 
             <h1 className="mt-3 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">
               {p.id === "neural"
-                ? "Sharp at 9am. Useless by 3pm? Not anymore."
+                ? "Cut through brain fog and get more done — without the crash."
                 : p.name}
             </h1>
             <button
@@ -1508,7 +1508,7 @@ function ProductPage() {
 
             <p className="mt-4 text-base md:text-lg font-semibold text-foreground leading-relaxed">
               {p.id === "neural"
-                ? "Calm focus all day — no jitters, no crash. One capsule. Your 3rd coffee is lying to you."
+                ? "That foggy, scattered, can't-focus feeling? It clears. One capsule keeps you locked in with clean, steady energy — no jitters, no crash."
                 : "500mg of pure NMN per serving. Replenish NAD+, restore cellular energy, and support healthy aging from the inside out."}
             </p>
 
@@ -1583,8 +1583,8 @@ function ProductPage() {
       <section className="container-x pb-16 pt-4">
         <div className="max-w-2xl">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">What changes</p>
-          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">{p.id === "neural" ? "Get your afternoon back." : "What you'll actually feel"}</h2>
-          <p className="mt-3 text-body font-medium">{p.id === "neural" ? "Still sharp at 5pm. Something left for the people who matter." : "The ingredients are the how. This is the why — what daily life looks like on Circuit."}</p>
+          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">{p.id === "neural" ? "Fog out. Focus in." : "What you'll actually feel"}</h2>
+          <p className="mt-3 text-body">{p.id === "neural" ? "Built for back-to-back meetings, deep work, and the 4pm deadline." : "The ingredients are the how. This is the why — what daily life looks like on Circuit."}</p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {outcomes.map(({ icon: OIcon, title, desc }, i) => {
