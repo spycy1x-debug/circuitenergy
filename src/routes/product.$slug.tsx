@@ -1438,11 +1438,6 @@ function ProductPage() {
               {p.id === "neural" ? "Best Seller · Focus Formula" : "Cellular Energy · Longevity"}
             </div>
 
-            {p.id === "neural" && (
-              <p className="mt-4 text-sm md:text-base font-semibold text-[#6A7786] italic tracking-tight">
-                Sharp at 9am. Useless by 3pm. That crash isn't a character flaw — it's your brain running out of fuel.
-              </p>
-            )}
 
             <h1 className="mt-3 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">
               {p.id === "neural"
