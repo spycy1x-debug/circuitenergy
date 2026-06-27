@@ -1518,32 +1518,20 @@ function ProductPage() {
             </p>
 
             {p.id === "neural" && (
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border bg-white p-4 shadow-sm">
-                  <div className="flex items-center gap-1.5 text-energy">
+              <figure className="mt-5 border-l-2 border-energy/70 pl-4">
+                <blockquote className="text-[15px] font-semibold text-foreground leading-snug">
+                  "Brain fog lifted in days. By day 4 I wasn't reaching for a third coffee."
+                </blockquote>
+                <figcaption className="mt-1.5 flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-0.5 text-energy">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                      <Star key={i} className="h-3 w-3 fill-current" />
                     ))}
-                    <span className="ml-1 text-xs font-bold text-foreground">Verified</span>
-                  </div>
-                  <p className="mt-2 text-sm font-semibold text-[#2C353F] leading-snug">
-                    "Genuine focus, no jitters. This is the first nootropic where I actually feel calm focus instead of caffeine anxiety."
-                  </p>
-                  <p className="mt-2 text-xs font-bold text-[#6A7786]">— Marcus T.</p>
-                </div>
-                <div className="rounded-2xl border border-border bg-white p-4 shadow-sm">
-                  <div className="flex items-center gap-1.5 text-energy">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                    ))}
-                    <span className="ml-1 text-xs font-bold text-foreground">Verified</span>
-                  </div>
-                  <p className="mt-2 text-sm font-semibold text-[#2C353F] leading-snug">
-                    "Brain fog lifted in days. By day 4 I wasn't reaching for a third coffee. Reading retention is noticeably better."
-                  </p>
-                  <p className="mt-2 text-xs font-bold text-[#6A7786]">— Sarah K.</p>
-                </div>
-              </div>
+                  </span>
+                  <span className="font-bold text-[#6A7786]">Sarah K.</span>
+                  <span className="text-muted-foreground/70">· Verified buyer</span>
+                </figcaption>
+              </figure>
             )}
 
             <div className="mt-6">
