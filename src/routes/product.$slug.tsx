@@ -1441,7 +1441,7 @@ function ProductPage() {
 
             <h1 className="mt-3 text-3xl md:text-4xl lg:text-[3.25rem] font-display font-bold leading-[1.05] tracking-tight">
               {p.id === "neural"
-                ? "Cut through brain fog and get more done — without the crash."
+                ? "Sharp at 9am. Useless by 3pm? Not anymore."
                 : p.name}
             </h1>
             <button
