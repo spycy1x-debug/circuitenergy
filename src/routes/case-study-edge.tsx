@@ -731,11 +731,11 @@ function ReviewCard({
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_10px_30px_-18px_rgba(44,53,63,0.25)]">
       {image && (
-        <div className="relative aspect-[4/3] w-full bg-[#F2EFEA]">
+        <div className="relative w-full bg-[#F2EFEA]">
           <img
             src={image}
             alt={`Photo from ${name}`}
-            className="h-full w-full object-cover"
+            className="h-auto max-h-[420px] w-full object-contain md:aspect-[4/3] md:max-h-none md:object-cover"
             loading="lazy"
           />
         </div>
