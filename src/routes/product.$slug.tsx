@@ -2044,7 +2044,7 @@ function ProductPage() {
                         <article key={reviewKey} className="mb-5 break-inside-avoid rounded-[1.5rem] border border-border bg-card shadow-sm shadow-primary/5 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10">
                           {r.image && (
                             <div className="overflow-hidden rounded-t-[1.5rem] border-b border-border bg-secondary">
-                              <img src={r.image} alt={`${r.name} sharing Circuit Neural Performance`} loading="lazy" className={`w-full ${r.customerPhoto ? "aspect-[4/5] object-cover" : "aspect-[4/5] object-cover"}`} />
+                              <img src={r.image} alt={`${r.name} sharing Circuit Neural Performance`} loading="lazy" className="w-full max-h-[420px] object-contain md:aspect-[4/5] md:max-h-none md:object-cover" />
                             </div>
                           )}
                           <div className="p-5 sm:p-6">
