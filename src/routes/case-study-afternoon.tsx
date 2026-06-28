@@ -193,7 +193,7 @@ function CaseStudyAfternoon() {
           </p>
         </FadeUp>
 
-        <PullQuote>
+        <PullQuote attribution="Sarah K. — Verified Customer">
           “I wasn't lazy. I just ran out of gas by 2pm — every single day.”
         </PullQuote>
 
