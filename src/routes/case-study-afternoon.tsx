@@ -372,7 +372,7 @@ function CaseStudyAfternoon() {
             rating={5}
             title="Brain fog lifted in days"
             image={reviewWomanBathroom}
-            quote="Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better."
+            quote="Was skeptical but by day 4 I noticed I wasn't reaching for more caffeine. Reading retention is noticeably better."
           />
           <ReviewCard
             initials="D.K."
