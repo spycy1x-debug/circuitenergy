@@ -502,7 +502,7 @@ function ProductPage() {
             },
             {
               title: "Desk-day focus is way better",
-              body: "I'm in meetings most of the day and this keeps me sharper without that over-caffeinated feeling. The difference is most obvious around 2 or 3pm.",
+              body: "I wasn't getting out-worked. I was getting out-focused. I'm in meetings most of the day and Circuit keeps me sharper without that over-caffeinated feeling. The difference is most obvious around 2 or 3pm.",
               name: "Andre W.",
               date: "2 weeks ago",
               rating: 5,
