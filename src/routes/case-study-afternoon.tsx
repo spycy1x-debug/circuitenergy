@@ -3,6 +3,19 @@ import { useEffect, useRef, useState } from "react";
 import crashHero from "@/assets/adv-crash-hero.jpg";
 import calmMid from "@/assets/adv-calm-mid.jpg";
 import bottleImg from "@/assets/neural-bottle.png";
+import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
+import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
+import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
+import reviewManSelfieAsset from "@/assets/review-man-selfie.png.asset.json";
+import reviewWomanKitchenSelfieAsset from "@/assets/review-woman-kitchen-selfie.png.asset.json";
+
+const reviewManGym = reviewManGymAsset.url;
+const reviewWomanBathroom = reviewWomanBathroomAsset.url;
+const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const reviewWomanLaptop = reviewWomanLaptopAsset.url;
+const reviewManSelfie = reviewManSelfieAsset.url;
+const reviewWomanKitchenSelfie = reviewWomanKitchenSelfieAsset.url;
 
 export const Route = createFileRoute("/case-study-afternoon")({
   head: () => ({
@@ -341,24 +354,57 @@ function CaseStudyAfternoon() {
         <div className="mx-auto max-w-[680px] px-5">
           <FadeUp>
             <Eyebrow>Section 07 — Real People</Eyebrow>
-            <SubHead>Not testimonials. Just notes from a Tuesday.</SubHead>
+            <SubHead>Not testimonials. Just notes from a Tuesday — with the photos to back them up.</SubHead>
           </FadeUp>
         </div>
-        <FadeUp className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 md:grid-cols-3">
+        <FadeUp className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 sm:grid-cols-2 lg:grid-cols-3">
           <ReviewCard
             initials="M.T."
             name="Marcus T."
-            quote="First week I noticed I didn't reach for a second coffee. By week three I realized I was actually finishing my work before 5. That hadn't happened in months."
+            rating={5}
+            title="Genuine focus, no jitters"
+            image={reviewManGym}
+            quote="I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone."
           />
           <ReviewCard
             initials="S.K."
             name="Sarah K."
-            quote="The clearest way I can put it: my afternoons stopped being a fight. It's not a buzz. It's just… on, the whole day."
+            rating={5}
+            title="Brain fog lifted in days"
+            image={reviewWomanBathroom}
+            quote="Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better."
           />
           <ReviewCard
-            initials="D.R."
-            name="Daniel R."
-            quote="I was skeptical. Took it for a month. The crash I'd been planning my afternoon around just stopped showing up."
+            initials="D.K."
+            name="David K."
+            rating={5}
+            title="Great for deep work"
+            image={reviewBottleKitchen}
+            quote="I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real."
+          />
+          <ReviewCard
+            initials="H.R."
+            name="Hannah Reinholt"
+            rating={4}
+            title="Subtle but real"
+            image={reviewWomanLaptop}
+            quote="Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got."
+          />
+          <ReviewCard
+            initials="G.M."
+            name="Greg M."
+            rating={5}
+            title="Late shift survivor"
+            image={reviewManSelfie}
+            quote="I work nights and this has been a game changer for staying sharp during the 3am dead zone. No crash after."
+          />
+          <ReviewCard
+            initials="L.B."
+            name="Lauren B."
+            rating={5}
+            title="Mornings feel lighter"
+            image={reviewWomanKitchenSelfie}
+            quote="I've been taking it before my morning routine and the difference is consistency. Cleaner focus, less friction, and I don't feel scattered by 10am."
           />
         </FadeUp>
       </section>
@@ -687,21 +733,54 @@ function EvidenceCard({ icon, title, body, source, href }: { icon: string; title
   );
 }
 
-function ReviewCard({ initials, name, quote }: { initials: string; name: string; quote: string }) {
+function ReviewCard({
+  initials,
+  name,
+  quote,
+  image,
+  title,
+  rating,
+}: {
+  initials: string;
+  name: string;
+  quote: string;
+  image?: string;
+  title?: string;
+  rating?: number;
+}) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-black/10 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(44,53,63,0.25)]">
-      <div className="flex items-center gap-3">
-        <div className="grid h-10 w-10 place-items-center rounded-full text-sm font-bold text-white" style={{ background: INK }}>
-          {initials}
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_10px_30px_-18px_rgba(44,53,63,0.25)]">
+      {image && (
+        <div className="relative aspect-[4/3] w-full bg-[#F2EFEA]">
+          <img
+            src={image}
+            alt={`Photo from ${name}`}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         </div>
-        <div>
-          <div className="text-sm font-bold" style={{ color: INK }}>{name}</div>
-          <div className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-[#ECF6EF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "#1E7A4D" }}>
-            ✓ Verified
+      )}
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-center gap-3">
+          <div className="grid h-10 w-10 place-items-center rounded-full text-sm font-bold text-white" style={{ background: INK }}>
+            {initials}
+          </div>
+          <div>
+            <div className="text-sm font-bold" style={{ color: INK }}>{name}</div>
+            {rating != null && (
+              <div className="mt-0.5 text-xs tracking-wide text-amber-500">
+                {"★".repeat(rating)}
+                <span className="ml-1 text-black/40">{rating.toFixed(1)}</span>
+              </div>
+            )}
+            <div className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-[#ECF6EF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "#1E7A4D" }}>
+              ✓ Verified
+            </div>
           </div>
         </div>
+        {title && <p className="mt-3 text-sm font-bold text-black/90">“{title}”</p>}
+        <p className="mt-3 text-[15px] leading-relaxed text-black/75">“{quote}”</p>
       </div>
-      <p className="mt-4 text-[15px] leading-relaxed text-black/75">“{quote}”</p>
     </div>
   );
 }
