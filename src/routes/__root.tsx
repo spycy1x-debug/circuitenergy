@@ -129,7 +129,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AnnouncementBar />
       <Header />
-      <AnniversaryBar />
       <main><Outlet /></main>
       <Footer />
       <CartDrawer />
