@@ -107,11 +107,7 @@ function CaseStudyAfternoon() {
 
       {/* Editorial chrome */}
       <header className="border-b border-black/5">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:py-5">
-          <span className="text-[10px] uppercase tracking-[0.28em] text-black/45">Advertisement</span>
-          <Link to="/" className="text-lg md:text-xl font-black tracking-[0.32em]" style={{ color: INK }}>
-            CIRCUIT
-          </Link>
+        <div className="mx-auto flex max-w-6xl items-center justify-center px-5 py-4 md:py-5">
           <span className="text-[10px] uppercase tracking-[0.28em] text-black/45">Case Study</span>
         </div>
       </header>
