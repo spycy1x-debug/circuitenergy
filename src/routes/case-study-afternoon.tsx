@@ -114,11 +114,11 @@ function CaseStudyAfternoon() {
 
       {/* HERO */}
       <section className="relative">
-        <div className="relative h-[78vh] min-h-[520px] w-full overflow-hidden">
+        <div className="relative h-[55vh] min-h-[360px] w-full overflow-hidden sm:h-[65vh] md:h-[78vh] md:min-h-[520px]">
           <img
             src={crashHero}
             alt="A professional slumped at a desk in afternoon light"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[65%_35%] sm:object-center"
             width={1600}
             height={1024}
           />
