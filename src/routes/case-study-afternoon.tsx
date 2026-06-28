@@ -183,7 +183,7 @@ function CaseStudyAfternoon() {
             >
               T
             </span>
-            ake a 34-year-old account manager. Up at 6:30. Inbox cleared by 9. By noon they've run three meetings and shipped a deck. Then 2:15 hits. The reread starts. They've been staring at the same email for four minutes. By 2:47, they're making a third coffee they know won't work — the kind that makes their chest flutter and their brain still feel like wet sand.
+            ake a 34-year-old account manager. Up at 6:30. Inbox cleared by 9. By noon they've run three meetings and shipped a deck. Then 2:15 hits. The reread starts. They've been staring at the same email for four minutes. By 2:47, they're pouring another 200 mg of caffeine into an empty tank — the kind that makes their chest flutter and their brain still feel like wet sand.
           </p>
           <p className="mt-5">
             They tell themselves they're just tired. That they'll catch up tomorrow. The deck for Thursday gets pushed. Dinner with their partner is half there, half not.
@@ -323,18 +323,18 @@ function CaseStudyAfternoon() {
         </div>
         <FadeUp className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 md:grid-cols-3">
           <EvidenceCard
-            icon="⚡"
-            title="Caffeine + L-theanine = calm focus."
-            body="A double-blind, placebo-controlled trial found the pair improved selective attention and reaction time and reduced mind-wandering — without the jitter."
-            source="Cambridge / British Journal of Nutrition · review PMC8794723"
-            href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8794723/"
-          />
-          <EvidenceCard
             icon="☕"
             title="The crash is real chemistry."
-            body="Adenosine builds while you're awake. Caffeine blocks it. When caffeine wears off, the blocked signal rebounds — and the afternoon falls out."
+            body="Adenosine builds while you're awake. Large doses of caffeine block it. When that caffeine wears off, the blocked signal rebounds — and the afternoon falls out."
             source="Harvard Medical School · Sleep Research"
             href="https://healthysleep.med.harvard.edu/healthy/science/how/neurophysiology"
+          />
+          <EvidenceCard
+            icon="⚡"
+            title="Caffeine + L-theanine = a cleaner mechanism."
+            body="Used together in the right ratio, the pair shifts attention without brute-forcing adenosine the way high-dose caffeine alone does. Research shows improved selective attention, faster reaction time, and less jitter."
+            source="Cambridge / British Journal of Nutrition · review PMC8794723"
+            href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8794723/"
           />
           <EvidenceCard
             icon="🧠"
@@ -372,7 +372,7 @@ function CaseStudyAfternoon() {
             rating={5}
             title="Brain fog lifted in days"
             image={reviewWomanBathroom}
-            quote="Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better."
+            quote="Was skeptical but by day 4 I noticed I wasn't reaching for more caffeine. Reading retention is noticeably better."
           />
           <ReviewCard
             initials="D.K."
@@ -666,7 +666,7 @@ function FocusGraph() {
 function ComparisonCard() {
   const rows = [
     { bad: "Crashed around 2pm", good: "Clear through 4–5pm" },
-    { bad: "3+ coffees, still foggy", good: "Off the 3rd coffee" },
+    { bad: "200+ mg caffeine, still foggy", good: "Off the caffeine spiral" },
     { bad: "Work pushed to tomorrow", good: "Finished the day's work" },
     { bad: "Drained by evening", good: "Energy left at home" },
   ];
