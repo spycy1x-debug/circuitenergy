@@ -183,7 +183,7 @@ function CaseStudyAfternoon() {
             >
               T
             </span>
-            ake a 34-year-old account manager. Up at 6:30. Inbox cleared by 9. By noon they've run three meetings and shipped a deck. Then 2:15 hits. The reread starts. They've been staring at the same email for four minutes. By 2:47, they're making a third coffee they know won't work — the kind that makes their chest flutter and their brain still feel like wet sand.
+            ake a 34-year-old account manager. Up at 6:30. Inbox cleared by 9. By noon they've run three meetings and shipped a deck. Then 2:15 hits. The reread starts. They've been staring at the same email for four minutes. By 2:47, they're pouring another 200 mg of caffeine into an empty tank — the kind that makes their chest flutter and their brain still feel like wet sand.
           </p>
           <p className="mt-5">
             They tell themselves they're just tired. That they'll catch up tomorrow. The deck for Thursday gets pushed. Dinner with their partner is half there, half not.
