@@ -516,7 +516,7 @@ function SubHead({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PullQuote({ children }: { children: React.ReactNode }) {
+function PullQuote({ children, attribution }: { children: React.ReactNode; attribution?: string }) {
   return (
     <FadeUp>
       <blockquote
@@ -530,6 +530,11 @@ function PullQuote({ children }: { children: React.ReactNode }) {
         }}
       >
         {children}
+        {attribution && (
+          <footer className="mt-4 not-italic text-[12px] font-semibold uppercase tracking-[0.18em] text-black/55" style={{ fontFamily: 'inherit' }}>
+            <span style={{ fontFamily: '"Inter", system-ui, sans-serif' }}>— {attribution}</span>
+          </footer>
+        )}
       </blockquote>
     </FadeUp>
   );
