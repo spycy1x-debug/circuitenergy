@@ -55,16 +55,15 @@ function useFadeUp() {
   return ref;
 }
 
-function FadeUp({ children, className = "", as: As = "div" }: { children: React.ReactNode; className?: string; as?: keyof JSX.IntrinsicElements }) {
+function FadeUp({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useFadeUp();
-  const Tag = As as keyof JSX.IntrinsicElements;
   return (
-    // @ts-expect-error dynamic tag
-    <Tag ref={ref} className={className} style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 600ms ease, transform 600ms ease" }}>
+    <div ref={ref} className={className} style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 600ms ease, transform 600ms ease" }}>
       {children}
-    </Tag>
+    </div>
   );
 }
+
 
 const eyebrowClass = "text-[11px] md:text-xs font-semibold uppercase tracking-[0.22em]";
 
