@@ -108,7 +108,7 @@ function CaseStudyAfternoon() {
       {/* Editorial chrome */}
       <header className="border-b border-black/5">
         <div className="mx-auto flex max-w-6xl items-center justify-center px-5 py-4 md:py-5">
-          <span className="text-[10px] uppercase tracking-[0.28em] text-black/45">Case Study</span>
+          <span className="text-[10px] uppercase tracking-[0.28em] text-black/45">The Focus Journal — a case study</span>
         </div>
       </header>
 
