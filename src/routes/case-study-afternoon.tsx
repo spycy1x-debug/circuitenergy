@@ -354,24 +354,57 @@ function CaseStudyAfternoon() {
         <div className="mx-auto max-w-[680px] px-5">
           <FadeUp>
             <Eyebrow>Section 07 — Real People</Eyebrow>
-            <SubHead>Not testimonials. Just notes from a Tuesday.</SubHead>
+            <SubHead>Not testimonials. Just notes from a Tuesday — with the photos to back them up.</SubHead>
           </FadeUp>
         </div>
-        <FadeUp className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 md:grid-cols-3">
+        <FadeUp className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 sm:grid-cols-2 lg:grid-cols-3">
           <ReviewCard
             initials="M.T."
             name="Marcus T."
-            quote="First week I noticed I didn't reach for a second coffee. By week three I realized I was actually finishing my work before 5. That hadn't happened in months."
+            rating={5}
+            title="Genuine focus, no jitters"
+            image={reviewManGym}
+            quote="I've tried every nootropic on the market. This is the first one where I actually feel calm focus instead of caffeine anxiety. Two weeks in and my afternoon slump is gone."
           />
           <ReviewCard
             initials="S.K."
             name="Sarah K."
-            quote="The clearest way I can put it: my afternoons stopped being a fight. It's not a buzz. It's just… on, the whole day."
+            rating={5}
+            title="Brain fog lifted in days"
+            image={reviewWomanBathroom}
+            quote="Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better."
           />
           <ReviewCard
-            initials="D.R."
-            name="Daniel R."
-            quote="I was skeptical. Took it for a month. The crash I'd been planning my afternoon around just stopped showing up."
+            initials="D.K."
+            name="David K."
+            rating={5}
+            title="Great for deep work"
+            image={reviewBottleKitchen}
+            quote="I write code for a living. This helps me hold complex problems in my head longer. Not magic, but real."
+          />
+          <ReviewCard
+            initials="H.R."
+            name="Hannah Reinholt"
+            rating={4}
+            title="Subtle but real"
+            image={reviewWomanLaptop}
+            quote="Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got."
+          />
+          <ReviewCard
+            initials="G.M."
+            name="Greg M."
+            rating={5}
+            title="Late shift survivor"
+            image={reviewManSelfie}
+            quote="I work nights and this has been a game changer for staying sharp during the 3am dead zone. No crash after."
+          />
+          <ReviewCard
+            initials="L.B."
+            name="Lauren B."
+            rating={5}
+            title="Mornings feel lighter"
+            image={reviewWomanKitchenSelfie}
+            quote="I've been taking it before my morning routine and the difference is consistency. Cleaner focus, less friction, and I don't feel scattered by 10am."
           />
         </FadeUp>
       </section>
