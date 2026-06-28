@@ -361,7 +361,7 @@ function CaseStudyEdge() {
             name="Marcus T."
             rating={5}
             title="Holding the edge through 5pm"
-            image={reviewManGym}
+            image={reviewManOfficeBlue}
             quote="I run a small team and the afternoons used to be a write-off. Two weeks in and I'm still sharp at 5pm — same workload, way more shipped."
           />
           <ReviewCard
@@ -369,23 +369,23 @@ function CaseStudyEdge() {
             name="Sarah K."
             rating={5}
             title="Off the caffeine spiral"
-            image={reviewWomanBathroom}
-            quote="I wasn't drinking less coffee — I was drinking more, and it was working less. Circuit broke the cycle. My focus actually lasts a full day now."
+            image={reviewWomanLaptop}
+            quote="I wasn't drinking less coffee — I was drinking more, and it was working less. Circuit broke the cycle. My focus actually lasts a full workday now."
           />
           <ReviewCard
             initials="D.K."
             name="David K."
             rating={5}
             title="Built for deep work"
-            image={reviewBottleKitchen}
-            quote="I write code for a living. This helps me hold complex problems in my head longer. Not a buzz — just more usable hours."
+            image={reviewManOfficeDark}
+            quote="I write code for a living. This helps me hold complex problems in my head longer. Not a buzz — just more usable hours at the desk."
           />
           <ReviewCard
             initials="H.R."
             name="Hannah R."
             rating={4}
             title="Subtle but real"
-            image={reviewWomanLaptop}
+            image={reviewWomanMugKitchen}
             quote="Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got."
           />
           <ReviewCard
@@ -393,7 +393,7 @@ function CaseStudyEdge() {
             name="Greg M."
             rating={5}
             title="A founder's edge"
-            image={reviewManSelfie}
+            image={reviewManGlassesSofa}
             quote="The difference is the afternoon. I'm not white-knuckling through 3pm anymore. Calls feel sharper. Decisions are faster."
           />
           <ReviewCard
@@ -401,9 +401,10 @@ function CaseStudyEdge() {
             name="Lauren B."
             rating={5}
             title="Mornings feel lighter"
-            image={reviewWomanKitchenSelfie}
+            image={reviewBottleKitchen}
             quote="Cleaner focus, less friction, and I'm not scattered by 10am. Feels like I have a quiet edge over my own old self."
           />
+
         </FadeUp>
       </section>
 
