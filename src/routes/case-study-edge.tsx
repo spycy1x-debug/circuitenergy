@@ -270,8 +270,8 @@ function CaseStudyEdge() {
 
       {/* Before / After split */}
       <FadeUp className="mx-auto max-w-6xl px-5">
-        <div className="relative overflow-hidden rounded-2xl bg-[#2C353F] shadow-[0_20px_60px_-20px_rgba(44,53,63,0.25)]">
-          <div className="relative aspect-[16/10]">
+        <div className="relative mx-auto max-w-[520px] overflow-hidden rounded-2xl shadow-[0_20px_60px_-20px_rgba(44,53,63,0.25)] md:max-w-[640px]">
+          <div className="relative aspect-[3/4]">
             <img src={edgeSplit} alt="Before and after — faded at desk vs locked in" className="absolute inset-0 h-full w-full object-contain" loading="lazy" />
             <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">Before</span>
             <span className="absolute right-3 top-3 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white" style={{ background: ORANGE }}>After</span>
