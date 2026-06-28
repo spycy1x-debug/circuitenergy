@@ -733,21 +733,54 @@ function EvidenceCard({ icon, title, body, source, href }: { icon: string; title
   );
 }
 
-function ReviewCard({ initials, name, quote }: { initials: string; name: string; quote: string }) {
+function ReviewCard({
+  initials,
+  name,
+  quote,
+  image,
+  title,
+  rating,
+}: {
+  initials: string;
+  name: string;
+  quote: string;
+  image?: string;
+  title?: string;
+  rating?: number;
+}) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-black/10 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(44,53,63,0.25)]">
-      <div className="flex items-center gap-3">
-        <div className="grid h-10 w-10 place-items-center rounded-full text-sm font-bold text-white" style={{ background: INK }}>
-          {initials}
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_10px_30px_-18px_rgba(44,53,63,0.25)]">
+      {image && (
+        <div className="relative aspect-[4/3] w-full bg-[#F2EFEA]">
+          <img
+            src={image}
+            alt={`Photo from ${name}`}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         </div>
-        <div>
-          <div className="text-sm font-bold" style={{ color: INK }}>{name}</div>
-          <div className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-[#ECF6EF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "#1E7A4D" }}>
-            ✓ Verified
+      )}
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-center gap-3">
+          <div className="grid h-10 w-10 place-items-center rounded-full text-sm font-bold text-white" style={{ background: INK }}>
+            {initials}
+          </div>
+          <div>
+            <div className="text-sm font-bold" style={{ color: INK }}>{name}</div>
+            {rating != null && (
+              <div className="mt-0.5 text-xs tracking-wide text-amber-500">
+                {"★".repeat(rating)}
+                <span className="ml-1 text-black/40">{rating.toFixed(1)}</span>
+              </div>
+            )}
+            <div className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-[#ECF6EF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "#1E7A4D" }}>
+              ✓ Verified
+            </div>
           </div>
         </div>
+        {title && <p className="mt-3 text-sm font-bold text-black/90">“{title}”</p>}
+        <p className="mt-3 text-[15px] leading-relaxed text-black/75">“{quote}”</p>
       </div>
-      <p className="mt-4 text-[15px] leading-relaxed text-black/75">“{quote}”</p>
     </div>
   );
 }
