@@ -1,21 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import edgeHero from "@/assets/adv-edge-hero.jpg";
-import edgeSplit from "@/assets/adv-edge-split.jpg";
+import edgeSplitAsset from "@/assets/adv-edge-split-v2.png.asset.json";
 import bottleImg from "@/assets/neural-bottle.png";
-import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
-import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
-import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewManOfficeBlueAsset from "@/assets/review-uploaded-man-office-blue.png.asset.json";
+import reviewManOfficeDarkAsset from "@/assets/review-uploaded-man-office-dark.png.asset.json";
 import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
-import reviewManSelfieAsset from "@/assets/review-man-selfie.png.asset.json";
-import reviewWomanKitchenSelfieAsset from "@/assets/review-woman-kitchen-selfie.png.asset.json";
+import reviewManGlassesSofaAsset from "@/assets/review-man-glasses-sofa.png.asset.json";
+import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewWomanMugKitchenAsset from "@/assets/review-woman-mug-kitchen.png.asset.json";
 
-const reviewManGym = reviewManGymAsset.url;
-const reviewWomanBathroom = reviewWomanBathroomAsset.url;
-const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const edgeSplit = edgeSplitAsset.url;
+const reviewManOfficeBlue = reviewManOfficeBlueAsset.url;
+const reviewManOfficeDark = reviewManOfficeDarkAsset.url;
 const reviewWomanLaptop = reviewWomanLaptopAsset.url;
-const reviewManSelfie = reviewManSelfieAsset.url;
-const reviewWomanKitchenSelfie = reviewWomanKitchenSelfieAsset.url;
+const reviewManGlassesSofa = reviewManGlassesSofaAsset.url;
+const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const reviewWomanMugKitchen = reviewWomanMugKitchenAsset.url;
+
 
 export const Route = createFileRoute("/case-study-edge")({
   head: () => ({
@@ -359,7 +361,7 @@ function CaseStudyEdge() {
             name="Marcus T."
             rating={5}
             title="Holding the edge through 5pm"
-            image={reviewManGym}
+            image={reviewManOfficeBlue}
             quote="I run a small team and the afternoons used to be a write-off. Two weeks in and I'm still sharp at 5pm — same workload, way more shipped."
           />
           <ReviewCard
@@ -367,23 +369,23 @@ function CaseStudyEdge() {
             name="Sarah K."
             rating={5}
             title="Off the caffeine spiral"
-            image={reviewWomanBathroom}
-            quote="I wasn't drinking less coffee — I was drinking more, and it was working less. Circuit broke the cycle. My focus actually lasts a full day now."
+            image={reviewWomanLaptop}
+            quote="I wasn't drinking less coffee — I was drinking more, and it was working less. Circuit broke the cycle. My focus actually lasts a full workday now."
           />
           <ReviewCard
             initials="D.K."
             name="David K."
             rating={5}
             title="Built for deep work"
-            image={reviewBottleKitchen}
-            quote="I write code for a living. This helps me hold complex problems in my head longer. Not a buzz — just more usable hours."
+            image={reviewManOfficeDark}
+            quote="I write code for a living. This helps me hold complex problems in my head longer. Not a buzz — just more usable hours at the desk."
           />
           <ReviewCard
             initials="H.R."
             name="Hannah R."
             rating={4}
             title="Subtle but real"
-            image={reviewWomanLaptop}
+            image={reviewWomanMugKitchen}
             quote="Don't expect a rush. Expect to finish your to-do list without zoning out. That's exactly what I got."
           />
           <ReviewCard
@@ -391,7 +393,7 @@ function CaseStudyEdge() {
             name="Greg M."
             rating={5}
             title="A founder's edge"
-            image={reviewManSelfie}
+            image={reviewManGlassesSofa}
             quote="The difference is the afternoon. I'm not white-knuckling through 3pm anymore. Calls feel sharper. Decisions are faster."
           />
           <ReviewCard
@@ -399,9 +401,10 @@ function CaseStudyEdge() {
             name="Lauren B."
             rating={5}
             title="Mornings feel lighter"
-            image={reviewWomanKitchenSelfie}
+            image={reviewBottleKitchen}
             quote="Cleaner focus, less friction, and I'm not scattered by 10am. Feels like I have a quiet edge over my own old self."
           />
+
         </FadeUp>
       </section>
 
