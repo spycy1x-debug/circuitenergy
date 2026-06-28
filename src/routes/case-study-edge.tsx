@@ -704,8 +704,8 @@ function EvidenceCard({ icon, title, body, source, href }: { icon: string; title
   return (
     <div className="flex h-full flex-col rounded-2xl border border-black/10 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(44,53,63,0.25)]">
       <div className="grid h-10 w-10 place-items-center rounded-xl text-lg" style={{ background: "#FFF1E6", color: ORANGE }}>{icon}</div>
-      <h4 className="mt-4 font-serif text-xl leading-snug" style={{ fontFamily: '"Instrument Serif", Georgia, serif', color: INK }}>{title}</h4>
-      <p className="mt-3 flex-1 text-[15px] leading-relaxed text-black/70">{body}</p>
+      <h4 className="mt-4 mb-0 font-serif text-xl leading-snug" style={{ fontFamily: '"Instrument Serif", Georgia, serif', color: INK }}>{title}</h4>
+      <p className="mt-0 flex-1 text-[15px] leading-relaxed text-black/70">{body}</p>
       <a href={href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold underline-offset-4 hover:underline" style={{ color: ORANGE }}>
         View study ↗
       </a>
