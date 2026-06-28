@@ -370,7 +370,7 @@ function ProductPage() {
             },
             {
               title: "Brain fog lifted in days",
-              body: "Was skeptical but by day 4 I noticed I wasn't reaching for a third coffee. Reading retention is noticeably better.",
+              body: "I wasn't lazy. I just ran out of gas by 2pm — every single day. By day 4 on Circuit I noticed I wasn't reaching for a third coffee and my reading retention was noticeably better.",
               name: "Sarah K.",
               date: "1 month ago",
               rating: 5,
@@ -502,7 +502,7 @@ function ProductPage() {
             },
             {
               title: "Desk-day focus is way better",
-              body: "I'm in meetings most of the day and this keeps me sharper without that over-caffeinated feeling. The difference is most obvious around 2 or 3pm.",
+              body: "I wasn't getting out-worked. I was getting out-focused. I'm in meetings most of the day and Circuit keeps me sharper without that over-caffeinated feeling. The difference is most obvious around 2 or 3pm.",
               name: "Andre W.",
               date: "2 weeks ago",
               rating: 5,

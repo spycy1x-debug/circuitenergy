@@ -194,7 +194,7 @@ function CaseStudyEdge() {
           </p>
         </FadeUp>
 
-        <PullQuote>
+        <PullQuote attribution="Andre W. — Verified Customer">
           “I wasn't getting out-worked. I was getting out-focused.”
         </PullQuote>
 
@@ -274,7 +274,7 @@ function CaseStudyEdge() {
           <div className="relative aspect-[3/4]">
             <img src={edgeSplit} alt="Before and after — faded at desk vs locked in" className="absolute inset-0 h-full w-full object-contain" loading="lazy" />
             <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">Before</span>
-            <span className="absolute left-1/2 top-3 ml-3 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white" style={{ background: ORANGE }}>After</span>
+            <span className="absolute right-3 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white" style={{ background: ORANGE, top: "calc(50% + 12px)" }}>After</span>
           </div>
         </div>
         <p className="mt-3 text-center text-sm italic text-black/55">Same hours. A full day of sharp instead of three good hours.</p>
@@ -509,7 +509,7 @@ function SubHead({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PullQuote({ children }: { children: React.ReactNode }) {
+function PullQuote({ children, attribution }: { children: React.ReactNode; attribution?: string }) {
   return (
     <FadeUp>
       <blockquote
@@ -523,6 +523,11 @@ function PullQuote({ children }: { children: React.ReactNode }) {
         }}
       >
         {children}
+        {attribution && (
+          <footer className="mt-4 not-italic text-[12px] font-semibold uppercase tracking-[0.18em] text-black/55">
+            <span style={{ fontFamily: '"Inter", system-ui, sans-serif' }}>— {attribution}</span>
+          </footer>
+        )}
       </blockquote>
     </FadeUp>
   );
