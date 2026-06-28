@@ -666,7 +666,7 @@ function FocusGraph() {
 function ComparisonCard() {
   const rows = [
     { bad: "Crashed around 2pm", good: "Clear through 4–5pm" },
-    { bad: "3+ coffees, still foggy", good: "Off the 3rd coffee" },
+    { bad: "200+ mg caffeine, still foggy", good: "Off the caffeine spiral" },
     { bad: "Work pushed to tomorrow", good: "Finished the day's work" },
     { bad: "Drained by evening", good: "Energy left at home" },
   ];
