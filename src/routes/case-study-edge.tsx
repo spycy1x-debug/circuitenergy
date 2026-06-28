@@ -194,7 +194,7 @@ function CaseStudyEdge() {
           </p>
         </FadeUp>
 
-        <PullQuote>
+        <PullQuote attribution="Andre W. — Verified Customer">
           “I wasn't getting out-worked. I was getting out-focused.”
         </PullQuote>
 
