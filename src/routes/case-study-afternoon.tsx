@@ -323,18 +323,18 @@ function CaseStudyAfternoon() {
         </div>
         <FadeUp className="mx-auto mt-10 grid max-w-5xl gap-5 px-5 md:grid-cols-3">
           <EvidenceCard
-            icon="⚡"
-            title="Caffeine + L-theanine = calm focus."
-            body="A double-blind, placebo-controlled trial found the pair improved selective attention and reaction time and reduced mind-wandering — without the jitter."
-            source="Cambridge / British Journal of Nutrition · review PMC8794723"
-            href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8794723/"
-          />
-          <EvidenceCard
             icon="☕"
             title="The crash is real chemistry."
-            body="Adenosine builds while you're awake. Caffeine blocks it. When caffeine wears off, the blocked signal rebounds — and the afternoon falls out."
+            body="Adenosine builds while you're awake. Large doses of caffeine block it. When that caffeine wears off, the blocked signal rebounds — and the afternoon falls out."
             source="Harvard Medical School · Sleep Research"
             href="https://healthysleep.med.harvard.edu/healthy/science/how/neurophysiology"
+          />
+          <EvidenceCard
+            icon="⚡"
+            title="Caffeine + L-theanine = a cleaner mechanism."
+            body="Used together in the right ratio, the pair shifts attention without brute-forcing adenosine the way high-dose caffeine alone does. Research shows improved selective attention, faster reaction time, and less jitter."
+            source="Cambridge / British Journal of Nutrition · review PMC8794723"
+            href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8794723/"
           />
           <EvidenceCard
             icon="🧠"
