@@ -1,21 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import edgeHero from "@/assets/adv-edge-hero.jpg";
-import edgeSplit from "@/assets/adv-edge-split.jpg";
+import edgeSplitAsset from "@/assets/adv-edge-split-v2.png.asset.json";
 import bottleImg from "@/assets/neural-bottle.png";
-import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
-import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
-import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewManOfficeBlueAsset from "@/assets/review-uploaded-man-office-blue.png.asset.json";
+import reviewManOfficeDarkAsset from "@/assets/review-uploaded-man-office-dark.png.asset.json";
 import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
-import reviewManSelfieAsset from "@/assets/review-man-selfie.png.asset.json";
-import reviewWomanKitchenSelfieAsset from "@/assets/review-woman-kitchen-selfie.png.asset.json";
+import reviewManGlassesSofaAsset from "@/assets/review-man-glasses-sofa.png.asset.json";
+import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewWomanMugKitchenAsset from "@/assets/review-woman-mug-kitchen.png.asset.json";
 
-const reviewManGym = reviewManGymAsset.url;
-const reviewWomanBathroom = reviewWomanBathroomAsset.url;
-const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const edgeSplit = edgeSplitAsset.url;
+const reviewManOfficeBlue = reviewManOfficeBlueAsset.url;
+const reviewManOfficeDark = reviewManOfficeDarkAsset.url;
 const reviewWomanLaptop = reviewWomanLaptopAsset.url;
-const reviewManSelfie = reviewManSelfieAsset.url;
-const reviewWomanKitchenSelfie = reviewWomanKitchenSelfieAsset.url;
+const reviewManGlassesSofa = reviewManGlassesSofaAsset.url;
+const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const reviewWomanMugKitchen = reviewWomanMugKitchenAsset.url;
+
 
 export const Route = createFileRoute("/case-study-edge")({
   head: () => ({
