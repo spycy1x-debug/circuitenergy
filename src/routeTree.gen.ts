@@ -14,6 +14,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CaseStudyAfternoonRouteImport } from './routes/case-study-afternoon'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
@@ -44,6 +45,11 @@ const LoginRoute = LoginRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudyAfternoonRoute = CaseStudyAfternoonRouteImport.update({
+  id: '/case-study-afternoon',
+  path: '/case-study-afternoon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/case-study-afternoon': typeof CaseStudyAfternoonRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/case-study-afternoon': typeof CaseStudyAfternoonRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/case-study-afternoon': typeof CaseStudyAfternoonRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/case-study-afternoon'
     | '/contact'
     | '/login'
     | '/privacy'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/case-study-afternoon'
     | '/contact'
     | '/login'
     | '/privacy'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/case-study-afternoon'
     | '/contact'
     | '/login'
     | '/privacy'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
+  CaseStudyAfternoonRoute: typeof CaseStudyAfternoonRoute
   ContactRoute: typeof ContactRoute
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -209,6 +222,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-study-afternoon': {
+      id: '/case-study-afternoon'
+      path: '/case-study-afternoon'
+      fullPath: '/case-study-afternoon'
+      preLoaderRoute: typeof CaseStudyAfternoonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -260,6 +280,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
+  CaseStudyAfternoonRoute: CaseStudyAfternoonRoute,
   ContactRoute: ContactRoute,
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,

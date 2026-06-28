@@ -4,9 +4,11 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+
 
 import appCss from "../styles.css?url";
 import { AnnouncementBar } from "@/components/site/AnnouncementBar";
@@ -115,6 +117,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAdvertorial = pathname.startsWith("/case-study");
+  if (isAdvertorial) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <main><Outlet /></main>
+      </QueryClientProvider>
+    );
+  }
   return (
     <QueryClientProvider client={queryClient}>
       <AnnouncementBar />
@@ -126,3 +137,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
