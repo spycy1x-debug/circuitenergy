@@ -372,7 +372,7 @@ function CaseStudyAfternoon() {
             rating={5}
             title="Brain fog lifted in days"
             image={reviewWomanBathroom}
-            quote="Was skeptical but by day 4 I noticed I wasn't reaching for more caffeine. Reading retention is noticeably better."
+            quote="I wasn't lazy. I just ran out of gas by 2pm — every single day. By day 4 on Circuit I noticed I wasn't reaching for a third coffee and my reading retention was noticeably better."
           />
           <ReviewCard
             initials="D.K."
