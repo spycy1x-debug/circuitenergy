@@ -126,15 +126,15 @@ function CaseStudyAfternoon() {
             width={1600}
             height={1024}
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 40%, rgba(250,248,245,0.92) 92%, #FAF8F5 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.55) 88%, rgba(0,0,0,0.70) 100%)" }} />
           <div className="relative z-10 mx-auto flex h-full max-w-3xl flex-col justify-end px-5 pb-12 md:pb-20">
-            <div className={eyebrowClass} style={{ color: ORANGE }}>
+            <div className={eyebrowClass} style={{ color: "#FFFFFF" }}>
               Case Study · Focus &amp; the Afternoon Crash · 6 min read
             </div>
-            <h1 className="mt-5 font-serif text-4xl leading-[1.05] md:text-6xl md:leading-[1.04]" style={{ fontFamily: '"Instrument Serif", Georgia, serif', color: INK }}>
+            <h1 className="mt-5 font-serif text-4xl leading-[1.05] md:text-6xl md:leading-[1.04]" style={{ fontFamily: '"Instrument Serif", Georgia, serif', color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}>
               The 2:47pm Problem: How One Professional Got the Back Half of Their Day Back
             </h1>
-            <p className="mt-5 max-w-2xl text-lg md:text-xl font-medium" style={{ color: INK, lineHeight: 1.55 }}>
+            <p className="mt-5 max-w-2xl text-lg md:text-xl font-medium" style={{ color: "#FFFFFF", lineHeight: 1.55, textShadow: "0 1px 16px rgba(0,0,0,0.35)" }}>
               Sharp at 9am, useless by 3pm — until a small change in the chemistry of the afternoon fixed it.
             </p>
           </div>
