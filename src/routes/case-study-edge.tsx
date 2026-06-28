@@ -364,7 +364,7 @@ function CaseStudyEdge() {
             rating={5}
             title="Desk-day focus is way better"
             image={reviewManOfficeDark}
-            quote="I'm in meetings most of the day and this keeps me sharper without that over-caffeinated feeling. The difference is most obvious around 2 or 3pm."
+            quote="I wasn't getting out-worked. I was getting out-focused. I'm in meetings most of the day and Circuit keeps me sharper without that over-caffeinated feeling. The difference is most obvious around 2 or 3pm."
           />
           <ReviewCard
             initials="H.R."
