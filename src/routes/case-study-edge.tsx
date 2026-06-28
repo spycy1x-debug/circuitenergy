@@ -274,7 +274,7 @@ function CaseStudyEdge() {
           <div className="relative aspect-[3/4]">
             <img src={edgeSplit} alt="Before and after — faded at desk vs locked in" className="absolute inset-0 h-full w-full object-contain" loading="lazy" />
             <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">Before</span>
-            <span className="absolute right-3 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white" style={{ background: ORANGE, top: "calc(50% + 12px)" }}>After</span>
+            <span className="absolute right-3 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white" style={{ background: ORANGE, top: "calc(50% + 56px)" }}>After</span>
           </div>
         </div>
         <p className="mt-3 text-center text-sm italic text-black/55">Same hours. A full day of sharp instead of three good hours.</p>
