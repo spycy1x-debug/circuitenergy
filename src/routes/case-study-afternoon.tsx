@@ -3,6 +3,19 @@ import { useEffect, useRef, useState } from "react";
 import crashHero from "@/assets/adv-crash-hero.jpg";
 import calmMid from "@/assets/adv-calm-mid.jpg";
 import bottleImg from "@/assets/neural-bottle.png";
+import reviewManGymAsset from "@/assets/review-man-gym.png.asset.json";
+import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
+import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
+import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
+import reviewManSelfieAsset from "@/assets/review-man-selfie.png.asset.json";
+import reviewWomanKitchenSelfieAsset from "@/assets/review-woman-kitchen-selfie.png.asset.json";
+
+const reviewManGym = reviewManGymAsset.url;
+const reviewWomanBathroom = reviewWomanBathroomAsset.url;
+const reviewBottleKitchen = reviewBottleKitchenAsset.url;
+const reviewWomanLaptop = reviewWomanLaptopAsset.url;
+const reviewManSelfie = reviewManSelfieAsset.url;
+const reviewWomanKitchenSelfie = reviewWomanKitchenSelfieAsset.url;
 
 export const Route = createFileRoute("/case-study-afternoon")({
   head: () => ({
