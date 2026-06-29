@@ -125,6 +125,7 @@ function RootComponent() {
   if (isAdvertorial) {
     return (
       <QueryClientProvider client={queryClient}>
+        <style dangerouslySetInnerHTML={{ __html: `.klaviyo-form,div[class*="kl-private-reset-css"],div[data-testid*="POPUP"]{display:none !important;visibility:hidden !important;}` }} />
         <main><Outlet /></main>
       </QueryClientProvider>
     );
