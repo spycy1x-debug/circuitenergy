@@ -136,7 +136,6 @@ function RootComponent() {
       <main><Outlet /></main>
       <Footer />
       <CartDrawer />
-      <WelcomePopup />
     </QueryClientProvider>
   );
 }
