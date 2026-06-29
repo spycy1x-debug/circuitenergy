@@ -138,20 +138,38 @@ function CaseStudyEdge() {
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.08) 40%, rgba(0,0,0,0.55) 88%, rgba(0,0,0,0.70) 100%)" }} />
           <div className="relative z-10 mx-auto flex h-full max-w-3xl flex-col justify-end px-5 pb-12 md:pb-20">
-            <div className={eyebrowClass} style={{ color: "#FFFFFF" }}>
-              Case Study · Focus &amp; Performance · 5 min read
+            <div className={eyebrowClass} style={{ color: ORANGE, textShadow: "0 1px 16px rgba(0,0,0,0.4)" }}>
+              Real Results · 5 min read
             </div>
             <h1 className="mt-5 font-serif text-4xl leading-[1.05] md:text-6xl md:leading-[1.04]" style={{ fontFamily: '"Instrument Serif", Georgia, serif', color: "#FFFFFF", textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}>
-              Out-Worked or Out-Focused? Why the Hardest Worker in the Room Still Finishes a Step Behind
+              The Edge They Were Looking For Wasn't More Hours — It Was This
             </h1>
             <p className="mt-5 max-w-2xl text-lg md:text-xl font-medium" style={{ color: "#FFFFFF", lineHeight: 1.55, textShadow: "0 1px 16px rgba(0,0,0,0.35)" }}>
-              Same hours, same effort — but some professionals stay sharp for the whole day. Here's the difference.
+              How a 31-year-old sales lead went from 2pm crashes to all-day focus — without more caffeine.
             </p>
           </div>
         </div>
-        <p className="mx-auto max-w-3xl px-5 pt-4 text-sm italic text-black/55">
-          Two people, same workload. One fades at 2pm. One doesn't.
-        </p>
+        {/* Above-the-fold one-line result + CTA */}
+        <div className="mx-auto max-w-3xl px-5 pt-6">
+          <div className="flex flex-col items-start gap-4 rounded-2xl border border-black/10 bg-white p-5 shadow-[0_10px_30px_-18px_rgba(44,53,63,0.25)] sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-base font-bold text-white" style={{ background: ORANGE }}>30d</span>
+              <p className="text-[15px] font-semibold leading-snug" style={{ color: INK }}>
+                Same hours, same effort — but the 2pm wall stopped showing up.
+              </p>
+            </div>
+            <Link
+              to="/product/$slug"
+              params={{ slug: "neural-performance" }}
+              onClick={() => track("advertorial_cta_click", { placement: "hero_inline" })}
+              className="shrink-0 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-[0_10px_24px_-10px_rgba(245,133,63,0.6)]"
+              style={{ background: ORANGE }}
+            >
+              Get the same edge — 45% off →
+            </Link>
+          </div>
+          <p className="mt-3 text-sm italic text-black/55">Two people, same workload. One fades at 2pm. One doesn't.</p>
+        </div>
 
         {/* Stat strip */}
         <div className="mx-auto mt-8 max-w-5xl px-5">
@@ -293,6 +311,18 @@ function CaseStudyEdge() {
 
       <FadeUp className="mx-auto max-w-5xl px-5">
         <ComparisonCard />
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <Link
+            to="/product/$slug"
+            params={{ slug: "neural-performance" }}
+            onClick={() => ctaClick("post_results")}
+            className="inline-flex items-center justify-center rounded-full px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(245,133,63,0.6)] transition hover:translate-y-[-1px]"
+            style={{ background: ORANGE }}
+          >
+            Get the same edge — 45% off →
+          </Link>
+          <p className="text-xs uppercase tracking-[0.18em] text-black/50">Free shipping · 30-day money-back</p>
+        </div>
       </FadeUp>
 
       <FadeUp className="mx-auto max-w-5xl px-5 pt-16 md:pt-20">
@@ -465,7 +495,7 @@ function CaseStudyEdge() {
               <img src={bottleImg} alt="" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0 flex-1 text-[13px] font-semibold md:text-sm" style={{ color: INK }}>
-              Circuit — calm focus, no crash
+              Get the same edge — 45% off
             </div>
             <Link
               to="/product/$slug"
@@ -474,7 +504,7 @@ function CaseStudyEdge() {
               className="shrink-0 rounded-full px-4 py-2 text-sm font-bold text-white"
               style={{ background: ORANGE }}
             >
-              Get My Edge →
+              Claim 45% →
             </Link>
             <button
               onClick={() => setCtaDismissed(true)}
