@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X, Mail } from "lucide-react";
+import { useRouterState } from "@tanstack/react-router";
 
 declare global {
   interface Window {
@@ -8,10 +9,13 @@ declare global {
 }
 
 export function WelcomePopup() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAdvertorial = pathname.startsWith("/case-study");
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    if (isAdvertorial) return;
     const dismissed = sessionStorage.getItem("welcomePopupDismissed");
     if (!dismissed) {
       const timer = setTimeout(() => {
@@ -20,7 +24,7 @@ export function WelcomePopup() {
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isAdvertorial]);
 
   const openKlaviyoForm = () => {
     window._klOnsite = window._klOnsite || [];
