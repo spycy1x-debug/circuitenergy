@@ -495,7 +495,7 @@ function CaseStudyEdge() {
               <img src={bottleImg} alt="" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0 flex-1 text-[13px] font-semibold md:text-sm" style={{ color: INK }}>
-              Circuit — calm focus, no crash
+              Get the same edge — 45% off
             </div>
             <Link
               to="/product/$slug"
@@ -504,7 +504,7 @@ function CaseStudyEdge() {
               className="shrink-0 rounded-full px-4 py-2 text-sm font-bold text-white"
               style={{ background: ORANGE }}
             >
-              Get My Edge →
+              Claim 45% →
             </Link>
             <button
               onClick={() => setCtaDismissed(true)}
