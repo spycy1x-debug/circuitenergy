@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import edgeHero from "@/assets/adv-edge-hero.jpg";
+import edgeHeroAsset from "@/assets/adv-edge-hero.webp.asset.json";
 import edgeSplitAsset from "@/assets/adv-edge-split-v2.png.asset.json";
 import bottleImg from "@/assets/neural-bottle.png";
 import reviewManOfficeBlueAsset from "@/assets/review-uploaded-man-office-blue.png.asset.json";
@@ -10,6 +10,7 @@ import reviewManGlassesSofaAsset from "@/assets/review-man-glasses-sofa.png.asse
 import reviewBottleKitchenAsset from "@/assets/review-bottle-kitchen.png.asset.json";
 import reviewWomanMugKitchenAsset from "@/assets/review-woman-mug-kitchen.png.asset.json";
 
+const edgeHero = edgeHeroAsset.url;
 const edgeSplit = edgeSplitAsset.url;
 const reviewManOfficeBlue = reviewManOfficeBlueAsset.url;
 const reviewManOfficeDark = reviewManOfficeDarkAsset.url;
