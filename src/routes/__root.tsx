@@ -15,7 +15,6 @@ import { AnnouncementBar } from "@/components/site/AnnouncementBar";
 import { UrgencyBar } from "@/components/site/UrgencyBar";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { WelcomePopup } from "@/components/site/WelcomePopup";
 import { CartDrawer } from "@/components/site/CartDrawer";
 
 function NotFoundComponent() {
@@ -137,7 +136,6 @@ function RootComponent() {
       <main><Outlet /></main>
       <Footer />
       <CartDrawer />
-      <WelcomePopup />
     </QueryClientProvider>
   );
 }
