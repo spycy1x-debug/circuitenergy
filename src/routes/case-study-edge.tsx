@@ -311,6 +311,18 @@ function CaseStudyEdge() {
 
       <FadeUp className="mx-auto max-w-5xl px-5">
         <ComparisonCard />
+        <div className="mt-10 flex flex-col items-center gap-3 text-center">
+          <Link
+            to="/product/$slug"
+            params={{ slug: "neural-performance" }}
+            onClick={() => ctaClick("post_results")}
+            className="inline-flex items-center justify-center rounded-full px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(245,133,63,0.6)] transition hover:translate-y-[-1px]"
+            style={{ background: ORANGE }}
+          >
+            Get the same edge — 45% off →
+          </Link>
+          <p className="text-xs uppercase tracking-[0.18em] text-black/50">Free shipping · 30-day money-back</p>
+        </div>
       </FadeUp>
 
       <FadeUp className="mx-auto max-w-5xl px-5 pt-16 md:pt-20">
