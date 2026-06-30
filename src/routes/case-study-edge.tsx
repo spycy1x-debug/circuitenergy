@@ -166,7 +166,7 @@ function CaseStudyEdge() {
               className="shrink-0 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-[0_10px_24px_-10px_rgba(245,133,63,0.6)]"
               style={{ background: ORANGE }}
             >
-              Get the same edge — 45% off →
+              Get the same edge — 30% off + 15% on signup →
             </Link>
           </div>
           <p className="mt-3 text-sm italic text-black/55">Two people, same workload. One fades at 2pm. One doesn't.</p>
@@ -320,7 +320,7 @@ function CaseStudyEdge() {
             className="inline-flex items-center justify-center rounded-full px-8 py-4 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(245,133,63,0.6)] transition hover:translate-y-[-1px]"
             style={{ background: ORANGE }}
           >
-            Get the same edge — 45% off →
+            Get the same edge — 30% off + 15% on signup →
           </Link>
           <p className="text-xs uppercase tracking-[0.18em] text-black/50">Free shipping · 30-day money-back</p>
         </div>
@@ -496,7 +496,7 @@ function CaseStudyEdge() {
               <img src={bottleImg} alt="" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0 flex-1 text-[13px] font-semibold md:text-sm" style={{ color: INK }}>
-              Get the same edge — 45% off
+              Get the same edge — 30% off + 15% on signup
             </div>
             <Link
               to="/product/$slug"
@@ -505,7 +505,7 @@ function CaseStudyEdge() {
               className="shrink-0 rounded-full px-4 py-2 text-sm font-bold text-white"
               style={{ background: ORANGE }}
             >
-              Claim 45% →
+              Claim 30% →
             </Link>
             <button
               onClick={() => setCtaDismissed(true)}
