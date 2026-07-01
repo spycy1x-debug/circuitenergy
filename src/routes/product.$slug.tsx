@@ -1545,7 +1545,7 @@ function ProductPage() {
               {p.id === "neural" ? (
                 <BundleSelector thumbnail={p.images[0]} productName={p.name} />
               ) : (
-                <NmnBuyBlock thumbnail={p.images[0]} />
+                <BundleSelector thumbnail={p.images[0]} productName={p.name} bundles={NMN_BUNDLES} defaultId="2" />
               )}
             </div>
 
