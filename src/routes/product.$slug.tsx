@@ -2383,9 +2383,9 @@ const NMN_BUNDLES: BundleOpt[] = [
   },
 ];
 
-function BundleSelector({ thumbnail, productName }: { thumbnail: string; productName: string }) {
-  const [selected, setSelected] = useState<string>("2");
-  const active = BUNDLES.find((b) => b.id === selected)!;
+function BundleSelector({ thumbnail, productName, bundles = BUNDLES, defaultId = "2", productTitle }: { thumbnail: string; productName: string; bundles?: BundleOpt[]; defaultId?: string; productTitle?: string }) {
+  const [selected, setSelected] = useState<string>(defaultId);
+  const active = bundles.find((b) => b.id === selected) ?? bundles[0];
 
   const [adding, setAdding] = useState(false);
   const handleAddToCart = async () => {
