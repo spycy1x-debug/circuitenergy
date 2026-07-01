@@ -1545,7 +1545,7 @@ function ProductPage() {
               {p.id === "neural" ? (
                 <BundleSelector thumbnail={p.images[0]} productName={p.name} />
               ) : (
-                <NmnBuyBlock thumbnail={p.images[0]} />
+                <BundleSelector thumbnail={p.images[0]} productName={p.name} bundles={NMN_BUNDLES} defaultId="2" />
               )}
             </div>
 
@@ -2342,9 +2342,50 @@ const BUNDLES: BundleOpt[] = [
   },
 ];
 
-function BundleSelector({ thumbnail, productName }: { thumbnail: string; productName: string }) {
-  const [selected, setSelected] = useState<string>("2");
-  const active = BUNDLES.find((b) => b.id === selected)!;
+const NMN_BUNDLES: BundleOpt[] = [
+  {
+    id: "1",
+    label: "1 BOTTLE",
+    bottles: 1,
+    variantId: "gid://shopify/ProductVariant/48124189704346",
+    price: 42.99,
+    compare: 59.0,
+    perBottle: 42.99,
+    detail: "30 capsules · 30-day supply",
+    freeShipping: false,
+  },
+  {
+    id: "2",
+    label: "2 BOTTLES",
+    bottles: 2,
+    variantId: "gid://shopify/ProductVariant/48597438365850",
+    price: 69.99,
+    compare: 118.0,
+    perBottle: 34.99,
+    detail: "60 capsules · 60-day supply",
+    freeShipping: true,
+    badge: "MOST POPULAR",
+    badgeColor: "gold",
+    popular: true,
+  },
+  {
+    id: "4",
+    label: "Buy 3, Get 1 FREE (4 Bottles)",
+    bottles: 4,
+    variantId: "gid://shopify/ProductVariant/48597440659610",
+    price: 95.99,
+    compare: 236.0,
+    perBottle: 24.0,
+    detail: "120 capsules · 120-day supply",
+    freeShipping: true,
+    badge: "BEST VALUE",
+    badgeColor: "green",
+  },
+];
+
+function BundleSelector({ thumbnail, productName, bundles = BUNDLES, defaultId = "2", productTitle }: { thumbnail: string; productName: string; bundles?: BundleOpt[]; defaultId?: string; productTitle?: string }) {
+  const [selected, setSelected] = useState<string>(defaultId);
+  const active = bundles.find((b) => b.id === selected) ?? bundles[0];
 
   const [adding, setAdding] = useState(false);
   const handleAddToCart = async () => {
@@ -2375,7 +2416,7 @@ function BundleSelector({ thumbnail, productName }: { thumbnail: string; product
         Choose Your Offer
       </h2>
       <div className="space-y-3">
-        {BUNDLES.map((b) => {
+        {bundles.map((b) => {
           const isSelected = selected === b.id;
           const popularSelected = isSelected;
           const displayPrice = b.perBottle;
