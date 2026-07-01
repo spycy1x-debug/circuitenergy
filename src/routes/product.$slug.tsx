@@ -2416,7 +2416,7 @@ function BundleSelector({ thumbnail, productName, bundles = BUNDLES, defaultId =
         Choose Your Offer
       </h2>
       <div className="space-y-3">
-        {BUNDLES.map((b) => {
+        {bundles.map((b) => {
           const isSelected = selected === b.id;
           const popularSelected = isSelected;
           const displayPrice = b.perBottle;
