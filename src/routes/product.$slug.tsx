@@ -1339,7 +1339,7 @@ function ProductPage() {
             <button onClick={() => setShowLabel(false)} className="absolute top-3 right-3 p-2 rounded-full hover:bg-secondary">
               <X className="h-5 w-5" />
             </button>
-            <img src={supplementFacts} alt="Supplement Facts" className="w-full h-auto rounded-xl" />
+            <img src={p.id === "nmn" ? nmnSupplementFacts : supplementFacts} alt="Supplement Facts" className="w-full h-auto rounded-xl" />
           </div>
         </div>
       )}
