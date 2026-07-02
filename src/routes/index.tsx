@@ -44,16 +44,16 @@ function HomePage() {
       {/* HERO — edge-to-edge */}
       <section className="relative w-full overflow-hidden bg-[#FDF8EE]">
         {/* Image: 3:4 on mobile, wide cinematic on desktop */}
-        <div className="relative w-full aspect-[3/4] md:aspect-auto md:h-[88vh] md:min-h-[640px] md:max-h-[900px]">
+        <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-auto md:h-[88vh] md:min-h-[640px] md:max-h-[900px]">
           <img
             src={heroImage.url}
             alt="A woman in a silk robe beginning her Seralie morning ritual"
-            className="absolute inset-0 h-full w-full object-cover object-center md:object-[70%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[75%_center] md:object-[70%_center]"
             loading="eager"
           />
           {/* Readability scrim — stronger on left where copy sits */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FDF8EE]/85 via-[#FDF8EE]/40 to-transparent md:from-[#FDF8EE]/80 md:via-[#FDF8EE]/20 md:to-transparent" />
-          <div className="absolute inset-0 md:hidden bg-gradient-to-t from-[#FDF8EE]/70 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FDF8EE]/95 via-[#FDF8EE]/70 to-[#FDF8EE]/10 md:from-[#FDF8EE]/85 md:via-[#FDF8EE]/25 md:to-transparent" />
+          <div className="absolute inset-0 md:hidden bg-gradient-to-t from-[#FDF8EE]/80 via-[#FDF8EE]/10 to-transparent" />
 
           {/* Overlay content — left third on desktop */}
           <div className="relative h-full">
