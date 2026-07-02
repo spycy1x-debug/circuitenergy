@@ -202,9 +202,13 @@ function ProductPage() {
                             <span className="font-display text-xl text-[#3B2E25]">{b.label}</span>
                             <span className="font-display text-xl text-[#3B2E25] tabular-nums">${b.price.toFixed(2)}</span>
                           </div>
-                          <div className="mt-1.5 flex items-center justify-between gap-3 text-xs text-[#7A6A5E] tracking-wide">
-                            <span>${b.perBottle.toFixed(2)} / bottle · {b.detail}</span>
-                            {b.save > 0 && <span className="caps-label text-[#AD9752]">Save ${b.save}</span>}
+                          <div className="mt-1.5 flex items-center justify-between gap-3 text-xs tracking-wide">
+                            <span className="text-[#7A6A5E]">
+                              <span className="line-through">${b.standardPrice.toFixed(2)} / bottle</span>
+                              <span className="ml-2 font-medium text-[#3B2E25]">${b.perBottle.toFixed(2)} / bottle</span>
+                              <span className="ml-1">· {b.detail}</span>
+                            </span>
+                            {savings > 0 && <span className="caps-label text-[#AD9752]">Save ${savings}</span>}
                           </div>
                           {b.freeShipping && (
                             <div className="mt-1.5 caps-label text-[#6B7A4B] text-[10px]">Free Shipping</div>
