@@ -74,7 +74,7 @@ function HomePage() {
             <div className="mt-8 flex items-center gap-3 text-[11px] tracking-wide text-[#7A6A5E]">
               <div className="flex items-center gap-1.5">
                 {[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-[#AD9752] text-[#AD9752]" />)}
-                <span className="ml-1.5 uppercase tracking-[0.18em]">400+ reviews</span>
+                <span className="ml-1.5 uppercase tracking-[0.18em]">2000+ reviews</span>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@ function HomePage() {
                 <div className="mt-10 flex items-center gap-6 text-[11px] tracking-wide text-[#7A6A5E]">
                   <div className="flex items-center gap-1.5">
                     {[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-[#AD9752] text-[#AD9752]" />)}
-                    <span className="ml-1.5 uppercase tracking-[0.18em]">400+ reviews</span>
+                    <span className="ml-1.5 uppercase tracking-[0.18em]">2000+ reviews</span>
                   </div>
                   <span className="opacity-50">·</span>
                   <span className="uppercase tracking-[0.18em]">30-day guarantee</span>

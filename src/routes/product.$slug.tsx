@@ -35,6 +35,30 @@ export const Route = createFileRoute("/product/$slug")({
 
 const GALLERY = [img1, img2, img3, img4, img5, img6, img7, img8].map((a) => a.url);
 
+function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: string }) {
+  return (
+    <span className="inline-flex gap-0.5" aria-label={`${value} out of 5 stars`}>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const fill = Math.max(0, Math.min(1, value - i));
+        return (
+          <span key={i} className={`relative inline-block ${size}`}>
+            <Star className={`${size} text-[#AD9752]`} strokeWidth={1.5} />
+            <span className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${fill * 100}%` }}>
+              <Star className={`${size} fill-current text-[#AD9752]`} strokeWidth={1.5} />
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+function scrollToReviews(e: React.MouseEvent) {
+  e.preventDefault();
+  document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+
 const BUNDLES = [
   { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, save: 0, detail: "30-day supply", freeShipping: false },
   { id: "2", label: "2 Bottles", bottles: 2, variantId: "gid://shopify/ProductVariant/48597438365850", price: 69.99, perBottle: 34.99, save: 16, detail: "60-day supply", freeShipping: true, badge: "Most Loved" },
@@ -106,13 +130,13 @@ function ProductPage() {
             <button
               type="button"
               onClick={() => setLightbox(true)}
-              className="block w-full aspect-square bg-[#F7EFDF] overflow-hidden group"
+              className="block w-full aspect-square bg-[#FDF8EE] overflow-hidden group"
               aria-label="View larger"
             >
               <img
                 src={GALLERY[active]}
                 alt={`Seralie NMN — view ${active + 1}`}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                className="h-full w-full object-cover mix-blend-multiply transition-transform duration-500 group-hover:scale-[1.02]"
                 loading="eager"
               />
             </button>
@@ -124,9 +148,10 @@ function ProductPage() {
                   onClick={() => setActive(i)}
                   aria-label={`Show image ${i + 1}`}
                   aria-current={active === i}
-                  className={`aspect-square bg-[#F7EFDF] overflow-hidden border transition-all ${active === i ? "border-[#AD9752]" : "border-transparent hover:border-[#EADFC7]"}`}
+                  className={`aspect-square bg-[#FDF8EE] overflow-hidden border transition-all ${active === i ? "border-[#AD9752]" : "border-transparent hover:border-[#EADFC7]"}`}
                 >
-                  <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <img src={src} alt="" className="h-full w-full object-cover mix-blend-multiply" loading="lazy" />
+
                 </button>
               ))}
             </div>
@@ -137,11 +162,12 @@ function ProductPage() {
             <div className="eyebrow">Beauty & Longevity</div>
             <h1 className="mt-4 font-display text-5xl md:text-6xl leading-[1.02] text-[#3B2E25]">Seralie NMN</h1>
             <div className="mt-4 flex items-center gap-3">
-              <div className="flex gap-0.5 text-[#AD9752]">
-                {[0,1,2,3,4].map(i => <Star key={i} className="h-4 w-4 fill-current" />)}
-              </div>
-              <span className="caps-label text-[#7A6A5E]">4.8 · 400+ reviews</span>
+              <FractionalStars value={4.8} size="h-4 w-4" />
+              <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
+                4.8 · 2000+ reviews
+              </a>
             </div>
+
 
             <p className="mt-6 text-[16px] leading-8 text-[#5A483C] max-w-lg">
               500 mg of pure β-NMN — the direct precursor to NAD+ — to help your skin stay radiant,
@@ -318,9 +344,10 @@ function ProductPage() {
       <section className="bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
           <div className="grid gap-14 md:grid-cols-2 items-center max-w-5xl mx-auto">
-            <div className="aspect-[4/5] bg-[#F7EFDF] overflow-hidden">
-              <img src={GALLERY[5]} alt="Seralie NMN — clean formulation" className="h-full w-full object-cover" loading="lazy" />
+            <div className="aspect-[4/5] bg-[#FDF8EE] overflow-hidden">
+              <img src={GALLERY[5]} alt="Seralie NMN — clean formulation" className="h-full w-full object-cover mix-blend-multiply" loading="lazy" />
             </div>
+
             <div>
               <div className="eyebrow">Quality & purity</div>
               <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Held to a <span className="italic text-[#AD9752]">standard</span> we'd give our mothers.</h2>
@@ -361,16 +388,17 @@ function ProductPage() {
       </section>
 
       {/* REVIEWS */}
-      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
+      <section id="reviews" className="scroll-mt-24 bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">Loved by</div>
             <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Women who <span className="italic text-[#AD9752]">know</span> their skin</h2>
             <div className="mt-6 flex items-center justify-center gap-2 text-[11px] tracking-[0.18em] text-[#7A6A5E]">
-              <div className="flex gap-0.5 text-[#AD9752]">{[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}</div>
-              <span>4.8 · 400+ verified reviews</span>
+              <FractionalStars value={4.8} size="h-3.5 w-3.5" />
+              <span>4.8 · 2000+ verified reviews</span>
             </div>
           </div>
+
 
           <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
             {[
