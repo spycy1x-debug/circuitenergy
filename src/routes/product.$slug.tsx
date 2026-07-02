@@ -499,8 +499,8 @@ function ProductPage() {
       >
         <div className="container-x py-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="h-11 w-11 bg-[#F7EFDF] overflow-hidden shrink-0">
-              <img src={GALLERY[0]} alt="" className="h-full w-full object-cover" />
+            <div className="h-11 w-11 bg-[#FDF8EE] overflow-hidden shrink-0">
+              <img src={GALLERY[0]} alt="" className="h-full w-full object-cover mix-blend-multiply" />
             </div>
             <div className="min-w-0">
               <div className="font-display text-sm text-[#3B2E25] leading-tight truncate">Seralie NMN — {bundle.label}</div>
