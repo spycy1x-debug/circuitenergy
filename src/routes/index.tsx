@@ -41,31 +41,64 @@ function HomePage() {
 
   return (
     <>
-      {/* HERO — edge-to-edge */}
+      {/* HERO — stacked on mobile, edge-to-edge on desktop */}
       <section className="relative w-full overflow-hidden bg-[#FDF8EE]">
-        {/* Image: 3:4 on mobile, wide cinematic on desktop */}
-        <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-auto md:h-[88vh] md:min-h-[640px] md:max-h-[900px]">
+        {/* Mobile: image first, then text — nothing gets cut off */}
+        <div className="md:hidden">
+          <div className="relative w-full aspect-[4/5]">
+            <img
+              src={heroImage.url}
+              alt="A woman in a silk robe beginning her Seralie morning ritual"
+              className="absolute inset-0 h-full w-full object-cover object-[65%_center]"
+              loading="eager"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#FDF8EE] to-transparent" />
+          </div>
+          <div className="container-x pt-2 pb-14">
+            <div className="eyebrow">Beauty · Longevity · Ritual</div>
+            <h1 className="mt-5 font-display text-5xl leading-[1.02] text-[#3B2E25]">
+              Beauty & healthy aging,{" "}
+              <span className="italic text-[#AD9752]">from within</span>.
+            </h1>
+            <div className="mt-5 hairline w-16" />
+            <p className="mt-5 text-[15px] leading-8 text-[#5A483C]">
+              500 mg of pure β-NMN to replenish NAD+, support cellular renewal,
+              and help skin stay radiant — the youth molecule your body makes less of every year.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center gap-4">
+              <Link to="/product/$slug" params={{ slug: "nmn" }} className="btn-primary">Shop Seralie NMN</Link>
+              <Link to="/product/$slug" params={{ slug: "nmn" }} className="caps-label text-[#AD9752] hover:text-[#94803F] transition-colors border-b border-transparent hover:border-[#AD9752] pb-1">
+                Learn the science →
+              </Link>
+            </div>
+            <div className="mt-8 flex items-center gap-3 text-[11px] tracking-wide text-[#7A6A5E]">
+              <div className="flex items-center gap-1.5">
+                {[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-[#AD9752] text-[#AD9752]" />)}
+                <span className="ml-1.5 uppercase tracking-[0.18em]">400+ reviews</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop: overlaid, edge-to-edge */}
+        <div className="hidden md:block relative w-full h-[88vh] min-h-[640px] max-h-[900px]">
           <img
             src={heroImage.url}
             alt="A woman in a silk robe beginning her Seralie morning ritual"
-            className="absolute inset-0 h-full w-full object-cover object-[75%_center] md:object-[70%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
             loading="eager"
           />
-          {/* Readability scrim — stronger on left where copy sits */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FDF8EE]/95 via-[#FDF8EE]/70 to-[#FDF8EE]/10 md:from-[#FDF8EE]/85 md:via-[#FDF8EE]/25 md:to-transparent" />
-          <div className="absolute inset-0 md:hidden bg-gradient-to-t from-[#FDF8EE]/80 via-[#FDF8EE]/10 to-transparent" />
-
-          {/* Overlay content — left third on desktop */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FDF8EE]/85 via-[#FDF8EE]/25 to-transparent" />
           <div className="relative h-full">
-            <div className="container-x h-full flex items-end md:items-center pb-10 md:pb-0">
-              <div className="w-full md:w-1/2 lg:w-[42%] max-w-xl">
+            <div className="container-x h-full flex items-center">
+              <div className="w-1/2 lg:w-[42%] max-w-xl">
                 <div className="eyebrow">Beauty · Longevity · Ritual</div>
-                <h1 className="mt-6 font-display text-5xl md:text-6xl lg:text-7xl leading-[1.02] text-[#3B2E25]">
+                <h1 className="mt-6 font-display text-6xl lg:text-7xl leading-[1.02] text-[#3B2E25]">
                   Beauty & healthy aging,{" "}
                   <span className="italic text-[#AD9752]">from within</span>.
                 </h1>
                 <div className="mt-6 hairline w-16" />
-                <p className="mt-6 max-w-lg text-[15px] md:text-base leading-8 text-[#5A483C]">
+                <p className="mt-6 max-w-lg text-base leading-8 text-[#5A483C]">
                   500 mg of pure β-NMN to replenish NAD+, support cellular renewal,
                   and help skin stay radiant — the youth molecule your body makes less of every year.
                 </p>
@@ -80,14 +113,15 @@ function HomePage() {
                     {[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-[#AD9752] text-[#AD9752]" />)}
                     <span className="ml-1.5 uppercase tracking-[0.18em]">400+ reviews</span>
                   </div>
-                  <span className="hidden sm:inline opacity-50">·</span>
-                  <span className="hidden sm:inline uppercase tracking-[0.18em]">30-day guarantee</span>
+                  <span className="opacity-50">·</span>
+                  <span className="uppercase tracking-[0.18em]">30-day guarantee</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* BENEFIT TRIO */}
       <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
