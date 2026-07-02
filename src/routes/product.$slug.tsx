@@ -39,13 +39,11 @@ declare global {
 }
 import neuralImg from "@/assets/neural-bottle.png";
 import neuralOpen from "@/assets/neural-open.png";
-import nmnImg from "@/assets/nmn-bottle.png";
-import nmnTrio from "@/assets/nmn-trio.png";
-import nmnBuiltDifferent from "@/assets/nmn-built-different-new.png";
-import nmnWomanBalconyAsset from "@/assets/nmn-woman-balcony.png.asset.json";
-import nmnEnergizeRepairAsset from "@/assets/nmn-energize-repair.png.asset.json";
-import nmnKitchenHandAsset from "@/assets/nmn-kitchen-hand.png.asset.json";
-import nmnNadChartAsset from "@/assets/nmn-nad-chart.png.asset.json";
+import nmnNew1Asset from "@/assets/nmn-new-1.jpeg.asset.json";
+import nmnNew2Asset from "@/assets/nmn-new-2.png.asset.json";
+import nmnNew3Asset from "@/assets/nmn-new-3.png.asset.json";
+import nmnNew4Asset from "@/assets/nmn-new-4.png.asset.json";
+import nmnNew5Asset from "@/assets/nmn-new-5.png.asset.json";
 import neuralHeroClean from "@/assets/neural-hero-clean.png";
 import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
@@ -56,10 +54,12 @@ import neuralPdp2 from "@/assets/neural-pdp-2-thumbsup.png";
 import neuralPdp3 from "@/assets/neural-pdp-3-infographic.png";
 import neuralPdp4 from "@/assets/neural-pdp-4-comparison.png";
 import neuralPdp5 from "@/assets/neural-pdp-5-handkitchen.png";
-const nmnWomanBalcony = nmnWomanBalconyAsset.url;
-const nmnEnergizeRepair = nmnEnergizeRepairAsset.url;
-const nmnKitchenHand = nmnKitchenHandAsset.url;
-const nmnNadChart = nmnNadChartAsset.url;
+const nmnNew1 = nmnNew1Asset.url;
+const nmnNew2 = nmnNew2Asset.url;
+const nmnNew3 = nmnNew3Asset.url;
+const nmnNew4 = nmnNew4Asset.url;
+const nmnNew5 = nmnNew5Asset.url;
+
 import supplementFacts from "@/assets/product-supplement-facts.png";
 import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
 import reviewWomanLaptopAsset from "@/assets/review-woman-laptop.png.asset.json";
