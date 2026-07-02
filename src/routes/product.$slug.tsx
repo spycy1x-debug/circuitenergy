@@ -60,9 +60,9 @@ function scrollToReviews(e: React.MouseEvent) {
 
 
 const BUNDLES = [
-  { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, save: 0, detail: "30-day supply", freeShipping: false },
-  { id: "2", label: "2 Bottles", bottles: 2, variantId: "gid://shopify/ProductVariant/48597438365850", price: 69.99, perBottle: 34.99, save: 16, detail: "60-day supply", freeShipping: true, badge: "Most Loved" },
-  { id: "4", label: "3 Bottles + 1 Free", bottles: 4, variantId: "gid://shopify/ProductVariant/48597440659610", price: 95.99, perBottle: 24.00, save: 76, detail: "120-day supply", freeShipping: true, badge: "Best Value", popular: true },
+  { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, standardPrice: 57.99, detail: "30-day supply", freeShipping: false },
+  { id: "2", label: "2 Bottles", bottles: 2, variantId: "gid://shopify/ProductVariant/48597438365850", price: 69.99, perBottle: 34.99, standardPrice: 57.99, detail: "60-day supply", freeShipping: true, badge: "Most Loved" },
+  { id: "4", label: "3 Bottles + 1 Free", bottles: 4, variantId: "gid://shopify/ProductVariant/48597440659610", price: 95.99, perBottle: 24.00, standardPrice: 57.99, detail: "120-day supply", freeShipping: true, badge: "Best Value", popular: true },
 ];
 
 function ProductPage() {
