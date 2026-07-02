@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Sparkles, Leaf, HeartPulse, ShieldCheck, Beaker, MapPin, Droplet, Star } from "lucide-react";
 import nmnBottle from "@/assets/nmn-new-1.jpeg.asset.json";
+import heroImage from "@/assets/seralie-hero.webp.asset.json";
 import nmnKitchen from "@/assets/nmn-new-4.png.asset.json";
 
 export const Route = createFileRoute("/")({
