@@ -153,7 +153,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     name: "Circuit NMN",
     rating: 4.6,
     reviews: 400,
-    images: [nmnNew1, nmnNew2, nmnNew3, nmnNew4, nmnNew5],
+    images: [nmnNew1, nmnNew3, nmnNew2, nmnNew4, nmnNew5, nmnHandCapsule, nmnWhatToExpect, nmnMorningRitual],
     related: { id: "neural", blurb: "Pair with NMN for complete energy and cognitive support." },
     sample: {
       title: "More energy, less drag",
