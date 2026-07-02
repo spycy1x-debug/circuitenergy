@@ -133,7 +133,7 @@ export function Header() {
         {open && (
           <>
             <div
-              className="fixed inset-0 top-24 md:top-28 z-30 bg-[#3B2E25]/25"
+              className="fixed inset-0 top-16 md:top-20 z-30 bg-[#3B2E25]/25"
               onClick={() => setOpen(false)}
               aria-hidden
             />
