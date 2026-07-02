@@ -344,9 +344,10 @@ function ProductPage() {
       <section className="bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
           <div className="grid gap-14 md:grid-cols-2 items-center max-w-5xl mx-auto">
-            <div className="aspect-[4/5] bg-[#F7EFDF] overflow-hidden">
-              <img src={GALLERY[5]} alt="Seralie NMN — clean formulation" className="h-full w-full object-cover" loading="lazy" />
+            <div className="aspect-[4/5] bg-[#FDF8EE] overflow-hidden">
+              <img src={GALLERY[5]} alt="Seralie NMN — clean formulation" className="h-full w-full object-cover mix-blend-multiply" loading="lazy" />
             </div>
+
             <div>
               <div className="eyebrow">Quality & purity</div>
               <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Held to a <span className="italic text-[#AD9752]">standard</span> we'd give our mothers.</h2>
