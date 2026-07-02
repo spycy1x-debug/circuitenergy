@@ -44,6 +44,10 @@ import nmnNew2Asset from "@/assets/nmn-new-2.png.asset.json";
 import nmnNew3Asset from "@/assets/nmn-new-3.png.asset.json";
 import nmnNew4Asset from "@/assets/nmn-new-4.png.asset.json";
 import nmnNew5Asset from "@/assets/nmn-new-5.png.asset.json";
+import nmnWhatToExpectAsset from "@/assets/nmn-what-to-expect.png.asset.json";
+import nmnMorningRitualAsset from "@/assets/nmn-morning-ritual.png.asset.json";
+import nmnHandCapsuleAsset from "@/assets/nmn-hand-capsule.png.asset.json";
+import nmnSupplementFactsAsset from "@/assets/nmn-supplement-facts.png.asset.json";
 import neuralHeroClean from "@/assets/neural-hero-clean.png";
 import neuralHand from "@/assets/product-hand-kitchen.png";
 import neuralCustomer from "@/assets/product-customer-thumbsup.png";
@@ -59,6 +63,10 @@ const nmnNew2 = nmnNew2Asset.url;
 const nmnNew3 = nmnNew3Asset.url;
 const nmnNew4 = nmnNew4Asset.url;
 const nmnNew5 = nmnNew5Asset.url;
+const nmnWhatToExpect = nmnWhatToExpectAsset.url;
+const nmnMorningRitual = nmnMorningRitualAsset.url;
+const nmnHandCapsule = nmnHandCapsuleAsset.url;
+const nmnSupplementFacts = nmnSupplementFactsAsset.url;
 
 import supplementFacts from "@/assets/product-supplement-facts.png";
 import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
@@ -145,7 +153,7 @@ const PRODUCT_DATA: Record<string, ProductData> = {
     name: "Circuit NMN",
     rating: 4.6,
     reviews: 400,
-    images: [nmnNew1, nmnNew2, nmnNew3, nmnNew4, nmnNew5],
+    images: [nmnNew1, nmnNew3, nmnNew2, nmnNew4, nmnNew5, nmnHandCapsule, nmnWhatToExpect, nmnMorningRitual],
     related: { id: "neural", blurb: "Pair with NMN for complete energy and cognitive support." },
     sample: {
       title: "More energy, less drag",
@@ -1331,7 +1339,7 @@ function ProductPage() {
             <button onClick={() => setShowLabel(false)} className="absolute top-3 right-3 p-2 rounded-full hover:bg-secondary">
               <X className="h-5 w-5" />
             </button>
-            <img src={supplementFacts} alt="Supplement Facts" className="w-full h-auto rounded-xl" />
+            <img src={p.id === "nmn" ? nmnSupplementFacts : supplementFacts} alt="Supplement Facts" className="w-full h-auto rounded-xl" />
           </div>
         </div>
       )}
