@@ -60,9 +60,9 @@ function scrollToReviews(e: React.MouseEvent) {
 
 
 const BUNDLES = [
-  { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, save: 0, detail: "30-day supply", freeShipping: false },
-  { id: "2", label: "2 Bottles", bottles: 2, variantId: "gid://shopify/ProductVariant/48597438365850", price: 69.99, perBottle: 34.99, save: 16, detail: "60-day supply", freeShipping: true, badge: "Most Loved" },
-  { id: "4", label: "3 Bottles + 1 Free", bottles: 4, variantId: "gid://shopify/ProductVariant/48597440659610", price: 95.99, perBottle: 24.00, save: 76, detail: "120-day supply", freeShipping: true, badge: "Best Value", popular: true },
+  { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, standardPrice: 57.99, detail: "30-day supply", freeShipping: false },
+  { id: "2", label: "2 Bottles", bottles: 2, variantId: "gid://shopify/ProductVariant/48597438365850", price: 69.99, perBottle: 34.99, standardPrice: 57.99, detail: "60-day supply", freeShipping: true, badge: "Most Loved" },
+  { id: "4", label: "3 Bottles + 1 Free", bottles: 4, variantId: "gid://shopify/ProductVariant/48597440659610", price: 95.99, perBottle: 24.00, standardPrice: 57.99, detail: "120-day supply", freeShipping: true, badge: "Best Value", popular: true },
 ];
 
 function ProductPage() {
@@ -179,6 +179,7 @@ function ProductPage() {
               <div className="mt-4 space-y-3">
                 {BUNDLES.map((b) => {
                   const isSelected = selectedBundle === b.id;
+                  const savings = Math.round((b.standardPrice - b.perBottle) * b.bottles);
                   return (
                     <button
                       key={b.id}
@@ -201,9 +202,13 @@ function ProductPage() {
                             <span className="font-display text-xl text-[#3B2E25]">{b.label}</span>
                             <span className="font-display text-xl text-[#3B2E25] tabular-nums">${b.price.toFixed(2)}</span>
                           </div>
-                          <div className="mt-1.5 flex items-center justify-between gap-3 text-xs text-[#7A6A5E] tracking-wide">
-                            <span>${b.perBottle.toFixed(2)} / bottle · {b.detail}</span>
-                            {b.save > 0 && <span className="caps-label text-[#AD9752]">Save ${b.save}</span>}
+                          <div className="mt-1.5 flex items-center justify-between gap-3 text-xs tracking-wide">
+                            <span className="text-[#7A6A5E]">
+                              <span className="line-through">${b.standardPrice.toFixed(2)} / bottle</span>
+                              <span className="ml-2 font-medium text-[#3B2E25]">${b.perBottle.toFixed(2)} / bottle</span>
+                              <span className="ml-1">· {b.detail}</span>
+                            </span>
+                            {savings > 0 && <span className="caps-label text-[#AD9752]">Save ${savings}</span>}
                           </div>
                           {b.freeShipping && (
                             <div className="mt-1.5 caps-label text-[#6B7A4B] text-[10px]">Free Shipping</div>
