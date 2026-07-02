@@ -351,10 +351,10 @@ function ProductPage() {
       <section className="bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
           <div className="grid gap-14 md:grid-cols-2 items-center max-w-5xl mx-auto">
-            <div className="relative aspect-[4/5] bg-[#FDF8EE] overflow-hidden">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)]">
               <img src={GALLERY[5]} alt="Seralie NMN — clean formulation" className="h-full w-full object-cover" loading="lazy" />
-              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_70px_30px_#FDF8EE]" />
             </div>
+
 
 
             <div>
