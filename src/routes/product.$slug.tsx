@@ -161,11 +161,12 @@ function ProductPage() {
             <div className="eyebrow">Beauty & Longevity</div>
             <h1 className="mt-4 font-display text-5xl md:text-6xl leading-[1.02] text-[#3B2E25]">Seralie NMN</h1>
             <div className="mt-4 flex items-center gap-3">
-              <div className="flex gap-0.5 text-[#AD9752]">
-                {[0,1,2,3,4].map(i => <Star key={i} className="h-4 w-4 fill-current" />)}
-              </div>
-              <span className="caps-label text-[#7A6A5E]">4.8 · 400+ reviews</span>
+              <FractionalStars value={4.8} size="h-4 w-4" />
+              <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
+                4.8 · 2000+ reviews
+              </a>
             </div>
+
 
             <p className="mt-6 text-[16px] leading-8 text-[#5A483C] max-w-lg">
               500 mg of pure β-NMN — the direct precursor to NAD+ — to help your skin stay radiant,
