@@ -58,7 +58,7 @@ export function CartDrawer() {
             <ul className="px-7 py-4 divide-y divide-[#EADFC7]">
               {lines.map((line) => (
                 <li key={line.id} className="py-5 flex gap-4">
-                  <div className="h-20 w-20 bg-white flex items-center justify-center overflow-hidden shrink-0 border border-[#EADFC7]">
+                  <div className="h-20 w-20 bg-[#FDF8EE] flex items-center justify-center overflow-hidden shrink-0 border border-[#EADFC7]">
                     {line.image ? (
                       <img src={line.image} alt={line.productTitle} className="h-full w-full object-cover mix-blend-multiply" />
                     ) : (
