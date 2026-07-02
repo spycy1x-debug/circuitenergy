@@ -81,14 +81,15 @@ function AccountPage() {
         <h1 className="mt-6 text-5xl md:text-6xl leading-[1]">
           Join the{" "}
           <em style={serif} className="italic font-normal text-[oklch(0.85_0.15_70)]">
-            Circuit
+            Seralie
           </em>{" "}
           list
         </h1>
         <p className="mt-5 text-white/75 text-lg">
-          Early access drops, founder notes, and the occasional deep dive on why you're tired and how to actually fix
-          it.
+          Thoughtful notes on beauty, longevity, and the ritual of aging well — plus early access and 10% off your first order.
         </p>
+
+
 
         <form onSubmit={onSubmit} className="mt-10 grid gap-3 text-left" noValidate>
           <label className="block">
