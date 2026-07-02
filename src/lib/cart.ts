@@ -1,4 +1,4 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 export type CartItem = {
   id: string;
@@ -8,16 +8,12 @@ export type CartItem = {
   qty: number;
 };
 
-const KEY = "circuit-cart";
+const KEY = "seralie-cart";
 const listeners = new Set<() => void>();
 
 function read(): CartItem[] {
   if (typeof window === "undefined") return [];
-  try {
-    return JSON.parse(localStorage.getItem(KEY) || "[]");
-  } catch {
-    return [];
-  }
+  try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch { return []; }
 }
 
 function write(items: CartItem[]) {
@@ -27,10 +23,7 @@ function write(items: CartItem[]) {
 
 export const cart = {
   get: read,
-  subscribe(l: () => void) {
-    listeners.add(l);
-    return () => listeners.delete(l);
-  },
+  subscribe(l: () => void) { listeners.add(l); return () => listeners.delete(l); },
   add(item: Omit<CartItem, "qty">, qty = 1) {
     const items = read();
     const existing = items.find((i) => i.id === item.id);
@@ -42,12 +35,8 @@ export const cart = {
     const items = read().map((i) => (i.id === id ? { ...i, qty: Math.max(1, qty) } : i));
     write(items);
   },
-  remove(id: string) {
-    write(read().filter((i) => i.id !== id));
-  },
-  clear() {
-    write([]);
-  },
+  remove(id: string) { write(read().filter((i) => i.id !== id)); },
+  clear() { write([]); },
 };
 
 export function useCart() {
@@ -64,31 +53,15 @@ export function useCart() {
 
 function fireAddToCartPixels(item: Omit<CartItem, "qty">, qty: number) {
   const value = parseFloat((item.price * qty).toFixed(2));
-
-  // Meta Pixel — AddToCart
   if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
     (window as any).fbq("track", "AddToCart", {
-      content_ids: [item.id],
-      content_name: item.name,
-      content_type: "product",
-      value,
-      currency: "USD",
+      content_ids: [item.id], content_name: item.name, content_type: "product", value, currency: "USD",
     });
   }
-
-  // Google Analytics 4 — add_to_cart
   if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
     (window as any).gtag("event", "add_to_cart", {
-      currency: "USD",
-      value,
-      items: [
-        {
-          item_id: item.id,
-          item_name: item.name,
-          price: item.price,
-          quantity: qty,
-        },
-      ],
+      currency: "USD", value,
+      items: [{ item_id: item.id, item_name: item.name, price: item.price, quantity: qty }],
     });
   }
 }
@@ -107,22 +80,14 @@ export function useAddToCart() {
   return { state, add };
 }
 
-import neuralImg from "@/assets/neural-bottle.png";
-import nmnImg from "@/assets/nmn-bottle.png";
+import nmnAsset from "@/assets/nmn-new-1.jpeg.asset.json";
 
 export const PRODUCTS = {
-  neural: {
-    id: "neural",
-    name: "Circuit Neural Performance",
-    price: 39.99,
-    image: neuralImg,
-    slug: "neural-performance",
-  },
   nmn: {
     id: "nmn",
-    name: "Circuit NMN",
-    price: 49.99,
-    image: nmnImg,
+    name: "Seralie NMN",
+    price: 42.99,
+    image: nmnAsset.url,
     slug: "nmn",
   },
 };

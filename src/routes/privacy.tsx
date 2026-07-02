@@ -3,10 +3,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Circuit Energy" },
-      { name: "description", content: "How Circuit Energy collects, uses, and protects your personal information, including order details, email subscriptions, and website usage data." },
-      { property: "og:title", content: "Privacy Policy — Circuit Energy" },
-      { property: "og:description", content: "Learn how Circuit Energy handles your personal information, marketing communications, cookies, and your privacy rights." },
+      { title: "Privacy Policy — Seralie" },
+      { name: "description", content: "How Seralie collects, uses, and protects your personal information, including order details, email subscriptions, and website usage data." },
+      { property: "og:title", content: "Privacy Policy — Seralie" },
+      { property: "og:description", content: "Learn how Seralie handles your personal information, marketing communications, cookies, and your privacy rights." },
     ],
   }),
   component: PrivacyPage,
@@ -45,9 +45,9 @@ function PrivacyPage() {
           <Intro />
           <Block n="1" title="Who We Are">
             <p>
-              Circuit Energy ("Circuit," "we," "us," or "our") sells dietary supplements — including Circuit Neural Performance and Circuit NMN — direct to consumers through circuitenergy.co (the "Site"). This Privacy Policy explains what information we collect from visitors and customers, how we use it, who we share it with, and the choices you have. By using the Site or purchasing our products, you agree to the practices described below.
+              Seralie ("Seralie," "we," "us," or "our") sells dietary supplements — including Seralie NMN — direct to consumers through seralie.com (the "Site"). This Privacy Policy explains what information we collect from visitors and customers, how we use it, who we share it with, and the choices you have. By using the Site or purchasing our products, you agree to the practices described below.
             </p>
-            <p>Contact: <a className="text-primary underline" href="mailto:support@circuitenergy.co">support@circuitenergy.co</a></p>
+            <p>Contact: <a className="text-primary underline" href="mailto:support@seralie.com">support@seralie.com</a></p>
           </Block>
 
           <Block n="2" title="Information We Collect">
@@ -76,7 +76,7 @@ function PrivacyPage() {
           </Block>
 
           <Block n="4" title="Email Marketing — Lawful Basis & Consent">
-            <p>When you enter your email into one of our forms (e.g., the welcome discount popup, footer signup, or checkout opt-in), you are giving express consent to receive marketing emails from Circuit Energy. We retain a record of when and where that consent was given. Every marketing email we send includes a one-click unsubscribe link, and we honor opt-out requests promptly in accordance with the U.S. <strong>CAN-SPAM Act</strong>, Canada's <strong>CASL</strong>, the EU/UK <strong>GDPR</strong> and the <strong>ePrivacy Directive</strong>, and other applicable laws. Withdrawing consent does not affect the lawfulness of processing before withdrawal.</p>
+            <p>When you enter your email into one of our forms (e.g., the welcome discount popup, footer signup, or checkout opt-in), you are giving express consent to receive marketing emails from Seralie. We retain a record of when and where that consent was given. Every marketing email we send includes a one-click unsubscribe link, and we honor opt-out requests promptly in accordance with the U.S. <strong>CAN-SPAM Act</strong>, Canada's <strong>CASL</strong>, the EU/UK <strong>GDPR</strong> and the <strong>ePrivacy Directive</strong>, and other applicable laws. Withdrawing consent does not affect the lawfulness of processing before withdrawal.</p>
           </Block>
 
           <Block n="5" title="Cookies and Tracking Technologies">
@@ -108,7 +108,7 @@ function PrivacyPage() {
           </Block>
 
           <Block n="8" title="Data Security">
-            <p>Circuit uses industry-standard administrative, technical, and physical safeguards — including HTTPS/TLS encryption, access controls, and reputable infrastructure providers — to protect personal information. No method of transmission over the internet is 100% secure, but we work continuously to protect your data.</p>
+            <p>Seralie uses industry-standard administrative, technical, and physical safeguards — including HTTPS/TLS encryption, access controls, and reputable infrastructure providers — to protect personal information. No method of transmission over the internet is 100% secure, but we work continuously to protect your data.</p>
           </Block>
 
           <Block n="9" title="Your Privacy Rights">
@@ -123,15 +123,15 @@ function PrivacyPage() {
               <li><strong>Withdraw consent</strong> where processing is based on consent (GDPR/UK GDPR).</li>
               <li><strong>Lodge a complaint</strong> with your local data-protection authority.</li>
             </ul>
-            <p>To exercise any of these rights, email <a className="text-primary underline" href="mailto:support@circuitenergy.co">support@circuitenergy.co</a> from the address on your account. We will respond within the timeframe required by applicable law (typically 30–45 days). We will not discriminate against you for exercising your rights.</p>
+            <p>To exercise any of these rights, email <a className="text-primary underline" href="mailto:support@seralie.com">support@seralie.com</a> from the address on your account. We will respond within the timeframe required by applicable law (typically 30–45 days). We will not discriminate against you for exercising your rights.</p>
           </Block>
 
           <Block n="10" title="Health, FDA & FTC Disclosures">
-            <p>Statements about Circuit Energy products have not been evaluated by the U.S. Food and Drug Administration. Our products are dietary supplements and are not intended to diagnose, treat, cure, or prevent any disease. Customer testimonials reflect individual experiences and are not guarantees of results. Always consult your healthcare provider before starting any supplement, especially if you are pregnant, nursing, taking medication, or have a medical condition.</p>
+            <p>Statements about Seralie products have not been evaluated by the U.S. Food and Drug Administration. Our products are dietary supplements and are not intended to diagnose, treat, cure, or prevent any disease. Customer testimonials reflect individual experiences and are not guarantees of results. Always consult your healthcare provider before starting any supplement, especially if you are pregnant, nursing, taking medication, or have a medical condition.</p>
           </Block>
 
           <Block n="11" title="International Transfers">
-            <p>Circuit operates from the United States. If you access the Site from outside the U.S., your information will be transferred to, stored, and processed in the U.S. and other countries where our service providers operate. Where required, we use appropriate safeguards such as Standard Contractual Clauses for international transfers.</p>
+            <p>Seralie operates from the United States. If you access the Site from outside the U.S., your information will be transferred to, stored, and processed in the U.S. and other countries where our service providers operate. Where required, we use appropriate safeguards such as Standard Contractual Clauses for international transfers.</p>
           </Block>
 
           <Block n="12" title="Third-Party Links">
@@ -144,7 +144,7 @@ function PrivacyPage() {
 
           <Block n="14" title="Contact Us">
             <p>Questions, requests, or complaints about this Privacy Policy? Reach us at:</p>
-            <p className="not-italic"><strong>Circuit Energy</strong><br/>Email: <a className="text-primary underline" href="mailto:support@circuitenergy.co">support@circuitenergy.co</a></p>
+            <p className="not-italic"><strong>Seralie</strong><br/>Email: <a className="text-primary underline" href="mailto:support@seralie.com">support@seralie.com</a></p>
           </Block>
 
           <div className="pt-6 text-sm text-muted-foreground">
@@ -166,7 +166,7 @@ function PrivacyPage() {
 function Intro() {
   return (
     <p className="text-lg">
-      Your privacy matters. This policy explains, in plain language, what we collect when you visit circuitenergy.co or buy from us, why we collect it, and the control you have over it.
+      Your privacy matters. This policy explains, in plain language, what we collect when you visit seralie.com or buy from us, why we collect it, and the control you have over it.
     </p>
   );
 }

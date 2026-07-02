@@ -5,10 +5,10 @@ import { useState } from "react";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "Join the Circuit list — Circuit Energy" },
+      { title: "Join the Seralie list — Seralie" },
       {
         name: "description",
-        content: "Subscribe to the Circuit email list for early access, founder notes, and energy-science deep dives.",
+        content: "Subscribe to the Seralie email list for early access, founder notes, and energy-science deep dives.",
       },
     ],
   }),
@@ -75,20 +75,21 @@ function AccountPage() {
       <div className="container-x py-20 md:py-28 max-w-xl mx-auto text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.2em] text-white/80 backdrop-blur">
           <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.75_0.2_55)] animate-pulse" />
-          The Circuit List
+          The Seralie List
         </span>
 
         <h1 className="mt-6 text-5xl md:text-6xl leading-[1]">
           Join the{" "}
           <em style={serif} className="italic font-normal text-[oklch(0.85_0.15_70)]">
-            Circuit
+            Seralie
           </em>{" "}
           list
         </h1>
         <p className="mt-5 text-white/75 text-lg">
-          Early access drops, founder notes, and the occasional deep dive on why you're tired and how to actually fix
-          it.
+          Thoughtful notes on beauty, longevity, and the ritual of aging well — plus early access and 10% off your first order.
         </p>
+
+
 
         <form onSubmit={onSubmit} className="mt-10 grid gap-3 text-left" noValidate>
           <label className="block">
