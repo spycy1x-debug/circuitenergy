@@ -170,8 +170,8 @@ function HomePage() {
                 Discover Seralie NMN →
               </Link>
             </div>
-            <div className="relative aspect-[4/5] bg-[#F7EFDF] overflow-hidden">
-              <img src={nmnBottle.url} alt="Seralie NMN bottle" className="h-full w-full object-cover" loading="lazy" />
+            <div className="relative aspect-[4/5] bg-[#FDF8EE] overflow-hidden">
+              <img src={nmnBottle.url} alt="Seralie NMN bottle" className="h-full w-full object-cover mix-blend-multiply" loading="lazy" />
             </div>
           </div>
         </div>
