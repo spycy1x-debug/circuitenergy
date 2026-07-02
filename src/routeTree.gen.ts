@@ -9,13 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WhyTiredRouteImport } from './routes/why-tired'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CaseStudyEdgeRouteImport } from './routes/case-study-edge'
-import { Route as CaseStudyAfternoonRouteImport } from './routes/case-study-afternoon'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,11 +20,6 @@ import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/public/klaviyo-subscribe'
 
-const WhyTiredRoute = WhyTiredRouteImport.update({
-  id: '/why-tired',
-  path: '/why-tired',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -46,16 +38,6 @@ const LoginRoute = LoginRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaseStudyEdgeRoute = CaseStudyEdgeRouteImport.update({
-  id: '/case-study-edge',
-  path: '/case-study-edge',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaseStudyAfternoonRoute = CaseStudyAfternoonRouteImport.update({
-  id: '/case-study-afternoon',
-  path: '/case-study-afternoon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -94,13 +76,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
-  '/case-study-afternoon': typeof CaseStudyAfternoonRoute
-  '/case-study-edge': typeof CaseStudyEdgeRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/why-tired': typeof WhyTiredRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/product/$slug': typeof ProductSlugRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
@@ -109,13 +88,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
-  '/case-study-afternoon': typeof CaseStudyAfternoonRoute
-  '/case-study-edge': typeof CaseStudyEdgeRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/why-tired': typeof WhyTiredRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/product/$slug': typeof ProductSlugRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
@@ -125,13 +101,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
-  '/case-study-afternoon': typeof CaseStudyAfternoonRoute
-  '/case-study-edge': typeof CaseStudyEdgeRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/why-tired': typeof WhyTiredRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/product/$slug': typeof ProductSlugRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
@@ -142,13 +115,10 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
-    | '/case-study-afternoon'
-    | '/case-study-edge'
     | '/contact'
     | '/login'
     | '/privacy'
     | '/shop'
-    | '/why-tired'
     | '/admin/analytics'
     | '/product/$slug'
     | '/api/public/klaviyo-subscribe'
@@ -157,13 +127,10 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
-    | '/case-study-afternoon'
-    | '/case-study-edge'
     | '/contact'
     | '/login'
     | '/privacy'
     | '/shop'
-    | '/why-tired'
     | '/admin/analytics'
     | '/product/$slug'
     | '/api/public/klaviyo-subscribe'
@@ -172,13 +139,10 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
-    | '/case-study-afternoon'
-    | '/case-study-edge'
     | '/contact'
     | '/login'
     | '/privacy'
     | '/shop'
-    | '/why-tired'
     | '/admin/analytics'
     | '/product/$slug'
     | '/api/public/klaviyo-subscribe'
@@ -188,13 +152,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
-  CaseStudyAfternoonRoute: typeof CaseStudyAfternoonRoute
-  CaseStudyEdgeRoute: typeof CaseStudyEdgeRoute
   ContactRoute: typeof ContactRoute
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
-  WhyTiredRoute: typeof WhyTiredRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ProductSlugRoute: typeof ProductSlugRoute
   ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
@@ -202,13 +163,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/why-tired': {
-      id: '/why-tired'
-      path: '/why-tired'
-      fullPath: '/why-tired'
-      preLoaderRoute: typeof WhyTiredRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -235,20 +189,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/case-study-edge': {
-      id: '/case-study-edge'
-      path: '/case-study-edge'
-      fullPath: '/case-study-edge'
-      preLoaderRoute: typeof CaseStudyEdgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/case-study-afternoon': {
-      id: '/case-study-afternoon'
-      path: '/case-study-afternoon'
-      fullPath: '/case-study-afternoon'
-      preLoaderRoute: typeof CaseStudyAfternoonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -300,13 +240,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
-  CaseStudyAfternoonRoute: CaseStudyAfternoonRoute,
-  CaseStudyEdgeRoute: CaseStudyEdgeRoute,
   ContactRoute: ContactRoute,
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
-  WhyTiredRoute: WhyTiredRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   ProductSlugRoute: ProductSlugRoute,
   ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
