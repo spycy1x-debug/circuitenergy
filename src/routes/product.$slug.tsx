@@ -130,16 +130,18 @@ function ProductPage() {
             <button
               type="button"
               onClick={() => setLightbox(true)}
-              className="block w-full aspect-square bg-[#FDF8EE] overflow-hidden group"
+              className="relative block w-full aspect-square bg-[#FDF8EE] overflow-hidden group"
               aria-label="View larger"
             >
               <img
                 src={GALLERY[active]}
                 alt={`Seralie NMN — view ${active + 1}`}
-                className="h-full w-full object-cover mix-blend-multiply transition-transform duration-500 group-hover:scale-[1.02]"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 loading="eager"
               />
+              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_60px_25px_#FDF8EE]" />
             </button>
+
             <div className="mt-3 grid grid-cols-5 sm:grid-cols-8 gap-2">
               {GALLERY.map((src, i) => (
                 <button
@@ -349,9 +351,11 @@ function ProductPage() {
       <section className="bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
           <div className="grid gap-14 md:grid-cols-2 items-center max-w-5xl mx-auto">
-            <div className="aspect-[4/5] bg-[#FDF8EE] overflow-hidden">
-              <img src={GALLERY[5]} alt="Seralie NMN — clean formulation" className="h-full w-full object-cover mix-blend-multiply" loading="lazy" />
+            <div className="relative aspect-[4/5] bg-[#FDF8EE] overflow-hidden">
+              <img src={GALLERY[5]} alt="Seralie NMN — clean formulation" className="h-full w-full object-cover" loading="lazy" />
+              <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_70px_30px_#FDF8EE]" />
             </div>
+
 
             <div>
               <div className="eyebrow">Quality & purity</div>
