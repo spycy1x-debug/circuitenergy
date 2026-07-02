@@ -386,16 +386,17 @@ function ProductPage() {
       </section>
 
       {/* REVIEWS */}
-      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
+      <section id="reviews" className="scroll-mt-24 bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">Loved by</div>
             <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Women who <span className="italic text-[#AD9752]">know</span> their skin</h2>
             <div className="mt-6 flex items-center justify-center gap-2 text-[11px] tracking-[0.18em] text-[#7A6A5E]">
-              <div className="flex gap-0.5 text-[#AD9752]">{[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}</div>
-              <span>4.8 · 400+ verified reviews</span>
+              <FractionalStars value={4.8} size="h-3.5 w-3.5" />
+              <span>4.8 · 2000+ verified reviews</span>
             </div>
           </div>
+
 
           <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
             {[
