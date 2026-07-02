@@ -1398,7 +1398,7 @@ function ProductPage() {
               </button>
             </div>
             <div className="mt-4 grid grid-cols-5 gap-2.5">
-              {p.images.slice(0, 5).map((src, i) => (
+              {p.images.map((src, i) => (
                 <button
                   key={i}
                   onClick={() => setImgIdx(i)}
