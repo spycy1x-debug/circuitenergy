@@ -181,8 +181,8 @@ function HomePage() {
       <section className="bg-[#F7EFDF]/40 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
           <div className="max-w-4xl mx-auto bg-[#FDF8EE] border border-[#EADFC7] p-8 md:p-14 grid gap-12 md:grid-cols-[1fr_1.2fr] items-center">
-            <div className="aspect-square bg-[#F7EFDF] overflow-hidden">
-              <img src={nmnBottle.url} alt="Seralie NMN" className="h-full w-full object-cover" loading="lazy" />
+            <div className="aspect-square bg-[#FDF8EE] overflow-hidden">
+              <img src={nmnBottle.url} alt="Seralie NMN" className="h-full w-full object-cover mix-blend-multiply" loading="lazy" />
             </div>
             <div>
               <div className="eyebrow">Best Seller</div>
