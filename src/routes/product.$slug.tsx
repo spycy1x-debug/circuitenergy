@@ -63,6 +63,10 @@ const nmnNew2 = nmnNew2Asset.url;
 const nmnNew3 = nmnNew3Asset.url;
 const nmnNew4 = nmnNew4Asset.url;
 const nmnNew5 = nmnNew5Asset.url;
+const nmnWhatToExpect = nmnWhatToExpectAsset.url;
+const nmnMorningRitual = nmnMorningRitualAsset.url;
+const nmnHandCapsule = nmnHandCapsuleAsset.url;
+const nmnSupplementFacts = nmnSupplementFactsAsset.url;
 
 import supplementFacts from "@/assets/product-supplement-facts.png";
 import reviewWomanBathroomAsset from "@/assets/review-woman-bathroom.png.asset.json";
