@@ -35,6 +35,30 @@ export const Route = createFileRoute("/product/$slug")({
 
 const GALLERY = [img1, img2, img3, img4, img5, img6, img7, img8].map((a) => a.url);
 
+function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: string }) {
+  return (
+    <span className="inline-flex gap-0.5" aria-label={`${value} out of 5 stars`}>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const fill = Math.max(0, Math.min(1, value - i));
+        return (
+          <span key={i} className={`relative inline-block ${size}`}>
+            <Star className={`${size} text-[#AD9752]`} strokeWidth={1.5} />
+            <span className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${fill * 100}%` }}>
+              <Star className={`${size} fill-current text-[#AD9752]`} strokeWidth={1.5} />
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+function scrollToReviews(e: React.MouseEvent) {
+  e.preventDefault();
+  document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+
 const BUNDLES = [
   { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, save: 0, detail: "30-day supply", freeShipping: false },
   { id: "2", label: "2 Bottles", bottles: 2, variantId: "gid://shopify/ProductVariant/48597438365850", price: 69.99, perBottle: 34.99, save: 16, detail: "60-day supply", freeShipping: true, badge: "Most Loved" },
