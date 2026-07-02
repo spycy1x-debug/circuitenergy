@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --font-sans: "Poppins", "Inter", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -36,53 +36,57 @@
   --color-ring: var(--ring);
   --color-ink: var(--ink);
   --color-body: var(--body);
-  --color-energy: var(--energy);
-  --color-energy-foreground: var(--energy-foreground);
-  --color-electric: var(--electric);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-cream: var(--cream);
+  --color-energy: var(--gold);
+  --color-energy-foreground: var(--primary-foreground);
+  --color-electric: var(--gold);
 }
 
 :root {
-  --radius: 0.75rem;
-  /* Slate brand */
-  --primary: #708090;
-  --primary-foreground: #FFFFFF;
-  --primary-dark: #2C353F;
+  --radius: 0.5rem;
 
-  --background: #FFFFFF;
-  --foreground: #2C353F;
-  --ink: #2C353F;
-  --body: #39424B;
+  /* Seralie palette */
+  --cream: #FDF8EE;
+  --cream-warm: #F7EFDF;
+  --espresso: #3B2E25;
+  --espresso-soft: #5A483C;
+  --gold: #AD9752;
+  --gold-hover: #94803F;
+  --gold-soft: #E5D9B5;
+
+  --primary: #AD9752;
+  --primary-foreground: #FDF8EE;
+  --primary-dark: #3B2E25;
+
+  --background: #FDF8EE;
+  --foreground: #3B2E25;
+  --ink: #3B2E25;
+  --body: #5A483C;
 
   --card: #FFFFFF;
-  --card-foreground: #2C353F;
+  --card-foreground: #3B2E25;
   --popover: #FFFFFF;
-  --popover-foreground: #2C353F;
+  --popover-foreground: #3B2E25;
 
-  --secondary: #F2F4F5;
-  --secondary-foreground: #2C353F;
-  --muted: #F2F4F5;
-  --muted-foreground: #6A7786;
-  --accent: #F2F4F5;
-  --accent-foreground: #2C353F;
+  --secondary: #F7EFDF;
+  --secondary-foreground: #3B2E25;
+  --muted: #F2E8D4;
+  --muted-foreground: #7A6A5E;
+  --accent: #F7EFDF;
+  --accent-foreground: #3B2E25;
 
-  --destructive: #D14343;
-  --destructive-foreground: #FFFFFF;
-  --alert: #D14343;
+  --destructive: #B14B3F;
+  --destructive-foreground: #FDF8EE;
+  --alert: #B14B3F;
 
-  --success: #2E9E6B;
-  --success-foreground: #FFFFFF;
+  --success: #6B7A4B;
+  --success-foreground: #FDF8EE;
 
-  --border: #D7DCE0;
-  --input: #D7DCE0;
-  --ring: #6A7786;
-
-  /* CTA — warm accent, scarcity = pop */
-  --energy: #F5853F;
-  --energy-foreground: #FFFFFF;
-  --electric: #6A7786;
-  --gradient-hero: linear-gradient(135deg, #2C353F 0%, #39424B 50%, #6A7786 100%);
-  --gradient-energy: linear-gradient(135deg, #F5853F 0%, #E0742E 100%);
-  --gradient-soft: linear-gradient(180deg, #FFFFFF 0%, #F2F4F5 100%);
+  --border: #EADFC7;
+  --input: #EADFC7;
+  --ring: #AD9752;
 }
 
 @layer base {
@@ -92,6 +96,7 @@
     background-color: var(--color-background);
     color: var(--color-body);
     font-family: var(--font-sans);
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
@@ -99,25 +104,43 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     color: var(--color-ink);
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    letter-spacing: -0.005em;
   }
 }
 
 @layer utilities {
-  .container-x { @apply mx-auto max-w-[1280px] px-5 md:px-8; }
-  .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-energy px-6 py-3 text-base font-semibold text-white shadow-sm transition-all duration-200 hover:brightness-95 hover:scale-[1.02] active:scale-100;
+  .container-x { @apply mx-auto max-w-[1240px] px-6 md:px-10; }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    color: var(--color-gold);
   }
+  .hairline { height: 1px; background: var(--color-gold); opacity: 0.6; }
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-none border border-[color:var(--color-gold)] bg-[color:var(--color-gold)] text-white px-8 py-4 text-[11px] font-medium tracking-[0.28em] uppercase transition-all duration-300;
+  }
+  .btn-primary:hover { background: var(--gold-hover); border-color: var(--gold-hover); }
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-md border border-ink/80 bg-transparent px-6 py-3 text-base font-semibold text-ink transition-all duration-200 hover:bg-ink hover:text-white;
+    @apply inline-flex items-center justify-center rounded-none border border-[color:var(--color-ink)] bg-transparent px-8 py-4 text-[11px] font-medium tracking-[0.28em] uppercase text-[color:var(--color-ink)] transition-colors duration-300 hover:bg-[color:var(--color-ink)] hover:text-[color:var(--cream)];
+  }
+  .btn-gold-ghost {
+    @apply inline-flex items-center justify-center rounded-none border border-[color:var(--color-gold)] bg-transparent px-8 py-4 text-[11px] font-medium tracking-[0.28em] uppercase text-[color:var(--color-gold)] transition-colors duration-300 hover:bg-[color:var(--color-gold)] hover:text-white;
   }
   .btn-white {
-    @apply inline-flex items-center justify-center rounded-md bg-white px-6 py-3 text-base font-semibold text-ink transition-all duration-200 hover:bg-white/90 hover:scale-[1.02];
+    @apply inline-flex items-center justify-center rounded-none bg-white px-8 py-4 text-[11px] font-medium tracking-[0.28em] uppercase text-[color:var(--color-ink)] transition;
   }
-  .marquee {
-    animation: marquee 30s linear infinite;
+  .caps-label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
   }
+  .marquee { animation: marquee 45s linear infinite; }
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -136,10 +159,10 @@
 }
 .cart-bump { animation: cartBump 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
 
+.font-display { font-family: var(--font-display); }
+.font-sans { font-family: var(--font-sans); }
+
 /* Product page: slightly bolden subtext for readability */
 .product-page p,
-.product-page li,
-.product-page .text-sm,
-.product-page .text-xs,
-.product-page .text-muted-foreground { font-weight: 500; }
-.product-page .text-muted-foreground { color: color-mix(in oklab, hsl(var(--muted-foreground)) 88%, hsl(var(--foreground))); }
+.product-page li { font-weight: 400; }
+.product-page .text-muted-foreground { color: color-mix(in oklab, var(--muted-foreground) 92%, var(--foreground)); }

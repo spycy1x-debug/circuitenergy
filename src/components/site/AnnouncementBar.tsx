@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
 const messages = [
-  "⚡ NO MORE AFTERNOON CRASHES — FEEL ENERGIZED ALL DAY",
-  "🛡️ 30-DAY MONEY-BACK GUARANTEE — NO QUESTIONS ASKED",
-  "🧠 WORKS IN 1-2 WEEKS — 50+ VERIFIED RESULTS",
-  "🚚 FREE SHIPPING ON ORDERS OVER $75",
+  "COMPLIMENTARY US SHIPPING ON ORDERS OVER $75",
+  "30-DAY MONEY-BACK GUARANTEE",
+  "REAL β-NMN · THIRD-PARTY TESTED · MADE IN THE USA",
 ];
 
 export function AnnouncementBar() {
@@ -14,8 +13,8 @@ export function AnnouncementBar() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="bg-ink text-white text-xs md:text-sm py-2.5 text-center font-bold tracking-[0.12em] uppercase overflow-hidden">
-      <div key={i} className="animate-in fade-in slide-in-from-bottom-1 duration-500">
+    <div className="bg-[#3B2E25] text-[#FDF8EE] text-[10px] md:text-[11px] py-2.5 text-center font-medium tracking-[0.28em] uppercase overflow-hidden">
+      <div key={i} className="animate-in fade-in duration-500">
         {messages[i]}
       </div>
     </div>

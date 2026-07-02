@@ -4,15 +4,14 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 
 
 import appCss from "../styles.css?url";
+import seralieLogo from "@/assets/seralie-logo.webp.asset.json";
 import { AnnouncementBar } from "@/components/site/AnnouncementBar";
-import { UrgencyBar } from "@/components/site/UrgencyBar";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CartDrawer } from "@/components/site/CartDrawer";
@@ -21,10 +20,10 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist.</p>
-        <Link to="/" className="btn-primary mt-6">Go home</Link>
+        <div className="eyebrow">404</div>
+        <h1 className="mt-4 font-display text-5xl text-foreground">Page not found</h1>
+        <p className="mt-3 text-sm text-muted-foreground">The page you're looking for doesn't exist.</p>
+        <Link to="/" className="btn-primary mt-8">Return home</Link>
       </div>
     </div>
   );
@@ -36,9 +35,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold">This page didn't load</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Something went wrong. Try refreshing or head back home.</p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <h1 className="font-display text-3xl">Something went wrong</h1>
+        <p className="mt-3 text-sm text-muted-foreground">Try refreshing or head back home.</p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button onClick={() => { router.invalidate(); reset(); }} className="btn-primary">Try again</button>
           <a href="/" className="btn-outline">Go home</a>
         </div>
@@ -52,14 +51,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Circuit Energy — Premium Energy & Cognitive Supplements" },
-      { name: "description", content: "Premium energy and cognitive supplements that fix the root cause of fatigue and brain fog." },
-      { property: "og:title", content: "Circuit Energy — Premium Energy & Cognitive Supplements" },
-      { name: "twitter:title", content: "Circuit Energy — Premium Energy & Cognitive Supplements" },
-      { property: "og:description", content: "Premium energy and cognitive supplements that fix the root cause of fatigue and brain fog." },
-      { name: "twitter:description", content: "Premium energy and cognitive supplements that fix the root cause of fatigue and brain fog." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cdfa6258-441b-422e-a6cd-168c5ee2c12d/id-preview-709e0da2--b8d81338-c7f3-4373-97b3-31e49deb8417.lovable.app-1779749710781.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cdfa6258-441b-422e-a6cd-168c5ee2c12d/id-preview-709e0da2--b8d81338-c7f3-4373-97b3-31e49deb8417.lovable.app-1779749710781.png" },
+      { title: "Seralie — Beauty & Healthy Aging, From Within" },
+      { name: "description", content: "Seralie NMN delivers 500 mg of pure β-NMN to replenish NAD+, support cellular renewal, and help skin stay radiant. Beauty and healthy aging, from within." },
+      { property: "og:title", content: "Seralie — Beauty & Healthy Aging, From Within" },
+      { name: "twitter:title", content: "Seralie — Beauty & Healthy Aging, From Within" },
+      { property: "og:description", content: "500 mg pure β-NMN to replenish NAD+ and help skin stay radiant. Beauty & healthy aging, from within." },
+      { name: "twitter:description", content: "500 mg pure β-NMN to replenish NAD+ and help skin stay radiant. Beauty & healthy aging, from within." },
+      { property: "og:site_name", content: "Seralie" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
     ],
@@ -67,10 +65,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Instrument+Serif:ital@0;1&display=swap" },
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico?v=2" },
-      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon.png?v=2" },
-      { rel: "apple-touch-icon", href: "/favicon.png?v=2" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" },
+      { rel: "icon", type: "image/webp", href: seralieLogo.url },
+      { rel: "apple-touch-icon", href: seralieLogo.url },
     ],
   }),
   shellComponent: RootShell,
@@ -120,16 +117,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isAdvertorial = pathname.startsWith("/case-study");
-  if (isAdvertorial) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <style dangerouslySetInnerHTML={{ __html: `.klaviyo-form,div[class*="kl-private-reset-css"],div[data-testid*="POPUP"]{display:none !important;visibility:hidden !important;}` }} />
-        <main><Outlet /></main>
-      </QueryClientProvider>
-    );
-  }
   return (
     <QueryClientProvider client={queryClient}>
       <AnnouncementBar />
@@ -140,4 +127,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-
