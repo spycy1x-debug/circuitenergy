@@ -130,13 +130,13 @@ function ProductPage() {
             <button
               type="button"
               onClick={() => setLightbox(true)}
-              className="block w-full aspect-square bg-[#F7EFDF] overflow-hidden group"
+              className="block w-full aspect-square bg-[#FDF8EE] overflow-hidden group"
               aria-label="View larger"
             >
               <img
                 src={GALLERY[active]}
                 alt={`Seralie NMN — view ${active + 1}`}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                className="h-full w-full object-cover mix-blend-multiply transition-transform duration-500 group-hover:scale-[1.02]"
                 loading="eager"
               />
             </button>
@@ -148,9 +148,10 @@ function ProductPage() {
                   onClick={() => setActive(i)}
                   aria-label={`Show image ${i + 1}`}
                   aria-current={active === i}
-                  className={`aspect-square bg-[#F7EFDF] overflow-hidden border transition-all ${active === i ? "border-[#AD9752]" : "border-transparent hover:border-[#EADFC7]"}`}
+                  className={`aspect-square bg-[#FDF8EE] overflow-hidden border transition-all ${active === i ? "border-[#AD9752]" : "border-transparent hover:border-[#EADFC7]"}`}
                 >
-                  <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <img src={src} alt="" className="h-full w-full object-cover mix-blend-multiply" loading="lazy" />
+
                 </button>
               ))}
             </div>
