@@ -179,6 +179,7 @@ function ProductPage() {
               <div className="mt-4 space-y-3">
                 {BUNDLES.map((b) => {
                   const isSelected = selectedBundle === b.id;
+                  const savings = Math.round((b.standardPrice - b.perBottle) * b.bottles);
                   return (
                     <button
                       key={b.id}
