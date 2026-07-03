@@ -736,7 +736,7 @@ function ProductPage() {
                   <p className={`mt-3 text-[#3B2E25] leading-relaxed ${!rv.img ? "font-display italic text-[19px] md:text-[21px]" : "text-[14px]"}`}>
                     {rv.img ? rv.t : `"${rv.t}"`}
                   </p>
-                  <div className="mt-4 flex items-center justify-between gap-3">
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5">
                     <div className="text-[13px] text-[#3B2E25]">
                       <span className="font-medium">{rv.n}</span>
                       {rv.a ? <span className="text-[#7A6A5E]">, {rv.a}</span> : null}
