@@ -149,6 +149,8 @@ function ProductPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [adding, setAdding] = useState(false);
   const [showSticky, setShowSticky] = useState(false);
+  const [wallVisible, setWallVisible] = useState(12);
+  const [wallImg, setWallImg] = useState<string | null>(null);
 
   const bundle = useMemo(() => BUNDLES.find((b) => b.id === selectedBundle) ?? BUNDLES[2], [selectedBundle]);
 
