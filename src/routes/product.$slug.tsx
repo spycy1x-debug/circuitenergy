@@ -110,7 +110,7 @@ function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: st
         const fill = Math.max(0, Math.min(1, value - i));
         return (
           <span key={i} className={`relative inline-block ${size}`}>
-            <Star className={`${size} text-[#AD9752]`} strokeWidth={1.5} />
+            <Star className={`${size} text-[#AD9752]/25`} strokeWidth={1.5} />
             <span className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${fill * 100}%` }}>
               <Star className={`${size} fill-current text-[#AD9752]`} strokeWidth={1.5} />
             </span>
@@ -544,45 +544,8 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* REVIEWS */}
-      <section id="reviews" className="scroll-mt-24 bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
-        <div className="container-x py-24 md:py-32">
-          <div className="text-center max-w-2xl mx-auto">
-            <div className="eyebrow">Loved by</div>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Women who <span className="italic text-[#AD9752]">know</span> their skin</h2>
-            <div className="mt-6 flex items-center justify-center gap-2 text-[11px] tracking-[0.18em] text-[#7A6A5E]">
-              <FractionalStars value={4.8} size="h-3.5 w-3.5" />
-              <span>4.8 · 2000+ verified reviews</span>
-            </div>
-          </div>
 
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-            {[
-              { name: "Priya M.", age: 46, months: 3, quote: "My skin looks brighter, my energy is steady, and I finally feel like myself again." },
-              { name: "Elena R.", age: 52, months: 4, quote: "The first thing where friends actually started asking what I was doing differently. That was the moment." },
-              { name: "Marina K.", age: 41, months: 6, quote: "By week six my skin had this glow I hadn't seen since my thirties. I'll never stop taking it." },
-              { name: "Naomi J.", age: 49, months: 5, quote: "I've spent thousands on serums. This works on the layer underneath — where actual aging happens." },
-              { name: "Sofia B.", age: 44, months: 2, quote: "It's the calmest, most unglamorous morning capsule that has quietly done the most for my skin." },
-              { name: "Amelia T.", age: 55, months: 8, quote: "Eight months in. My complexion is more even, my mornings are easier, and my hairdresser noticed my hair felt healthier." },
-            ].map((r) => (
-              <figure key={r.name} className="bg-[#FDF8EE] border border-[#EADFC7] p-8">
-                <div className="flex gap-0.5 text-[#AD9752]">{[0,1,2,3,4].map(i => <Star key={i} className="h-3 w-3 fill-current" />)}</div>
-                <blockquote className="mt-5 font-display italic text-xl leading-relaxed text-[#3B2E25]">"{r.quote}"</blockquote>
-                <figcaption className="mt-6 pt-5 border-t border-[#EADFC7] flex items-center justify-between">
-                  <div>
-                    <div className="caps-label text-[#3B2E25]">{r.name}</div>
-                    <div className="text-[11px] text-[#7A6A5E] tracking-wide mt-1">Age {r.age} · {r.months} months in</div>
-                  </div>
-                  <div className="caps-label text-[#6B7A4B] text-[10px] inline-flex items-center gap-1">
-                    <Check className="h-3 w-3" /> Verified
-                  </div>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* PROOF, NOT PROMISES */}
       <section className="bg-[#FDF8EE]">
@@ -644,7 +607,7 @@ function ProductPage() {
       </section>
 
       {/* REVIEW WALL */}
-      <section className="bg-[#FDF8EE]">
+      <section id="reviews" className="scroll-mt-24 bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">Real Women, Real Rituals</div>
@@ -653,7 +616,7 @@ function ProductPage() {
               <FractionalStars value={4.8} size="h-4 w-4" />
               <span className="text-[#3B2E25] font-medium">4.8</span>
               <span className="text-[#AD9752]">·</span>
-              <span>based on verified reviews</span>
+              <span>based on 2000+ reviews</span>
             </div>
           </div>
 

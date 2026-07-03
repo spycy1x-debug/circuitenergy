@@ -4,6 +4,9 @@ import { Sparkles, Leaf, HeartPulse, ShieldCheck, Beaker, MapPin, Droplet, Star 
 import nmnBottle from "@/assets/nmn-new-1.jpeg.asset.json";
 import heroImage from "@/assets/seralie-hero.webp.asset.json";
 import nmnKitchen from "@/assets/nmn-new-4.png.asset.json";
+import rvMirror from "@/assets/nmn-review-bathroom-mirror.png.asset.json";
+import rvPool from "@/assets/nmn-review-pool.png.asset.json";
+import rvKitchen from "@/assets/nmn-review-kitchen-flowers.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,19 +22,22 @@ export const Route = createFileRoute("/")({
 
 const testimonials = [
   {
-    quote: "My skin looks brighter, my energy is steady, and I finally feel like myself again. Seralie has become the quiet non-negotiable in my morning.",
+    quote: "I've spent more on a single serum than this costs for a month. My skin has never looked this awake.",
     name: "Priya M.",
-    detail: "Age 46 · 3 months in",
+    detail: "Age 44 · Verified Buyer",
+    image: rvMirror.url,
   },
   {
-    quote: "I've tried collagen, retinols, everything. This is the first thing where friends started asking what I was doing differently.",
-    name: "Elena R.",
-    detail: "Age 52 · 4 months in",
+    quote: "Turned 60 this year and feel more like myself than I did at 55. Started as a skeptic.",
+    name: "Gloria S.",
+    detail: "Age 61 · Verified Buyer",
+    image: rvPool.url,
   },
   {
-    quote: "By week six my skin had this glow I hadn't seen since my thirties. I'll never stop taking it.",
-    name: "Marina K.",
-    detail: "Age 41 · 6 months in",
+    quote: "I bought it for the skin benefits, but honestly the 3pm energy dip disappearing is what keeps me reordering.",
+    name: "Karen L.",
+    detail: "Age 44 · Verified Buyer",
+    image: rvKitchen.url,
   },
 ];
 
@@ -217,17 +223,22 @@ function HomePage() {
           </div>
           <div className="mt-16 grid gap-10 md:gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
-              <figure key={t.name} className="bg-[#F7EFDF]/60 p-8 md:p-10">
-                <div className="flex gap-1 text-[#AD9752]">
-                  {[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}
+              <figure key={t.name} className="bg-[#F7EFDF]/60 overflow-hidden">
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img src={t.image} alt={`${t.name} — verified Seralie customer`} className="h-full w-full object-cover" loading="lazy" />
                 </div>
-                <blockquote className="mt-5 font-display italic text-xl md:text-2xl leading-relaxed text-[#3B2E25]">
-                  "{t.quote}"
-                </blockquote>
-                <figcaption className="mt-6 pt-6 border-t border-[#EADFC7]">
-                  <div className="caps-label text-[#3B2E25]">{t.name}</div>
-                  <div className="mt-1 text-xs text-[#7A6A5E] tracking-wide">{t.detail}</div>
-                </figcaption>
+                <div className="p-8 md:p-10">
+                  <div className="flex gap-1 text-[#AD9752]">
+                    {[0,1,2,3,4].map(i => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}
+                  </div>
+                  <blockquote className="mt-5 font-display italic text-lg md:text-xl leading-relaxed text-[#3B2E25]">
+                    "{t.quote}"
+                  </blockquote>
+                  <figcaption className="mt-6 pt-6 border-t border-[#EADFC7]">
+                    <div className="caps-label text-[#3B2E25]">{t.name}</div>
+                    <div className="mt-1 text-xs text-[#7A6A5E] tracking-wide">{t.detail}</div>
+                  </figcaption>
+                </div>
               </figure>
             ))}
           </div>
