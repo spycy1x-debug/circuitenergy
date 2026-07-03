@@ -22,19 +22,22 @@ export const Route = createFileRoute("/")({
 
 const testimonials = [
   {
-    quote: "My skin looks brighter, my energy is steady, and I finally feel like myself again. Seralie has become the quiet non-negotiable in my morning.",
+    quote: "I've spent more on a single serum than this costs for a month. My skin has never looked this awake.",
     name: "Priya M.",
-    detail: "Age 46 · 3 months in",
+    detail: "Age 44 · Verified Buyer",
+    image: rvMirror.url,
   },
   {
-    quote: "I've tried collagen, retinols, everything. This is the first thing where friends started asking what I was doing differently.",
-    name: "Elena R.",
-    detail: "Age 52 · 4 months in",
+    quote: "Turned 60 this year and feel more like myself than I did at 55. Started as a skeptic.",
+    name: "Gloria S.",
+    detail: "Age 61 · Verified Buyer",
+    image: rvPool.url,
   },
   {
-    quote: "By week six my skin had this glow I hadn't seen since my thirties. I'll never stop taking it.",
-    name: "Marina K.",
-    detail: "Age 41 · 6 months in",
+    quote: "I bought it for the skin benefits, but honestly the 3pm energy dip disappearing is what keeps me reordering.",
+    name: "Karen L.",
+    detail: "Age 44 · Verified Buyer",
+    image: rvKitchen.url,
   },
 ];
 
