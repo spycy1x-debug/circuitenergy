@@ -277,8 +277,84 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* WHAT TO EXPECT — timeline */}
+      {/* WHY YOUR BODY NEEDS THIS */}
       <section className="bg-[#FDF8EE]">
+        <div className="container-x py-28 md:py-[120px]">
+          <div className="max-w-5xl mx-auto space-y-24 md:space-y-32">
+            {/* Beat 1 */}
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="eyebrow">The science, simply</div>
+              <h2 className="mt-5 font-display text-4xl md:text-5xl text-[#3B2E25] leading-tight">
+                Around 35, your NAD+ <span className="italic text-[#AD9752]">starts to decline</span>.
+              </h2>
+              <p className="mt-7 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                NAD+ is the molecule every cell uses to produce energy, repair DNA, and renew itself — and levels fall by roughly half between your 20s and 50s.
+              </p>
+              <p className="mt-4 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                It's why energy dips sooner, skin bounces back slower, and mornings feel different than they used to.
+              </p>
+            </div>
+
+            {/* Beat 2 — graph */}
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center caps-label text-[#3B2E25] mb-6">Your NAD+ Levels</div>
+              <div className="relative w-full aspect-[16/8]">
+                <svg viewBox="0 0 800 400" className="w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+                  {/* baseline */}
+                  <line x1="60" y1="360" x2="770" y2="360" stroke="#EADFC7" strokeWidth="1" />
+                  <line x1="60" y1="40" x2="60" y2="360" stroke="#EADFC7" strokeWidth="1" />
+                  {/* curve descending */}
+                  <path
+                    d="M 60 70 C 220 90, 320 170, 420 230 S 640 340, 770 355"
+                    fill="none"
+                    stroke="#AD9752"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  {/* you are here dot around age 40 (~x=340) */}
+                  <circle cx="340" cy="190" r="9" fill="#AD9752" />
+                  <circle cx="340" cy="190" r="16" fill="none" stroke="#AD9752" strokeOpacity="0.35" strokeWidth="1.5" />
+                </svg>
+                <div
+                  className="absolute font-display italic text-[#3B2E25] text-sm md:text-base"
+                  style={{ left: "43%", top: "38%" }}
+                >
+                  you may be here
+                </div>
+              </div>
+              <div className="mt-4 flex justify-between text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] px-1">
+                <span>Age 20</span>
+                <span>→</span>
+                <span>Age 60</span>
+              </div>
+            </div>
+
+            {/* Beat 3 */}
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="eyebrow">The solution</div>
+              <h2 className="mt-5 font-display text-4xl md:text-5xl text-[#3B2E25] leading-tight">
+                NMN is the <span className="italic text-[#AD9752]">direct precursor</span>.
+              </h2>
+              <p className="mt-7 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                You can't take NAD+ directly — the molecule is too large to absorb. NMN converts to NAD+ in a single step, which is why it's the focus of published human research on healthy aging.
+              </p>
+              <p className="mt-4 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                Seralie delivers 500 mg of pure β-NMN per capsule — the level used in studies, not a sprinkle.
+              </p>
+              <a
+                href="#top"
+                onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="mt-10 inline-block caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-1 transition-colors"
+              >
+                Choose your ritual ↑
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT TO EXPECT — timeline */}
+      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">What to expect</div>
