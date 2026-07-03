@@ -162,6 +162,41 @@ function ProductPage() {
   const [showSticky, setShowSticky] = useState(false);
   const [wallVisible, setWallVisible] = useState(12);
   const [wallImg, setWallImg] = useState<string | null>(null);
+  const [userReviews, setUserReviews] = useState<WallReview[]>([]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [formName, setFormName] = useState("");
+  const [formAge, setFormAge] = useState("");
+  const [formRating, setFormRating] = useState(5);
+  const [formText, setFormText] = useState("");
+  const [formPhoto, setFormPhoto] = useState<string | null>(null);
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+
+  // Load persisted user reviews for this product
+  useEffect(() => {
+    let alive = true;
+    supabase
+      .from("product_reviews")
+      .select("name, title, body, rating, image_url, created_at")
+      .eq("product_id", slug)
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (!alive || !data) return;
+        setUserReviews(
+          data.map((r) => ({
+            r: r.rating,
+            t: r.body,
+            n: r.name,
+            a: parseInt(r.title, 10) || 0,
+            img: r.image_url || undefined,
+            long: !r.image_url && r.body.length > 140,
+          })),
+        );
+      });
+    return () => { alive = false; };
+  }, [slug]);
+
+  const allWallReviews = useMemo(() => [...userReviews, ...WALL_REVIEWS], [userReviews]);
 
   const bundle = useMemo(() => BUNDLES.find((b) => b.id === selectedBundle) ?? BUNDLES[2], [selectedBundle]);
 
