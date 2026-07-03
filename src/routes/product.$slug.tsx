@@ -366,13 +366,15 @@ function ProductPage() {
               ))}
             </div>
 
-            <button
-              type="button"
-              onClick={() => setShowFacts(true)}
-              className="mt-6 inline-flex items-center gap-2 caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-0.5"
-            >
-              <FileText className="h-3.5 w-3.5" /> View Supplement Facts
-            </button>
+            <div className="mt-6 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowFacts(true)}
+                className="inline-flex items-center gap-2 caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-0.5"
+              >
+                <FileText className="h-3.5 w-3.5" /> View Supplement Facts
+              </button>
+            </div>
           </div>
         </div>
       </section>
