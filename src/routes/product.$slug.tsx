@@ -664,10 +664,19 @@ function ProductPage() {
               <span className="text-[#AD9752]">·</span>
               <span>based on 2000+ reviews</span>
             </div>
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={() => setShowReviewForm(true)}
+                className="btn-gold-ghost"
+              >
+                Write a Review
+              </button>
+            </div>
           </div>
 
           <div className="mt-14 columns-2 md:columns-3 gap-4 [column-fill:_balance]">
-            {WALL_REVIEWS.slice(0, wallVisible).map((rv, i) => (
+            {allWallReviews.slice(0, wallVisible).map((rv, i) => (
               <article
                 key={i}
                 className="mb-4 break-inside-avoid bg-[#FDF8EE] border border-[#EADFC7] rounded-[12px] shadow-[0_2px_10px_-4px_rgba(59,46,37,0.08)] hover:shadow-[0_18px_40px_-20px_rgba(59,46,37,0.25)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
@@ -690,7 +699,7 @@ function ProductPage() {
                   <div className="mt-4 flex items-center justify-between gap-3">
                     <div className="text-[13px] text-[#3B2E25]">
                       <span className="font-medium">{rv.n}</span>
-                      <span className="text-[#7A6A5E]">, {rv.a}</span>
+                      {rv.a ? <span className="text-[#7A6A5E]">, {rv.a}</span> : null}
                     </div>
                     <span className="text-[10px] tracking-[0.14em] uppercase text-[#AD9752] whitespace-nowrap">✓ Verified Buyer</span>
                   </div>
@@ -699,7 +708,7 @@ function ProductPage() {
             ))}
           </div>
 
-          {wallVisible < WALL_REVIEWS.length && (
+          {wallVisible < allWallReviews.length && (
             <div className="mt-12 text-center">
               <button
                 type="button"
@@ -712,6 +721,182 @@ function ProductPage() {
           )}
         </div>
       </section>
+
+      {/* WRITE A REVIEW MODAL */}
+      {showReviewForm && (
+        <div className="fixed inset-0 z-[95] bg-black/60 flex items-center justify-center p-4" onClick={() => !formSubmitting && setShowReviewForm(false)}>
+          <div
+            className="bg-[#FDF8EE] rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#EADFC7]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-6 md:p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <div className="eyebrow">Share Your Experience</div>
+                  <h3 className="mt-2 font-display text-2xl text-[#3B2E25]">Write a Review</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowReviewForm(false)}
+                  className="text-[#7A6A5E] hover:text-[#3B2E25] p-1"
+                  aria-label="Close"
+                >
+                  <XIcon className="h-5 w-5" />
+                </button>
+              </div>
+
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setFormError(null);
+                  const name = formName.trim();
+                  const text = formText.trim();
+                  const age = parseInt(formAge, 10);
+                  if (!name || name.length > 80) return setFormError("Please enter your name.");
+                  if (!text || text.length < 5) return setFormError("Please write your review.");
+                  if (text.length > 2000) return setFormError("Review is too long.");
+                  if (!age || age < 18 || age > 100) return setFormError("Please enter a valid age.");
+                  setFormSubmitting(true);
+                  try {
+                    const { error } = await supabase.from("product_reviews").insert({
+                      product_id: slug,
+                      name,
+                      title: String(age),
+                      body: text,
+                      rating: formRating,
+                      image_url: formPhoto,
+                    });
+                    if (error) throw error;
+                    const newRv: WallReview = {
+                      r: formRating, t: text, n: name, a: age,
+                      img: formPhoto || undefined,
+                      long: !formPhoto && text.length > 140,
+                    };
+                    setUserReviews((prev) => [newRv, ...prev]);
+                    setShowReviewForm(false);
+                    setFormName(""); setFormAge(""); setFormText(""); setFormPhoto(null); setFormRating(5);
+                  } catch (err: any) {
+                    setFormError(err?.message || "Something went wrong. Please try again.");
+                  } finally {
+                    setFormSubmitting(false);
+                  }
+                }}
+                className="space-y-5"
+              >
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase text-[#7A6A5E] mb-2">Rating</label>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <button key={n} type="button" onClick={() => setFormRating(n)} className="p-1" aria-label={`${n} stars`}>
+                        <Star className={`h-7 w-7 ${n <= formRating ? "fill-[#AD9752] text-[#AD9752]" : "text-[#AD9752]/25"}`} />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[11px] tracking-[0.18em] uppercase text-[#7A6A5E] mb-2">Name</label>
+                    <input
+                      type="text" value={formName} maxLength={80}
+                      onChange={(e) => setFormName(e.target.value)}
+                      className="w-full px-3 py-2.5 bg-white border border-[#EADFC7] rounded-md text-[14px] text-[#3B2E25] focus:outline-none focus:border-[#AD9752]"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] tracking-[0.18em] uppercase text-[#7A6A5E] mb-2">Age</label>
+                    <input
+                      type="number" value={formAge} min={18} max={100}
+                      onChange={(e) => setFormAge(e.target.value)}
+                      className="w-full px-3 py-2.5 bg-white border border-[#EADFC7] rounded-md text-[14px] text-[#3B2E25] focus:outline-none focus:border-[#AD9752]"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase text-[#7A6A5E] mb-2">Your Review</label>
+                  <textarea
+                    value={formText} maxLength={2000} rows={4}
+                    onChange={(e) => setFormText(e.target.value)}
+                    placeholder="Tell others what you love about it..."
+                    className="w-full px-3 py-2.5 bg-white border border-[#EADFC7] rounded-md text-[14px] text-[#3B2E25] focus:outline-none focus:border-[#AD9752] resize-none"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase text-[#7A6A5E] mb-2">Add a Photo (optional)</label>
+                  {formPhoto ? (
+                    <div className="relative inline-block">
+                      <img src={formPhoto} alt="Preview" className="h-24 w-24 object-cover rounded-md border border-[#EADFC7]" />
+                      <button
+                        type="button" onClick={() => setFormPhoto(null)}
+                        className="absolute -top-2 -right-2 bg-[#3B2E25] text-[#FDF8EE] rounded-full p-1 shadow"
+                        aria-label="Remove photo"
+                      >
+                        <XIcon className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-dashed border-[#AD9752]/60 rounded-md text-[13px] text-[#3B2E25] cursor-pointer hover:border-[#AD9752]">
+                      <input
+                        type="file" accept="image/*" className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          if (file.size > 15 * 1024 * 1024) { setFormError("Image too large (15MB max)."); return; }
+                          // Compress via canvas
+                          const dataUrl: string = await new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => {
+                              const img = new Image();
+                              img.onload = () => {
+                                const maxW = 900;
+                                const scale = Math.min(1, maxW / img.width);
+                                const canvas = document.createElement("canvas");
+                                canvas.width = img.width * scale;
+                                canvas.height = img.height * scale;
+                                const ctx = canvas.getContext("2d")!;
+                                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                                resolve(canvas.toDataURL("image/jpeg", 0.82));
+                              };
+                              img.onerror = reject;
+                              img.src = reader.result as string;
+                            };
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                          });
+                          setFormPhoto(dataUrl);
+                        }}
+                      />
+                      + Upload Photo
+                    </label>
+                  )}
+                </div>
+
+                {formError && <p className="text-[13px] text-red-700">{formError}</p>}
+
+                <div className="pt-2 flex gap-3">
+                  <button
+                    type="button" onClick={() => setShowReviewForm(false)}
+                    className="flex-1 py-3 border border-[#EADFC7] rounded-md text-[13px] text-[#3B2E25] hover:bg-[#EADFC7]/30"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit" disabled={formSubmitting}
+                    className="flex-1 py-3 bg-[#3B2E25] text-[#FDF8EE] rounded-md text-[13px] tracking-wide uppercase hover:bg-[#AD9752] disabled:opacity-60 transition-colors"
+                  >
+                    {formSubmitting ? "Submitting..." : "Submit Review"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* REVIEW PHOTO LIGHTBOX */}
       {wallImg && (
