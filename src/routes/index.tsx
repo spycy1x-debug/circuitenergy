@@ -277,7 +277,7 @@ function HomePage() {
             <div className="eyebrow">Join the ritual</div>
             <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Softer mornings, brighter skin.</h2>
             <p className="mt-5 text-[15px] leading-8 text-[#5A483C]">
-              Thoughtful notes on beauty, longevity, and the science of aging well — plus 10% off your first ritual.
+              Thoughtful notes on beauty, longevity, and the science of aging well — plus 15% off your first ritual.
             </p>
             {sent ? (
               <p className="mt-8 font-display italic text-2xl text-[#AD9752]">Welcome. Check your inbox.</p>
