@@ -535,10 +535,10 @@ function ProductPage() {
           <div className="mt-20 md:mt-24 max-w-5xl mx-auto grid gap-14 md:gap-16 md:grid-cols-2 items-center">
             <div>
               <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
-                <img src={gmpFacility.url} alt="Seralie GMP-certified US manufacturing facility" className="w-full h-auto object-cover" loading="lazy" />
+                <img src={gmpCertificate.url} alt="Seralie GMP certificate — independently audited, GMP-certified US manufacturing" className="w-full h-auto object-cover" loading="lazy" />
               </div>
               <p className="mt-5 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] leading-relaxed">
-                Manufactured in a GMP-Certified US Facility <span className="text-[#AD9752]">·</span> 21 CFR Part 111
+                Independently Audited <span className="text-[#AD9752]">·</span> GMP-Certified US Manufacturing
               </p>
             </div>
             <div>
