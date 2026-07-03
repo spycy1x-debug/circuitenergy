@@ -607,7 +607,7 @@ function ProductPage() {
       </section>
 
       {/* REVIEW WALL */}
-      <section className="bg-[#FDF8EE]">
+      <section id="reviews" className="scroll-mt-24 bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">Real Women, Real Rituals</div>
