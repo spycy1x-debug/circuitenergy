@@ -86,7 +86,7 @@ function AccountPage() {
           list
         </h1>
         <p className="mt-5 text-white/75 text-lg">
-          Thoughtful notes on beauty, longevity, and the ritual of aging well — plus early access and 10% off your first order.
+          Thoughtful notes on beauty, longevity, and the ritual of aging well — plus early access and 15% off your first order.
         </p>
 
 
