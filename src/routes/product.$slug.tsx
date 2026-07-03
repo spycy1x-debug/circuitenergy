@@ -555,8 +555,17 @@ function ProductPage() {
               </p>
             </div>
           </div>
+          {/* Row 3 — facility */}
+          <div className="mt-16 md:mt-20 max-w-5xl mx-auto">
+            <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
+              <img src={gmpFacility.url} alt="GMP-certified facility where Seralie NMN is made" className="w-full h-auto object-cover" loading="lazy" />
+            </div>
+            <p className="mt-5 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] leading-relaxed">
+              GMP-Certified Facility <span className="text-[#AD9752]">·</span> US Manufacturing
+            </p>
+          </div>
 
-          {/* Row 3 — thin trust strip */}
+          {/* Row 4 — thin trust strip */}
           <div className="mt-24 max-w-4xl mx-auto">
             <div className="h-px bg-[#AD9752]/40" />
             <div className="py-6 text-center text-[10px] md:text-[11px] tracking-[0.24em] uppercase text-[#3B2E25] leading-loose">
