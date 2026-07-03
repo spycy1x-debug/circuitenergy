@@ -110,7 +110,7 @@ function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: st
         const fill = Math.max(0, Math.min(1, value - i));
         return (
           <span key={i} className={`relative inline-block ${size}`}>
-            <Star className={`${size} text-[#AD9752]`} strokeWidth={1.5} />
+            <Star className={`${size} text-[#AD9752]/25`} strokeWidth={1.5} />
             <span className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${fill * 100}%` }}>
               <Star className={`${size} fill-current text-[#AD9752]`} strokeWidth={1.5} />
             </span>
