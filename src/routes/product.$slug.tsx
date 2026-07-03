@@ -18,6 +18,7 @@ import img7 from "@/assets/nmn-what-to-expect.png.asset.json";
 import img8 from "@/assets/nmn-morning-ritual.png.asset.json";
 import supplementFacts from "@/assets/nmn-supplement-facts.png.asset.json";
 import gmpFacility from "@/assets/seralie-gmp-facility.png.asset.json";
+import gmpCertificate from "@/assets/seralie-gmp-certificate.png.asset.json";
 import batchTested from "@/assets/seralie-batch-tested.png.asset.json";
 
 export const Route = createFileRoute("/product/$slug")({
@@ -534,10 +535,10 @@ function ProductPage() {
           <div className="mt-20 md:mt-24 max-w-5xl mx-auto grid gap-14 md:gap-16 md:grid-cols-2 items-center">
             <div>
               <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
-                <img src={gmpFacility.url} alt="Seralie GMP-certified US manufacturing facility" className="w-full h-auto object-cover" loading="lazy" />
+                <img src={gmpCertificate.url} alt="Seralie GMP certificate — independently audited, GMP-certified US manufacturing" className="w-full h-auto object-cover" loading="lazy" />
               </div>
               <p className="mt-5 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] leading-relaxed">
-                Manufactured in a GMP-Certified US Facility <span className="text-[#AD9752]">·</span> 21 CFR Part 111
+                Independently Audited <span className="text-[#AD9752]">·</span> GMP-Certified US Manufacturing
               </p>
             </div>
             <div>
@@ -554,8 +555,17 @@ function ProductPage() {
               </p>
             </div>
           </div>
+          {/* Row 3 — facility */}
+          <div className="mt-16 md:mt-20 max-w-5xl mx-auto">
+            <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
+              <img src={gmpFacility.url} alt="GMP-certified facility where Seralie NMN is made" className="w-full h-auto object-cover" loading="lazy" />
+            </div>
+            <p className="mt-5 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] leading-relaxed">
+              GMP-Certified Facility <span className="text-[#AD9752]">·</span> US Manufacturing
+            </p>
+          </div>
 
-          {/* Row 3 — thin trust strip */}
+          {/* Row 4 — thin trust strip */}
           <div className="mt-24 max-w-4xl mx-auto">
             <div className="h-px bg-[#AD9752]/40" />
             <div className="py-6 text-center text-[10px] md:text-[11px] tracking-[0.24em] uppercase text-[#3B2E25] leading-loose">
