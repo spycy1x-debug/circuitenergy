@@ -350,9 +350,21 @@ function ProductPage() {
             <p className="mt-4 flex items-center justify-center gap-2 text-xs text-[#7A6A5E] tracking-wide">
               <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee
             </p>
-            <p className="mt-2 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E]">
-              Third-Party Tested <span className="text-[#AD9752]">·</span> GMP-Certified <span className="text-[#AD9752]">·</span> Made in USA
-            </p>
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+              {[
+                { Icon: Beaker, label: "Third-Party Tested" },
+                { Icon: ShieldCheck, label: "GMP-Certified" },
+                { Icon: MapPin, label: "Made in USA" },
+              ].map(({ Icon, label }) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center gap-1.5 border border-[#EADFC7] bg-[#F7EFDF]/70 px-3 py-1.5 text-[10px] tracking-[0.18em] uppercase text-[#3B2E25]"
+                >
+                  <Icon className="h-3 w-3 text-[#AD9752]" strokeWidth={1.6} />
+                  {label}
+                </span>
+              ))}
+            </div>
 
             <button
               type="button"
@@ -362,6 +374,26 @@ function ProductPage() {
               <FileText className="h-3.5 w-3.5" /> View Supplement Facts
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* CERTIFICATIONS STRIP */}
+      <section className="bg-[#3B2E25]">
+        <div className="container-x py-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+          {[
+            "Real β-NMN — Lab-Verified",
+            "Third-Party Tested Every Batch",
+            "GMP-Certified US Facility",
+            "COA Available on Request",
+          ].map((t) => (
+            <span
+              key={t}
+              className="flex items-center gap-2 text-[10px] tracking-[0.24em] uppercase text-[#FDF8EE]/90"
+            >
+              <Check className="h-3 w-3 text-[#AD9752]" strokeWidth={2} />
+              {t}
+            </span>
+          ))}
         </div>
       </section>
 
@@ -516,20 +548,22 @@ function ProductPage() {
           <div className="mt-14 max-w-3xl mx-auto bg-[#FDF8EE] border border-[#EADFC7]">
             <div className="grid grid-cols-3 border-b border-[#EADFC7]">
               <div className="p-5 caps-label text-[#7A6A5E]">The difference</div>
-              <div className="p-5 caps-label text-[#AD9752] text-center border-x border-[#EADFC7]">Seralie</div>
+              <div className="p-5 caps-label text-[#AD9752] text-center border-x border-[#EADFC7] bg-[#F7EFDF]/60">Seralie</div>
               <div className="p-5 caps-label text-[#7A6A5E] text-center">Typical Amazon Brand</div>
             </div>
             {[
               ["Real β-NMN molecule", true, false],
               ["500 mg full dose", true, false],
               ["Third-party tested every batch", true, false],
+              ["COA available on request", true, false],
               ["Formulated for beauty & longevity", true, false],
               ["Made in the USA, GMP-certified", true, false],
               ["No unnecessary fillers", true, false],
+              ["30-day money-back guarantee", true, false],
             ].map(([label, us, them], i) => (
-              <div key={i} className={`grid grid-cols-3 ${i < 5 ? "border-b border-[#EADFC7]" : ""}`}>
+              <div key={i} className={`grid grid-cols-3 ${i < 7 ? "border-b border-[#EADFC7]" : ""}`}>
                 <div className="p-5 text-sm text-[#3B2E25]">{label}</div>
-                <div className="p-5 border-x border-[#EADFC7] text-center">
+                <div className="p-5 border-x border-[#EADFC7] bg-[#F7EFDF]/60 text-center">
                   {us ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
                 </div>
                 <div className="p-5 text-center">
@@ -538,6 +572,10 @@ function ProductPage() {
               </div>
             ))}
           </div>
+          <p className="mt-5 max-w-3xl mx-auto text-center text-[11px] leading-5 text-[#7A6A5E]">
+            "Typical Amazon Brand" reflects patterns reported in independent third-party testing of
+            marketplace NMN products, not any specific brand.
+          </p>
         </div>
       </section>
 
