@@ -643,6 +643,79 @@ function ProductPage() {
         </div>
       </section>
 
+      {/* REVIEW WALL */}
+      <section className="bg-[#FDF8EE]">
+        <div className="container-x py-24 md:py-32">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="eyebrow">Real Women, Real Rituals</div>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Loved by <span className="italic text-[#AD9752]">Thousands</span></h2>
+            <div className="mt-5 inline-flex items-center gap-2 text-[13px] tracking-wide text-[#5A483C]">
+              <FractionalStars value={4.8} size="h-4 w-4" />
+              <span className="text-[#3B2E25] font-medium">4.8</span>
+              <span className="text-[#AD9752]">·</span>
+              <span>based on verified reviews</span>
+            </div>
+          </div>
+
+          <div className="mt-14 columns-2 md:columns-3 gap-4 [column-fill:_balance]">
+            {WALL_REVIEWS.slice(0, wallVisible).map((rv, i) => (
+              <article
+                key={i}
+                className="mb-4 break-inside-avoid bg-[#FDF8EE] border border-[#EADFC7] rounded-[12px] shadow-[0_2px_10px_-4px_rgba(59,46,37,0.08)] hover:shadow-[0_18px_40px_-20px_rgba(59,46,37,0.25)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+              >
+                {rv.img && (
+                  <button
+                    type="button"
+                    onClick={() => setWallImg(rv.img!)}
+                    className="block w-full"
+                    aria-label={`Open photo from ${rv.n}`}
+                  >
+                    <img src={rv.img} alt={`Customer photo — ${rv.n}`} className="w-full h-auto block" loading="lazy" />
+                  </button>
+                )}
+                <div className={`p-5 ${!rv.img && rv.long ? "py-7" : ""}`}>
+                  <FractionalStars value={rv.r} size="h-3.5 w-3.5" />
+                  <p className={`mt-3 text-[#3B2E25] leading-relaxed ${!rv.img ? "font-display italic text-[19px] md:text-[21px]" : "text-[14px]"}`}>
+                    {rv.img ? rv.t : `"${rv.t}"`}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between gap-3">
+                    <div className="text-[13px] text-[#3B2E25]">
+                      <span className="font-medium">{rv.n}</span>
+                      <span className="text-[#7A6A5E]">, {rv.a}</span>
+                    </div>
+                    <span className="text-[10px] tracking-[0.14em] uppercase text-[#AD9752] whitespace-nowrap">✓ Verified Buyer</span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {wallVisible < WALL_REVIEWS.length && (
+            <div className="mt-12 text-center">
+              <button
+                type="button"
+                onClick={() => setWallVisible((v) => v + 12)}
+                className="btn-gold-ghost"
+              >
+                Load More Reviews
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* REVIEW PHOTO LIGHTBOX */}
+      {wallImg && (
+        <div className="fixed inset-0 z-[92] bg-black flex items-center justify-center" onClick={() => setWallImg(null)}>
+          <button
+            onClick={(e) => { e.stopPropagation(); setWallImg(null); }}
+            className="absolute top-4 right-4 text-white/80 hover:text-white h-10 w-10 flex items-center justify-center"
+            aria-label="Close"
+          ><XIcon className="h-6 w-6" /></button>
+          <img src={wallImg} alt="" className="max-h-[92vh] max-w-[92vw] object-contain" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
+
       {/* FAQ */}
       <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
