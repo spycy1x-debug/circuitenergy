@@ -6,6 +6,7 @@ import {
   Plus, Minus, ShoppingBag,
 } from "lucide-react";
 import { shopifyCart } from "@/lib/shopify-cart";
+import { supabase } from "@/integrations/supabase/client";
 
 // Product assets (in gallery display order)
 import img1 from "@/assets/nmn-new-1.jpeg.asset.json";
