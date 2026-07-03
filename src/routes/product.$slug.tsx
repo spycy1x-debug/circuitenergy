@@ -17,6 +17,8 @@ import img6 from "@/assets/nmn-hand-capsule.png.asset.json";
 import img7 from "@/assets/nmn-what-to-expect.png.asset.json";
 import img8 from "@/assets/nmn-morning-ritual.png.asset.json";
 import supplementFacts from "@/assets/nmn-supplement-facts.png.asset.json";
+import gmpFacility from "@/assets/seralie-gmp-facility.png.asset.json";
+import batchTested from "@/assets/seralie-batch-tested.png.asset.json";
 
 export const Route = createFileRoute("/product/$slug")({
   head: ({ params }) => {
@@ -234,6 +236,9 @@ function ProductPage() {
             <p className="mt-4 flex items-center justify-center gap-2 text-xs text-[#7A6A5E] tracking-wide">
               <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee
             </p>
+            <p className="mt-2 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E]">
+              Third-Party Tested <span className="text-[#AD9752]">·</span> GMP-Certified <span className="text-[#AD9752]">·</span> Made in USA
+            </p>
 
             <button
               type="button"
@@ -272,8 +277,84 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* WHAT TO EXPECT — timeline */}
+      {/* WHY YOUR BODY NEEDS THIS */}
       <section className="bg-[#FDF8EE]">
+        <div className="container-x py-28 md:py-[120px]">
+          <div className="max-w-5xl mx-auto space-y-24 md:space-y-32">
+            {/* Beat 1 */}
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="eyebrow">The science, simply</div>
+              <h2 className="mt-5 font-display text-4xl md:text-5xl text-[#3B2E25] leading-tight">
+                Around 35, your NAD+ <span className="italic text-[#AD9752]">starts to decline</span>.
+              </h2>
+              <p className="mt-7 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                NAD+ is the molecule every cell uses to produce energy, repair DNA, and renew itself — and levels fall by roughly half between your 20s and 50s.
+              </p>
+              <p className="mt-4 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                It's why energy dips sooner, skin bounces back slower, and mornings feel different than they used to.
+              </p>
+            </div>
+
+            {/* Beat 2 — graph */}
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center caps-label text-[#3B2E25] mb-6">Your NAD+ Levels</div>
+              <div className="relative w-full aspect-[16/8]">
+                <svg viewBox="0 0 800 400" className="w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+                  {/* baseline */}
+                  <line x1="60" y1="360" x2="770" y2="360" stroke="#EADFC7" strokeWidth="1" />
+                  <line x1="60" y1="40" x2="60" y2="360" stroke="#EADFC7" strokeWidth="1" />
+                  {/* curve descending */}
+                  <path
+                    d="M 60 70 C 220 90, 320 170, 420 230 S 640 340, 770 355"
+                    fill="none"
+                    stroke="#AD9752"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  {/* you are here dot around age 40 (~x=340) */}
+                  <circle cx="340" cy="190" r="9" fill="#AD9752" />
+                  <circle cx="340" cy="190" r="16" fill="none" stroke="#AD9752" strokeOpacity="0.35" strokeWidth="1.5" />
+                </svg>
+                <div
+                  className="absolute font-display italic text-[#3B2E25] text-sm md:text-base"
+                  style={{ left: "43%", top: "38%" }}
+                >
+                  you may be here
+                </div>
+              </div>
+              <div className="mt-4 flex justify-between text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] px-1">
+                <span>Age 20</span>
+                <span>→</span>
+                <span>Age 60</span>
+              </div>
+            </div>
+
+            {/* Beat 3 */}
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="eyebrow">The solution</div>
+              <h2 className="mt-5 font-display text-4xl md:text-5xl text-[#3B2E25] leading-tight">
+                NMN is the <span className="italic text-[#AD9752]">direct precursor</span>.
+              </h2>
+              <p className="mt-7 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                You can't take NAD+ directly — the molecule is too large to absorb. NMN converts to NAD+ in a single step, which is why it's the focus of published human research on healthy aging.
+              </p>
+              <p className="mt-4 text-[15px] md:text-base leading-8 text-[#5A483C]">
+                Seralie delivers 500 mg of pure β-NMN per capsule — the level used in studies, not a sprinkle.
+              </p>
+              <a
+                href="#top"
+                onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="mt-10 inline-block caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-1 transition-colors"
+              >
+                Choose your ritual ↑
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT TO EXPECT — timeline */}
+      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">What to expect</div>
@@ -435,8 +516,58 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* PROOF, NOT PROMISES */}
       <section className="bg-[#FDF8EE]">
+        <div className="container-x py-28 md:py-[120px]">
+          {/* Row 1 — header */}
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="eyebrow">The Seralie Standard</div>
+            <h2 className="mt-5 font-display text-4xl md:text-5xl text-[#3B2E25]">
+              Proof, <span className="italic text-[#AD9752]">Not Promises.</span>
+            </h2>
+            <p className="mt-6 text-[15px] md:text-base leading-8 text-[#5A483C]">
+              Every batch of Seralie NMN is independently tested. Here's what ours showed.
+            </p>
+          </div>
+
+          {/* Row 2 — two columns */}
+          <div className="mt-20 md:mt-24 max-w-5xl mx-auto grid gap-14 md:gap-16 md:grid-cols-2 items-center">
+            <div>
+              <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
+                <img src={gmpFacility.url} alt="Seralie GMP-certified US manufacturing facility" className="w-full h-auto object-cover" loading="lazy" />
+              </div>
+              <p className="mt-5 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] leading-relaxed">
+                Manufactured in a GMP-Certified US Facility <span className="text-[#AD9752]">·</span> 21 CFR Part 111
+              </p>
+            </div>
+            <div>
+              <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
+                <img src={batchTested.url} alt="Independent laboratory batch test results for Seralie NMN" className="w-full h-auto object-cover" loading="lazy" />
+              </div>
+              <p className="mt-5 text-center">
+                <a
+                  href="mailto:support@seralie.com?subject=COA%20Request"
+                  className="caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-0.5 transition-colors"
+                >
+                  Request the full Certificate of Analysis →
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Row 3 — thin trust strip */}
+          <div className="mt-24 max-w-4xl mx-auto">
+            <div className="h-px bg-[#AD9752]/40" />
+            <div className="py-6 text-center text-[10px] md:text-[11px] tracking-[0.24em] uppercase text-[#3B2E25] leading-loose">
+              Third-Party Tested <span className="text-[#AD9752] mx-2">·</span> GMP-Certified Facility <span className="text-[#AD9752] mx-2">·</span> Real β-NMN, Verified <span className="text-[#AD9752] mx-2">·</span> Made in USA
+            </div>
+            <div className="h-px bg-[#AD9752]/40" />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">Questions</div>
