@@ -20,6 +20,71 @@ import supplementFacts from "@/assets/nmn-supplement-facts.png.asset.json";
 import gmpFacility from "@/assets/seralie-gmp-facility.png.asset.json";
 import gmpCertificate from "@/assets/seralie-gmp-certificate.png.asset.json";
 import batchTested from "@/assets/seralie-batch-tested.png.asset.json";
+// Review wall photos
+import rwTennis from "@/assets/nmn-review-tennis.png.asset.json";
+import rwCar from "@/assets/nmn-review-car.png.asset.json";
+import rwPool from "@/assets/nmn-review-pool.png.asset.json";
+import rwPilates from "@/assets/nmn-review-pilates.png.asset.json";
+import rwBalcony from "@/assets/nmn-review-balcony.png.asset.json";
+import rwKitchen from "@/assets/nmn-review-kitchen-flowers.png.asset.json";
+import rwMirror from "@/assets/nmn-review-bathroom-mirror.png.asset.json";
+
+type WallReview = { r: number; t: string; n: string; a: number; img?: string; long?: boolean };
+const WALL_REVIEWS: WallReview[] = [
+  { r: 5, t: "Three months in and my esthetician asked what I changed. That's all the proof I needed.", n: "Daniela", a: 50, img: rwCar.url },
+  { r: 5, t: "I bought it for the skin benefits, but honestly the 3pm energy dip disappearing is what keeps me reordering.", n: "Karen", a: 44, img: rwKitchen.url },
+  { r: 5, t: "I did my research — most NMN on Amazon isn't even real NMN. The testing info is why I chose Seralie.", n: "Mei", a: 47, img: rwTennis.url },
+  { r: 4, t: "Took about five weeks before I noticed anything, so be patient. But my skin looks brighter and I sleep better. Wish it worked faster, hence 4 stars.", n: "Susan", a: 58, long: true },
+  { r: 5, t: "One capsule with my morning coffee. Easiest thing in my whole routine and the one I'd give up last.", n: "Aisha", a: 48, img: rwBalcony.url },
+  { r: 5, t: "My husband started stealing mine. Ordering the 3-pack now.", n: "Rosa", a: 55 },
+  { r: 5, t: "I've spent more on a single serum than this costs for a month. My skin has never looked this awake.", n: "Priya", a: 44, img: rwMirror.url },
+  { r: 5, t: "Turned 60 this year and feel more like myself than I did at 55. Started as a skeptic.", n: "Gloria", a: 61, img: rwPool.url },
+  { r: 4, t: "Good product, packaging is beautiful. Only reason for 4 stars is I wish there was a subscription option.", n: "Jennifer", a: 40 },
+  { r: 5, t: "The photo test: I stopped hating pictures of myself. That's worth every penny.", n: "Michelle", a: 46, img: rwPilates.url },
+  { r: 5, t: "As a nurse I read labels for a living. Real dose, real ingredient, third-party tested. It's the only supplement brand I've ever reviewed.", n: "Denise", a: 52, long: true },
+  { r: 5, t: "Week 8: my nails are stronger, my skin is calmer, and I have energy after work for the first time in years.", n: "Amara", a: 39 },
+  // additional 40
+  { r: 5, t: "Glow is real. Cheeks look plumper without me changing a thing in my skincare.", n: "Elena", a: 42 },
+  { r: 5, t: "I feel less foggy in the mornings. Small thing but it changed my whole day.", n: "Beatrice", a: 49 },
+  { r: 5, t: "My mom noticed before I did. She's ordering her own now.", n: "Chloe", a: 38 },
+  { r: 4, t: "Solid product. Took about a month. Wish the bottle was slightly bigger for the price.", n: "Hannah", a: 45 },
+  { r: 5, t: "Sleep quality is noticeably better. I wake up actually rested.", n: "Yumi", a: 51 },
+  { r: 5, t: "Skin on my hands looks younger. That's the first place I always saw the age.", n: "Margaret", a: 57 },
+  { r: 5, t: "Been through every trend. This one earned the spot on my counter.", n: "Sasha", a: 43 },
+  { r: 5, t: "Finally something that doesn't taste like anything or upset my stomach.", n: "Ines", a: 41 },
+  { r: 5, t: "I'm 54 and get carded at wine bars again. Coincidence? I don't care.", n: "Vivian", a: 54 },
+  { r: 3, t: "Decent. I think I need more time. Two months in, subtle changes.", n: "Rachel", a: 47 },
+  { r: 5, t: "Recommended by my dermatologist. That was enough for me.", n: "Kavita", a: 46 },
+  { r: 5, t: "My under-eyes look brighter and I'm not editing photos anymore.", n: "Naomi", a: 39 },
+  { r: 5, t: "Bought it for my anniversary trip. Skin looked incredible in every photo.", n: "Camille", a: 48 },
+  { r: 4, t: "Good. Skin more even. Would love if it came in a larger bottle.", n: "Diane", a: 60 },
+  { r: 5, t: "Never leaving a review before. Had to for this one.", n: "Angela", a: 50 },
+  { r: 5, t: "My skin drinks moisturizer differently now. Hard to explain, but it's true.", n: "Farah", a: 45 },
+  { r: 5, t: "Perimenopause skin was rough. This helped more than any cream.", n: "Sophie", a: 47 },
+  { r: 5, t: "Been on it 6 months. Not stopping.", n: "Grace", a: 52 },
+  { r: 2, t: "Didn't feel much difference for me personally. Might just not be my thing.", n: "Barbara", a: 55 },
+  { r: 5, t: "Hair grew faster too. Wasn't expecting that.", n: "Lucia", a: 44 },
+  { r: 5, t: "Simple, clean, works. That's all I want in a supplement.", n: "Nina", a: 40 },
+  { r: 5, t: "Skin looks lit from inside. My favorite compliment to receive.", n: "Talia", a: 43 },
+  { r: 5, t: "Reordered before my first bottle ended. That says everything.", n: "Marisol", a: 49 },
+  { r: 4, t: "Noticed the energy first. Skin took longer but it did come.", n: "Erin", a: 46 },
+  { r: 5, t: "I've tried NAD IVs. This is 10% of the cost and I feel similar.", n: "Adriana", a: 53 },
+  { r: 5, t: "Feels like a treatment, not a supplement.", n: "Zara", a: 41 },
+  { r: 5, t: "Neck looks better. That's where I really see the age.", n: "Louise", a: 58 },
+  { r: 3, t: "Fine. Not life-changing for me but nothing negative to say.", n: "Karen T.", a: 51 },
+  { r: 5, t: "My skincare works better now. Serums actually sink in.", n: "Isabelle", a: 42 },
+  { r: 5, t: "Bought as a gift for my sister. She called me crying.", n: "Yara", a: 45 },
+  { r: 5, t: "Post-workout recovery feels quicker in my 50s.", n: "Tessa", a: 52 },
+  { r: 5, t: "Third bottle. Not going back.", n: "Renata", a: 47 },
+  { r: 5, t: "I forget I'm taking it. Then people ask what I'm doing differently.", n: "Simone", a: 44 },
+  { r: 4, t: "Solid. Consistent. I wish shipping was a touch faster.", n: "Melanie", a: 39 },
+  { r: 5, t: "Menopause hit me hard. This softened everything about it.", n: "Deborah", a: 56 },
+  { r: 5, t: "Clean ingredient list, no fillers. Exactly what I look for.", n: "Priyanka", a: 40 },
+  { r: 5, t: "My esthetician asked what changed at my last facial. That was the moment.", n: "Alicia", a: 48 },
+  { r: 5, t: "I feel like myself again. That's the best way I can put it.", n: "Miriam", a: 53 },
+  { r: 5, t: "Better than any face oil I've tried, and I've tried them all.", n: "Cara", a: 46 },
+  { r: 5, t: "One month in and my jawline looks tighter. Not imagining it.", n: "Bianca", a: 44 },
+];
 
 export const Route = createFileRoute("/product/$slug")({
   head: ({ params }) => {
@@ -84,6 +149,8 @@ function ProductPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [adding, setAdding] = useState(false);
   const [showSticky, setShowSticky] = useState(false);
+  const [wallVisible, setWallVisible] = useState(12);
+  const [wallImg, setWallImg] = useState<string | null>(null);
 
   const bundle = useMemo(() => BUNDLES.find((b) => b.id === selectedBundle) ?? BUNDLES[2], [selectedBundle]);
 
@@ -575,6 +642,79 @@ function ProductPage() {
           </div>
         </div>
       </section>
+
+      {/* REVIEW WALL */}
+      <section className="bg-[#FDF8EE]">
+        <div className="container-x py-24 md:py-32">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="eyebrow">Real Women, Real Rituals</div>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Loved by <span className="italic text-[#AD9752]">Thousands</span></h2>
+            <div className="mt-5 inline-flex items-center gap-2 text-[13px] tracking-wide text-[#5A483C]">
+              <FractionalStars value={4.8} size="h-4 w-4" />
+              <span className="text-[#3B2E25] font-medium">4.8</span>
+              <span className="text-[#AD9752]">·</span>
+              <span>based on verified reviews</span>
+            </div>
+          </div>
+
+          <div className="mt-14 columns-2 md:columns-3 gap-4 [column-fill:_balance]">
+            {WALL_REVIEWS.slice(0, wallVisible).map((rv, i) => (
+              <article
+                key={i}
+                className="mb-4 break-inside-avoid bg-[#FDF8EE] border border-[#EADFC7] rounded-[12px] shadow-[0_2px_10px_-4px_rgba(59,46,37,0.08)] hover:shadow-[0_18px_40px_-20px_rgba(59,46,37,0.25)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+              >
+                {rv.img && (
+                  <button
+                    type="button"
+                    onClick={() => setWallImg(rv.img!)}
+                    className="block w-full"
+                    aria-label={`Open photo from ${rv.n}`}
+                  >
+                    <img src={rv.img} alt={`Customer photo — ${rv.n}`} className="w-full h-auto block" loading="lazy" />
+                  </button>
+                )}
+                <div className={`p-5 ${!rv.img && rv.long ? "py-7" : ""}`}>
+                  <FractionalStars value={rv.r} size="h-3.5 w-3.5" />
+                  <p className={`mt-3 text-[#3B2E25] leading-relaxed ${!rv.img ? "font-display italic text-[19px] md:text-[21px]" : "text-[14px]"}`}>
+                    {rv.img ? rv.t : `"${rv.t}"`}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between gap-3">
+                    <div className="text-[13px] text-[#3B2E25]">
+                      <span className="font-medium">{rv.n}</span>
+                      <span className="text-[#7A6A5E]">, {rv.a}</span>
+                    </div>
+                    <span className="text-[10px] tracking-[0.14em] uppercase text-[#AD9752] whitespace-nowrap">✓ Verified Buyer</span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {wallVisible < WALL_REVIEWS.length && (
+            <div className="mt-12 text-center">
+              <button
+                type="button"
+                onClick={() => setWallVisible((v) => v + 12)}
+                className="btn-gold-ghost"
+              >
+                Load More Reviews
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* REVIEW PHOTO LIGHTBOX */}
+      {wallImg && (
+        <div className="fixed inset-0 z-[92] bg-black flex items-center justify-center" onClick={() => setWallImg(null)}>
+          <button
+            onClick={(e) => { e.stopPropagation(); setWallImg(null); }}
+            className="absolute top-4 right-4 text-white/80 hover:text-white h-10 w-10 flex items-center justify-center"
+            aria-label="Close"
+          ><XIcon className="h-6 w-6" /></button>
+          <img src={wallImg} alt="" className="max-h-[92vh] max-w-[92vw] object-contain" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
 
       {/* FAQ */}
       <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
