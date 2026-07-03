@@ -236,6 +236,9 @@ function ProductPage() {
             <p className="mt-4 flex items-center justify-center gap-2 text-xs text-[#7A6A5E] tracking-wide">
               <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee
             </p>
+            <p className="mt-2 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E]">
+              Third-Party Tested <span className="text-[#AD9752]">·</span> GMP-Certified <span className="text-[#AD9752]">·</span> Made in USA
+            </p>
 
             <button
               type="button"
