@@ -273,7 +273,7 @@ function ProductPage() {
                 <p className="mt-3 text-[14px] leading-7 text-[#5A483C]">{desc}</p>
               </div>
             ))}
-      <section className="bg-[#FDF8EE]">
+          </div>
         </div>
       </section>
 
