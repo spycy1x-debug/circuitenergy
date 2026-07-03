@@ -18,6 +18,7 @@ import img7 from "@/assets/nmn-what-to-expect.png.asset.json";
 import img8 from "@/assets/nmn-morning-ritual.png.asset.json";
 import supplementFacts from "@/assets/nmn-supplement-facts.png.asset.json";
 import gmpFacility from "@/assets/seralie-gmp-facility.png.asset.json";
+import gmpCertificate from "@/assets/seralie-gmp-certificate.png.asset.json";
 import batchTested from "@/assets/seralie-batch-tested.png.asset.json";
 
 export const Route = createFileRoute("/product/$slug")({
