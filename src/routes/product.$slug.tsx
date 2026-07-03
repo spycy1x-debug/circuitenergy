@@ -616,7 +616,7 @@ function ProductPage() {
               <FractionalStars value={4.8} size="h-4 w-4" />
               <span className="text-[#3B2E25] font-medium">4.8</span>
               <span className="text-[#AD9752]">·</span>
-              <span>based on verified reviews</span>
+              <span>based on 2000+ reviews</span>
             </div>
           </div>
 
