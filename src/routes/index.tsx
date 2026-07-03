@@ -4,6 +4,9 @@ import { Sparkles, Leaf, HeartPulse, ShieldCheck, Beaker, MapPin, Droplet, Star 
 import nmnBottle from "@/assets/nmn-new-1.jpeg.asset.json";
 import heroImage from "@/assets/seralie-hero.webp.asset.json";
 import nmnKitchen from "@/assets/nmn-new-4.png.asset.json";
+import rvMirror from "@/assets/nmn-review-bathroom-mirror.png.asset.json";
+import rvPool from "@/assets/nmn-review-pool.png.asset.json";
+import rvKitchen from "@/assets/nmn-review-kitchen-flowers.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
