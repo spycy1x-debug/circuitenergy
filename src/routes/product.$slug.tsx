@@ -28,6 +28,16 @@ import rwPilates from "@/assets/nmn-review-pilates.png.asset.json";
 import rwBalcony from "@/assets/nmn-review-balcony.png.asset.json";
 import rwKitchen from "@/assets/nmn-review-kitchen-flowers.png.asset.json";
 import rwMirror from "@/assets/nmn-review-bathroom-mirror.png.asset.json";
+import rwDenise from "@/assets/nmn-rw-denise.png.asset.json";
+import rwYumi from "@/assets/nmn-rw-yumi.png.asset.json";
+import rwAdriana from "@/assets/nmn-rw-adriana.png.asset.json";
+import rwLouise from "@/assets/nmn-rw-louise.png.asset.json";
+import rwKavita from "@/assets/nmn-rw-kavita.png.asset.json";
+import rwGrace from "@/assets/nmn-rw-grace.png.asset.json";
+import rwVivian from "@/assets/nmn-rw-vivian.png.asset.json";
+import rwBeatrice from "@/assets/nmn-rw-beatrice.png.asset.json";
+import rwIsabelle from "@/assets/nmn-rw-isabelle.png.asset.json";
+import rwMiriam from "@/assets/nmn-rw-miriam.png.asset.json";
 
 type WallReview = { r: number; t: string; n: string; a: number; img?: string; long?: boolean };
 const WALL_REVIEWS: WallReview[] = [
@@ -41,38 +51,38 @@ const WALL_REVIEWS: WallReview[] = [
   { r: 5, t: "Turned 60 this year and feel more like myself than I did at 55. Started as a skeptic.", n: "Gloria", a: 61, img: rwPool.url },
   { r: 4, t: "Good product, packaging is beautiful. Only reason for 4 stars is I wish there was a subscription option.", n: "Jennifer", a: 40 },
   { r: 5, t: "The photo test: I stopped hating pictures of myself. That's worth every penny.", n: "Michelle", a: 46, img: rwPilates.url },
-  { r: 5, t: "As a nurse I read labels for a living. Real dose, real ingredient, third-party tested. It's the only supplement brand I've ever reviewed.", n: "Denise", a: 52, long: true },
+  { r: 5, t: "As a nurse I read labels for a living. Real dose, real ingredient, third-party tested. It's the only supplement brand I've ever reviewed.", n: "Denise", a: 52, long: true, img: rwDenise.url },
   { r: 5, t: "Week 8: my nails are stronger, my skin is calmer, and I have energy after work for the first time in years.", n: "Amara", a: 39 },
   // additional 40
   { r: 5, t: "Glow is real. Cheeks look plumper without me changing a thing in my skincare.", n: "Elena", a: 42 },
-  { r: 5, t: "I feel less foggy in the mornings. Small thing but it changed my whole day.", n: "Beatrice", a: 49 },
+  { r: 5, t: "I feel less foggy in the mornings. Small thing but it changed my whole day.", n: "Beatrice", a: 49, img: rwBeatrice.url },
   { r: 5, t: "My mom noticed before I did. She's ordering her own now.", n: "Chloe", a: 38 },
   { r: 4, t: "Solid product. Took about a month. Wish the bottle was slightly bigger for the price.", n: "Hannah", a: 45 },
-  { r: 5, t: "Sleep quality is noticeably better. I wake up actually rested.", n: "Yumi", a: 51 },
+  { r: 5, t: "Sleep quality is noticeably better. I wake up actually rested.", n: "Yumi", a: 51, img: rwYumi.url },
   { r: 5, t: "Skin on my hands looks younger. That's the first place I always saw the age.", n: "Margaret", a: 57 },
   { r: 5, t: "Been through every trend. This one earned the spot on my counter.", n: "Sasha", a: 43 },
   { r: 5, t: "Finally something that doesn't taste like anything or upset my stomach.", n: "Ines", a: 41 },
-  { r: 5, t: "I'm 54 and get carded at wine bars again. Coincidence? I don't care.", n: "Vivian", a: 54 },
+  { r: 5, t: "I'm 54 and get carded at wine bars again. Coincidence? I don't care.", n: "Vivian", a: 54, img: rwVivian.url },
   { r: 3, t: "Decent. I think I need more time. Two months in, subtle changes.", n: "Rachel", a: 47 },
-  { r: 5, t: "Recommended by my dermatologist. That was enough for me.", n: "Kavita", a: 46 },
+  { r: 5, t: "Recommended by my dermatologist. That was enough for me.", n: "Kavita", a: 46, img: rwKavita.url },
   { r: 5, t: "My under-eyes look brighter and I'm not editing photos anymore.", n: "Naomi", a: 39 },
   { r: 5, t: "Bought it for my anniversary trip. Skin looked incredible in every photo.", n: "Camille", a: 48 },
   { r: 4, t: "Good. Skin more even. Would love if it came in a larger bottle.", n: "Diane", a: 60 },
   { r: 5, t: "Never leaving a review before. Had to for this one.", n: "Angela", a: 50 },
   { r: 5, t: "My skin drinks moisturizer differently now. Hard to explain, but it's true.", n: "Farah", a: 45 },
   { r: 5, t: "Perimenopause skin was rough. This helped more than any cream.", n: "Sophie", a: 47 },
-  { r: 5, t: "Been on it 6 months. Not stopping.", n: "Grace", a: 52 },
+  { r: 5, t: "Been on it 6 months. Not stopping.", n: "Grace", a: 52, img: rwGrace.url },
   { r: 2, t: "Didn't feel much difference for me personally. Might just not be my thing.", n: "Barbara", a: 55 },
   { r: 5, t: "Hair grew faster too. Wasn't expecting that.", n: "Lucia", a: 44 },
   { r: 5, t: "Simple, clean, works. That's all I want in a supplement.", n: "Nina", a: 40 },
   { r: 5, t: "Skin looks lit from inside. My favorite compliment to receive.", n: "Talia", a: 43 },
   { r: 5, t: "Reordered before my first bottle ended. That says everything.", n: "Marisol", a: 49 },
   { r: 4, t: "Noticed the energy first. Skin took longer but it did come.", n: "Erin", a: 46 },
-  { r: 5, t: "I've tried NAD IVs. This is 10% of the cost and I feel similar.", n: "Adriana", a: 53 },
+  { r: 5, t: "I've tried NAD IVs. This is 10% of the cost and I feel similar.", n: "Adriana", a: 53, img: rwAdriana.url },
   { r: 5, t: "Feels like a treatment, not a supplement.", n: "Zara", a: 41 },
-  { r: 5, t: "Neck looks better. That's where I really see the age.", n: "Louise", a: 58 },
+  { r: 5, t: "Neck looks better. That's where I really see the age.", n: "Louise", a: 58, img: rwLouise.url },
   { r: 3, t: "Fine. Not life-changing for me but nothing negative to say.", n: "Karen T.", a: 51 },
-  { r: 5, t: "My skincare works better now. Serums actually sink in.", n: "Isabelle", a: 42 },
+  { r: 5, t: "My skincare works better now. Serums actually sink in.", n: "Isabelle", a: 42, img: rwIsabelle.url },
   { r: 5, t: "Bought as a gift for my sister. She called me crying.", n: "Yara", a: 45 },
   { r: 5, t: "Post-workout recovery feels quicker in my 50s.", n: "Tessa", a: 52 },
   { r: 5, t: "Third bottle. Not going back.", n: "Renata", a: 47 },
@@ -81,7 +91,7 @@ const WALL_REVIEWS: WallReview[] = [
   { r: 5, t: "Menopause hit me hard. This softened everything about it.", n: "Deborah", a: 56 },
   { r: 5, t: "Clean ingredient list, no fillers. Exactly what I look for.", n: "Priyanka", a: 40 },
   { r: 5, t: "My esthetician asked what changed at my last facial. That was the moment.", n: "Alicia", a: 48 },
-  { r: 5, t: "I feel like myself again. That's the best way I can put it.", n: "Miriam", a: 53 },
+  { r: 5, t: "I feel like myself again. That's the best way I can put it.", n: "Miriam", a: 53, img: rwMiriam.url },
   { r: 5, t: "Better than any face oil I've tried, and I've tried them all.", n: "Cara", a: 46 },
   { r: 5, t: "One month in and my jawline looks tighter. Not imagining it.", n: "Bianca", a: 44 },
 ];
