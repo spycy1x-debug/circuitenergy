@@ -516,8 +516,58 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* PROOF, NOT PROMISES */}
       <section className="bg-[#FDF8EE]">
+        <div className="container-x py-28 md:py-[120px]">
+          {/* Row 1 — header */}
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="eyebrow">The Seralie Standard</div>
+            <h2 className="mt-5 font-display text-4xl md:text-5xl text-[#3B2E25]">
+              Proof, <span className="italic text-[#AD9752]">Not Promises.</span>
+            </h2>
+            <p className="mt-6 text-[15px] md:text-base leading-8 text-[#5A483C]">
+              Every batch of Seralie NMN is independently tested. Here's what ours showed.
+            </p>
+          </div>
+
+          {/* Row 2 — two columns */}
+          <div className="mt-20 md:mt-24 max-w-5xl mx-auto grid gap-14 md:gap-16 md:grid-cols-2 items-center">
+            <div>
+              <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
+                <img src={gmpFacility.url} alt="Seralie GMP-certified US manufacturing facility" className="w-full h-auto object-cover" loading="lazy" />
+              </div>
+              <p className="mt-5 text-center text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] leading-relaxed">
+                Manufactured in a GMP-Certified US Facility <span className="text-[#AD9752]">·</span> 21 CFR Part 111
+              </p>
+            </div>
+            <div>
+              <div className="overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] bg-[#FDF8EE]">
+                <img src={batchTested.url} alt="Independent laboratory batch test results for Seralie NMN" className="w-full h-auto object-cover" loading="lazy" />
+              </div>
+              <p className="mt-5 text-center">
+                <a
+                  href="mailto:support@seralie.com?subject=COA%20Request"
+                  className="caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-0.5 transition-colors"
+                >
+                  Request the full Certificate of Analysis →
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Row 3 — thin trust strip */}
+          <div className="mt-24 max-w-4xl mx-auto">
+            <div className="h-px bg-[#AD9752]/40" />
+            <div className="py-6 text-center text-[10px] md:text-[11px] tracking-[0.24em] uppercase text-[#3B2E25] leading-loose">
+              Third-Party Tested <span className="text-[#AD9752] mx-2">·</span> GMP-Certified Facility <span className="text-[#AD9752] mx-2">·</span> Real β-NMN, Verified <span className="text-[#AD9752] mx-2">·</span> Made in USA
+            </div>
+            <div className="h-px bg-[#AD9752]/40" />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
         <div className="container-x py-24 md:py-32">
           <div className="text-center max-w-2xl mx-auto">
             <div className="eyebrow">Questions</div>
