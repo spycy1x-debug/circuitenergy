@@ -28,6 +28,16 @@ import rwPilates from "@/assets/nmn-review-pilates.png.asset.json";
 import rwBalcony from "@/assets/nmn-review-balcony.png.asset.json";
 import rwKitchen from "@/assets/nmn-review-kitchen-flowers.png.asset.json";
 import rwMirror from "@/assets/nmn-review-bathroom-mirror.png.asset.json";
+import rwDenise from "@/assets/nmn-rw-denise.png.asset.json";
+import rwYumi from "@/assets/nmn-rw-yumi.png.asset.json";
+import rwAdriana from "@/assets/nmn-rw-adriana.png.asset.json";
+import rwLouise from "@/assets/nmn-rw-louise.png.asset.json";
+import rwKavita from "@/assets/nmn-rw-kavita.png.asset.json";
+import rwGrace from "@/assets/nmn-rw-grace.png.asset.json";
+import rwVivian from "@/assets/nmn-rw-vivian.png.asset.json";
+import rwBeatrice from "@/assets/nmn-rw-beatrice.png.asset.json";
+import rwIsabelle from "@/assets/nmn-rw-isabelle.png.asset.json";
+import rwMiriam from "@/assets/nmn-rw-miriam.png.asset.json";
 
 type WallReview = { r: number; t: string; n: string; a: number; img?: string; long?: boolean };
 const WALL_REVIEWS: WallReview[] = [
