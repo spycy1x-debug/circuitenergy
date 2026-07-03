@@ -14,9 +14,9 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { lines, subtotal, count, isLoading, checkoutUrl } = useShopifyCart();
-  const shipping = subtotal >= 75 || subtotal === 0 ? 0 : 7.99;
+  const shipping = subtotal >= 50 || subtotal === 0 ? 0 : 7.99;
   const total = subtotal + shipping;
-  const progress = Math.min(100, (subtotal / 75) * 100);
+  const progress = Math.min(100, (subtotal / 50) * 100);
 
   return (
     <>
@@ -25,7 +25,7 @@ function CartPage() {
           <div className="eyebrow">Your Ritual</div>
           <h1 className="mt-4 font-display text-5xl md:text-6xl text-[#3B2E25]">Cart</h1>
           <p className="mt-4 text-[15px] leading-8 text-[#5A483C]">
-            {count === 0 ? "Nothing here yet — the ritual awaits." : `${count} ${count === 1 ? "item" : "items"} · Complimentary shipping over $75.`}
+            {count === 0 ? "Nothing here yet — the ritual awaits." : `${count} ${count === 1 ? "item" : "items"} · Complimentary shipping over $50.`}
           </p>
         </div>
       </section>
@@ -44,10 +44,10 @@ function CartPage() {
           ) : (
             <div className="grid gap-10 lg:grid-cols-[1fr_380px] max-w-5xl mx-auto">
               <div>
-                {subtotal < 75 && (
+                {subtotal < 50 && (
                   <div className="border border-[#EADFC7] bg-[#F7EFDF]/60 p-5">
                     <div className="text-sm text-[#3B2E25]">
-                      Add <span className="font-display italic text-[#AD9752]">${(75 - subtotal).toFixed(2)}</span> for complimentary shipping.
+                      Add <span className="font-display italic text-[#AD9752]">${(50 - subtotal).toFixed(2)}</span> for complimentary shipping.
                     </div>
                     <div className="mt-3 h-1 bg-[#EADFC7] overflow-hidden">
                       <div className="h-full bg-[#AD9752] transition-all" style={{ width: `${progress}%` }} />
@@ -94,7 +94,7 @@ function CartPage() {
                 </button>
                 <div className="mt-6 space-y-2 text-[11px] text-[#7A6A5E] tracking-wide">
                   <div className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee</div>
-                  <div className="flex items-center gap-2"><Truck className="h-3.5 w-3.5 text-[#AD9752]" /> Free shipping over $75</div>
+                  <div className="flex items-center gap-2"><Truck className="h-3.5 w-3.5 text-[#AD9752]" /> Free shipping over $50</div>
                 </div>
               </aside>
             </div>
