@@ -301,10 +301,19 @@ function ProductPage() {
           <div>
             <div className="eyebrow">Beauty & Longevity</div>
             <h1 className="mt-4 font-display text-5xl md:text-6xl leading-[1.02] text-[#3B2E25]">Seralie NMN</h1>
-            <div className="mt-4 flex items-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <FractionalStars value={4.8} size="h-4 w-4" />
               <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
                 4.8 · 2000+ reviews
+              </a>
+              <span className="hidden sm:inline text-[#EADFC7]">|</span>
+              <a
+                href="#certifications"
+                onClick={scrollToCertifications}
+                className="caps-label inline-flex items-center gap-1.5 text-[#AD9752] hover:text-[#3B2E25] underline underline-offset-4 decoration-[#AD9752]/40 hover:decoration-[#3B2E25] transition-colors"
+              >
+                <ShieldCheck className="h-3.5 w-3.5" strokeWidth={1.5} />
+                View Certifications
               </a>
             </div>
 
