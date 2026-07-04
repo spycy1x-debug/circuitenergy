@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ShieldCheck, Star } from "lucide-react";
 
 import heroMirror from "@/assets/nmn-review-bathroom-mirror.png.asset.json";
-import nadChart from "@/assets/nmn-nad-chart.png.asset.json";
 import morningRitual from "@/assets/nmn-morning-ritual.png.asset.json";
 import bottleHero from "@/assets/nmn-bottle-hero.png.asset.json";
 
@@ -106,8 +105,34 @@ function GlowStoryPage() {
 
       {/* NAD CHART */}
       <div className="container-x mt-12 max-w-2xl mx-auto">
-        <div className="overflow-hidden rounded-2xl border border-[#EADFC7] bg-white/50">
-          <img src={nadChart.url} alt="Chart showing NAD+ levels declining with age" className="w-full h-auto" />
+        <div className="rounded-2xl border border-[#EADFC7] bg-[#F7EFDF]/50 p-6 sm:p-10">
+          <div className="text-center caps-label text-[#3B2E25] mb-6">Your NAD+ Levels</div>
+          <div className="relative w-full aspect-[16/8]">
+            <svg viewBox="0 0 800 400" className="w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="60" y1="360" x2="770" y2="360" stroke="#EADFC7" strokeWidth="1" />
+              <line x1="60" y1="40" x2="60" y2="360" stroke="#EADFC7" strokeWidth="1" />
+              <path
+                d="M 60 70 C 220 90, 320 170, 420 230 S 640 340, 770 355"
+                fill="none"
+                stroke="#AD9752"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+              <circle cx="340" cy="190" r="9" fill="#AD9752" />
+              <circle cx="340" cy="190" r="16" fill="none" stroke="#AD9752" strokeOpacity="0.35" strokeWidth="1.5" />
+            </svg>
+            <div
+              className="absolute font-display italic text-[#3B2E25] text-sm md:text-base"
+              style={{ left: "43%", top: "38%" }}
+            >
+              you may be here
+            </div>
+          </div>
+          <div className="mt-4 flex justify-between text-[10px] tracking-[0.24em] uppercase text-[#7A6A5E] px-1">
+            <span>Age 20</span>
+            <span>→</span>
+            <span>Age 60</span>
+          </div>
         </div>
         <p className="mt-3 text-center text-[11px] italic text-[#7A6A5E]">
           NAD+ declines steadily with age — researchers estimate a ~50% drop between 20 and 50.
