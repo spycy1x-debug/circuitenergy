@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as GlowRouteImport } from './routes/glow'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
@@ -28,6 +29,11 @@ const ShopRoute = ShopRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlowRoute = GlowRouteImport.update({
+  id: '/glow',
+  path: '/glow',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/glow': typeof GlowRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/glow': typeof GlowRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/glow': typeof GlowRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/glow'
     | '/login'
     | '/privacy'
     | '/shop'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/glow'
     | '/login'
     | '/privacy'
     | '/shop'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/glow'
     | '/login'
     | '/privacy'
     | '/shop'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
+  GlowRoute: typeof GlowRoute
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glow': {
+      id: '/glow'
+      path: '/glow'
+      fullPath: '/glow'
+      preLoaderRoute: typeof GlowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
+  GlowRoute: GlowRoute,
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
