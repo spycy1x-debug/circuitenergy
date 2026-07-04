@@ -137,6 +137,11 @@ function scrollToReviews(e: React.MouseEvent) {
   document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function scrollToCertifications(e: React.MouseEvent) {
+  e.preventDefault();
+  document.getElementById("certifications")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 
 const BUNDLES = [
   { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, standardPrice: 57.99, detail: "30-day supply", freeShipping: false },
@@ -243,19 +248,37 @@ function ProductPage() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Gallery */}
           <div>
-            <button
-              type="button"
-              onClick={() => setLightbox(true)}
-              className="relative block w-full aspect-square overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] group"
-              aria-label="View larger"
-            >
-              <img
-                src={GALLERY[active]}
-                alt={`Seralie NMN — view ${active + 1}`}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                loading="eager"
-              />
-            </button>
+            <div className="relative group">
+              <button
+                type="button"
+                onClick={() => setLightbox(true)}
+                className="relative block w-full aspect-square overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)]"
+                aria-label="View larger"
+              >
+                <img
+                  src={GALLERY[active]}
+                  alt={`Seralie NMN — view ${active + 1}`}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="eager"
+                />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setActive((active - 1 + GALLERY.length) % GALLERY.length); }}
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-[#FDF8EE]/90 backdrop-blur border border-[#EADFC7] text-[#3B2E25] flex items-center justify-center shadow-md hover:bg-[#FDF8EE] hover:border-[#AD9752] transition-colors"
+              >
+                <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setActive((active + 1) % GALLERY.length); }}
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-[#FDF8EE]/90 backdrop-blur border border-[#EADFC7] text-[#3B2E25] flex items-center justify-center shadow-md hover:bg-[#FDF8EE] hover:border-[#AD9752] transition-colors"
+              >
+                <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
+              </button>
+            </div>
 
             <div className="mt-3 grid grid-cols-5 sm:grid-cols-8 gap-2">
               {GALLERY.map((src, i) => (
@@ -278,10 +301,19 @@ function ProductPage() {
           <div>
             <div className="eyebrow">Beauty & Longevity</div>
             <h1 className="mt-4 font-display text-5xl md:text-6xl leading-[1.02] text-[#3B2E25]">Seralie NMN</h1>
-            <div className="mt-4 flex items-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <FractionalStars value={4.8} size="h-4 w-4" />
               <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
                 4.8 · 2000+ reviews
+              </a>
+              <span className="hidden sm:inline text-[#EADFC7]">|</span>
+              <a
+                href="#certifications"
+                onClick={scrollToCertifications}
+                className="caps-label inline-flex items-center gap-1.5 text-[#AD9752] hover:text-[#3B2E25] underline underline-offset-4 decoration-[#AD9752]/40 hover:decoration-[#3B2E25] transition-colors"
+              >
+                <ShieldCheck className="h-3.5 w-3.5" strokeWidth={1.5} />
+                View Certifications
               </a>
             </div>
 
@@ -634,7 +666,7 @@ function ProductPage() {
 
 
       {/* PROOF, NOT PROMISES */}
-      <section className="bg-[#FDF8EE]">
+      <section id="certifications" className="scroll-mt-24 bg-[#FDF8EE]">
         <div className="container-x py-28 md:py-[120px]">
           {/* Row 1 — header */}
           <div className="text-center max-w-2xl mx-auto">
