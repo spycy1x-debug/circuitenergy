@@ -137,6 +137,11 @@ function scrollToReviews(e: React.MouseEvent) {
   document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function scrollToCertifications(e: React.MouseEvent) {
+  e.preventDefault();
+  document.getElementById("certifications")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 
 const BUNDLES = [
   { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, standardPrice: 57.99, detail: "30-day supply", freeShipping: false },
