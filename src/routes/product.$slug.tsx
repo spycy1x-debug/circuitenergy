@@ -248,19 +248,37 @@ function ProductPage() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Gallery */}
           <div>
-            <button
-              type="button"
-              onClick={() => setLightbox(true)}
-              className="relative block w-full aspect-square overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)] group"
-              aria-label="View larger"
-            >
-              <img
-                src={GALLERY[active]}
-                alt={`Seralie NMN — view ${active + 1}`}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                loading="eager"
-              />
-            </button>
+            <div className="relative group">
+              <button
+                type="button"
+                onClick={() => setLightbox(true)}
+                className="relative block w-full aspect-square overflow-hidden rounded-2xl border border-[#EADFC7] shadow-[0_20px_50px_-25px_rgba(59,46,37,0.25)]"
+                aria-label="View larger"
+              >
+                <img
+                  src={GALLERY[active]}
+                  alt={`Seralie NMN — view ${active + 1}`}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="eager"
+                />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setActive((active - 1 + GALLERY.length) % GALLERY.length); }}
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-[#FDF8EE]/90 backdrop-blur border border-[#EADFC7] text-[#3B2E25] flex items-center justify-center shadow-md hover:bg-[#FDF8EE] hover:border-[#AD9752] transition-colors"
+              >
+                <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setActive((active + 1) % GALLERY.length); }}
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-[#FDF8EE]/90 backdrop-blur border border-[#EADFC7] text-[#3B2E25] flex items-center justify-center shadow-md hover:bg-[#FDF8EE] hover:border-[#AD9752] transition-colors"
+              >
+                <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
+              </button>
+            </div>
 
             <div className="mt-3 grid grid-cols-5 sm:grid-cols-8 gap-2">
               {GALLERY.map((src, i) => (
