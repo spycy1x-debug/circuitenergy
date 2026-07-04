@@ -666,7 +666,7 @@ function ProductPage() {
 
 
       {/* PROOF, NOT PROMISES */}
-      <section className="bg-[#FDF8EE]">
+      <section id="certifications" className="scroll-mt-24 bg-[#FDF8EE]">
         <div className="container-x py-28 md:py-[120px]">
           {/* Row 1 — header */}
           <div className="text-center max-w-2xl mx-auto">
