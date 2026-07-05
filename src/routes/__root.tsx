@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 
+
 import appCss from "../styles.css?url";
 import seralieLogo from "@/assets/seralie-logo.webp.asset.json";
 import favicon from "@/assets/favicon.png.asset.json";
