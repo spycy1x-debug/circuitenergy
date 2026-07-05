@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -118,9 +119,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+  const isGlowPage = location.pathname === "/glow";
   return (
     <QueryClientProvider client={queryClient}>
-      <AnnouncementBar />
+      {!isGlowPage && <AnnouncementBar />}
       <Header />
       <main><Outlet /></main>
       <Footer />
