@@ -124,7 +124,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {!isGlowPage && <AnnouncementBar />}
-      <Header />
+      {!isGlowPage && <Header />}
       <main><Outlet /></main>
       <Footer />
       <CartDrawer />
