@@ -44,7 +44,7 @@ function GlowStoryPage() {
           <span>6 min read</span>
         </div>
         <p className="mt-3 text-[10px] tracking-[0.2em] uppercase text-[#B0A294]">
-          Sponsored content · In partnership with Seralie
+          In partnership with Seralie
         </p>
       </header>
 
