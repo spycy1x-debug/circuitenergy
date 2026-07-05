@@ -255,7 +255,7 @@ function GlowStoryPage() {
       {/* DISCLAIMERS */}
       <footer className="container-x max-w-2xl mx-auto mt-14 pb-20 space-y-3 text-[11px] leading-5 text-[#9B8D80]">
         <p>
-          This is a sponsored reader story published in partnership with Seralie. Individual results
+          This is a reader story published in partnership with Seralie. Individual results
           vary; the experiences described are one person's and are not a guarantee of outcomes.
         </p>
         <p>
