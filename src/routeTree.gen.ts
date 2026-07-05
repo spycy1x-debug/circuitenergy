@@ -31,14 +31,14 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GlowRoute = GlowRouteImport.update({
-  id: '/glow',
-  path: '/glow',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlowRoute = GlowRouteImport.update({
+  id: '/glow',
+  path: '/glow',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -190,18 +190,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/glow': {
-      id: '/glow'
-      path: '/glow'
-      fullPath: '/glow'
-      preLoaderRoute: typeof GlowRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glow': {
+      id: '/glow'
+      path: '/glow'
+      fullPath: '/glow'
+      preLoaderRoute: typeof GlowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
