@@ -290,6 +290,30 @@ function GlowStoryPage() {
           product is not intended to diagnose, treat, cure, or prevent any disease.
         </p>
       </footer>
+
+      {/* STICKY BOTTOM CTA */}
+      {showSticky && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#FDF8EE]/95 border-t border-[#EADFC7] shadow-[0_-4px_20px_rgba(59,46,37,0.12)] backdrop-blur-sm">
+          <div className="container-x max-w-3xl mx-auto py-3 md:py-4 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <img src={bottleHero.url} alt="Seralie NMN" className="h-12 w-auto md:h-14" />
+              <div>
+                <div className="font-display text-[#3B2E25] text-sm md:text-base">Seralie NMN</div>
+                <div className="text-[10px] md:text-[11px] text-[#7A6A5E]">500 mg β-NMN · 15% off first order</div>
+              </div>
+            </div>
+            <Link
+              to="/product/$slug"
+              params={{ slug: "nmn" }}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] md:text-[12px] px-5 py-3 transition-colors"
+            >
+              Shop now <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </div>
+      )}
+      {showSticky && <div className="h-24 md:h-28" />}
+
     </article>
   );
 }
