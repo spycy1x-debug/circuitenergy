@@ -26,6 +26,15 @@ export const Route = createFileRoute("/glow")({
 });
 
 function GlowStoryPage() {
+  const [showSticky, setShowSticky] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowSticky(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <article className="bg-[#FDF8EE] text-[#3B2E25]">
       {/* EDITORIAL HEADER */}
