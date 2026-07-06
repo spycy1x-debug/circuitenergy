@@ -64,13 +64,12 @@ function GlowStoryPage() {
             <p className="font-medium text-[#3B2E25] text-sm">15% off your first Seralie order</p>
             <p className="text-[11px] md:text-[12px] text-[#7A6A5E]">Verified β-NMN · 500 mg per capsule · 30-day guarantee</p>
           </div>
-          <Link
-            to="/product/$slug"
-            params={{ slug: "nmn" }}
+          <a
+            href="/product/nmn"
             className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] md:text-[12px] px-5 py-3 transition-colors"
           >
             Shop now <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -305,13 +304,12 @@ function GlowStoryPage() {
                 <div className="text-[10px] md:text-[11px] text-[#7A6A5E]">500 mg β-NMN · 15% off first order</div>
               </div>
             </div>
-            <Link
-              to="/product/$slug"
-              params={{ slug: "nmn" }}
+            <a
+              href="/product/nmn"
               className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] md:text-[12px] px-5 py-3 transition-colors"
             >
               Shop now <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </a>
           </div>
         </div>
       )}
