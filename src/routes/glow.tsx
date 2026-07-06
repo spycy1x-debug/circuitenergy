@@ -9,16 +9,16 @@ import bottleHero from "@/assets/nmn-bottle-hero.png.asset.json";
 export const Route = createFileRoute("/glow")({
   head: () => ({
     meta: [
-      { title: "The Photo That Made Me Google “Why Do I Look So Tired” | Seralie Journal" },
+      { title: "How My Skin “Reversed” In Age | Seralie Journal" },
       {
         name: "description",
         content:
-          "I wasn't tired. But every photo said otherwise. What I learned about NAD+ changed how I think about aging — and what I do every morning now.",
+          "At 47, people started asking what I'd changed. What I learned about NAD+ changed how I think about aging — and what I do every morning now.",
       },
-      { property: "og:title", content: "The Photo That Made Me Google “Why Do I Look So Tired”" },
+      { property: "og:title", content: "How My Skin “Reversed” In Age" },
       {
         property: "og:description",
-        content: "A reader's story about the molecule behind “tired face” — and the morning ritual that changed hers.",
+        content: "A reader's story about the molecule behind aging skin — and the morning ritual that turned it around.",
       },
     ],
   }),
@@ -41,12 +41,11 @@ function GlowStoryPage() {
       <header className="container-x pt-14 md:pt-20 max-w-3xl mx-auto text-center">
         <div className="eyebrow">Seralie Journal · Reader Story</div>
         <h1 className="mt-6 font-display text-4xl md:text-6xl leading-[1.05]">
-          The photo that made me google{" "}
-          <span className="italic text-[#AD9752]">“why do I look so tired”</span>
+          How my skin <span className="italic text-[#AD9752]">“reversed” in age</span>
         </h1>
         <p className="mt-6 text-[15px] leading-8 text-[#5A483C]">
-          I wasn't tired. I'd slept eight hours. But the camera kept disagreeing with me — and it
-          turned out the camera knew something I didn't.
+          A year ago, photos of me read a decade older than I felt. Then I found what was actually
+          aging my skin — and it was never my skincare.
         </p>
         <div className="mt-8 flex items-center justify-center gap-3 text-[12px] tracking-[0.18em] uppercase text-[#7A6A5E]">
           <span>By Rachel M., 47</span>
@@ -85,29 +84,32 @@ function GlowStoryPage() {
           />
         </div>
         <p className="mt-3 text-center text-[11px] italic text-[#7A6A5E]">
-          “It wasn't one bad photo. It was every photo.”
+          “This was the ‘before.’ I just didn't know it yet.”
         </p>
       </div>
 
       {/* STORY */}
       <div className="container-x max-w-2xl mx-auto mt-14 md:mt-20 space-y-8 text-[16px] leading-9 text-[#4A3B30]">
         <p>
-          It was my niece's graduation. Someone handed me their phone to show me the group photo,
-          and my first thought — the honest one, before I could edit it — was:{" "}
-          <em>who is that exhausted woman standing next to my sister?</em>
+          Last month, my esthetician — a woman who does not hand out compliments — held my chart,
+          looked at my face, and asked what I'd changed. A friend at brunch asked if I'd had
+          “something done.” I hadn't. But a year ago, nobody was asking me anything like that.
         </p>
         <p>
-          I wasn't exhausted. I'd slept fine. I'd done my skincare that morning — the serums, the
-          SPF, the whole shelf. And I still looked like I was running on four hours.
+          A year ago, it was the opposite. It was my niece's graduation, someone handed me their
+          phone to show me the group photo, and my first thought — the honest one, before I could
+          edit it — was: <em>who is that older, exhausted woman standing next to my sister?</em>
         </p>
         <p>
-          If you're a woman somewhere north of 40, you probably know this exact moment. It's not
-          dramatic. Nothing is <em>wrong</em>, exactly. Your face just reads&hellip; dimmer. Flatter.
-          Tired when you aren't. And nobody warns you how early it starts.
+          I'd done everything right. The serums, the SPF, the whole shelf. And my skin still
+          read&hellip; older than I felt. Dimmer. Flatter. If you're a woman somewhere north of 40,
+          you probably know this exact moment. Nothing is <em>wrong</em>, exactly. And nobody warns
+          you how early it starts.
         </p>
         <p className="font-medium text-[#3B2E25]">
-          That night I did what we all do. I googled it. And I fell down a rabbit hole that changed
-          how I think about aging.
+          That night I did what we all do. I googled it. And I fell down a rabbit hole that
+          explained why my skin was aging faster than I was — and how that turned out to be
+          reversible.
         </p>
 
         <div className="hairline w-16 mx-auto" />
@@ -217,8 +219,9 @@ function GlowStoryPage() {
           <em>mine again</em>.
         </p>
         <p>
-          By week eight, a coworker asked if I'd changed my makeup. I hadn't. By month three, my
-          esthetician asked what I was doing differently — and she does not hand out compliments.
+          By week eight, a coworker asked if I'd changed my makeup. I hadn't. By month three came
+          the esthetician moment I told you about at the start — and the strange, wonderful
+          experience of watching photos of myself start moving in the <em>other</em> direction.
         </p>
       </div>
 
@@ -234,10 +237,10 @@ function GlowStoryPage() {
 
       <div className="container-x max-w-2xl mx-auto mt-12 space-y-8 text-[16px] leading-9 text-[#4A3B30]">
         <p>
-          Here's the thing I'd say to the woman staring at her own graduation photo: you're not
-          imagining it, and it's not your fault. You did the skincare, the water, the workouts.
-          This is the layer underneath all of that — and it's addressable. That's not hype;
-          that's biology.
+          Here's the thing I'd say to the woman staring at a photo that reads older than she
+          feels: you're not imagining it, and it's not your fault. You did the skincare, the
+          water, the workouts. This is the layer underneath all of that — and it's the one layer
+          that can actually move in the other direction. That's not hype; that's biology.
         </p>
         <p className="font-medium text-[#3B2E25]">
           Every month at half-empty is a month your cells don't get back. That's the sentence that
