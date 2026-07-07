@@ -8,15 +8,15 @@ import {
 import { shopifyCart } from "@/lib/shopify-cart";
 import { supabase } from "@/integrations/supabase/client";
 
-// Product assets (in gallery display order)
-import img1 from "@/assets/nmn-new-1.jpeg.asset.json";
-import img2 from "@/assets/nmn-new-3.png.asset.json";
-import img3 from "@/assets/nmn-new-2.png.asset.json";
-import img4 from "@/assets/nmn-new-4.png.asset.json";
-import img5 from "@/assets/nmn-new-5.png.asset.json";
-import img6 from "@/assets/nmn-hand-capsule.png.asset.json";
-import img7 from "@/assets/nmn-what-to-expect.png.asset.json";
-import img8 from "@/assets/nmn-morning-ritual.png.asset.json";
+// Product assets (in gallery display order) — locally optimized JPEGs
+import img1 from "@/assets/nmn-new-1-opt.jpg";
+import img2 from "@/assets/nmn-new-3-opt.jpg";
+import img3 from "@/assets/nmn-new-2-opt.jpg";
+import img4 from "@/assets/nmn-new-4-opt.jpg";
+import img5 from "@/assets/nmn-new-5-opt.jpg";
+import img6 from "@/assets/nmn-hand-capsule-opt.jpg";
+import img7 from "@/assets/nmn-what-to-expect-opt.jpg";
+import img8 from "@/assets/nmn-morning-ritual-opt.jpg";
 import supplementFacts from "@/assets/nmn-supplement-facts.png.asset.json";
 import gmpFacility from "@/assets/seralie-gmp-facility.png.asset.json";
 import gmpCertificate from "@/assets/seralie-gmp-certificate.png.asset.json";
@@ -112,7 +112,7 @@ export const Route = createFileRoute("/product/$slug")({
   component: ProductPage,
 });
 
-const GALLERY = [img1, img2, img3, img4, img5, img6, img7, img8].map((a) => a.url);
+const GALLERY = [img8, img1, img2, img3, img4, img5, img6, img7];
 
 function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: string }) {
   return (
@@ -160,7 +160,7 @@ function ProductPage() {
 
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
-  const [selectedBundle, setSelectedBundle] = useState("4");
+  const [selectedBundle, setSelectedBundle] = useState("1");
   const [showFacts, setShowFacts] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [adding, setAdding] = useState(false);
