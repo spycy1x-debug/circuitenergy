@@ -397,12 +397,13 @@ function ProductPage() {
             </button>
 
             <p className="mt-4 flex items-center justify-center gap-2 text-xs text-[#7A6A5E] tracking-wide">
-              <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee
+              <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee · Secure checkout
             </p>
             <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
               {[
                 { Icon: Beaker, label: "Third-Party Tested" },
                 { Icon: ShieldCheck, label: "GMP-Certified" },
+                { Icon: Droplet, label: "High Purity β-NMN" },
                 { Icon: MapPin, label: "Made in USA" },
               ].map(({ Icon, label }) => (
                 <span
