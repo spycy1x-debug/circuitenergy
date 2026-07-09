@@ -586,51 +586,6 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* NOT ALL NMN IS REAL NMN */}
-      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
-        <div className="container-x py-24 md:py-32">
-          <div className="text-center max-w-2xl mx-auto">
-            <div className="eyebrow">A quiet warning</div>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Not all NMN is <span className="italic text-[#AD9752]">real NMN</span>.</h2>
-            <p className="mt-5 text-[15px] leading-8 text-[#5A483C]">
-              Most cheap NMN online is nicotinamide or under-dosed. The molecule matters. The purity matters. The dose matters.
-            </p>
-          </div>
-
-          <div className="mt-14 max-w-3xl mx-auto bg-[#FDF8EE] border border-[#EADFC7]">
-            <div className="grid grid-cols-3 border-b border-[#EADFC7]">
-              <div className="p-5 caps-label text-[#7A6A5E]">The difference</div>
-              <div className="p-5 caps-label text-[#AD9752] text-center border-x border-[#EADFC7] bg-[#F7EFDF]/60">Seralie</div>
-              <div className="p-5 caps-label text-[#7A6A5E] text-center">Typical Amazon Brand</div>
-            </div>
-            {[
-              ["Real β-NMN molecule", true, false],
-              ["500 mg full dose", true, false],
-              ["Third-party tested every batch", true, false],
-              ["COA available on request", true, false],
-              ["Formulated for beauty & longevity", true, false],
-              ["Made in the USA, GMP-certified", true, false],
-              ["No unnecessary fillers", true, false],
-              ["30-day money-back guarantee", true, false],
-            ].map(([label, us, them], i) => (
-              <div key={i} className={`grid grid-cols-3 ${i < 7 ? "border-b border-[#EADFC7]" : ""}`}>
-                <div className="p-5 text-sm text-[#3B2E25]">{label}</div>
-                <div className="p-5 border-x border-[#EADFC7] bg-[#F7EFDF]/60 text-center">
-                  {us ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
-                </div>
-                <div className="p-5 text-center">
-                  {them ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-5 max-w-3xl mx-auto text-center text-[11px] leading-5 text-[#7A6A5E]">
-            "Typical Amazon Brand" reflects patterns reported in independent third-party testing of
-            marketplace NMN products, not any specific brand.
-          </p>
-        </div>
-      </section>
-
       {/* QUALITY & PURITY */}
       <section className="bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
