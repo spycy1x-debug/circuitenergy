@@ -236,7 +236,7 @@ function ProductPage() {
         variantId: bundle.variantId,
         productTitle: "Seralie NMN",
         variantTitle: bundle.label,
-        image: GALLERY[0],
+        image: img1,
         unitPrice: bundle.price,
       }, 1);
     } catch (e) {

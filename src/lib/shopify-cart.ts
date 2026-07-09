@@ -11,6 +11,11 @@ const ENDPOINT = `https://${DOMAIN}/api/${API_VERSION}/graphql.json`;
 
 const LS_CART_ID = "circuit-shopify-cart-id";
 const LS_CART_LINES = "circuit-shopify-cart-lines";
+const LS_OVERRIDES = "seralie-cart-overrides";
+
+// Per-variant display overrides (title/image) captured on add() so the cart
+// always shows Seralie branding even when the Shopify product data is stale.
+const overrides: Record<string, { title?: string; image?: string }> = {};
 
 export type CartLine = {
   id: string; // shopify line id
@@ -51,6 +56,7 @@ function persist() {
   if (typeof window === "undefined") return;
   if (state.cartId) localStorage.setItem(LS_CART_ID, state.cartId);
   localStorage.setItem(LS_CART_LINES, JSON.stringify({ lines: state.lines, checkoutUrl: state.checkoutUrl }));
+  localStorage.setItem(LS_OVERRIDES, JSON.stringify(overrides));
 }
 
 function hydrate() {
@@ -63,6 +69,8 @@ function hydrate() {
       state.lines = parsed.lines || [];
       state.checkoutUrl = parsed.checkoutUrl || null;
     }
+    const ovRaw = localStorage.getItem(LS_OVERRIDES);
+    if (ovRaw) Object.assign(overrides, JSON.parse(ovRaw));
   } catch {
     /* ignore */
   }
@@ -120,12 +128,13 @@ function mapCart(cart: any) {
   state.lines = (cart.lines?.edges || []).map((e: any) => {
     const n = e.node;
     const m = n.merchandise;
+    const ov = overrides[m.id] || {};
     return {
       id: n.id,
       variantId: m.id,
-      productTitle: m.product?.title || "",
+      productTitle: (ov.title || m.product?.title || "").replace(/circuit/gi, "Seralie"),
       variantTitle: m.title === "Default Title" ? "" : m.title,
-      image: m.image?.url || m.product?.featuredImage?.url || "",
+      image: ov.image || m.image?.url || m.product?.featuredImage?.url || "",
       unitPrice: parseFloat(m.price?.amount || "0"),
       quantity: n.quantity,
     } as CartLine;
@@ -236,6 +245,9 @@ export const shopifyCart = {
   },
   async add(item: Omit<CartLine, "id" | "quantity">, quantity = 1) {
     ensureHydrated();
+    if (item.productTitle || item.image) {
+      overrides[item.variantId] = { title: item.productTitle, image: item.image };
+    }
     state.isLoading = true;
     commit();
     try {
