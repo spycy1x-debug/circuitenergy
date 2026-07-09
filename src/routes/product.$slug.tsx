@@ -112,7 +112,8 @@ export const Route = createFileRoute("/product/$slug")({
   component: ProductPage,
 });
 
-const GALLERY = [img8, img1, img2, img3, img4, img5, img6, img7];
+// Image 4 (nmn-new-4) — the "5th" of the original gallery — is now the hero image.
+const GALLERY = [img4, img8, img1, img2, img3, img5, img6, img7];
 
 function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: string }) {
   return (
@@ -206,7 +207,7 @@ function ProductPage() {
   const bundle = useMemo(() => BUNDLES.find((b) => b.id === selectedBundle) ?? BUNDLES[2], [selectedBundle]);
 
   useEffect(() => {
-    const onScroll = () => setShowSticky(window.scrollY > 700);
+    const onScroll = () => setShowSticky(window.scrollY > 400);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -244,7 +245,7 @@ function ProductPage() {
   return (
     <div className="product-page bg-[#FDF8EE] text-[#3B2E25]">
       {/* ABOVE THE FOLD */}
-      <section className="container-x pt-10 md:pt-14 pb-16 md:pb-24">
+      <section className="container-x pt-6 md:pt-14 pb-12 md:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Gallery */}
           <div>
@@ -299,8 +300,10 @@ function ProductPage() {
 
           {/* Buy area */}
           <div>
-            <div className="eyebrow">Beauty & Longevity</div>
-            <h1 className="mt-4 font-display text-5xl md:text-6xl leading-[1.02] text-[#3B2E25]">Seralie NMN</h1>
+            <div className="eyebrow">A Daily Longevity Ritual</div>
+            <h1 className="mt-4 font-display text-4xl md:text-6xl leading-[1.05] text-[#3B2E25]">
+              Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
+            </h1>
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <FractionalStars value={4.8} size="h-4 w-4" />
               <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
@@ -319,9 +322,23 @@ function ProductPage() {
 
 
             <p className="mt-6 text-[16px] leading-8 text-[#5A483C] max-w-lg">
-              500 mg of pure β-NMN — the direct precursor to NAD+ — to help your skin stay radiant,
-              your energy stay steady, and your body age well from within.
+              The daily ritual for women who want to look and feel their most vibrant — powered by
+              <span className="text-[#3B2E25] font-medium"> 500&nbsp;mg of pure β-NMN</span>, the clinically studied precursor that restores the NAD+ your body makes less of every year.
             </p>
+
+            {/* Quick benefit bullets — reinforce value in seconds */}
+            <ul className="mt-5 space-y-2 max-w-lg">
+              {[
+                "Supports radiant skin & cellular renewal",
+                "Steadier energy — no afternoon dip",
+                "Clinically studied dose (not a sprinkle)",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-2.5 text-[14px] text-[#3B2E25]">
+                  <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-[#AD9752]" strokeWidth={2} />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
 
             <div className="mt-8">
               <div className="eyebrow">Choose your ritual</div>
@@ -380,12 +397,13 @@ function ProductPage() {
             </button>
 
             <p className="mt-4 flex items-center justify-center gap-2 text-xs text-[#7A6A5E] tracking-wide">
-              <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee
+              <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee · Secure checkout
             </p>
             <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
               {[
                 { Icon: Beaker, label: "Third-Party Tested" },
                 { Icon: ShieldCheck, label: "GMP-Certified" },
+                { Icon: Droplet, label: "High Purity β-NMN" },
                 { Icon: MapPin, label: "Made in USA" },
               ].map(({ Icon, label }) => (
                 <span
@@ -453,6 +471,96 @@ function ProductPage() {
                 <p className="mt-3 text-[14px] leading-7 text-[#5A483C]">{desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MINI SOCIAL PROOF — bring reviews above the fold of long scroll */}
+      <section className="bg-[#FDF8EE] border-b border-[#EADFC7]">
+        <div className="container-x py-16 md:py-20">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 text-[13px] tracking-wide text-[#5A483C]">
+              <FractionalStars value={4.8} size="h-4 w-4" />
+              <span className="text-[#3B2E25] font-medium">4.8</span>
+              <span className="text-[#AD9752]">·</span>
+              <span>2000+ women, one quiet ritual</span>
+            </div>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl text-[#3B2E25]">What they're <span className="italic text-[#AD9752]">saying</span></h2>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-3 max-w-5xl mx-auto">
+            {[
+              { t: "Three months in and my esthetician asked what I changed. That's all the proof I needed.", n: "Daniela, 50" },
+              { t: "The 3pm energy dip disappearing is what keeps me reordering.", n: "Karen, 44" },
+              { t: "As a nurse I read labels for a living. Real dose, real ingredient, third-party tested.", n: "Denise, 52" },
+            ].map((rv) => (
+              <div key={rv.n} className="bg-[#F7EFDF]/60 border border-[#EADFC7] p-6 rounded-[12px]">
+                <FractionalStars value={5} size="h-3.5 w-3.5" />
+                <p className="mt-3 font-display italic text-[18px] leading-relaxed text-[#3B2E25]">"{rv.t}"</p>
+                <div className="mt-4 flex items-center justify-between text-[12px]">
+                  <span className="text-[#3B2E25] font-medium">{rv.n}</span>
+                  <span className="text-[10px] tracking-[0.14em] uppercase text-[#AD9752]">✓ Verified</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-0.5 transition-colors">
+              Read all 2000+ reviews →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* NOT ALL NMN IS REAL NMN — moved up for differentiation before long-form content */}
+      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
+        <div className="container-x py-24 md:py-32">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="eyebrow">A quiet warning</div>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Not all NMN is <span className="italic text-[#AD9752]">real NMN</span>.</h2>
+            <p className="mt-5 text-[15px] leading-8 text-[#5A483C]">
+              Most cheap NMN online is nicotinamide or under-dosed. The molecule matters. The purity matters. The dose matters.
+            </p>
+          </div>
+
+          <div className="mt-14 max-w-3xl mx-auto bg-[#FDF8EE] border border-[#EADFC7]">
+            <div className="grid grid-cols-3 border-b border-[#EADFC7]">
+              <div className="p-5 caps-label text-[#7A6A5E]">The difference</div>
+              <div className="p-5 caps-label text-[#AD9752] text-center border-x border-[#EADFC7] bg-[#F7EFDF]/60">Seralie</div>
+              <div className="p-5 caps-label text-[#7A6A5E] text-center">Typical Amazon Brand</div>
+            </div>
+            {[
+              ["Real β-NMN molecule", true, false],
+              ["500 mg full dose", true, false],
+              ["Third-party tested every batch", true, false],
+              ["COA available on request", true, false],
+              ["Formulated for beauty & longevity", true, false],
+              ["Made in the USA, GMP-certified", true, false],
+              ["No unnecessary fillers", true, false],
+              ["30-day money-back guarantee", true, false],
+            ].map(([label, us, them], i) => (
+              <div key={i} className={`grid grid-cols-3 ${i < 7 ? "border-b border-[#EADFC7]" : ""}`}>
+                <div className="p-5 text-sm text-[#3B2E25]">{label}</div>
+                <div className="p-5 border-x border-[#EADFC7] bg-[#F7EFDF]/60 text-center">
+                  {us ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
+                </div>
+                <div className="p-5 text-center">
+                  {them ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 max-w-3xl mx-auto text-center text-[11px] leading-5 text-[#7A6A5E]">
+            "Typical Amazon Brand" reflects patterns reported in independent third-party testing of
+            marketplace NMN products, not any specific brand.
+          </p>
+          <div className="mt-10 text-center">
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] px-8 py-4 transition-colors"
+            >
+              Start Your Ritual <ArrowRight className="h-3.5 w-3.5" />
+            </a>
           </div>
         </div>
       </section>
@@ -568,51 +676,6 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* NOT ALL NMN IS REAL NMN */}
-      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
-        <div className="container-x py-24 md:py-32">
-          <div className="text-center max-w-2xl mx-auto">
-            <div className="eyebrow">A quiet warning</div>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Not all NMN is <span className="italic text-[#AD9752]">real NMN</span>.</h2>
-            <p className="mt-5 text-[15px] leading-8 text-[#5A483C]">
-              Most cheap NMN online is nicotinamide or under-dosed. The molecule matters. The purity matters. The dose matters.
-            </p>
-          </div>
-
-          <div className="mt-14 max-w-3xl mx-auto bg-[#FDF8EE] border border-[#EADFC7]">
-            <div className="grid grid-cols-3 border-b border-[#EADFC7]">
-              <div className="p-5 caps-label text-[#7A6A5E]">The difference</div>
-              <div className="p-5 caps-label text-[#AD9752] text-center border-x border-[#EADFC7] bg-[#F7EFDF]/60">Seralie</div>
-              <div className="p-5 caps-label text-[#7A6A5E] text-center">Typical Amazon Brand</div>
-            </div>
-            {[
-              ["Real β-NMN molecule", true, false],
-              ["500 mg full dose", true, false],
-              ["Third-party tested every batch", true, false],
-              ["COA available on request", true, false],
-              ["Formulated for beauty & longevity", true, false],
-              ["Made in the USA, GMP-certified", true, false],
-              ["No unnecessary fillers", true, false],
-              ["30-day money-back guarantee", true, false],
-            ].map(([label, us, them], i) => (
-              <div key={i} className={`grid grid-cols-3 ${i < 7 ? "border-b border-[#EADFC7]" : ""}`}>
-                <div className="p-5 text-sm text-[#3B2E25]">{label}</div>
-                <div className="p-5 border-x border-[#EADFC7] bg-[#F7EFDF]/60 text-center">
-                  {us ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
-                </div>
-                <div className="p-5 text-center">
-                  {them ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-5 max-w-3xl mx-auto text-center text-[11px] leading-5 text-[#7A6A5E]">
-            "Typical Amazon Brand" reflects patterns reported in independent third-party testing of
-            marketplace NMN products, not any specific brand.
-          </p>
-        </div>
-      </section>
-
       {/* QUALITY & PURITY */}
       <section className="bg-[#FDF8EE]">
         <div className="container-x py-24 md:py-32">
@@ -721,6 +784,15 @@ function ProductPage() {
             </div>
             <div className="h-px bg-[#AD9752]/40" />
           </div>
+          <div className="mt-12 text-center">
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] px-8 py-4 transition-colors"
+            >
+              Choose Your Ritual <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -791,6 +863,17 @@ function ProductPage() {
               </button>
             </div>
           )}
+
+          <div className="mt-16 text-center">
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] px-8 py-4 transition-colors"
+            >
+              Join Them — Start Your Ritual <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+            <p className="mt-3 text-[11px] tracking-wide text-[#7A6A5E]">30-day money-back guarantee · Free shipping on 2+ bottles</p>
+          </div>
         </div>
       </section>
 
