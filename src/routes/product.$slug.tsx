@@ -475,6 +475,96 @@ function ProductPage() {
         </div>
       </section>
 
+      {/* MINI SOCIAL PROOF — bring reviews above the fold of long scroll */}
+      <section className="bg-[#FDF8EE] border-b border-[#EADFC7]">
+        <div className="container-x py-16 md:py-20">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="inline-flex items-center gap-2 text-[13px] tracking-wide text-[#5A483C]">
+              <FractionalStars value={4.8} size="h-4 w-4" />
+              <span className="text-[#3B2E25] font-medium">4.8</span>
+              <span className="text-[#AD9752]">·</span>
+              <span>2000+ women, one quiet ritual</span>
+            </div>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl text-[#3B2E25]">What they're <span className="italic text-[#AD9752]">saying</span></h2>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-3 max-w-5xl mx-auto">
+            {[
+              { t: "Three months in and my esthetician asked what I changed. That's all the proof I needed.", n: "Daniela, 50" },
+              { t: "The 3pm energy dip disappearing is what keeps me reordering.", n: "Karen, 44" },
+              { t: "As a nurse I read labels for a living. Real dose, real ingredient, third-party tested.", n: "Denise, 52" },
+            ].map((rv) => (
+              <div key={rv.n} className="bg-[#F7EFDF]/60 border border-[#EADFC7] p-6 rounded-[12px]">
+                <FractionalStars value={5} size="h-3.5 w-3.5" />
+                <p className="mt-3 font-display italic text-[18px] leading-relaxed text-[#3B2E25]">"{rv.t}"</p>
+                <div className="mt-4 flex items-center justify-between text-[12px]">
+                  <span className="text-[#3B2E25] font-medium">{rv.n}</span>
+                  <span className="text-[10px] tracking-[0.14em] uppercase text-[#AD9752]">✓ Verified</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-0.5 transition-colors">
+              Read all 2000+ reviews →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* NOT ALL NMN IS REAL NMN — moved up for differentiation before long-form content */}
+      <section className="bg-[#F7EFDF]/60 border-y border-[#EADFC7]">
+        <div className="container-x py-24 md:py-32">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="eyebrow">A quiet warning</div>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Not all NMN is <span className="italic text-[#AD9752]">real NMN</span>.</h2>
+            <p className="mt-5 text-[15px] leading-8 text-[#5A483C]">
+              Most cheap NMN online is nicotinamide or under-dosed. The molecule matters. The purity matters. The dose matters.
+            </p>
+          </div>
+
+          <div className="mt-14 max-w-3xl mx-auto bg-[#FDF8EE] border border-[#EADFC7]">
+            <div className="grid grid-cols-3 border-b border-[#EADFC7]">
+              <div className="p-5 caps-label text-[#7A6A5E]">The difference</div>
+              <div className="p-5 caps-label text-[#AD9752] text-center border-x border-[#EADFC7] bg-[#F7EFDF]/60">Seralie</div>
+              <div className="p-5 caps-label text-[#7A6A5E] text-center">Typical Amazon Brand</div>
+            </div>
+            {[
+              ["Real β-NMN molecule", true, false],
+              ["500 mg full dose", true, false],
+              ["Third-party tested every batch", true, false],
+              ["COA available on request", true, false],
+              ["Formulated for beauty & longevity", true, false],
+              ["Made in the USA, GMP-certified", true, false],
+              ["No unnecessary fillers", true, false],
+              ["30-day money-back guarantee", true, false],
+            ].map(([label, us, them], i) => (
+              <div key={i} className={`grid grid-cols-3 ${i < 7 ? "border-b border-[#EADFC7]" : ""}`}>
+                <div className="p-5 text-sm text-[#3B2E25]">{label}</div>
+                <div className="p-5 border-x border-[#EADFC7] bg-[#F7EFDF]/60 text-center">
+                  {us ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
+                </div>
+                <div className="p-5 text-center">
+                  {them ? <Check className="inline h-5 w-5 text-[#AD9752]" strokeWidth={2} /> : <span className="text-[#C9BFA3]">—</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 max-w-3xl mx-auto text-center text-[11px] leading-5 text-[#7A6A5E]">
+            "Typical Amazon Brand" reflects patterns reported in independent third-party testing of
+            marketplace NMN products, not any specific brand.
+          </p>
+          <div className="mt-10 text-center">
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] px-8 py-4 transition-colors"
+            >
+              Start Your Ritual <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* WHY YOUR BODY NEEDS THIS */}
       <section className="bg-[#FDF8EE]">
         <div className="container-x py-28 md:py-[120px]">
