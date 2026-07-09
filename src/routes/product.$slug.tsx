@@ -300,8 +300,10 @@ function ProductPage() {
 
           {/* Buy area */}
           <div>
-            <div className="eyebrow">Beauty & Longevity</div>
-            <h1 className="mt-4 font-display text-5xl md:text-6xl leading-[1.02] text-[#3B2E25]">Seralie NMN</h1>
+            <div className="eyebrow">A Daily Longevity Ritual</div>
+            <h1 className="mt-4 font-display text-4xl md:text-6xl leading-[1.05] text-[#3B2E25]">
+              Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
+            </h1>
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <FractionalStars value={4.8} size="h-4 w-4" />
               <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
@@ -320,9 +322,23 @@ function ProductPage() {
 
 
             <p className="mt-6 text-[16px] leading-8 text-[#5A483C] max-w-lg">
-              500 mg of pure β-NMN — the direct precursor to NAD+ — to help your skin stay radiant,
-              your energy stay steady, and your body age well from within.
+              The daily ritual for women who want to look and feel their most vibrant — powered by
+              <span className="text-[#3B2E25] font-medium"> 500&nbsp;mg of pure β-NMN</span>, the clinically studied precursor that restores the NAD+ your body makes less of every year.
             </p>
+
+            {/* Quick benefit bullets — reinforce value in seconds */}
+            <ul className="mt-5 space-y-2 max-w-lg">
+              {[
+                "Supports radiant skin & cellular renewal",
+                "Steadier energy — no afternoon dip",
+                "Clinically studied dose (not a sprinkle)",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-2.5 text-[14px] text-[#3B2E25]">
+                  <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-[#AD9752]" strokeWidth={2} />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
 
             <div className="mt-8">
               <div className="eyebrow">Choose your ritual</div>
