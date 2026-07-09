@@ -784,6 +784,15 @@ function ProductPage() {
             </div>
             <div className="h-px bg-[#AD9752]/40" />
           </div>
+          <div className="mt-12 text-center">
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] px-8 py-4 transition-colors"
+            >
+              Choose Your Ritual <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
       </section>
 
