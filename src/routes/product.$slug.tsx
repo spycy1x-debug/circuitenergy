@@ -112,7 +112,8 @@ export const Route = createFileRoute("/product/$slug")({
   component: ProductPage,
 });
 
-const GALLERY = [img8, img1, img2, img3, img4, img5, img6, img7];
+// Image 4 (nmn-new-4) — the "5th" of the original gallery — is now the hero image.
+const GALLERY = [img4, img8, img1, img2, img3, img5, img6, img7];
 
 function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: string }) {
   return (
