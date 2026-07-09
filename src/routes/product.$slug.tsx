@@ -251,8 +251,8 @@ function ProductPage() {
     <div className="product-page bg-[#FDF8EE] text-[#3B2E25]">
       {/* ABOVE THE FOLD */}
       <section id="buy" className="container-x pt-6 md:pt-14 pb-12 md:pb-24">
-        {/* OUTCOME-LED HEADER — leads on both mobile and desktop */}
-        <div className="max-w-3xl mb-8 md:mb-12">
+        {/* OUTCOME-LED HEADER — mobile only (desktop shows it beside the gallery) */}
+        <div className="max-w-3xl mb-8 lg:hidden">
           <div className="eyebrow">A Daily Longevity Ritual</div>
           <h1 className="mt-4 font-display text-4xl md:text-6xl leading-[1.03] text-[#3B2E25]">
             Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
@@ -333,6 +333,34 @@ function ProductPage() {
 
           {/* Buy area */}
           <div>
+            {/* Desktop hero header (mobile shows this above the grid) */}
+            <div className="hidden lg:block mb-6">
+              <div className="eyebrow">A Daily Longevity Ritual</div>
+              <h1 className="mt-4 font-display text-4xl md:text-5xl leading-[1.05] text-[#3B2E25]">
+                Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
+              </h1>
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <FractionalStars value={4.8} size="h-4 w-4" />
+                <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
+                  4.8 · 2000+ reviews
+                </a>
+                <span className="text-[#EADFC7]">|</span>
+                <a
+                  href="#certifications"
+                  onClick={scrollToCertifications}
+                  className="caps-label inline-flex items-center gap-1.5 text-[#AD9752] hover:text-[#3B2E25] underline underline-offset-4 decoration-[#AD9752]/40 hover:decoration-[#3B2E25] transition-colors"
+                >
+                  <ShieldCheck className="h-3.5 w-3.5" strokeWidth={1.5} />
+                  View Certifications
+                </a>
+              </div>
+              <p className="mt-5 text-[16px] leading-8 text-[#5A483C] max-w-lg">
+                The daily ritual for women who want to look and feel their most vibrant — powered by
+                <span className="text-[#3B2E25] font-medium"> 500&nbsp;mg of pure β-NMN</span>, the
+                clinically studied precursor that restores the NAD+ your body makes less of every year.
+              </p>
+            </div>
+
             {/* Quick benefit bullets — reinforce value in seconds */}
             <ul className="space-y-2 max-w-lg">
               {[
