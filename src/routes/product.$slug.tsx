@@ -143,6 +143,11 @@ function scrollToCertifications(e: React.MouseEvent) {
   document.getElementById("certifications")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function scrollToBuy(e: React.MouseEvent) {
+  e.preventDefault();
+  document.getElementById("buy")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 
 const BUNDLES = [
   { id: "1", label: "1 Bottle", bottles: 1, variantId: "gid://shopify/ProductVariant/48124189704346", price: 42.99, perBottle: 42.99, standardPrice: 57.99, detail: "30-day supply", freeShipping: false },
@@ -245,7 +250,35 @@ function ProductPage() {
   return (
     <div className="product-page bg-[#FDF8EE] text-[#3B2E25]">
       {/* ABOVE THE FOLD */}
-      <section className="container-x pt-6 md:pt-14 pb-12 md:pb-24">
+      <section id="buy" className="container-x pt-6 md:pt-14 pb-12 md:pb-24">
+        {/* OUTCOME-LED HEADER — leads on both mobile and desktop */}
+        <div className="max-w-3xl mb-8 md:mb-12">
+          <div className="eyebrow">A Daily Longevity Ritual</div>
+          <h1 className="mt-4 font-display text-4xl md:text-6xl leading-[1.03] text-[#3B2E25]">
+            Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
+          </h1>
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <FractionalStars value={4.8} size="h-4 w-4" />
+            <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
+              4.8 · 2000+ reviews
+            </a>
+            <span className="hidden sm:inline text-[#EADFC7]">|</span>
+            <a
+              href="#certifications"
+              onClick={scrollToCertifications}
+              className="caps-label inline-flex items-center gap-1.5 text-[#AD9752] hover:text-[#3B2E25] underline underline-offset-4 decoration-[#AD9752]/40 hover:decoration-[#3B2E25] transition-colors"
+            >
+              <ShieldCheck className="h-3.5 w-3.5" strokeWidth={1.5} />
+              View Certifications
+            </a>
+          </div>
+          <p className="mt-5 text-[16px] leading-8 text-[#5A483C] max-w-xl">
+            The daily ritual for women who want to look and feel their most vibrant — powered by
+            <span className="text-[#3B2E25] font-medium"> 500&nbsp;mg of pure β-NMN</span>, the clinically
+            studied precursor that restores the NAD+ your body makes less of every year.
+          </p>
+        </div>
+
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Gallery */}
           <div>
@@ -300,34 +333,8 @@ function ProductPage() {
 
           {/* Buy area */}
           <div>
-            <div className="eyebrow">A Daily Longevity Ritual</div>
-            <h1 className="mt-4 font-display text-4xl md:text-6xl leading-[1.05] text-[#3B2E25]">
-              Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
-            </h1>
-            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <FractionalStars value={4.8} size="h-4 w-4" />
-              <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
-                4.8 · 2000+ reviews
-              </a>
-              <span className="hidden sm:inline text-[#EADFC7]">|</span>
-              <a
-                href="#certifications"
-                onClick={scrollToCertifications}
-                className="caps-label inline-flex items-center gap-1.5 text-[#AD9752] hover:text-[#3B2E25] underline underline-offset-4 decoration-[#AD9752]/40 hover:decoration-[#3B2E25] transition-colors"
-              >
-                <ShieldCheck className="h-3.5 w-3.5" strokeWidth={1.5} />
-                View Certifications
-              </a>
-            </div>
-
-
-            <p className="mt-6 text-[16px] leading-8 text-[#5A483C] max-w-lg">
-              The daily ritual for women who want to look and feel their most vibrant — powered by
-              <span className="text-[#3B2E25] font-medium"> 500&nbsp;mg of pure β-NMN</span>, the clinically studied precursor that restores the NAD+ your body makes less of every year.
-            </p>
-
             {/* Quick benefit bullets — reinforce value in seconds */}
-            <ul className="mt-5 space-y-2 max-w-lg">
+            <ul className="space-y-2 max-w-lg">
               {[
                 "Supports radiant skin & cellular renewal",
                 "Steadier energy — no afternoon dip",
@@ -471,6 +478,16 @@ function ProductPage() {
                 <p className="mt-3 text-[14px] leading-7 text-[#5A483C]">{desc}</p>
               </div>
             ))}
+          </div>
+          {/* Micro-CTA */}
+          <div className="mt-14 flex justify-center">
+            <a
+              href="#buy"
+              onClick={scrollToBuy}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[12px] px-8 py-4 transition-colors"
+            >
+              Start your ritual <ArrowRight className="h-3.5 w-3.5" />
+            </a>
           </div>
         </div>
       </section>

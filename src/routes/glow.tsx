@@ -111,6 +111,12 @@ function GlowStoryPage() {
           reversible.
         </p>
 
+        <blockquote className="py-4 text-center">
+          <p className="font-display italic text-2xl md:text-3xl leading-snug text-[#AD9752]">
+            “Who is that older, exhausted woman standing next to my sister?”
+          </p>
+        </blockquote>
+
         <div className="hairline w-16 mx-auto" />
 
         <h2 className="font-display text-3xl md:text-4xl text-[#3B2E25] pt-2">
@@ -205,6 +211,14 @@ function GlowStoryPage() {
           unlike the biohacker brands built for Silicon Valley men, it's actually formulated and
           positioned for women like me. Beauty from within, not a lab experiment.
         </p>
+        <div>
+          <a
+            href="/product/nmn"
+            className="inline-flex items-center gap-1.5 caps-label text-[12px] text-[#AD9752] border-b border-[#AD9752]/40 hover:border-[#AD9752] pb-0.5 transition-colors"
+          >
+            See the formula she chose <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
 
         <div className="hairline w-16 mx-auto" />
 
@@ -244,6 +258,14 @@ function GlowStoryPage() {
         <p className="font-medium text-[#3B2E25]">
           Every month at half-empty is a month your cells don't get back. That's the sentence that
           finally made me order. I'm glad I did.
+        </p>
+      </div>
+
+      {/* NARRATIVE BRIDGE */}
+      <div className="container-x max-w-2xl mx-auto mt-16 text-center">
+        <p className="font-display text-2xl md:text-3xl text-[#3B2E25] leading-snug">
+          If you saw yourself anywhere in this story,{" "}
+          <span className="italic text-[#AD9752]">this is where it starts.</span>
         </p>
       </div>
 
