@@ -245,7 +245,7 @@ function ProductPage() {
   return (
     <div className="product-page bg-[#FDF8EE] text-[#3B2E25]">
       {/* ABOVE THE FOLD */}
-      <section className="container-x pt-10 md:pt-14 pb-16 md:pb-24">
+      <section className="container-x pt-6 md:pt-14 pb-12 md:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Gallery */}
           <div>
