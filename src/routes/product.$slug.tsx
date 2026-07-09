@@ -361,20 +361,6 @@ function ProductPage() {
               </p>
             </div>
 
-            {/* Quick benefit bullets — reinforce value in seconds */}
-            <ul className="space-y-2 max-w-lg">
-              {[
-                "Supports radiant skin & cellular renewal",
-                "Steadier energy — no afternoon dip",
-                "Clinically studied dose (not a sprinkle)",
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-2.5 text-[14px] text-[#3B2E25]">
-                  <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-[#AD9752]" strokeWidth={2} />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-
             <div className="mt-8">
               <div className="eyebrow">Choose your ritual</div>
               <div className="mt-4 space-y-3">
@@ -434,24 +420,8 @@ function ProductPage() {
             <p className="mt-4 flex items-center justify-center gap-2 text-xs text-[#7A6A5E] tracking-wide">
               <ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee · Secure checkout
             </p>
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-              {[
-                { Icon: Beaker, label: "Third-Party Tested" },
-                { Icon: ShieldCheck, label: "GMP-Certified" },
-                { Icon: Droplet, label: "High Purity β-NMN" },
-                { Icon: MapPin, label: "Made in USA" },
-              ].map(({ Icon, label }) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-1.5 border border-[#EADFC7] bg-[#F7EFDF]/70 px-3 py-1.5 text-[10px] tracking-[0.18em] uppercase text-[#3B2E25]"
-                >
-                  <Icon className="h-3 w-3 text-[#AD9752]" strokeWidth={1.6} />
-                  {label}
-                </span>
-              ))}
-            </div>
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-5 flex justify-center">
               <button
                 type="button"
                 onClick={() => setShowFacts(true)}
