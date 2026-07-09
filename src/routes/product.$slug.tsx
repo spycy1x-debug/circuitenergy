@@ -863,6 +863,17 @@ function ProductPage() {
               </button>
             </div>
           )}
+
+          <div className="mt-16 text-center">
+            <a
+              href="#top"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="inline-flex items-center gap-2 bg-[#AD9752] hover:bg-[#94803F] text-white caps-label text-[11px] px-8 py-4 transition-colors"
+            >
+              Join Them — Start Your Ritual <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+            <p className="mt-3 text-[11px] tracking-wide text-[#7A6A5E]">30-day money-back guarantee · Free shipping on 2+ bottles</p>
+          </div>
         </div>
       </section>
 
