@@ -258,7 +258,7 @@ function ProductPage() {
         <div className="max-w-3xl mb-8 lg:hidden">
           <div className="eyebrow">A Daily Longevity Ritual</div>
           <h1 className="mt-4 font-display text-4xl md:text-6xl leading-[1.03] text-[#3B2E25]">
-            Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
+            If your skin looks older than you feel — <span className="italic text-[#AD9752]">this is for you.</span>
           </h1>
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
             <FractionalStars value={4.8} size="h-[18px] w-[18px]" />
@@ -340,7 +340,7 @@ function ProductPage() {
             <div className="hidden lg:block mb-6">
               <div className="eyebrow">A Daily Longevity Ritual</div>
               <h1 className="mt-4 font-display text-4xl md:text-5xl leading-[1.05] text-[#3B2E25]">
-                Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
+                If your skin looks older than you feel — <span className="italic text-[#AD9752]">this is for you.</span>
               </h1>
               <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <FractionalStars value={4.8} size="h-[18px] w-[18px]" />
