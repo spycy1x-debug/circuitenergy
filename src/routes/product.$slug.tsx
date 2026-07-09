@@ -122,9 +122,12 @@ function FractionalStars({ value, size = "h-4 w-4" }: { value: number; size?: st
         const fill = Math.max(0, Math.min(1, value - i));
         return (
           <span key={i} className={`relative inline-block ${size}`}>
-            <Star className={`${size} text-[#AD9752]/25`} strokeWidth={1.5} />
+            <Star className={`${size} text-[#D8C9A3]`} strokeWidth={1.5} />
             <span className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${fill * 100}%` }}>
-              <Star className={`${size} fill-current text-[#AD9752]`} strokeWidth={1.5} />
+              <Star
+                className={`${size} fill-current text-[#E0A82E] drop-shadow-[0_1px_1px_rgba(59,46,37,0.15)]`}
+                strokeWidth={1.5}
+              />
             </span>
           </span>
         );
@@ -258,7 +261,7 @@ function ProductPage() {
             Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
           </h1>
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-            <FractionalStars value={4.8} size="h-4 w-4" />
+            <FractionalStars value={4.8} size="h-[18px] w-[18px]" />
             <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
               4.8 · 2000+ reviews
             </a>
@@ -340,7 +343,7 @@ function ProductPage() {
                 Radiant skin. Steady energy. <span className="italic text-[#AD9752]">Age beautifully.</span>
               </h1>
               <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-                <FractionalStars value={4.8} size="h-4 w-4" />
+                <FractionalStars value={4.8} size="h-[18px] w-[18px]" />
                 <a href="#reviews" onClick={scrollToReviews} className="caps-label text-[#7A6A5E] hover:text-[#AD9752] underline underline-offset-4 decoration-[#EADFC7] hover:decoration-[#AD9752] transition-colors">
                   4.8 · 2000+ reviews
                 </a>
@@ -495,7 +498,7 @@ function ProductPage() {
         <div className="container-x py-16 md:py-20">
           <div className="text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 text-[13px] tracking-wide text-[#5A483C]">
-              <FractionalStars value={4.8} size="h-4 w-4" />
+              <FractionalStars value={4.8} size="h-[18px] w-[18px]" />
               <span className="text-[#3B2E25] font-medium">4.8</span>
               <span className="text-[#AD9752]">·</span>
               <span>2000+ women, one quiet ritual</span>
@@ -818,7 +821,7 @@ function ProductPage() {
             <div className="eyebrow">Real Women, Real Rituals</div>
             <h2 className="mt-4 font-display text-4xl md:text-5xl text-[#3B2E25]">Loved by <span className="italic text-[#AD9752]">Thousands</span></h2>
             <div className="mt-5 inline-flex items-center gap-2 text-[13px] tracking-wide text-[#5A483C]">
-              <FractionalStars value={4.8} size="h-4 w-4" />
+              <FractionalStars value={4.8} size="h-[18px] w-[18px]" />
               <span className="text-[#3B2E25] font-medium">4.8</span>
               <span className="text-[#AD9752]">·</span>
               <span>based on 2000+ reviews</span>
