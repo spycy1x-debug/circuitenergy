@@ -608,7 +608,7 @@ const FAQS = [
   },
   {
     q: "How often can I use SERALIE?",
-    a: "Use them whenever you want your smile to look brighter. Whether it's for special occasions or as part of your regular beauty routine, they're designed to fit effortlessly into your lifestyle.",
+    a: "Two ways: on-demand before big moments, or a few times a week as part of your routine. The instant brightening is our signature — and with consistent use, yellow tones stay neutralized so your smile maintains a visibly whiter look over time.",
   },
   {
     q: "What's included in each pack?",
