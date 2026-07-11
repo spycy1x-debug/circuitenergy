@@ -165,7 +165,7 @@ function StripsPage() {
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
-                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence.
+                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, yellow tones stay neutralized — so your smile looks whiter week after week, not just tonight.
               </p>
             </Reveal>
             <Reveal delay={220}>
@@ -204,6 +204,99 @@ function StripsPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* OFFER */}
+      <section ref={offerRef} id="offer" className="py-20 md:py-28" style={{ background: C.blushSoft }}>
+        <div className="container-x grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
+          <Reveal>
+            <div
+              className="rounded-[24px] overflow-hidden"
+              style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.25)" }}
+            >
+              <img src={offerImg.url} alt="Seralie purple whitening strip pouch on blush linen" width={1408} height={1408} loading="lazy" className="w-full h-auto block" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div
+              className="rounded-[24px] p-6 md:p-9"
+              style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.15)" }}
+            >
+              <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose your ritual</div>
+              <h2 className="font-display text-3xl md:text-4xl mt-2">Bundle & save.</h2>
+              <div className="mt-2 flex items-center gap-3">
+                <Stars rating={4.8} />
+                <span className="text-sm" style={{ color: C.muted }}>4.8 · Loved by thousands</span>
+              </div>
+
+              <div className="mt-7 space-y-3">
+                {BUNDLES.map((b) => {
+                  const active = selected === b.id;
+                  return (
+                    <button
+                      key={b.id}
+                      onClick={() => setSelected(b.id)}
+                      className="w-full text-left rounded-2xl p-4 md:p-5 flex items-center gap-4 transition-all duration-200"
+                      style={{
+                        background: active ? C.blushSoft : "#FFFFFF",
+                        border: `1.5px solid ${active ? C.primary : C.border}`,
+                        boxShadow: active ? "0 8px 24px -12px rgba(91,58,110,0.35)" : "none",
+                      }}
+                    >
+                      <span
+                        className="inline-flex items-center justify-center h-5 w-5 rounded-full shrink-0"
+                        style={{ border: `1.5px solid ${active ? C.primary : "#C7BCB0"}`, background: active ? C.primary : "transparent" }}
+                      >
+                        {active && <span className="h-2 w-2 rounded-full bg-white" />}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-display text-xl leading-none" style={{ color: C.text }}>{b.title}</span>
+                          {b.tag && (
+                            <span
+                              className="text-[10px] tracking-[0.2em] uppercase px-2 py-1 rounded-full"
+                              style={{
+                                background: b.popular ? C.primary : C.blush,
+                                color: b.popular ? "#FFFFFF" : C.primary,
+                              }}
+                            >
+                              {b.tag}
+                            </span>
+                          )}
+                        </div>
+                        <div className="mt-1 text-xs" style={{ color: C.muted }}>{b.strips} · {b.subtitle}</div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <div className="font-display text-2xl" style={{ color: C.text }}>${b.price.toFixed(2)}</div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => window?.alert?.("Launching soon — connect your Shopify variant to enable checkout.")}
+                className="mt-7 w-full rounded-full px-8 py-5 text-sm md:text-base font-medium tracking-[0.14em] uppercase transition-all duration-300 hover:-translate-y-0.5"
+                style={{
+                  background: C.primary,
+                  color: "#FFFFFF",
+                  boxShadow: "0 14px 34px -14px rgba(91,58,110,0.6)",
+                }}
+              >
+                Add To Cart · ${chosen.price.toFixed(2)}
+              </button>
+
+              <div className="mt-6 grid grid-cols-2 gap-3 text-xs" style={{ color: C.muted }}>
+                <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
+                <span className="inline-flex items-center gap-2"><Lock className="h-4 w-4" style={{ color: C.primary }} /> Secure Checkout</span>
+                <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4" style={{ color: C.primary }} /> Ships Within 24 Hours</span>
+                <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
 
       {/* HOW IT WORKS */}
       <section className="py-20 md:py-28">
@@ -321,7 +414,7 @@ function StripsPage() {
             {[
               { title: "Instant Brightening", body: "Look more camera-ready in just 30 minutes." },
               { title: "No Harsh Bleaching", body: "Beauty-inspired color correction instead of aggressive whitening." },
-              { title: "Confidence On Demand", body: "Perfect before dates, weddings, vacations, interviews, parties, and important moments." },
+              { title: "Brighter Over Time", body: "Instant is our specialty — but with consistent use, your smile keeps looking whiter week after week." },
               { title: "Fits Your Beauty Routine", body: "Designed to belong beside your skincare and makeup, not inside a medicine cabinet." },
             ].map((m, i) => (
               <Reveal key={m.title} delay={i * 80}>
@@ -338,98 +431,6 @@ function StripsPage() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* OFFER */}
-      <section ref={offerRef} id="offer" className="py-20 md:py-28" style={{ background: C.blushSoft }}>
-        <div className="container-x grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
-          <Reveal>
-            <div
-              className="rounded-[24px] overflow-hidden"
-              style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.25)" }}
-            >
-              <img src={offerImg.url} alt="Seralie purple whitening strip pouch on blush linen" width={1408} height={1408} loading="lazy" className="w-full h-auto block" />
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div
-              className="rounded-[24px] p-6 md:p-9"
-              style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.15)" }}
-            >
-              <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose your ritual</div>
-              <h2 className="font-display text-3xl md:text-4xl mt-2">Bundle & save.</h2>
-              <div className="mt-2 flex items-center gap-3">
-                <Stars rating={4.8} />
-                <span className="text-sm" style={{ color: C.muted }}>4.8 · Loved by thousands</span>
-              </div>
-
-              <div className="mt-7 space-y-3">
-                {BUNDLES.map((b) => {
-                  const active = selected === b.id;
-                  return (
-                    <button
-                      key={b.id}
-                      onClick={() => setSelected(b.id)}
-                      className="w-full text-left rounded-2xl p-4 md:p-5 flex items-center gap-4 transition-all duration-200"
-                      style={{
-                        background: active ? C.blushSoft : "#FFFFFF",
-                        border: `1.5px solid ${active ? C.primary : C.border}`,
-                        boxShadow: active ? "0 8px 24px -12px rgba(91,58,110,0.35)" : "none",
-                      }}
-                    >
-                      <span
-                        className="inline-flex items-center justify-center h-5 w-5 rounded-full shrink-0"
-                        style={{ border: `1.5px solid ${active ? C.primary : "#C7BCB0"}`, background: active ? C.primary : "transparent" }}
-                      >
-                        {active && <span className="h-2 w-2 rounded-full bg-white" />}
-                      </span>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-display text-xl leading-none" style={{ color: C.text }}>{b.title}</span>
-                          {b.tag && (
-                            <span
-                              className="text-[10px] tracking-[0.2em] uppercase px-2 py-1 rounded-full"
-                              style={{
-                                background: b.popular ? C.primary : C.blush,
-                                color: b.popular ? "#FFFFFF" : C.primary,
-                              }}
-                            >
-                              {b.tag}
-                            </span>
-                          )}
-                        </div>
-                        <div className="mt-1 text-xs" style={{ color: C.muted }}>{b.strips} · {b.subtitle}</div>
-                      </div>
-                      <div className="text-right shrink-0">
-                        <div className="font-display text-2xl" style={{ color: C.text }}>${b.price.toFixed(2)}</div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <button
-                onClick={() => window?.alert?.("Launching soon — connect your Shopify variant to enable checkout.")}
-                className="mt-7 w-full rounded-full px-8 py-5 text-sm md:text-base font-medium tracking-[0.14em] uppercase transition-all duration-300 hover:-translate-y-0.5"
-                style={{
-                  background: C.primary,
-                  color: "#FFFFFF",
-                  boxShadow: "0 14px 34px -14px rgba(91,58,110,0.6)",
-                }}
-              >
-                Add To Cart · ${chosen.price.toFixed(2)}
-              </button>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 text-xs" style={{ color: C.muted }}>
-                <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
-                <span className="inline-flex items-center gap-2"><Lock className="h-4 w-4" style={{ color: C.primary }} /> Secure Checkout</span>
-                <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4" style={{ color: C.primary }} /> Ships Within 24 Hours</span>
-                <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -583,7 +584,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 const FAQS = [
   {
     q: "How do SERALIE Purple Whitening Strips work?",
-    a: "Purple sits opposite yellow on the color wheel, helping neutralize yellow tones so your smile appears brighter after just one treatment. Think of it as the same beauty concept behind purple shampoo, but designed for your smile. It's the perfect finishing touch before the moments that matter.",
+    a: "Purple sits opposite yellow on the color wheel, helping neutralize yellow tones so your smile appears brighter after just one treatment. Think of it as the same beauty concept behind purple shampoo, but designed for your smile. It's the perfect finishing touch before the moments that matter — and with regular use, that brighter look becomes your smile's everyday baseline.",
   },
   {
     q: "How long does it take?",
