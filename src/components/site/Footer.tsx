@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import seralieLogo from "@/assets/seralie-logo-transparent.png.asset.json";
+import seralieLogo from "@/assets/seralie-wordmark.webp.asset.json";
 
 export function Footer() {
   return (
@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container-x py-20">
         <div className="grid gap-14 md:grid-cols-3">
           <div>
-            <img src={seralieLogo.url} alt="Seralie" className="h-24 md:h-28 w-auto" />
+            <img src={seralieLogo.url} alt="Seralie" className="h-24 md:h-28 w-auto invert brightness-0 opacity-95" />
             <p className="mt-5 font-display italic text-lg text-[#F7EFDF]">Beauty & healthy aging, from within.</p>
           </div>
 

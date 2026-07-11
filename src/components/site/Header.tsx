@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Search, User, ShoppingBag, Menu, X, ArrowUpRight, Mail, Home as HomeIcon, Sparkles } from "lucide-react";
-import seralieLogo from "@/assets/seralie-logo-transparent.png.asset.json";
+import seralieLogo from "@/assets/seralie-wordmark.webp.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { shopifyCart, useShopifyCart } from "@/lib/shopify-cart";
@@ -95,7 +95,7 @@ export function Header() {
 
           <div className="flex items-center justify-center">
             <Link to="/" aria-label="Seralie home" className="flex items-center justify-center">
-              <img src={seralieLogo.url} alt="Seralie" className="h-12 md:h-14 w-auto" />
+              <img src={seralieLogo.url} alt="Seralie" className="h-16 md:h-20 w-auto" style={{ mixBlendMode: "multiply" }} />
             </Link>
           </div>
 
