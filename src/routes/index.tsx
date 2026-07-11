@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Star,
@@ -11,7 +11,7 @@ import {
   Briefcase,
   Coffee,
   Heart,
-  ChevronDown,
+  ArrowRight,
 } from "lucide-react";
 import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
 import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
@@ -20,17 +20,17 @@ import offerImg from "@/assets/seralie-strips-offer.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Seralie — Makeup For Your Teeth" },
+      { title: "Seralie — Beauty, Down To Your Smile" },
       {
         name: "description",
         content:
-          "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile for dates, photos, meetings, and every moment you want extra confidence.",
+          "Seralie is beauty for your smile. Purple color-correcting whitening strips that make you camera-ready in 30 minutes — for dates, photos, and every moment that matters.",
       },
-      { property: "og:title", content: "Seralie — Makeup For Your Teeth" },
+      { property: "og:title", content: "Seralie — Beauty, Down To Your Smile" },
       {
         property: "og:description",
         content:
-          "Purple color-correcting whitening strips. Camera-ready in 30 minutes. A beauty-first smile ritual.",
+          "Makeup for your teeth. Camera-ready in 30 minutes.",
       },
       { property: "og:image", content: heroImg.url },
       { name: "twitter:image", content: heroImg.url },
@@ -51,14 +51,6 @@ const C = {
   border: "#E9DFD5",
   card: "#FFFFFF",
 };
-
-/* ---------- bundle data ---------- */
-const BUNDLES = [
-  { id: "b1", title: "Buy 1", strips: "14 Strips", price: 31.99, tag: null, subtitle: "Try it before an event." },
-  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", price: 50.99, tag: "BEST VALUE", subtitle: "Stash one, gift one." },
-  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", price: 69.99, tag: "MAXIMUM SAVINGS", subtitle: "Never run out." },
-];
 
 /* ---------- fade-in on scroll ---------- */
 function useReveal<T extends HTMLElement>() {
@@ -93,26 +85,6 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-/* ---------- primary button ---------- */
-function CTAButton({ children, onClick, className = "" }: { children: React.ReactNode; onClick?: () => void; className?: string }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`group inline-flex items-center justify-center rounded-full px-8 py-4 text-sm md:text-base font-medium tracking-wide uppercase transition-all duration-300 hover:-translate-y-0.5 ${className}`}
-      style={{
-        background: C.primary,
-        color: "#FFFFFF",
-        letterSpacing: "0.14em",
-        boxShadow: "0 10px 30px -12px rgba(91,58,110,0.55)",
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = C.primaryHover)}
-      onMouseLeave={(e) => (e.currentTarget.style.background = C.primary)}
-    >
-      {children}
-    </button>
-  );
-}
-
 /* ---------- stars ---------- */
 function Stars({ rating = 4.8, size = 14 }: { rating?: number; size?: number }) {
   return (
@@ -132,55 +104,57 @@ function Stars({ rating = 4.8, size = 14 }: { rating?: number; size?: number }) 
   );
 }
 
+/* ---------- CTA link (routes to product page) ---------- */
+function CTALink({ children, to = "/strips", className = "" }: { children: React.ReactNode; to?: string; className?: string }) {
+  return (
+    <Link
+      to={to}
+      className={`group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-sm md:text-base font-medium tracking-wide uppercase transition-all duration-300 hover:-translate-y-0.5 ${className}`}
+      style={{
+        background: C.primary,
+        color: "#FFFFFF",
+        letterSpacing: "0.14em",
+        boxShadow: "0 10px 30px -12px rgba(91,58,110,0.55)",
+      }}
+    >
+      {children}
+      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+    </Link>
+  );
+}
+
 /* ---------- page ---------- */
 function HomePage() {
-  const [selected, setSelected] = useState("b2");
-  const [showSticky, setShowSticky] = useState(false);
-  const offerRef = useRef<HTMLDivElement>(null);
-  const chosen = BUNDLES.find((b) => b.id === selected)!;
-
-  useEffect(() => {
-    const onScroll = () => setShowSticky(window.scrollY > 600);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const scrollToOffer = () => offerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: "'Poppins', 'Inter', system-ui, sans-serif" }}>
-      {/* HERO */}
+      {/* BRAND HERO */}
       <section className="relative overflow-hidden">
-        <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-10 md:py-24">
+        <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-12 md:py-24">
           <div className="order-2 md:order-1">
             <Reveal>
               <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
-                <Sparkles className="h-3.5 w-3.5" /> New · Purple Color-Correcting Strips
+                <Sparkles className="h-3.5 w-3.5" /> Seralie Beauty
               </div>
             </Reveal>
             <Reveal delay={80}>
               <h1 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]" style={{ color: C.text }}>
-                Makeup for<br />your teeth.
+                Beauty, down to<br />your smile.
               </h1>
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
-                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence.
+                You perfect your skin, your hair, your look — Seralie is the finishing touch.
+                Our purple color-correcting strips are{" "}
+                <span className="font-medium" style={{ color: C.text }}>makeup for your teeth</span>:
+                a brighter-looking smile in 30 minutes, right when you need it.
               </p>
             </Reveal>
-            <Reveal delay={220}>
-              <div className="mt-6 flex items-center gap-3">
-                <Stars rating={4.8} size={16} />
-                <span className="text-sm font-medium">4.8</span>
-                <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.muted }}>Reviews</a>
-              </div>
-            </Reveal>
-            <Reveal delay={280}>
+            <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <CTAButton onClick={scrollToOffer}>Be Camera-Ready</CTAButton>
+                <CTALink>Shop Whitening Strips</CTALink>
               </div>
             </Reveal>
-            <Reveal delay={340}>
+            <Reveal delay={320}>
               <div className="mt-8 flex flex-wrap items-center gap-6 text-xs tracking-wide" style={{ color: C.muted }}>
                 <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
                 <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free U.S. Shipping Over $40</span>
@@ -205,78 +179,60 @@ function HomePage() {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="py-20 md:py-28">
-        <div className="container-x">
+      {/* FEATURED PRODUCT */}
+      <section className="py-20 md:py-28" style={{ background: C.blushSoft }}>
+        <div className="container-x grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
           <Reveal>
-            <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>How it works</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Brighten in 3 simple steps.</h2>
-            </div>
+            <Link to="/strips" className="block group">
+              <div
+                className="rounded-[24px] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1"
+                style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.25)" }}
+              >
+                <img
+                  src={offerImg.url}
+                  alt="Seralie purple whitening strip pouch on blush linen"
+                  width={1408}
+                  height={1408}
+                  loading="lazy"
+                  className="w-full h-auto block"
+                />
+              </div>
+            </Link>
           </Reveal>
 
-          <div className="mt-14 grid lg:grid-cols-[1.4fr_1fr] gap-14 items-center">
-            <div className="grid sm:grid-cols-3 gap-5">
-              {[
-                { n: "01", title: "Apply", body: "Place the strip onto clean teeth.", Icon: Sparkles },
-                { n: "02", title: "Wait", body: "Relax for 30 minutes.", Icon: Clock },
-                { n: "03", title: "Smile", body: "Reveal a brighter-looking smile.", Icon: Heart },
-              ].map((s, i) => (
-                <Reveal key={s.n} delay={i * 100}>
-                  <div
-                    className="h-full rounded-[20px] p-7 transition-all duration-300 hover:-translate-y-1"
-                    style={{
-                      background: C.card,
-                      border: `1px solid ${C.border}`,
-                      boxShadow: "0 8px 30px -18px rgba(46,37,40,0.2)",
-                    }}
-                  >
-                    <div
-                      className="inline-flex items-center justify-center h-12 w-12 rounded-full mb-6"
-                      style={{ background: C.blushSoft, color: C.primary }}
-                    >
-                      <s.Icon className="h-5 w-5" />
-                    </div>
-                    <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.muted }}>{s.n}</div>
-                    <div className="font-display text-2xl mt-1" style={{ color: C.text }}>{s.title}</div>
-                    <p className="mt-3 text-sm leading-relaxed" style={{ color: C.muted }}>{s.body}</p>
-                  </div>
-                </Reveal>
-              ))}
+          <Reveal delay={120}>
+            <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>The flagship</div>
+            <h2 className="font-display text-4xl md:text-5xl mt-3 leading-tight">Purple Whitening Strips</h2>
+            <div className="mt-4 flex items-center gap-3">
+              <Stars rating={4.8} size={16} />
+              <span className="text-sm" style={{ color: C.muted }}>4.8 · Loved by our community</span>
             </div>
-
-            {/* Color wheel illustration */}
-            <Reveal delay={200}>
-              <div className="flex flex-col items-center text-center">
-                <svg viewBox="0 0 240 240" className="w-56 h-56 md:w-64 md:h-64" aria-hidden>
-                  <defs>
-                    <linearGradient id="purple" x1="0" x2="1">
-                      <stop offset="0%" stopColor="#7A5490" />
-                      <stop offset="100%" stopColor="#5B3A6E" />
-                    </linearGradient>
-                    <linearGradient id="yellow" x1="0" x2="1">
-                      <stop offset="0%" stopColor="#F0D57A" />
-                      <stop offset="100%" stopColor="#E5C25A" />
-                    </linearGradient>
-                  </defs>
-                  <circle cx="120" cy="120" r="90" fill="none" stroke={C.border} strokeWidth="1" />
-                  <path d="M120,30 A90,90 0 0,1 120,210 Z" fill="url(#purple)" opacity="0.9" />
-                  <path d="M120,30 A90,90 0 0,0 120,210 Z" fill="url(#yellow)" opacity="0.85" />
-                  <circle cx="120" cy="120" r="42" fill={C.bg} />
-                  <text x="120" y="118" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="20" fill={C.text}>Purple</text>
-                  <text x="120" y="138" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="14" fill={C.muted}>neutralizes yellow</text>
-                </svg>
-                <p className="mt-5 text-sm max-w-xs" style={{ color: C.muted }}>
-                  The same beauty principle behind purple shampoo — reimagined for your smile.
-                </p>
-              </div>
-            </Reveal>
-          </div>
+            <p className="mt-6 text-base leading-relaxed max-w-lg" style={{ color: C.muted }}>
+              Purple neutralizes yellow — the same beauty principle as purple shampoo, reimagined
+              for your smile. No peroxide, no sensitivity, no waiting weeks. Just a visibly
+              brighter-looking smile, 30 minutes before the moments that matter.
+            </p>
+            <ul className="mt-6 space-y-2.5 text-sm" style={{ color: C.text }}>
+              {[
+                "Camera-ready in 30 minutes",
+                "Peroxide-free color correction — zero sensitivity",
+                "14 strips per pack · bundles from $31.99",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-2.5">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0" style={{ color: C.primary }} />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <CTALink>Shop Now · From $31.99</CTALink>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* YOUR MOMENTS */}
-      <section className="py-20 md:py-28" style={{ background: C.blushSoft }}>
+      <section className="py-20 md:py-28">
         <div className="container-x">
           <Reveal>
             <div className="max-w-2xl">
@@ -308,192 +264,25 @@ function HomePage() {
         </div>
       </section>
 
-      {/* WHY SERALIE */}
-      <section className="py-20 md:py-28">
+      {/* THE SERALIE PROMISE */}
+      <section className="py-16 md:py-20" style={{ background: C.blushSoft }}>
         <div className="container-x">
-          <Reveal>
-            <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Why Seralie</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Beauty-first smile confidence.</h2>
-            </div>
-          </Reveal>
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "Instant Brightening", body: "Look more camera-ready in just 30 minutes." },
-              { title: "No Harsh Bleaching", body: "Beauty-inspired color correction instead of aggressive whitening." },
-              { title: "Confidence On Demand", body: "Perfect before dates, weddings, vacations, interviews, parties, and important moments." },
-              { title: "Fits Your Beauty Routine", body: "Designed to belong beside your skincare and makeup, not inside a medicine cabinet." },
-            ].map((m, i) => (
-              <Reveal key={m.title} delay={i * 80}>
-                <div
-                  className="h-full rounded-[20px] p-7 transition-all duration-300 hover:-translate-y-1"
-                  style={{ background: C.card, border: `1px solid ${C.border}` }}
-                >
-                  <div className="inline-flex items-center justify-center h-11 w-11 rounded-full mb-6" style={{ background: C.blushSoft, color: C.primary }}>
-                    <Sparkles className="h-5 w-5" />
-                  </div>
-                  <div className="font-display text-2xl leading-tight">{m.title}</div>
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: C.muted }}>{m.body}</p>
+              { Icon: ShieldCheck, title: "30-Day Guarantee", body: "Love it or your money back." },
+              { Icon: Lock, title: "Secure Checkout", body: "Safe, encrypted payment." },
+              { Icon: Clock, title: "Ships Within 24 Hours", body: "Ready for your next moment." },
+              { Icon: Truck, title: "Free Shipping Over $40", body: "Across the U.S." },
+            ].map(({ Icon, title, body }, i) => (
+              <Reveal key={title} delay={i * 70}>
+                <div className="flex flex-col items-center text-center gap-3">
+                  <span className="inline-flex items-center justify-center h-12 w-12 rounded-full" style={{ background: C.card, color: C.primary, border: `1px solid ${C.border}` }}>
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div className="font-medium text-sm" style={{ color: C.text }}>{title}</div>
+                  <p className="text-xs" style={{ color: C.muted }}>{body}</p>
                 </div>
               </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* OFFER */}
-      <section ref={offerRef} id="offer" className="py-20 md:py-28" style={{ background: C.blushSoft }}>
-        <div className="container-x grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
-          <Reveal>
-            <div
-              className="rounded-[24px] overflow-hidden"
-              style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.25)" }}
-            >
-              <img src={offerImg.url} alt="Seralie purple whitening strip pouch on blush linen" width={1408} height={1408} loading="lazy" className="w-full h-auto block" />
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div
-              className="rounded-[24px] p-6 md:p-9"
-              style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.15)" }}
-            >
-              <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose your ritual</div>
-              <h2 className="font-display text-3xl md:text-4xl mt-2">Bundle & save.</h2>
-              <div className="mt-2 flex items-center gap-3">
-                <Stars rating={4.8} />
-                <span className="text-sm" style={{ color: C.muted }}>4.8 · Loved by thousands</span>
-              </div>
-
-              <div className="mt-7 space-y-3">
-                {BUNDLES.map((b) => {
-                  const active = selected === b.id;
-                  return (
-                    <button
-                      key={b.id}
-                      onClick={() => setSelected(b.id)}
-                      className="w-full text-left rounded-2xl p-4 md:p-5 flex items-center gap-4 transition-all duration-200"
-                      style={{
-                        background: active ? C.blushSoft : "#FFFFFF",
-                        border: `1.5px solid ${active ? C.primary : C.border}`,
-                        boxShadow: active ? "0 8px 24px -12px rgba(91,58,110,0.35)" : "none",
-                      }}
-                    >
-                      <span
-                        className="inline-flex items-center justify-center h-5 w-5 rounded-full shrink-0"
-                        style={{ border: `1.5px solid ${active ? C.primary : "#C7BCB0"}`, background: active ? C.primary : "transparent" }}
-                      >
-                        {active && <span className="h-2 w-2 rounded-full bg-white" />}
-                      </span>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-display text-xl leading-none" style={{ color: C.text }}>{b.title}</span>
-                          {b.tag && (
-                            <span
-                              className="text-[10px] tracking-[0.2em] uppercase px-2 py-1 rounded-full"
-                              style={{
-                                background: b.popular ? C.primary : C.blush,
-                                color: b.popular ? "#FFFFFF" : C.primary,
-                              }}
-                            >
-                              {b.tag}
-                            </span>
-                          )}
-                        </div>
-                        <div className="mt-1 text-xs" style={{ color: C.muted }}>{b.strips} · {b.subtitle}</div>
-                      </div>
-                      <div className="text-right shrink-0">
-                        <div className="font-display text-2xl" style={{ color: C.text }}>${b.price.toFixed(2)}</div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <button
-                onClick={() => window?.alert?.("Launching soon — connect your Shopify variant to enable checkout.")}
-                className="mt-7 w-full rounded-full px-8 py-5 text-sm md:text-base font-medium tracking-[0.14em] uppercase transition-all duration-300 hover:-translate-y-0.5"
-                style={{
-                  background: C.primary,
-                  color: "#FFFFFF",
-                  boxShadow: "0 14px 34px -14px rgba(91,58,110,0.6)",
-                }}
-              >
-                Add To Cart · ${chosen.price.toFixed(2)}
-              </button>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 text-xs" style={{ color: C.muted }}>
-                <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
-                <span className="inline-flex items-center gap-2"><Lock className="h-4 w-4" style={{ color: C.primary }} /> Secure Checkout</span>
-                <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4" style={{ color: C.primary }} /> Ships Within 24 Hours</span>
-                <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* REVIEWS (empty-ready) */}
-      <section id="reviews" className="py-20 md:py-28">
-        <div className="container-x">
-          <Reveal>
-            <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Loved by our community</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Real smiles, real moments.</h2>
-              <p className="mt-4 text-sm md:text-base" style={{ color: C.muted }}>
-                Reviews from verified customers will appear here as they come in.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <Reveal key={i} delay={i * 60}>
-                <div
-                  className="mb-5 break-inside-avoid rounded-[20px] p-6"
-                  style={{ background: C.card, border: `1px dashed ${C.border}` }}
-                >
-                  <div
-                    className="w-full rounded-2xl mb-5"
-                    style={{
-                      aspectRatio: i % 2 === 0 ? "4 / 5" : "1 / 1",
-                      background: `linear-gradient(135deg, ${C.blushSoft}, ${C.blush})`,
-                    }}
-                  />
-                  <Stars rating={0} />
-                  <div className="mt-3 font-display text-xl" style={{ color: C.text }}>Review title</div>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: C.muted }}>
-                    No reviews yet — be the first to share your Seralie moment.
-                  </p>
-                  <div className="mt-5 flex items-center justify-between text-xs" style={{ color: C.muted }}>
-                    <span>Customer Name</span>
-                    <span
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded-full"
-                      style={{ background: C.blushSoft, color: C.primary }}
-                    >
-                      <ShieldCheck className="h-3 w-3" /> Verified Purchase
-                    </span>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-20 md:py-28" style={{ background: C.blushSoft }}>
-        <div className="container-x max-w-3xl">
-          <Reveal>
-            <div className="text-center">
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>FAQ</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Everything you're wondering.</h2>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 space-y-3">
-            {FAQS.map((f, i) => (
-              <FAQItem key={i} q={f.q} a={f.a} />
             ))}
           </div>
         </div>
@@ -506,7 +295,7 @@ function HomePage() {
             className="relative overflow-hidden rounded-[28px]"
             style={{ boxShadow: "0 40px 100px -40px rgba(91,58,110,0.35)", border: `1px solid ${C.border}` }}
           >
-            <img src={ctaImg.url} alt="Woman with a bright, natural smile in warm sunlight" width={1600} height={1408} loading="lazy" className="w-full h-[520px] md:h-[640px] object-cover block" />
+            <img src={ctaImg.url} alt="Woman with a bright, natural smile in warm sunlight" width={1600} height={1408} loading="lazy" className="w-full h-[480px] md:h-[600px] object-cover block" />
             <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(46,37,40,0.55), rgba(46,37,40,0.15) 60%, transparent)" }} />
             <div className="absolute inset-0 flex items-center">
               <div className="px-8 md:px-16 max-w-2xl text-white">
@@ -517,12 +306,7 @@ function HomePage() {
                 </Reveal>
                 <Reveal delay={120}>
                   <div className="mt-8">
-                    <CTAButton onClick={scrollToOffer}>Be Camera-Ready</CTAButton>
-                  </div>
-                </Reveal>
-                <Reveal delay={200}>
-                  <div className="mt-6 text-xs md:text-sm tracking-wide opacity-90">
-                    30-Day Guarantee &nbsp;•&nbsp; Secure Checkout &nbsp;•&nbsp; Fast Shipping
+                    <CTALink>Be Camera-Ready</CTALink>
                   </div>
                 </Reveal>
               </div>
@@ -530,91 +314,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* STICKY MOBILE CTA */}
-      <div
-        className={`md:hidden fixed left-0 right-0 bottom-0 z-40 px-4 pb-[env(safe-area-inset-bottom)] pt-3 transition-transform duration-300 ${
-          showSticky ? "translate-y-0" : "translate-y-full"
-        }`}
-        style={{ background: "rgba(250,246,240,0.95)", backdropFilter: "blur(10px)", borderTop: `1px solid ${C.border}` }}
-      >
-        <button
-          onClick={scrollToOffer}
-          className="w-full rounded-full py-4 text-sm font-medium tracking-[0.14em] uppercase text-white"
-          style={{ background: C.primary, boxShadow: "0 10px 28px -12px rgba(91,58,110,0.6)" }}
-        >
-          Be Camera-Ready · ${chosen.price.toFixed(2)}
-        </button>
-      </div>
     </div>
   );
 }
-
-/* ---------- FAQ item ---------- */
-function FAQItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div
-      className="rounded-[18px] overflow-hidden transition-all"
-      style={{ background: C.card, border: `1px solid ${C.border}` }}
-    >
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between gap-6 px-6 py-5 text-left"
-      >
-        <span className="font-display text-lg md:text-xl" style={{ color: C.text }}>{q}</span>
-        <ChevronDown
-          className="h-5 w-5 shrink-0 transition-transform duration-300"
-          style={{ color: C.primary, transform: open ? "rotate(180deg)" : "rotate(0)" }}
-        />
-      </button>
-      <div
-        className="grid transition-all duration-300"
-        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
-      >
-        <div className="overflow-hidden">
-          <p className="px-6 pb-6 text-sm leading-relaxed" style={{ color: C.muted }}>{a}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const FAQS = [
-  {
-    q: "How do SERALIE Purple Whitening Strips work?",
-    a: "Purple sits opposite yellow on the color wheel, helping neutralize yellow tones so your smile appears brighter after just one treatment. Think of it as the same beauty concept behind purple shampoo, but designed for your smile. It's the perfect finishing touch before the moments that matter.",
-  },
-  {
-    q: "How long does it take?",
-    a: "Simply apply the strip and relax for 30 minutes. Once removed, your smile looks instantly brighter and more camera-ready, making it effortless to fit into your routine before a date, event, meeting, vacation, or night out.",
-  },
-  {
-    q: "When should I use them?",
-    a: "Anytime you want your smile to look its best. They're perfect before photos, weddings, interviews, content creation, first dates, special events, or whenever you want an extra boost of confidence.",
-  },
-  {
-    q: "Will they make my teeth sensitive?",
-    a: "SERALIE is designed as a gentle beauty product rather than a traditional bleaching treatment. Because it doesn't rely on harsh whitening methods, many people choose it when they want a brighter-looking smile without the discomfort often associated with peroxide whitening.",
-  },
-  {
-    q: "Do they contain peroxide or bleach?",
-    a: "No. SERALIE uses color-correction technology instead of harsh bleaching ingredients, giving you a brighter-looking smile without making bleaching the focus of your beauty routine.",
-  },
-  {
-    q: "Can I use them after drinking coffee or wine?",
-    a: "Yes. They're perfect whenever your smile could use a quick refresh before heading out, taking photos, or meeting people.",
-  },
-  {
-    q: "How often can I use SERALIE?",
-    a: "Use them whenever you want your smile to look brighter. Whether it's for special occasions or as part of your regular beauty routine, they're designed to fit effortlessly into your lifestyle.",
-  },
-  {
-    q: "What's included in each pack?",
-    a: "Each pack includes 14 easy-to-use purple whitening strips, enough for multiple confidence boosts whenever you need them. Bundle options offer even greater value if you want to keep a pack at home, in your travel bag, or ready for upcoming events.",
-  },
-  {
-    q: "What if I'm not satisfied?",
-    a: "Try SERALIE completely risk-free. If you're not happy with your order, you're covered by our 30-Day Satisfaction Guarantee. Our team is here to make sure you have a great experience from your first order onward.",
-  },
-];
