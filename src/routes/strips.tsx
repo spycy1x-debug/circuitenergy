@@ -56,8 +56,8 @@ const C = {
 const BUNDLES = [
   { id: "b1", title: "Buy 1", strips: "14 Strips", price: 31.99, tag: null, subtitle: "Try it before an event." },
   { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", price: 50.99, tag: "BEST VALUE", subtitle: "Stash one, gift one." },
-  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", price: 69.99, tag: "MAXIMUM SAVINGS", subtitle: "Never run out." },
+  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one." },
+  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", price: 69.99, tag: "BEST VALUE", subtitle: "Never run out." },
 ];
 
 /* ---------- fade-in on scroll ---------- */
