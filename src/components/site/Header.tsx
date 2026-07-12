@@ -80,7 +80,7 @@ export function Header() {
         className={`sticky top-0 z-40 transition-all duration-300 ${scrolled ? "shadow-[0_1px_0_rgba(173,151,82,0.2)]" : ""} ${hidden ? "-translate-y-full" : "translate-y-0"}`}
         style={{ background: scrolled ? "rgba(253,248,238,0.96)" : "#FDF8EE", backdropFilter: scrolled ? "blur(8px)" : undefined, borderBottom: "1px solid rgba(173,151,82,0.15)" }}
       >
-        <div className="container-x relative grid h-16 md:h-20 grid-cols-3 items-center">
+        <div className="container-x relative grid h-20 md:h-24 grid-cols-3 items-center">
           <div className="flex items-center justify-start gap-4">
             <button
               aria-label="Menu"
