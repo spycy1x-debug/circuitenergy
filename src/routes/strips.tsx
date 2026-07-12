@@ -149,17 +149,17 @@ function StripsPage() {
 
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: "'Poppins', 'Inter', system-ui, sans-serif" }}>
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-10 md:py-24">
+      {/* HERO + OFFER */}
+      <section ref={offerRef} id="offer" className="relative overflow-hidden">
+        <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-10 md:py-20">
           <div className="order-2 md:order-1">
             <Reveal>
               <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
-                <Sparkles className="h-3.5 w-3.5" /> New · Purple Color-Correcting Strips
+                <Sparkles className="h-3.5 w-3.5" /> Purple Color-Correcting Strips
               </div>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]" style={{ color: C.text }}>
+              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]" style={{ color: C.primary }}>
                 Makeup for<br />your teeth.
               </h1>
             </Reveal>
@@ -175,11 +175,6 @@ function StripsPage() {
                 <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.muted }}>Reviews</a>
               </div>
             </Reveal>
-            <Reveal delay={280}>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <CTAButton onClick={scrollToOffer}>Be Camera-Ready</CTAButton>
-              </div>
-            </Reveal>
             <Reveal delay={340}>
               <div className="mt-8 flex flex-wrap items-center gap-6 text-xs tracking-wide" style={{ color: C.muted }}>
                 <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
@@ -190,53 +185,20 @@ function StripsPage() {
 
           <Reveal delay={120} className="order-1 md:order-2">
             <div
-              className="relative rounded-[24px] overflow-hidden"
-              style={{ boxShadow: "0 30px 80px -30px rgba(91,58,110,0.25)", border: `1px solid ${C.border}` }}
-            >
-              <img
-                src={heroImg.url}
-                alt="Seralie purple whitening strip on a marble vanity in morning light"
-                width={1600}
-                height={1808}
-                className="w-full h-auto block"
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* OFFER */}
-      <section ref={offerRef} id="offer" className="py-20 md:py-28" style={{ background: C.blushSoft }}>
-        <div className="container-x grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
-          <Reveal>
-            <div
-              className="rounded-[24px] overflow-hidden"
-              style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.25)" }}
-            >
-              <img src={offerImg.url} alt="Seralie purple whitening strip pouch on blush linen" width={1408} height={1408} loading="lazy" className="w-full h-auto block" />
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div
-              className="rounded-[24px] p-6 md:p-9"
-              style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.15)" }}
+              className="rounded-[24px] p-6 md:p-8"
+              style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
             >
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose your ritual</div>
-              <h2 className="font-display text-3xl md:text-4xl mt-2">Bundle & save.</h2>
-              <div className="mt-2 flex items-center gap-3">
-                <Stars rating={4.8} />
-                <span className="text-sm" style={{ color: C.muted }}>4.8 · Loved by thousands</span>
-              </div>
+              <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
 
-              <div className="mt-7 space-y-3">
+              <div className="mt-6 space-y-3">
                 {BUNDLES.map((b) => {
                   const active = selected === b.id;
                   return (
                     <button
                       key={b.id}
                       onClick={() => setSelected(b.id)}
-                      className="w-full text-left rounded-2xl p-4 md:p-5 flex items-center gap-4 transition-all duration-200"
+                      className="w-full text-left rounded-2xl p-4 flex items-center gap-4 transition-all duration-200"
                       style={{
                         background: active ? C.blushSoft : "#FFFFFF",
                         border: `1.5px solid ${active ? C.primary : C.border}`,
@@ -251,7 +213,7 @@ function StripsPage() {
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-display text-xl leading-none" style={{ color: C.text }}>{b.title}</span>
+                          <span className="font-display text-lg leading-none" style={{ color: C.text }}>{b.title}</span>
                           {b.tag && (
                             <span
                               className="text-[10px] tracking-[0.2em] uppercase px-2 py-1 rounded-full"
@@ -267,7 +229,7 @@ function StripsPage() {
                         <div className="mt-1 text-xs" style={{ color: C.muted }}>{b.strips} · {b.subtitle}</div>
                       </div>
                       <div className="text-right shrink-0">
-                        <div className="font-display text-2xl" style={{ color: C.text }}>${b.price.toFixed(2)}</div>
+                        <div className="font-display text-xl" style={{ color: C.text }}>${b.price.toFixed(2)}</div>
                       </div>
                     </button>
                   );
@@ -276,7 +238,7 @@ function StripsPage() {
 
               <button
                 onClick={() => window?.alert?.("Launching soon — connect your Shopify variant to enable checkout.")}
-                className="mt-7 w-full rounded-full px-8 py-5 text-sm md:text-base font-medium tracking-[0.14em] uppercase transition-all duration-300 hover:-translate-y-0.5"
+                className="mt-6 w-full rounded-full px-8 py-4 text-sm md:text-base font-medium tracking-[0.14em] uppercase transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   background: C.primary,
                   color: "#FFFFFF",
@@ -286,7 +248,7 @@ function StripsPage() {
                 Add To Cart · ${chosen.price.toFixed(2)}
               </button>
 
-              <div className="mt-6 grid grid-cols-2 gap-3 text-xs" style={{ color: C.muted }}>
+              <div className="mt-5 grid grid-cols-2 gap-3 text-xs" style={{ color: C.muted }}>
                 <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
                 <span className="inline-flex items-center gap-2"><Lock className="h-4 w-4" style={{ color: C.primary }} /> Secure Checkout</span>
                 <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4" style={{ color: C.primary }} /> Ships Within 24 Hours</span>
@@ -296,6 +258,8 @@ function StripsPage() {
           </Reveal>
         </div>
       </section>
+
+
 
 
       {/* HOW IT WORKS */}
