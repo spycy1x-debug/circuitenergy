@@ -151,7 +151,7 @@ function StripsPage() {
       {/* HERO + OFFER */}
       <section ref={offerRef} id="offer" className="relative overflow-hidden">
         <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-10 md:py-20">
-          <div className="order-2 md:order-1">
+          <div>
             <Reveal>
               <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
                 <Sparkles className="h-3.5 w-3.5" /> Purple Color-Correcting Strips
@@ -174,6 +174,13 @@ function StripsPage() {
                 <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.muted }}>Reviews</a>
               </div>
             </Reveal>
+            <Reveal delay={280}>
+              <div className="mt-8">
+                <CTAButton onClick={() => document.getElementById('offer-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                  Choose Your Offer
+                </CTAButton>
+              </div>
+            </Reveal>
             <Reveal delay={340}>
               <div className="mt-8 flex flex-wrap items-center gap-6 text-xs tracking-wide" style={{ color: C.muted }}>
                 <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
@@ -182,8 +189,9 @@ function StripsPage() {
             </Reveal>
           </div>
 
-          <Reveal delay={120} className="order-1 md:order-2">
+          <Reveal delay={120}>
             <div
+              id="offer-card"
               className="rounded-[24px] p-6 md:p-8"
               style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
             >
