@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
 import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
-import offerImg from "@/assets/seralie-strips-offer.jpg.asset.json";
 
 export const Route = createFileRoute("/strips")({
   head: () => ({
@@ -268,7 +267,7 @@ function StripsPage() {
           <Reveal>
             <div className="max-w-2xl">
               <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>How it works</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Brighten in 3 simple steps.</h2>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Brighten in 3 simple steps.</h2>
             </div>
           </Reveal>
 
@@ -338,7 +337,7 @@ function StripsPage() {
           <Reveal>
             <div className="max-w-2xl">
               <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Your moments</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Confidence for every occasion.</h2>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Confidence for every occasion.</h2>
             </div>
           </Reveal>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -371,7 +370,7 @@ function StripsPage() {
           <Reveal>
             <div className="max-w-2xl">
               <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Why Seralie</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Beauty-first smile confidence.</h2>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Beauty-first smile confidence.</h2>
             </div>
           </Reveal>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -404,7 +403,7 @@ function StripsPage() {
           <Reveal>
             <div className="max-w-2xl">
               <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Loved by our community</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Real smiles, real moments.</h2>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Real smiles, real moments.</h2>
               <p className="mt-4 text-sm md:text-base" style={{ color: C.muted }}>
                 Reviews from verified customers will appear here as they come in.
               </p>
@@ -452,7 +451,7 @@ function StripsPage() {
           <Reveal>
             <div className="text-center">
               <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>FAQ</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight">Everything you're wondering.</h2>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Everything you're wondering.</h2>
             </div>
           </Reveal>
 
