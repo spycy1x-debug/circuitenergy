@@ -95,7 +95,7 @@ export function Header() {
 
           <div className="flex items-center justify-center">
             <Link to="/" aria-label="Seralie home" className="flex items-center justify-center">
-              <img src={seralieLogo.url} alt="Seralie" className="h-16 md:h-20 w-auto" style={{ mixBlendMode: "multiply" }} />
+              <img src={seralieLogo.url} alt="Seralie" className="h-20 md:h-24 w-auto" style={{ mixBlendMode: "multiply" }} />
             </Link>
           </div>
 
