@@ -82,6 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const isGlowPage = location.pathname === "/glow";
+  const hideKlaviyo = isGlowPage || location.pathname === "/strips";
 
   return (
     <html lang="en">
