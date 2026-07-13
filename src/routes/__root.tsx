@@ -82,6 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const isGlowPage = location.pathname === "/glow";
+  const hideKlaviyo = isGlowPage || location.pathname === "/strips";
 
   return (
     <html lang="en">
@@ -98,7 +99,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
             __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1969968856965318');fbq('track', 'PageView');`,
           }}
         />
-        {!isGlowPage && (
+        {!hideKlaviyo && (
           <>
             <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/X9StMz/klaviyo.js?company_id=X9StMz"></script>
             <script
