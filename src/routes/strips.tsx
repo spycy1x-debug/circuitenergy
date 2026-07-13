@@ -281,71 +281,77 @@ function StripsPage() {
 
 
       {/* HOW IT WORKS */}
-      <section className="py-20 md:py-28">
-        <div className="container-x">
+      <section className="py-20 md:py-28 relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(60% 60% at 15% 20%, rgba(234,217,223,0.55) 0%, transparent 60%), radial-gradient(50% 50% at 90% 80%, rgba(240,213,122,0.18) 0%, transparent 60%)",
+          }}
+        />
+        <div className="container-x relative">
           <Reveal>
-            <div className="max-w-2xl">
+            <div className="max-w-2xl text-center mx-auto">
               <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>How it works</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Brighten in 3 simple steps.</h2>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Brighten in three simple steps.</h2>
+              <p className="mt-5 text-sm md:text-base" style={{ color: C.muted }}>
+                A 30-minute ritual built on the same beauty principle behind purple shampoo.
+              </p>
             </div>
           </Reveal>
 
-          <div className="mt-14 grid lg:grid-cols-[1.4fr_1fr] gap-14 items-center">
-            <div className="grid sm:grid-cols-3 gap-5">
-              {[
-                { n: "01", title: "Apply", body: "Place the strip onto clean teeth.", Icon: Sparkles },
-                { n: "02", title: "Wait", body: "Relax for 30 minutes.", Icon: Clock },
-                { n: "03", title: "Smile", body: "Reveal a brighter-looking smile.", Icon: Heart },
-              ].map((s, i) => (
-                <Reveal key={s.n} delay={i * 100}>
-                  <div
-                    className="h-full rounded-[20px] p-7 transition-all duration-300 hover:-translate-y-1"
-                    style={{
-                      background: C.card,
-                      border: `1px solid ${C.border}`,
-                      boxShadow: "0 8px 30px -18px rgba(46,37,40,0.2)",
-                    }}
-                  >
-                    <div
-                      className="inline-flex items-center justify-center h-12 w-12 rounded-full mb-6"
-                      style={{ background: C.blushSoft, color: C.primary }}
-                    >
-                      <s.Icon className="h-5 w-5" />
-                    </div>
-                    <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.muted }}>{s.n}</div>
-                    <div className="font-display text-2xl mt-1" style={{ color: C.text }}>{s.title}</div>
-                    <p className="mt-3 text-sm leading-relaxed" style={{ color: C.muted }}>{s.body}</p>
-                  </div>
-                </Reveal>
-              ))}
+          {/* Color wheel centerpiece */}
+          <Reveal delay={100}>
+            <div className="mt-14 flex flex-col items-center text-center">
+              <svg viewBox="0 0 240 240" className="w-64 h-64 md:w-72 md:h-72 drop-shadow-[0_20px_40px_rgba(91,58,110,0.15)]" aria-hidden>
+                <defs>
+                  <linearGradient id="purple" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#7A5490" />
+                    <stop offset="100%" stopColor="#5B3A6E" />
+                  </linearGradient>
+                  <linearGradient id="yellow" x1="0" x2="1">
+                    <stop offset="0%" stopColor="#F0D57A" />
+                    <stop offset="100%" stopColor="#E5C25A" />
+                  </linearGradient>
+                </defs>
+                <circle cx="120" cy="120" r="94" fill="none" stroke={C.border} strokeWidth="1" />
+                <path d="M120,30 A90,90 0 0,1 120,210 Z" fill="url(#purple)" opacity="0.95" />
+                <path d="M120,30 A90,90 0 0,0 120,210 Z" fill="url(#yellow)" opacity="0.9" />
+                <circle cx="120" cy="120" r="46" fill={C.bg} />
+                <text x="120" y="118" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="20" fill={C.text}>Purple</text>
+                <text x="120" y="138" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="12" fill={C.muted}>neutralizes yellow</text>
+              </svg>
             </div>
+          </Reveal>
 
-            {/* Color wheel illustration */}
-            <Reveal delay={200}>
-              <div className="flex flex-col items-center text-center">
-                <svg viewBox="0 0 240 240" className="w-56 h-56 md:w-64 md:h-64" aria-hidden>
-                  <defs>
-                    <linearGradient id="purple" x1="0" x2="1">
-                      <stop offset="0%" stopColor="#7A5490" />
-                      <stop offset="100%" stopColor="#5B3A6E" />
-                    </linearGradient>
-                    <linearGradient id="yellow" x1="0" x2="1">
-                      <stop offset="0%" stopColor="#F0D57A" />
-                      <stop offset="100%" stopColor="#E5C25A" />
-                    </linearGradient>
-                  </defs>
-                  <circle cx="120" cy="120" r="90" fill="none" stroke={C.border} strokeWidth="1" />
-                  <path d="M120,30 A90,90 0 0,1 120,210 Z" fill="url(#purple)" opacity="0.9" />
-                  <path d="M120,30 A90,90 0 0,0 120,210 Z" fill="url(#yellow)" opacity="0.85" />
-                  <circle cx="120" cy="120" r="42" fill={C.bg} />
-                  <text x="120" y="118" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="20" fill={C.text}>Purple</text>
-                  <text x="120" y="138" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="14" fill={C.muted}>neutralizes yellow</text>
-                </svg>
-                <p className="mt-5 text-sm max-w-xs" style={{ color: C.muted }}>
-                  The same beauty principle behind purple shampoo — reimagined for your smile.
-                </p>
-              </div>
-            </Reveal>
+          <div className="mt-14 grid sm:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            {[
+              { n: "01", title: "Apply", body: "Place the strip onto clean, dry teeth.", Icon: Sparkles },
+              { n: "02", title: "Wait", body: "Relax for 30 minutes while the color wheel does its work.", Icon: Clock },
+              { n: "03", title: "Smile", body: "Peel off and reveal a visibly brighter, camera-ready smile.", Icon: Heart },
+            ].map((s, i) => (
+              <Reveal key={s.n} delay={i * 100}>
+                <div
+                  className="h-full rounded-[24px] p-8 text-center transition-all duration-300 hover:-translate-y-1"
+                  style={{
+                    background: C.card,
+                    border: `1px solid ${C.border}`,
+                    boxShadow: "0 20px 50px -30px rgba(46,37,40,0.18)",
+                  }}
+                >
+                  <div
+                    className="mx-auto inline-flex items-center justify-center h-14 w-14 rounded-full mb-6"
+                    style={{ background: C.blushSoft, color: C.primary }}
+                  >
+                    <s.Icon className="h-5 w-5" />
+                  </div>
+                  <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.muted }}>{s.n}</div>
+                  <div className="font-display text-2xl mt-1" style={{ color: C.primary }}>{s.title}</div>
+                  <p className="mt-3 text-sm leading-relaxed" style={{ color: C.muted }}>{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
