@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container-x py-20">
         <div className="grid gap-14 md:grid-cols-3">
           <div>
-            <img src={seralieLogo.url} alt="Seralie" className="h-24 md:h-28 w-auto invert brightness-0 opacity-95" />
+            <div className="font-display text-4xl md:text-5xl text-[#FAF6F0] tracking-wide">Seralie</div>
             <p className="mt-5 font-display italic text-lg text-[#FAF6F0]">Beauty, down to your smile.</p>
           </div>
 
