@@ -496,11 +496,11 @@ function StripsPage() {
             style={{ boxShadow: "0 40px 100px -40px rgba(91,58,110,0.35)", border: `1px solid ${C.border}` }}
           >
             <img src={ctaImg.url} alt="Woman with a bright, natural smile in warm sunlight" width={1600} height={1408} loading="lazy" className="w-full h-[520px] md:h-[640px] object-cover block" />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(30,20,26,0.82) 0%, rgba(46,37,40,0.6) 45%, rgba(46,37,40,0.25) 80%, transparent 100%)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,12,18,0.92) 0%, rgba(30,20,26,0.78) 45%, rgba(30,20,26,0.5) 75%, rgba(30,20,26,0.25) 100%)" }} />
             <div className="absolute inset-0 flex items-center">
-              <div className="px-8 md:px-16 max-w-2xl text-white">
+              <div className="px-8 md:px-16 max-w-2xl">
                 <Reveal>
-                  <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
+                  <h2 className="font-display text-4xl md:text-6xl leading-[1.05] text-white" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.55)" }}>
                     Your smile deserves the same attention as the rest of your beauty routine.
                   </h2>
                 </Reveal>
@@ -510,7 +510,7 @@ function StripsPage() {
                   </div>
                 </Reveal>
                 <Reveal delay={200}>
-                  <div className="mt-6 text-xs md:text-sm tracking-wide opacity-90">
+                  <div className="mt-6 text-xs md:text-sm tracking-wide text-white/90">
                     30-Day Guarantee &nbsp;•&nbsp; Secure Checkout &nbsp;•&nbsp; Fast Shipping
                   </div>
                 </Reveal>
