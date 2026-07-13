@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import seralieLogo from "@/assets/seralie-wordmark.webp.asset.json";
 
 export function Footer() {
   return (
