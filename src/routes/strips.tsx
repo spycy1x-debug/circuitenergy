@@ -52,12 +52,15 @@ const C = {
 };
 
 /* ---------- bundle data ---------- */
+const BASE_UNIT = 34.99;
+const compareAt = (qty: number) => (qty === 1 ? BASE_UNIT : Math.floor(BASE_UNIT * qty) - 0.01);
+
 const BUNDLES = [
-  { id: "b1", title: "Buy 1", strips: "14 Strips", price: 31.99, tag: null, subtitle: "Try it before an event." },
-  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one." },
-  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", price: 69.99, tag: "BEST VALUE", subtitle: "Never run out." },
-];
+  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event." },
+  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true },
+  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one." },
+  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", qty: 7, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out." },
+].map((b) => ({ ...b, compareAt: compareAt(b.qty) }));
 
 /* ---------- fade-in on scroll ---------- */
 function useReveal<T extends HTMLElement>() {
