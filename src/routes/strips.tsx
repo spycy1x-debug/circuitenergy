@@ -239,7 +239,11 @@ function StripsPage() {
                         <div className="mt-1 text-xs" style={{ color: C.muted }}>{b.strips} · {b.subtitle}</div>
                       </div>
                       <div className="text-right shrink-0">
-                        <div className="font-display text-xl" style={{ color: C.text }}>${b.price.toFixed(2)}</div>
+                        <div className="text-xs line-through" style={{ color: C.muted }}>${b.compareAt.toFixed(2)}</div>
+                        <div className="font-display text-xl leading-tight" style={{ color: C.primary }}>${b.price.toFixed(2)}</div>
+                        <div className="text-[10px] tracking-[0.14em] uppercase mt-0.5" style={{ color: C.muted }}>
+                          Save ${(b.compareAt - b.price).toFixed(2)}
+                        </div>
                       </div>
                     </button>
                   );
