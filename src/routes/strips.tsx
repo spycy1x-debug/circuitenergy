@@ -510,7 +510,7 @@ function StripsPage() {
                   </div>
                 </Reveal>
                 <Reveal delay={200}>
-                  <div className="mt-6 text-xs md:text-sm tracking-wide opacity-90">
+                  <div className="mt-6 text-xs md:text-sm tracking-wide text-white/90">
                     30-Day Guarantee &nbsp;•&nbsp; Secure Checkout &nbsp;•&nbsp; Fast Shipping
                   </div>
                 </Reveal>
