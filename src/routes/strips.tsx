@@ -496,7 +496,7 @@ function StripsPage() {
             style={{ boxShadow: "0 40px 100px -40px rgba(91,58,110,0.35)", border: `1px solid ${C.border}` }}
           >
             <img src={ctaImg.url} alt="Woman with a bright, natural smile in warm sunlight" width={1600} height={1408} loading="lazy" className="w-full h-[520px] md:h-[640px] object-cover block" />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(46,37,40,0.55), rgba(46,37,40,0.15) 60%, transparent)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(30,20,26,0.82) 0%, rgba(46,37,40,0.6) 45%, rgba(46,37,40,0.25) 80%, transparent 100%)" }} />
             <div className="absolute inset-0 flex items-center">
               <div className="px-8 md:px-16 max-w-2xl text-white">
                 <Reveal>
