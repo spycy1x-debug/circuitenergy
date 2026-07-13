@@ -259,7 +259,11 @@ function StripsPage() {
                   boxShadow: "0 14px 34px -14px rgba(91,58,110,0.6)",
                 }}
               >
-                Add To Cart · ${chosen.price.toFixed(2)}
+                <span className="inline-flex items-center gap-2">
+                  Add To Cart
+                  <span className="opacity-70 line-through text-xs">${chosen.compareAt.toFixed(2)}</span>
+                  <span>${chosen.price.toFixed(2)}</span>
+                </span>
               </button>
 
               <div className="mt-5 grid grid-cols-2 gap-3 text-xs" style={{ color: C.muted }}>
