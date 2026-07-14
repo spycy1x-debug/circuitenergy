@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const messages = [
-  "FREE US SHIPPING ON ORDERS OVER $50",
+  "FREE US SHIPPING ON ORDERS OVER $40",
   "CAMERA-READY IN 30 MINUTES · PURPLE COLOR-CORRECTING STRIPS",
   "30-DAY SATISFACTION GUARANTEE",
 ];
