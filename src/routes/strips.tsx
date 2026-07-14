@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
 import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
+import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
 import { shopifyCart } from "@/lib/shopify-cart";
 
 export const Route = createFileRoute("/strips")({
@@ -314,7 +315,7 @@ function StripsPage() {
 
 
 
-      {/* HOW IT WORKS */}
+      {/* WHY YOUR SMILE LOOKS DULL */}
       <section className="py-20 md:py-28 relative overflow-hidden">
         <div
           aria-hidden
@@ -324,69 +325,172 @@ function StripsPage() {
               "radial-gradient(60% 60% at 15% 20%, rgba(234,217,223,0.55) 0%, transparent 60%), radial-gradient(50% 50% at 90% 80%, rgba(240,213,122,0.18) 0%, transparent 60%)",
           }}
         />
-        <div className="container-x relative">
+        <div className="container-x relative grid lg:grid-cols-2 gap-14 items-center">
           <Reveal>
-            <div className="max-w-2xl text-center mx-auto">
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>How it works</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Brighten in three simple steps.</h2>
-              <p className="mt-5 text-sm md:text-base" style={{ color: C.muted }}>
-                A 30-minute ritual built on the same beauty principle behind purple shampoo.
-              </p>
+            <div>
+              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Why your smile looks dull</div>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>
+                Your natural smile is still there.
+              </h2>
+              <div className="mt-6 space-y-5 text-base leading-relaxed" style={{ color: C.muted }}>
+                <p>
+                  Everyday habits like coffee, tea, wine, berries, and richly colored foods leave behind tiny pigment particles that settle into the surface of your teeth. Over time, these stains build up, causing your smile to appear duller and more yellow — even if you brush twice a day.
+                </p>
+                <p>
+                  Unfortunately, toothpaste can only remove surface debris. It isn't designed to lift the deeper stains that gradually develop with everyday life.
+                </p>
+                <p className="font-display text-2xl md:text-3xl" style={{ color: C.primary }}>
+                  The good news? Your natural smile is still there.
+                </p>
+                <p>
+                  Seralie Purple Whitening Strips are formulated to target stubborn discoloration while color-correcting visible yellow tones, helping reveal a brighter, whiter smile from the very first use. The comfortable, enamel-safe strips conform to your teeth to deliver even whitening across your smile — without the mess of gels or the hassle of expensive treatments.
+                </p>
+                <p style={{ color: C.text }}>
+                  The result is a visibly brighter smile that looks fresh, radiant, and effortlessly confident.
+                </p>
+              </div>
+              <div className="mt-8">
+                <CTAButton onClick={() => document.getElementById('offer-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                  Shop The Ritual
+                </CTAButton>
+              </div>
             </div>
           </Reveal>
 
-          {/* Color wheel centerpiece */}
-          <Reveal delay={100}>
-            <div className="mt-14 flex flex-col items-center text-center">
-              <svg viewBox="0 0 240 240" className="w-64 h-64 md:w-72 md:h-72 drop-shadow-[0_20px_40px_rgba(91,58,110,0.15)]" aria-hidden>
-                <defs>
-                  <linearGradient id="purple" x1="0" x2="1">
-                    <stop offset="0%" stopColor="#7A5490" />
-                    <stop offset="100%" stopColor="#5B3A6E" />
-                  </linearGradient>
-                  <linearGradient id="yellow" x1="0" x2="1">
-                    <stop offset="0%" stopColor="#F0D57A" />
-                    <stop offset="100%" stopColor="#E5C25A" />
-                  </linearGradient>
-                </defs>
-                <circle cx="120" cy="120" r="94" fill="none" stroke={C.border} strokeWidth="1" />
-                <path d="M120,30 A90,90 0 0,1 120,210 Z" fill="url(#purple)" opacity="0.95" />
-                <path d="M120,30 A90,90 0 0,0 120,210 Z" fill="url(#yellow)" opacity="0.9" />
-                <circle cx="120" cy="120" r="46" fill={C.bg} />
-                <text x="120" y="118" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="20" fill={C.text}>Purple</text>
-                <text x="120" y="138" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="12" fill={C.muted}>neutralizes yellow</text>
-              </svg>
+          <Reveal delay={120}>
+            <div
+              className="rounded-[24px] overflow-hidden"
+              style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.28)" }}
+            >
+              <video
+                src={howVideo.url}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-auto block"
+              />
             </div>
           </Reveal>
+        </div>
+      </section>
 
-          <div className="mt-14 grid sm:grid-cols-3 gap-5 max-w-5xl mx-auto">
+      {/* THE SCIENCE — simple icons */}
+      <section className="py-16 md:py-20" style={{ background: C.blushSoft }}>
+        <div className="container-x">
+          <Reveal>
+            <div className="max-w-2xl mx-auto text-center">
+              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>The science, simply</div>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>How Seralie works.</h2>
+            </div>
+          </Reveal>
+          <div className="mt-12 grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {[
-              { n: "01", title: "Apply", body: "Place the strip onto clean, dry teeth.", Icon: Sparkles },
-              { n: "02", title: "Wait", body: "Relax for 30 minutes while the color wheel does its work.", Icon: Clock },
-              { n: "03", title: "Smile", body: "Peel off and reveal a visibly brighter, camera-ready smile.", Icon: Heart },
+              { emoji: "☕", title: "Coffee stains enamel", body: "Pigments settle into the surface of your teeth every day." },
+              { emoji: "💜", title: "Purple neutralizes yellow", body: "The same beauty principle behind purple shampoo — for your smile." },
+              { emoji: "✨", title: "Whitening lifts stains", body: "Gentle actives target deeper discoloration over time." },
             ].map((s, i) => (
-              <Reveal key={s.n} delay={i * 100}>
+              <Reveal key={s.title} delay={i * 100}>
                 <div
                   className="h-full rounded-[24px] p-8 text-center transition-all duration-300 hover:-translate-y-1"
-                  style={{
-                    background: C.card,
-                    border: `1px solid ${C.border}`,
-                    boxShadow: "0 20px 50px -30px rgba(46,37,40,0.18)",
-                  }}
+                  style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 20px 50px -30px rgba(46,37,40,0.18)" }}
                 >
-                  <div
-                    className="mx-auto inline-flex items-center justify-center h-14 w-14 rounded-full mb-6"
-                    style={{ background: C.blushSoft, color: C.primary }}
-                  >
-                    <s.Icon className="h-5 w-5" />
-                  </div>
-                  <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.muted }}>{s.n}</div>
-                  <div className="font-display text-2xl mt-1" style={{ color: C.primary }}>{s.title}</div>
+                  <div className="text-5xl mb-4" aria-hidden>{s.emoji}</div>
+                  <div className="font-display text-2xl" style={{ color: C.primary }}>{s.title}</div>
                   <p className="mt-3 text-sm leading-relaxed" style={{ color: C.muted }}>{s.body}</p>
                 </div>
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* COMPARISON TABLE */}
+      <section className="py-20 md:py-28">
+        <div className="container-x max-w-5xl">
+          <Reveal>
+            <div className="max-w-2xl mx-auto text-center">
+              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Why Seralie</div>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>The clear difference.</h2>
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div
+              className="mt-12 rounded-[24px] overflow-hidden"
+              style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.15)" }}
+            >
+              <div className="grid grid-cols-4 text-center text-[11px] md:text-sm tracking-[0.14em] uppercase" style={{ background: C.blushSoft, color: C.primary }}>
+                <div className="p-4 text-left pl-6" />
+                <div className="p-4 font-display text-base md:text-lg tracking-normal">Seralie</div>
+                <div className="p-4 tracking-normal" style={{ color: C.muted }}>Whitening Toothpaste</div>
+                <div className="p-4 tracking-normal" style={{ color: C.muted }}>Whitening Pen</div>
+              </div>
+              {[
+                { label: "Instant brightening", s: "yes", t: "no", p: "meh" },
+                { label: "Whitens over time", s: "yes", t: "limited", p: "yes" },
+                { label: "Even coverage", s: "yes", t: "no", p: "no" },
+                { label: "Comfortable", s: "yes", t: "yes", p: "no" },
+                { label: "Enamel safe", s: "yes", t: "yes", p: "meh" },
+                { label: "Peroxide-free", s: "yes", t: "limited", p: "no" },
+              ].map((row, i) => (
+                <div
+                  key={row.label}
+                  className="grid grid-cols-4 items-center text-sm"
+                  style={{ borderTop: `1px solid ${C.border}`, background: i % 2 ? "transparent" : "rgba(245,233,238,0.35)" }}
+                >
+                  <div className="p-4 pl-6 text-left font-medium" style={{ color: C.text }}>{row.label}</div>
+                  <Cell value={row.s} highlight />
+                  <Cell value={row.t} />
+                  <Cell value={row.p} />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* BEAUTY ROUTINE */}
+      <section className="py-20 md:py-28" style={{ background: C.blushSoft }}>
+        <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
+          <Reveal>
+            <div className="rounded-[24px] overflow-hidden group" style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.28)" }}>
+              <img
+                src={heroImg.url}
+                alt="Seralie beside skincare and makeup on a vanity"
+                className="w-full h-auto block transition-transform duration-[900ms] group-hover:scale-105"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div>
+              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Your beauty routine</div>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>
+                The final step before you leave the house.
+              </h2>
+              <ul className="mt-8 space-y-3 text-base" style={{ color: C.text }}>
+                {[
+                  "Morning skincare",
+                  "Hair",
+                  "Makeup",
+                  "✨ Smile",
+                ].map((x) => (
+                  <li key={x} className="flex items-center gap-3">
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: C.primary }} />
+                    <span className="font-display text-2xl">{x}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-base leading-relaxed max-w-md" style={{ color: C.muted }}>
+                You perfect your skin, your hair, your look — Seralie is the finishing touch that ties it all together. Because your smile is part of your beauty routine, too.
+              </p>
+              <div className="mt-8">
+                <CTAButton onClick={() => document.getElementById('offer-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                  Add To Your Ritual
+                </CTAButton>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
