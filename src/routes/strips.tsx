@@ -449,12 +449,12 @@ function StripsPage() {
                 <div className="p-4 tracking-normal" style={{ color: C.muted }}>Whitening Pen</div>
               </div>
               {[
-                { label: "Instant brightening", s: "yes", t: "no", p: "meh" },
-                { label: "Whitens over time", s: "yes", t: "limited", p: "yes" },
-                { label: "Even coverage", s: "yes", t: "no", p: "no" },
-                { label: "Comfortable", s: "yes", t: "yes", p: "no" },
-                { label: "Enamel safe", s: "yes", t: "yes", p: "meh" },
-                { label: "Peroxide-free", s: "yes", t: "limited", p: "no" },
+                { label: "Instant brightening", s: "yes" as const, t: "no" as const, p: "meh" as const },
+                { label: "Whitens over time", s: "yes" as const, t: "limited" as const, p: "yes" as const },
+                { label: "Even coverage", s: "yes" as const, t: "no" as const, p: "no" as const },
+                { label: "Comfortable", s: "yes" as const, t: "yes" as const, p: "no" as const },
+                { label: "Enamel safe", s: "yes" as const, t: "yes" as const, p: "meh" as const },
+                { label: "Peroxide-free", s: "yes" as const, t: "limited" as const, p: "no" as const },
               ].map((row, i) => (
                 <div
                   key={row.label}
