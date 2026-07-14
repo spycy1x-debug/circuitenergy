@@ -126,7 +126,7 @@ export function CartDrawer() {
             <div className="flex items-center justify-center gap-4 pt-1 text-[11px] text-[#7A6A5E] tracking-wide">
               <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day guarantee</span>
               <span className="opacity-40">·</span>
-              <span className="inline-flex items-center gap-1.5"><Truck className="h-3.5 w-3.5 text-[#AD9752]" /> Free over $50</span>
+              <span className="inline-flex items-center gap-1.5"><Truck className="h-3.5 w-3.5 text-[#AD9752]" /> Free over $40</span>
             </div>
           </div>
         )}

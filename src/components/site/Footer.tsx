@@ -33,7 +33,7 @@ export function Footer() {
             <div>30-Day Money-Back Guarantee</div>
             <div>Peroxide-Free · Gentle on Enamel</div>
             <div>Non-Toxic Ingredients</div>
-            <div>Free U.S. Shipping Over $50</div>
+            <div>Free U.S. Shipping Over $40</div>
           </div>
         </div>
 

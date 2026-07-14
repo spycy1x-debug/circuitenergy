@@ -183,7 +183,7 @@ export function Header() {
                     </div>
                   </Link>
                   <div className="mt-6 text-[11px] text-[#7A6A5E] tracking-wide">
-                    Complimentary shipping over $50 · 30-day guarantee
+                    Complimentary shipping over $40 · 30-day guarantee
                   </div>
                 </div>
               </div>

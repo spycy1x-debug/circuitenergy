@@ -25,7 +25,7 @@ function CartPage() {
           <div className="eyebrow">Your Ritual</div>
           <h1 className="mt-4 font-display text-5xl md:text-6xl text-[#3B2E25]">Cart</h1>
           <p className="mt-4 text-[15px] leading-8 text-[#5A483C]">
-            {count === 0 ? "Nothing here yet — the ritual awaits." : `${count} ${count === 1 ? "item" : "items"} · Complimentary shipping over $50.`}
+            {count === 0 ? "Nothing here yet — the ritual awaits." : `${count} ${count === 1 ? "item" : "items"} · Complimentary shipping over $40.`}
           </p>
         </div>
       </section>
@@ -94,7 +94,7 @@ function CartPage() {
                 </button>
                 <div className="mt-6 space-y-2 text-[11px] text-[#7A6A5E] tracking-wide">
                   <div className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day money-back guarantee</div>
-                  <div className="flex items-center gap-2"><Truck className="h-3.5 w-3.5 text-[#AD9752]" /> Free shipping over $50</div>
+                  <div className="flex items-center gap-2"><Truck className="h-3.5 w-3.5 text-[#AD9752]" /> Free shipping over $40</div>
                 </div>
               </aside>
             </div>
