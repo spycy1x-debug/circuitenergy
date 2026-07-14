@@ -141,6 +141,28 @@ function Stars({ rating = 4.8, size = 14 }: { rating?: number; size?: number }) 
   );
 }
 
+/* ---------- comparison cell ---------- */
+function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "limited"; highlight?: boolean }) {
+  const symbol = value === "yes" ? "✓" : value === "no" ? "✕" : value === "limited" ? "Limited" : "△";
+  const color = value === "yes" ? (highlight ? C.primary : "#6B7A4B") : value === "no" ? "#B14B3F" : C.muted;
+  return (
+    <div className="p-4 text-center">
+      <span
+        className={`inline-flex items-center justify-center min-w-8 h-8 px-2 rounded-full ${highlight ? "font-semibold" : ""}`}
+        style={{
+          background: highlight && value === "yes" ? C.blushSoft : "transparent",
+          color,
+          fontSize: value === "limited" ? 11 : 16,
+          letterSpacing: value === "limited" ? "0.14em" : "normal",
+          textTransform: value === "limited" ? "uppercase" : "none",
+        }}
+      >
+        {symbol}
+      </span>
+    </div>
+  );
+}
+
 /* ---------- page ---------- */
 function StripsPage() {
   const [selected, setSelected] = useState("b2");
