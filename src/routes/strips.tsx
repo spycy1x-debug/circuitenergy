@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
 import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
+import { shopifyCart } from "@/lib/shopify-cart";
 
 export const Route = createFileRoute("/strips")({
   head: () => ({
@@ -55,11 +56,16 @@ const C = {
 const BASE_UNIT = 34.99;
 const compareAt = (qty: number) => (qty === 1 ? BASE_UNIT : Math.floor(BASE_UNIT * qty) - 0.01);
 
+/*
+ * WIRING: replace each REPLACE_ME_* with the numeric variant ID from Shopify.
+ * Shopify admin → Products → Seralie Purple Whitening Strips → click a variant —
+ * the number at the end of the URL (.../variants/1234567890) is the ID.
+ */
 const BUNDLES = [
-  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event." },
-  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one." },
-  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", qty: 7, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out." },
+  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event.", variantId: "gid://shopify/ProductVariant/REPLACE_ME_B1" },
+  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/REPLACE_ME_B2" },
+  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/REPLACE_ME_B3" },
+  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", qty: 7, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/REPLACE_ME_B4" },
 ].map((b) => ({ ...b, compareAt: compareAt(b.qty) }));
 
 /* ---------- fade-in on scroll ---------- */
@@ -138,8 +144,35 @@ function Stars({ rating = 4.8, size = 14 }: { rating?: number; size?: number }) 
 function StripsPage() {
   const [selected, setSelected] = useState("b2");
   const [showSticky, setShowSticky] = useState(false);
+  const [adding, setAdding] = useState(false);
   const offerRef = useRef<HTMLDivElement>(null);
   const chosen = BUNDLES.find((b) => b.id === selected)!;
+
+  const handleAdd = async () => {
+    if (adding) return;
+    if (chosen.variantId.includes("REPLACE_ME")) {
+      window?.alert?.("Checkout launches soon — we're putting the finishing touches on our store.");
+      return;
+    }
+    setAdding(true);
+    try {
+      await shopifyCart.add(
+        {
+          variantId: chosen.variantId,
+          productTitle: "Seralie Purple Whitening Strips",
+          variantTitle: chosen.title,
+          image: heroImg.url,
+          unitPrice: chosen.price,
+        },
+        1,
+      );
+    } catch (e) {
+      console.error(e);
+      window?.alert?.("Could not add to cart. Please try again.");
+    } finally {
+      setAdding(false);
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setShowSticky(window.scrollY > 600);
@@ -251,8 +284,9 @@ function StripsPage() {
               </div>
 
               <button
-                onClick={() => window?.alert?.("Launching soon — connect your Shopify variant to enable checkout.")}
-                className="mt-6 w-full rounded-full px-8 py-4 text-sm md:text-base font-medium tracking-[0.14em] uppercase transition-all duration-300 hover:-translate-y-0.5"
+                onClick={handleAdd}
+                disabled={adding}
+                className="mt-6 w-full rounded-full px-8 py-4 text-sm md:text-base font-medium tracking-[0.14em] uppercase transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-60"
                 style={{
                   background: C.primary,
                   color: "#FFFFFF",
@@ -260,7 +294,7 @@ function StripsPage() {
                 }}
               >
                 <span className="inline-flex items-center gap-2">
-                  Add To Cart
+                  {adding ? "Adding…" : "Add To Cart"}
                   <span className="opacity-70 line-through text-xs">${chosen.compareAt.toFixed(2)}</span>
                   <span>${chosen.price.toFixed(2)}</span>
                 </span>
