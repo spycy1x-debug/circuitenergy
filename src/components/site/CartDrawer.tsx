@@ -3,6 +3,20 @@ import { X, Plus, Minus, ShoppingBag, Lock, ShieldCheck, Truck, Loader2, ArrowRi
 import { Link } from "@tanstack/react-router";
 import { shopifyCart, useShopifyCart } from "@/lib/shopify-cart";
 
+/* Seralie purple palette (matches /strips) */
+const C = {
+  bg: "#FAF6F0",
+  panel: "#FFFFFF",
+  soft: "#F5E9EE",
+  softer: "#FBF3F6",
+  primary: "#5B3A6E",
+  primaryHover: "#4A2E5A",
+  text: "#2E2528",
+  muted: "#6B5D62",
+  border: "#E9DFD5",
+  borderStrong: "#E4D5DC",
+};
+
 export function CartDrawer() {
   const { isOpen, lines, subtotal, count, isLoading, checkoutUrl } = useShopifyCart();
 
@@ -27,25 +41,30 @@ export function CartDrawer() {
       <div
         aria-hidden={!isOpen}
         onClick={() => shopifyCart.close()}
-        className={`fixed inset-0 z-[80] bg-[#3B2E25]/55 backdrop-blur-[3px] transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 z-[80] backdrop-blur-[3px] transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        style={{ background: "rgba(46,37,40,0.55)" }}
       />
       <aside
         role="dialog"
         aria-label="Shopping cart"
         aria-hidden={!isOpen}
-        className={`fixed top-0 right-0 z-[81] h-full w-full sm:w-[440px] bg-[#FDF8EE] shadow-[0_20px_60px_-15px_rgba(59,46,37,0.35)] flex flex-col transform transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 z-[81] h-full w-full sm:w-[440px] flex flex-col transform transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        style={{ background: C.bg, boxShadow: "0 20px 60px -15px rgba(91,58,110,0.35)" }}
       >
-        <div className="flex items-center justify-between px-7 py-6 border-b border-[#EADFC7]">
+        <div className="flex items-center justify-between px-7 py-6" style={{ borderBottom: `1px solid ${C.borderStrong}` }}>
           <div>
-            <div className="caps-label text-[#AD9752]">Your Ritual</div>
-            <div className="mt-1 font-display text-2xl text-[#3B2E25]">
+            <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Your Ritual</div>
+            <div className="mt-1 font-display text-2xl" style={{ color: C.primary }}>
               {count === 0 ? "Empty" : `${count} ${count === 1 ? "item" : "items"}`}
             </div>
           </div>
           <button
             onClick={() => shopifyCart.close()}
             aria-label="Close cart"
-            className="h-10 w-10 hover:text-[#AD9752] flex items-center justify-center text-[#5A483C] transition"
+            className="h-10 w-10 flex items-center justify-center transition"
+            style={{ color: C.muted }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = C.primary)}
+            onMouseLeave={(e) => (e.currentTarget.style.color = C.muted)}
           >
             <X className="h-5 w-5" />
           </button>
@@ -55,38 +74,40 @@ export function CartDrawer() {
           {lines.length === 0 ? (
             <EmptyState />
           ) : (
-            <ul className="px-7 py-4 divide-y divide-[#EADFC7]">
+            <ul className="px-7 py-4 divide-y" style={{ borderColor: C.borderStrong }}>
               {lines.map((line) => (
-                <li key={line.id} className="py-5 flex gap-4">
-                  <div className="h-20 w-20 bg-[#FDF8EE] flex items-center justify-center overflow-hidden shrink-0 border border-[#EADFC7]">
+                <li key={line.id} className="py-5 flex gap-4" style={{ borderColor: C.borderStrong }}>
+                  <div className="h-20 w-20 flex items-center justify-center overflow-hidden shrink-0 rounded-xl" style={{ background: C.panel, border: `1px solid ${C.borderStrong}` }}>
                     {line.image ? (
-                      <img src={line.image} alt={line.productTitle} className="h-full w-full object-cover mix-blend-multiply" />
+                      <img src={line.image} alt={line.productTitle} className="h-full w-full object-cover" />
                     ) : (
-                      <ShoppingBag className="h-6 w-6 text-[#AD9752]" />
+                      <ShoppingBag className="h-6 w-6" style={{ color: C.primary }} />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-display text-lg text-[#3B2E25] leading-snug truncate">{line.productTitle}</div>
+                    <div className="font-display text-lg leading-snug truncate" style={{ color: C.text }}>{line.productTitle}</div>
                     {line.variantTitle && (
-                      <div className="text-[11px] uppercase tracking-[0.18em] text-[#7A6A5E] mt-1 truncate">{line.variantTitle}</div>
+                      <div className="text-[11px] uppercase tracking-[0.18em] mt-1 truncate" style={{ color: C.muted }}>{line.variantTitle}</div>
                     )}
                     <div className="mt-3 flex items-center justify-between gap-2">
-                      <div className="inline-flex items-center border border-[#EADFC7] bg-white overflow-hidden">
+                      <div className="inline-flex items-center overflow-hidden rounded-full" style={{ background: C.panel, border: `1px solid ${C.borderStrong}` }}>
                         <button
                           aria-label="Decrease quantity"
                           onClick={() => shopifyCart.setQty(line.id, line.quantity - 1)}
                           disabled={isLoading}
-                          className="h-8 w-8 flex items-center justify-center text-[#5A483C] hover:bg-[#F7EFDF] transition disabled:opacity-50"
+                          className="h-8 w-8 flex items-center justify-center transition disabled:opacity-50"
+                          style={{ color: C.primary }}
                         ><Minus className="h-3 w-3" /></button>
-                        <span className="w-8 text-center text-[13px] font-medium text-[#3B2E25] tabular-nums">{line.quantity}</span>
+                        <span className="w-8 text-center text-[13px] font-medium tabular-nums" style={{ color: C.text }}>{line.quantity}</span>
                         <button
                           aria-label="Increase quantity"
                           onClick={() => shopifyCart.setQty(line.id, line.quantity + 1)}
                           disabled={isLoading}
-                          className="h-8 w-8 flex items-center justify-center text-[#5A483C] hover:bg-[#F7EFDF] transition disabled:opacity-50"
+                          className="h-8 w-8 flex items-center justify-center transition disabled:opacity-50"
+                          style={{ color: C.primary }}
                         ><Plus className="h-3 w-3" /></button>
                       </div>
-                      <div className="text-[16px] font-medium text-[#3B2E25] tabular-nums">
+                      <div className="text-[16px] font-medium tabular-nums" style={{ color: C.primary }}>
                         ${(line.unitPrice * line.quantity).toFixed(2)}
                       </div>
                     </div>
@@ -95,7 +116,10 @@ export function CartDrawer() {
                     aria-label="Remove item"
                     onClick={() => shopifyCart.remove(line.id)}
                     disabled={isLoading}
-                    className="self-start h-7 w-7 text-[#AD9752] hover:text-[#3B2E25] flex items-center justify-center transition disabled:opacity-50"
+                    className="self-start h-7 w-7 flex items-center justify-center transition disabled:opacity-50"
+                    style={{ color: C.muted }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = C.primary)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = C.muted)}
                   ><X className="h-4 w-4" /></button>
                 </li>
               ))}
@@ -104,29 +128,32 @@ export function CartDrawer() {
         </div>
 
         {lines.length > 0 && (
-          <div className="border-t border-[#EADFC7] bg-[#F7EFDF]/60 px-7 py-6 space-y-4">
+          <div className="px-7 py-6 space-y-4" style={{ background: C.softer, borderTop: `1px solid ${C.borderStrong}` }}>
             <div className="flex items-center justify-between">
-              <span className="caps-label text-[#AD9752]">Subtotal</span>
-              <span className="font-display text-3xl text-[#3B2E25] tabular-nums">${subtotal.toFixed(2)}</span>
+              <span className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Subtotal</span>
+              <span className="font-display text-3xl tabular-nums" style={{ color: C.primary }}>${subtotal.toFixed(2)}</span>
             </div>
-            <div className="text-[11px] text-[#7A6A5E] -mt-2 tracking-wide">Shipping & taxes calculated at checkout</div>
+            <div className="text-[11px] -mt-2 tracking-wide" style={{ color: C.muted }}>Shipping & taxes calculated at checkout</div>
 
             <button
               onClick={() => shopifyCart.checkout()}
               disabled={isLoading || !checkoutUrl}
-              className="group w-full bg-[#AD9752] hover:bg-[#94803F] text-white font-medium tracking-[0.28em] uppercase text-[11px] py-5 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="group w-full font-medium tracking-[0.28em] uppercase text-[11px] py-5 rounded-full transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-white"
+              style={{ background: C.primary, boxShadow: "0 14px 34px -14px rgba(91,58,110,0.6)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = C.primaryHover)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = C.primary)}
             >
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Lock className="h-3.5 w-3.5" /> Checkout <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></>}
             </button>
 
-            <button onClick={() => shopifyCart.close()} className="w-full text-center caps-label text-[#5A483C] hover:text-[#3B2E25] transition py-1">
+            <button onClick={() => shopifyCart.close()} className="w-full text-center text-[11px] tracking-[0.24em] uppercase transition py-1" style={{ color: C.muted }}>
               Continue Shopping
             </button>
 
-            <div className="flex items-center justify-center gap-4 pt-1 text-[11px] text-[#7A6A5E] tracking-wide">
-              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-[#AD9752]" /> 30-day guarantee</span>
+            <div className="flex items-center justify-center gap-4 pt-1 text-[11px] tracking-wide" style={{ color: C.muted }}>
+              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5" style={{ color: C.primary }} /> 30-day guarantee</span>
               <span className="opacity-40">·</span>
-              <span className="inline-flex items-center gap-1.5"><Truck className="h-3.5 w-3.5 text-[#AD9752]" /> Free over $40</span>
+              <span className="inline-flex items-center gap-1.5"><Truck className="h-3.5 w-3.5" style={{ color: C.primary }} /> Free over $40</span>
             </div>
           </div>
         )}
@@ -138,21 +165,21 @@ export function CartDrawer() {
 function EmptyState() {
   return (
     <div className="h-full flex flex-col items-center justify-center text-center px-8 py-16">
-      <div className="h-16 w-16 rounded-full border border-[#EADFC7] bg-white flex items-center justify-center mb-6">
-        <ShoppingBag className="h-6 w-6 text-[#AD9752]" />
+      <div className="h-16 w-16 rounded-full flex items-center justify-center mb-6" style={{ background: C.panel, border: `1px solid ${C.borderStrong}` }}>
+        <ShoppingBag className="h-6 w-6" style={{ color: C.primary }} />
       </div>
-      <div className="caps-label text-[#AD9752]">Your ritual awaits</div>
-      <h3 className="mt-3 font-display text-3xl text-[#3B2E25]">Nothing here yet</h3>
-      <p className="mt-3 text-sm text-[#5A483C] max-w-xs">
-        Beauty and healthy aging, from within. Begin with Seralie NMN.
+      <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Your ritual awaits</div>
+      <h3 className="mt-3 font-display text-3xl" style={{ color: C.primary }}>Nothing here yet</h3>
+      <p className="mt-3 text-sm max-w-xs" style={{ color: C.muted }}>
+        Makeup for your teeth. Camera-ready in 30 minutes.
       </p>
       <Link
-        to="/product/$slug"
-        params={{ slug: "nmn" }}
+        to="/strips"
         onClick={() => shopifyCart.close()}
-        className="mt-7 btn-primary"
+        className="mt-7 inline-flex items-center justify-center rounded-full px-8 py-4 text-[11px] font-medium tracking-[0.24em] uppercase text-white transition-all"
+        style={{ background: C.primary, boxShadow: "0 10px 28px -12px rgba(91,58,110,0.6)" }}
       >
-        Shop NMN
+        Shop Strips
       </Link>
     </div>
   );
