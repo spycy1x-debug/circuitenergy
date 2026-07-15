@@ -411,7 +411,14 @@ function StripsPage() {
         </div>
       </section>
 
-
+      {/* PRODUCT GALLERY */}
+      <section className="pb-16 md:pb-24">
+        <div className="container-x max-w-3xl">
+          <Reveal>
+            <ProductGallery />
+          </Reveal>
+        </div>
+      </section>
 
 
       {/* WHY YOUR SMILE LOOKS DULL */}
