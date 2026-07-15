@@ -16,12 +16,7 @@ import {
 import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
 import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
 import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
-import { shopifyCart, fetchVariantsByHandle } from "@/lib/shopify-cart";
-
-/* The Shopify product handle for the strips product. If you renamed the product
- * URL handle in Shopify, update this to match (Products → product → Search engine
- * listing → the slug after /products/). */
-const PRODUCT_HANDLE = "seralie-purple-whitening-strips";
+import { shopifyCart } from "@/lib/shopify-cart";
 
 export const Route = createFileRoute("/strips")({
   head: () => ({
@@ -62,11 +57,12 @@ const C = {
 const BASE_UNIT = 34.99;
 const compareAt = (qty: number) => (qty === 1 ? BASE_UNIT : Math.floor(BASE_UNIT * qty) - 0.01);
 
+/* Each bundle is its own Shopify product; variantId verified from the live store. */
 const BUNDLES = [
-  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event." },
-  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one." },
-  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", qty: 7, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out." },
+  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event.", variantId: "gid://shopify/ProductVariant/48740328308890" },
+  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/48744375156890" },
+  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/48744310997146" },
+  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", qty: 7, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/48744332066970" },
 ].map((b) => ({ ...b, compareAt: compareAt(b.qty) }));
 
 /* ---------- fade-in on scroll ---------- */
@@ -168,46 +164,16 @@ function StripsPage() {
   const [selected, setSelected] = useState("b2");
   const [showSticky, setShowSticky] = useState(false);
   const [adding, setAdding] = useState(false);
-  // bundle id -> Shopify variant gid, resolved from the live product on mount
-  const [variantIds, setVariantIds] = useState<Record<string, string>>({});
   const offerRef = useRef<HTMLDivElement>(null);
   const chosen = BUNDLES.find((b) => b.id === selected)!;
 
-  // Auto-wire: pull the product's variants from Shopify and match them to
-  // bundles by price (unique for b3/b4; the two $31.99 tiers fall in order).
-  useEffect(() => {
-    let alive = true;
-    fetchVariantsByHandle(PRODUCT_HANDLE)
-      .then((variants) => {
-        if (!alive || !variants.length) return;
-        const remaining = [...variants];
-        const map: Record<string, string> = {};
-        for (const b of BUNDLES) {
-          const i = remaining.findIndex((v) => Math.abs(v.price - b.price) < 0.005);
-          if (i >= 0) { map[b.id] = remaining[i].id; remaining.splice(i, 1); }
-        }
-        // fallback: assign any leftover variants to unmapped bundles in order
-        for (const b of BUNDLES) {
-          if (!map[b.id] && remaining.length) map[b.id] = remaining.shift()!.id;
-        }
-        setVariantIds(map);
-      })
-      .catch(() => {});
-    return () => { alive = false; };
-  }, []);
-
   const handleAdd = async () => {
     if (adding) return;
-    const variantId = variantIds[chosen.id];
-    if (!variantId) {
-      window?.alert?.("Checkout is loading — one moment, then try again.");
-      return;
-    }
     setAdding(true);
     try {
       await shopifyCart.add(
         {
-          variantId,
+          variantId: chosen.variantId,
           productTitle: "Seralie Purple Whitening Strips",
           variantTitle: chosen.title,
           image: heroImg.url,
