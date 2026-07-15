@@ -223,6 +223,31 @@ function fireAddPixels(item: { variantId: string; productTitle: string; unitPric
   });
 }
 
+/**
+ * Fetch a product's variants from the Storefront API by its handle.
+ * Returns [{ id, title, price }] so pages can auto-wire without hardcoded IDs.
+ */
+export async function fetchVariantsByHandle(
+  handle: string,
+): Promise<{ id: string; title: string; price: number }[]> {
+  const data = await gql<{ product: { variants: { edges: { node: any }[] } } | null }>(
+    `query($handle: String!) {
+       product(handle: $handle) {
+         variants(first: 20) {
+           edges { node { id title price { amount } } }
+         }
+       }
+     }`,
+    { handle },
+  );
+  const edges = data.product?.variants?.edges || [];
+  return edges.map((e) => ({
+    id: e.node.id,
+    title: e.node.title,
+    price: parseFloat(e.node.price?.amount || "0"),
+  }));
+}
+
 export const shopifyCart = {
   subscribe(l: () => void) {
     ensureHydrated();
