@@ -12,11 +12,29 @@ import {
   Coffee,
   Heart,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
-import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
 import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
+import gallerySmile from "@/assets/strips-smile-closeup.png.asset.json";
+import galleryMirror from "@/assets/strips-mirror-apply.png.asset.json";
+import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
+import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
+import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
+import galleryMacroMug from "@/assets/strips-macro-mug.png.asset.json";
 import { shopifyCart } from "@/lib/shopify-cart";
+
+/* order requested: last→first, 2nd-to-last→second, 1st→third, 2nd→fourth, then rest */
+const GALLERY = [
+  { url: gallerySmile.url, alt: "Bright, camera-ready smile after using Seralie strips" },
+  { url: galleryMirror.url, alt: "Applying a Seralie purple whitening strip in the mirror" },
+  { url: galleryBoxMarble.url, alt: "Seralie Whitening Strips box on marble vanity" },
+  { url: galleryBoxVanity.url, alt: "Seralie Whitening Strips alongside a beauty vanity" },
+  { url: gallery14Strips.url, alt: "Seralie box opened with all 14 purple whitening strips" },
+  { url: galleryMacroMug.url, alt: "Macro of a Seralie purple strip beside a coffee cup" },
+];
+const heroImg = GALLERY[3]; // box on vanity (used for beauty-routine section)
+const ctaImg = GALLERY[1]; // mirror apply (used as final CTA backdrop)
 
 export const Route = createFileRoute("/strips")({
   head: () => ({
@@ -60,9 +78,9 @@ const compareAt = (qty: number) => (qty === 1 ? BASE_UNIT : Math.floor(BASE_UNIT
 /* Each bundle is its own Shopify product; variantId verified from the live store. */
 const BUNDLES = [
   { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event.", variantId: "gid://shopify/ProductVariant/48740328308890" },
-  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/48744375156890" },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/48744310997146" },
-  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", qty: 7, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/48744332066970" },
+  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/48745209397402" },
+  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/48745208742042" },
+  { id: "b4", title: "Buy 3 Get 4 FREE", strips: "98 Strips", qty: 7, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/48745209266330" },
 ].map((b) => ({ ...b, compareAt: compareAt(b.qty) }));
 
 /* ---------- fade-in on scroll ---------- */
@@ -155,6 +173,73 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
       >
         {symbol}
       </span>
+    </div>
+  );
+}
+
+/* ---------- product gallery ---------- */
+function ProductGallery() {
+  const [i, setI] = useState(0);
+  const total = GALLERY.length;
+  const prev = () => setI((v) => (v - 1 + total) % total);
+  const next = () => setI((v) => (v + 1) % total);
+  return (
+    <div>
+      <div
+        className="relative rounded-[24px] overflow-hidden group"
+        style={{ background: "#FFFFFF", border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
+      >
+        <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+          {GALLERY.map((g, idx) => (
+            <img
+              key={g.url}
+              src={g.url}
+              alt={g.alt}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+              style={{ opacity: i === idx ? 1 : 0 }}
+              loading={idx === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+        <button
+          onClick={prev}
+          aria-label="Previous photo"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 hover:-translate-x-0.5"
+          style={{ background: "rgba(255,255,255,0.92)", color: C.primary, boxShadow: "0 8px 24px -8px rgba(46,37,40,0.25)", transform: "translateY(-50%)" }}
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          onClick={next}
+          aria-label="Next photo"
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 hover:translate-x-0.5"
+          style={{ background: "rgba(255,255,255,0.92)", color: C.primary, boxShadow: "0 8px 24px -8px rgba(46,37,40,0.25)", transform: "translateY(-50%)" }}
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 inline-flex gap-1.5">
+          {GALLERY.map((_, idx) => (
+            <span
+              key={idx}
+              className="h-1.5 rounded-full transition-all"
+              style={{ width: i === idx ? 20 : 6, background: i === idx ? C.primary : "rgba(91,58,110,0.28)" }}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="mt-3 grid grid-cols-6 gap-2">
+        {GALLERY.map((g, idx) => (
+          <button
+            key={g.url}
+            onClick={() => setI(idx)}
+            aria-label={`Show photo ${idx + 1}`}
+            className="rounded-lg overflow-hidden transition-all"
+            style={{ border: `1.5px solid ${i === idx ? C.primary : C.border}`, opacity: i === idx ? 1 : 0.75 }}
+          >
+            <img src={g.url} alt="" className="w-full h-full object-cover" style={{ aspectRatio: "1 / 1" }} />
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -326,7 +411,14 @@ function StripsPage() {
         </div>
       </section>
 
-
+      {/* PRODUCT GALLERY */}
+      <section className="pb-16 md:pb-24">
+        <div className="container-x max-w-3xl">
+          <Reveal>
+            <ProductGallery />
+          </Reveal>
+        </div>
+      </section>
 
 
       {/* WHY YOUR SMILE LOOKS DULL */}
