@@ -177,6 +177,73 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
   );
 }
 
+/* ---------- product gallery ---------- */
+function ProductGallery() {
+  const [i, setI] = useState(0);
+  const total = GALLERY.length;
+  const prev = () => setI((v) => (v - 1 + total) % total);
+  const next = () => setI((v) => (v + 1) % total);
+  return (
+    <div>
+      <div
+        className="relative rounded-[24px] overflow-hidden group"
+        style={{ background: "#FFFFFF", border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
+      >
+        <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+          {GALLERY.map((g, idx) => (
+            <img
+              key={g.url}
+              src={g.url}
+              alt={g.alt}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+              style={{ opacity: i === idx ? 1 : 0 }}
+              loading={idx === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+        <button
+          onClick={prev}
+          aria-label="Previous photo"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 hover:-translate-x-0.5"
+          style={{ background: "rgba(255,255,255,0.92)", color: C.primary, boxShadow: "0 8px 24px -8px rgba(46,37,40,0.25)", transform: "translateY(-50%)" }}
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          onClick={next}
+          aria-label="Next photo"
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 hover:translate-x-0.5"
+          style={{ background: "rgba(255,255,255,0.92)", color: C.primary, boxShadow: "0 8px 24px -8px rgba(46,37,40,0.25)", transform: "translateY(-50%)" }}
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 inline-flex gap-1.5">
+          {GALLERY.map((_, idx) => (
+            <span
+              key={idx}
+              className="h-1.5 rounded-full transition-all"
+              style={{ width: i === idx ? 20 : 6, background: i === idx ? C.primary : "rgba(91,58,110,0.28)" }}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="mt-3 grid grid-cols-6 gap-2">
+        {GALLERY.map((g, idx) => (
+          <button
+            key={g.url}
+            onClick={() => setI(idx)}
+            aria-label={`Show photo ${idx + 1}`}
+            className="rounded-lg overflow-hidden transition-all"
+            style={{ border: `1.5px solid ${i === idx ? C.primary : C.border}`, opacity: i === idx ? 1 : 0.75 }}
+          >
+            <img src={g.url} alt="" className="w-full h-full object-cover" style={{ aspectRatio: "1 / 1" }} />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------- page ---------- */
 function StripsPage() {
   const [selected, setSelected] = useState("b2");
