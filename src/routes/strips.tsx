@@ -12,11 +12,29 @@ import {
   Coffee,
   Heart,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
-import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
 import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
+import gallerySmile from "@/assets/strips-smile-closeup.png.asset.json";
+import galleryMirror from "@/assets/strips-mirror-apply.png.asset.json";
+import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
+import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
+import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
+import galleryMacroMug from "@/assets/strips-macro-mug.png.asset.json";
 import { shopifyCart } from "@/lib/shopify-cart";
+
+/* order requested: last→first, 2nd-to-last→second, 1st→third, 2nd→fourth, then rest */
+const GALLERY = [
+  { url: gallerySmile.url, alt: "Bright, camera-ready smile after using Seralie strips" },
+  { url: galleryMirror.url, alt: "Applying a Seralie purple whitening strip in the mirror" },
+  { url: galleryBoxMarble.url, alt: "Seralie Whitening Strips box on marble vanity" },
+  { url: galleryBoxVanity.url, alt: "Seralie Whitening Strips alongside a beauty vanity" },
+  { url: gallery14Strips.url, alt: "Seralie box opened with all 14 purple whitening strips" },
+  { url: galleryMacroMug.url, alt: "Macro of a Seralie purple strip beside a coffee cup" },
+];
+const heroImg = GALLERY[0];
+const ctaImg = GALLERY[0];
 
 export const Route = createFileRoute("/strips")({
   head: () => ({
