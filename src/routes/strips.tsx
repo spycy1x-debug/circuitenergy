@@ -33,8 +33,8 @@ const GALLERY = [
   { url: gallery14Strips.url, alt: "Seralie box opened with all 14 purple whitening strips" },
   { url: galleryMacroMug.url, alt: "Macro of a Seralie purple strip beside a coffee cup" },
 ];
-const heroImg = GALLERY[0];
-const ctaImg = GALLERY[0];
+const heroImg = GALLERY[3]; // box on vanity (used for beauty-routine section)
+const ctaImg = GALLERY[1]; // mirror apply (used as final CTA backdrop)
 
 export const Route = createFileRoute("/strips")({
   head: () => ({
