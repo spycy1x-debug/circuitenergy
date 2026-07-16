@@ -747,53 +747,278 @@ function StripsPage() {
         </div>
       </section>
 
-      {/* REVIEWS (empty-ready) */}
+      {/* REVIEWS */}
       <section id="reviews" className="py-20 md:py-28">
         <div className="container-x">
           <Reveal>
-            <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Loved by our community</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Real smiles, real moments.</h2>
-              <p className="mt-4 text-sm md:text-base" style={{ color: C.muted }}>
-                Reviews from verified customers will appear here as they come in.
-              </p>
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Loved by thousands of smiles</div>
+              <h2 className="font-display text-4xl md:text-6xl leading-[1.05]" style={{ color: C.primary }}>
+                Real smiles, real moments.
+              </h2>
+              <div className="mt-6 inline-flex items-center gap-3 flex-wrap justify-center">
+                <Stars rating={avgRating} size={22} />
+                <span className="font-display text-2xl" style={{ color: C.primary }}>{avgRating.toFixed(1)}</span>
+                <span className="text-sm" style={{ color: C.muted }}>· Based on {totalCount.toLocaleString()}+ reviews</span>
+              </div>
             </div>
           </Reveal>
 
-          <div className="mt-12 columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <Reveal key={i} delay={i * 60}>
-                <div
-                  className="mb-5 break-inside-avoid rounded-[20px] p-6"
-                  style={{ background: C.card, border: `1px dashed ${C.border}` }}
-                >
-                  <div
-                    className="w-full rounded-2xl mb-5"
-                    style={{
-                      aspectRatio: i % 2 === 0 ? "4 / 5" : "1 / 1",
-                      background: `linear-gradient(135deg, ${C.blushSoft}, ${C.blush})`,
-                    }}
-                  />
-                  <Stars rating={0} />
-                  <div className="mt-3 font-display text-xl" style={{ color: C.text }}>Review title</div>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: C.muted }}>
-                    No reviews yet — be the first to share your Seralie moment.
-                  </p>
-                  <div className="mt-5 flex items-center justify-between text-xs" style={{ color: C.muted }}>
-                    <span>Customer Name</span>
-                    <span
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded-full"
-                      style={{ background: C.blushSoft, color: C.primary }}
+          {/* summary + filters */}
+          <Reveal delay={100}>
+            <div className="mt-10 max-w-3xl mx-auto rounded-[20px] p-6 md:p-7" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+              <div className="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-center">
+                <div className="text-center md:border-r md:pr-8" style={{ borderColor: C.border }}>
+                  <div className="font-display text-5xl md:text-6xl leading-none" style={{ color: C.primary }}>{avgRating.toFixed(1)}</div>
+                  <div className="mt-2"><Stars rating={avgRating} size={16} /></div>
+                  <div className="mt-1 text-[11px] tracking-wide" style={{ color: C.muted }}>{totalCount.toLocaleString()}+ reviews</div>
+                </div>
+                <div className="space-y-1.5">
+                  {[5, 4, 3, 2, 1].map((s) => {
+                    const pct = s === 5 ? 88 : s === 4 ? 8 : s === 3 ? 3 : s === 2 ? 1 : 0;
+                    return (
+                      <button
+                        key={s}
+                        onClick={() => { setReviewFilter((reviewFilter === s ? 0 : s) as 0 | 5 | 4 | 3 | 2); setReviewsVisible(12); }}
+                        className="w-full flex items-center gap-3 text-left px-2 py-1 rounded-md transition-colors hover:bg-black/[0.03]"
+                        style={{ opacity: reviewFilter === 0 || reviewFilter === s ? 1 : 0.5 }}
+                      >
+                        <span className="text-xs w-6" style={{ color: C.muted }}>{s}★</span>
+                        <span className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: C.blushSoft }}>
+                          <span className="block h-full rounded-full" style={{ width: `${pct}%`, background: C.primary }} />
+                        </span>
+                        <span className="text-xs w-10 text-right tabular-nums" style={{ color: C.muted }}>{pct}%</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-2 pt-5" style={{ borderTop: `1px solid ${C.border}` }}>
+                {[
+                  { v: 0, label: "All" },
+                  { v: 5, label: "5 ★" },
+                  { v: 4, label: "4 ★" },
+                  { v: 3, label: "3 ★" },
+                  { v: 2, label: "2 ★" },
+                ].map((f) => {
+                  const active = reviewFilter === f.v;
+                  return (
+                    <button
+                      key={f.v}
+                      onClick={() => { setReviewFilter(f.v as 0 | 5 | 4 | 3 | 2); setReviewsVisible(12); }}
+                      className="px-4 py-1.5 rounded-full text-xs tracking-wide transition-all"
+                      style={{
+                        background: active ? C.primary : "transparent",
+                        color: active ? "#FFFFFF" : C.primary,
+                        border: `1px solid ${active ? C.primary : C.border}`,
+                      }}
                     >
-                      <ShieldCheck className="h-3 w-3" /> Verified Purchase
+                      {f.label}
+                    </button>
+                  );
+                })}
+                <div className="flex-1" />
+                <button
+                  onClick={() => setShowReviewForm(true)}
+                  className="px-5 py-2 rounded-full text-xs font-medium tracking-[0.14em] uppercase text-white transition-all hover:-translate-y-0.5"
+                  style={{ background: C.primary, boxShadow: "0 10px 24px -12px rgba(91,58,110,0.55)" }}
+                >
+                  Write a Review
+                </button>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* masonry */}
+          <div className="mt-12 columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+            {shown.map((rv, i) => (
+              <div
+                key={i}
+                className="mb-5 break-inside-avoid rounded-2xl p-6"
+                style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 6px 20px -12px rgba(46,37,40,0.10)" }}
+              >
+                <Stars rating={rv.r} size={14} />
+                <div className="mt-3 font-display text-xl leading-tight" style={{ color: C.primary }}>{rv.title}</div>
+                <p className="mt-2 text-[14px] leading-relaxed" style={{ color: C.text }}>{rv.body}</p>
+                {rv.img && (
+                  <div className="mt-4 rounded-xl overflow-hidden" style={{ border: `1px solid ${C.border}` }}>
+                    <img src={rv.img} alt="" className="w-full h-full object-cover" style={{ aspectRatio: "4 / 5" }} loading="lazy" />
+                  </div>
+                )}
+                <div className="mt-5 flex items-center justify-between gap-2 flex-wrap text-xs" style={{ color: C.muted }}>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span style={{ color: C.text }}>{rv.n}</span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ background: C.blushSoft, color: C.primary }}>
+                      <ShieldCheck className="h-3 w-3" /> Verified Buyer
                     </span>
                   </div>
+                  <span>{rv.date}</span>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
+
+          {reviewsVisible < filtered.length && (
+            <div className="mt-8 flex justify-center">
+              <button
+                onClick={() => setReviewsVisible((v) => v + 9)}
+                className="px-8 py-3 rounded-full text-xs font-medium tracking-[0.14em] uppercase transition-all hover:-translate-y-0.5"
+                style={{ background: "transparent", color: C.primary, border: `1.5px solid ${C.primary}` }}
+              >
+                Load More Reviews
+              </button>
+            </div>
+          )}
         </div>
       </section>
+
+      {/* WRITE A REVIEW MODAL */}
+      {showReviewForm && (
+        <div className="fixed inset-0 z-[95] bg-black/60 flex items-center justify-center p-4" onClick={() => !rvSubmitting && setShowReviewForm(false)}>
+          <div
+            className="rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            style={{ background: C.bg, border: `1px solid ${C.border}` }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-6 md:p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Share your smile</div>
+                  <h3 className="mt-2 font-display text-2xl" style={{ color: C.primary }}>Write a Review</h3>
+                </div>
+                <button type="button" onClick={() => setShowReviewForm(false)} className="p-1" style={{ color: C.muted }} aria-label="Close">
+                  <XIcon className="h-5 w-5" />
+                </button>
+              </div>
+
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setRvError(null);
+                  const name = rvName.trim();
+                  const title = rvTitle.trim();
+                  const text = rvText.trim();
+                  if (!name || name.length > 80) return setRvError("Please enter your name.");
+                  if (!title || title.length > 120) return setRvError("Please add a short title.");
+                  if (!text || text.length < 5) return setRvError("Please write your review.");
+                  if (text.length > 2000) return setRvError("Review is too long.");
+                  setRvSubmitting(true);
+                  try {
+                    const { error } = await supabase.from("product_reviews").insert({
+                      product_id: "strips",
+                      name, title, body: text, rating: rvRating, image_url: rvPhoto,
+                    });
+                    if (error) throw error;
+                    setUserReviews((prev) => [{
+                      r: rvRating, title, body: text, n: name,
+                      date: new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }),
+                      img: rvPhoto || undefined,
+                    }, ...prev]);
+                    setShowReviewForm(false);
+                    setRvName(""); setRvTitle(""); setRvText(""); setRvRating(5); setRvPhoto(null);
+                  } catch (err: any) {
+                    setRvError(err?.message || "Something went wrong. Please try again.");
+                  } finally {
+                    setRvSubmitting(false);
+                  }
+                }}
+                className="space-y-5"
+              >
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Rating</label>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <button key={n} type="button" onClick={() => setRvRating(n)} className="p-1" aria-label={`${n} stars`}>
+                        <Star className="h-7 w-7" style={{ color: C.primary, opacity: n <= rvRating ? 1 : 0.25 }} fill="currentColor" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Name</label>
+                  <input type="text" value={rvName} maxLength={80} onChange={(e) => setRvName(e.target.value)} required
+                    className="w-full px-3 py-2.5 bg-white rounded-md text-[14px] focus:outline-none"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }} />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Review title</label>
+                  <input type="text" value={rvTitle} maxLength={120} onChange={(e) => setRvTitle(e.target.value)} required
+                    className="w-full px-3 py-2.5 bg-white rounded-md text-[14px] focus:outline-none"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }} />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Your review</label>
+                  <textarea value={rvText} maxLength={2000} rows={4} onChange={(e) => setRvText(e.target.value)} required
+                    placeholder="Tell others what you love about it…"
+                    className="w-full px-3 py-2.5 bg-white rounded-md text-[14px] focus:outline-none resize-none"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }} />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Add a photo (optional)</label>
+                  {rvPhoto ? (
+                    <div className="relative inline-block">
+                      <img src={rvPhoto} alt="Preview" className="h-24 w-24 object-cover rounded-md" style={{ border: `1px solid ${C.border}` }} />
+                      <button type="button" onClick={() => setRvPhoto(null)} aria-label="Remove photo"
+                        className="absolute -top-2 -right-2 text-white rounded-full p-1 shadow" style={{ background: C.primary }}>
+                        <XIcon className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <label className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-md text-[13px] cursor-pointer"
+                      style={{ border: `1px dashed ${C.primary}`, color: C.primary }}>
+                      <input type="file" accept="image/*" className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0]; if (!file) return;
+                          if (file.size > 15 * 1024 * 1024) { setRvError("Image too large (15MB max)."); return; }
+                          const dataUrl: string = await new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => {
+                              const img = new Image();
+                              img.onload = () => {
+                                const maxW = 900;
+                                const scale = Math.min(1, maxW / img.width);
+                                const canvas = document.createElement("canvas");
+                                canvas.width = img.width * scale;
+                                canvas.height = img.height * scale;
+                                canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
+                                resolve(canvas.toDataURL("image/jpeg", 0.82));
+                              };
+                              img.onerror = reject; img.src = reader.result as string;
+                            };
+                            reader.onerror = reject; reader.readAsDataURL(file);
+                          });
+                          setRvPhoto(dataUrl);
+                        }} />
+                      + Upload Photo
+                    </label>
+                  )}
+                </div>
+
+                {rvError && <p className="text-[13px] text-red-700">{rvError}</p>}
+
+                <div className="pt-2 flex gap-3">
+                  <button type="button" onClick={() => setShowReviewForm(false)}
+                    className="flex-1 py-3 rounded-md text-[13px]"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }}>
+                    Cancel
+                  </button>
+                  <button type="submit" disabled={rvSubmitting}
+                    className="flex-1 py-3 rounded-md text-[13px] tracking-wide uppercase text-white disabled:opacity-60 transition-colors"
+                    style={{ background: C.primary }}>
+                    {rvSubmitting ? "Submitting…" : "Submit Review"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+
 
       {/* FAQ */}
       <section className="py-20 md:py-28" style={{ background: C.blushSoft }}>
