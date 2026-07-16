@@ -37,7 +37,7 @@ export function CartDrawer() {
       >
         <div className="flex items-center justify-between px-7 py-6 border-b border-[#EADFC7]">
           <div>
-            <div className="caps-label text-[#AD9752]">Your Ritual</div>
+            <div className="caps-label text-[#AD9752]">Your Bag</div>
             <div className="mt-1 font-display text-2xl text-[#3B2E25]">
               {count === 0 ? "Empty" : `${count} ${count === 1 ? "item" : "items"}`}
             </div>
@@ -141,7 +141,7 @@ function EmptyState() {
       <div className="h-16 w-16 rounded-full border border-[#EADFC7] bg-white flex items-center justify-center mb-6">
         <ShoppingBag className="h-6 w-6 text-[#AD9752]" />
       </div>
-      <div className="caps-label text-[#AD9752]">Your ritual awaits</div>
+      <div className="caps-label text-[#AD9752]">Your brighter smile awaits</div>
       <h3 className="mt-3 font-display text-3xl text-[#3B2E25]">Nothing here yet</h3>
       <p className="mt-3 text-sm text-[#5A483C] max-w-xs">
         Beauty and healthy aging, from within. Begin with Seralie NMN.

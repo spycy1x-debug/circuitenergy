@@ -5,7 +5,7 @@ import { useShopifyCart, shopifyCart } from "@/lib/shopify-cart";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Ritual — Seralie" },
+      { title: "Your Bag — Seralie" },
       { name: "description", content: "Review your Seralie order before checkout." },
     ],
   }),
@@ -22,10 +22,10 @@ function CartPage() {
     <>
       <section className="bg-[#FDF8EE]">
         <div className="container-x pt-14 pb-6 md:pt-20 md:pb-10 text-center max-w-2xl mx-auto">
-          <div className="eyebrow">Your Ritual</div>
+          <div className="eyebrow">Your Bag</div>
           <h1 className="mt-4 font-display text-5xl md:text-6xl text-[#3B2E25]">Cart</h1>
           <p className="mt-4 text-[15px] leading-8 text-[#5A483C]">
-            {count === 0 ? "Nothing here yet — the ritual awaits." : `${count} ${count === 1 ? "item" : "items"} · Complimentary shipping over $40.`}
+            {count === 0 ? "Nothing here yet — your brighter smile awaits." : `${count} ${count === 1 ? "item" : "items"} · Complimentary shipping over $40.`}
           </p>
         </div>
       </section>

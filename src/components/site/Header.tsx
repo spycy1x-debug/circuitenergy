@@ -12,7 +12,7 @@ const SEARCH_INDEX: SearchItem[] = [
   { label: "Shop", sub: "Seralie NMN", to: "/shop" },
   { label: "Seralie NMN", sub: "500mg β-NMN — the youth molecule", to: "/product/$slug", params: { slug: "nmn" } },
   { label: "Contact", sub: "Speak with our team", to: "/contact" },
-  { label: "Cart", sub: "Review your ritual", to: "/cart" },
+  { label: "Cart", sub: "Review your bag", to: "/cart" },
   { label: "Account", sub: "Sign in", to: "/account" },
 ];
 
@@ -179,7 +179,7 @@ export function Header() {
                       500 mg pure β-NMN. Replenish NAD+, support cellular renewal, and help skin stay radiant.
                     </p>
                     <div className="mt-5 inline-flex items-center gap-2 caps-label text-[#AD9752] group-hover:gap-3 transition-all">
-                      Shop the ritual <ArrowUpRight className="h-3.5 w-3.5" />
+                      Shop Now <ArrowUpRight className="h-3.5 w-3.5" />
                     </div>
                   </Link>
                   <div className="mt-6 text-[11px] text-[#7A6A5E] tracking-wide">
