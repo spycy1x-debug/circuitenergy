@@ -55,10 +55,10 @@ const SEED_REVIEWS: SeedReview[] = [
   { r: 5, title: "my new pre-date ritual", body: "put one on while i'm doing my hair and makeup and by the time i'm ready to walk out the door my smile matches the effort i put into everything else. finally.", n: "Sofia G.", date: "9 days ago", img: rvVanityCurl.url },
   { r: 5, title: "coffee girlie approved", body: "i drink way too much coffee. way too much. was skeptical anything short of the dentist could help but these have honestly kept my teeth looking bright between cleanings. i keep a box at work now.", n: "Priya S.", date: "4 days ago", img: rvOffice.url },
   { r: 5, title: "before flights, before events, before everything", body: "throw a box in my gym bag, in my carry on, everywhere. 30 min and i look put together no matter how tired i am. only thing i've tried that gives an instant result AND actually whitens over time.", n: "Isabela M.", date: "11 days ago", img: rvGym.url },
-  { r: 5, title: "obsessed", body: "no other way to put it. gentle, no burning, actually works. i keep telling my mom to try them.", n: "Hannah K.", date: "1 week ago" },
+  { r: 5, title: "a month in and i'm sold", body: "the instant thing is fun but what actually got me is the long game — about a month of using them a few times a week and my teeth are just whiter now, even on the days i don't put one on. gentle the whole time, no burning. keep telling my mom to try them.", n: "Hannah K.", date: "1 week ago" },
   { r: 5, title: "the purple genuinely does something", body: "you can literally see the yellow being neutralized the second you take it off. it's like a filter but real. then a few weeks of using them and the baseline shade just… stays lighter. love that.", n: "Ellie P.", date: "3 weeks ago", img: rvPurpleMouth.url },
   { r: 5, title: "no sensitivity at all", body: "i have sensitive teeth and can't do the peroxide strips from the drugstore, they wreck me for days. these? nothing. just a brighter smile.", n: "Rachel W.", date: "5 days ago" },
-  { r: 5, title: "worth the bundle", body: "got the buy 2 get 2 free — glad i did. one for the bathroom, one for the travel bag, one for my sister, one still sealed. price per box is a joke for the quality.", n: "Amanda B.", date: "2 weeks ago", img: rvPorchGolden.url },
+  { r: 5, title: "worth the bundle", body: "got the buy 2 get 2 free — glad i did. i'm on my second box now and the change adds up: each pack my baseline shade got a little lighter, not just the day-of glow. one for the bathroom, one for the travel bag, one for my sister. price per box is a joke for the quality.", n: "Amanda B.", date: "2 weeks ago", img: rvPorchGolden.url },
   { r: 4, title: "really good, just wanted the deeper whitening a bit faster", body: "the instant effect is unreal, no notes there. for the long term change i'd say i started really seeing it around week 3, i was hoping for closer to 1. still keeping them in rotation.", n: "Nicole H.", date: "8 days ago" },
   { r: 4, title: "loving them so far", body: "wish the strips were just slightly wider so they'd cover my back teeth too. the front looks amazing though and i keep getting compliments.", n: "Julia F.", date: "12 days ago", img: rvPorchLaugh.url },
   { r: 4, title: "great product, would love more per box", body: "14 strips goes faster than you think once you start using them for every event. bundle is the way to go. rating 4 only because i want more!!", n: "Taylor V.", date: "6 days ago" },
@@ -607,7 +607,7 @@ function StripsPage() {
               className="mt-12 rounded-[24px] overflow-hidden"
               style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.15)" }}
             >
-              <div className="grid grid-cols-4 text-center text-[11px] md:text-sm tracking-[0.14em] uppercase" style={{ background: C.blushSoft, color: C.primary }}>
+              <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] text-center text-[11px] md:text-sm tracking-[0.14em] uppercase" style={{ background: C.blushSoft, color: C.primary }}>
                 <div className="p-4 text-left pl-6" />
                 <div className="p-4 font-display text-base md:text-lg tracking-normal">Seralie</div>
                 <div className="p-4 tracking-normal" style={{ color: C.muted }}>Whitening Toothpaste</div>
@@ -623,7 +623,7 @@ function StripsPage() {
               ].map((row, i) => (
                 <div
                   key={row.label}
-                  className="grid grid-cols-4 items-center text-sm"
+                  className="grid grid-cols-[1.4fr_1fr_1fr_1fr] items-center text-sm"
                   style={{ borderTop: `1px solid ${C.border}`, background: i % 2 ? "transparent" : "rgba(245,233,238,0.35)" }}
                 >
                   <div className="p-4 pl-6 text-left font-medium" style={{ color: C.text }}>{row.label}</div>
@@ -1123,6 +1123,10 @@ const FAQS = [
   {
     q: "How do SERALIE Purple Whitening Strips work?",
     a: "Purple sits opposite yellow on the color wheel, helping neutralize yellow tones so your smile appears brighter after just one treatment. Think of it as the same beauty concept behind purple shampoo, but designed for your smile. It's the perfect finishing touch before the moments that matter — and with regular use, that brighter look becomes your smile's everyday baseline.",
+  },
+  {
+    q: "Do they actually whiten over time, or just for the day?",
+    a: "Both — and that's what makes them different. The purple color-correction gives you an instant, camera-ready brightness the moment you peel the strip off. Underneath, the enamel-safe formula is gently lifting the stains that build up from coffee, tea, and wine — so with a consistent routine (a few times a week), your baseline shade keeps getting lighter, week after week. The instant glow is the hook; a genuinely whiter everyday smile is what keeps people reordering.",
   },
   {
     q: "How long does it take?",
