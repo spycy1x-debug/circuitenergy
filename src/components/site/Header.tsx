@@ -2,7 +2,6 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Search, User, ShoppingBag, Menu, X, ArrowUpRight, Mail, Home as HomeIcon, Sparkles } from "lucide-react";
 import seralieLogo from "@/assets/seralie-wordmark.webp.asset.json";
 import { useEffect, useRef, useState } from "react";
-import { useCart } from "@/lib/cart";
 import { shopifyCart, useShopifyCart } from "@/lib/shopify-cart";
 
 type SearchItem = { label: string; sub: string; to: string; params?: Record<string, string> };
@@ -22,9 +21,8 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
-  const { count } = useCart();
   const { count: shopifyCount, bump } = useShopifyCart();
-  const totalCount = shopifyCount || count;
+  const totalCount = shopifyCount;
   const [pulse, setPulse] = useState(false);
   useEffect(() => {
     if (bump > 0) {
