@@ -359,6 +359,10 @@ function StripsPage() {
             </Reveal>
           </div>
 
+          <Reveal delay={100}>
+            <ProductGallery />
+          </Reveal>
+
           <Reveal delay={120}>
             <div
               id="offer-card"
