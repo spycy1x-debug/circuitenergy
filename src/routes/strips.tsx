@@ -359,11 +359,12 @@ function StripsPage() {
             </Reveal>
           </div>
 
-          <Reveal delay={100}>
-            <ProductGallery />
-          </Reveal>
+          <div className="space-y-6 md:space-y-8">
+            <Reveal delay={100}>
+              <ProductGallery />
+            </Reveal>
 
-          <Reveal delay={120}>
+            <Reveal delay={160}>
             <div
               id="offer-card"
               className="rounded-[24px] p-6 md:p-8"
