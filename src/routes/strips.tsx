@@ -337,10 +337,11 @@ function StripsPage() {
               </p>
             </Reveal>
             <Reveal delay={220}>
-              <div className="mt-6 flex items-center gap-3">
+              <div className="mt-6 flex items-center gap-3 flex-wrap">
                 <Stars rating={4.8} size={16} />
                 <span className="text-sm font-medium">4.8</span>
-                <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.muted }}>Reviews</a>
+                <span className="text-sm" style={{ color: C.muted }}>3,000+ reviews</span>
+                <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.primary }}>Read reviews</a>
               </div>
             </Reveal>
             <Reveal delay={280}>
