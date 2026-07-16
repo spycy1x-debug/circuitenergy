@@ -285,6 +285,57 @@ function StripsPage() {
   const offerRef = useRef<HTMLDivElement>(null);
   const chosen = BUNDLES.find((b) => b.id === selected)!;
 
+  /* ----- reviews state ----- */
+  type UserReview = { r: number; title: string; body: string; n: string; date: string; img?: string };
+  const [userReviews, setUserReviews] = useState<UserReview[]>([]);
+  const [reviewFilter, setReviewFilter] = useState<0 | 5 | 4 | 3 | 2>(0);
+  const [reviewsVisible, setReviewsVisible] = useState(12);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [rvName, setRvName] = useState("");
+  const [rvTitle, setRvTitle] = useState("");
+  const [rvText, setRvText] = useState("");
+  const [rvRating, setRvRating] = useState(5);
+  const [rvPhoto, setRvPhoto] = useState<string | null>(null);
+  const [rvSubmitting, setRvSubmitting] = useState(false);
+  const [rvError, setRvError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    supabase
+      .from("product_reviews")
+      .select("name, title, body, rating, image_url, created_at")
+      .eq("product_id", "strips")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (!alive || !data) return;
+        setUserReviews(
+          data.map((r) => ({
+            r: r.rating,
+            title: r.title,
+            body: r.body,
+            n: r.name,
+            date: new Date(r.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }),
+            img: r.image_url || undefined,
+          })),
+        );
+      });
+    return () => { alive = false; };
+  }, []);
+
+  const allReviews = useMemo<UserReview[]>(() => [...userReviews, ...SEED_REVIEWS], [userReviews]);
+  const filtered = useMemo(
+    () => (reviewFilter === 0 ? allReviews : allReviews.filter((r) => r.r === reviewFilter)),
+    [allReviews, reviewFilter],
+  );
+  const shown = filtered.slice(0, reviewsVisible);
+  const totalCount = 3000 + userReviews.length;
+  const avgRating = 4.8;
+  const starBreakdown = useMemo(() => {
+    const buckets: Record<number, number> = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+    allReviews.forEach((r) => { buckets[r.r] = (buckets[r.r] || 0) + 1; });
+    return buckets;
+  }, [allReviews]);
+
   const handleAdd = async () => {
     if (adding) return;
     setAdding(true);
