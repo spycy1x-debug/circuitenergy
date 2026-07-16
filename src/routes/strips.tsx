@@ -76,7 +76,7 @@ export const Route = createFileRoute("/strips")({
       {
         name: "description",
         content:
-          "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile for dates, photos, meetings, and every moment you want extra confidence.",
+          "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile — and, with regular use, whiten it over time. For dates, photos, meetings, and every moment you want extra confidence.",
       },
       { property: "og:title", content: "Seralie — Makeup For Your Teeth" },
       {
@@ -727,7 +727,7 @@ function StripsPage() {
             {[
               { title: "Instant Brightening", body: "Look more camera-ready in just 30 minutes." },
               { title: "No Harsh Bleaching", body: "Beauty-inspired color correction instead of aggressive whitening." },
-              { title: "Brighter Over Time", body: "Instant is our specialty — but with consistent use, your smile keeps looking whiter week after week." },
+              { title: "Brighter Over Time", body: "The whitening compounds — with consistent use, yellow stays neutralized and your smile keeps getting whiter, week after week." },
               { title: "Fits Your Beauty Routine", body: "Designed to belong beside your skincare and makeup, not inside a medicine cabinet." },
             ].map((m, i) => (
               <Reveal key={m.title} delay={i * 80}>

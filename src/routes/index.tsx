@@ -24,13 +24,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Seralie is beauty for your smile. Purple color-correcting whitening strips that make you camera-ready in 30 minutes — for dates, photos, and every moment that matters.",
+          "Seralie is beauty for your smile. Purple color-correcting whitening strips: camera-ready in 30 minutes, and whiter over time with regular use — for dates, photos, and every moment that matters.",
       },
       { property: "og:title", content: "Seralie — Beauty, Down To Your Smile" },
       {
         property: "og:description",
         content:
-          "Makeup for your teeth. Camera-ready in 30 minutes.",
+          "Makeup for your teeth. Camera-ready in 30 minutes — and whiter over time.",
       },
       { property: "og:image", content: heroImg.url },
       { name: "twitter:image", content: heroImg.url },
@@ -146,7 +146,7 @@ function HomePage() {
                 You perfect your skin, your hair, your look — Seralie is the finishing touch.
                 Our purple color-correcting strips are{" "}
                 <span className="font-medium" style={{ color: C.text }}>makeup for your teeth</span>:
-                a brighter-looking smile in 30 minutes, right when you need it.
+                a brighter smile in 30 minutes when you need it — one that keeps getting whiter the more you wear them.
               </p>
             </Reveal>
             <Reveal delay={240}>
@@ -209,12 +209,14 @@ function HomePage() {
             </div>
             <p className="mt-6 text-base leading-relaxed max-w-lg" style={{ color: C.muted }}>
               Purple neutralizes yellow — the same beauty principle as purple shampoo, reimagined
-              for your smile. No peroxide, no sensitivity, no waiting weeks. Just a visibly
-              brighter-looking smile, 30 minutes before the moments that matter.
+              for your smile. Peroxide-free and gentle, it gives you a visibly brighter smile
+              30 minutes before the moments that matter — and with regular use the whitening
+              compounds, so your everyday smile keeps getting brighter too.
             </p>
             <ul className="mt-6 space-y-2.5 text-sm" style={{ color: C.text }}>
               {[
                 "Camera-ready in 30 minutes",
+                "Whiter over time — with regular use, the brighter look becomes your baseline",
                 "Peroxide-free color correction — zero sensitivity",
                 "14 strips per pack · bundles from $31.99",
               ].map((b) => (
@@ -245,7 +247,7 @@ function HomePage() {
               { icon: Heart, title: "Date Night", body: "Your finishing touch before heading out." },
               { icon: Camera, title: "Photos & Events", body: "Look brighter in every picture." },
               { icon: Briefcase, title: "Interviews & Meetings", body: "Feel polished before every first impression." },
-              { icon: Coffee, title: "Coffee Refresh", body: "A quick confidence boost after your daily coffee." },
+              { icon: Coffee, title: "Daily Upkeep", body: "Lift everyday coffee and wine stains before they set in." },
             ].map((m, i) => (
               <Reveal key={m.title} delay={i * 80}>
                 <div
