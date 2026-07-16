@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Star,
   ShieldCheck,
@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  X as XIcon,
 } from "lucide-react";
 import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
 import gallerySmile from "@/assets/strips-smile-closeup.png.asset.json";
@@ -22,7 +23,18 @@ import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
 import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
 import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
 import galleryMacroMug from "@/assets/strips-macro-mug.png.asset.json";
+import rvMia from "@/assets/strips-rv-mia.png.asset.json";
+import rvJasmine from "@/assets/strips-rv-jasmine.png.asset.json";
+import rvStripMacro from "@/assets/strips-rv-strip-macro.png.asset.json";
+import rvFlatlayTimer from "@/assets/strips-rv-flatlay-timer.png.asset.json";
+import rvGym from "@/assets/strips-rv-gym.png.asset.json";
+import rvVanityCurl from "@/assets/strips-rv-vanity-curl.png.asset.json";
+import rvPurpleMouth from "@/assets/strips-rv-purple-mouth.png.asset.json";
+import rvOffice from "@/assets/strips-rv-office.png.asset.json";
+import rvPorchGolden from "@/assets/strips-rv-porch-golden.png.asset.json";
+import rvPorchLaugh from "@/assets/strips-rv-porch-laugh.png.asset.json";
 import { shopifyCart } from "@/lib/shopify-cart";
+import { supabase } from "@/integrations/supabase/client";
 
 /* order requested: last→first, 2nd-to-last→second, 1st→third, 2nd→fourth, then rest */
 const GALLERY = [
@@ -32,6 +44,27 @@ const GALLERY = [
   { url: galleryBoxVanity.url, alt: "Seralie Whitening Strips alongside a beauty vanity" },
   { url: gallery14Strips.url, alt: "Seralie box opened with all 14 purple whitening strips" },
   { url: galleryMacroMug.url, alt: "Macro of a Seralie purple strip beside a coffee cup" },
+];
+
+/* ---------- seed reviews ---------- */
+type SeedReview = { r: number; title: string; body: string; n: string; date: string; img?: string };
+const SEED_REVIEWS: SeedReview[] = [
+  { r: 5, title: "wedding-ready in an hour", body: "used these the morning of my best friend's wedding and by the time i got to hair & makeup my teeth genuinely looked whiter. the purple cancels the yellow immediately, it's kind of unreal. every photo i'm in i can actually see the difference.", n: "Mia R.", date: "6 days ago", img: rvMia.url },
+  { r: 5, title: "two weeks in", body: "i've been using them 3x a week for a little over two weeks and my teeth are genuinely several shades lighter. not a filter, not a lighting trick — my husband noticed before i said anything. and zero sensitivity which was my main worry.", n: "Jasmine T.", date: "2 weeks ago", img: rvJasmine.url },
+  { r: 5, title: "the strips are actually cute?", body: "wasn't expecting to say that about whitening strips but the little purple shape is kind of adorable. fits my teeth perfectly, doesn't slide around. more importantly they actually work.", n: "Chloe D.", date: "3 days ago", img: rvStripMacro.url },
+  { r: 5, title: "my new pre-date ritual", body: "put one on while i'm doing my hair and makeup and by the time i'm ready to walk out the door my smile matches the effort i put into everything else. finally.", n: "Sofia G.", date: "9 days ago", img: rvVanityCurl.url },
+  { r: 5, title: "coffee girlie approved", body: "i drink way too much coffee. way too much. was skeptical anything short of the dentist could help but these have honestly kept my teeth looking bright between cleanings. i keep a box at work now.", n: "Priya S.", date: "4 days ago", img: rvOffice.url },
+  { r: 5, title: "before flights, before events, before everything", body: "throw a box in my gym bag, in my carry on, everywhere. 30 min and i look put together no matter how tired i am. only thing i've tried that gives an instant result AND actually whitens over time.", n: "Isabela M.", date: "11 days ago", img: rvGym.url },
+  { r: 5, title: "obsessed", body: "no other way to put it. gentle, no burning, actually works. i keep telling my mom to try them.", n: "Hannah K.", date: "1 week ago" },
+  { r: 5, title: "the purple genuinely does something", body: "you can literally see the yellow being neutralized the second you take it off. it's like a filter but real. then a few weeks of using them and the baseline shade just… stays lighter. love that.", n: "Ellie P.", date: "3 weeks ago", img: rvPurpleMouth.url },
+  { r: 5, title: "no sensitivity at all", body: "i have sensitive teeth and can't do the peroxide strips from the drugstore, they wreck me for days. these? nothing. just a brighter smile.", n: "Rachel W.", date: "5 days ago" },
+  { r: 5, title: "worth the bundle", body: "got the buy 2 get 2 free — glad i did. one for the bathroom, one for the travel bag, one for my sister, one still sealed. price per box is a joke for the quality.", n: "Amanda B.", date: "2 weeks ago", img: rvPorchGolden.url },
+  { r: 4, title: "really good, just wanted the deeper whitening a bit faster", body: "the instant effect is unreal, no notes there. for the long term change i'd say i started really seeing it around week 3, i was hoping for closer to 1. still keeping them in rotation.", n: "Nicole H.", date: "8 days ago" },
+  { r: 4, title: "loving them so far", body: "wish the strips were just slightly wider so they'd cover my back teeth too. the front looks amazing though and i keep getting compliments.", n: "Julia F.", date: "12 days ago", img: rvPorchLaugh.url },
+  { r: 4, title: "great product, would love more per box", body: "14 strips goes faster than you think once you start using them for every event. bundle is the way to go. rating 4 only because i want more!!", n: "Taylor V.", date: "6 days ago" },
+  { r: 3, title: "instant effect is real, long term was slower for me", body: "loved the way it looked right after — before a shoot it saved me. the whitening-over-time part took longer for me than i expected, maybe a month before i noticed a permanent shift. still using them though.", n: "Kayla D.", date: "3 weeks ago" },
+  { r: 3, title: "good for events, i wanted more staying power", body: "it's a lovely product and gentle which i appreciate. the instant brightness faded quicker than i hoped between uses so i basically apply one before anything important. that's fine but i wanted the day-to-day effect to stick harder.", n: "Meredith L.", date: "2 weeks ago", img: rvFlatlayTimer.url },
+  { r: 2, title: "gentle but slow for me", body: "no complaints on safety, zero sensitivity, easy to use. i just didn't see the dramatic long-term change others are getting after 3 weeks. the instant effect is nice for a night out but for me it faded pretty fast. giving it more time.", n: "Danielle O.", date: "10 days ago" },
 ];
 const heroImg = GALLERY[3]; // box on vanity (used for beauty-routine section)
 const ctaImg = GALLERY[1]; // mirror apply (used as final CTA backdrop)
