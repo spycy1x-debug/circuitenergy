@@ -53,7 +53,7 @@ export function CartDrawer() {
       >
         <div className="flex items-center justify-between px-7 py-6" style={{ borderBottom: `1px solid ${C.borderStrong}` }}>
           <div>
-            <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Your Ritual</div>
+            <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Your Bag</div>
             <div className="mt-1 font-display text-2xl" style={{ color: C.primary }}>
               {count === 0 ? "Empty" : `${count} ${count === 1 ? "item" : "items"}`}
             </div>
@@ -168,7 +168,7 @@ function EmptyState() {
       <div className="h-16 w-16 rounded-full flex items-center justify-center mb-6" style={{ background: C.panel, border: `1px solid ${C.borderStrong}` }}>
         <ShoppingBag className="h-6 w-6" style={{ color: C.primary }} />
       </div>
-      <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Your ritual awaits</div>
+      <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Your brighter smile awaits</div>
       <h3 className="mt-3 font-display text-3xl" style={{ color: C.primary }}>Nothing here yet</h3>
       <p className="mt-3 text-sm max-w-xs" style={{ color: C.muted }}>
         Makeup for your teeth. Camera-ready in 30 minutes.

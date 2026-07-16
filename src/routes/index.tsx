@@ -151,7 +151,7 @@ function HomePage() {
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <CTALink>Shop Whitening Strips</CTALink>
+                <CTALink>Brighten My Smile</CTALink>
               </div>
             </Reveal>
             <Reveal delay={320}>
@@ -225,7 +225,7 @@ function HomePage() {
               ))}
             </ul>
             <div className="mt-8">
-              <CTALink>Shop Now · From $31.99</CTALink>
+              <CTALink>Brighten My Smile · From $31.99</CTALink>
             </div>
           </Reveal>
         </div>
