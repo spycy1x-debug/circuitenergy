@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, Sparkles, Zap, ShieldCheck, Check, Loader2 } from "lucide-react";
+import { Mail, Sparkles, Star, ShieldCheck, Check, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/account")({
@@ -8,7 +8,7 @@ export const Route = createFileRoute("/account")({
       { title: "Join the Seralie list — Seralie" },
       {
         name: "description",
-        content: "Subscribe to the Seralie email list for early access, founder notes, and energy-science deep dives.",
+        content: "Subscribe to the Seralie list for early access to new drops, beauty notes, and 15% off your first order.",
       },
     ],
   }),
@@ -53,13 +53,13 @@ function AccountPage() {
   };
 
   return (
-    <section className="relative isolate overflow-hidden bg-[oklch(0.13_0.03_245)] text-white min-h-[80vh]">
+    <section className="relative isolate overflow-hidden bg-[#241531] text-white min-h-[80vh]">
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-80"
         style={{
           background:
-            "radial-gradient(ellipse at 15% 10%, oklch(0.55 0.18 290 / 0.55), transparent 55%), radial-gradient(ellipse at 90% 90%, oklch(0.6 0.18 55 / 0.5), transparent 50%), linear-gradient(135deg, oklch(0.18 0.05 250), oklch(0.1 0.04 245))",
+            "radial-gradient(ellipse at 15% 10%, oklch(0.55 0.16 330 / 0.55), transparent 55%), radial-gradient(ellipse at 90% 90%, oklch(0.5 0.14 300 / 0.5), transparent 50%), linear-gradient(135deg, oklch(0.26 0.07 320), oklch(0.16 0.05 315))",
         }}
       />
       <div
@@ -74,19 +74,19 @@ function AccountPage() {
 
       <div className="container-x py-20 md:py-28 max-w-xl mx-auto text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.2em] text-white/80 backdrop-blur">
-          <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.75_0.2_55)] animate-pulse" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.8_0.14_340)] animate-pulse" />
           The Seralie List
         </span>
 
         <h1 className="mt-6 text-5xl md:text-6xl leading-[1]">
           Join the{" "}
-          <em style={serif} className="italic font-normal text-[oklch(0.85_0.15_70)]">
+          <em style={serif} className="italic font-normal text-[oklch(0.86_0.1_340)]">
             Seralie
           </em>{" "}
           list
         </h1>
         <p className="mt-5 text-white/75 text-lg">
-          Thoughtful notes on beauty, longevity, and the ritual of aging well — plus early access and 15% off your first order.
+          First looks at new drops, beauty notes worth reading, and 15% off your first order — straight to your inbox.
         </p>
 
 
@@ -144,26 +144,26 @@ function AccountPage() {
 
         <div className="mt-12 grid grid-cols-3 gap-3 text-left">
           <Link
-            to="/shop"
+            to="/strips"
             className="rounded-2xl ring-1 ring-white/15 bg-white/5 p-4 hover:bg-white/10 transition-colors backdrop-blur"
           >
-            <Sparkles className="h-5 w-5 text-[oklch(0.85_0.12_290)]" />
+            <Sparkles className="h-5 w-5 text-[oklch(0.82_0.11_330)]" />
             <div className="mt-2 text-sm font-semibold text-white">Shop</div>
-            <div className="text-xs text-white/60">Browse formulas</div>
+            <div className="text-xs text-white/60">Whitening strips</div>
           </Link>
           <Link
-            to="/why-tired"
+            to="/strips"
             className="rounded-2xl ring-1 ring-white/15 bg-white/5 p-4 hover:bg-white/10 transition-colors backdrop-blur"
           >
-            <Zap className="h-5 w-5 text-[oklch(0.85_0.15_70)]" />
-            <div className="mt-2 text-sm font-semibold text-white">Science</div>
-            <div className="text-xs text-white/60">Why you're tired</div>
+            <Star className="h-5 w-5 text-[oklch(0.86_0.12_340)]" />
+            <div className="mt-2 text-sm font-semibold text-white">Reviews</div>
+            <div className="text-xs text-white/60">Real results</div>
           </Link>
           <Link
             to="/contact"
             className="rounded-2xl ring-1 ring-white/15 bg-white/5 p-4 hover:bg-white/10 transition-colors backdrop-blur"
           >
-            <ShieldCheck className="h-5 w-5 text-[oklch(0.85_0.15_150)]" />
+            <ShieldCheck className="h-5 w-5 text-[oklch(0.84_0.1_320)]" />
             <div className="mt-2 text-sm font-semibold text-white">Support</div>
             <div className="text-xs text-white/60">30-day guarantee</div>
           </Link>
