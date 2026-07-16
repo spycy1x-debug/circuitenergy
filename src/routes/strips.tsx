@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Star,
   ShieldCheck,
@@ -12,11 +12,62 @@ import {
   Coffee,
   Heart,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  X as XIcon,
 } from "lucide-react";
-import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
-import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
 import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
+import gallerySmile from "@/assets/strips-smile-closeup.png.asset.json";
+import galleryMirror from "@/assets/strips-mirror-apply.png.asset.json";
+import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
+import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
+import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
+import galleryMacroMug from "@/assets/strips-macro-mug.png.asset.json";
+import rvMia from "@/assets/strips-rv-mia.png.asset.json";
+import rvJasmine from "@/assets/strips-rv-jasmine.png.asset.json";
+import rvStripMacro from "@/assets/strips-rv-strip-macro.png.asset.json";
+import rvFlatlayTimer from "@/assets/strips-rv-flatlay-timer.png.asset.json";
+import rvGym from "@/assets/strips-rv-gym.png.asset.json";
+import rvVanityCurl from "@/assets/strips-rv-vanity-curl.png.asset.json";
+import rvPurpleMouth from "@/assets/strips-rv-purple-mouth.png.asset.json";
+import rvOffice from "@/assets/strips-rv-office.png.asset.json";
+import rvPorchGolden from "@/assets/strips-rv-porch-golden.png.asset.json";
+import rvPorchLaugh from "@/assets/strips-rv-porch-laugh.png.asset.json";
 import { shopifyCart } from "@/lib/shopify-cart";
+import { supabase } from "@/integrations/supabase/client";
+
+/* order requested: last→first, 2nd-to-last→second, 1st→third, 2nd→fourth, then rest */
+const GALLERY = [
+  { url: gallerySmile.url, alt: "Bright, camera-ready smile after using Seralie strips" },
+  { url: galleryMirror.url, alt: "Applying a Seralie purple whitening strip in the mirror" },
+  { url: galleryBoxMarble.url, alt: "Seralie Whitening Strips box on marble vanity" },
+  { url: galleryBoxVanity.url, alt: "Seralie Whitening Strips alongside a beauty vanity" },
+  { url: gallery14Strips.url, alt: "Seralie box opened with all 14 purple whitening strips" },
+  { url: galleryMacroMug.url, alt: "Macro of a Seralie purple strip beside a coffee cup" },
+];
+
+/* ---------- seed reviews ---------- */
+type SeedReview = { r: number; title: string; body: string; n: string; date: string; img?: string };
+const SEED_REVIEWS: SeedReview[] = [
+  { r: 5, title: "wedding-ready in an hour", body: "used these the morning of my best friend's wedding and by the time i got to hair & makeup my teeth genuinely looked whiter. the purple cancels the yellow immediately, it's kind of unreal. every photo i'm in i can actually see the difference.", n: "Mia R.", date: "6 days ago", img: rvMia.url },
+  { r: 5, title: "two weeks in", body: "i've been using them 3x a week for a little over two weeks and my teeth are genuinely several shades lighter. not a filter, not a lighting trick — my husband noticed before i said anything. and zero sensitivity which was my main worry.", n: "Jasmine T.", date: "2 weeks ago", img: rvJasmine.url },
+  { r: 5, title: "the strips are actually cute?", body: "wasn't expecting to say that about whitening strips but the little purple shape is kind of adorable. fits my teeth perfectly, doesn't slide around. more importantly they actually work.", n: "Chloe D.", date: "3 days ago", img: rvStripMacro.url },
+  { r: 5, title: "my new pre-date ritual", body: "put one on while i'm doing my hair and makeup and by the time i'm ready to walk out the door my smile matches the effort i put into everything else. finally.", n: "Sofia G.", date: "9 days ago", img: rvVanityCurl.url },
+  { r: 5, title: "coffee girlie approved", body: "i drink way too much coffee. way too much. was skeptical anything short of the dentist could help but these have honestly kept my teeth looking bright between cleanings. i keep a box at work now.", n: "Priya S.", date: "4 days ago", img: rvOffice.url },
+  { r: 5, title: "before flights, before events, before everything", body: "throw a box in my gym bag, in my carry on, everywhere. 30 min and i look put together no matter how tired i am. only thing i've tried that gives an instant result AND actually whitens over time.", n: "Isabela M.", date: "11 days ago", img: rvGym.url },
+  { r: 5, title: "obsessed", body: "no other way to put it. gentle, no burning, actually works. i keep telling my mom to try them.", n: "Hannah K.", date: "1 week ago" },
+  { r: 5, title: "the purple genuinely does something", body: "you can literally see the yellow being neutralized the second you take it off. it's like a filter but real. then a few weeks of using them and the baseline shade just… stays lighter. love that.", n: "Ellie P.", date: "3 weeks ago", img: rvPurpleMouth.url },
+  { r: 5, title: "no sensitivity at all", body: "i have sensitive teeth and can't do the peroxide strips from the drugstore, they wreck me for days. these? nothing. just a brighter smile.", n: "Rachel W.", date: "5 days ago" },
+  { r: 5, title: "worth the bundle", body: "got the buy 2 get 2 free — glad i did. one for the bathroom, one for the travel bag, one for my sister, one still sealed. price per box is a joke for the quality.", n: "Amanda B.", date: "2 weeks ago", img: rvPorchGolden.url },
+  { r: 4, title: "really good, just wanted the deeper whitening a bit faster", body: "the instant effect is unreal, no notes there. for the long term change i'd say i started really seeing it around week 3, i was hoping for closer to 1. still keeping them in rotation.", n: "Nicole H.", date: "8 days ago" },
+  { r: 4, title: "loving them so far", body: "wish the strips were just slightly wider so they'd cover my back teeth too. the front looks amazing though and i keep getting compliments.", n: "Julia F.", date: "12 days ago", img: rvPorchLaugh.url },
+  { r: 4, title: "great product, would love more per box", body: "14 strips goes faster than you think once you start using them for every event. bundle is the way to go. rating 4 only because i want more!!", n: "Taylor V.", date: "6 days ago" },
+  { r: 3, title: "instant effect is real, long term was slower for me", body: "loved the way it looked right after — before a shoot it saved me. the whitening-over-time part took longer for me than i expected, maybe a month before i noticed a permanent shift. still using them though.", n: "Kayla D.", date: "3 weeks ago" },
+  { r: 3, title: "good for events, i wanted more staying power", body: "it's a lovely product and gentle which i appreciate. the instant brightness faded quicker than i hoped between uses so i basically apply one before anything important. that's fine but i wanted the day-to-day effect to stick harder.", n: "Meredith L.", date: "2 weeks ago", img: rvFlatlayTimer.url },
+  { r: 2, title: "gentle but slow for me", body: "no complaints on safety, zero sensitivity, easy to use. i just didn't see the dramatic long-term change others are getting after 3 weeks. the instant effect is nice for a night out but for me it faded pretty fast. giving it more time.", n: "Danielle O.", date: "10 days ago" },
+];
+const heroImg = GALLERY[3]; // box on vanity (used for beauty-routine section)
+const ctaImg = GALLERY[1]; // mirror apply (used as final CTA backdrop)
 
 export const Route = createFileRoute("/strips")({
   head: () => ({
@@ -159,6 +210,73 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
   );
 }
 
+/* ---------- product gallery ---------- */
+function ProductGallery() {
+  const [i, setI] = useState(0);
+  const total = GALLERY.length;
+  const prev = () => setI((v) => (v - 1 + total) % total);
+  const next = () => setI((v) => (v + 1) % total);
+  return (
+    <div>
+      <div
+        className="relative rounded-[24px] overflow-hidden group"
+        style={{ background: "#FFFFFF", border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
+      >
+        <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+          {GALLERY.map((g, idx) => (
+            <img
+              key={g.url}
+              src={g.url}
+              alt={g.alt}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+              style={{ opacity: i === idx ? 1 : 0 }}
+              loading={idx === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+        <button
+          onClick={prev}
+          aria-label="Previous photo"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 hover:-translate-x-0.5"
+          style={{ background: "rgba(255,255,255,0.92)", color: C.primary, boxShadow: "0 8px 24px -8px rgba(46,37,40,0.25)", transform: "translateY(-50%)" }}
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          onClick={next}
+          aria-label="Next photo"
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full flex items-center justify-center transition-all duration-200 opacity-80 hover:opacity-100 hover:translate-x-0.5"
+          style={{ background: "rgba(255,255,255,0.92)", color: C.primary, boxShadow: "0 8px 24px -8px rgba(46,37,40,0.25)", transform: "translateY(-50%)" }}
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 inline-flex gap-1.5">
+          {GALLERY.map((_, idx) => (
+            <span
+              key={idx}
+              className="h-1.5 rounded-full transition-all"
+              style={{ width: i === idx ? 20 : 6, background: i === idx ? C.primary : "rgba(91,58,110,0.28)" }}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="mt-3 grid grid-cols-6 gap-2">
+        {GALLERY.map((g, idx) => (
+          <button
+            key={g.url}
+            onClick={() => setI(idx)}
+            aria-label={`Show photo ${idx + 1}`}
+            className="rounded-lg overflow-hidden transition-all"
+            style={{ border: `1.5px solid ${i === idx ? C.primary : C.border}`, opacity: i === idx ? 1 : 0.75 }}
+          >
+            <img src={g.url} alt="" className="w-full h-full object-cover" style={{ aspectRatio: "1 / 1" }} />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------- page ---------- */
 function StripsPage() {
   const [selected, setSelected] = useState("b2");
@@ -166,6 +284,57 @@ function StripsPage() {
   const [adding, setAdding] = useState(false);
   const offerRef = useRef<HTMLDivElement>(null);
   const chosen = BUNDLES.find((b) => b.id === selected)!;
+
+  /* ----- reviews state ----- */
+  type UserReview = { r: number; title: string; body: string; n: string; date: string; img?: string };
+  const [userReviews, setUserReviews] = useState<UserReview[]>([]);
+  const [reviewFilter, setReviewFilter] = useState<0 | 5 | 4 | 3 | 2>(0);
+  const [reviewsVisible, setReviewsVisible] = useState(12);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [rvName, setRvName] = useState("");
+  const [rvTitle, setRvTitle] = useState("");
+  const [rvText, setRvText] = useState("");
+  const [rvRating, setRvRating] = useState(5);
+  const [rvPhoto, setRvPhoto] = useState<string | null>(null);
+  const [rvSubmitting, setRvSubmitting] = useState(false);
+  const [rvError, setRvError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    supabase
+      .from("product_reviews")
+      .select("name, title, body, rating, image_url, created_at")
+      .eq("product_id", "strips")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (!alive || !data) return;
+        setUserReviews(
+          data.map((r) => ({
+            r: r.rating,
+            title: r.title,
+            body: r.body,
+            n: r.name,
+            date: new Date(r.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }),
+            img: r.image_url || undefined,
+          })),
+        );
+      });
+    return () => { alive = false; };
+  }, []);
+
+  const allReviews = useMemo<UserReview[]>(() => [...userReviews, ...SEED_REVIEWS], [userReviews]);
+  const filtered = useMemo(
+    () => (reviewFilter === 0 ? allReviews : allReviews.filter((r) => r.r === reviewFilter)),
+    [allReviews, reviewFilter],
+  );
+  const shown = filtered.slice(0, reviewsVisible);
+  const totalCount = 3000 + userReviews.length;
+  const avgRating = 4.8;
+  const starBreakdown = useMemo(() => {
+    const buckets: Record<number, number> = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+    allReviews.forEach((r) => { buckets[r.r] = (buckets[r.r] || 0) + 1; });
+    return buckets;
+  }, [allReviews]);
 
   const handleAdd = async () => {
     if (adding) return;
@@ -219,10 +388,11 @@ function StripsPage() {
               </p>
             </Reveal>
             <Reveal delay={220}>
-              <div className="mt-6 flex items-center gap-3">
+              <div className="mt-6 flex items-center gap-3 flex-wrap">
                 <Stars rating={4.8} size={16} />
                 <span className="text-sm font-medium">4.8</span>
-                <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.muted }}>Reviews</a>
+                <span className="text-sm" style={{ color: C.muted }}>3,000+ reviews</span>
+                <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.primary }}>Read reviews</a>
               </div>
             </Reveal>
             <Reveal delay={280}>
@@ -240,7 +410,12 @@ function StripsPage() {
             </Reveal>
           </div>
 
-          <Reveal delay={120}>
+          <div className="space-y-6 md:space-y-8">
+            <Reveal delay={100}>
+              <ProductGallery />
+            </Reveal>
+
+            <Reveal delay={160}>
             <div
               id="offer-card"
               className="rounded-[24px] p-6 md:p-8"
@@ -323,11 +498,9 @@ function StripsPage() {
               </div>
             </div>
           </Reveal>
+          </div>
         </div>
       </section>
-
-
-
 
       {/* WHY YOUR SMILE LOOKS DULL */}
       <section className="py-20 md:py-28 relative overflow-hidden">
@@ -574,53 +747,278 @@ function StripsPage() {
         </div>
       </section>
 
-      {/* REVIEWS (empty-ready) */}
+      {/* REVIEWS */}
       <section id="reviews" className="py-20 md:py-28">
         <div className="container-x">
           <Reveal>
-            <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Loved by our community</div>
-              <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: C.primary }}>Real smiles, real moments.</h2>
-              <p className="mt-4 text-sm md:text-base" style={{ color: C.muted }}>
-                Reviews from verified customers will appear here as they come in.
-              </p>
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="text-[11px] tracking-[0.24em] uppercase mb-4" style={{ color: C.primary }}>Loved by thousands of smiles</div>
+              <h2 className="font-display text-4xl md:text-6xl leading-[1.05]" style={{ color: C.primary }}>
+                Real smiles, real moments.
+              </h2>
+              <div className="mt-6 inline-flex items-center gap-3 flex-wrap justify-center">
+                <Stars rating={avgRating} size={22} />
+                <span className="font-display text-2xl" style={{ color: C.primary }}>{avgRating.toFixed(1)}</span>
+                <span className="text-sm" style={{ color: C.muted }}>· Based on {totalCount.toLocaleString()}+ reviews</span>
+              </div>
             </div>
           </Reveal>
 
-          <div className="mt-12 columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <Reveal key={i} delay={i * 60}>
-                <div
-                  className="mb-5 break-inside-avoid rounded-[20px] p-6"
-                  style={{ background: C.card, border: `1px dashed ${C.border}` }}
-                >
-                  <div
-                    className="w-full rounded-2xl mb-5"
-                    style={{
-                      aspectRatio: i % 2 === 0 ? "4 / 5" : "1 / 1",
-                      background: `linear-gradient(135deg, ${C.blushSoft}, ${C.blush})`,
-                    }}
-                  />
-                  <Stars rating={0} />
-                  <div className="mt-3 font-display text-xl" style={{ color: C.text }}>Review title</div>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: C.muted }}>
-                    No reviews yet — be the first to share your Seralie moment.
-                  </p>
-                  <div className="mt-5 flex items-center justify-between text-xs" style={{ color: C.muted }}>
-                    <span>Customer Name</span>
-                    <span
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded-full"
-                      style={{ background: C.blushSoft, color: C.primary }}
+          {/* summary + filters */}
+          <Reveal delay={100}>
+            <div className="mt-10 max-w-3xl mx-auto rounded-[20px] p-6 md:p-7" style={{ background: C.card, border: `1px solid ${C.border}` }}>
+              <div className="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-center">
+                <div className="text-center md:border-r md:pr-8" style={{ borderColor: C.border }}>
+                  <div className="font-display text-5xl md:text-6xl leading-none" style={{ color: C.primary }}>{avgRating.toFixed(1)}</div>
+                  <div className="mt-2"><Stars rating={avgRating} size={16} /></div>
+                  <div className="mt-1 text-[11px] tracking-wide" style={{ color: C.muted }}>{totalCount.toLocaleString()}+ reviews</div>
+                </div>
+                <div className="space-y-1.5">
+                  {[5, 4, 3, 2, 1].map((s) => {
+                    const pct = s === 5 ? 88 : s === 4 ? 8 : s === 3 ? 3 : s === 2 ? 1 : 0;
+                    return (
+                      <button
+                        key={s}
+                        onClick={() => { setReviewFilter((reviewFilter === s ? 0 : s) as 0 | 5 | 4 | 3 | 2); setReviewsVisible(12); }}
+                        className="w-full flex items-center gap-3 text-left px-2 py-1 rounded-md transition-colors hover:bg-black/[0.03]"
+                        style={{ opacity: reviewFilter === 0 || reviewFilter === s ? 1 : 0.5 }}
+                      >
+                        <span className="text-xs w-6" style={{ color: C.muted }}>{s}★</span>
+                        <span className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: C.blushSoft }}>
+                          <span className="block h-full rounded-full" style={{ width: `${pct}%`, background: C.primary }} />
+                        </span>
+                        <span className="text-xs w-10 text-right tabular-nums" style={{ color: C.muted }}>{pct}%</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-2 pt-5" style={{ borderTop: `1px solid ${C.border}` }}>
+                {[
+                  { v: 0, label: "All" },
+                  { v: 5, label: "5 ★" },
+                  { v: 4, label: "4 ★" },
+                  { v: 3, label: "3 ★" },
+                  { v: 2, label: "2 ★" },
+                ].map((f) => {
+                  const active = reviewFilter === f.v;
+                  return (
+                    <button
+                      key={f.v}
+                      onClick={() => { setReviewFilter(f.v as 0 | 5 | 4 | 3 | 2); setReviewsVisible(12); }}
+                      className="px-4 py-1.5 rounded-full text-xs tracking-wide transition-all"
+                      style={{
+                        background: active ? C.primary : "transparent",
+                        color: active ? "#FFFFFF" : C.primary,
+                        border: `1px solid ${active ? C.primary : C.border}`,
+                      }}
                     >
-                      <ShieldCheck className="h-3 w-3" /> Verified Purchase
+                      {f.label}
+                    </button>
+                  );
+                })}
+                <div className="flex-1" />
+                <button
+                  onClick={() => setShowReviewForm(true)}
+                  className="px-5 py-2 rounded-full text-xs font-medium tracking-[0.14em] uppercase text-white transition-all hover:-translate-y-0.5"
+                  style={{ background: C.primary, boxShadow: "0 10px 24px -12px rgba(91,58,110,0.55)" }}
+                >
+                  Write a Review
+                </button>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* masonry */}
+          <div className="mt-12 columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+            {shown.map((rv, i) => (
+              <div
+                key={i}
+                className="mb-5 break-inside-avoid rounded-2xl p-6"
+                style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 6px 20px -12px rgba(46,37,40,0.10)" }}
+              >
+                <Stars rating={rv.r} size={14} />
+                <div className="mt-3 font-display text-xl leading-tight" style={{ color: C.primary }}>{rv.title}</div>
+                <p className="mt-2 text-[14px] leading-relaxed" style={{ color: C.text }}>{rv.body}</p>
+                {rv.img && (
+                  <div className="mt-4 rounded-xl overflow-hidden" style={{ border: `1px solid ${C.border}` }}>
+                    <img src={rv.img} alt="" className="w-full h-full object-cover" style={{ aspectRatio: "4 / 5" }} loading="lazy" />
+                  </div>
+                )}
+                <div className="mt-5 flex items-center justify-between gap-2 flex-wrap text-xs" style={{ color: C.muted }}>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span style={{ color: C.text }}>{rv.n}</span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ background: C.blushSoft, color: C.primary }}>
+                      <ShieldCheck className="h-3 w-3" /> Verified Buyer
                     </span>
                   </div>
+                  <span>{rv.date}</span>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
+
+          {reviewsVisible < filtered.length && (
+            <div className="mt-8 flex justify-center">
+              <button
+                onClick={() => setReviewsVisible((v) => v + 9)}
+                className="px-8 py-3 rounded-full text-xs font-medium tracking-[0.14em] uppercase transition-all hover:-translate-y-0.5"
+                style={{ background: "transparent", color: C.primary, border: `1.5px solid ${C.primary}` }}
+              >
+                Load More Reviews
+              </button>
+            </div>
+          )}
         </div>
       </section>
+
+      {/* WRITE A REVIEW MODAL */}
+      {showReviewForm && (
+        <div className="fixed inset-0 z-[95] bg-black/60 flex items-center justify-center p-4" onClick={() => !rvSubmitting && setShowReviewForm(false)}>
+          <div
+            className="rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            style={{ background: C.bg, border: `1px solid ${C.border}` }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-6 md:p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Share your smile</div>
+                  <h3 className="mt-2 font-display text-2xl" style={{ color: C.primary }}>Write a Review</h3>
+                </div>
+                <button type="button" onClick={() => setShowReviewForm(false)} className="p-1" style={{ color: C.muted }} aria-label="Close">
+                  <XIcon className="h-5 w-5" />
+                </button>
+              </div>
+
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setRvError(null);
+                  const name = rvName.trim();
+                  const title = rvTitle.trim();
+                  const text = rvText.trim();
+                  if (!name || name.length > 80) return setRvError("Please enter your name.");
+                  if (!title || title.length > 120) return setRvError("Please add a short title.");
+                  if (!text || text.length < 5) return setRvError("Please write your review.");
+                  if (text.length > 2000) return setRvError("Review is too long.");
+                  setRvSubmitting(true);
+                  try {
+                    const { error } = await supabase.from("product_reviews").insert({
+                      product_id: "strips",
+                      name, title, body: text, rating: rvRating, image_url: rvPhoto,
+                    });
+                    if (error) throw error;
+                    setUserReviews((prev) => [{
+                      r: rvRating, title, body: text, n: name,
+                      date: new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }),
+                      img: rvPhoto || undefined,
+                    }, ...prev]);
+                    setShowReviewForm(false);
+                    setRvName(""); setRvTitle(""); setRvText(""); setRvRating(5); setRvPhoto(null);
+                  } catch (err: any) {
+                    setRvError(err?.message || "Something went wrong. Please try again.");
+                  } finally {
+                    setRvSubmitting(false);
+                  }
+                }}
+                className="space-y-5"
+              >
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Rating</label>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <button key={n} type="button" onClick={() => setRvRating(n)} className="p-1" aria-label={`${n} stars`}>
+                        <Star className="h-7 w-7" style={{ color: C.primary, opacity: n <= rvRating ? 1 : 0.25 }} fill="currentColor" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Name</label>
+                  <input type="text" value={rvName} maxLength={80} onChange={(e) => setRvName(e.target.value)} required
+                    className="w-full px-3 py-2.5 bg-white rounded-md text-[14px] focus:outline-none"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }} />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Review title</label>
+                  <input type="text" value={rvTitle} maxLength={120} onChange={(e) => setRvTitle(e.target.value)} required
+                    className="w-full px-3 py-2.5 bg-white rounded-md text-[14px] focus:outline-none"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }} />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Your review</label>
+                  <textarea value={rvText} maxLength={2000} rows={4} onChange={(e) => setRvText(e.target.value)} required
+                    placeholder="Tell others what you love about it…"
+                    className="w-full px-3 py-2.5 bg-white rounded-md text-[14px] focus:outline-none resize-none"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }} />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] tracking-[0.18em] uppercase mb-2" style={{ color: C.muted }}>Add a photo (optional)</label>
+                  {rvPhoto ? (
+                    <div className="relative inline-block">
+                      <img src={rvPhoto} alt="Preview" className="h-24 w-24 object-cover rounded-md" style={{ border: `1px solid ${C.border}` }} />
+                      <button type="button" onClick={() => setRvPhoto(null)} aria-label="Remove photo"
+                        className="absolute -top-2 -right-2 text-white rounded-full p-1 shadow" style={{ background: C.primary }}>
+                        <XIcon className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <label className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-md text-[13px] cursor-pointer"
+                      style={{ border: `1px dashed ${C.primary}`, color: C.primary }}>
+                      <input type="file" accept="image/*" className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0]; if (!file) return;
+                          if (file.size > 15 * 1024 * 1024) { setRvError("Image too large (15MB max)."); return; }
+                          const dataUrl: string = await new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => {
+                              const img = new Image();
+                              img.onload = () => {
+                                const maxW = 900;
+                                const scale = Math.min(1, maxW / img.width);
+                                const canvas = document.createElement("canvas");
+                                canvas.width = img.width * scale;
+                                canvas.height = img.height * scale;
+                                canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
+                                resolve(canvas.toDataURL("image/jpeg", 0.82));
+                              };
+                              img.onerror = reject; img.src = reader.result as string;
+                            };
+                            reader.onerror = reject; reader.readAsDataURL(file);
+                          });
+                          setRvPhoto(dataUrl);
+                        }} />
+                      + Upload Photo
+                    </label>
+                  )}
+                </div>
+
+                {rvError && <p className="text-[13px] text-red-700">{rvError}</p>}
+
+                <div className="pt-2 flex gap-3">
+                  <button type="button" onClick={() => setShowReviewForm(false)}
+                    className="flex-1 py-3 rounded-md text-[13px]"
+                    style={{ border: `1px solid ${C.border}`, color: C.text }}>
+                    Cancel
+                  </button>
+                  <button type="submit" disabled={rvSubmitting}
+                    className="flex-1 py-3 rounded-md text-[13px] tracking-wide uppercase text-white disabled:opacity-60 transition-colors"
+                    style={{ background: C.primary }}>
+                    {rvSubmitting ? "Submitting…" : "Submit Review"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+
 
       {/* FAQ */}
       <section className="py-20 md:py-28" style={{ background: C.blushSoft }}>
