@@ -447,6 +447,7 @@ function StripsPage() {
               </div>
             </div>
           </Reveal>
+          </div>
         </div>
       </section>
 
