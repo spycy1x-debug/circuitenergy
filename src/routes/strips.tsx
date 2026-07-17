@@ -250,7 +250,7 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
   const symbol = value === "yes" ? "✓" : value === "no" ? "✕" : value === "limited" ? "Limited" : "△";
   const color = value === "yes" ? (highlight ? "#4A2E5A" : "#2F7D32") : value === "no" ? "#C0392B" : "#5A4A52";
   return (
-    <div className="p-4 self-stretch flex items-center justify-center" style={highlight ? { background: "#F1E1EA" } : undefined}>
+    <td className="p-4 text-center align-middle" style={highlight ? { background: "#F1E1EA" } : undefined}>
       <span
         className={`inline-flex items-center justify-center min-w-9 h-9 px-2 rounded-full ${highlight ? "font-bold" : "font-semibold"}`}
         style={{
@@ -263,7 +263,7 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
       >
         {symbol}
       </span>
-    </div>
+    </td>
   );
 }
 
@@ -741,31 +741,42 @@ function StripsPage() {
               className="mt-12 rounded-[24px] overflow-hidden"
               style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.15)" }}
             >
-              <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] text-center text-[11px] md:text-sm tracking-[0.14em] uppercase" style={{ background: C.blushSoft, color: C.primary }}>
-                <div className="p-4 text-left pl-6" />
-                <div className="p-4 font-display text-base md:text-lg tracking-normal font-semibold" style={{ background: "#F1E1EA", color: "#4A2E5A" }}>Seralie</div>
-                <div className="p-4 tracking-normal font-medium" style={{ color: "#4A3F45" }}>Whitening Toothpaste</div>
-                <div className="p-4 tracking-normal font-medium" style={{ color: "#4A3F45" }}>Whitening Pen</div>
-              </div>
-              {[
-                { label: "Instant brightening", s: "yes" as const, t: "no" as const, p: "meh" as const },
-                { label: "Whitens over time", s: "yes" as const, t: "limited" as const, p: "yes" as const },
-                { label: "Even coverage", s: "yes" as const, t: "no" as const, p: "no" as const },
-                { label: "Comfortable", s: "yes" as const, t: "yes" as const, p: "no" as const },
-                { label: "Enamel safe", s: "yes" as const, t: "yes" as const, p: "meh" as const },
-                { label: "Peroxide-free", s: "yes" as const, t: "limited" as const, p: "no" as const },
-              ].map((row, i) => (
-                <div
-                  key={row.label}
-                  className="grid grid-cols-[1.4fr_1fr_1fr_1fr] items-center text-sm"
-                  style={{ borderTop: `1px solid ${C.border}`, background: i % 2 ? "transparent" : "rgba(245,233,238,0.35)" }}
-                >
-                  <div className="p-4 pl-6 text-left font-medium" style={{ color: C.text }}>{row.label}</div>
-                  <Cell value={row.s} highlight />
-                  <Cell value={row.t} />
-                  <Cell value={row.p} />
-                </div>
-              ))}
+              <table className="w-full border-collapse" style={{ tableLayout: "fixed" }}>
+                <colgroup>
+                  <col style={{ width: "34%" }} />
+                  <col style={{ width: "22%" }} />
+                  <col style={{ width: "22%" }} />
+                  <col style={{ width: "22%" }} />
+                </colgroup>
+                <thead>
+                  <tr className="text-center text-[11px] md:text-sm tracking-[0.14em] uppercase" style={{ background: C.blushSoft, color: C.primary }}>
+                    <th className="p-4" />
+                    <th className="p-4 font-display text-base md:text-lg tracking-normal font-semibold" style={{ background: "#F1E1EA", color: "#4A2E5A" }}>Seralie</th>
+                    <th className="p-4 tracking-normal font-medium" style={{ color: "#4A3F45" }}>Whitening Toothpaste</th>
+                    <th className="p-4 tracking-normal font-medium" style={{ color: "#4A3F45" }}>Whitening Pen</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  {[
+                    { label: "Instant brightening", s: "yes" as const, t: "no" as const, p: "meh" as const },
+                    { label: "Whitens over time", s: "yes" as const, t: "limited" as const, p: "yes" as const },
+                    { label: "Even coverage", s: "yes" as const, t: "no" as const, p: "no" as const },
+                    { label: "Comfortable", s: "yes" as const, t: "yes" as const, p: "no" as const },
+                    { label: "Enamel safe", s: "yes" as const, t: "yes" as const, p: "meh" as const },
+                    { label: "Peroxide-free", s: "yes" as const, t: "limited" as const, p: "no" as const },
+                  ].map((row, i) => (
+                    <tr
+                      key={row.label}
+                      style={{ borderTop: `1px solid ${C.border}`, background: i % 2 ? "transparent" : "rgba(245,233,238,0.35)" }}
+                    >
+                      <td className="p-4 pl-6 text-left font-medium align-middle" style={{ color: C.text }}>{row.label}</td>
+                      <Cell value={row.s} highlight />
+                      <Cell value={row.t} />
+                      <Cell value={row.p} />
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </Reveal>
         </div>
