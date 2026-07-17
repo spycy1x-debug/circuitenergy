@@ -267,6 +267,78 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
   );
 }
 
+/* ---------- limited-time urgency countdown (resets midnight local) ---------- */
+function OfferCountdown() {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const end = useMemo(() => {
+    const d = new Date();
+    d.setHours(23, 59, 59, 999);
+    return d.getTime();
+  }, []);
+  const remaining = Math.max(0, end - now);
+  const h = Math.floor(remaining / 3_600_000);
+  const m = Math.floor((remaining % 3_600_000) / 60_000);
+  const s = Math.floor((remaining % 60_000) / 1000);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return (
+    <div
+      className="flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 mb-4"
+      style={{ background: C.blushSoft, border: `1px dashed ${C.primary}` }}
+    >
+      <div className="flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase" style={{ color: C.primary }}>
+        <Clock className="h-3.5 w-3.5" />
+        Limited-Time Offer
+      </div>
+      <div className="font-mono text-sm tabular-nums font-semibold" style={{ color: C.primary }}>
+        {pad(h)}h : {pad(m)}m : {pad(s)}s
+      </div>
+    </div>
+  );
+}
+
+/* ---------- shipping timeline (dynamic dates) ---------- */
+function ShippingTimeline() {
+  const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  const today = new Date();
+  const readyStart = new Date(today); readyStart.setDate(today.getDate() + 1);
+  const readyEnd = new Date(today); readyEnd.setDate(today.getDate() + 2);
+  const delivStart = new Date(today); delivStart.setDate(today.getDate() + 6);
+  const delivEnd = new Date(today); delivEnd.setDate(today.getDate() + 10);
+  const Step = ({ icon, date, label }: { icon: React.ReactNode; date: string; label: string }) => (
+    <div className="flex-1 flex flex-col items-center text-center min-w-0">
+      <div
+        className="h-11 w-11 rounded-full flex items-center justify-center"
+        style={{ background: C.primary, color: "#FFFFFF" }}
+      >
+        {icon}
+      </div>
+      <div className="mt-2 font-semibold text-[13px] whitespace-nowrap" style={{ color: C.text }}>{date}</div>
+      <div className="text-[11px]" style={{ color: C.muted }}>{label}</div>
+    </div>
+  );
+  return (
+    <div
+      className="rounded-2xl p-5 md:p-6 mt-4"
+      style={{ background: C.card, border: `1px solid ${C.border}` }}
+    >
+      <div className="text-[11px] tracking-[0.24em] uppercase mb-4 text-center" style={{ color: C.primary }}>
+        Estimated delivery
+      </div>
+      <div className="flex items-center justify-between">
+        <Step icon={<span className="text-lg">🛒</span>} date={fmt(today)} label="Ordered" />
+        <div className="flex-1 h-px mx-1 mt-[-24px]" style={{ background: C.border }} />
+        <Step icon={<Truck className="h-5 w-5" />} date={`${fmt(readyStart)} – ${fmt(readyEnd)}`} label="Order Ready" />
+        <div className="flex-1 h-px mx-1 mt-[-24px]" style={{ background: C.border }} />
+        <Step icon={<span className="text-lg">🎁</span>} date={`${fmt(delivStart)} – ${fmt(delivEnd)}`} label="Delivered" />
+      </div>
+    </div>
+  );
+}
+
 /* ---------- product gallery ---------- */
 function ProductGallery() {
   const [i, setI] = useState(0);
