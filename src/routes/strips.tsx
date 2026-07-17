@@ -550,6 +550,7 @@ function StripsPage() {
               className="rounded-[24px] p-6 md:p-8"
               style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
             >
+              <OfferCountdown />
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose Your Pack</div>
               <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
 
@@ -626,7 +627,11 @@ function StripsPage() {
                 <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
               </div>
             </div>
-          </Reveal>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <ShippingTimeline />
+            </Reveal>
           </div>
         </div>
       </section>
