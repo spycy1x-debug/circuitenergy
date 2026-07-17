@@ -33,6 +33,9 @@ import rvPurpleMouth from "@/assets/strips-rv-purple-mouth.png.asset.json";
 import rvOffice from "@/assets/strips-rv-office.png.asset.json";
 import rvPorchGolden from "@/assets/strips-rv-porch-golden.png.asset.json";
 import rvPorchLaugh from "@/assets/strips-rv-porch-laugh.png.asset.json";
+import rvFlatlayTimer2 from "@/assets/strips-rv-flatlay-timer2.png.asset.json";
+import rvCarSmile from "@/assets/strips-rv-car-smile.png.asset.json";
+import rvMirrorCurl from "@/assets/strips-rv-mirror-curl.png.asset.json";
 import { shopifyCart } from "@/lib/shopify-cart";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -65,7 +68,61 @@ const SEED_REVIEWS: SeedReview[] = [
   { r: 3, title: "instant effect is real, long term was slower for me", body: "loved the way it looked right after — before a shoot it saved me. the whitening-over-time part took longer for me than i expected, maybe a month before i noticed a permanent shift. still using them though.", n: "Kayla D.", date: "5 months ago" },
   { r: 3, title: "good for events, i wanted more staying power", body: "it's a lovely product and gentle which i appreciate. the instant brightness faded quicker than i hoped between uses so i basically apply one before anything important. that's fine but i wanted the day-to-day effect to stick harder.", n: "Meredith L.", date: "4 months ago", img: rvFlatlayTimer.url },
   { r: 2, title: "gentle but slow for me", body: "no complaints on safety, zero sensitivity, easy to use. i just didn't see the dramatic long-term change others are getting after 3 weeks. the instant effect is nice for a night out but for me it faded pretty fast. giving it more time.", n: "Danielle O.", date: "6 months ago" },
+
+  /* --- 50 additional reviews --- */
+  { r: 5, title: "instant glow up", body: "put one on before dinner and my teeth looked noticeably brighter walking out the door. genuinely didn't expect a color-correcting strip to do THIS on the first try.", n: "Ashley P.", date: "2 days ago" },
+  { r: 5, title: "week 3 update", body: "using them 3x a week and my baseline shade is legit lighter now, even on the days i skip. it compounds fast if you're consistent.", n: "Emma L.", date: "5 days ago" },
+  { r: 5, title: "before a shoot", body: "content creator here — i put one on 30 min before every shoot day and never worry about my smile in the frame anymore. and my everyday teeth are getting whiter too which is a nice bonus.", n: "Zaria K.", date: "1 week ago", img: rvCarSmile.url },
+  { r: 5, title: "the compounding is real", body: "month one: instantly whiter after each use. month two: whiter without even using one. that's when you know it's actually working.", n: "Grace M.", date: "2 months ago" },
+  { r: 5, title: "why didn't i try these sooner", body: "spent so much money at the dentist. this does 80% of it at home in half an hour with zero pain.", n: "Olivia N.", date: "4 days ago" },
+  { r: 5, title: "the mirror moment", body: "took it off, looked in the mirror, actually gasped. purple magic is real.", n: "Bella C.", date: "6 days ago", img: rvMirrorCurl.url },
+  { r: 5, title: "kept getting compliments", body: "three separate people at work asked what i did to my teeth. it's been about 5 weeks of using them a few nights a week.", n: "Lauren T.", date: "2 months ago" },
+  { r: 5, title: "coffee stains meet their match", body: "i drink two cups minimum every morning. these strips undo a full day of coffee in one session and then some.", n: "Amelia S.", date: "3 days ago", img: rvFlatlayTimer2.url },
+  { r: 5, title: "quick before a first date", body: "put one on while doing my brows. by the time i left my apartment my smile was doing half the flirting for me.", n: "Sydney H.", date: "8 days ago" },
+  { r: 5, title: "compounds week by week", body: "each week they just look brighter than the last. it's not a filter, it's real. i'm on week 4 and my sister literally noticed on facetime.", n: "Maya J.", date: "7 weeks ago" },
+  { r: 5, title: "genuinely painless", body: "no zings, no sensitivity, nothing. just whiter teeth. the peroxide strips i used years ago had me eating soup for two days — never again.", n: "Katie R.", date: "1 week ago" },
+  { r: 5, title: "instant + long game", body: "the day-of glow gets me out the door confident, but the fact that my teeth are just… whiter now, at rest, is what makes this a repurchase.", n: "Nicole A.", date: "2 weeks ago" },
+  { r: 5, title: "before my sister's wedding", body: "used one every other day for two weeks leading up. photos came back and i've never looked at my own smile that long before. money well spent.", n: "Jenna B.", date: "3 weeks ago" },
+  { r: 5, title: "worth every dollar", body: "the buy 2 get 2 free is unreal value. quality is way beyond what i expected for the price.", n: "Riley F.", date: "4 days ago" },
+  { r: 5, title: "one use = visible", body: "you can see the difference the second you peel it off. no hype, just fact.", n: "Chloe M.", date: "9 days ago" },
+  { r: 5, title: "my smile keeps getting whiter", body: "the compounding effect is what sold me. 6 weeks in and my teeth are several shades lighter than when i started, permanently.", n: "Sara V.", date: "3 months ago" },
+  { r: 5, title: "date night ritual", body: "hair, makeup, seralie. in that order. every time.", n: "Paige D.", date: "1 week ago" },
+  { r: 5, title: "no sensitivity finally", body: "sensitive teeth here — every drugstore whitener wrecks me. these are the first ones i can actually use consistently. and the results speak for themselves.", n: "Hannah W.", date: "2 weeks ago" },
+  { r: 5, title: "photographs so well", body: "instant whitening for photos AND long-term brightness for real life. i don't know how they do both but here we are.", n: "Erin S.", date: "10 days ago" },
+  { r: 5, title: "packaging is beautiful too", body: "sits on my vanity like a piece of skincare. and it works — the strips actually stay on and the color correction is instant.", n: "Mackenzie L.", date: "3 days ago" },
+  { r: 5, title: "wine drinker approved", body: "red wine every weekend used to catch up on my smile fast. now i pop a strip on sunday morning and reset the whole thing.", n: "Sophia R.", date: "6 days ago" },
+  { r: 5, title: "keeps getting better", body: "the more consistently i use them the whiter my day-to-day smile gets. it's not just instant, it actually keeps compounding.", n: "Vanessa T.", date: "6 weeks ago" },
+  { r: 5, title: "i'm sold", body: "instant results the first time, whiter teeth by week 2. reordering the biggest bundle.", n: "Kelsey N.", date: "5 days ago" },
+  { r: 5, title: "so easy", body: "peel, apply, do skincare for 30 min, remove. that's it. and every single time i look brighter after.", n: "Alexa G.", date: "1 week ago" },
+  { r: 5, title: "compounds fast", body: "3 weeks of using these a few times a week and my before/after is genuinely shocking. and every single application still gives me an instant lift.", n: "Isabel M.", date: "2 months ago" },
+  { r: 5, title: "everyone asks", body: "coworkers, friends, my mother-in-law. now i just carry a spare box.", n: "Rebecca K.", date: "3 months ago" },
+  { r: 5, title: "flight essential", body: "throw a strip in my carry on. land, apply in the hotel, look put together no matter how much i slept.", n: "Nadia F.", date: "8 days ago" },
+  { r: 5, title: "purple is genius", body: "it's the same reason purple shampoo works for blonde hair — cancels the yellow. so obvious in hindsight.", n: "Camila O.", date: "4 days ago" },
+  { r: 5, title: "long term is where it hits", body: "week 1 i was impressed with the instant effect. by week 6 i literally look like a different person smiling. it just keeps compounding.", n: "Alicia B.", date: "4 months ago" },
+  { r: 5, title: "no more dentist bills", body: "i was booking whitening sessions every 3 months. haven't been in 6 months and my teeth look better than they did leaving the dentist.", n: "Jordan E.", date: "6 months ago" },
+  { r: 5, title: "quick and effective", body: "30 minutes and done. not a big commitment, big payoff.", n: "Morgan I.", date: "3 days ago" },
+  { r: 5, title: "confidence boost", body: "i smile bigger in photos now. that's the whole review.", n: "Tessa Y.", date: "2 weeks ago" },
+  { r: 5, title: "the gift that keeps giving", body: "instant every use, cumulatively whiter over time. two products in one.", n: "Kayla P.", date: "9 days ago" },
+  { r: 5, title: "gentle formula, real results", body: "no burning, no sensitivity, just a whiter smile that keeps getting whiter the more consistently i use them.", n: "Brooke S.", date: "2 weeks ago" },
+  { r: 5, title: "obsessed", body: "genuinely the best beauty purchase of the year. instant + long term brightness in one strip.", n: "Nora K.", date: "5 months ago" },
+  { r: 5, title: "before every event", body: "wedding? strip. work photo? strip. brunch with my in-laws? strip. never disappoints.", n: "Melissa D.", date: "3 months ago" },
+  { r: 5, title: "wow after 4 weeks", body: "the compounding is what did it for me. i barely notice a huge change day to day but 4 weeks in and looking at old photos i'm floored.", n: "Angela H.", date: "3 months ago" },
+  { r: 5, title: "purple actually works", body: "instantly neutralizes the yellow. i can see it happening in real time.", n: "Diana C.", date: "5 days ago" },
+  { r: 5, title: "smile is my favorite feature now", body: "which is a wild thing to be able to say. thank you seralie.", n: "Rachel M.", date: "2 weeks ago" },
+  { r: 5, title: "quick + polished", body: "put one on in the morning while getting ready. by the time i sit down at my desk my smile is camera-ready for every zoom.", n: "Priya N.", date: "6 days ago" },
+  { r: 5, title: "the strip fits perfectly", body: "conforms to my teeth, doesn't slide. and comes off cleanly. small thing but it matters.", n: "Bianca L.", date: "1 week ago" },
+  { r: 5, title: "compounds compounds compounds", body: "each pack my baseline shade gets a little lighter. i'm on my third box and my teeth are a completely different color than when i started.", n: "Whitney A.", date: "5 months ago" },
+  { r: 5, title: "so much better than pens", body: "the pens i tried before were streaky and painful. these are neither.", n: "Elise R.", date: "10 days ago" },
+  { r: 5, title: "wedding photos incoming", body: "using these leading up to my own wedding. the instant effect is my emergency plan, the long-term whitening is my main plan.", n: "Ava J.", date: "2 weeks ago" },
+  { r: 5, title: "morning coffee, evening strip", body: "restart button on my smile every single day. brighter now than any point in the last decade.", n: "Kimberly V.", date: "2 months ago" },
+  { r: 4, title: "loving them, want more per box", body: "these work great, instant results and long-term whitening. only complaint is i want more strips per pack — i go through them fast now.", n: "Naomi F.", date: "8 days ago" },
+  { r: 4, title: "solid, instant effect is the star", body: "the day-of brightness is the real hero. compounding is real but slower for me — took about 4 weeks to really see the baseline shift.", n: "Kendall B.", date: "2 months ago" },
+  { r: 4, title: "great, wish they were slightly bigger", body: "front teeth look amazing. would be perfect if the strip covered a bit more toward the back. still repurchasing.", n: "Simone A.", date: "12 days ago" },
+  { r: 4, title: "works well, took time to see long-term", body: "instant effect impressed me right away. it took me 3-4 weeks of consistent use to notice the baseline shift but once it hit it stuck.", n: "Leah C.", date: "3 months ago" },
+  { r: 4, title: "really good product", body: "no sensitivity, real results. would give 5 stars if there were just a couple more strips in each box.", n: "Vivian T.", date: "6 days ago" },
+  { r: 5, title: "the instant + compounding combo", body: "haven't found anything else that does both. instant confidence before an event AND a genuinely whiter smile long term. worth every penny.", n: "Marisol E.", date: "4 months ago" },
 ];
+
 const heroImg = GALLERY[3]; // box on vanity (used for beauty-routine section)
 const ctaImg = GALLERY[1]; // mirror apply (used as final CTA backdrop)
 
@@ -206,6 +263,78 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
       >
         {symbol}
       </span>
+    </div>
+  );
+}
+
+/* ---------- limited-time urgency countdown (resets midnight local) ---------- */
+function OfferCountdown() {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const end = useMemo(() => {
+    const d = new Date();
+    d.setHours(23, 59, 59, 999);
+    return d.getTime();
+  }, []);
+  const remaining = Math.max(0, end - now);
+  const h = Math.floor(remaining / 3_600_000);
+  const m = Math.floor((remaining % 3_600_000) / 60_000);
+  const s = Math.floor((remaining % 60_000) / 1000);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return (
+    <div
+      className="flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 mb-4"
+      style={{ background: C.blushSoft, border: `1px dashed ${C.primary}` }}
+    >
+      <div className="flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase" style={{ color: C.primary }}>
+        <Clock className="h-3.5 w-3.5" />
+        Limited-Time Offer
+      </div>
+      <div className="font-mono text-sm tabular-nums font-semibold" style={{ color: C.primary }}>
+        {pad(h)}h : {pad(m)}m : {pad(s)}s
+      </div>
+    </div>
+  );
+}
+
+/* ---------- shipping timeline (dynamic dates) ---------- */
+function ShippingTimeline() {
+  const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  const today = new Date();
+  const readyStart = new Date(today); readyStart.setDate(today.getDate() + 1);
+  const readyEnd = new Date(today); readyEnd.setDate(today.getDate() + 2);
+  const delivStart = new Date(today); delivStart.setDate(today.getDate() + 6);
+  const delivEnd = new Date(today); delivEnd.setDate(today.getDate() + 10);
+  const Step = ({ icon, date, label }: { icon: React.ReactNode; date: string; label: string }) => (
+    <div className="flex-1 flex flex-col items-center text-center min-w-0">
+      <div
+        className="h-11 w-11 rounded-full flex items-center justify-center"
+        style={{ background: C.primary, color: "#FFFFFF" }}
+      >
+        {icon}
+      </div>
+      <div className="mt-2 font-semibold text-[13px] whitespace-nowrap" style={{ color: C.text }}>{date}</div>
+      <div className="text-[11px]" style={{ color: C.muted }}>{label}</div>
+    </div>
+  );
+  return (
+    <div
+      className="rounded-2xl p-5 md:p-6 mt-4"
+      style={{ background: C.card, border: `1px solid ${C.border}` }}
+    >
+      <div className="text-[11px] tracking-[0.24em] uppercase mb-4 text-center" style={{ color: C.primary }}>
+        Estimated delivery
+      </div>
+      <div className="flex items-center justify-between">
+        <Step icon={<span className="text-lg">🛒</span>} date={fmt(today)} label="Ordered" />
+        <div className="flex-1 h-px mx-1 mt-[-24px]" style={{ background: C.border }} />
+        <Step icon={<Truck className="h-5 w-5" />} date={`${fmt(readyStart)} – ${fmt(readyEnd)}`} label="Order Ready" />
+        <div className="flex-1 h-px mx-1 mt-[-24px]" style={{ background: C.border }} />
+        <Step icon={<span className="text-lg">🎁</span>} date={`${fmt(delivStart)} – ${fmt(delivEnd)}`} label="Delivered" />
+      </div>
     </div>
   );
 }
@@ -421,6 +550,7 @@ function StripsPage() {
               className="rounded-[24px] p-6 md:p-8"
               style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
             >
+              <OfferCountdown />
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose Your Pack</div>
               <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
 
@@ -497,7 +627,11 @@ function StripsPage() {
                 <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
               </div>
             </div>
-          </Reveal>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <ShippingTimeline />
+            </Reveal>
           </div>
         </div>
       </section>

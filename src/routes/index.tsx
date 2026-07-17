@@ -13,9 +13,9 @@ import {
   Heart,
   ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
-import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
-import offerImg from "@/assets/seralie-strips-offer.jpg.asset.json";
+import heroImg from "@/assets/strips-smile-closeup.png.asset.json";
+import ctaImg from "@/assets/strips-mirror-apply.png.asset.json";
+import offerImg from "@/assets/strips-box-marble.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -152,6 +152,12 @@ function HomePage() {
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <CTALink>Brighten My Smile</CTALink>
+                <span
+                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase rounded-full px-3 py-1.5"
+                  style={{ background: C.blushSoft, color: C.primary, border: `1px dashed ${C.primary}` }}
+                >
+                  <Clock className="h-3.5 w-3.5" /> Limited-time bundle offer
+                </span>
               </div>
             </Reveal>
             <Reveal delay={320}>
