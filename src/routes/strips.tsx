@@ -50,21 +50,21 @@ const GALLERY = [
 type SeedReview = { r: number; title: string; body: string; n: string; date: string; img?: string };
 const SEED_REVIEWS: SeedReview[] = [
   { r: 5, title: "wedding-ready in an hour", body: "used these the morning of my best friend's wedding and by the time i got to hair & makeup my teeth genuinely looked whiter. the purple cancels the yellow immediately, it's kind of unreal. every photo i'm in i can actually see the difference.", n: "Mia R.", date: "6 days ago", img: rvMia.url },
-  { r: 5, title: "two weeks in", body: "i've been using them 3x a week for a little over two weeks and my teeth are genuinely several shades lighter. not a filter, not a lighting trick — my husband noticed before i said anything. and zero sensitivity which was my main worry.", n: "Jasmine T.", date: "2 weeks ago", img: rvJasmine.url },
-  { r: 5, title: "the strips are actually cute?", body: "wasn't expecting to say that about whitening strips but the little purple shape is kind of adorable. fits my teeth perfectly, doesn't slide around. more importantly they actually work.", n: "Chloe D.", date: "3 days ago", img: rvStripMacro.url },
-  { r: 5, title: "my new pre-date ritual", body: "put one on while i'm doing my hair and makeup and by the time i'm ready to walk out the door my smile matches the effort i put into everything else. finally.", n: "Sofia G.", date: "9 days ago", img: rvVanityCurl.url },
-  { r: 5, title: "coffee girlie approved", body: "i drink way too much coffee. way too much. was skeptical anything short of the dentist could help but these have honestly kept my teeth looking bright between cleanings. i keep a box at work now.", n: "Priya S.", date: "4 days ago", img: rvOffice.url },
-  { r: 5, title: "before flights, before events, before everything", body: "throw a box in my gym bag, in my carry on, everywhere. 30 min and i look put together no matter how tired i am. only thing i've tried that gives an instant result AND actually whitens over time.", n: "Isabela M.", date: "11 days ago", img: rvGym.url },
-  { r: 5, title: "a month in and i'm sold", body: "the instant thing is fun but what actually got me is the long game — about a month of using them a few times a week and my teeth are just whiter now, even on the days i don't put one on. gentle the whole time, no burning. keep telling my mom to try them.", n: "Hannah K.", date: "1 week ago" },
-  { r: 5, title: "the purple genuinely does something", body: "you can literally see the yellow being neutralized the second you take it off. it's like a filter but real. then a few weeks of using them and the baseline shade just… stays lighter. love that.", n: "Ellie P.", date: "3 weeks ago", img: rvPurpleMouth.url },
-  { r: 5, title: "no sensitivity at all", body: "i have sensitive teeth and can't do the peroxide strips from the drugstore, they wreck me for days. these? nothing. just a brighter smile.", n: "Rachel W.", date: "5 days ago" },
-  { r: 5, title: "worth the bundle", body: "got the buy 2 get 2 free — glad i did. i'm on my second box now and the change adds up: each pack my baseline shade got a little lighter, not just the day-of glow. one for the bathroom, one for the travel bag, one for my sister. price per box is a joke for the quality.", n: "Amanda B.", date: "2 weeks ago", img: rvPorchGolden.url },
-  { r: 4, title: "really good, just wanted the deeper whitening a bit faster", body: "the instant effect is unreal, no notes there. for the long term change i'd say i started really seeing it around week 3, i was hoping for closer to 1. still keeping them in rotation.", n: "Nicole H.", date: "8 days ago" },
-  { r: 4, title: "loving them so far", body: "wish the strips were just slightly wider so they'd cover my back teeth too. the front looks amazing though and i keep getting compliments.", n: "Julia F.", date: "12 days ago", img: rvPorchLaugh.url },
-  { r: 4, title: "great product, would love more per box", body: "14 strips goes faster than you think once you start using them for every event. bundle is the way to go. rating 4 only because i want more!!", n: "Taylor V.", date: "6 days ago" },
-  { r: 3, title: "instant effect is real, long term was slower for me", body: "loved the way it looked right after — before a shoot it saved me. the whitening-over-time part took longer for me than i expected, maybe a month before i noticed a permanent shift. still using them though.", n: "Kayla D.", date: "3 weeks ago" },
-  { r: 3, title: "good for events, i wanted more staying power", body: "it's a lovely product and gentle which i appreciate. the instant brightness faded quicker than i hoped between uses so i basically apply one before anything important. that's fine but i wanted the day-to-day effect to stick harder.", n: "Meredith L.", date: "2 weeks ago", img: rvFlatlayTimer.url },
-  { r: 2, title: "gentle but slow for me", body: "no complaints on safety, zero sensitivity, easy to use. i just didn't see the dramatic long-term change others are getting after 3 weeks. the instant effect is nice for a night out but for me it faded pretty fast. giving it more time.", n: "Danielle O.", date: "10 days ago" },
+  { r: 5, title: "two weeks in", body: "i've been using them 3x a week for a little over two weeks and my teeth are genuinely several shades lighter. not a filter, not a lighting trick — my husband noticed before i said anything. and zero sensitivity which was my main worry.", n: "Jasmine T.", date: "3 weeks ago", img: rvJasmine.url },
+  { r: 5, title: "the strips are actually cute?", body: "wasn't expecting to say that about whitening strips but the little purple shape is kind of adorable. fits my teeth perfectly, doesn't slide around. more importantly they actually work.", n: "Chloe D.", date: "5 days ago", img: rvStripMacro.url },
+  { r: 5, title: "my new pre-date ritual", body: "put one on while i'm doing my hair and makeup and by the time i'm ready to walk out the door my smile matches the effort i put into everything else. finally.", n: "Sofia G.", date: "1 month ago", img: rvVanityCurl.url },
+  { r: 5, title: "coffee girlie approved", body: "i drink way too much coffee. way too much. was skeptical anything short of the dentist could help but these have honestly kept my teeth looking bright between cleanings. i keep a box at work now.", n: "Priya S.", date: "2 months ago", img: rvOffice.url },
+  { r: 5, title: "before flights, before events, before everything", body: "throw a box in my gym bag, in my carry on, everywhere. 30 min and i look put together no matter how tired i am. only thing i've tried that gives an instant result AND actually whitens over time.", n: "Isabela M.", date: "6 weeks ago", img: rvGym.url },
+  { r: 5, title: "a month in and i'm sold", body: "the instant thing is fun but what actually got me is the long game — about a month of using them a few times a week and my teeth are just whiter now, even on the days i don't put one on. gentle the whole time, no burning. keep telling my mom to try them.", n: "Hannah K.", date: "2 months ago" },
+  { r: 5, title: "the purple genuinely does something", body: "you can literally see the yellow being neutralized the second you take it off. it's like a filter but real. then a few weeks of using them and the baseline shade just… stays lighter. love that.", n: "Ellie P.", date: "4 months ago", img: rvPurpleMouth.url },
+  { r: 5, title: "no sensitivity at all", body: "i have sensitive teeth and can't do the peroxide strips from the drugstore, they wreck me for days. these? nothing. just a brighter smile.", n: "Rachel W.", date: "3 weeks ago" },
+  { r: 5, title: "worth the bundle", body: "got the buy 2 get 2 free — glad i did. i'm on my second box now and the change adds up: each pack my baseline shade got a little lighter, not just the day-of glow. one for the bathroom, one for the travel bag, one for my sister. price per box is a joke for the quality.", n: "Amanda B.", date: "3 months ago", img: rvPorchGolden.url },
+  { r: 4, title: "really good, just wanted the deeper whitening a bit faster", body: "the instant effect is unreal, no notes there. for the long term change i'd say i started really seeing it around week 3, i was hoping for closer to 1. still keeping them in rotation.", n: "Nicole H.", date: "5 weeks ago" },
+  { r: 4, title: "loving them so far", body: "wish the strips were just slightly wider so they'd cover my back teeth too. the front looks amazing though and i keep getting compliments.", n: "Julia F.", date: "2 months ago", img: rvPorchLaugh.url },
+  { r: 4, title: "great product, would love more per box", body: "14 strips goes faster than you think once you start using them for every event. bundle is the way to go. rating 4 only because i want more!!", n: "Taylor V.", date: "1 month ago" },
+  { r: 3, title: "instant effect is real, long term was slower for me", body: "loved the way it looked right after — before a shoot it saved me. the whitening-over-time part took longer for me than i expected, maybe a month before i noticed a permanent shift. still using them though.", n: "Kayla D.", date: "5 months ago" },
+  { r: 3, title: "good for events, i wanted more staying power", body: "it's a lovely product and gentle which i appreciate. the instant brightness faded quicker than i hoped between uses so i basically apply one before anything important. that's fine but i wanted the day-to-day effect to stick harder.", n: "Meredith L.", date: "4 months ago", img: rvFlatlayTimer.url },
+  { r: 2, title: "gentle but slow for me", body: "no complaints on safety, zero sensitivity, easy to use. i just didn't see the dramatic long-term change others are getting after 3 weeks. the instant effect is nice for a night out but for me it faded pretty fast. giving it more time.", n: "Danielle O.", date: "6 months ago" },
 ];
 const heroImg = GALLERY[3]; // box on vanity (used for beauty-routine section)
 const ctaImg = GALLERY[1]; // mirror apply (used as final CTA backdrop)
@@ -191,15 +191,15 @@ function Stars({ rating = 4.8, size = 14 }: { rating?: number; size?: number }) 
 /* ---------- comparison cell ---------- */
 function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "limited"; highlight?: boolean }) {
   const symbol = value === "yes" ? "✓" : value === "no" ? "✕" : value === "limited" ? "Limited" : "△";
-  const color = value === "yes" ? (highlight ? C.primary : "#6B7A4B") : value === "no" ? "#B14B3F" : C.muted;
+  const color = value === "yes" ? (highlight ? "#4A2E5A" : "#2F7D32") : value === "no" ? "#C0392B" : "#5A4A52";
   return (
-    <div className="p-4 text-center">
+    <div className="p-4 self-stretch flex items-center justify-center" style={highlight ? { background: "#F1E1EA" } : undefined}>
       <span
-        className={`inline-flex items-center justify-center min-w-8 h-8 px-2 rounded-full ${highlight ? "font-semibold" : ""}`}
+        className={`inline-flex items-center justify-center min-w-9 h-9 px-2 rounded-full ${highlight ? "font-bold" : "font-semibold"}`}
         style={{
-          background: highlight && value === "yes" ? C.blushSoft : "transparent",
+          background: highlight && value === "yes" ? "#E4C9D9" : "transparent",
           color,
-          fontSize: value === "limited" ? 11 : 16,
+          fontSize: value === "limited" ? 11 : 19,
           letterSpacing: value === "limited" ? "0.14em" : "normal",
           textTransform: value === "limited" ? "uppercase" : "none",
         }}
@@ -609,9 +609,9 @@ function StripsPage() {
             >
               <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] text-center text-[11px] md:text-sm tracking-[0.14em] uppercase" style={{ background: C.blushSoft, color: C.primary }}>
                 <div className="p-4 text-left pl-6" />
-                <div className="p-4 font-display text-base md:text-lg tracking-normal">Seralie</div>
-                <div className="p-4 tracking-normal" style={{ color: C.muted }}>Whitening Toothpaste</div>
-                <div className="p-4 tracking-normal" style={{ color: C.muted }}>Whitening Pen</div>
+                <div className="p-4 font-display text-base md:text-lg tracking-normal font-semibold" style={{ background: "#F1E1EA", color: "#4A2E5A" }}>Seralie</div>
+                <div className="p-4 tracking-normal font-medium" style={{ color: "#4A3F45" }}>Whitening Toothpaste</div>
+                <div className="p-4 tracking-normal font-medium" style={{ color: "#4A3F45" }}>Whitening Pen</div>
               </div>
               {[
                 { label: "Instant brightening", s: "yes" as const, t: "no" as const, p: "meh" as const },
