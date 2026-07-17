@@ -300,45 +300,6 @@ function OfferCountdown() {
   );
 }
 
-/* ---------- shipping timeline (dynamic dates) ---------- */
-function ShippingTimeline() {
-  const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  const today = new Date();
-  const readyStart = new Date(today); readyStart.setDate(today.getDate() + 1);
-  const readyEnd = new Date(today); readyEnd.setDate(today.getDate() + 2);
-  const delivStart = new Date(today); delivStart.setDate(today.getDate() + 6);
-  const delivEnd = new Date(today); delivEnd.setDate(today.getDate() + 10);
-  const Step = ({ icon, date, label }: { icon: React.ReactNode; date: string; label: string }) => (
-    <div className="flex-1 flex flex-col items-center text-center min-w-0">
-      <div
-        className="h-11 w-11 rounded-full flex items-center justify-center"
-        style={{ background: C.primary, color: "#FFFFFF" }}
-      >
-        {icon}
-      </div>
-      <div className="mt-2 font-semibold text-[13px] whitespace-nowrap" style={{ color: C.text }}>{date}</div>
-      <div className="text-[11px]" style={{ color: C.muted }}>{label}</div>
-    </div>
-  );
-  return (
-    <div
-      className="rounded-2xl p-5 md:p-6 mt-4"
-      style={{ background: C.card, border: `1px solid ${C.border}` }}
-    >
-      <div className="text-[11px] tracking-[0.24em] uppercase mb-4 text-center" style={{ color: C.primary }}>
-        Estimated delivery
-      </div>
-      <div className="flex items-center justify-between">
-        <Step icon={<span className="text-lg">🛒</span>} date={fmt(today)} label="Ordered" />
-        <div className="flex-1 h-px mx-1 mt-[-24px]" style={{ background: C.border }} />
-        <Step icon={<Truck className="h-5 w-5" />} date={`${fmt(readyStart)} – ${fmt(readyEnd)}`} label="Order Ready" />
-        <div className="flex-1 h-px mx-1 mt-[-24px]" style={{ background: C.border }} />
-        <Step icon={<span className="text-lg">🎁</span>} date={`${fmt(delivStart)} – ${fmt(delivEnd)}`} label="Delivered" />
-      </div>
-    </div>
-  );
-}
-
 /* ---------- product gallery ---------- */
 function ProductGallery() {
   const [i, setI] = useState(0);
@@ -627,10 +588,6 @@ function StripsPage() {
                 <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
               </div>
             </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <ShippingTimeline />
             </Reveal>
           </div>
         </div>
