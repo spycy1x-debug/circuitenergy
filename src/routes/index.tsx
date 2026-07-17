@@ -13,9 +13,9 @@ import {
   Heart,
   ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/seralie-strips-hero.jpg.asset.json";
-import ctaImg from "@/assets/seralie-strips-cta.jpg.asset.json";
-import offerImg from "@/assets/seralie-strips-offer.jpg.asset.json";
+import heroImg from "@/assets/strips-smile-closeup.png.asset.json";
+import ctaImg from "@/assets/strips-mirror-apply.png.asset.json";
+import offerImg from "@/assets/strips-box-marble.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({

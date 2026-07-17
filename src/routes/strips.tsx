@@ -33,6 +33,9 @@ import rvPurpleMouth from "@/assets/strips-rv-purple-mouth.png.asset.json";
 import rvOffice from "@/assets/strips-rv-office.png.asset.json";
 import rvPorchGolden from "@/assets/strips-rv-porch-golden.png.asset.json";
 import rvPorchLaugh from "@/assets/strips-rv-porch-laugh.png.asset.json";
+import rvFlatlayTimer2 from "@/assets/strips-rv-flatlay-timer2.png.asset.json";
+import rvCarSmile from "@/assets/strips-rv-car-smile.png.asset.json";
+import rvMirrorCurl from "@/assets/strips-rv-mirror-curl.png.asset.json";
 import { shopifyCart } from "@/lib/shopify-cart";
 import { supabase } from "@/integrations/supabase/client";
 
