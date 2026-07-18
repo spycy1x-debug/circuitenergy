@@ -17,8 +17,8 @@ import {
   X as XIcon,
 } from "lucide-react";
 import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
-import gallerySmile from "@/assets/strips-smile-closeup.png.asset.json";
-import galleryMirror from "@/assets/strips-mirror-apply.png.asset.json";
+import galleryNew1 from "@/assets/strips-gallery-1.png.asset.json";
+import galleryNew2 from "@/assets/strips-gallery-2.webp.asset.json";
 import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
 import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
 import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
@@ -41,8 +41,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 /* order requested: last→first, 2nd-to-last→second, 1st→third, 2nd→fourth, then rest */
 const GALLERY = [
-  { url: gallerySmile.url, alt: "Bright, camera-ready smile after using Seralie strips" },
-  { url: galleryMirror.url, alt: "Applying a Seralie purple whitening strip in the mirror" },
+  { url: galleryNew1.url, alt: "Smiling with Seralie Whitening Strips box at the vanity" },
+  { url: galleryNew2.url, alt: "Wearing Seralie purple whitening strip with 30-min timer" },
   { url: galleryBoxMarble.url, alt: "Seralie Whitening Strips box on marble vanity" },
   { url: galleryBoxVanity.url, alt: "Seralie Whitening Strips alongside a beauty vanity" },
   { url: gallery14Strips.url, alt: "Seralie box opened with all 14 purple whitening strips" },
