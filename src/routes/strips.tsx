@@ -17,8 +17,8 @@ import {
   X as XIcon,
 } from "lucide-react";
 import howVideo from "@/assets/strips-how-it-works.mp4.asset.json";
-import gallerySmile from "@/assets/strips-smile-closeup.png.asset.json";
-import galleryMirror from "@/assets/strips-mirror-apply.png.asset.json";
+import galleryNew1 from "@/assets/strips-gallery-1.png.asset.json";
+import galleryNew2 from "@/assets/strips-gallery-2.webp.asset.json";
 import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
 import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
 import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
