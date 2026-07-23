@@ -521,7 +521,7 @@ function StripsPage() {
                   key={chosen.id}
                   src={chosen.image}
                   alt={chosen.title}
-                  className="w-full h-auto object-cover animate-in fade-in duration-300"
+                  className="w-full h-auto object-cover"
                   style={{ maxHeight: 260 }}
                 />
               </div>
