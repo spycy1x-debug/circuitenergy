@@ -369,7 +369,7 @@ function ProductGallery() {
 
 /* ---------- page ---------- */
 function StripsPage() {
-  const [selected, setSelected] = useState("b2");
+  const [selected, setSelected] = useState("b4");
   const [showSticky, setShowSticky] = useState(false);
   const [adding, setAdding] = useState(false);
   const offerRef = useRef<HTMLDivElement>(null);
