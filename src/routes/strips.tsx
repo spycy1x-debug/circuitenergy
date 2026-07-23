@@ -516,6 +516,16 @@ function StripsPage() {
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose Your Pack</div>
               <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
 
+              <div className="mt-5 rounded-2xl overflow-hidden" style={{ border: `1px solid ${C.border}`, background: C.blushSoft }}>
+                <img
+                  key={chosen.id}
+                  src={chosen.image}
+                  alt={chosen.title}
+                  className="w-full h-auto object-cover animate-in fade-in duration-300"
+                  style={{ maxHeight: 260 }}
+                />
+              </div>
+
               <div className="mt-6 space-y-3">
                 {BUNDLES.map((b) => {
                   const active = selected === b.id;
