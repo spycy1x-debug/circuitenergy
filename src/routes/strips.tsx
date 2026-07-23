@@ -436,7 +436,7 @@ function StripsPage() {
           variantId: chosen.variantId,
           productTitle: "Seralie Purple Whitening Strips",
           variantTitle: chosen.title,
-          image: "", // let the cart use the real Shopify product image
+          image: chosen.image,
           unitPrice: chosen.price,
         },
         1,
