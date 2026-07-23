@@ -23,6 +23,7 @@ import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
 import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
 import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
 import galleryMacroMug from "@/assets/strips-macro-mug.png.asset.json";
+import pack6 from "@/assets/strips-6pack.png.asset.json";
 import rvMia from "@/assets/strips-rv-mia.png.asset.json";
 import rvJasmine from "@/assets/strips-rv-jasmine.png.asset.json";
 import rvStripMacro from "@/assets/strips-rv-strip-macro.png.asset.json";
