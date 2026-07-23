@@ -168,10 +168,10 @@ const compareAt = (qty: number) => (qty === 1 ? BASE_UNIT : Math.floor(BASE_UNIT
 
 /* Each bundle is its own Shopify product; variantId verified from the live store. */
 const BUNDLES = [
-  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event.", variantId: "gid://shopify/ProductVariant/48740328308890" },
-  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/48745209397402" },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/48745208742042" },
-  { id: "b4", title: "Buy 3 Get 3 FREE", strips: "84 Strips", qty: 6, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/48745209266330", compareAtOverride: 209.94 },
+  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event.", variantId: "gid://shopify/ProductVariant/48740328308890", image: galleryBoxMarble.url },
+  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/48745209397402", image: galleryBoxVanity.url },
+  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/48745208742042", image: galleryMacroMug.url },
+  { id: "b4", title: "Buy 3 Get 3 FREE", strips: "84 Strips", qty: 6, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/48745209266330", compareAtOverride: 209.94, image: pack6.url },
 ].map((b) => ({ ...b, compareAt: (b as any).compareAtOverride ?? compareAt(b.qty) }));
 
 /* ---------- fade-in on scroll ---------- */
