@@ -23,6 +23,7 @@ import galleryBoxMarble from "@/assets/strips-box-marble.png.asset.json";
 import galleryBoxVanity from "@/assets/strips-box-vanity.png.asset.json";
 import gallery14Strips from "@/assets/strips-14-strips.png.asset.json";
 import galleryMacroMug from "@/assets/strips-macro-mug.png.asset.json";
+import pack6 from "@/assets/strips-6pack.png.asset.json";
 import rvMia from "@/assets/strips-rv-mia.png.asset.json";
 import rvJasmine from "@/assets/strips-rv-jasmine.png.asset.json";
 import rvStripMacro from "@/assets/strips-rv-strip-macro.png.asset.json";
@@ -167,10 +168,10 @@ const compareAt = (qty: number) => (qty === 1 ? BASE_UNIT : Math.floor(BASE_UNIT
 
 /* Each bundle is its own Shopify product; variantId verified from the live store. */
 const BUNDLES = [
-  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event.", variantId: "gid://shopify/ProductVariant/48740328308890" },
-  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/48745209397402" },
-  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/48745208742042" },
-  { id: "b4", title: "Buy 3 Get 3 FREE", strips: "84 Strips", qty: 6, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/48745209266330", compareAtOverride: 209.94 },
+  { id: "b1", title: "Buy 1", strips: "14 Strips", qty: 1, price: 31.99, tag: null, subtitle: "Try it before an event.", variantId: "gid://shopify/ProductVariant/48740328308890", image: galleryBoxMarble.url },
+  { id: "b2", title: "Buy 1 Get 1 FREE", strips: "28 Strips", qty: 2, price: 31.99, tag: "MOST POPULAR", subtitle: "Two months of brighter smiles.", popular: true, variantId: "gid://shopify/ProductVariant/48745209397402", image: galleryBoxVanity.url },
+  { id: "b3", title: "Buy 2 Get 2 FREE", strips: "56 Strips", qty: 4, price: 50.99, tag: "FAN FAVORITE", subtitle: "Stash one, gift one.", variantId: "gid://shopify/ProductVariant/48745208742042", image: galleryMacroMug.url },
+  { id: "b4", title: "Buy 3 Get 3 FREE", strips: "84 Strips", qty: 6, price: 69.99, tag: "BEST VALUE", subtitle: "Never run out.", variantId: "gid://shopify/ProductVariant/48745209266330", compareAtOverride: 209.94, image: pack6.url },
 ].map((b) => ({ ...b, compareAt: (b as any).compareAtOverride ?? compareAt(b.qty) }));
 
 /* ---------- fade-in on scroll ---------- */
@@ -435,7 +436,7 @@ function StripsPage() {
           variantId: chosen.variantId,
           productTitle: "Seralie Purple Whitening Strips",
           variantTitle: chosen.title,
-          image: "", // let the cart use the real Shopify product image
+          image: chosen.image,
           unitPrice: chosen.price,
         },
         1,
@@ -514,6 +515,16 @@ function StripsPage() {
               <OfferCountdown />
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose Your Pack</div>
               <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
+
+              <div className="mt-5 rounded-2xl overflow-hidden" style={{ border: `1px solid ${C.border}`, background: C.blushSoft }}>
+                <img
+                  key={chosen.id}
+                  src={chosen.image}
+                  alt={chosen.title}
+                  className="w-full h-auto object-cover"
+                  style={{ maxHeight: 260 }}
+                />
+              </div>
 
               <div className="mt-6 space-y-3">
                 {BUNDLES.map((b) => {
