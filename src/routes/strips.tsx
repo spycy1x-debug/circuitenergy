@@ -134,7 +134,7 @@ export const Route = createFileRoute("/strips")({
       {
         name: "description",
         content:
-          "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile — and, with regular use, whiten it over time. For dates, photos, meetings, and every moment you want extra confidence.",
+          "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile — and, with regular use, the PAP+ formula lifts stains beneath the surface for a genuinely whiter smile. For dates, photos, meetings, and every moment you want extra confidence.",
       },
       { property: "og:title", content: "Seralie — Makeup For Your Teeth" },
       {
@@ -475,7 +475,7 @@ function StripsPage() {
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
-                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, yellow tones stay neutralized — so your smile looks whiter week after week, not just tonight.
+                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, the PAP+ formula releases active oxygen that breaks down the stain molecules coffee, wine, and tea leave behind — so your baseline shade actually lifts, week after week.
               </p>
             </Reveal>
             <Reveal delay={220}>
@@ -623,7 +623,7 @@ function StripsPage() {
                   The good news? Your natural smile is still there.
                 </p>
                 <p>
-                  Seralie Purple Whitening Strips are formulated to target stubborn discoloration while color-correcting visible yellow tones, helping reveal a brighter, whiter smile from the very first use. The comfortable, enamel-safe strips conform to your teeth to deliver even whitening across your smile — without the mess of gels or the hassle of expensive treatments.
+                  Seralie Purple Whitening Strips combine instant color-correction with a PAP+ formula. The PAP+ releases gentle active oxygen that targets the deeper stain molecules embedded in enamel, while the purple pigment neutralizes visible yellow tones on contact — giving you a brighter smile from the very first use that keeps improving with consistent use.
                 </p>
                 <p style={{ color: C.text }}>
                   The result is a visibly brighter smile that looks fresh, radiant, and effortlessly confident.
@@ -668,7 +668,7 @@ function StripsPage() {
             {[
               { emoji: "☕", title: "Coffee stains enamel", body: "Pigments settle into the surface of your teeth every day." },
               { emoji: "💜", title: "Purple neutralizes yellow", body: "The same beauty principle behind purple shampoo — for your smile." },
-              { emoji: "✨", title: "Whitening lifts stains", body: "Gentle actives target deeper discoloration over time." },
+              { emoji: "✨", title: "PAP+ lifts stains beneath the surface", body: "Active oxygen breaks down deeper stain molecules with each use — no peroxide needed." },
             ].map((s, i) => (
               <Reveal key={s.title} delay={i * 100}>
                 <div
@@ -831,7 +831,7 @@ function StripsPage() {
             {[
               { title: "Instant Brightening", body: "Look more camera-ready in just 30 minutes." },
               { title: "No Harsh Bleaching", body: "Beauty-inspired color correction instead of aggressive whitening." },
-              { title: "Brighter Over Time", body: "The whitening compounds — with consistent use, yellow stays neutralized and your smile keeps getting whiter, week after week." },
+              { title: "Brighter Over Time", body: "PAP+ works beneath the surface, releasing active oxygen that breaks down stain buildup from coffee, wine, and daily life. With consistent use, your baseline shade lifts — not just the day-of glow." },
               { title: "Fits Your Beauty Routine", body: "Designed to belong beside your skincare and makeup, not inside a medicine cabinet." },
             ].map((m, i) => (
               <Reveal key={m.title} delay={i * 80}>
