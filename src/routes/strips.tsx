@@ -58,15 +58,15 @@ const SEED_REVIEWS: SeedReview[] = [
   { r: 5, title: "the strips are actually cute?", body: "wasn't expecting to say that about whitening strips but the little purple shape is kind of adorable. fits my teeth perfectly, doesn't slide around. more importantly they actually work.", n: "Chloe D.", date: "5 days ago", img: rvStripMacro.url },
   { r: 5, title: "my new pre-date ritual", body: "put one on while i'm doing my hair and makeup and by the time i'm ready to walk out the door my smile matches the effort i put into everything else. finally.", n: "Sofia G.", date: "1 month ago", img: rvVanityCurl.url },
   { r: 5, title: "coffee girlie approved", body: "i drink way too much coffee. way too much. was skeptical anything short of the dentist could help but these have honestly kept my teeth looking bright between cleanings. i keep a box at work now.", n: "Priya S.", date: "2 months ago", img: rvOffice.url },
-  { r: 5, title: "before flights, before events, before everything", body: "throw a box in my gym bag, in my carry on, everywhere. 30 min and i look put together no matter how tired i am. only thing i've tried that gives an instant result AND actually whitens over time.", n: "Isabela M.", date: "6 weeks ago", img: rvGym.url },
-  { r: 5, title: "a month in and i'm sold", body: "the instant thing is fun but what actually got me is the long game — about a month of using them a few times a week and my teeth are just whiter now, even on the days i don't put one on. gentle the whole time, no burning. keep telling my mom to try them.", n: "Hannah K.", date: "2 months ago" },
+  { r: 5, title: "before flights, before events, before everything", body: "throw a box in my gym bag, in my carry on, everywhere. 30 min and i look put together no matter how tired i am. only thing i've tried that gives an instant result AND actually whitens over time — the PAP+ really does break down those deeper stains with each use.", n: "Isabela M.", date: "6 weeks ago", img: rvGym.url },
+  { r: 5, title: "a month in and i'm sold", body: "the instant thing is fun but what actually got me is the long game — about a month of using them a few times a week and my teeth are just whiter now, even on the days i don't put one on. the PAP+ is doing the real work underneath. gentle the whole time, no burning. keep telling my mom to try them.", n: "Hannah K.", date: "2 months ago" },
   { r: 5, title: "the purple genuinely does something", body: "you can literally see the yellow being neutralized the second you take it off. it's like a filter but real. then a few weeks of using them and the baseline shade just… stays lighter. love that.", n: "Ellie P.", date: "4 months ago", img: rvPurpleMouth.url },
   { r: 5, title: "no sensitivity at all", body: "i have sensitive teeth and can't do the peroxide strips from the drugstore, they wreck me for days. these? nothing. just a brighter smile.", n: "Rachel W.", date: "3 weeks ago" },
   { r: 5, title: "worth the bundle", body: "got the buy 2 get 2 free — glad i did. i'm on my second box now and the change adds up: each pack my baseline shade got a little lighter, not just the day-of glow. one for the bathroom, one for the travel bag, one for my sister. price per box is a joke for the quality.", n: "Amanda B.", date: "3 months ago", img: rvPorchGolden.url },
   { r: 4, title: "really good, just wanted the deeper whitening a bit faster", body: "the instant effect is unreal, no notes there. for the long term change i'd say i started really seeing it around week 3, i was hoping for closer to 1. still keeping them in rotation.", n: "Nicole H.", date: "5 weeks ago" },
   { r: 4, title: "loving them so far", body: "wish the strips were just slightly wider so they'd cover my back teeth too. the front looks amazing though and i keep getting compliments.", n: "Julia F.", date: "2 months ago", img: rvPorchLaugh.url },
   { r: 4, title: "great product, would love more per box", body: "14 strips goes faster than you think once you start using them for every event. bundle is the way to go. rating 4 only because i want more!!", n: "Taylor V.", date: "1 month ago" },
-  { r: 3, title: "instant effect is real, long term was slower for me", body: "loved the way it looked right after — before a shoot it saved me. the whitening-over-time part took longer for me than i expected, maybe a month before i noticed a permanent shift. still using them though.", n: "Kayla D.", date: "5 months ago" },
+  { r: 3, title: "instant effect is real, long term was slower for me", body: "loved the way it looked right after — before a shoot it saved me. the whitening-over-time part (the PAP+ breaking down deeper stains) took longer for me than i expected, maybe a month before i noticed a permanent shift. still using them though.", n: "Kayla D.", date: "5 months ago" },
   { r: 3, title: "good for events, i wanted more staying power", body: "it's a lovely product and gentle which i appreciate. the instant brightness faded quicker than i hoped between uses so i basically apply one before anything important. that's fine but i wanted the day-to-day effect to stick harder.", n: "Meredith L.", date: "4 months ago", img: rvFlatlayTimer.url },
   { r: 2, title: "gentle but slow for me", body: "no complaints on safety, zero sensitivity, easy to use. i just didn't see the dramatic long-term change others are getting after 3 weeks. the instant effect is nice for a night out but for me it faded pretty fast. giving it more time.", n: "Danielle O.", date: "6 months ago" },
 
@@ -74,7 +74,7 @@ const SEED_REVIEWS: SeedReview[] = [
   { r: 5, title: "instant glow up", body: "put one on before dinner and my teeth looked noticeably brighter walking out the door. genuinely didn't expect a color-correcting strip to do THIS on the first try.", n: "Ashley P.", date: "2 days ago" },
   { r: 5, title: "week 3 update", body: "using them 3x a week and my baseline shade is legit lighter now, even on the days i skip. it compounds fast if you're consistent.", n: "Emma L.", date: "5 days ago" },
   { r: 5, title: "before a shoot", body: "content creator here — i put one on 30 min before every shoot day and never worry about my smile in the frame anymore. and my everyday teeth are getting whiter too which is a nice bonus.", n: "Zaria K.", date: "1 week ago", img: rvCarSmile.url },
-  { r: 5, title: "the compounding is real", body: "month one: instantly whiter after each use. month two: whiter without even using one. that's when you know it's actually working.", n: "Grace M.", date: "2 months ago" },
+  { r: 5, title: "the compounding is real", body: "month one: instantly whiter after each use. month two: whiter without even using one. that's the PAP+ actually lifting the deeper stains — not just the purple tint.", n: "Grace M.", date: "2 months ago" },
   { r: 5, title: "why didn't i try these sooner", body: "spent so much money at the dentist. this does 80% of it at home in half an hour with zero pain.", n: "Olivia N.", date: "4 days ago" },
   { r: 5, title: "the mirror moment", body: "took it off, looked in the mirror, actually gasped. purple magic is real.", n: "Bella C.", date: "6 days ago", img: rvMirrorCurl.url },
   { r: 5, title: "kept getting compliments", body: "three separate people at work asked what i did to my teeth. it's been about 5 weeks of using them a few nights a week.", n: "Lauren T.", date: "2 months ago" },
@@ -86,42 +86,42 @@ const SEED_REVIEWS: SeedReview[] = [
   { r: 5, title: "before my sister's wedding", body: "used one every other day for two weeks leading up. photos came back and i've never looked at my own smile that long before. money well spent.", n: "Jenna B.", date: "3 weeks ago" },
   { r: 5, title: "worth every dollar", body: "the buy 2 get 2 free is unreal value. quality is way beyond what i expected for the price.", n: "Riley F.", date: "4 days ago" },
   { r: 5, title: "one use = visible", body: "you can see the difference the second you peel it off. no hype, just fact.", n: "Chloe M.", date: "9 days ago" },
-  { r: 5, title: "my smile keeps getting whiter", body: "the compounding effect is what sold me. 6 weeks in and my teeth are several shades lighter than when i started, permanently.", n: "Sara V.", date: "3 months ago" },
+  { r: 5, title: "my smile keeps getting whiter", body: "the compounding effect is what sold me. 6 weeks in and my teeth are several shades lighter than when i started, permanently. the PAP+ is legit breaking down stains beneath the surface.", n: "Sara V.", date: "3 months ago" },
   { r: 5, title: "date night ritual", body: "hair, makeup, seralie. in that order. every time.", n: "Paige D.", date: "1 week ago" },
   { r: 5, title: "no sensitivity finally", body: "sensitive teeth here — every drugstore whitener wrecks me. these are the first ones i can actually use consistently. and the results speak for themselves.", n: "Hannah W.", date: "2 weeks ago" },
   { r: 5, title: "photographs so well", body: "instant whitening for photos AND long-term brightness for real life. i don't know how they do both but here we are.", n: "Erin S.", date: "10 days ago" },
   { r: 5, title: "packaging is beautiful too", body: "sits on my vanity like a piece of skincare. and it works — the strips actually stay on and the color correction is instant.", n: "Mackenzie L.", date: "3 days ago" },
   { r: 5, title: "wine drinker approved", body: "red wine every weekend used to catch up on my smile fast. now i pop a strip on sunday morning and reset the whole thing.", n: "Sophia R.", date: "6 days ago" },
-  { r: 5, title: "keeps getting better", body: "the more consistently i use them the whiter my day-to-day smile gets. it's not just instant, it actually keeps compounding.", n: "Vanessa T.", date: "6 weeks ago" },
+  { r: 5, title: "keeps getting better", body: "the more consistently i use them the whiter my day-to-day smile gets. it's not just instant — the PAP+ keeps breaking down deeper stains so the results actually compound.", n: "Vanessa T.", date: "6 weeks ago" },
   { r: 5, title: "i'm sold", body: "instant results the first time, whiter teeth by week 2. reordering the biggest bundle.", n: "Kelsey N.", date: "5 days ago" },
   { r: 5, title: "so easy", body: "peel, apply, do skincare for 30 min, remove. that's it. and every single time i look brighter after.", n: "Alexa G.", date: "1 week ago" },
   { r: 5, title: "compounds fast", body: "3 weeks of using these a few times a week and my before/after is genuinely shocking. and every single application still gives me an instant lift.", n: "Isabel M.", date: "2 months ago" },
   { r: 5, title: "everyone asks", body: "coworkers, friends, my mother-in-law. now i just carry a spare box.", n: "Rebecca K.", date: "3 months ago" },
   { r: 5, title: "flight essential", body: "throw a strip in my carry on. land, apply in the hotel, look put together no matter how much i slept.", n: "Nadia F.", date: "8 days ago" },
   { r: 5, title: "purple is genius", body: "it's the same reason purple shampoo works for blonde hair — cancels the yellow. so obvious in hindsight.", n: "Camila O.", date: "4 days ago" },
-  { r: 5, title: "long term is where it hits", body: "week 1 i was impressed with the instant effect. by week 6 i literally look like a different person smiling. it just keeps compounding.", n: "Alicia B.", date: "4 months ago" },
+  { r: 5, title: "long term is where it hits", body: "week 1 i was impressed with the instant effect. by week 6 i literally look like a different person smiling. the PAP+ just keeps lifting those deeper stains — it really compounds.", n: "Alicia B.", date: "4 months ago" },
   { r: 5, title: "no more dentist bills", body: "i was booking whitening sessions every 3 months. haven't been in 6 months and my teeth look better than they did leaving the dentist.", n: "Jordan E.", date: "6 months ago" },
   { r: 5, title: "quick and effective", body: "30 minutes and done. not a big commitment, big payoff.", n: "Morgan I.", date: "3 days ago" },
   { r: 5, title: "confidence boost", body: "i smile bigger in photos now. that's the whole review.", n: "Tessa Y.", date: "2 weeks ago" },
-  { r: 5, title: "the gift that keeps giving", body: "instant every use, cumulatively whiter over time. two products in one.", n: "Kayla P.", date: "9 days ago" },
+  { r: 5, title: "the gift that keeps giving", body: "instant every use, cumulatively whiter over time. the PAP+ handles the deeper stains while the purple handles the instant glow — two products in one.", n: "Kayla P.", date: "9 days ago" },
   { r: 5, title: "gentle formula, real results", body: "no burning, no sensitivity, just a whiter smile that keeps getting whiter the more consistently i use them.", n: "Brooke S.", date: "2 weeks ago" },
-  { r: 5, title: "obsessed", body: "genuinely the best beauty purchase of the year. instant + long term brightness in one strip.", n: "Nora K.", date: "5 months ago" },
+  { r: 5, title: "obsessed", body: "genuinely the best beauty purchase of the year. instant color-correction plus the PAP+ working on deeper stains — long term brightness in one strip.", n: "Nora K.", date: "5 months ago" },
   { r: 5, title: "before every event", body: "wedding? strip. work photo? strip. brunch with my in-laws? strip. never disappoints.", n: "Melissa D.", date: "3 months ago" },
-  { r: 5, title: "wow after 4 weeks", body: "the compounding is what did it for me. i barely notice a huge change day to day but 4 weeks in and looking at old photos i'm floored.", n: "Angela H.", date: "3 months ago" },
+  { r: 5, title: "wow after 4 weeks", body: "the compounding is what did it for me — the PAP+ breaking down stains beneath the surface. i barely notice a huge change day to day but 4 weeks in and looking at old photos i'm floored.", n: "Angela H.", date: "3 months ago" },
   { r: 5, title: "purple actually works", body: "instantly neutralizes the yellow. i can see it happening in real time.", n: "Diana C.", date: "5 days ago" },
   { r: 5, title: "smile is my favorite feature now", body: "which is a wild thing to be able to say. thank you seralie.", n: "Rachel M.", date: "2 weeks ago" },
   { r: 5, title: "quick + polished", body: "put one on in the morning while getting ready. by the time i sit down at my desk my smile is camera-ready for every zoom.", n: "Priya N.", date: "6 days ago" },
   { r: 5, title: "the strip fits perfectly", body: "conforms to my teeth, doesn't slide. and comes off cleanly. small thing but it matters.", n: "Bianca L.", date: "1 week ago" },
   { r: 5, title: "compounds compounds compounds", body: "each pack my baseline shade gets a little lighter. i'm on my third box and my teeth are a completely different color than when i started.", n: "Whitney A.", date: "5 months ago" },
   { r: 5, title: "so much better than pens", body: "the pens i tried before were streaky and painful. these are neither.", n: "Elise R.", date: "10 days ago" },
-  { r: 5, title: "wedding photos incoming", body: "using these leading up to my own wedding. the instant effect is my emergency plan, the long-term whitening is my main plan.", n: "Ava J.", date: "2 weeks ago" },
+  { r: 5, title: "wedding photos incoming", body: "using these leading up to my own wedding. the instant effect is my emergency plan, the PAP+ long-term whitening is my main plan.", n: "Ava J.", date: "2 weeks ago" },
   { r: 5, title: "morning coffee, evening strip", body: "restart button on my smile every single day. brighter now than any point in the last decade.", n: "Kimberly V.", date: "2 months ago" },
-  { r: 4, title: "loving them, want more per box", body: "these work great, instant results and long-term whitening. only complaint is i want more strips per pack — i go through them fast now.", n: "Naomi F.", date: "8 days ago" },
-  { r: 4, title: "solid, instant effect is the star", body: "the day-of brightness is the real hero. compounding is real but slower for me — took about 4 weeks to really see the baseline shift.", n: "Kendall B.", date: "2 months ago" },
+  { r: 4, title: "loving them, want more per box", body: "these work great, instant results and the PAP+ long-term whitening. only complaint is i want more strips per pack — i go through them fast now.", n: "Naomi F.", date: "8 days ago" },
+  { r: 4, title: "solid, instant effect is the star", body: "the day-of brightness is the real hero. the PAP+ compounding is real but slower for me — took about 4 weeks to really see the baseline shift.", n: "Kendall B.", date: "2 months ago" },
   { r: 4, title: "great, wish they were slightly bigger", body: "front teeth look amazing. would be perfect if the strip covered a bit more toward the back. still repurchasing.", n: "Simone A.", date: "12 days ago" },
-  { r: 4, title: "works well, took time to see long-term", body: "instant effect impressed me right away. it took me 3-4 weeks of consistent use to notice the baseline shift but once it hit it stuck.", n: "Leah C.", date: "3 months ago" },
+  { r: 4, title: "works well, took time to see long-term", body: "instant effect impressed me right away. it took me 3-4 weeks of consistent use for the PAP+ to lift the deeper stains and show the baseline shift, but once it hit it stuck.", n: "Leah C.", date: "3 months ago" },
   { r: 4, title: "really good product", body: "no sensitivity, real results. would give 5 stars if there were just a couple more strips in each box.", n: "Vivian T.", date: "6 days ago" },
-  { r: 5, title: "the instant + compounding combo", body: "haven't found anything else that does both. instant confidence before an event AND a genuinely whiter smile long term. worth every penny.", n: "Marisol E.", date: "4 months ago" },
+  { r: 5, title: "the instant + compounding combo", body: "haven't found anything else that does both. instant confidence before an event AND the PAP+ giving me a genuinely whiter smile long term. worth every penny.", n: "Marisol E.", date: "4 months ago" },
 ];
 
 const heroImg = GALLERY[3]; // box on vanity (used for beauty-routine section)
@@ -134,7 +134,7 @@ export const Route = createFileRoute("/strips")({
       {
         name: "description",
         content:
-          "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile — and, with regular use, whiten it over time. For dates, photos, meetings, and every moment you want extra confidence.",
+          "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile — and, with regular use, the PAP+ formula lifts stains beneath the surface for a genuinely whiter smile. For dates, photos, meetings, and every moment you want extra confidence.",
       },
       { property: "og:title", content: "Seralie — Makeup For Your Teeth" },
       {
@@ -475,7 +475,7 @@ function StripsPage() {
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
-                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, yellow tones stay neutralized — so your smile looks whiter week after week, not just tonight.
+                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, the PAP+ formula releases active oxygen that breaks down the stain molecules coffee, wine, and tea leave behind — so your baseline shade actually lifts, week after week.
               </p>
             </Reveal>
             <Reveal delay={220}>
@@ -623,7 +623,7 @@ function StripsPage() {
                   The good news? Your natural smile is still there.
                 </p>
                 <p>
-                  Seralie Purple Whitening Strips are formulated to target stubborn discoloration while color-correcting visible yellow tones, helping reveal a brighter, whiter smile from the very first use. The comfortable, enamel-safe strips conform to your teeth to deliver even whitening across your smile — without the mess of gels or the hassle of expensive treatments.
+                  Seralie Purple Whitening Strips combine instant color-correction with a PAP+ formula. The PAP+ releases gentle active oxygen that targets the deeper stain molecules embedded in enamel, while the purple pigment neutralizes visible yellow tones on contact — giving you a brighter smile from the very first use that keeps improving with consistent use.
                 </p>
                 <p style={{ color: C.text }}>
                   The result is a visibly brighter smile that looks fresh, radiant, and effortlessly confident.
@@ -668,7 +668,7 @@ function StripsPage() {
             {[
               { emoji: "☕", title: "Coffee stains enamel", body: "Pigments settle into the surface of your teeth every day." },
               { emoji: "💜", title: "Purple neutralizes yellow", body: "The same beauty principle behind purple shampoo — for your smile." },
-              { emoji: "✨", title: "Whitening lifts stains", body: "Gentle actives target deeper discoloration over time." },
+              { emoji: "✨", title: "PAP+ lifts stains beneath the surface", body: "Active oxygen breaks down deeper stain molecules with each use — no peroxide needed." },
             ].map((s, i) => (
               <Reveal key={s.title} delay={i * 100}>
                 <div
@@ -831,7 +831,7 @@ function StripsPage() {
             {[
               { title: "Instant Brightening", body: "Look more camera-ready in just 30 minutes." },
               { title: "No Harsh Bleaching", body: "Beauty-inspired color correction instead of aggressive whitening." },
-              { title: "Brighter Over Time", body: "The whitening compounds — with consistent use, yellow stays neutralized and your smile keeps getting whiter, week after week." },
+              { title: "Brighter Over Time", body: "PAP+ works beneath the surface, releasing active oxygen that breaks down stain buildup from coffee, wine, and daily life. With consistent use, your baseline shade lifts — not just the day-of glow." },
               { title: "Fits Your Beauty Routine", body: "Designed to belong beside your skincare and makeup, not inside a medicine cabinet." },
             ].map((m, i) => (
               <Reveal key={m.title} delay={i * 80}>
@@ -1230,7 +1230,7 @@ const FAQS = [
   },
   {
     q: "Do they actually whiten over time, or just for the day?",
-    a: "Both — and that's what makes them different. The purple color-correction gives you an instant, camera-ready brightness the moment you peel the strip off. Underneath, the enamel-safe formula is gently lifting the stains that build up from coffee, tea, and wine — so with a consistent routine (a few times a week), your baseline shade keeps getting lighter, week after week. The instant glow is the hook; a genuinely whiter everyday smile is what keeps people reordering.",
+    a: "Both — and that's what makes them different. The purple color-correction gives you an instant, camera-ready brightness the moment you peel the strip off. Underneath, the PAP+ formula is releasing active oxygen that breaks down the stain molecules trapped in enamel from coffee, tea, and wine. With a consistent routine (a few times a week), those deeper stains lift and your baseline shade keeps getting lighter, week after week. The instant glow is the hook; a genuinely whiter everyday smile is what keeps people reordering.",
   },
   {
     q: "How long does it take?",
@@ -1254,7 +1254,7 @@ const FAQS = [
   },
   {
     q: "How often can I use SERALIE?",
-    a: "Two ways: on-demand before big moments, or a few times a week as part of your routine. The instant brightening is our signature — and with consistent use, yellow tones stay neutralized so your smile maintains a visibly whiter look over time.",
+    a: "Two ways: on-demand before big moments, or a few times a week as part of your routine. The instant brightening is our signature — and with consistent use, the PAP+ formula keeps breaking down deeper stains so your smile's baseline shade stays visibly whiter over time.",
   },
   {
     q: "What's included in each pack?",

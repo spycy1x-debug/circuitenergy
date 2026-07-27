@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Seralie is beauty for your smile. Purple color-correcting whitening strips: camera-ready in 30 minutes, and whiter over time with regular use — for dates, photos, and every moment that matters.",
+          "Seralie is beauty for your smile. Purple color-correcting whitening strips: camera-ready in 30 minutes, and whiter over time with PAP+ — for dates, photos, and every moment that matters.",
       },
       { property: "og:title", content: "Seralie — Beauty, Down To Your Smile" },
       {
@@ -216,13 +216,14 @@ function HomePage() {
             <p className="mt-6 text-base leading-relaxed max-w-lg" style={{ color: C.muted }}>
               Purple neutralizes yellow — the same beauty principle as purple shampoo, reimagined
               for your smile. Peroxide-free and gentle, it gives you a visibly brighter smile
-              30 minutes before the moments that matter — and with regular use the whitening
-              compounds, so your everyday smile keeps getting brighter too.
+              30 minutes before the moments that matter. Underneath, the PAP+ formula releases
+              active oxygen that breaks down deeper stain molecules, so your everyday smile keeps
+              getting brighter too.
             </p>
             <ul className="mt-6 space-y-2.5 text-sm" style={{ color: C.text }}>
               {[
                 "Camera-ready in 30 minutes",
-                "Whiter over time — with regular use, the brighter look becomes your baseline",
+                "Whiter over time — PAP+ breaks down deeper stains with each use, so your baseline shade lifts",
                 "Peroxide-free color correction — zero sensitivity",
                 "14 strips per pack · bundles from $31.99",
               ].map((b) => (
