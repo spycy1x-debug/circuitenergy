@@ -6,7 +6,7 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop — Seralie Whitening Strips" },
-      { name: "description", content: "Shop Seralie purple color-correcting whitening strips — camera-ready in 30 minutes, whiter over time." },
+      { name: "description", content: "Shop Seralie purple color-correcting whitening strips — camera-ready in 30 minutes, whiter over time with PAP+." },
       { property: "og:title", content: "Shop — Seralie Whitening Strips" },
       { property: "og:description", content: "Makeup for your teeth. Beauty, down to your smile." },
     ],
@@ -22,7 +22,7 @@ function ShopPage() {
           <div className="eyebrow">The Collection</div>
           <h1 className="mt-5 font-display text-5xl md:text-6xl text-[#2E2528]">Shop <span className="italic text-[#5B3A6E]">Seralie</span></h1>
           <p className="mt-6 text-[15px] leading-8 text-[#5A4A52]">
-            Purple color-correcting whitening strips. Instantly brighter, whiter over time.
+            Purple color-correcting whitening strips. Instantly brighter, whiter over time with PAP+.
           </p>
         </div>
       </section>

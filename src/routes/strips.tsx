@@ -1230,7 +1230,7 @@ const FAQS = [
   },
   {
     q: "Do they actually whiten over time, or just for the day?",
-    a: "Both — and that's what makes them different. The purple color-correction gives you an instant, camera-ready brightness the moment you peel the strip off. Underneath, the enamel-safe formula is gently lifting the stains that build up from coffee, tea, and wine — so with a consistent routine (a few times a week), your baseline shade keeps getting lighter, week after week. The instant glow is the hook; a genuinely whiter everyday smile is what keeps people reordering.",
+    a: "Both — and that's what makes them different. The purple color-correction gives you an instant, camera-ready brightness the moment you peel the strip off. Underneath, the PAP+ formula is releasing active oxygen that breaks down the stain molecules trapped in enamel from coffee, tea, and wine. With a consistent routine (a few times a week), those deeper stains lift and your baseline shade keeps getting lighter, week after week. The instant glow is the hook; a genuinely whiter everyday smile is what keeps people reordering.",
   },
   {
     q: "How long does it take?",
@@ -1254,7 +1254,7 @@ const FAQS = [
   },
   {
     q: "How often can I use SERALIE?",
-    a: "Two ways: on-demand before big moments, or a few times a week as part of your routine. The instant brightening is our signature — and with consistent use, yellow tones stay neutralized so your smile maintains a visibly whiter look over time.",
+    a: "Two ways: on-demand before big moments, or a few times a week as part of your routine. The instant brightening is our signature — and with consistent use, the PAP+ formula keeps breaking down deeper stains so your smile's baseline shade stays visibly whiter over time.",
   },
   {
     q: "What's included in each pack?",

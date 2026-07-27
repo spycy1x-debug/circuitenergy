@@ -173,7 +173,7 @@ export function Header() {
                     <div className="eyebrow text-[#5B3A6E]">Makeup For Your Teeth</div>
                     <h3 className="mt-3 font-display text-3xl text-[#2E2528]">Whitening Strips</h3>
                     <p className="mt-3 text-sm text-[#5A4A52] leading-relaxed">
-                      Purple color-correcting whitening strips. Instantly brighter, whiter over time — camera-ready in 30 minutes.
+                      Purple color-correcting whitening strips. Instantly brighter, whiter over time with PAP+ — camera-ready in 30 minutes.
                     </p>
                     <div className="mt-5 inline-flex items-center gap-2 caps-label text-[#5B3A6E] group-hover:gap-3 transition-all">
                       Shop Now <ArrowUpRight className="h-3.5 w-3.5" />
