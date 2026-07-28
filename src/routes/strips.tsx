@@ -484,11 +484,11 @@ function StripsPage() {
     }
   };
 
+  // sticky mobile buy bar: visible from the moment the page is interactive
   useEffect(() => {
-    const onScroll = () => setShowSticky(window.scrollY > 600);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    setShowSticky(true);
   }, []);
+
 
   const scrollToOffer = () => offerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
