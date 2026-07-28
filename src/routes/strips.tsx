@@ -310,9 +310,10 @@ function OfferCountdown() {
 }
 
 /* ---------- lazy video (defers the download until it scrolls into view) ---------- */
-function LazyVideo({ src }: { src: string }) {
+function LazyVideo({ src, poster }: { src: string; poster?: string }) {
   const ref = useRef<HTMLVideoElement | null>(null);
   const [load, setLoad] = useState(false);
+  const [playing, setPlaying] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -321,7 +322,6 @@ function LazyVideo({ src }: { src: string }) {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             setLoad(true);
-            el.play().catch(() => {});
             io.disconnect();
           }
         });
@@ -331,17 +331,60 @@ function LazyVideo({ src }: { src: string }) {
     io.observe(el);
     return () => io.disconnect();
   }, []);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !load) return;
+    el.play()
+      .then(() => setPlaying(true))
+      .catch(() => setPlaying(false));
+  }, [load]);
+  const toggle = () => {
+    const el = ref.current;
+    if (!el) return;
+    if (el.paused) {
+      el.play().then(() => setPlaying(true)).catch(() => {});
+    } else {
+      el.pause();
+      setPlaying(false);
+    }
+  };
   return (
-    <video
-      ref={ref}
-      src={load ? src : undefined}
-      muted
-      loop
-      playsInline
-      preload="none"
-      className="w-full h-auto block"
+    <button
+      type="button"
+      onClick={toggle}
+      className="relative w-full block overflow-hidden group"
       style={{ aspectRatio: "1 / 1", background: C.blushSoft }}
-    />
+      aria-label={playing ? "Pause video" : "Play video"}
+    >
+      {poster && !playing && (
+        <img
+          src={poster}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: load ? 0 : 1, transition: "opacity 400ms ease" }}
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+      <video
+        ref={ref}
+        src={load ? src : undefined}
+        poster={poster}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+        style={{ opacity: load ? 1 : 0 }}
+      />
+      {!playing && (
+        <span className="absolute inset-0 flex items-center justify-center" style={{ background: "rgba(46,37,40,0.18)" }}>
+          <span className="h-14 w-14 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110" style={{ background: "rgba(255,255,255,0.95)", boxShadow: "0 10px 30px -10px rgba(46,37,40,0.35)" }}>
+            <Play className="h-6 w-6 ml-0.5" style={{ color: C.primary, fill: C.primary }} />
+          </span>
+        </span>
+      )}
+    </button>
   );
 }
 
@@ -742,7 +785,7 @@ function StripsPage() {
               className="rounded-[24px] overflow-hidden"
               style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.28)" }}
             >
-              <LazyVideo src={howVideo.url} />
+              <LazyVideo src={howVideo.url} poster={galleryNew2.url} />
 
             </div>
           </Reveal>
