@@ -539,17 +539,18 @@ function StripsPage() {
 
               <OfferCountdown />
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose Your Pack</div>
-              <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
+              <h2 className="font-display text-2xl md:text-4xl mt-1 md:mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
 
 
-              <div className="mt-6 space-y-3">
+              <div className="mt-4 md:mt-6 space-y-2.5 md:space-y-3">
                 {BUNDLES.map((b) => {
                   const active = selected === b.id;
                   return (
                     <button
                       key={b.id}
                       onClick={() => setSelected(b.id)}
-                      className="w-full text-left rounded-2xl p-4 flex items-center gap-4 transition-all duration-200"
+                      className="w-full text-left rounded-2xl p-3 md:p-4 flex items-center gap-3 md:gap-4 transition-all duration-200"
+
                       style={{
                         background: active ? C.blushSoft : "#FFFFFF",
                         border: `1.5px solid ${active ? C.primary : C.border}`,
