@@ -374,19 +374,31 @@ function ProductGallery() {
           ))}
         </div>
       </div>
-      <div className="mt-3 grid grid-cols-6 gap-2">
+      {/* thumbnails: desktop only — mobile uses arrows + dots so we don't
+          download 6 extra images on cell data before first paint */}
+      <div className="mt-3 hidden md:grid grid-cols-6 gap-2">
         {GALLERY.map((g, idx) => (
           <button
             key={g.url}
-            onClick={() => setI(idx)}
+            onClick={() => go(idx)}
             aria-label={`Show photo ${idx + 1}`}
             className="rounded-lg overflow-hidden transition-all"
             style={{ border: `1.5px solid ${i === idx ? C.primary : C.border}`, opacity: i === idx ? 1 : 0.75 }}
           >
-            <img src={g.url} alt="" className="w-full h-full object-cover" style={{ aspectRatio: "1 / 1" }} />
+            <img
+              src={g.url}
+              alt=""
+              width={200}
+              height={200}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+              style={{ aspectRatio: "1 / 1" }}
+            />
           </button>
         ))}
       </div>
+
     </div>
   );
 }
