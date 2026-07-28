@@ -270,22 +270,26 @@ function Cell({ value, highlight = false }: { value: "yes" | "no" | "meh" | "lim
 
 /* ---------- limited-time urgency countdown (resets midnight local) ---------- */
 function OfferCountdown() {
-  const [now, setNow] = useState(() => Date.now());
+  // Start as null so SSR and first client render match — hydration-safe.
+  const [remaining, setRemaining] = useState<number | null>(null);
   useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
+    const endOfDay = () => {
+      const d = new Date();
+      d.setHours(23, 59, 59, 999);
+      return d.getTime();
+    };
+    const tick = () => setRemaining(Math.max(0, endOfDay() - Date.now()));
+    tick();
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
-  const end = useMemo(() => {
-    const d = new Date();
-    d.setHours(23, 59, 59, 999);
-    return d.getTime();
-  }, []);
-  const remaining = Math.max(0, end - now);
-  const h = Math.floor(remaining / 3_600_000);
-  const m = Math.floor((remaining % 3_600_000) / 60_000);
-  const s = Math.floor((remaining % 60_000) / 1000);
+  const total = remaining ?? 0;
+  const h = Math.floor(total / 3_600_000);
+  const m = Math.floor((total % 3_600_000) / 60_000);
+  const s = Math.floor((total % 60_000) / 1000);
   const pad = (n: number) => String(n).padStart(2, "0");
   return (
+
     <div
       className="flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 mb-4"
       style={{ background: C.blushSoft, border: `1px dashed ${C.primary}` }}
