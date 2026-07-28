@@ -145,6 +145,9 @@ export const Route = createFileRoute("/strips")({
       { property: "og:image", content: heroImg.url },
       { name: "twitter:image", content: heroImg.url },
     ],
+    links: [
+      { rel: "preload", as: "image", href: GALLERY[0].url },
+    ],
   }),
   component: StripsPage,
 });
@@ -305,12 +308,57 @@ function OfferCountdown() {
   );
 }
 
+/* ---------- lazy video (defers the download until it scrolls into view) ---------- */
+function LazyVideo({ src }: { src: string }) {
+  const ref = useRef<HTMLVideoElement | null>(null);
+  const [load, setLoad] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setLoad(true);
+            el.play().catch(() => {});
+            io.disconnect();
+          }
+        });
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <video
+      ref={ref}
+      src={load ? src : undefined}
+      muted
+      loop
+      playsInline
+      preload="none"
+      className="w-full h-auto block"
+      style={{ aspectRatio: "1 / 1", background: C.blushSoft }}
+    />
+  );
+}
+
 /* ---------- product gallery ---------- */
+
 function ProductGallery() {
   const [i, setI] = useState(0);
+  /* only mount images the shopper has actually reached — keeps the initial
+     mobile payload to a single hero image and avoids offscreen decodes */
+  const [mounted, setMounted] = useState<number[]>([0]);
   const total = GALLERY.length;
-  const prev = () => setI((v) => (v - 1 + total) % total);
-  const next = () => setI((v) => (v + 1) % total);
+  const go = (n: number) => {
+    const idx = (n + total) % total;
+    setI(idx);
+    setMounted((m) => (m.includes(idx) ? m : [...m, idx]));
+  };
+  const prev = () => go(i - 1);
+  const next = () => go(i + 1);
   return (
     <div>
       <div
@@ -318,17 +366,24 @@ function ProductGallery() {
         style={{ background: "#FFFFFF", border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
       >
         <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-          {GALLERY.map((g, idx) => (
-            <img
-              key={g.url}
-              src={g.url}
-              alt={g.alt}
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-              style={{ opacity: i === idx ? 1 : 0 }}
-              loading={idx === 0 ? "eager" : "lazy"}
-            />
-          ))}
+          {GALLERY.map((g, idx) =>
+            mounted.includes(idx) ? (
+              <img
+                key={g.url}
+                src={g.url}
+                alt={g.alt}
+                width={1200}
+                height={1200}
+                decoding={idx === 0 ? "sync" : "async"}
+                fetchPriority={idx === 0 ? "high" : "low"}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                style={{ opacity: i === idx ? 1 : 0 }}
+                loading={idx === 0 ? "eager" : "lazy"}
+              />
+            ) : null,
+          )}
         </div>
+
         <button
           onClick={prev}
           aria-label="Previous photo"
@@ -355,19 +410,31 @@ function ProductGallery() {
           ))}
         </div>
       </div>
-      <div className="mt-3 grid grid-cols-6 gap-2">
+      {/* thumbnails: desktop only — mobile uses arrows + dots so we don't
+          download 6 extra images on cell data before first paint */}
+      <div className="mt-3 hidden md:grid grid-cols-6 gap-2">
         {GALLERY.map((g, idx) => (
           <button
             key={g.url}
-            onClick={() => setI(idx)}
+            onClick={() => go(idx)}
             aria-label={`Show photo ${idx + 1}`}
             className="rounded-lg overflow-hidden transition-all"
             style={{ border: `1.5px solid ${i === idx ? C.primary : C.border}`, opacity: i === idx ? 1 : 0.75 }}
           >
-            <img src={g.url} alt="" className="w-full h-full object-cover" style={{ aspectRatio: "1 / 1" }} />
+            <img
+              src={g.url}
+              alt=""
+              width={200}
+              height={200}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+              style={{ aspectRatio: "1 / 1" }}
+            />
           </button>
         ))}
       </div>
+
     </div>
   );
 }
@@ -453,11 +520,11 @@ function StripsPage() {
     }
   };
 
+  // sticky mobile buy bar: visible from the moment the page is interactive
   useEffect(() => {
-    const onScroll = () => setShowSticky(window.scrollY > 600);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    setShowSticky(true);
   }, []);
+
 
   const scrollToOffer = () => offerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -465,70 +532,61 @@ function StripsPage() {
     <div style={{ background: C.bg, color: C.text, fontFamily: "'Poppins', 'Inter', system-ui, sans-serif" }}>
       {/* HERO + OFFER */}
       <section ref={offerRef} id="offer" className="relative overflow-hidden">
-        <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-10 md:py-20">
-          <div>
-            <Reveal>
-              <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
-                <Sparkles className="h-3.5 w-3.5" /> Purple Color-Correcting Strips
-              </div>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]" style={{ color: C.primary }}>
-                Makeup for<br />your teeth.
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
-                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, the PAP+ formula releases active oxygen that breaks down the stain molecules coffee, wine, and tea leave behind — so your baseline shade actually lifts, week after week.
-              </p>
-            </Reveal>
-            <Reveal delay={220}>
-              <div className="mt-6 flex items-center gap-3 flex-wrap">
-                <Stars rating={4.8} size={16} />
-                <span className="text-sm font-medium">4.8</span>
-                <span className="text-sm" style={{ color: C.muted }}>3,000+ reviews</span>
-                <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.primary }}>Read reviews</a>
-              </div>
-            </Reveal>
-            <Reveal delay={280}>
-              <div className="mt-8">
-                <CTAButton onClick={() => document.getElementById('offer-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
-                  Choose Your Offer
-                </CTAButton>
-              </div>
-            </Reveal>
-            <Reveal delay={340}>
-              <div className="mt-8 flex flex-wrap items-center gap-6 text-xs tracking-wide" style={{ color: C.muted }}>
-                <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
-                <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free U.S. Shipping Over $40</span>
-              </div>
-            </Reveal>
+        <div className="container-x flex flex-col md:grid md:grid-cols-2 gap-0 md:gap-16 items-center py-5 md:py-20">
+          {/* `contents` on mobile lets the buy box interleave above the long copy */}
+          <div className="contents md:block">
+            <div className="order-1 inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-2 md:mb-6" style={{ color: C.primary }}>
+              <Sparkles className="h-3.5 w-3.5" /> Purple Color-Correcting Strips
+            </div>
+            <h1 className="order-2 font-display text-[2.1rem] leading-[1.05] sm:text-6xl md:text-7xl md:leading-[1.02]" style={{ color: C.primary }}>
+              Makeup for<br />your teeth.
+            </h1>
+            <div className="order-3 mt-2 md:mt-6 flex items-center gap-2 md:gap-3 flex-wrap">
+              <Stars rating={4.8} size={15} />
+              <span className="text-sm font-medium">4.8</span>
+              <span className="text-sm" style={{ color: C.muted }}>3,000+ reviews</span>
+              <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.primary }}>Read reviews</a>
+            </div>
+            <p className="order-7 mt-8 md:mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
+              <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, the PAP+ formula releases active oxygen that breaks down the stain molecules coffee, wine, and tea leave behind — so your baseline shade actually lifts, week after week.
+            </p>
+            <div className="order-8 mt-8 hidden md:block">
+              <CTAButton onClick={() => document.getElementById('offer-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                Choose Your Offer
+              </CTAButton>
+            </div>
+            <div className="order-9 mt-6 md:mt-8 flex flex-wrap items-center gap-4 md:gap-6 text-xs tracking-wide" style={{ color: C.muted }}>
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
+              <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free U.S. Shipping Over $40</span>
+            </div>
           </div>
 
-          <div className="space-y-6 md:space-y-8">
-            <Reveal delay={100}>
+          <div className="contents md:block md:space-y-8">
+            <div className="order-4 w-full max-w-[58vw] sm:max-w-[46vw] md:max-w-none mx-auto mt-4 md:mt-0">
               <ProductGallery />
-            </Reveal>
+            </div>
 
-            <Reveal delay={160}>
+            <div className="order-5 w-full mt-5 md:mt-8">
             <div
               id="offer-card"
-              className="rounded-[24px] p-6 md:p-8"
+              className="rounded-[24px] p-4 md:p-8"
               style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
             >
+
               <OfferCountdown />
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose Your Pack</div>
-              <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
+              <h2 className="font-display text-2xl md:text-4xl mt-1 md:mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
 
 
-              <div className="mt-6 space-y-3">
+              <div className="mt-4 md:mt-6 space-y-2.5 md:space-y-3">
                 {BUNDLES.map((b) => {
                   const active = selected === b.id;
                   return (
                     <button
                       key={b.id}
                       onClick={() => setSelected(b.id)}
-                      className="w-full text-left rounded-2xl p-4 flex items-center gap-4 transition-all duration-200"
+                      className="w-full text-left rounded-2xl p-3 md:p-4 flex items-center gap-3 md:gap-4 transition-all duration-200"
+
                       style={{
                         background: active ? C.blushSoft : "#FFFFFF",
                         border: `1.5px solid ${active ? C.primary : C.border}`,
@@ -594,7 +652,8 @@ function StripsPage() {
                 <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
               </div>
             </div>
-            </Reveal>
+            </div>
+
           </div>
         </div>
       </section>
@@ -646,14 +705,8 @@ function StripsPage() {
               className="rounded-[24px] overflow-hidden"
               style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.28)" }}
             >
-              <video
-                src={howVideo.url}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-auto block"
-              />
+              <LazyVideo src={howVideo.url} />
+
             </div>
           </Reveal>
         </div>
@@ -753,8 +806,13 @@ function StripsPage() {
               <img
                 src={heroImg.url}
                 alt="Seralie beside skincare and makeup on a vanity"
+                width={1600}
+                height={1600}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto block transition-transform duration-[900ms] group-hover:scale-105"
               />
+
             </div>
           </Reveal>
           <Reveal delay={120}>
@@ -1178,21 +1236,38 @@ function StripsPage() {
         </div>
       </section>
 
-      {/* STICKY MOBILE CTA */}
+      {/* STICKY MOBILE ADD TO CART */}
       <div
         className={`md:hidden fixed left-0 right-0 bottom-0 z-40 px-4 pb-[env(safe-area-inset-bottom)] pt-3 transition-transform duration-300 ${
           showSticky ? "translate-y-0" : "translate-y-full"
         }`}
-        style={{ background: "rgba(250,246,240,0.95)", backdropFilter: "blur(10px)", borderTop: `1px solid ${C.border}` }}
+        style={{ background: "rgba(250,246,240,0.97)", backdropFilter: "blur(10px)", borderTop: `1px solid ${C.border}` }}
       >
-        <button
-          onClick={scrollToOffer}
-          className="w-full rounded-full py-4 text-sm font-medium tracking-[0.14em] uppercase text-white"
-          style={{ background: C.primary, boxShadow: "0 10px 28px -12px rgba(91,58,110,0.6)" }}
-        >
-          Be Camera-Ready · ${chosen.price.toFixed(2)}
-        </button>
+        <div className="flex items-center gap-3 pb-3">
+          <button onClick={scrollToOffer} className="flex-1 min-w-0 text-left">
+            <div className="text-[11px] tracking-[0.16em] uppercase truncate" style={{ color: C.muted }}>
+              {chosen.title}
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="font-display text-lg leading-none" style={{ color: C.primary }}>
+                ${chosen.price.toFixed(2)}
+              </span>
+              <span className="text-xs line-through" style={{ color: C.muted }}>
+                ${chosen.compareAt.toFixed(2)}
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={handleAdd}
+            disabled={adding}
+            className="shrink-0 rounded-full px-7 py-3.5 text-sm font-medium tracking-[0.14em] uppercase text-white disabled:opacity-60"
+            style={{ background: C.primary, boxShadow: "0 10px 28px -12px rgba(91,58,110,0.6)" }}
+          >
+            {adding ? "Adding…" : "Add To Cart"}
+          </button>
+        </div>
       </div>
+
     </div>
   );
 }
