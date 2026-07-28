@@ -375,8 +375,7 @@ function ProductGallery() {
                 width={1200}
                 height={1200}
                 decoding={idx === 0 ? "sync" : "async"}
-                // @ts-expect-error fetchpriority is valid HTML
-                fetchpriority={idx === 0 ? "high" : "low"}
+                fetchPriority={idx === 0 ? "high" : "low"}
                 className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                 style={{ opacity: i === idx ? 1 : 0 }}
                 loading={idx === 0 ? "eager" : "lazy"}
