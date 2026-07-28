@@ -308,7 +308,44 @@ function OfferCountdown() {
   );
 }
 
+/* ---------- lazy video (defers the download until it scrolls into view) ---------- */
+function LazyVideo({ src }: { src: string }) {
+  const ref = useRef<HTMLVideoElement | null>(null);
+  const [load, setLoad] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setLoad(true);
+            el.play().catch(() => {});
+            io.disconnect();
+          }
+        });
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <video
+      ref={ref}
+      src={load ? src : undefined}
+      muted
+      loop
+      playsInline
+      preload="none"
+      className="w-full h-auto block"
+      style={{ aspectRatio: "1 / 1", background: C.blushSoft }}
+    />
+  );
+}
+
 /* ---------- product gallery ---------- */
+
 function ProductGallery() {
   const [i, setI] = useState(0);
   /* only mount images the shopper has actually reached — keeps the initial
