@@ -39,8 +39,7 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-[#EAD9DF]/25 text-[11px] text-[#D9C9D4] leading-relaxed">
           <p className="italic font-display text-sm text-[#FAF6F0] mb-3">
-            Seralie strips deliver cosmetic color-correction. Brightening effects are temporary —
-            like all good makeup — and individual results vary.
+            Results may vary.
           </p>
           © {new Date().getFullYear()} Seralie. All rights reserved.
         </div>
