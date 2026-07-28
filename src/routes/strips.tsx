@@ -311,9 +311,17 @@ function OfferCountdown() {
 /* ---------- product gallery ---------- */
 function ProductGallery() {
   const [i, setI] = useState(0);
+  /* only mount images the shopper has actually reached — keeps the initial
+     mobile payload to a single hero image and avoids offscreen decodes */
+  const [mounted, setMounted] = useState<number[]>([0]);
   const total = GALLERY.length;
-  const prev = () => setI((v) => (v - 1 + total) % total);
-  const next = () => setI((v) => (v + 1) % total);
+  const go = (n: number) => {
+    const idx = (n + total) % total;
+    setI(idx);
+    setMounted((m) => (m.includes(idx) ? m : [...m, idx]));
+  };
+  const prev = () => go(i - 1);
+  const next = () => go(i + 1);
   return (
     <div>
       <div
@@ -321,17 +329,25 @@ function ProductGallery() {
         style={{ background: "#FFFFFF", border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
       >
         <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-          {GALLERY.map((g, idx) => (
-            <img
-              key={g.url}
-              src={g.url}
-              alt={g.alt}
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-              style={{ opacity: i === idx ? 1 : 0 }}
-              loading={idx === 0 ? "eager" : "lazy"}
-            />
-          ))}
+          {GALLERY.map((g, idx) =>
+            mounted.includes(idx) ? (
+              <img
+                key={g.url}
+                src={g.url}
+                alt={g.alt}
+                width={1200}
+                height={1200}
+                decoding={idx === 0 ? "sync" : "async"}
+                // @ts-expect-error fetchpriority is valid HTML
+                fetchpriority={idx === 0 ? "high" : "low"}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                style={{ opacity: i === idx ? 1 : 0 }}
+                loading={idx === 0 ? "eager" : "lazy"}
+              />
+            ) : null,
+          )}
         </div>
+
         <button
           onClick={prev}
           aria-label="Previous photo"
