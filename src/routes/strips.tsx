@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Play,
   Star,
   ShieldCheck,
   Truck,
@@ -350,8 +351,8 @@ function ProductGallery() {
   const [i, setI] = useState(0);
   /* only mount images the shopper has actually reached — keeps the initial
      mobile payload to a single hero image and avoids offscreen decodes */
-  const [mounted, setMounted] = useState<number[]>([0]);
-  const total = GALLERY.length;
+  const [mounted, setMounted] = useState<number[]>([1]);
+  const total = GALLERY.length + 1; // slide 0 = video
   const go = (n: number) => {
     const idx = (n + total) % total;
     setI(idx);
@@ -366,22 +367,35 @@ function ProductGallery() {
         style={{ background: "#FFFFFF", border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
       >
         <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-          {GALLERY.map((g, idx) =>
-            mounted.includes(idx) ? (
+          {/* slide 0 is the how-it-works video */}
+          <video
+            src={howVideo.url}
+            poster={GALLERY[0].url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+            style={{ opacity: i === 0 ? 1 : 0 }}
+          />
+          {GALLERY.map((g, gi) => {
+            const idx = gi + 1;
+            return mounted.includes(idx) ? (
               <img
                 key={g.url}
                 src={g.url}
                 alt={g.alt}
                 width={1200}
                 height={1200}
-                decoding={idx === 0 ? "sync" : "async"}
-                fetchPriority={idx === 0 ? "high" : "low"}
+                decoding="async"
+                fetchPriority={gi === 0 ? "high" : "low"}
                 className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                 style={{ opacity: i === idx ? 1 : 0 }}
-                loading={idx === 0 ? "eager" : "lazy"}
+                loading="lazy"
               />
-            ) : null,
-          )}
+            ) : null;
+          })}
         </div>
 
         <button
@@ -401,7 +415,7 @@ function ProductGallery() {
           <ChevronRight className="h-5 w-5" />
         </button>
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 inline-flex gap-1.5">
-          {GALLERY.map((_, idx) => (
+          {Array.from({ length: total }).map((_, idx) => (
             <span
               key={idx}
               className="h-1.5 rounded-full transition-all"
@@ -412,8 +426,23 @@ function ProductGallery() {
       </div>
       {/* thumbnails: desktop only — mobile uses arrows + dots so we don't
           download 6 extra images on cell data before first paint */}
-      <div className="mt-3 hidden md:grid grid-cols-6 gap-2">
-        {GALLERY.map((g, idx) => (
+      <div className="mt-3 hidden md:grid grid-cols-7 gap-2">
+        <button
+          onClick={() => go(0)}
+          aria-label="Show video"
+          className="relative rounded-lg overflow-hidden transition-all"
+          style={{ border: `1.5px solid ${i === 0 ? C.primary : C.border}`, opacity: i === 0 ? 1 : 0.75 }}
+        >
+          <img src={GALLERY[0].url} alt="" width={200} height={200} loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ aspectRatio: "1 / 1" }} />
+          <span className="absolute inset-0 flex items-center justify-center" style={{ background: "rgba(46,37,40,0.28)" }}>
+            <span className="h-6 w-6 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.92)" }}>
+              <Play className="h-3 w-3" style={{ color: C.primary, fill: C.primary }} />
+            </span>
+          </span>
+        </button>
+        {GALLERY.map((g, gi) => {
+          const idx = gi + 1;
+          return (
           <button
             key={g.url}
             onClick={() => go(idx)}
@@ -432,7 +461,8 @@ function ProductGallery() {
               style={{ aspectRatio: "1 / 1" }}
             />
           </button>
-        ))}
+          );
+        })}
       </div>
 
     </div>
