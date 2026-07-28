@@ -59,12 +59,23 @@ function useReveal<T extends HTMLElement>() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const check = () => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight + 120 && r.bottom > -120) setVisible(true);
+    };
+    check();
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && setVisible(true)),
-      { threshold: 0.12 }
+      { threshold: 0, rootMargin: "120px 0px 120px 0px" }
     );
     io.observe(el);
-    return () => io.disconnect();
+    window.addEventListener("scroll", check, { passive: true });
+    const t = setTimeout(() => setVisible(true), 2500);
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", check);
+      clearTimeout(t);
+    };
   }, []);
   return { ref, visible };
 }
