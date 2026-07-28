@@ -1201,21 +1201,38 @@ function StripsPage() {
         </div>
       </section>
 
-      {/* STICKY MOBILE CTA */}
+      {/* STICKY MOBILE ADD TO CART */}
       <div
         className={`md:hidden fixed left-0 right-0 bottom-0 z-40 px-4 pb-[env(safe-area-inset-bottom)] pt-3 transition-transform duration-300 ${
           showSticky ? "translate-y-0" : "translate-y-full"
         }`}
-        style={{ background: "rgba(250,246,240,0.95)", backdropFilter: "blur(10px)", borderTop: `1px solid ${C.border}` }}
+        style={{ background: "rgba(250,246,240,0.97)", backdropFilter: "blur(10px)", borderTop: `1px solid ${C.border}` }}
       >
-        <button
-          onClick={scrollToOffer}
-          className="w-full rounded-full py-4 text-sm font-medium tracking-[0.14em] uppercase text-white"
-          style={{ background: C.primary, boxShadow: "0 10px 28px -12px rgba(91,58,110,0.6)" }}
-        >
-          Be Camera-Ready · ${chosen.price.toFixed(2)}
-        </button>
+        <div className="flex items-center gap-3 pb-3">
+          <button onClick={scrollToOffer} className="flex-1 min-w-0 text-left">
+            <div className="text-[11px] tracking-[0.16em] uppercase truncate" style={{ color: C.muted }}>
+              {chosen.title}
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="font-display text-lg leading-none" style={{ color: C.primary }}>
+                ${chosen.price.toFixed(2)}
+              </span>
+              <span className="text-xs line-through" style={{ color: C.muted }}>
+                ${chosen.compareAt.toFixed(2)}
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={handleAdd}
+            disabled={adding}
+            className="shrink-0 rounded-full px-7 py-3.5 text-sm font-medium tracking-[0.14em] uppercase text-white disabled:opacity-60"
+            style={{ background: C.primary, boxShadow: "0 10px 28px -12px rgba(91,58,110,0.6)" }}
+          >
+            {adding ? "Adding…" : "Add To Cart"}
+          </button>
+        </div>
       </div>
+
     </div>
   );
 }
