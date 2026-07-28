@@ -566,10 +566,10 @@ function StripsPage() {
           {/* `contents` on mobile lets the buy box interleave above the long copy */}
           <div className="contents md:block">
             <div className="order-1 inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-2 md:mb-6" style={{ color: C.primary }}>
-              <Sparkles className="h-3.5 w-3.5" /> Purple Color-Correcting Strips
+              <Sparkles className="h-3.5 w-3.5" /> MAKEUP FOR YOUR TEETH
             </div>
             <h1 className="order-2 font-display text-[2.1rem] leading-[1.05] sm:text-6xl md:text-7xl md:leading-[1.02]" style={{ color: C.primary }}>
-              Makeup for<br />your teeth.
+              Undo yellow teeth<br />in 30 minutes.
             </h1>
             <div className="order-3 mt-2 md:mt-6 flex items-center gap-2 md:gap-3 flex-wrap">
               <Stars rating={4.8} size={15} />

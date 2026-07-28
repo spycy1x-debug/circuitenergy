@@ -133,12 +133,12 @@ function HomePage() {
           <div className="order-2 md:order-1">
             <Reveal>
               <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
-                <Sparkles className="h-3.5 w-3.5" /> Seralie Beauty
+                <Sparkles className="h-3.5 w-3.5" /> MAKEUP FOR YOUR TEETH
               </div>
             </Reveal>
             <Reveal delay={80}>
               <h1 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]" style={{ color: C.text }}>
-                Beauty, down to<br />your smile.
+                Undo yellow teeth<br />in 30 minutes.
               </h1>
             </Reveal>
             <Reveal delay={160}>
