@@ -340,7 +340,7 @@ function LazyVideo({ src, poster }: { src: string; poster?: string }) {
           }
         });
       },
-      { rootMargin: "200px" },
+      { rootMargin: "600px" },
     );
     io.observe(el);
     return () => io.disconnect();
