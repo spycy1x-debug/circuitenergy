@@ -615,7 +615,8 @@ function StripsPage() {
                 <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free Shipping Over $40</span>
               </div>
             </div>
-            </Reveal>
+            </div>
+
           </div>
         </div>
       </section>
