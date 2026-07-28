@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Play,
   Star,
   ShieldCheck,
   Truck,
@@ -460,7 +461,8 @@ function ProductGallery() {
               style={{ aspectRatio: "1 / 1" }}
             />
           </button>
-        ))}
+          );
+        })}
       </div>
 
     </div>
