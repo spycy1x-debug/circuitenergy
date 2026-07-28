@@ -531,14 +531,12 @@ function StripsPage() {
             </div>
 
             <div className="order-5 w-full mt-5 md:mt-8">
-
-
-            <Reveal delay={160}>
             <div
               id="offer-card"
-              className="rounded-[24px] p-6 md:p-8"
+              className="rounded-[24px] p-4 md:p-8"
               style={{ background: C.card, border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(46,37,40,0.18)" }}
             >
+
               <OfferCountdown />
               <div className="text-[11px] tracking-[0.24em] uppercase" style={{ color: C.primary }}>Choose Your Pack</div>
               <h2 className="font-display text-3xl md:text-4xl mt-2" style={{ color: C.primary }}>Bundle & save.</h2>
