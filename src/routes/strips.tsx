@@ -565,17 +565,24 @@ function StripsPage() {
         <div className="container-x flex flex-col md:grid md:grid-cols-2 gap-0 md:gap-16 items-center py-5 md:py-20">
           {/* `contents` on mobile lets the buy box interleave above the long copy */}
           <div className="contents md:block">
-            <div className="order-1 inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-2 md:mb-6" style={{ color: C.primary }}>
-              <Sparkles className="h-3.5 w-3.5" /> MAKEUP FOR YOUR TEETH
+            <div className="order-1 inline-flex items-center gap-3 text-[11px] tracking-[0.24em] uppercase mb-3 md:mb-6" style={{ color: C.primary }}>
+              <span className="h-px w-5" style={{ background: C.primary, opacity: 0.35 }} />
+              MAKEUP FOR YOUR TEETH
+              <span className="h-px w-5" style={{ background: C.primary, opacity: 0.35 }} />
             </div>
-            <h1 className="order-2 font-display text-[2.1rem] leading-[1.05] sm:text-6xl md:text-7xl md:leading-[1.02]" style={{ color: C.primary }}>
+            <h1 className="order-2 font-display text-[2.1rem] leading-[1.08] sm:text-6xl md:text-7xl md:leading-[1.02]" style={{ color: C.primary }}>
               Undo yellow teeth<br />in 30 minutes.
             </h1>
-            <div className="order-3 mt-2 md:mt-6 flex items-center gap-2 md:gap-3 flex-wrap">
-              <Stars rating={4.8} size={15} />
-              <span className="text-sm font-medium">4.8</span>
-              <span className="text-sm" style={{ color: C.muted }}>3,000+ reviews</span>
-              <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.primary }}>Read reviews</a>
+            <div className="order-3 mt-3 md:mt-5 flex flex-wrap items-center gap-2 md:gap-3">
+              <div className="inline-flex items-center gap-1.5">
+                <Stars rating={4.8} size={14} />
+                <span className="text-sm font-semibold" style={{ color: C.text }}>4.8</span>
+              </div>
+              <span className="hidden sm:inline-block h-3 w-px" style={{ background: C.border }} />
+              <a href="#reviews" className="group inline-flex items-center gap-1 text-sm font-medium" style={{ color: C.primary }}>
+                3,000+ reviews
+                <ChevronRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </a>
             </div>
             <p className="order-7 mt-8 md:mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
               <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, the PAP+ formula releases active oxygen that breaks down the stain molecules coffee, wine, and tea leave behind — so your baseline shade actually lifts, week after week.

@@ -132,8 +132,10 @@ function HomePage() {
         <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-12 md:py-24">
           <div className="order-2 md:order-1">
             <Reveal>
-              <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
-                <Sparkles className="h-3.5 w-3.5" /> MAKEUP FOR YOUR TEETH
+              <div className="inline-flex items-center gap-3 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
+                <span className="h-px w-5" style={{ background: C.primary, opacity: 0.35 }} />
+                MAKEUP FOR YOUR TEETH
+                <span className="h-px w-5" style={{ background: C.primary, opacity: 0.35 }} />
               </div>
             </Reveal>
             <Reveal delay={80}>
