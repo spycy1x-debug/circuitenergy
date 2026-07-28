@@ -807,8 +807,13 @@ function StripsPage() {
               <img
                 src={heroImg.url}
                 alt="Seralie beside skincare and makeup on a vanity"
+                width={1600}
+                height={1600}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto block transition-transform duration-[900ms] group-hover:scale-105"
               />
+
             </div>
           </Reveal>
           <Reveal delay={120}>
