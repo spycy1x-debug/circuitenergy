@@ -785,7 +785,7 @@ function StripsPage() {
               className="rounded-[24px] overflow-hidden"
               style={{ border: `1px solid ${C.border}`, boxShadow: "0 30px 80px -30px rgba(91,58,110,0.28)" }}
             >
-              <LazyVideo src={howVideo.url} />
+              <LazyVideo src={howVideo.url} poster={galleryNew2.url} />
 
             </div>
           </Reveal>
