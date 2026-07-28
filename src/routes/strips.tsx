@@ -409,7 +409,7 @@ function StripsPage() {
             title: r.title,
             body: r.body,
             n: r.name,
-            date: new Date(r.created_at).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }),
+            date: new Date(r.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
             img: r.image_url || undefined,
           })),
         );
@@ -867,7 +867,7 @@ function StripsPage() {
               <div className="mt-6 inline-flex items-center gap-3 flex-wrap justify-center">
                 <Stars rating={avgRating} size={22} />
                 <span className="font-display text-2xl" style={{ color: C.primary }}>{avgRating.toFixed(1)}</span>
-                <span className="text-sm" style={{ color: C.muted }}>· Based on {totalCount.toLocaleString()}+ reviews</span>
+                <span className="text-sm" style={{ color: C.muted }}>· Based on {totalCount.toLocaleString("en-US")}+ reviews</span>
               </div>
             </div>
           </Reveal>
@@ -879,7 +879,7 @@ function StripsPage() {
                 <div className="text-center md:border-r md:pr-8" style={{ borderColor: C.border }}>
                   <div className="font-display text-5xl md:text-6xl leading-none" style={{ color: C.primary }}>{avgRating.toFixed(1)}</div>
                   <div className="mt-2"><Stars rating={avgRating} size={16} /></div>
-                  <div className="mt-1 text-[11px] tracking-wide" style={{ color: C.muted }}>{totalCount.toLocaleString()}+ reviews</div>
+                  <div className="mt-1 text-[11px] tracking-wide" style={{ color: C.muted }}>{totalCount.toLocaleString("en-US")}+ reviews</div>
                 </div>
                 <div className="space-y-1.5">
                   {[5, 4, 3, 2, 1].map((s) => {
@@ -1019,7 +1019,7 @@ function StripsPage() {
                     if (error) throw error;
                     setUserReviews((prev) => [{
                       r: rvRating, title, body: text, n: name,
-                      date: new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }),
+                      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
                       img: rvPhoto || undefined,
                     }, ...prev]);
                     setShowReviewForm(false);
