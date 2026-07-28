@@ -145,6 +145,9 @@ export const Route = createFileRoute("/strips")({
       { property: "og:image", content: heroImg.url },
       { name: "twitter:image", content: heroImg.url },
     ],
+    links: [
+      { rel: "preload", as: "image", href: GALLERY[0].url, fetchpriority: "high" },
+    ],
   }),
   component: StripsPage,
 });
