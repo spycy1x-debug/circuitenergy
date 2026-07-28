@@ -496,50 +496,42 @@ function StripsPage() {
     <div style={{ background: C.bg, color: C.text, fontFamily: "'Poppins', 'Inter', system-ui, sans-serif" }}>
       {/* HERO + OFFER */}
       <section ref={offerRef} id="offer" className="relative overflow-hidden">
-        <div className="container-x grid md:grid-cols-2 gap-10 md:gap-16 items-center py-10 md:py-20">
-          <div>
-            <Reveal>
-              <div className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-6" style={{ color: C.primary }}>
-                <Sparkles className="h-3.5 w-3.5" /> Purple Color-Correcting Strips
-              </div>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]" style={{ color: C.primary }}>
-                Makeup for<br />your teeth.
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
-                <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, the PAP+ formula releases active oxygen that breaks down the stain molecules coffee, wine, and tea leave behind — so your baseline shade actually lifts, week after week.
-              </p>
-            </Reveal>
-            <Reveal delay={220}>
-              <div className="mt-6 flex items-center gap-3 flex-wrap">
-                <Stars rating={4.8} size={16} />
-                <span className="text-sm font-medium">4.8</span>
-                <span className="text-sm" style={{ color: C.muted }}>3,000+ reviews</span>
-                <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.primary }}>Read reviews</a>
-              </div>
-            </Reveal>
-            <Reveal delay={280}>
-              <div className="mt-8">
-                <CTAButton onClick={() => document.getElementById('offer-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
-                  Choose Your Offer
-                </CTAButton>
-              </div>
-            </Reveal>
-            <Reveal delay={340}>
-              <div className="mt-8 flex flex-wrap items-center gap-6 text-xs tracking-wide" style={{ color: C.muted }}>
-                <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
-                <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free U.S. Shipping Over $40</span>
-              </div>
-            </Reveal>
+        <div className="container-x flex flex-col md:grid md:grid-cols-2 gap-0 md:gap-16 items-center py-5 md:py-20">
+          {/* `contents` on mobile lets the buy box interleave above the long copy */}
+          <div className="contents md:block">
+            <div className="order-1 inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase mb-2 md:mb-6" style={{ color: C.primary }}>
+              <Sparkles className="h-3.5 w-3.5" /> Purple Color-Correcting Strips
+            </div>
+            <h1 className="order-2 font-display text-[2.1rem] leading-[1.05] sm:text-6xl md:text-7xl md:leading-[1.02]" style={{ color: C.primary }}>
+              Makeup for<br />your teeth.
+            </h1>
+            <div className="order-3 mt-2 md:mt-6 flex items-center gap-2 md:gap-3 flex-wrap">
+              <Stars rating={4.8} size={15} />
+              <span className="text-sm font-medium">4.8</span>
+              <span className="text-sm" style={{ color: C.muted }}>3,000+ reviews</span>
+              <a href="#reviews" className="text-sm underline underline-offset-4" style={{ color: C.primary }}>Read reviews</a>
+            </div>
+            <p className="order-7 mt-8 md:mt-6 text-base md:text-lg max-w-lg leading-relaxed" style={{ color: C.muted }}>
+              <span className="font-medium" style={{ color: C.text }}>Camera-ready in just 30 minutes.</span> Purple color correction instantly brightens your smile for dates, photos, meetings, weddings, and every moment you want extra confidence. And with consistent use, the PAP+ formula releases active oxygen that breaks down the stain molecules coffee, wine, and tea leave behind — so your baseline shade actually lifts, week after week.
+            </p>
+            <div className="order-8 mt-8 hidden md:block">
+              <CTAButton onClick={() => document.getElementById('offer-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                Choose Your Offer
+              </CTAButton>
+            </div>
+            <div className="order-9 mt-6 md:mt-8 flex flex-wrap items-center gap-4 md:gap-6 text-xs tracking-wide" style={{ color: C.muted }}>
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4" style={{ color: C.primary }} /> 30-Day Guarantee</span>
+              <span className="inline-flex items-center gap-2"><Truck className="h-4 w-4" style={{ color: C.primary }} /> Free U.S. Shipping Over $40</span>
+            </div>
           </div>
 
-          <div className="space-y-6 md:space-y-8">
-            <Reveal delay={100}>
+          <div className="contents md:block md:space-y-8">
+            <div className="order-4 w-full max-w-[58vw] sm:max-w-[46vw] md:max-w-none mx-auto mt-4 md:mt-0">
               <ProductGallery />
-            </Reveal>
+            </div>
+
+            <div className="order-5 w-full mt-5 md:mt-8">
+
 
             <Reveal delay={160}>
             <div
