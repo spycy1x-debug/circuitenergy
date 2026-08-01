@@ -17,6 +17,7 @@ export type Database = {
       product_reviews: {
         Row: {
           body: string
+          city: string | null
           created_at: string
           id: string
           image_url: string | null
@@ -27,6 +28,7 @@ export type Database = {
         }
         Insert: {
           body: string
+          city?: string | null
           created_at?: string
           id?: string
           image_url?: string | null
@@ -37,6 +39,7 @@ export type Database = {
         }
         Update: {
           body?: string
+          city?: string | null
           created_at?: string
           id?: string
           image_url?: string | null
