@@ -10,8 +10,7 @@ import { toGid } from "./product-config";
  * Package Protection is a separate Shopify product.
  * Fill in the variant ID (numeric, e.g. "48912345678901") once it's created.
  */
-export const PACKAGE_PROTECTION_VARIANT_ID = "";
-export const PACKAGE_PROTECTION_PRICE = 4.99;
+export const PACKAGE_PROTECTION_VARIANT_ID = "48890343030938";
 
 const LS_CART_ID = "seralie-cart-id";
 const LS_CART_STATE = "seralie-cart-state";
@@ -34,6 +33,9 @@ type State = {
   isOpen: boolean;
   isLoading: boolean;
   error: string | null;
+  protectionPending: boolean;
+  protectionError: string | null;
+  protectionOptimistic: boolean | null;
 };
 
 const listeners = new Set<() => void>();
@@ -44,6 +46,9 @@ const state: State = {
   isOpen: false,
   isLoading: false,
   error: null,
+  protectionPending: false,
+  protectionError: null,
+  protectionOptimistic: null,
 };
 let snapshot = "";
 
@@ -200,6 +205,18 @@ async function removeLineRemote(cartId: string, lineId: string) {
   return true;
 }
 
+async function updateLineRemote(cartId: string, lineId: string, quantity: number) {
+  const data = await gql<{ cartLinesUpdate: { cart: any; userErrors: any[] } }>(
+    `mutation($cartId: ID!, $lines: [CartLineUpdateInput!]!) { cartLinesUpdate(cartId: $cartId, lines: $lines) { cart { ${CART_FIELDS} } userErrors { message } } }`,
+    { cartId, lines: [{ id: lineId, quantity }] },
+  );
+  const errs = data.cartLinesUpdate.userErrors || [];
+  if (errs.some((e: any) => /cart not found|does not exist/i.test(e.message))) return false;
+  if (errs.length) throw new Error(errs[0].message);
+  mapCart(data.cartLinesUpdate.cart);
+  return true;
+}
+
 function clearLocal() {
   state.cartId = null;
   state.checkoutUrl = null;
@@ -207,6 +224,25 @@ function clearLocal() {
   if (typeof window !== "undefined") {
     localStorage.removeItem(LS_CART_ID);
     localStorage.removeItem(LS_CART_STATE);
+  }
+}
+
+export const PROTECTION_GID = toGid(PACKAGE_PROTECTION_VARIANT_ID);
+
+export function isProtectionLine(l: CartLine) {
+  return l.variantId === PROTECTION_GID;
+}
+
+function protectionLine() {
+  return state.lines.find(isProtectionLine) ?? null;
+}
+
+/** If protection is the only thing left, it can't stand alone — clear the cart. */
+async function dropOrphanProtection() {
+  const others = state.lines.filter((l) => !isProtectionLine(l));
+  const prot = protectionLine();
+  if (prot && others.length === 0 && state.cartId) {
+    await removeLineRemote(state.cartId, prot.id);
   }
 }
 
@@ -270,12 +306,51 @@ export const cart = {
       commit();
     }
   },
+  /** Toggle the standalone Package Protection line. Always quantity exactly 1. */
+  async setProtection(on: boolean) {
+    ensureHydrated();
+    if (state.protectionPending) return;
+    const existing = protectionLine();
+    if (on === !!existing && (!existing || existing.quantity === 1)) return;
+
+    state.protectionPending = true;
+    state.protectionError = null;
+    // Optimistic flip
+    state.protectionOptimistic = on;
+    commit();
+
+    try {
+      if (on) {
+        if (!state.cartId) throw new Error("Add a necklace first.");
+        const ok = await addLines(state.cartId, [
+          { merchandiseId: PROTECTION_GID, quantity: 1 },
+        ]);
+        if (!ok) throw new Error("Your bag expired. Refresh and try again.");
+        // Guard against qty > 1
+        const p = protectionLine();
+        if (p && p.quantity !== 1) await updateLineRemote(state.cartId, p.id, 1);
+      } else if (existing && state.cartId) {
+        const ok = await removeLineRemote(state.cartId, existing.id);
+        if (!ok) throw new Error("Your bag expired. Refresh and try again.");
+      }
+      persist();
+    } catch (err) {
+      console.error("Protection toggle failed", err);
+      state.protectionError =
+        err instanceof Error ? err.message : "Couldn't update package protection.";
+    } finally {
+      state.protectionOptimistic = null;
+      state.protectionPending = false;
+      commit();
+    }
+  },
   async remove(lineId: string) {
     if (!state.cartId) return;
     state.isLoading = true;
     commit();
     try {
       const ok = await removeLineRemote(state.cartId, lineId);
+      if (ok) await dropOrphanProtection();
       if (!ok || state.lines.length === 0) clearLocal();
       persist();
     } finally {
@@ -288,12 +363,34 @@ export const cart = {
   },
 };
 
+const EMPTY: State = {
+  cartId: null,
+  checkoutUrl: null,
+  lines: [],
+  isOpen: false,
+  isLoading: false,
+  error: null,
+  protectionPending: false,
+  protectionError: null,
+  protectionOptimistic: null,
+};
+
 export function useCart() {
   const snap = useSyncExternalStore(cart.subscribe, cart.getSnapshot, cart.getServerSnapshot);
-  const s: State = snap
-    ? JSON.parse(snap)
-    : { cartId: null, checkoutUrl: null, lines: [], isOpen: false, isLoading: false, error: null };
-  const count = s.lines.reduce((sum, l) => sum + l.quantity, 0);
+  const s: State = snap ? JSON.parse(snap) : EMPTY;
+  const protection = s.lines.find(isProtectionLine) ?? null;
+  const lines = s.lines.filter((l) => !isProtectionLine(l));
+  // Badge counts necklaces only.
+  const count = lines.reduce((sum, l) => sum + l.quantity, 0);
   const subtotal = s.lines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0);
-  return { ...s, count, subtotal };
+  return {
+    ...s,
+    lines,
+    allLines: s.lines,
+    protection,
+    protectionOn: s.protectionOptimistic ?? !!protection,
+    count,
+    subtotal,
+  };
 }
+

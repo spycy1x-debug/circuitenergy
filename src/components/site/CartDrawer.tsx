@@ -1,9 +1,86 @@
-import { X, ShoppingBag, ArrowRight } from "lucide-react";
-import { cart, useCart } from "@/lib/shopify-cart";
+import { useEffect, useState } from "react";
+import { X, ShoppingBag, ArrowRight, ShieldCheck } from "lucide-react";
+import {
+  cart,
+  useCart,
+  fetchVariantPrices,
+  PACKAGE_PROTECTION_VARIANT_ID,
+} from "@/lib/shopify-cart";
 import { Link } from "@tanstack/react-router";
+
+function ProtectionRow() {
+  const { protectionOn, protectionPending, protectionError, protection, lines } = useCart();
+  const [price, setPrice] = useState<number | null>(protection?.unitPrice ?? null);
+
+  useEffect(() => {
+    let alive = true;
+    fetchVariantPrices([PACKAGE_PROTECTION_VARIANT_ID])
+      .then((m) => {
+        const p = m[PACKAGE_PROTECTION_VARIANT_ID];
+        if (alive && p) setPrice(p.amount);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  if (lines.length === 0) return null;
+
+  return (
+    <div className="border-t border-[color:var(--border)] px-6 py-4 bg-[color:var(--sand)]/40">
+      <div className="flex items-start gap-3">
+        <ShieldCheck
+          className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--muted-foreground)]"
+          strokeWidth={1.4}
+        />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between gap-3">
+            <span id="pkg-protect-label" className="text-sm text-[color:var(--charcoal)]">
+              Package Protection
+            </span>
+            <div className="flex items-center gap-3">
+              {price !== null && (
+                <span className="text-sm tabular-nums text-[color:var(--muted-foreground)]">
+                  ${price.toFixed(2)}
+                </span>
+              )}
+              <button
+                role="switch"
+                aria-checked={protectionOn}
+                aria-labelledby="pkg-protect-label"
+                aria-describedby="pkg-protect-desc"
+                disabled={protectionPending}
+                onClick={() => cart.setProtection(!protectionOn)}
+                className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--charcoal)] focus-visible:ring-offset-2 ${
+                  protectionOn
+                    ? "bg-[color:var(--charcoal)]"
+                    : "bg-[color:var(--border)]"
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+                    protectionOn ? "translate-x-[18px]" : "translate-x-[2px]"
+                  }`}
+                />
+              </button>
+            </div>
+          </div>
+          <p id="pkg-protect-desc" className="mt-1 text-xs leading-relaxed text-[color:var(--muted-foreground)]">
+            Covers loss, theft, and damage in transit. We remake and reship free.
+          </p>
+          {protectionError && (
+            <p className="mt-2 text-xs text-[color:var(--muted-foreground)]">{protectionError}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function CartDrawer() {
   const { isOpen, lines, subtotal, isLoading, checkoutUrl, error } = useCart();
+
 
   return (
     <>
@@ -75,6 +152,8 @@ export function CartDrawer() {
             </ul>
           )}
         </div>
+
+        <ProtectionRow />
 
         {lines.length > 0 && (
           <div className="border-t border-[color:var(--border)] px-6 py-6 space-y-4">
