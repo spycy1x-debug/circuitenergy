@@ -52,6 +52,99 @@ function BonusRow({ label, value }: { label: string; value?: number | null }) {
   );
 }
 
+const GALLERY = [
+  { src: g1.url, alt: "Gold pendant engraved with a golden retriever portrait and the name Bailey" },
+  { src: g2.url, alt: "The pendant in gold, silver, and rose gold finishes" },
+  { src: g3.url, alt: "Engraved gold pendant beside the original photo of a golden retriever" },
+  { src: g4.url, alt: "Woman wearing the engraved pendant with the name Willow" },
+  { src: g5.url, alt: "Engraved pendant held between two fingers" },
+  { src: g6.url, alt: "Engraved pendant on a wooden dresser beside a framed dog portrait" },
+];
+
+function Gallery() {
+  const [i, setI] = useState(0);
+  return (
+    <div>
+      <PhotoSlot label="Necklace" ratio="1/1" src={GALLERY[i]!.src} alt={GALLERY[i]!.alt} />
+      <div className="mt-3 grid grid-cols-6 gap-2">
+        {GALLERY.map((g, idx) => (
+          <button
+            key={g.src}
+            type="button"
+            onClick={() => setI(idx)}
+            aria-label={`View image ${idx + 1}`}
+            className={`overflow-hidden rounded-xl border p-1 transition ${
+              idx === i
+                ? "border-[color:var(--gold)]"
+                : "border-[color:var(--sand-deep)]/60 hover:border-[color:var(--sand-deep)]"
+            }`}
+          >
+            <img
+              src={g.src}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="aspect-square w-full rounded-lg object-cover"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Horizontal, snap-scrolling testimonial track. Next card peeks at the edge. */
+function ReviewCarousel() {
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  function scrollBy(dir: 1 | -1) {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * (el.clientWidth * 0.6), behavior: "smooth" });
+  }
+
+  return (
+    <div className="relative mt-10">
+      <div
+        ref={trackRef}
+        className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:px-0"
+      >
+        {[1, 2, 3, 4, 5].map((n) => (
+          <figure
+            key={n}
+            className="w-[78%] shrink-0 snap-start rounded-2xl border border-[color:var(--border)] bg-[color:var(--bone)] p-6 sm:w-[52%] lg:w-[31%]"
+          >
+            <PhotoSlot label={`Customer photo ${n}`} ratio="1/1" />
+            <blockquote className="mt-5 min-h-16 text-sm leading-7 text-[color:var(--muted-foreground)]">
+              <span className="opacity-50">Customer review — add real copy here.</span>
+            </blockquote>
+            <figcaption className="mt-3 caps-label text-[color:var(--muted-foreground)]">Name, City</figcaption>
+          </figure>
+        ))}
+        <div className="w-2 shrink-0 md:hidden" aria-hidden />
+      </div>
+
+      <div className="mt-6 hidden justify-end gap-3 md:flex">
+        <button
+          type="button"
+          onClick={() => scrollBy(-1)}
+          aria-label="Previous reviews"
+          className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollBy(1)}
+          aria-label="Next reviews"
+          className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 
 function NecklacePage() {
