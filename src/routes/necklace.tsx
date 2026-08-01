@@ -212,10 +212,11 @@ function NecklacePage() {
                             <ul className="mt-3 space-y-2.5">
                               {freePieces > 0 && tPrice !== null && (
                                 <BonusRow
-                                  label={`${freePieces} extra ${freePieces === 1 ? "necklace" : "necklaces"}`}
+                                  label={`${freePieces} free ${freePieces === 1 ? "necklace" : "necklaces"} (${PAID_PIECES[t.id]} paid, ${t.pieces} shipped)`}
                                   value={freePieces * (tPrice / PAID_PIECES[t.id])}
                                 />
                               )}
+
                               {t.extras.map((e) => (
                                 <BonusRow key={e.label} label={e.label} value={e.value} />
                               ))}
@@ -241,7 +242,7 @@ function NecklacePage() {
 
               <div className="mt-7">
                 <div className="eyebrow">Finish</div>
-                <div className="mt-3 flex gap-3">
+                <div className="mt-3 flex flex-wrap gap-3">
                   {FINISHES.map((f) => (
                     <button
                       key={f.id}
@@ -257,7 +258,12 @@ function NecklacePage() {
                     </button>
                   ))}
                 </div>
+                <p className="mt-3 text-xs text-[color:var(--muted-foreground)]">
+                  {FINISHES.find((f) => f.id === finish)!.detail} · nickel-free, water-resistant, won't tarnish
+                  with everyday wear.
+                </p>
               </div>
+
             </div>
 
             {/* 4. Photo + engraving slots */}
