@@ -1,14 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Star } from "lucide-react";
-import stripsBox from "@/assets/strips-box-marble.png.asset.json";
+import { PhotoSlot } from "@/components/site/PhotoSlot";
 
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — Seralie Whitening Strips" },
-      { name: "description", content: "Shop Seralie purple color-correcting whitening strips — camera-ready in 30 minutes, whiter over time with PAP+." },
-      { property: "og:title", content: "Shop — Seralie Whitening Strips" },
-      { property: "og:description", content: "Makeup for your teeth. Beauty, down to your smile." },
+      { title: "Shop — Seralie Keepsake Jewellery" },
+      {
+        name: "description",
+        content: "Shop Seralie keepsake jewellery — photo-engraved pendants made to order in gold, silver, and rose gold.",
+      },
+      { property: "og:title", content: "Shop — Seralie Keepsake Jewellery" },
+      { property: "og:description", content: "Photo-engraved pendants, made to order." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ShopPage,
@@ -16,45 +20,38 @@ export const Route = createFileRoute("/shop")({
 
 function ShopPage() {
   return (
-    <>
-      <section className="bg-[#FAF6F0]">
-        <div className="container-x pt-16 pb-10 md:pt-24 md:pb-14 text-center max-w-2xl mx-auto">
-          <div className="eyebrow">The Collection</div>
-          <h1 className="mt-5 font-display text-5xl md:text-6xl text-[#2E2528]">Shop <span className="italic text-[#5B3A6E]">Seralie</span></h1>
-          <p className="mt-6 text-[15px] leading-8 text-[#5A4A52]">
-            Purple color-correcting whitening strips. Instantly brighter, whiter over time with PAP+.
-          </p>
-        </div>
-      </section>
+    <section className="container-x py-16 md:py-24">
+      <div className="max-w-xl">
+        <div className="eyebrow">The collection</div>
+        <h1 className="mt-4 font-display text-4xl md:text-5xl">Shop</h1>
+        <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
+          Each piece is engraved to order from a photo you send us. New pieces are added slowly.
+        </p>
+      </div>
 
-      <section className="bg-[#FAF6F0]">
-        <div className="container-x pb-24 md:pb-32">
-          <div className="max-w-3xl mx-auto">
-            <Link to="/strips" className="group block">
-              <div className="aspect-[4/5] bg-[#F5E9EE] overflow-hidden rounded-2xl">
-                <img src={stripsBox.url} alt="Seralie Purple Whitening Strips" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-              </div>
-              <div className="mt-8 text-center">
-                <div className="eyebrow text-[#5B3A6E]">Makeup For Your Teeth</div>
-                <h2 className="mt-3 font-display text-4xl md:text-5xl text-[#2E2528]">Whitening Strips</h2>
-                <div className="mt-3 flex items-center justify-center gap-2 text-[11px] tracking-[0.18em] text-[#6B5D62]">
-                  <div className="flex gap-0.5 text-[#5B3A6E]">
-                    {[0,1,2,3,4].map(i => <Star key={i} className="h-3 w-3 fill-current" />)}
-                  </div>
-                  <span>4.7 · 2,000+ reviews</span>
-                </div>
-                <p className="mt-4 font-display text-2xl italic text-[#5A4A52]">From $31.99</p>
-                <span
-                  className="inline-flex items-center justify-center mt-6 px-8 py-3 rounded-full text-[11px] uppercase tracking-[0.24em] font-medium border transition-colors group-hover:bg-[#5B3A6E] group-hover:text-white"
-                  style={{ color: "#5B3A6E", borderColor: "#5B3A6E" }}
-                >
-                  Brighten My Smile
-                </span>
-              </div>
-            </Link>
-          </div>
+      <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <Link to="/necklace" className="group block">
+          <PhotoSlot label="Photo Necklace — product image" ratio="4/5" className="transition-opacity group-hover:opacity-90" />
+          <h2 className="mt-5 font-display text-2xl">Pet Memorial Photo Necklace</h2>
+          <p className="mt-1 text-sm text-[color:var(--muted-foreground)]">Gold · Silver · Rose Gold</p>
+          <p className="mt-3 caps-label text-[color:var(--charcoal)]">Configure →</p>
+        </Link>
+
+        <div className="border border-dashed border-[color:var(--sand-deep)] p-10 flex flex-col justify-center text-center">
+          <div className="eyebrow">Coming next</div>
+          <p className="mt-4 font-display text-2xl">Portrait pieces</p>
+          <p className="mt-3 text-sm leading-7 text-[color:var(--muted-foreground)]">
+            The same engraving, made for the people you love.
+          </p>
+          <Link to="/account" className="btn-outline mt-7 self-center">
+            Be told first
+          </Link>
         </div>
-      </section>
-    </>
+
+        <div className="hidden lg:flex flex-col justify-end">
+          <PhotoSlot label="Editorial still life" ratio="4/5" />
+        </div>
+      </div>
+    </section>
   );
 }

@@ -4,7 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useLocation,
+
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -12,7 +12,7 @@ import {
 
 
 import appCss from "../styles.css?url";
-import seralieLogo from "@/assets/seralie-logo.webp.asset.json";
+
 import favicon from "@/assets/favicon.png.asset.json";
 import { AnnouncementBar } from "@/components/site/AnnouncementBar";
 import { Header } from "@/components/site/Header";
@@ -54,12 +54,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Seralie — Makeup For Your Teeth" },
-      { name: "description", content: "Camera-ready in 30 minutes. Seralie purple color-correcting whitening strips instantly brighten your smile for dates, photos, meetings, and every moment you want extra confidence." },
-      { property: "og:title", content: "Seralie — Makeup For Your Teeth" },
-      { name: "twitter:title", content: "Seralie — Makeup For Your Teeth" },
-      { property: "og:description", content: "Purple color-correcting whitening strips. A beauty-first smile ritual — camera-ready in 30 minutes." },
-      { name: "twitter:description", content: "Purple color-correcting whitening strips. A beauty-first smile ritual — camera-ready in 30 minutes." },
+      { title: "Seralie — Keepsake Jewellery" },
+      { name: "description", content: "Fine jewellery engraved with the ones you love. Upload a photo, approve your digital proof, and we engrave." },
+      { property: "og:title", content: "Seralie — Keepsake Jewellery" },
+      { name: "twitter:title", content: "Seralie — Keepsake Jewellery" },
+      { property: "og:description", content: "Fine jewellery engraved with the ones you love. Made to order, with a digital proof before we engrave." },
+      { name: "twitter:description", content: "Fine jewellery engraved with the ones you love. Made to order, with a digital proof before we engrave." },
       { property: "og:site_name", content: "Seralie" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
@@ -68,11 +68,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;500&display=swap" },
       { rel: "icon", type: "image/png", href: favicon.url },
       { rel: "apple-touch-icon", href: favicon.url },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -80,9 +81,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
-  const isGlowPage = location.pathname === "/glow";
-  const hideKlaviyo = isGlowPage || location.pathname === "/strips";
+  const hideKlaviyo = false;
+
 
   return (
     <html lang="en">
@@ -128,13 +128,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const location = useLocation();
-  const isGlowPage = location.pathname === "/glow";
   return (
     <QueryClientProvider client={queryClient}>
-      {!isGlowPage && <AnnouncementBar />}
-      {!isGlowPage && <Header />}
+      <AnnouncementBar />
+      <Header />
       <main><Outlet /></main>
+
       <Footer />
       <CartDrawer />
     </QueryClientProvider>

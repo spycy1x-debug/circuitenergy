@@ -1,106 +1,92 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ShieldCheck, Truck, Lock, ArrowRight, ShoppingBag, Minus, Plus, X } from "lucide-react";
-import { useShopifyCart, shopifyCart } from "@/lib/shopify-cart";
+import { X, ShoppingBag, ArrowRight } from "lucide-react";
+import { cart, useCart } from "@/lib/shopify-cart";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
       { title: "Your Bag — Seralie" },
-      { name: "description", content: "Review your Seralie order before checkout." },
+      { name: "description", content: "Review your Seralie keepsake before checkout." },
+      { property: "og:title", content: "Your Bag — Seralie" },
+      { property: "og:description", content: "Review your Seralie keepsake before checkout." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: CartPage,
 });
 
 function CartPage() {
-  const { lines, subtotal, count, isLoading, checkoutUrl } = useShopifyCart();
-  const shipping = subtotal >= 50 || subtotal === 0 ? 0 : 7.99;
-  const total = subtotal + shipping;
-  const progress = Math.min(100, (subtotal / 50) * 100);
+  const { lines, subtotal, isLoading, checkoutUrl } = useCart();
 
   return (
-    <>
-      <section className="bg-[#FAF6F0]">
-        <div className="container-x pt-14 pb-6 md:pt-20 md:pb-10 text-center max-w-2xl mx-auto">
-          <div className="eyebrow">Your Bag</div>
-          <h1 className="mt-4 font-display text-5xl md:text-6xl text-[#2E2528]">Cart</h1>
-          <p className="mt-4 text-[15px] leading-8 text-[#5A4A52]">
-            {count === 0 ? "Nothing here yet — your brighter smile awaits." : `${count} ${count === 1 ? "item" : "items"} · Complimentary shipping over $40.`}
-          </p>
-        </div>
-      </section>
+    <section className="container-x py-16 md:py-24">
+      <div className="max-w-3xl mx-auto">
+        <div className="eyebrow">Your bag</div>
+        <h1 className="mt-4 font-display text-4xl md:text-5xl">Bag</h1>
 
-      <section className="bg-[#FAF6F0]">
-        <div className="container-x pb-24 md:pb-32">
-          {lines.length === 0 ? (
-            <div className="max-w-md mx-auto text-center border border-[#E4D5DC] bg-white p-10">
-              <div className="mx-auto h-16 w-16 rounded-full border border-[#5B3A6E] flex items-center justify-center">
-                <ShoppingBag className="h-6 w-6 text-[#5B3A6E]" />
-              </div>
-              <h2 className="mt-6 font-display text-3xl text-[#2E2528]">Empty for now</h2>
-              <p className="mt-3 text-sm text-[#5A4A52]">Beauty, down to your smile. Begin with our whitening strips.</p>
-              <Link to="/strips" className="inline-flex items-center justify-center mt-7 px-8 py-3 rounded-full text-white text-[11px] uppercase tracking-[0.24em] font-medium transition-colors" style={{ background: "#5B3A6E" }}>Brighten My Smile</Link>
-            </div>
-          ) : (
-            <div className="grid gap-10 lg:grid-cols-[1fr_380px] max-w-5xl mx-auto">
-              <div>
-                {subtotal < 50 && (
-                  <div className="border border-[#E4D5DC] bg-[#F5E9EE]/60 p-5">
-                    <div className="text-sm text-[#2E2528]">
-                      Add <span className="font-display italic text-[#5B3A6E]">${(50 - subtotal).toFixed(2)}</span> for complimentary shipping.
-                    </div>
-                    <div className="mt-3 h-1 bg-[#E4D5DC] overflow-hidden">
-                      <div className="h-full bg-[#5B3A6E] transition-all" style={{ width: `${progress}%` }} />
+        {lines.length === 0 ? (
+          <div className="mt-12 border border-[color:var(--border)] bg-white p-12 text-center">
+            <ShoppingBag className="mx-auto h-6 w-6 text-[color:var(--muted-foreground)]" strokeWidth={1.2} />
+            <p className="mt-4 text-sm text-[color:var(--muted-foreground)]">Nothing here yet.</p>
+            <Link to="/necklace" className="btn-primary mt-8">Begin a keepsake</Link>
+          </div>
+        ) : (
+          <>
+            <ul className="mt-10 divide-y divide-[color:var(--border)] border-y border-[color:var(--border)]">
+              {lines.map((line) => (
+                <li key={line.id} className="py-6 flex gap-5">
+                  <div className="h-24 w-24 shrink-0 bg-[color:var(--sand)] overflow-hidden">
+                    {line.image && <img src={line.image} alt={line.title} className="h-full w-full object-cover" />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-display text-xl">{line.title}</div>
+                    {line.subtitle && (
+                      <div className="mt-1 text-xs text-[color:var(--muted-foreground)]">{line.subtitle}</div>
+                    )}
+                    <ul className="mt-2 space-y-1">
+                      {line.attributes
+                        .filter((a) => a.key.startsWith("_name_"))
+                        .map((a) => (
+                          <li key={a.key} className="text-xs text-[color:var(--muted-foreground)]">
+                            {a.key.replace("_name_", "Necklace ")}: {a.value}
+                          </li>
+                        ))}
+                    </ul>
+                    <div className="mt-4 flex items-center justify-between">
+                      <span className="text-xs text-[color:var(--muted-foreground)]">Qty {line.quantity}</span>
+                      <span className="tabular-nums">${(line.unitPrice * line.quantity).toFixed(2)}</span>
                     </div>
                   </div>
-                )}
-                <ul className="mt-6 divide-y divide-[#E4D5DC] border-y border-[#E4D5DC]">
-                  {lines.map((line) => (
-                    <li key={line.id} className="py-6 flex gap-5">
-                      <div className="h-24 w-24 bg-[#F5E9EE] shrink-0 overflow-hidden">
-                        {line.image ? <img src={line.image} alt={line.productTitle} className="h-full w-full object-cover" /> : <ShoppingBag className="h-6 w-6 m-auto text-[#5B3A6E]" />}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-display text-xl text-[#2E2528]">{line.productTitle}</div>
-                        {line.variantTitle && <div className="caps-label text-[#6B5D62] text-[10px] mt-1">{line.variantTitle}</div>}
-                        <div className="mt-4 flex items-center justify-between gap-3">
-                          <div className="inline-flex items-center border border-[#E4D5DC] bg-white">
-                            <button aria-label="Decrease" onClick={() => shopifyCart.setQty(line.id, line.quantity - 1)} disabled={isLoading} className="h-9 w-9 flex items-center justify-center hover:bg-[#F5E9EE] disabled:opacity-50"><Minus className="h-3 w-3" /></button>
-                            <span className="w-9 text-center text-sm tabular-nums">{line.quantity}</span>
-                            <button aria-label="Increase" onClick={() => shopifyCart.setQty(line.id, line.quantity + 1)} disabled={isLoading} className="h-9 w-9 flex items-center justify-center hover:bg-[#F5E9EE] disabled:opacity-50"><Plus className="h-3 w-3" /></button>
-                          </div>
-                          <div className="font-display text-xl text-[#2E2528] tabular-nums">${(line.unitPrice * line.quantity).toFixed(2)}</div>
-                        </div>
-                      </div>
-                      <button aria-label="Remove" onClick={() => shopifyCart.remove(line.id)} disabled={isLoading} className="self-start text-[#5B3A6E] hover:text-[#2E2528] h-8 w-8 flex items-center justify-center"><X className="h-4 w-4" /></button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                  <button
+                    onClick={() => cart.remove(line.id)}
+                    disabled={isLoading}
+                    aria-label="Remove"
+                    className="self-start p-1 text-[color:var(--muted-foreground)] hover:text-[color:var(--charcoal)]"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </li>
+              ))}
+            </ul>
 
-              <aside className="bg-[#F5E9EE]/60 border border-[#E4D5DC] p-8 h-fit">
-                <div className="eyebrow">Summary</div>
-                <div className="mt-5 space-y-3 text-sm text-[#2E2528]">
-                  <div className="flex justify-between"><span>Subtotal</span><span className="tabular-nums">${subtotal.toFixed(2)}</span></div>
-                  <div className="flex justify-between"><span>Shipping</span><span className="tabular-nums">{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</span></div>
-                  <div className="border-t border-[#E4D5DC] pt-3 flex justify-between font-display text-2xl text-[#2E2528]"><span>Total</span><span className="tabular-nums">${total.toFixed(2)}</span></div>
-                </div>
-                <button
-                  onClick={() => shopifyCart.checkout()}
-                  disabled={isLoading || !checkoutUrl}
-                  className="mt-6 w-full bg-[#5B3A6E] hover:bg-[#4A2E5A] text-white caps-label text-[11px] py-4 flex items-center justify-center gap-2 disabled:opacity-60"
-                >
-                  <Lock className="h-3.5 w-3.5" /> Checkout <ArrowRight className="h-3.5 w-3.5" />
-                </button>
-                <div className="mt-6 space-y-2 text-[11px] text-[#6B5D62] tracking-wide">
-                  <div className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-[#5B3A6E]" /> 30-day money-back guarantee</div>
-                  <div className="flex items-center gap-2"><Truck className="h-3.5 w-3.5 text-[#5B3A6E]" /> Free shipping over $40</div>
-                </div>
-              </aside>
+            <div className="mt-8 flex items-center justify-between">
+              <span className="caps-label text-[color:var(--muted-foreground)]">Subtotal</span>
+              <span className="font-display text-2xl tabular-nums">${subtotal.toFixed(2)}</span>
             </div>
-          )}
-        </div>
-      </section>
-    </>
+            <button
+              onClick={() => cart.checkout()}
+              disabled={isLoading || !checkoutUrl}
+              className="btn-primary mt-6 w-full gap-2"
+            >
+              Checkout <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+            <p className="mt-4 text-center text-[11px] text-[color:var(--muted-foreground)]">
+              Package protection can be added at checkout · 30-day guarantee
+            </p>
+          </>
+        )}
+      </div>
+    </section>
   );
 }

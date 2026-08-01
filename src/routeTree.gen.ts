@@ -9,9 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as StripsRouteImport } from './routes/strips'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as NecklaceRouteImport } from './routes/necklace'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
@@ -20,11 +20,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/public/klaviyo-subscribe'
 
-const StripsRoute = StripsRouteImport.update({
-  id: '/strips',
-  path: '/strips',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -33,6 +28,11 @@ const ShopRoute = ShopRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NecklaceRoute = NecklaceRouteImport.update({
+  id: '/necklace',
+  path: '/necklace',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -78,9 +78,9 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/necklace': typeof NecklaceRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/strips': typeof StripsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -90,9 +90,9 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/necklace': typeof NecklaceRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/strips': typeof StripsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -103,9 +103,9 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/necklace': typeof NecklaceRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/strips': typeof StripsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -117,9 +117,9 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
+    | '/necklace'
     | '/privacy'
     | '/shop'
-    | '/strips'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesByTo: FileRoutesByTo
@@ -129,9 +129,9 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
+    | '/necklace'
     | '/privacy'
     | '/shop'
-    | '/strips'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   id:
@@ -141,9 +141,9 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
+    | '/necklace'
     | '/privacy'
     | '/shop'
-    | '/strips'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesById: FileRoutesById
@@ -154,22 +154,15 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   LoginRoute: typeof LoginRoute
+  NecklaceRoute: typeof NecklaceRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
-  StripsRoute: typeof StripsRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/strips': {
-      id: '/strips'
-      path: '/strips'
-      fullPath: '/strips'
-      preLoaderRoute: typeof StripsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -182,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/necklace': {
+      id: '/necklace'
+      path: '/necklace'
+      fullPath: '/necklace'
+      preLoaderRoute: typeof NecklaceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -242,22 +242,12 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   LoginRoute: LoginRoute,
+  NecklaceRoute: NecklaceRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
-  StripsRoute: StripsRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

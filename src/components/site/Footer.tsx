@@ -2,46 +2,43 @@ import { Link } from "@tanstack/react-router";
 
 export function Footer() {
   return (
-    <footer className="bg-[#4A2E5A] text-[#F5E9EE]">
-      <div className="container-x py-20">
-        <div className="grid gap-14 md:grid-cols-3">
-          <div>
-            <div className="font-display text-4xl md:text-5xl text-[#FAF6F0] tracking-wide">Seralie</div>
-            <p className="mt-5 font-display italic text-lg text-[#FAF6F0]">Beauty, down to your smile.</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 text-sm">
-            <div className="caps-label text-[#EAD9DF] col-span-2 mb-2">Explore</div>
-            <Link to="/" className="py-1.5 hover:text-white transition-colors">Home</Link>
-            <Link to="/strips" className="py-1.5 hover:text-white transition-colors">Whitening Strips</Link>
-            <Link to="/shop" className="py-1.5 hover:text-white transition-colors">Shop</Link>
-            <Link to="/contact" className="py-1.5 hover:text-white transition-colors">Contact</Link>
-            <Link to="/privacy" className="py-1.5 hover:text-white transition-colors">Privacy</Link>
-            <a
-              href="https://crystal-arithmetic-b9d.notion.site/Return-Refund-Policy-3820dd83dbc080bfb93ac8dd79b1d27d?pvs=73"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-1.5 hover:text-white transition-colors"
-            >
-              Returns
-            </a>
-          </div>
-
-          <div className="text-sm space-y-2.5">
-            <div className="caps-label text-[#EAD9DF] mb-2">The Seralie Standard</div>
-            <a href="mailto:support@seralie.com" className="block hover:text-white transition-colors">support@seralie.com</a>
-            <div>30-Day Money-Back Guarantee</div>
-            <div>Peroxide-Free · Gentle on Enamel</div>
-            <div>Non-Toxic Ingredients</div>
-            <div>Free U.S. Shipping Over $40</div>
-          </div>
+    <footer className="border-t border-[color:var(--border)] bg-[color:var(--bone)]">
+      <div className="container-x py-16 md:py-20 grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <div className="font-display text-2xl tracking-[0.28em] text-[color:var(--charcoal)]">SERALIE</div>
+          <p className="mt-5 max-w-sm text-sm leading-7 text-[color:var(--muted-foreground)]">
+            Fine jewellery made from the ones you love. Each piece is engraved to order and shown to you as a
+            digital proof before we begin.
+          </p>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-[#EAD9DF]/25 text-[11px] text-[#D9C9D4] leading-relaxed">
-          <p className="italic font-display text-sm text-[#FAF6F0] mb-3">
-            Results may vary.
+        <div>
+          <div className="eyebrow">Shop</div>
+          <ul className="mt-5 space-y-3 text-sm text-[color:var(--muted-foreground)]">
+            <li><Link to="/necklace" className="hover:text-[color:var(--charcoal)]">Photo Necklace</Link></li>
+            <li><Link to="/shop" className="hover:text-[color:var(--charcoal)]">All pieces</Link></li>
+            <li><Link to="/cart" className="hover:text-[color:var(--charcoal)]">Your bag</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <div className="eyebrow">Care</div>
+          <ul className="mt-5 space-y-3 text-sm text-[color:var(--muted-foreground)]">
+            <li><Link to="/contact" className="hover:text-[color:var(--charcoal)]">Contact</Link></li>
+            <li><Link to="/account" className="hover:text-[color:var(--charcoal)]">Account</Link></li>
+            <li><Link to="/privacy" className="hover:text-[color:var(--charcoal)]">Privacy</Link></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-[color:var(--border)]">
+        <div className="container-x py-6 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-[11px] tracking-wide text-[color:var(--muted-foreground)]">
+            © {new Date().getFullYear()} Seralie. All rights reserved.
           </p>
-          © {new Date().getFullYear()} Seralie. All rights reserved.
+          <p className="text-[11px] tracking-wide text-[color:var(--muted-foreground)]">
+            30-day guarantee · support@seralie.com
+          </p>
         </div>
       </div>
     </footer>

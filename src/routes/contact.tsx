@@ -1,14 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, ShieldCheck, RotateCcw } from "lucide-react";
 import { useState } from "react";
+import { Mail, Clock, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Seralie" },
-      { name: "description", content: "Reach the Seralie team. Email support@seralie.com for questions about your order, product, or guarantee." },
+      {
+        name: "description",
+        content: "Questions about a proof, an order, or an engraving? Email support@seralie.com — we reply within 24 hours.",
+      },
       { property: "og:title", content: "Contact — Seralie" },
-      { property: "og:description", content: "Real humans, thoughtful replies. Get in touch with Seralie." },
+      { property: "og:description", content: "We reply within 24 hours. 30-day guarantee on every piece." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ContactPage,
@@ -16,82 +21,103 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", order: "", message: "" });
+
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const body = encodeURIComponent(
+      `${form.message}\n\n—\n${form.name}\nOrder: ${form.order || "n/a"}\n${form.email}`,
+    );
+    window.location.href = `mailto:support@seralie.com?subject=${encodeURIComponent(
+      `Seralie enquiry from ${form.name || "a customer"}`,
+    )}&body=${body}`;
+    setSent(true);
+  }
+
   return (
-    <>
-      <section className="bg-[#FDF8EE]">
-        <div className="container-x pt-16 pb-10 md:pt-24 md:pb-16 max-w-2xl mx-auto text-center">
-          <div className="eyebrow">We're listening</div>
-          <h1 className="mt-5 font-display text-5xl md:text-6xl text-[#3B2E25]">Get in <span className="italic text-[#AD9752]">touch</span>.</h1>
-          <p className="mt-6 text-[15px] leading-8 text-[#5A483C]">
-            Questions about your order, the ritual, or our guarantee — we'll respond within 24 hours.
+    <section className="container-x py-16 md:py-24">
+      <div className="mx-auto max-w-4xl">
+        <div className="max-w-xl">
+          <div className="eyebrow">Contact</div>
+          <h1 className="mt-4 font-display text-4xl md:text-5xl">We're here.</h1>
+          <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
+            Questions about a proof, an engraving, or an order already on its way — write to us and a real person
+            will answer.
           </p>
         </div>
-      </section>
 
-      <section className="bg-[#F7EFDF]/50 border-y border-[#EADFC7]">
-        <div className="container-x py-16 md:py-24 grid gap-12 lg:grid-cols-2 items-start max-w-5xl mx-auto">
-          <div className="space-y-6">
-            <InfoRow Icon={Mail} title="Email">
-              <a href="mailto:support@seralie.com" className="font-display italic text-2xl text-[#AD9752] hover:text-[#94803F] transition-colors">
+        <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+          <div className="space-y-8">
+            <Info Icon={Mail} title="Email">
+              <a href="mailto:support@seralie.com" className="font-display text-xl hover:text-[color:var(--gold)]">
                 support@seralie.com
               </a>
-              <p className="text-xs text-[#7A6A5E] tracking-wide mt-2">Responses within 24 hours.</p>
-            </InfoRow>
-            <InfoRow Icon={ShieldCheck} title="30-Day Guarantee">
-              <p className="text-sm text-[#5A483C] leading-7">Not satisfied? Every penny back, no questions asked.</p>
-            </InfoRow>
-            <InfoRow Icon={RotateCcw} title="Easy Returns">
-              <p className="text-sm text-[#5A483C] leading-7">Hassle-free within 30 days of purchase.</p>
-            </InfoRow>
+            </Info>
+            <Info Icon={Clock} title="Response time">
+              Within 24 hours, Monday to Friday.
+            </Info>
+            <Info Icon={ShieldCheck} title="30-day guarantee">
+              If a piece arrives wrong or isn't what you approved, we remake it or refund you. No argument.
+            </Info>
           </div>
 
-          <form
-            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-            className="bg-[#FDF8EE] border border-[#EADFC7] p-8 md:p-10"
-          >
-            <div className="eyebrow">Send a note</div>
-            <h2 className="mt-3 font-display text-3xl md:text-4xl text-[#3B2E25]">Say <span className="italic text-[#AD9752]">hello</span></h2>
-
-            {sent ? (
-              <div className="mt-8 border-l-2 border-[#AD9752] pl-4 py-2 text-sm text-[#3B2E25]">
-                Thank you — we'll be in touch within 24 hours.
-              </div>
-            ) : (
-              <div className="mt-8 space-y-5">
-                <Field label="Name"><input required className="input" /></Field>
-                <Field label="Email"><input type="email" required className="input" /></Field>
-                <Field label="Subject"><input required className="input" /></Field>
-                <Field label="Message"><textarea required rows={5} className="input resize-none" /></Field>
-                <button className="btn-primary w-full mt-3">Send Message</button>
-              </div>
+          <form onSubmit={onSubmit} className="border border-[color:var(--border)] bg-white p-7 space-y-4">
+            <Field label="Name">
+              <input required value={form.name} onChange={set("name")} maxLength={100} className={inputCls} />
+            </Field>
+            <Field label="Email">
+              <input required type="email" value={form.email} onChange={set("email")} maxLength={255} className={inputCls} />
+            </Field>
+            <Field label="Order number (optional)">
+              <input value={form.order} onChange={set("order")} maxLength={40} className={inputCls} />
+            </Field>
+            <Field label="Message">
+              <textarea required rows={5} value={form.message} onChange={set("message")} maxLength={1500} className={inputCls} />
+            </Field>
+            <button type="submit" className="btn-primary w-full">Send message</button>
+            {sent && (
+              <p className="text-xs text-[color:var(--muted-foreground)]">
+                Your email client should have opened. If not, write to support@seralie.com directly.
+              </p>
             )}
-            <style>{`.input{width:100%;padding:.9rem 1rem;border:1px solid #EADFC7;background:#FDF8EE;font-size:.9rem;color:#3B2E25;font-family:inherit;outline:none;transition:border-color .2s}.input:focus{border-color:#AD9752}`}</style>
           </form>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
-function InfoRow({ Icon, title, children }: { Icon: any; title: string; children: React.ReactNode }) {
-  return (
-    <div className="flex items-start gap-5 pb-6 border-b border-[#EADFC7]">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#AD9752] text-[#AD9752]">
-        <Icon className="h-4 w-4" strokeWidth={1.4} />
-      </div>
-      <div className="flex-1">
-        <div className="caps-label text-[#3B2E25]">{title}</div>
-        <div className="mt-2">{children}</div>
-      </div>
-    </div>
-  );
-}
+const inputCls =
+  "mt-2 w-full border border-[color:var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[color:var(--charcoal)]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="caps-label text-[#5A483C] mb-2 block">{label}</span>
+      <span className="eyebrow">{label}</span>
       {children}
     </label>
+  );
+}
+
+function Info({
+  Icon,
+  title,
+  children,
+}: {
+  Icon: React.ElementType;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex gap-4">
+      <Icon className="mt-1 h-4 w-4 shrink-0 text-[color:var(--gold)]" strokeWidth={1.5} />
+      <div>
+        <div className="eyebrow">{title}</div>
+        <div className="mt-2 text-sm leading-7 text-[color:var(--muted-foreground)]">{children}</div>
+      </div>
+    </div>
   );
 }
