@@ -1,6 +1,6 @@
 /**
- * Placeholder slot for real photography.
- * No stock or AI imagery — drop your own image in via the `src` prop.
+ * Framed image slot. Real photography gets a soft bordered frame so it sits
+ * cleanly on the bone background; without a `src` it renders a placeholder.
  */
 export function PhotoSlot({
   label,
@@ -15,21 +15,33 @@ export function PhotoSlot({
   src?: string;
   alt?: string;
 }) {
+  const frame =
+    "overflow-hidden rounded-2xl border border-[color:var(--sand-deep)]/60 bg-[color:var(--sand)]/50 p-1.5 shadow-[0_10px_30px_-18px_rgba(59,46,37,0.35)]";
+
   if (src) {
     return (
-      <div className={`overflow-hidden bg-[color:var(--sand)] ${className}`} style={{ aspectRatio: ratio }}>
-        <img src={src} alt={alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+      <div className={`${frame} ${className}`}>
+        <img
+          src={src}
+          alt={alt || label}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full rounded-xl object-cover"
+          style={{ aspectRatio: ratio }}
+        />
       </div>
     );
   }
   return (
-    <div
-      className={`flex items-center justify-center border border-dashed border-[color:var(--sand-deep)] bg-[color:var(--sand)]/60 ${className}`}
-      style={{ aspectRatio: ratio }}
-      role="img"
-      aria-label={`Image placeholder: ${label}`}
-    >
-      <span className="px-6 text-center caps-label text-[color:var(--muted-foreground)]">{label}</span>
+    <div className={`${frame} ${className}`}>
+      <div
+        className="flex items-center justify-center rounded-xl border border-dashed border-[color:var(--sand-deep)]"
+        style={{ aspectRatio: ratio }}
+        role="img"
+        aria-label={`Image placeholder: ${label}`}
+      >
+        <span className="px-6 text-center caps-label text-[color:var(--muted-foreground)]">{label}</span>
+      </div>
     </div>
   );
 }
