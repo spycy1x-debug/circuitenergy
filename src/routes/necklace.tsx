@@ -212,10 +212,11 @@ function NecklacePage() {
                             <ul className="mt-3 space-y-2.5">
                               {freePieces > 0 && tPrice !== null && (
                                 <BonusRow
-                                  label={`${freePieces} extra ${freePieces === 1 ? "necklace" : "necklaces"}`}
+                                  label={`${freePieces} free ${freePieces === 1 ? "necklace" : "necklaces"} (${PAID_PIECES[t.id]} paid, ${t.pieces} shipped)`}
                                   value={freePieces * (tPrice / PAID_PIECES[t.id])}
                                 />
                               )}
+
                               {t.extras.map((e) => (
                                 <BonusRow key={e.label} label={e.label} value={e.value} />
                               ))}
