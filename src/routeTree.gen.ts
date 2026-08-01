@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as StripsRouteImport } from './routes/strips'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
@@ -20,11 +19,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/public/klaviyo-subscribe'
 
-const StripsRoute = StripsRouteImport.update({
-  id: '/strips',
-  path: '/strips',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -80,7 +74,6 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/strips': typeof StripsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -92,7 +85,6 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/strips': typeof StripsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -105,7 +97,6 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
-  '/strips': typeof StripsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -119,7 +110,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/privacy'
     | '/shop'
-    | '/strips'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesByTo: FileRoutesByTo
@@ -131,7 +121,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/privacy'
     | '/shop'
-    | '/strips'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   id:
@@ -143,7 +132,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/privacy'
     | '/shop'
-    | '/strips'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesById: FileRoutesById
@@ -156,20 +144,12 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
-  StripsRoute: typeof StripsRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/strips': {
-      id: '/strips'
-      path: '/strips'
-      fullPath: '/strips'
-      preLoaderRoute: typeof StripsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -244,7 +224,6 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
-  StripsRoute: StripsRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
 }
