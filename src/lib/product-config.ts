@@ -59,7 +59,6 @@ export const TIERS: Tier[] = [
     includes: ["Three custom engraved pendants + chains", "Digital proof before we engrave"],
     extras: [
       ...ENGRAVING,
-      { label: "Third necklace", value: 0 },
       { label: "Their portrait as a downloadable file", value: 29 },
       { label: "Matching phone lock-screen wallpaper", value: 19 },
     ],
