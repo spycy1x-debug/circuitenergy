@@ -33,6 +33,9 @@ type State = {
   isOpen: boolean;
   isLoading: boolean;
   error: string | null;
+  protectionPending: boolean;
+  protectionError: string | null;
+  protectionOptimistic: boolean | null;
 };
 
 const listeners = new Set<() => void>();
@@ -43,6 +46,9 @@ const state: State = {
   isOpen: false,
   isLoading: false,
   error: null,
+  protectionPending: false,
+  protectionError: null,
+  protectionOptimistic: null,
 };
 let snapshot = "";
 
