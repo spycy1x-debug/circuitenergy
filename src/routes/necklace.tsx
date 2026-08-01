@@ -447,17 +447,7 @@ function NecklacePage() {
             <div className="eyebrow">In their words</div>
             <h2 className="mt-4 font-display text-3xl md:text-4xl">From customers</h2>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <figure key={i} className="border border-[color:var(--border)] p-6">
-                <PhotoSlot label={`Customer photo ${i}`} ratio="1/1" />
-                <blockquote className="mt-5 min-h-16 text-sm leading-7 text-[color:var(--muted-foreground)]">
-                  <span className="opacity-50">Customer review — add real copy here.</span>
-                </blockquote>
-                <figcaption className="mt-3 caps-label text-[color:var(--muted-foreground)]">Name, City</figcaption>
-              </figure>
-            ))}
-          </div>
+          <ReviewCarousel />
         </div>
       </section>
 
