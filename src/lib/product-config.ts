@@ -10,11 +10,17 @@ export const SHOW_BACK_ENGRAVING = true;
 
 export type FinishId = "gold" | "silver" | "rose-gold";
 
-export const FINISHES: { id: FinishId; label: string; swatch: string }[] = [
-  { id: "gold", label: "Gold", swatch: "#C6A664" },
-  { id: "silver", label: "Silver", swatch: "#C7C9CB" },
-  { id: "rose-gold", label: "Rose Gold", swatch: "#D6A28C" },
+export const FINISHES: { id: FinishId; label: string; detail: string; swatch: string }[] = [
+  { id: "gold", label: "18K Gold Plated", detail: "18K gold over hypoallergenic stainless steel", swatch: "#C6A664" },
+  { id: "silver", label: "Polished Silver", detail: "Rhodium-finished hypoallergenic stainless steel", swatch: "#C7C9CB" },
+  {
+    id: "rose-gold",
+    label: "18K Rose Gold Plated",
+    detail: "18K rose gold over hypoallergenic stainless steel",
+    swatch: "#D6A28C",
+  },
 ];
+
 
 export type TierId = "one" | "three" | "six";
 
