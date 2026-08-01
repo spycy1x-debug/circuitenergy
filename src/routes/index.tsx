@@ -40,7 +40,11 @@ function HomePage() {
             </Link>
           </div>
           <div className="order-1 lg:order-2">
-            <PhotoSlot label="Hero — necklace worn, editorial" ratio="4/5" />
+            <PhotoSlot
+              label="Woman wearing an engraved Seralie pendant beside a framed photo of her dog"
+              ratio="4/5"
+              src={heroImg.url}
+            />
           </div>
         </div>
       </section>
