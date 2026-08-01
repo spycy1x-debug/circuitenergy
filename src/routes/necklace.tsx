@@ -33,7 +33,7 @@ const emptySlot = (): Slot => ({ file: null, url: null, name: "", error: null, u
 /** How many pieces are actually paid for in each set. */
 const PAID_PIECES: Record<TierId, number> = { one: 1, three: 2, six: 3 };
 
-function BonusRow({ label, value }: { label: string; value: number }) {
+function BonusRow({ label, value }: { label: string; value?: number | null }) {
   return (
     <li className="flex items-center justify-between gap-3 text-[13px]">
       <span className="flex items-center gap-2.5 text-[color:var(--charcoal)]">
@@ -41,14 +41,17 @@ function BonusRow({ label, value }: { label: string; value: number }) {
         {label}
       </span>
       <span className="flex shrink-0 items-center gap-2">
-        <span className="tabular-nums text-[color:var(--muted-foreground)] line-through">
-          ${value.toFixed(2)}
-        </span>
+        {typeof value === "number" && value > 0 && (
+          <span className="tabular-nums text-[color:var(--muted-foreground)] line-through">
+            ${value.toFixed(2)}
+          </span>
+        )}
         <span className="caps-label text-[9px] text-[color:var(--gold)]">Free</span>
       </span>
     </li>
   );
 }
+
 
 
 function NecklacePage() {
@@ -210,12 +213,13 @@ function NecklacePage() {
                               Included free with this set
                             </div>
                             <ul className="mt-3 space-y-2.5">
-                              {freePieces > 0 && tPrice !== null && (
+                              {freePieces > 0 && (
                                 <BonusRow
-                                  label={`${freePieces} free ${freePieces === 1 ? "necklace" : "necklaces"} (${PAID_PIECES[t.id]} paid, ${t.pieces} shipped)`}
-                                  value={freePieces * (tPrice / PAID_PIECES[t.id])}
+                                  label={`${freePieces} free ${freePieces === 1 ? "necklace" : "necklaces"}`}
+                                  value={tPrice !== null ? freePieces * (tPrice / PAID_PIECES[t.id]) : null}
                                 />
                               )}
+
 
                               {t.extras.map((e) => (
                                 <BonusRow key={e.label} label={e.label} value={e.value} />
