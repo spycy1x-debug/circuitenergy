@@ -128,13 +128,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const location = useLocation();
-  const isGlowPage = location.pathname === "/glow";
   return (
     <QueryClientProvider client={queryClient}>
-      {!isGlowPage && <AnnouncementBar />}
-      {!isGlowPage && <Header />}
+      <AnnouncementBar />
+      <Header />
       <main><Outlet /></main>
+
       <Footer />
       <CartDrawer />
     </QueryClientProvider>
