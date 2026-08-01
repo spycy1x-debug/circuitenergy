@@ -153,6 +153,8 @@ export function CartDrawer() {
           )}
         </div>
 
+        <ProtectionRow />
+
         {lines.length > 0 && (
           <div className="border-t border-[color:var(--border)] px-6 py-6 space-y-4">
             <div className="flex items-center justify-between text-sm">
