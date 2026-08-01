@@ -391,8 +391,9 @@ function NecklacePage() {
           <div>
             <div className="eyebrow">Shipping &amp; guarantee</div>
             <p className="mt-5 text-sm leading-7 text-[color:var(--muted-foreground)]">
-              Made to order. Proof in 48 hours, then 5–9 business days to arrive. Free shipping on 3+ necklaces,
-              $2.99 on single pieces. If it isn't right, we remake it or refund you within 30 days.
+              Made to order. Proof in 48 hours, then 5–9 business days to arrive. Free shipping on orders
+              over $80, $2.99 below that. If it isn't right, we remake it or refund you within 30 days.
+
             </p>
           </div>
         </div>
