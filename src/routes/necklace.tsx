@@ -128,13 +128,19 @@ function NecklacePage() {
                 {TIERS.map((t) => {
                   const tPrice = prices[t.variants[finish]]?.amount ?? null;
                   const selected = t.id === tierId;
+                  const perPiece = tPrice !== null ? tPrice / t.pieces : null;
+                  const freePieces = t.pieces - PAID_PIECES[t.id];
+                  const bonusValue =
+                    t.extras.reduce((sum, e) => sum + e.value, 0) +
+                    (t.shipping === null ? 2.99 : 0) +
+                    (freePieces > 0 && perPiece !== null ? freePieces * (tPrice! / PAID_PIECES[t.id]) : 0);
                   return (
                     <button
                       key={t.id}
                       onClick={() => setTierId(t.id)}
-                      className={`w-full text-left border p-5 transition-colors ${
+                      className={`relative w-full text-left border p-5 transition-all ${
                         selected
-                          ? "border-[color:var(--charcoal)] bg-white"
+                          ? "border-[color:var(--charcoal)] bg-white shadow-[0_10px_30px_-18px_rgba(0,0,0,0.45)]"
                           : "border-[color:var(--border)] bg-transparent hover:border-[color:var(--sand-deep)]"
                       }`}
                     >
@@ -143,32 +149,73 @@ function NecklacePage() {
                           <div className="flex items-center gap-3">
                             <span className="font-display text-xl">{t.label}</span>
                             {t.badge && (
-                              <span className="caps-label text-[9px] px-2 py-1 bg-[color:var(--sand)] text-[color:var(--charcoal)]">
+                              <span className="caps-label text-[9px] px-2 py-1 bg-[color:var(--gold)]/15 text-[color:var(--gold)] border border-[color:var(--gold)]/30">
                                 {t.badge}
                               </span>
                             )}
                           </div>
                           <div className="mt-1 text-xs text-[color:var(--muted-foreground)]">
                             {t.pieces} {t.pieces === 1 ? "necklace" : "necklaces"}
+                            {perPiece !== null && ` · $${perPiece.toFixed(2)} each`}
                           </div>
                         </div>
-                        <div className="font-display text-xl tabular-nums shrink-0">
-                          {tPrice !== null ? `$${tPrice.toFixed(2)}` : "—"}
+                        <div className="shrink-0 text-right">
+                          <div className="font-display text-xl tabular-nums">
+                            {tPrice !== null ? `$${tPrice.toFixed(2)}` : "—"}
+                          </div>
+                          {bonusValue > 0 && (
+                            <div className="mt-1 caps-label text-[9px] text-[color:var(--gold)]">
+                              +${Math.round(bonusValue)} free
+                            </div>
+                          )}
                         </div>
                       </div>
                       {selected && (
-                        <ul className="mt-4 space-y-2 border-t border-[color:var(--border)] pt-4">
-                          {t.includes.map((line) => (
-                            <li key={line} className="flex gap-2.5 text-[13px] text-[color:var(--muted-foreground)]">
-                              <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--gold)]" />
-                              {line}
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="mt-4 border-t border-[color:var(--border)] pt-4">
+                          <ul className="space-y-2">
+                            {t.includes.map((line) => (
+                              <li
+                                key={line}
+                                className="flex gap-2.5 text-[13px] text-[color:var(--muted-foreground)]"
+                              >
+                                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--gold)]" />
+                                {line}
+                              </li>
+                            ))}
+                          </ul>
+
+                          <div className="mt-4 border border-[color:var(--gold)]/25 bg-[color:var(--gold)]/[0.06] p-4">
+                            <div className="caps-label text-[9px] text-[color:var(--gold)]">
+                              Included free with this set
+                            </div>
+                            <ul className="mt-3 space-y-2.5">
+                              {freePieces > 0 && tPrice !== null && (
+                                <BonusRow
+                                  label={`${freePieces} extra ${freePieces === 1 ? "necklace" : "necklaces"}`}
+                                  value={freePieces * (tPrice / PAID_PIECES[t.id])}
+                                />
+                              )}
+                              {t.extras.map((e) => (
+                                <BonusRow key={e.label} label={e.label} value={e.value} />
+                              ))}
+                              {t.shipping === null ? (
+                                <BonusRow label="Shipping" value={2.99} />
+                              ) : (
+                                <li className="flex items-center justify-between gap-3 text-[13px]">
+                                  <span className="text-[color:var(--muted-foreground)]">Shipping</span>
+                                  <span className="tabular-nums text-[color:var(--muted-foreground)]">
+                                    ${t.shipping.toFixed(2)}
+                                  </span>
+                                </li>
+                              )}
+                            </ul>
+                          </div>
+                        </div>
                       )}
                     </button>
                   );
                 })}
+
               </div>
 
               <div className="mt-7">
