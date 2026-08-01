@@ -4,7 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useLocation,
+
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -12,7 +12,7 @@ import {
 
 
 import appCss from "../styles.css?url";
-import seralieLogo from "@/assets/seralie-logo.webp.asset.json";
+
 import favicon from "@/assets/favicon.png.asset.json";
 import { AnnouncementBar } from "@/components/site/AnnouncementBar";
 import { Header } from "@/components/site/Header";
