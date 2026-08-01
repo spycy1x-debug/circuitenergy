@@ -88,9 +88,30 @@ function Gallery({ finish }: { finish: FinishId }) {
     return list;
   }, [finish]);
 
+  const go = (dir: 1 | -1) => setI((p) => (p + dir + images.length) % images.length);
+
   return (
     <div>
-      <PhotoSlot label="Necklace" ratio="1/1" src={images[i]!.src} alt={images[i]!.alt} />
+      <div className="relative">
+        <PhotoSlot label="Necklace" ratio="1/1" src={images[i]!.src} alt={images[i]!.alt} />
+        <button
+          type="button"
+          onClick={() => go(-1)}
+          aria-label="Previous photo"
+          className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--sand-deep)]/60 bg-[color:var(--bone)]/90 shadow-sm backdrop-blur transition hover:border-[color:var(--gold)]"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onClick={() => go(1)}
+          aria-label="Next photo"
+          className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--sand-deep)]/60 bg-[color:var(--bone)]/90 shadow-sm backdrop-blur transition hover:border-[color:var(--gold)]"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+
       <div className="mt-3 grid grid-cols-6 gap-2">
         {images.map((g, idx) => (
           <button
