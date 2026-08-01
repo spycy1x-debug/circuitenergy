@@ -30,6 +30,27 @@ export const Route = createFileRoute("/necklace")({
 type Slot = { file: File | null; url: string | null; name: string; error: string | null; uploading: boolean };
 const emptySlot = (): Slot => ({ file: null, url: null, name: "", error: null, uploading: false });
 
+/** How many pieces are actually paid for in each set. */
+const PAID_PIECES: Record<TierId, number> = { one: 1, three: 2, six: 3 };
+
+function BonusRow({ label, value }: { label: string; value: number }) {
+  return (
+    <li className="flex items-center justify-between gap-3 text-[13px]">
+      <span className="flex items-center gap-2.5 text-[color:var(--charcoal)]">
+        <Check className="h-3.5 w-3.5 shrink-0 text-[color:var(--gold)]" />
+        {label}
+      </span>
+      <span className="flex shrink-0 items-center gap-2">
+        <span className="tabular-nums text-[color:var(--muted-foreground)] line-through">
+          ${value.toFixed(2)}
+        </span>
+        <span className="caps-label text-[9px] text-[color:var(--gold)]">Free</span>
+      </span>
+    </li>
+  );
+}
+
+
 function NecklacePage() {
   const [tierId, setTierId] = useState<TierId>("three");
   const [finish, setFinish] = useState<FinishId>("gold");
