@@ -1,7 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-import { Check, Loader2, Upload, X, ChevronDown } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Check, Loader2, Upload, X, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { PhotoSlot } from "@/components/site/PhotoSlot";
+import g1 from "@/assets/pdp-1-bailey.png.asset.json";
+import g2 from "@/assets/pdp-2-three-finishes.webp.asset.json";
+import g3 from "@/assets/pdp-3-photo-compare.webp.asset.json";
+import g4 from "@/assets/pdp-4-worn-willow.webp.asset.json";
+import g5 from "@/assets/pdp-5-in-hand.webp.asset.json";
+import g6 from "@/assets/pdp-6-milo-desk.webp.asset.json";
 import { FINISHES, TIERS, PRODUCT_TITLE, type FinishId, type TierId } from "@/lib/product-config";
 import { cart, fetchVariantPrices } from "@/lib/shopify-cart";
 import { uploadPhoto, validatePhoto } from "@/lib/photo-upload";
