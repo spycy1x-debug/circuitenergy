@@ -58,8 +58,18 @@ function BonusRow({ label, value }: { label: string; value?: number | null }) {
   );
 }
 
+/** Hero shot swaps to match the selected finish — same gallery slot, no extra thumbnails. */
+const HERO_BY_FINISH: Record<FinishId, { src: string; alt: string }> = {
+  gold: { src: g1.url, alt: "Gold pendant engraved with a golden retriever portrait and the name Bailey" },
+  silver: { src: g1s.url, alt: "Silver pendant engraved with a golden retriever portrait and the name Bailey" },
+  "rose-gold": {
+    src: g1r.url,
+    alt: "Rose gold pendant engraved with a golden retriever portrait and the name Bailey",
+  },
+};
+
 const GALLERY = [
-  { src: g1.url, alt: "Gold pendant engraved with a golden retriever portrait and the name Bailey" },
+  HERO_BY_FINISH.gold,
   { src: g2.url, alt: "The pendant in gold, silver, and rose gold finishes" },
   { src: g3.url, alt: "Engraved gold pendant beside the original photo of a golden retriever" },
   { src: g4.url, alt: "Woman wearing the engraved pendant with the name Willow" },
@@ -67,15 +77,21 @@ const GALLERY = [
   { src: g6.url, alt: "Engraved pendant on a wooden dresser beside a framed dog portrait" },
 ];
 
-function Gallery() {
+function Gallery({ finish }: { finish: FinishId }) {
   const [i, setI] = useState(0);
+  const images = useMemo(() => {
+    const list = [...GALLERY];
+    list[0] = HERO_BY_FINISH[finish];
+    return list;
+  }, [finish]);
+
   return (
     <div>
-      <PhotoSlot label="Necklace" ratio="1/1" src={GALLERY[i]!.src} alt={GALLERY[i]!.alt} />
+      <PhotoSlot label="Necklace" ratio="1/1" src={images[i]!.src} alt={images[i]!.alt} />
       <div className="mt-3 grid grid-cols-6 gap-2">
-        {GALLERY.map((g, idx) => (
+        {images.map((g, idx) => (
           <button
-            key={g.src}
+            key={idx}
             type="button"
             onClick={() => setI(idx)}
             aria-label={`View image ${idx + 1}`}
@@ -99,9 +115,44 @@ function Gallery() {
   );
 }
 
-/** Horizontal, snap-scrolling testimonial track. Next card peeks at the edge. */
+type Review = {
+  id: string;
+  name: string;
+  city: string | null;
+  body: string;
+  rating: number;
+  image_url: string | null;
+  created_at: string;
+};
+
+function Stars({ n, className = "" }: { n: number; className?: string }) {
+  return (
+    <span className={`text-[color:var(--gold)] ${className}`} aria-label={`${n} out of 5 stars`}>
+      {"★★★★★".slice(0, n)}
+      <span className="text-[color:var(--sand-deep)]">{"★★★★★".slice(0, 5 - n)}</span>
+    </span>
+  );
+}
+
+/** Horizontal, snap-scrolling testimonial track. Neighbouring cards peek on both sides. */
 function ReviewCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [open, setOpen] = useState(false);
+
+  async function load() {
+    const { data } = await supabase
+      .from("product_reviews")
+      .select("id,name,city,body,rating,image_url,created_at")
+      .eq("product_id", "necklace")
+      .order("created_at", { ascending: false })
+      .limit(50);
+    if (data) setReviews(data as Review[]);
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
 
   function scrollBy(dir: 1 | -1) {
     const el = trackRef.current;
@@ -111,46 +162,193 @@ function ReviewCarousel() {
 
   return (
     <div className="relative mt-10">
-      <div
-        ref={trackRef}
-        className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-6 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:px-0"
-      >
-        {[1, 2, 3, 4, 5].map((n) => (
-          <figure
-            key={n}
-            className="w-[78%] shrink-0 snap-start rounded-2xl border border-[color:var(--border)] bg-[color:var(--bone)] p-6 sm:w-[52%] lg:w-[31%]"
-          >
-            <PhotoSlot label={`Customer photo ${n}`} ratio="1/1" />
-            <blockquote className="mt-5 min-h-16 text-sm leading-7 text-[color:var(--muted-foreground)]">
-              <span className="opacity-50">Customer review — add real copy here.</span>
-            </blockquote>
-            <figcaption className="mt-3 caps-label text-[color:var(--muted-foreground)]">Name, City</figcaption>
-          </figure>
-        ))}
-        <div className="w-2 shrink-0 md:hidden" aria-hidden />
+      {reviews.length === 0 ? (
+        <p className="text-sm text-[color:var(--muted-foreground)]">
+          No reviews yet — be the first to share yours.
+        </p>
+      ) : (
+        <div
+          ref={trackRef}
+          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-[14%] pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:px-[8%]"
+        >
+          {reviews.map((r) => (
+            <figure
+              key={r.id}
+              className="w-[72%] shrink-0 snap-center rounded-2xl border border-[color:var(--border)] bg-[color:var(--bone)] p-6 sm:w-[48%] lg:w-[30%]"
+            >
+              {r.image_url && <PhotoSlot label="Customer photo" ratio="1/1" src={r.image_url} alt="" />}
+              <Stars n={r.rating} className={r.image_url ? "mt-5 block text-sm" : "block text-sm"} />
+              <blockquote className="mt-3 min-h-16 text-sm leading-7 text-[color:var(--muted-foreground)]">
+                {r.body}
+              </blockquote>
+              <figcaption className="mt-3 caps-label text-[color:var(--muted-foreground)]">
+                {r.name}
+                {r.city ? `, ${r.city}` : ""}
+              </figcaption>
+            </figure>
+          ))}
+          <div className="w-2 shrink-0 md:hidden" aria-hidden />
+        </div>
+      )}
+
+      <div className="mt-6 flex items-center justify-between gap-3">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="rounded-full border border-[color:var(--charcoal)] px-5 py-2.5 caps-label transition hover:border-[color:var(--gold)] hover:text-[color:var(--gold)]"
+        >
+          Write a review
+        </button>
+        {reviews.length > 0 && (
+          <div className="hidden gap-3 md:flex">
+            <button
+              type="button"
+              onClick={() => scrollBy(-1)}
+              aria-label="Previous reviews"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollBy(1)}
+              aria-label="Next reviews"
+              className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
 
-      <div className="mt-6 hidden justify-end gap-3 md:flex">
-        <button
-          type="button"
-          onClick={() => scrollBy(-1)}
-          aria-label="Previous reviews"
-          className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollBy(1)}
-          aria-label="Next reviews"
-          className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </button>
-      </div>
+      {open && (
+        <ReviewForm
+          onClose={() => setOpen(false)}
+          onSaved={() => {
+            setOpen(false);
+            load();
+          }}
+        />
+      )}
     </div>
   );
 }
+
+function ReviewForm({ onClose, onSaved }: { onClose: () => void; onSaved: () => void }) {
+  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
+  const [body, setBody] = useState("");
+  const [rating, setRating] = useState(5);
+  const [file, setFile] = useState<File | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    if (!name.trim()) return setError("Please add your name.");
+    if (body.trim().length < 10) return setError("Please write a little more about your piece.");
+    setBusy(true);
+    try {
+      let imageUrl: string | null = null;
+      if (file) {
+        const v = validatePhoto(file);
+        if (v) throw new Error(v);
+        imageUrl = await uploadPhoto(file);
+      }
+      const { error: err } = await supabase.from("product_reviews").insert({
+        product_id: "necklace",
+        name: name.trim().slice(0, 60),
+        city: city.trim().slice(0, 60) || null,
+        body: body.trim().slice(0, 1000),
+        title: "",
+        rating,
+        image_url: imageUrl,
+      });
+      if (err) throw new Error(err.message);
+      onSaved();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/50 p-4">
+      <form
+        onSubmit={submit}
+        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-[color:var(--bone)] p-6"
+      >
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-xl">Write a review</h3>
+          <button type="button" onClick={onClose} aria-label="Close">
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="mt-5 space-y-4 text-sm">
+          <div className="flex items-center gap-2">
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                type="button"
+                onClick={() => setRating(n)}
+                aria-label={`${n} star`}
+                className={n <= rating ? "text-[color:var(--gold)]" : "text-[color:var(--sand-deep)]"}
+              >
+                ★
+              </button>
+            ))}
+          </div>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name"
+            maxLength={60}
+            className="w-full rounded-xl border border-[color:var(--border)] bg-transparent px-4 py-3"
+          />
+          <input
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder="City (optional)"
+            maxLength={60}
+            className="w-full rounded-xl border border-[color:var(--border)] bg-transparent px-4 py-3"
+          />
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            placeholder="Tell us about your piece"
+            rows={4}
+            maxLength={1000}
+            className="w-full rounded-xl border border-[color:var(--border)] bg-transparent px-4 py-3"
+          />
+          <label className="flex cursor-pointer items-center gap-2 caps-label text-[color:var(--muted-foreground)]">
+            <Upload className="h-4 w-4" />
+            {file ? file.name : "Add a photo (optional)"}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+            />
+          </label>
+          {error && <p className="text-xs text-red-600">{error}</p>}
+        </div>
+
+        <button
+          type="submit"
+          disabled={busy}
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--charcoal)] px-6 py-3.5 caps-label text-[color:var(--bone)] disabled:opacity-60"
+        >
+          {busy && <Loader2 className="h-4 w-4 animate-spin" />}
+          Submit review
+        </button>
+      </form>
+    </div>
+  );
+}
+
 
 
 function NecklacePage() {
