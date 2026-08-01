@@ -1,30 +1,30 @@
 import { useSyncExternalStore } from "react";
+import { storefront } from "./storefront.functions";
+import { toGid } from "./product-config";
 
 // =====================================================================
-// Shopify Storefront API — cart implementation
+// Seralie cart — Shopify Storefront API
 // =====================================================================
 
-const DOMAIN = "xwkkv0-r0.myshopify.com";
-const STOREFRONT_TOKEN = "27b060f0e9c0b8a83808f0165c32c501";
-const API_VERSION = "2024-10";
-const ENDPOINT = `https://${DOMAIN}/api/${API_VERSION}/graphql.json`;
+/**
+ * Package Protection is a separate Shopify product.
+ * Fill in the variant ID (numeric, e.g. "48912345678901") once it's created.
+ */
+export const PACKAGE_PROTECTION_VARIANT_ID = "";
+export const PACKAGE_PROTECTION_PRICE = 4.99;
 
-const LS_CART_ID = "circuit-shopify-cart-id";
-const LS_CART_LINES = "circuit-shopify-cart-lines";
-const LS_OVERRIDES = "seralie-cart-overrides";
-
-// Per-variant display overrides (title/image) captured on add() so the cart
-// always shows Seralie branding even when the Shopify product data is stale.
-const overrides: Record<string, { title?: string; image?: string }> = {};
+const LS_CART_ID = "seralie-cart-id";
+const LS_CART_STATE = "seralie-cart-state";
 
 export type CartLine = {
-  id: string; // shopify line id
-  variantId: string; // gid://shopify/ProductVariant/...
-  productTitle: string;
-  variantTitle: string;
+  id: string;
+  variantId: string;
+  title: string;
+  subtitle: string;
   image: string;
   unitPrice: number;
   quantity: number;
+  attributes: { key: string; value: string }[];
 };
 
 type State = {
@@ -33,7 +33,7 @@ type State = {
   lines: CartLine[];
   isOpen: boolean;
   isLoading: boolean;
-  bump: number; // increments to trigger badge animation
+  error: string | null;
 };
 
 const listeners = new Set<() => void>();
@@ -43,7 +43,7 @@ const state: State = {
   lines: [],
   isOpen: false,
   isLoading: false,
-  bump: 0,
+  error: null,
 };
 let snapshot = "";
 
@@ -55,48 +55,32 @@ function commit() {
 function persist() {
   if (typeof window === "undefined") return;
   if (state.cartId) localStorage.setItem(LS_CART_ID, state.cartId);
-  localStorage.setItem(LS_CART_LINES, JSON.stringify({ lines: state.lines, checkoutUrl: state.checkoutUrl }));
-  localStorage.setItem(LS_OVERRIDES, JSON.stringify(overrides));
-}
-
-function hydrate() {
-  if (typeof window === "undefined") return;
-  try {
-    state.cartId = localStorage.getItem(LS_CART_ID);
-    const raw = localStorage.getItem(LS_CART_LINES);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      state.lines = parsed.lines || [];
-      state.checkoutUrl = parsed.checkoutUrl || null;
-    }
-    const ovRaw = localStorage.getItem(LS_OVERRIDES);
-    if (ovRaw) Object.assign(overrides, JSON.parse(ovRaw));
-  } catch {
-    /* ignore */
-  }
-  commit();
+  localStorage.setItem(
+    LS_CART_STATE,
+    JSON.stringify({ lines: state.lines, checkoutUrl: state.checkoutUrl }),
+  );
 }
 
 let hydrated = false;
 function ensureHydrated() {
   if (hydrated || typeof window === "undefined") return;
   hydrated = true;
-  hydrate();
+  try {
+    state.cartId = localStorage.getItem(LS_CART_ID);
+    const raw = localStorage.getItem(LS_CART_STATE);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      state.lines = parsed.lines || [];
+      state.checkoutUrl = parsed.checkoutUrl || null;
+    }
+  } catch {
+    /* ignore */
+  }
+  commit();
 }
 
-async function gql<T = any>(query: string, variables: any): Promise<T> {
-  const res = await fetch(ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": STOREFRONT_TOKEN,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-  if (!res.ok) throw new Error(`Shopify ${res.status}`);
-  const json = await res.json();
-  if (json.errors) throw new Error(json.errors.map((e: any) => e.message).join(", "));
-  return json.data as T;
+async function gql<T = any>(query: string, variables: Record<string, unknown> = {}) {
+  return (await storefront({ data: { query, variables } })) as T;
 }
 
 const CART_FIELDS = `
@@ -108,12 +92,13 @@ const CART_FIELDS = `
       node {
         id
         quantity
+        attributes { key value }
         merchandise {
           ... on ProductVariant {
             id
             title
             image { url }
-            price { amount currencyCode }
+            price { amount }
             product { title featuredImage { url } }
           }
         }
@@ -122,26 +107,7 @@ const CART_FIELDS = `
   }
 `;
 
-function mapCart(cart: any) {
-  state.cartId = cart.id;
-  state.checkoutUrl = formatCheckoutUrl(cart.checkoutUrl);
-  state.lines = (cart.lines?.edges || []).map((e: any) => {
-    const n = e.node;
-    const m = n.merchandise;
-    const ov = overrides[m.id] || {};
-    return {
-      id: n.id,
-      variantId: m.id,
-      productTitle: (ov.title || m.product?.title || "").replace(/circuit/gi, "Seralie"),
-      variantTitle: m.title === "Default Title" ? "" : m.title,
-      image: ov.image || m.image?.url || m.product?.featuredImage?.url || "",
-      unitPrice: parseFloat(m.price?.amount || "0"),
-      quantity: n.quantity,
-    } as CartLine;
-  });
-}
-
-function formatCheckoutUrl(url: string): string {
+function formatCheckoutUrl(url: string) {
   try {
     const u = new URL(url);
     u.searchParams.set("channel", "online_store");
@@ -151,46 +117,84 @@ function formatCheckoutUrl(url: string): string {
   }
 }
 
-async function createCart(variantId: string, quantity: number) {
+function mapCart(cart: any) {
+  state.cartId = cart.id;
+  state.checkoutUrl = formatCheckoutUrl(cart.checkoutUrl);
+  state.lines = (cart.lines?.edges || []).map((e: any) => {
+    const n = e.node;
+    const m = n.merchandise;
+    return {
+      id: n.id,
+      variantId: m.id,
+      title: m.product?.title || "",
+      subtitle: m.title === "Default Title" ? "" : m.title,
+      image: m.image?.url || m.product?.featuredImage?.url || "",
+      unitPrice: parseFloat(m.price?.amount || "0"),
+      quantity: n.quantity,
+      attributes: (n.attributes || []).filter((a: any) => a.key && a.value),
+    } as CartLine;
+  });
+}
+
+/** Live prices straight from Shopify — never hardcoded in the UI. */
+export async function fetchVariantPrices(
+  variantIds: string[],
+): Promise<Record<string, { amount: number; currencyCode: string; compareAt: number | null }>> {
+  if (variantIds.length === 0) return {};
+  const data = await gql<{ nodes: any[] }>(
+    `query($ids: [ID!]!) {
+      nodes(ids: $ids) {
+        ... on ProductVariant {
+          id
+          price { amount currencyCode }
+          compareAtPrice { amount }
+        }
+      }
+    }`,
+    { ids: variantIds.map(toGid) },
+  );
+  const out: Record<string, { amount: number; currencyCode: string; compareAt: number | null }> = {};
+  for (const n of data.nodes || []) {
+    if (!n?.id) continue;
+    out[String(n.id).split("/").pop()!] = {
+      amount: parseFloat(n.price?.amount || "0"),
+      currencyCode: n.price?.currencyCode || "USD",
+      compareAt: n.compareAtPrice?.amount ? parseFloat(n.compareAtPrice.amount) : null,
+    };
+  }
+  return out;
+}
+
+type LineInput = { merchandiseId: string; quantity: number; attributes?: { key: string; value: string }[] };
+
+async function createCart(lines: LineInput[]) {
   const data = await gql<{ cartCreate: { cart: any; userErrors: any[] } }>(
     `mutation($input: CartInput!) { cartCreate(input: $input) { cart { ${CART_FIELDS} } userErrors { message } } }`,
-    { input: { lines: [{ merchandiseId: variantId, quantity }] } },
+    { input: { lines } },
   );
   if (data.cartCreate.userErrors?.length) throw new Error(data.cartCreate.userErrors[0].message);
   mapCart(data.cartCreate.cart);
 }
 
-async function addLines(cartId: string, variantId: string, quantity: number) {
+async function addLines(cartId: string, lines: LineInput[]) {
   const data = await gql<{ cartLinesAdd: { cart: any; userErrors: any[] } }>(
     `mutation($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ${CART_FIELDS} } userErrors { message } } }`,
-    { cartId, lines: [{ merchandiseId: variantId, quantity }] },
+    { cartId, lines },
   );
   const errs = data.cartLinesAdd.userErrors || [];
-  if (errs.some((e) => /cart not found|does not exist/i.test(e.message))) return false;
+  if (errs.some((e: any) => /cart not found|does not exist/i.test(e.message))) return false;
   if (errs.length) throw new Error(errs[0].message);
   mapCart(data.cartLinesAdd.cart);
   return true;
 }
 
-async function updateLine(cartId: string, lineId: string, quantity: number) {
-  const data = await gql<{ cartLinesUpdate: { cart: any; userErrors: any[] } }>(
-    `mutation($cartId: ID!, $lines: [CartLineUpdateInput!]!) { cartLinesUpdate(cartId: $cartId, lines: $lines) { cart { ${CART_FIELDS} } userErrors { message } } }`,
-    { cartId, lines: [{ id: lineId, quantity }] },
-  );
-  const errs = data.cartLinesUpdate.userErrors || [];
-  if (errs.some((e) => /cart not found|does not exist/i.test(e.message))) return false;
-  if (errs.length) throw new Error(errs[0].message);
-  mapCart(data.cartLinesUpdate.cart);
-  return true;
-}
-
-async function removeLine(cartId: string, lineId: string) {
+async function removeLineRemote(cartId: string, lineId: string) {
   const data = await gql<{ cartLinesRemove: { cart: any; userErrors: any[] } }>(
     `mutation($cartId: ID!, $lineIds: [ID!]!) { cartLinesRemove(cartId: $cartId, lineIds: $lineIds) { cart { ${CART_FIELDS} } userErrors { message } } }`,
     { cartId, lineIds: [lineId] },
   );
   const errs = data.cartLinesRemove.userErrors || [];
-  if (errs.some((e) => /cart not found|does not exist/i.test(e.message))) return false;
+  if (errs.some((e: any) => /cart not found|does not exist/i.test(e.message))) return false;
   if (errs.length) throw new Error(errs[0].message);
   mapCart(data.cartLinesRemove.cart);
   return true;
@@ -202,53 +206,11 @@ function clearLocal() {
   state.lines = [];
   if (typeof window !== "undefined") {
     localStorage.removeItem(LS_CART_ID);
-    localStorage.removeItem(LS_CART_LINES);
+    localStorage.removeItem(LS_CART_STATE);
   }
 }
 
-function fireAddPixels(item: { variantId: string; productTitle: string; unitPrice: number }, qty: number) {
-  if (typeof window === "undefined") return;
-  const value = parseFloat((item.unitPrice * qty).toFixed(2));
-  (window as any).fbq?.("track", "AddToCart", {
-    content_ids: [item.variantId],
-    content_name: item.productTitle,
-    content_type: "product",
-    value,
-    currency: "USD",
-  });
-  (window as any).gtag?.("event", "add_to_cart", {
-    currency: "USD",
-    value,
-    items: [{ item_id: item.variantId, item_name: item.productTitle, price: item.unitPrice, quantity: qty }],
-  });
-}
-
-/**
- * Fetch a product's variants from the Storefront API by its handle.
- * Returns [{ id, title, price }] so pages can auto-wire without hardcoded IDs.
- */
-export async function fetchVariantsByHandle(
-  handle: string,
-): Promise<{ id: string; title: string; price: number }[]> {
-  const data = await gql<{ product: { variants: { edges: { node: any }[] } } | null }>(
-    `query($handle: String!) {
-       product(handle: $handle) {
-         variants(first: 20) {
-           edges { node { id title price { amount } } }
-         }
-       }
-     }`,
-    { handle },
-  );
-  const edges = data.product?.variants?.edges || [];
-  return edges.map((e) => ({
-    id: e.node.id,
-    title: e.node.title,
-    price: parseFloat(e.node.price?.amount || "0"),
-  }));
-}
-
-export const shopifyCart = {
+export const cart = {
   subscribe(l: () => void) {
     ensureHydrated();
     listeners.add(l);
@@ -268,45 +230,41 @@ export const shopifyCart = {
     state.isOpen = false;
     commit();
   },
-  async add(item: Omit<CartLine, "id" | "quantity">, quantity = 1) {
+  /**
+   * Adds one configured necklace order line (quantity 1) plus optional
+   * package protection. Customer inputs ride along as hidden line attributes.
+   */
+  async addConfigured(opts: {
+    variantId: string;
+    attributes: { key: string; value: string }[];
+    packageProtection?: boolean;
+  }) {
     ensureHydrated();
-    if (item.productTitle || item.image) {
-      overrides[item.variantId] = { title: item.productTitle, image: item.image };
-    }
     state.isLoading = true;
+    state.error = null;
     commit();
     try {
-      let ok = true;
+      const lines: LineInput[] = [
+        { merchandiseId: toGid(opts.variantId), quantity: 1, attributes: opts.attributes },
+      ];
+      if (opts.packageProtection && PACKAGE_PROTECTION_VARIANT_ID) {
+        lines.push({ merchandiseId: toGid(PACKAGE_PROTECTION_VARIANT_ID), quantity: 1 });
+      }
       if (!state.cartId) {
-        await createCart(item.variantId, quantity);
+        await createCart(lines);
       } else {
-        ok = await addLines(state.cartId, item.variantId, quantity);
+        const ok = await addLines(state.cartId, lines);
         if (!ok) {
           clearLocal();
-          await createCart(item.variantId, quantity);
+          await createCart(lines);
         }
       }
-      fireAddPixels(item, quantity);
       persist();
-      state.bump += 1;
       state.isOpen = true;
     } catch (err) {
       console.error("Cart add failed", err);
+      state.error = err instanceof Error ? err.message : "Something went wrong adding to your bag.";
       throw err;
-    } finally {
-      state.isLoading = false;
-      commit();
-    }
-  },
-  async setQty(lineId: string, quantity: number) {
-    if (!state.cartId) return;
-    if (quantity <= 0) return this.remove(lineId);
-    state.isLoading = true;
-    commit();
-    try {
-      const ok = await updateLine(state.cartId, lineId, quantity);
-      if (!ok) clearLocal();
-      persist();
     } finally {
       state.isLoading = false;
       commit();
@@ -317,9 +275,8 @@ export const shopifyCart = {
     state.isLoading = true;
     commit();
     try {
-      const ok = await removeLine(state.cartId, lineId);
-      if (!ok) clearLocal();
-      if (state.lines.length === 0) clearLocal();
+      const ok = await removeLineRemote(state.cartId, lineId);
+      if (!ok || state.lines.length === 0) clearLocal();
       persist();
     } finally {
       state.isLoading = false;
@@ -327,20 +284,16 @@ export const shopifyCart = {
     }
   },
   checkout() {
-    if (state.checkoutUrl) {
-      window.location.href = state.checkoutUrl;
-    }
+    if (state.checkoutUrl) window.location.href = state.checkoutUrl;
   },
 };
 
-export function useShopifyCart() {
-  const snap = useSyncExternalStore(
-    shopifyCart.subscribe,
-    shopifyCart.getSnapshot,
-    shopifyCart.getServerSnapshot,
-  );
-  const s: State = snap ? JSON.parse(snap) : { cartId: null, checkoutUrl: null, lines: [], isOpen: false, isLoading: false, bump: 0 };
+export function useCart() {
+  const snap = useSyncExternalStore(cart.subscribe, cart.getSnapshot, cart.getServerSnapshot);
+  const s: State = snap
+    ? JSON.parse(snap)
+    : { cartId: null, checkoutUrl: null, lines: [], isOpen: false, isLoading: false, error: null };
   const count = s.lines.reduce((sum, l) => sum + l.quantity, 0);
-  const subtotal = s.lines.reduce((sum, l) => sum + l.quantity * l.unitPrice, 0);
+  const subtotal = s.lines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0);
   return { ...s, count, subtotal };
 }
