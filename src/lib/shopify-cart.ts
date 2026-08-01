@@ -10,8 +10,7 @@ import { toGid } from "./product-config";
  * Package Protection is a separate Shopify product.
  * Fill in the variant ID (numeric, e.g. "48912345678901") once it's created.
  */
-export const PACKAGE_PROTECTION_VARIANT_ID = "";
-export const PACKAGE_PROTECTION_PRICE = 4.99;
+export const PACKAGE_PROTECTION_VARIANT_ID = "48890343030938";
 
 const LS_CART_ID = "seralie-cart-id";
 const LS_CART_STATE = "seralie-cart-state";
