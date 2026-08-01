@@ -18,26 +18,33 @@ export const FINISHES: { id: FinishId; label: string; swatch: string }[] = [
 
 export type TierId = "one" | "three" | "six";
 
+/** A bonus included with a tier. `value` is what it would otherwise cost. */
+export type Extra = { label: string; value: number };
+
 export type Tier = {
   id: TierId;
   label: string;
   pieces: number;
   badge?: string;
+  /** Always-included essentials — no price attached. */
   includes: string[];
+  /** Bonuses shown with their value struck out and marked FREE. */
+  extras: Extra[];
+  /** Shipping line: null means free shipping, a number is the charge. */
+  shipping: number | null;
   variants: Record<FinishId, string>;
 };
+
+const ENGRAVING: Extra[] = SHOW_BACK_ENGRAVING ? [{ label: "Engraving on the back", value: 19 }] : [];
 
 export const TIERS: Tier[] = [
   {
     id: "one",
     label: "1 Necklace",
     pieces: 1,
-    includes: [
-      "One custom engraved pendant + chain",
-      ...(SHOW_BACK_ENGRAVING ? ["Free engraving on the back"] : []),
-      "Digital proof before we engrave",
-      "$2.99 shipping",
-    ],
+    includes: ["One custom engraved pendant + chain", "Digital proof before we engrave"],
+    extras: [...ENGRAVING],
+    shipping: 2.99,
     variants: {
       gold: "48859433238682",
       silver: "48859433271450",
@@ -49,14 +56,13 @@ export const TIERS: Tier[] = [
     label: "Buy 2 Get 1 Free",
     pieces: 3,
     badge: "Most popular",
-    includes: [
-      "Three custom engraved pendants + chains",
-      ...(SHOW_BACK_ENGRAVING ? ["Free engraving on the back"] : []),
-      "Digital proof before we engrave",
-      "Their portrait as a downloadable file",
-      "Matching phone lock-screen wallpaper",
-      "Free shipping",
+    includes: ["Three custom engraved pendants + chains", "Digital proof before we engrave"],
+    extras: [
+      ...ENGRAVING,
+      { label: "Their portrait as a downloadable file", value: 29 },
+      { label: "Matching phone lock-screen wallpaper", value: 19 },
     ],
+    shipping: null,
     variants: {
       gold: "48859433336986",
       silver: "48859433369754",
@@ -68,14 +74,13 @@ export const TIERS: Tier[] = [
     label: "Buy 3 Get 3 Free",
     pieces: 6,
     badge: "Best value",
-    includes: [
-      "Six custom engraved pendants + chains",
-      ...(SHOW_BACK_ENGRAVING ? ["Free engraving on the back"] : []),
-      "Digital proof before we engrave",
-      "Their portrait as a downloadable file",
-      "Matching phone lock-screen wallpaper",
-      "Free shipping",
+    includes: ["Six custom engraved pendants + chains", "Digital proof before we engrave"],
+    extras: [
+      ...ENGRAVING,
+      { label: "Their portrait as a downloadable file", value: 29 },
+      { label: "Matching phone lock-screen wallpaper", value: 19 },
     ],
+    shipping: null,
     variants: {
       gold: "48859433435290",
       silver: "48859433468058",
@@ -83,6 +88,7 @@ export const TIERS: Tier[] = [
     },
   },
 ];
+
 
 export const PRODUCT_HANDLE_ID = "9068189778074";
 export const PRODUCT_TITLE = "Pet Memorial Photo Necklace";
