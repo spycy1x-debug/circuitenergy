@@ -242,7 +242,7 @@ function NecklacePage() {
 
               <div className="mt-7">
                 <div className="eyebrow">Finish</div>
-                <div className="mt-3 flex gap-3">
+                <div className="mt-3 flex flex-wrap gap-3">
                   {FINISHES.map((f) => (
                     <button
                       key={f.id}
@@ -258,7 +258,12 @@ function NecklacePage() {
                     </button>
                   ))}
                 </div>
+                <p className="mt-3 text-xs text-[color:var(--muted-foreground)]">
+                  {FINISHES.find((f) => f.id === finish)!.detail} · nickel-free, water-resistant, won't tarnish
+                  with everyday wear.
+                </p>
               </div>
+
             </div>
 
             {/* 4. Photo + engraving slots */}
