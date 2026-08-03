@@ -676,7 +676,7 @@ function NecklacePage() {
                       <div className="flex-1 min-w-0">
                         <input
                           value={s.name}
-                          maxLength={15}
+                          maxLength={10}
                           onChange={(e) => updateSlot(i, { name: e.target.value })}
                           placeholder="Name for the front"
                           className="w-full border border-[color:var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none focus:border-[color:var(--charcoal)]"
