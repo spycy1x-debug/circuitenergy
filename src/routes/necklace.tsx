@@ -415,6 +415,10 @@ function ReviewForm({ onClose, onSaved }: { onClose: () => void; onSaved: () => 
 
 
 
+function labelFor(id: FinishId) {
+  return FINISHES.find((f) => f.id === id)!.label;
+}
+
 function NecklacePage() {
   const [tierId, setTierId] = useState<TierId>("three");
   const [finish, setFinish] = useState<FinishId>("gold");
@@ -438,6 +442,16 @@ function NecklacePage() {
 
   const active = slots.slice(0, tier.pieces);
   const complete = active.every((s) => s.url && s.name.trim().length > 0);
+
+  const finishCounts = active.reduce<Record<string, number>>((acc, s) => {
+    const label = labelFor(s.finish ?? finish);
+    acc[label] = (acc[label] ?? 0) + 1;
+    return acc;
+  }, {});
+  const fulfillmentSummary = Object.entries(finishCounts)
+    .map(([label, n]) => `${n}\u00d7 ${label}`)
+    .join(", ");
+  const mixedFinishes = active.some((s) => s.finish && s.finish !== finish);
 
   function updateSlot(i: number, patch: Partial<Slot>) {
     setSlots((prev) => prev.map((s, idx) => (idx === i ? { ...s, ...patch } : s)));
@@ -469,11 +483,11 @@ function NecklacePage() {
     setAdding(true);
     try {
       const attributes = active.flatMap((s, i) => [
-        { key: `_photo_${i + 1}_url`, value: s.url! },
-        { key: `_name_${i + 1}`, value: s.name.trim() },
-        { key: `_finish_${i + 1}`, value: FINISHES.find((f) => f.id === (s.finish ?? finish))!.label },
+        { key: `_necklace_${i + 1}_photo`, value: s.url! },
+        { key: `_necklace_${i + 1}_name`, value: s.name.trim() },
+        { key: `_necklace_${i + 1}_finish`, value: labelFor(s.finish ?? finish) },
       ]);
-      attributes.push({ key: "_finish", value: FINISHES.find((f) => f.id === finish)!.label });
+      attributes.push({ key: "Fulfillment", value: fulfillmentSummary });
       await cart.addConfigured({ variantId, attributes });
     } catch (e) {
       setAddError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
@@ -505,7 +519,7 @@ function NecklacePage() {
               <div className="eyebrow">Choose your set</div>
               <div className="mt-4 space-y-3">
                 {TIERS.map((t) => {
-                  const tPrice = prices[t.variants[finish]]?.amount ?? null;
+                  const tPrice = prices[t.variantId]?.amount ?? null;
                   const selected = t.id === tierId;
                   const perPiece = tPrice !== null ? tPrice / t.pieces : null;
                   const freePieces = t.pieces - PAID_PIECES[t.id];
@@ -600,7 +614,9 @@ function NecklacePage() {
               </div>
 
               <div className="mt-7">
-                <div className="eyebrow">Finish</div>
+                <div className="eyebrow">
+                  {tier.pieces === 1 ? "Finish" : "Preview finish — choose each necklace below"}
+                </div>
                 <div className="mt-3 flex flex-wrap gap-3">
                   {FINISHES.map((f) => (
                     <button
@@ -635,29 +651,50 @@ function NecklacePage() {
                 {active.map((s, i) => (
                   <div key={i} className="border border-[color:var(--border)] bg-white p-4">
                     <div className="caps-label text-[color:var(--muted-foreground)]">Necklace {i + 1}</div>
-                    <div className="mt-3">
-                      <div className="text-[11px] text-[color:var(--muted-foreground)]">Finish for this necklace</div>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {FINISHES.map((f) => {
-                          const activeFinish = (s.finish ?? finish) === f.id;
-                          return (
-                            <button
-                              key={f.id}
-                              type="button"
-                              onClick={() => updateSlot(i, { finish: f.id })}
-                              className={`flex items-center gap-2 border px-3 py-2 text-[11px] transition-colors ${
-                                activeFinish
-                                  ? "border-[color:var(--charcoal)] bg-white"
-                                  : "border-[color:var(--border)] hover:border-[color:var(--sand-deep)]"
-                              }`}
-                            >
-                              <span className="h-3 w-3 rounded-full" style={{ background: f.swatch }} />
-                              {f.label}
-                            </button>
-                          );
-                        })}
+                    {tier.pieces > 1 && (
+                      <div className="mt-3">
+                        <div className="flex items-center gap-2 text-[11px] text-[color:var(--muted-foreground)]">
+                          <span
+                            className="h-3 w-3 rounded-full"
+                            style={{ background: FINISHES.find((f) => f.id === (s.finish ?? finish))!.swatch }}
+                          />
+                          <span>Finish: {labelFor(s.finish ?? finish)}</span>
+                          <span aria-hidden>·</span>
+                          <button
+                            type="button"
+                            onClick={() => setOpenFinishFor(openFinishFor === i ? null : i)}
+                            className="underline underline-offset-2 hover:text-[color:var(--charcoal)]"
+                          >
+                            Change
+                          </button>
+                        </div>
+                        {openFinishFor === i && (
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {FINISHES.map((f) => {
+                              const activeFinish = (s.finish ?? finish) === f.id;
+                              return (
+                                <button
+                                  key={f.id}
+                                  type="button"
+                                  onClick={() => {
+                                    updateSlot(i, { finish: f.id });
+                                    setOpenFinishFor(null);
+                                  }}
+                                  className={`flex items-center gap-2 border px-3 py-2 text-[11px] transition-colors ${
+                                    activeFinish
+                                      ? "border-[color:var(--charcoal)] bg-white"
+                                      : "border-[color:var(--border)] hover:border-[color:var(--sand-deep)]"
+                                  }`}
+                                >
+                                  <span className="h-3 w-3 rounded-full" style={{ background: f.swatch }} />
+                                  {f.label}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
-                    </div>
+                    )}
                     <div className="mt-3 flex gap-4">
 
                       <label className="relative h-20 w-20 shrink-0 cursor-pointer overflow-hidden border border-dashed border-[color:var(--sand-deep)] bg-[color:var(--sand)]/50 flex items-center justify-center">
@@ -712,7 +749,12 @@ function NecklacePage() {
             </div>
 
             {/* 5. Add to cart */}
-            <button onClick={addToCart} disabled={adding} className="btn-primary mt-8 w-full gap-2">
+            {mixedFinishes && (
+              <p className="mt-8 text-center text-xs text-[color:var(--charcoal)]">
+                Your order: {fulfillmentSummary}
+              </p>
+            )}
+            <button onClick={addToCart} disabled={adding} className="btn-primary mt-4 w-full gap-2">
               {adding ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to bag"}
             </button>
             {!complete && (
