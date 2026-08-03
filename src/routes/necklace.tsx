@@ -14,9 +14,12 @@ import g6 from "@/assets/pdp-6-milo-desk.webp.asset.json";
 import { FINISHES, TIERS, PRODUCT_TITLE, type FinishId, type TierId } from "@/lib/product-config";
 import { cart, fetchVariantPrices } from "@/lib/shopify-cart";
 import { uploadPhoto, validatePhoto } from "@/lib/photo-upload";
-import hiw1 from "@/assets/hiw-1-upload.jpg";
+import hiw1Asset from "@/assets/hiw-1-upload.png.asset.json";
 import hiw2 from "@/assets/hiw-2-illustrate.jpg";
-import hiw3 from "@/assets/hiw-3-craft.jpg";
+import hiw3Asset from "@/assets/hiw-3-craft.png.asset.json";
+
+const hiw1 = hiw1Asset.url;
+const hiw3 = hiw3Asset.url;
 
 const HOW_IT_WORKS: { img: string; title: string; body: string }[] = [
   {
