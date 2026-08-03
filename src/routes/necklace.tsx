@@ -682,7 +682,7 @@ function NecklacePage() {
                           className="w-full border border-[color:var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none focus:border-[color:var(--charcoal)]"
                         />
                         <div className="mt-1.5 flex items-center justify-between">
-                          <span className="text-[11px] text-[color:var(--muted-foreground)]">Max 15 characters</span>
+                          <span className="text-[11px] text-[color:var(--muted-foreground)]">Max 10 characters</span>
                           {s.url && (
                             <button
                               onClick={() => updateSlot(i, { url: null, file: null })}
