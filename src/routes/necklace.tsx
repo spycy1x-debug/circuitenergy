@@ -60,8 +60,8 @@ export const Route = createFileRoute("/necklace")({
   component: NecklacePage,
 });
 
-type Slot = { file: File | null; url: string | null; name: string; error: string | null; uploading: boolean };
-const emptySlot = (): Slot => ({ file: null, url: null, name: "", error: null, uploading: false });
+type Slot = { file: File | null; url: string | null; name: string; error: string | null; uploading: boolean; finish: FinishId | null };
+const emptySlot = (): Slot => ({ file: null, url: null, name: "", error: null, uploading: false, finish: null });
 
 /** How many pieces are actually paid for in each set. */
 const PAID_PIECES: Record<TierId, number> = { one: 1, three: 2, six: 3 };
@@ -470,6 +470,7 @@ function NecklacePage() {
       const attributes = active.flatMap((s, i) => [
         { key: `_photo_${i + 1}_url`, value: s.url! },
         { key: `_name_${i + 1}`, value: s.name.trim() },
+        { key: `_finish_${i + 1}`, value: FINISHES.find((f) => f.id === (s.finish ?? finish))!.label },
       ]);
       attributes.push({ key: "_finish", value: FINISHES.find((f) => f.id === finish)!.label });
       await cart.addConfigured({ variantId, attributes });
@@ -633,7 +634,31 @@ function NecklacePage() {
                 {active.map((s, i) => (
                   <div key={i} className="border border-[color:var(--border)] bg-white p-4">
                     <div className="caps-label text-[color:var(--muted-foreground)]">Necklace {i + 1}</div>
+                    <div className="mt-3">
+                      <div className="text-[11px] text-[color:var(--muted-foreground)]">Finish for this necklace</div>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {FINISHES.map((f) => {
+                          const activeFinish = (s.finish ?? finish) === f.id;
+                          return (
+                            <button
+                              key={f.id}
+                              type="button"
+                              onClick={() => updateSlot(i, { finish: f.id })}
+                              className={`flex items-center gap-2 border px-3 py-2 text-[11px] transition-colors ${
+                                activeFinish
+                                  ? "border-[color:var(--charcoal)] bg-white"
+                                  : "border-[color:var(--border)] hover:border-[color:var(--sand-deep)]"
+                              }`}
+                            >
+                              <span className="h-3 w-3 rounded-full" style={{ background: f.swatch }} />
+                              {f.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                     <div className="mt-3 flex gap-4">
+
                       <label className="relative h-20 w-20 shrink-0 cursor-pointer overflow-hidden border border-dashed border-[color:var(--sand-deep)] bg-[color:var(--sand)]/50 flex items-center justify-center">
                         {s.uploading ? (
                           <Loader2 className="h-4 w-4 animate-spin text-[color:var(--muted-foreground)]" />
@@ -652,13 +677,13 @@ function NecklacePage() {
                       <div className="flex-1 min-w-0">
                         <input
                           value={s.name}
-                          maxLength={15}
+                          maxLength={10}
                           onChange={(e) => updateSlot(i, { name: e.target.value })}
                           placeholder="Name for the front"
                           className="w-full border border-[color:var(--border)] bg-transparent px-3 py-2.5 text-sm outline-none focus:border-[color:var(--charcoal)]"
                         />
                         <div className="mt-1.5 flex items-center justify-between">
-                          <span className="text-[11px] text-[color:var(--muted-foreground)]">Max 15 characters</span>
+                          <span className="text-[11px] text-[color:var(--muted-foreground)]">Max 10 characters</span>
                           {s.url && (
                             <button
                               onClick={() => updateSlot(i, { url: null, file: null })}
