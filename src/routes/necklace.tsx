@@ -425,11 +425,12 @@ function NecklacePage() {
   const [attempted, setAttempted] = useState(false);
 
   const tier = useMemo(() => TIERS.find((t) => t.id === tierId)!, [tierId]);
-  const variantId = tier.variants[finish];
+  const variantId = tier.variantId;
   const price = prices[variantId]?.amount ?? null;
+  const [openFinishFor, setOpenFinishFor] = useState<number | null>(null);
 
   useEffect(() => {
-    const ids = TIERS.flatMap((t) => Object.values(t.variants));
+    const ids = TIERS.map((t) => t.variantId);
     fetchVariantPrices(ids)
       .then(setPrices)
       .catch(() => setPrices({}));
