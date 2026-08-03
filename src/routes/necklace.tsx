@@ -187,65 +187,79 @@ function ReviewCarousel() {
   }
 
   return (
-    <div className="relative mt-10">
+    <div className="relative mt-8">
       {reviews.length === 0 ? (
         <p className="text-sm text-[color:var(--muted-foreground)]">
           No reviews yet — be the first to share yours.
         </p>
       ) : (
-        <div
-          ref={trackRef}
-          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-[14%] pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:px-[8%]"
-        >
-          {reviews.map((r) => (
-            <figure
-              key={r.id}
-              className="w-[72%] shrink-0 snap-center rounded-2xl border border-[color:var(--border)] bg-[color:var(--bone)] p-6 sm:w-[48%] lg:w-[30%]"
-            >
-              {r.image_url && <PhotoSlot label="Customer photo" ratio="1/1" src={r.image_url} alt="" />}
-              <Stars n={r.rating} className={r.image_url ? "mt-5 block text-sm" : "block text-sm"} />
-              <blockquote className="mt-3 min-h-16 text-sm leading-7 text-[color:var(--muted-foreground)]">
-                {r.body}
-              </blockquote>
-              <figcaption className="mt-3 caps-label text-[color:var(--muted-foreground)]">
-                {r.name}
-                {r.city ? `, ${r.city}` : ""}
-              </figcaption>
-            </figure>
-          ))}
-          <div className="w-2 shrink-0 md:hidden" aria-hidden />
+        <div className="relative">
+          <div
+            ref={trackRef}
+            className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-10 pb-2 [scrollbar-width:none] md:mx-0 md:gap-5 md:px-12 [&::-webkit-scrollbar]:hidden"
+          >
+            {reviews.map((r) => (
+              <figure
+                key={r.id}
+                className="flex w-[78%] shrink-0 snap-center flex-col rounded-2xl border border-[color:var(--border)] bg-[color:var(--bone)] p-4 sm:w-[46%] lg:w-[30%]"
+              >
+                {r.image_url && (
+                  <div className="overflow-hidden rounded-xl">
+                    <img
+                      src={r.image_url}
+                      alt=""
+                      loading="lazy"
+                      className="h-40 w-full object-cover md:h-48"
+                    />
+                  </div>
+                )}
+                <Stars n={r.rating} className={r.image_url ? "mt-3 block text-sm" : "block text-sm"} />
+                <blockquote className="mt-2 line-clamp-4 text-sm leading-6 text-[color:var(--muted-foreground)]">
+                  {r.body}
+                </blockquote>
+                <figcaption className="mt-3 caps-label text-[color:var(--muted-foreground)]">
+                  {r.name}
+                  {r.city ? `, ${r.city}` : ""}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollBy(-1)}
+            aria-label="Previous reviews"
+            className="absolute left-0 top-1/2 z-10 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--border)] bg-white/90 shadow-sm backdrop-blur transition hover:border-[color:var(--gold)] md:h-11 md:w-11"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollBy(1)}
+            aria-label="Next reviews"
+            className="absolute right-0 top-1/2 z-10 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--border)] bg-white/90 shadow-sm backdrop-blur transition hover:border-[color:var(--gold)] md:h-11 md:w-11"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
       )}
 
-      <div className="mt-6 flex items-center justify-between gap-3">
+      <div className="mt-7 flex flex-col items-center gap-3">
+        <a
+          href="#buy"
+          className="w-full rounded-full bg-[color:var(--charcoal)] px-8 py-4 text-center caps-label text-[color:var(--bone)] transition hover:opacity-90 sm:w-auto"
+        >
+          Create yours
+        </a>
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="rounded-full border border-[color:var(--charcoal)] px-5 py-2.5 caps-label transition hover:border-[color:var(--gold)] hover:text-[color:var(--gold)]"
+          className="caps-label text-[color:var(--muted-foreground)] underline underline-offset-4 transition hover:text-[color:var(--gold)]"
         >
           Write a review
         </button>
-        {reviews.length > 0 && (
-          <div className="hidden gap-3 md:flex">
-            <button
-              type="button"
-              onClick={() => scrollBy(-1)}
-              aria-label="Previous reviews"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollBy(1)}
-              aria-label="Next reviews"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[color:var(--border)] transition hover:border-[color:var(--gold)]"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        )}
       </div>
+
 
       {open && (
         <ReviewForm
@@ -444,7 +458,7 @@ function NecklacePage() {
 
   return (
     <div className="bg-[color:var(--bone)]">
-      <section className="container-x pt-8 pb-16 md:pt-14 md:pb-24">
+      <section id="buy" className="container-x scroll-mt-24 pt-8 pb-16 md:pt-14 md:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* 1. Gallery */}
           <Gallery finish={finish} />
