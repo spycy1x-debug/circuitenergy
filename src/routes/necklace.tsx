@@ -458,7 +458,7 @@ function NecklacePage() {
 
   return (
     <div className="bg-[color:var(--bone)]">
-      <section className="container-x pt-8 pb-16 md:pt-14 md:pb-24">
+      <section id="buy" className="container-x scroll-mt-24 pt-8 pb-16 md:pt-14 md:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* 1. Gallery */}
           <Gallery finish={finish} />
