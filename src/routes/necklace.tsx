@@ -470,6 +470,7 @@ function NecklacePage() {
       const attributes = active.flatMap((s, i) => [
         { key: `_photo_${i + 1}_url`, value: s.url! },
         { key: `_name_${i + 1}`, value: s.name.trim() },
+        { key: `_finish_${i + 1}`, value: FINISHES.find((f) => f.id === (s.finish ?? finish))!.label },
       ]);
       attributes.push({ key: "_finish", value: FINISHES.find((f) => f.id === finish)!.label });
       await cart.addConfigured({ variantId, attributes });
