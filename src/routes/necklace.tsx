@@ -169,10 +169,12 @@ function ReviewCarousel() {
       .from("product_reviews")
       .select("id,name,city,body,rating,image_url,created_at")
       .eq("product_id", "necklace")
+      .order("image_url", { ascending: true, nullsFirst: false })
       .order("created_at", { ascending: false })
-      .limit(50);
+      .limit(80);
     if (data) setReviews(data as Review[]);
   }
+
 
   useEffect(() => {
     load();
