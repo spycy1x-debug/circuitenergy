@@ -60,8 +60,8 @@ export const Route = createFileRoute("/necklace")({
   component: NecklacePage,
 });
 
-type Slot = { file: File | null; url: string | null; name: string; error: string | null; uploading: boolean };
-const emptySlot = (): Slot => ({ file: null, url: null, name: "", error: null, uploading: false });
+type Slot = { file: File | null; url: string | null; name: string; error: string | null; uploading: boolean; finish: FinishId | null };
+const emptySlot = (): Slot => ({ file: null, url: null, name: "", error: null, uploading: false, finish: null });
 
 /** How many pieces are actually paid for in each set. */
 const PAID_PIECES: Record<TierId, number> = { one: 1, three: 2, six: 3 };
