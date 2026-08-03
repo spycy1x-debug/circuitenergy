@@ -443,15 +443,17 @@ function NecklacePage() {
   const active = slots.slice(0, tier.pieces);
   const complete = active.every((s) => s.url && s.name.trim().length > 0);
 
+  const finishOf = (s: Slot) => (tier.pieces === 1 ? finish : (s.finish ?? finish));
+
   const finishCounts = active.reduce<Record<string, number>>((acc, s) => {
-    const label = labelFor(s.finish ?? finish);
+    const label = labelFor(finishOf(s));
     acc[label] = (acc[label] ?? 0) + 1;
     return acc;
   }, {});
   const fulfillmentSummary = Object.entries(finishCounts)
     .map(([label, n]) => `${n}\u00d7 ${label}`)
     .join(", ");
-  const mixedFinishes = active.some((s) => s.finish && s.finish !== finish);
+  const mixedFinishes = tier.pieces > 1 && active.some((s) => s.finish && s.finish !== finish);
 
   function updateSlot(i: number, patch: Partial<Slot>) {
     setSlots((prev) => prev.map((s, idx) => (idx === i ? { ...s, ...patch } : s)));
@@ -485,7 +487,7 @@ function NecklacePage() {
       const attributes = active.flatMap((s, i) => [
         { key: `_necklace_${i + 1}_photo`, value: s.url! },
         { key: `_necklace_${i + 1}_name`, value: s.name.trim() },
-        { key: `_necklace_${i + 1}_finish`, value: labelFor(s.finish ?? finish) },
+        { key: `_necklace_${i + 1}_finish`, value: labelFor(finishOf(s)) },
       ]);
       attributes.push({ key: "Fulfillment", value: fulfillmentSummary });
       await cart.addConfigured({ variantId, attributes });
