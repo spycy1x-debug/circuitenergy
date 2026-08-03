@@ -14,6 +14,27 @@ import g6 from "@/assets/pdp-6-milo-desk.webp.asset.json";
 import { FINISHES, TIERS, PRODUCT_TITLE, type FinishId, type TierId } from "@/lib/product-config";
 import { cart, fetchVariantPrices } from "@/lib/shopify-cart";
 import { uploadPhoto, validatePhoto } from "@/lib/photo-upload";
+import hiw1 from "@/assets/hiw-1-upload.jpg";
+import hiw2 from "@/assets/hiw-2-illustrate.jpg";
+import hiw3 from "@/assets/hiw-3-craft.jpg";
+
+const HOW_IT_WORKS: { img: string; title: string; body: string }[] = [
+  {
+    img: hiw1,
+    title: "Upload your photo",
+    body: "Any clear phone photo works. Add a name for the engraving on the back.",
+  },
+  {
+    img: hiw2,
+    title: "We draw the portrait",
+    body: "Our artists hand-refine the details into a fine-line engraving, then send you a digital proof within 48 hours.",
+  },
+  {
+    img: hiw3,
+    title: "We engrave and ship",
+    body: "Once you approve the proof, we engrave your piece and ship it in 5–9 business days.",
+  },
+];
 
 export const Route = createFileRoute("/necklace")({
   head: () => ({
