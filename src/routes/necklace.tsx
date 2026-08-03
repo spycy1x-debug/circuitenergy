@@ -633,7 +633,31 @@ function NecklacePage() {
                 {active.map((s, i) => (
                   <div key={i} className="border border-[color:var(--border)] bg-white p-4">
                     <div className="caps-label text-[color:var(--muted-foreground)]">Necklace {i + 1}</div>
+                    <div className="mt-3">
+                      <div className="text-[11px] text-[color:var(--muted-foreground)]">Finish for this necklace</div>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {FINISHES.map((f) => {
+                          const activeFinish = (s.finish ?? finish) === f.id;
+                          return (
+                            <button
+                              key={f.id}
+                              type="button"
+                              onClick={() => updateSlot(i, { finish: f.id })}
+                              className={`flex items-center gap-2 border px-3 py-2 text-[11px] transition-colors ${
+                                activeFinish
+                                  ? "border-[color:var(--charcoal)] bg-white"
+                                  : "border-[color:var(--border)] hover:border-[color:var(--sand-deep)]"
+                              }`}
+                            >
+                              <span className="h-3 w-3 rounded-full" style={{ background: f.swatch }} />
+                              {f.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                     <div className="mt-3 flex gap-4">
+
                       <label className="relative h-20 w-20 shrink-0 cursor-pointer overflow-hidden border border-dashed border-[color:var(--sand-deep)] bg-[color:var(--sand)]/50 flex items-center justify-center">
                         {s.uploading ? (
                           <Loader2 className="h-4 w-4 animate-spin text-[color:var(--muted-foreground)]" />
