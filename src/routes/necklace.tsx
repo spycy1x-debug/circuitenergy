@@ -689,17 +689,42 @@ function NecklacePage() {
         </div>
       </section>
 
-      {/* 7. Everything else */}
-      <section className="container-x py-16 md:py-24">
-        <div className="grid gap-12 md:grid-cols-3">
-          <div>
+      {/* 7. How it works — visual 3-step */}
+      <section className="bg-[color:var(--secondary)]">
+        <div className="container-x py-16 md:py-24">
+          <div className="text-center">
             <div className="eyebrow">How it works</div>
-            <ol className="mt-5 space-y-4 text-sm leading-7 text-[color:var(--muted-foreground)]">
-              <li>1. Upload a photo of them.</li>
-              <li>2. We send a digital proof within 48 hours.</li>
-              <li>3. You approve, then we engrave and ship.</li>
-            </ol>
+            <h2 className="mt-4 font-display text-3xl md:text-4xl">Three steps, start to keepsake</h2>
           </div>
+          <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+            {HOW_IT_WORKS.map((s, i) => (
+              <div key={s.title} className="text-center">
+                <div className="overflow-hidden rounded-2xl border border-[color:var(--border)] bg-white shadow-sm">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                    className="aspect-square w-full object-cover"
+                  />
+                </div>
+                <div className="mt-6 text-xs tracking-[0.2em] text-[color:var(--muted-foreground)]">
+                  STEP {i + 1}
+                </div>
+                <h3 className="mt-2 font-display text-xl md:text-2xl">{s.title}</h3>
+                <p className="mx-auto mt-3 max-w-xs text-sm leading-7 text-[color:var(--muted-foreground)]">
+                  {s.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Everything else */}
+      <section className="container-x py-16 md:py-24">
+        <div className="grid gap-12 md:grid-cols-2">
           <div>
             <div className="eyebrow">Materials</div>
             <p className="mt-5 text-sm leading-7 text-[color:var(--muted-foreground)]">
@@ -712,10 +737,10 @@ function NecklacePage() {
             <p className="mt-5 text-sm leading-7 text-[color:var(--muted-foreground)]">
               Made to order. Proof in 48 hours, then 5–9 business days to arrive. Free shipping on orders
               over $80, $2.99 below that. If it isn't right, we remake it or refund you within 30 days.
-
             </p>
           </div>
         </div>
+
 
         <div className="mt-16 max-w-3xl">
           <div className="eyebrow">Questions</div>
