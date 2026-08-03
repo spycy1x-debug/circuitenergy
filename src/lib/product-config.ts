@@ -38,7 +38,8 @@ export type Tier = {
   extras: Extra[];
   /** Shipping line: null means free shipping, a number is the charge. */
   shipping: number | null;
-  variants: Record<FinishId, string>;
+  /** Single Shopify variant — finish is no longer part of the variant. */
+  variantId: string;
 };
 
 const ENGRAVING: Extra[] = SHOW_BACK_ENGRAVING ? [{ label: "Engraving on the back", value: 19 }] : [];
@@ -51,11 +52,7 @@ export const TIERS: Tier[] = [
     includes: ["One custom engraved pendant + chain", "Digital proof before we engrave"],
     extras: [...ENGRAVING],
     shipping: 2.99,
-    variants: {
-      gold: "48859433238682",
-      silver: "48859433271450",
-      "rose-gold": "48859433304218",
-    },
+    variantId: "48859433238682",
   },
   {
     id: "three",
@@ -69,11 +66,7 @@ export const TIERS: Tier[] = [
       { label: "Matching phone lock-screen wallpaper", value: 19 },
     ],
     shipping: null,
-    variants: {
-      gold: "48859433336986",
-      silver: "48859433369754",
-      "rose-gold": "48859433402522",
-    },
+    variantId: "48859433336986",
   },
   {
     id: "six",
@@ -87,11 +80,7 @@ export const TIERS: Tier[] = [
       { label: "Matching phone lock-screen wallpaper", value: 19 },
     ],
     shipping: null,
-    variants: {
-      gold: "48859433435290",
-      silver: "48859433468058",
-      "rose-gold": "48859433500826",
-    },
+    variantId: "48859433435290",
   },
 ];
 
