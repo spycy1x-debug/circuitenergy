@@ -30,7 +30,7 @@ const HOW_IT_WORKS: { img: string; title: string; body: string }[] = [
   {
     img: hiw2,
     title: "We draw the portrait",
-    body: "Our artists hand-refine the details into a fine-line engraving, then send you a digital proof within 48 hours.",
+    body: "Their portrait is engraved by hand-finished laser onto a solid pendant. You approve a digital proof before we touch the metal.",
   },
   {
     img: hiw3,
