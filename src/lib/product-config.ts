@@ -65,8 +65,9 @@ export const TIERS: Tier[] = [
     includes: ["Three custom engraved pendants + chains", "Digital proof before we engrave"],
     extras: [
       ...ENGRAVING,
-      { label: "Their portrait as a downloadable file", value: 29 },
+      { label: "2-year tarnish warranty", value: 29 },
       { label: "Matching phone lock-screen wallpaper", value: 19 },
+      LOST_PENDANT,
     ],
     shipping: null,
     variantId: "48859433336986",
@@ -79,8 +80,9 @@ export const TIERS: Tier[] = [
     includes: ["Six custom engraved pendants + chains", "Digital proof before we engrave"],
     extras: [
       ...ENGRAVING,
-      { label: "Their portrait as a downloadable file", value: 29 },
+      { label: "2-year tarnish warranty", value: 29 },
       { label: "Matching phone lock-screen wallpaper", value: 19 },
+      LOST_PENDANT,
     ],
     shipping: null,
     variantId: "48859433435290",
