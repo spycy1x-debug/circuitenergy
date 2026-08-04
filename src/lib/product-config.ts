@@ -44,13 +44,16 @@ export type Tier = {
 
 const ENGRAVING: Extra[] = SHOW_BACK_ENGRAVING ? [{ label: "Engraving on the back", value: 19 }] : [];
 
+/** Included with every set. */
+const LOST_PENDANT: Extra = { label: "50% off a replacement if a pendant is lost", value: 35 };
+
 export const TIERS: Tier[] = [
   {
     id: "one",
     label: "1 Necklace",
     pieces: 1,
     includes: ["One custom engraved pendant + chain", "Digital proof before we engrave"],
-    extras: [...ENGRAVING],
+    extras: [...ENGRAVING, LOST_PENDANT],
     shipping: 2.99,
     variantId: "48859433238682",
   },
@@ -62,8 +65,9 @@ export const TIERS: Tier[] = [
     includes: ["Three custom engraved pendants + chains", "Digital proof before we engrave"],
     extras: [
       ...ENGRAVING,
-      { label: "Their portrait as a downloadable file", value: 29 },
+      { label: "2-year tarnish warranty", value: 29 },
       { label: "Matching phone lock-screen wallpaper", value: 19 },
+      LOST_PENDANT,
     ],
     shipping: null,
     variantId: "48859433336986",
@@ -76,8 +80,9 @@ export const TIERS: Tier[] = [
     includes: ["Six custom engraved pendants + chains", "Digital proof before we engrave"],
     extras: [
       ...ENGRAVING,
-      { label: "Their portrait as a downloadable file", value: 29 },
+      { label: "2-year tarnish warranty", value: 29 },
       { label: "Matching phone lock-screen wallpaper", value: 19 },
+      LOST_PENDANT,
     ],
     shipping: null,
     variantId: "48859433435290",
