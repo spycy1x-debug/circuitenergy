@@ -44,13 +44,16 @@ export type Tier = {
 
 const ENGRAVING: Extra[] = SHOW_BACK_ENGRAVING ? [{ label: "Engraving on the back", value: 19 }] : [];
 
+/** Included with every set. */
+const LOST_PENDANT: Extra = { label: "50% off a replacement if a pendant is lost", value: 35 };
+
 export const TIERS: Tier[] = [
   {
     id: "one",
     label: "1 Necklace",
     pieces: 1,
     includes: ["One custom engraved pendant + chain", "Digital proof before we engrave"],
-    extras: [...ENGRAVING],
+    extras: [...ENGRAVING, LOST_PENDANT],
     shipping: 2.99,
     variantId: "48859433238682",
   },
