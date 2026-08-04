@@ -781,10 +781,15 @@ function NecklacePage() {
             <div className="mt-5 inline-flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
               <div className="flex items-center gap-2">
                 <span className="font-display text-2xl">4.8</span>
-                <span className="relative text-lg text-[color:var(--gold)]">
-                  <span className="text-[color:var(--sand-deep)]">★★★★★</span>
-                  <span className="absolute left-0 top-0 overflow-hidden" style={{ width: "80%" }}>
-                    ★★★★★
+                <span className="flex items-center text-lg">
+                  {"★★★★".split("").map((_, i) => (
+                    <span key={i} className="text-[color:var(--gold)]">★</span>
+                  ))}
+                  <span className="relative text-[color:var(--sand-deep)]">
+                    ★
+                    <span className="absolute left-0 top-0 overflow-hidden text-[color:var(--gold)]" style={{ width: "80%" }}>
+                      ★
+                    </span>
                   </span>
                 </span>
               </div>
