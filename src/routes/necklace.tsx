@@ -778,6 +778,18 @@ function NecklacePage() {
           <div className="text-center">
             <div className="eyebrow">In their words</div>
             <h2 className="mt-4 font-display text-3xl md:text-4xl">From customers</h2>
+            <div className="mt-5 inline-flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
+              <div className="flex items-center gap-2">
+                <span className="font-display text-2xl">4.8</span>
+                <span className="relative text-lg text-[color:var(--gold)]">
+                  <span className="text-[color:var(--sand-deep)]">★★★★★</span>
+                  <span className="absolute left-0 top-0 overflow-hidden" style={{ width: "80%" }}>
+                    ★★★★★
+                  </span>
+                </span>
+              </div>
+              <span className="text-sm text-[color:var(--muted-foreground)]">out of 5 · 6000+ reviews</span>
+            </div>
           </div>
           <ReviewCarousel />
         </div>
