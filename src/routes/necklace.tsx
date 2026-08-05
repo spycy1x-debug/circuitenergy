@@ -12,7 +12,8 @@ import g4 from "@/assets/pdp-4-worn-willow.webp.asset.json";
 import g5 from "@/assets/pdp-5-in-hand.webp.asset.json";
 import g6 from "@/assets/pdp-6-milo-desk.webp.asset.json";
 import { FINISHES, TIERS, PRODUCT_TITLE, type FinishId, type TierId } from "@/lib/product-config";
-import { cart, fetchVariantPrices } from "@/lib/shopify-cart";
+import { cart, fetchVariantPrices, useCart } from "@/lib/shopify-cart";
+import { trackViewContent, trackAddToCart } from "@/lib/fb-pixel";
 import { uploadPhoto, validatePhoto } from "@/lib/photo-upload";
 import hiw1Asset from "@/assets/hiw-1-upload.png.asset.json";
 import hiw2 from "@/assets/hiw-2-illustrate.jpg";
@@ -432,11 +433,18 @@ function NecklacePage() {
   const variantId = tier.variantId;
   const [openFinishFor, setOpenFinishFor] = useState<number | null>(null);
 
+  const { protection } = useCart();
+
   useEffect(() => {
     const ids = TIERS.map((t) => t.variantId);
     fetchVariantPrices(ids)
-      .then(setPrices)
+      .then((p) => {
+        setPrices(p);
+        const amount = p[variantId]?.amount;
+        if (amount) trackViewContent(variantId, amount);
+      })
       .catch(() => setPrices({}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const active = slots.slice(0, tier.pieces);
@@ -490,6 +498,9 @@ function NecklacePage() {
       ]);
       attributes.push({ key: "Fulfillment", value: fulfillmentSummary });
       await cart.addConfigured({ variantId, attributes });
+      // Only after a successful cartCreate / cartLinesAdd response
+      const pkgPrice = prices[variantId]?.amount ?? 0;
+      trackAddToCart(variantId, pkgPrice + (protection ? 4.99 : 0), tier.pieces);
     } catch (e) {
       setAddError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
     } finally {

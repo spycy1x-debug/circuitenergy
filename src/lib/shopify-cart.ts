@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 import { storefront } from "./storefront.functions";
 import { toGid } from "./product-config";
+import { trackInitiateCheckout } from "./fb-pixel";
 
 // =====================================================================
 // Seralie cart — Shopify Storefront API
@@ -359,7 +360,24 @@ export const cart = {
     }
   },
   checkout() {
-    if (state.checkoutUrl) window.location.href = state.checkoutUrl;
+    if (!state.checkoutUrl) return;
+    try {
+      const ids = state.lines.map((l) => String(l.variantId).split("/").pop()!);
+      const total = state.lines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0);
+      const necklaces = state.lines
+        .filter((l) => !isProtectionLine(l))
+        .reduce(
+          (sum, l) =>
+            sum +
+            l.quantity *
+              Math.max(1, l.attributes.filter((a) => /^_necklace_\d+_name$/.test(a.key)).length),
+          0,
+        );
+      trackInitiateCheckout(ids, total, necklaces);
+    } catch {
+      /* never block checkout on tracking */
+    }
+    window.location.href = state.checkoutUrl;
   },
 };
 
