@@ -498,6 +498,9 @@ function NecklacePage() {
       ]);
       attributes.push({ key: "Fulfillment", value: fulfillmentSummary });
       await cart.addConfigured({ variantId, attributes });
+      // Only after a successful cartCreate / cartLinesAdd response
+      const pkgPrice = prices[variantId]?.amount ?? 0;
+      trackAddToCart(variantId, pkgPrice + (protection ? 4.99 : 0), tier.pieces);
     } catch (e) {
       setAddError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
     } finally {
