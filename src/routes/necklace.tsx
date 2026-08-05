@@ -430,7 +430,6 @@ function NecklacePage() {
 
   const tier = useMemo(() => TIERS.find((t) => t.id === tierId)!, [tierId]);
   const variantId = tier.variantId;
-  const price = prices[variantId]?.amount ?? null;
   const [openFinishFor, setOpenFinishFor] = useState<number | null>(null);
 
   useEffect(() => {
