@@ -420,7 +420,7 @@ function labelFor(id: FinishId) {
 }
 
 function NecklacePage() {
-  const [tierId, setTierId] = useState<TierId>("three");
+  const [tierId, setTierId] = useState<TierId>("one");
   const [finish, setFinish] = useState<FinishId>("gold");
   const [slots, setSlots] = useState<Slot[]>(() => Array.from({ length: 6 }, emptySlot));
   const [prices, setPrices] = useState<Record<string, { amount: number; currencyCode: string }>>({});
