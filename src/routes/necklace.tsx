@@ -42,13 +42,13 @@ const HOW_IT_WORKS: { img: string; title: string; body: string }[] = [
 export const Route = createFileRoute("/necklace")({
   head: () => ({
     meta: [
-      { title: "Pet Memorial Photo Necklace — Seralie" },
+      { title: "Custom Pet Portrait Necklace — Seralie" },
       {
         name: "description",
         content:
           "A hand-finished photo pendant engraved with your pet's portrait. Upload a photo, approve a digital proof, and we engrave. Gold, silver, or rose gold.",
       },
-      { property: "og:title", content: "Pet Memorial Photo Necklace — Seralie" },
+      { property: "og:title", content: "Custom Pet Portrait Necklace — Seralie" },
       {
         property: "og:description",
         content: "Upload a photo, approve your digital proof, and we engrave. Made to order in gold, silver, or rose gold.",
