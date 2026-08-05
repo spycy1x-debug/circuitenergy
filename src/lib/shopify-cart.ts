@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 import { storefront } from "./storefront.functions";
 import { toGid } from "./product-config";
+import { trackInitiateCheckout } from "./fb-pixel";
 
 // =====================================================================
 // Seralie cart — Shopify Storefront API
