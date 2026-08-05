@@ -511,9 +511,6 @@ function NecklacePage() {
               Their portrait, engraved by hand-finished laser onto a solid pendant. You approve a digital proof
               before we touch the metal.
             </p>
-            <p className="mt-5 font-display text-2xl tabular-nums">
-              {price !== null ? `$${price.toFixed(2)}` : <span className="opacity-40">—</span>}
-            </p>
 
             {/* 3. Offer selector */}
             <div className="mt-8">
