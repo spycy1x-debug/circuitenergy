@@ -433,11 +433,18 @@ function NecklacePage() {
   const variantId = tier.variantId;
   const [openFinishFor, setOpenFinishFor] = useState<number | null>(null);
 
+  const { protection } = useCart();
+
   useEffect(() => {
     const ids = TIERS.map((t) => t.variantId);
     fetchVariantPrices(ids)
-      .then(setPrices)
+      .then((p) => {
+        setPrices(p);
+        const amount = p[variantId]?.amount;
+        if (amount) trackViewContent(variantId, amount);
+      })
       .catch(() => setPrices({}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const active = slots.slice(0, tier.pieces);
