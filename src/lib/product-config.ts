@@ -91,7 +91,7 @@ export const TIERS: Tier[] = [
 
 
 export const PRODUCT_HANDLE_ID = "9068189778074";
-export const PRODUCT_TITLE = "Pet Memorial Photo Necklace";
+export const PRODUCT_TITLE = "Custom Pet Portrait Necklace";
 
 export function tierById(id: TierId): Tier {
   return TIERS.find((t) => t.id === id) ?? TIERS[0]!;

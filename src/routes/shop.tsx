@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PhotoSlot } from "@/components/site/PhotoSlot";
+import { PRODUCT_TITLE } from "@/lib/product-config";
 
 export const Route = createFileRoute("/shop")({
   head: () => ({
@@ -32,7 +33,7 @@ function ShopPage() {
       <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         <Link to="/necklace" className="group block">
           <PhotoSlot label="Photo Necklace — product image" ratio="4/5" className="transition-opacity group-hover:opacity-90" />
-          <h2 className="mt-5 font-display text-2xl">Pet Memorial Photo Necklace</h2>
+          <h2 className="mt-5 font-display text-2xl">{PRODUCT_TITLE}</h2>
           <p className="mt-1 text-sm text-[color:var(--muted-foreground)]">Gold · Silver · Rose Gold</p>
           <p className="mt-3 caps-label text-[color:var(--charcoal)]">Configure →</p>
         </Link>
