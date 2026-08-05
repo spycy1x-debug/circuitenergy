@@ -430,7 +430,6 @@ function NecklacePage() {
 
   const tier = useMemo(() => TIERS.find((t) => t.id === tierId)!, [tierId]);
   const variantId = tier.variantId;
-  const price = prices[variantId]?.amount ?? null;
   const [openFinishFor, setOpenFinishFor] = useState<number | null>(null);
 
   useEffect(() => {
@@ -511,9 +510,6 @@ function NecklacePage() {
             <p className="mt-4 max-w-md text-sm leading-7 text-[color:var(--muted-foreground)]">
               Their portrait, engraved by hand-finished laser onto a solid pendant. You approve a digital proof
               before we touch the metal.
-            </p>
-            <p className="mt-5 font-display text-2xl tabular-nums">
-              {price !== null ? `$${price.toFixed(2)}` : <span className="opacity-40">—</span>}
             </p>
 
             {/* 3. Offer selector */}
