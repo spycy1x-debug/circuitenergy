@@ -37,45 +37,50 @@
   --color-sand-deep: var(--sand-deep);
   --color-gold: var(--gold);
   --color-charcoal: var(--charcoal);
+  --color-ink: var(--ink);
+  --color-gold-soft: var(--gold-soft);
+  --font-serif-accent: "Cormorant Garamond", Georgia, serif;
 }
 
 :root {
   --radius: 0.25rem;
 
-  /* Seralie — warm neutrals */
-  --bone: #F7F3ED;
-  --sand: #ECE4D8;
-  --sand-deep: #DDD1BF;
-  --gold: #B4986A;
-  --gold-hover: #9C8154;
-  --charcoal: #262320;
+  /* Seralie — keepsake jewellery: aged ivory, antique gold, warm ink */
+  --bone: #F8F5EF;
+  --sand: #EEE7DB;
+  --sand-deep: #DCCFB9;
+  --gold: #A98A55;
+  --gold-soft: #D8C6A2;
+  --gold-hover: #8E7241;
+  --charcoal: #2A2521;
+  --ink: #3B342D;
 
-  --background: #F7F3ED;
-  --foreground: #262320;
+  --background: #F8F5EF;
+  --foreground: #2A2521;
 
-  --primary: #262320;
-  --primary-foreground: #F7F3ED;
+  --primary: #2A2521;
+  --primary-foreground: #F8F5EF;
 
-  --card: #FFFFFF;
-  --card-foreground: #262320;
-  --popover: #FFFFFF;
-  --popover-foreground: #262320;
+  --card: #FFFDF9;
+  --card-foreground: #2A2521;
+  --popover: #FFFDF9;
+  --popover-foreground: #2A2521;
 
-  --secondary: #ECE4D8;
-  --secondary-foreground: #262320;
-  --muted: #ECE4D8;
-  --muted-foreground: #6E6660;
-  --accent: #ECE4D8;
-  --accent-foreground: #262320;
+  --secondary: #EEE7DB;
+  --secondary-foreground: #2A2521;
+  --muted: #EEE7DB;
+  --muted-foreground: #6B6259;
+  --accent: #EEE7DB;
+  --accent-foreground: #2A2521;
 
   --destructive: #9C4A3C;
   --destructive-foreground: #F7F3ED;
   --success: #5C6B4C;
   --success-foreground: #F7F3ED;
 
-  --border: #E0D6C6;
-  --input: #E0D6C6;
-  --ring: #B4986A;
+  --border: #E2D8C6;
+  --input: #E2D8C6;
+  --ring: #A98A55;
 }
 
 @layer base {
@@ -83,6 +88,10 @@
   html { scroll-behavior: smooth; overflow-x: hidden; }
   body {
     background-color: var(--color-background);
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, #FDFBF6 0%, transparent 60%),
+      radial-gradient(90% 60% at 100% 100%, #F2EBDF 0%, transparent 55%);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-weight: 400;
@@ -93,8 +102,9 @@
     font-family: var(--font-display);
     color: var(--color-foreground);
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.005em;
   }
+  ::selection { background: var(--gold-soft); color: var(--charcoal); }
 }
 
 @layer utilities {
@@ -123,6 +133,29 @@
     @apply inline-flex items-center justify-center rounded-none border border-[color:var(--charcoal)] bg-transparent px-9 py-4 text-[11px] font-medium tracking-[0.22em] uppercase text-[color:var(--charcoal)] transition-colors duration-300 hover:bg-[color:var(--charcoal)] hover:text-[color:var(--bone)];
   }
   .rule { height: 1px; background: var(--color-border); }
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-soft) 20%, var(--gold) 50%, var(--gold-soft) 80%, transparent);
+  }
+  .script-accent {
+    font-family: var(--font-serif-accent);
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+  .text-gold { color: var(--gold); }
+  .frame-keepsake {
+    background: var(--card);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 1px 0 0 #FFFFFF inset, 0 18px 40px -28px rgba(42, 37, 33, 0.35);
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center rounded-none px-9 py-4 text-[11px] font-medium tracking-[0.22em] uppercase transition-colors duration-300;
+    background: var(--gold);
+    color: #FFFDF9;
+  }
+  .btn-gold:hover { background: var(--gold-hover); }
 }
 
 .font-display { font-family: var(--font-display); }
