@@ -58,6 +58,7 @@ export const TIERS: Tier[] = [
     extras: [...ENGRAVING, LOST_PENDANT],
     shipping: 2.99,
     variantId: "48859433238682",
+    displayPrice: 59.99,
   },
   {
     id: "three",
@@ -73,6 +74,7 @@ export const TIERS: Tier[] = [
     ],
     shipping: null,
     variantId: "48859433336986",
+    displayPrice: 99.99,
   },
   {
     id: "six",
