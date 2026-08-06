@@ -40,6 +40,8 @@ export type Tier = {
   shipping: number | null;
   /** Single Shopify variant — finish is no longer part of the variant. */
   variantId: string;
+  /** Optional frontend price override when Shopify hasn't synced yet. */
+  displayPrice?: number;
 };
 
 const ENGRAVING: Extra[] = SHOW_BACK_ENGRAVING ? [{ label: "Engraving on the back", value: 19 }] : [];
@@ -56,6 +58,7 @@ export const TIERS: Tier[] = [
     extras: [...ENGRAVING, LOST_PENDANT],
     shipping: 2.99,
     variantId: "48859433238682",
+    displayPrice: 59.99,
   },
   {
     id: "three",
@@ -71,6 +74,7 @@ export const TIERS: Tier[] = [
     ],
     shipping: null,
     variantId: "48859433336986",
+    displayPrice: 99.99,
   },
   {
     id: "six",
