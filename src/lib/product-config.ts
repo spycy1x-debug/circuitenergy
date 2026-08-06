@@ -40,6 +40,8 @@ export type Tier = {
   shipping: number | null;
   /** Single Shopify variant — finish is no longer part of the variant. */
   variantId: string;
+  /** Optional frontend price override when Shopify hasn't synced yet. */
+  displayPrice?: number;
 };
 
 const ENGRAVING: Extra[] = SHOW_BACK_ENGRAVING ? [{ label: "Engraving on the back", value: 19 }] : [];
