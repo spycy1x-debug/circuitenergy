@@ -774,7 +774,7 @@ function NecklacePage() {
             )}
             {addError && <p className="mt-3 text-center text-xs text-[color:var(--destructive)]">{addError}</p>}
             <p className="mt-4 text-center text-[11px] text-[color:var(--muted-foreground)]">
-              Hand-engraved by a professional · Digital proof before we ship · 30-day guarantee
+              Free digital proof before we engrave · 30-day remake or refund · Every order helps a rescue dog
             </p>
           </div>
         </div>
