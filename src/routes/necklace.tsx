@@ -491,7 +491,24 @@ function NecklacePage() {
   async function addToCart() {
     setAttempted(true);
     setAddError(null);
-    if (!complete) return;
+    if (active.some((s) => s.uploading)) {
+      setAddError("Your photo is still uploading — one moment.");
+      return;
+    }
+    if (!complete) {
+      const idx = active.findIndex((s) => !s.url || !s.name.trim());
+      setAddError(
+        tier.pieces > 1
+          ? `Add a photo and a name for necklace ${idx + 1} to continue.`
+          : "Add a photo and a name to continue.",
+      );
+      if (typeof document !== "undefined") {
+        document
+          .getElementById(`necklace-slot-${idx}`)
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      return;
+    }
     setAdding(true);
     try {
       const attributes = active.flatMap((s, i) => [
@@ -502,7 +519,7 @@ function NecklacePage() {
       attributes.push({ key: "Fulfillment", value: fulfillmentSummary });
       await cart.addConfigured({ variantId, attributes });
       // Only after a successful cartCreate / cartLinesAdd response
-      const pkgPrice = prices[variantId]?.amount ?? 0;
+      const pkgPrice = prices[variantId]?.amount ?? tier.displayPrice ?? 0;
       trackAddToCart(variantId, pkgPrice + (protection ? 4.99 : 0), tier.pieces);
     } catch (e) {
       setAddError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
@@ -510,6 +527,7 @@ function NecklacePage() {
       setAdding(false);
     }
   }
+
 
   return (
     <div className="bg-[color:var(--bone)]">
