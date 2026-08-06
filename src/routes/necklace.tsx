@@ -612,6 +612,7 @@ function NecklacePage() {
                                   </span>
                                 </li>
                               )}
+                              <BonusRow label="♥ Helps fund the rescue and care of dogs in need" />
                             </ul>
                           </div>
                         </div>
@@ -773,7 +774,7 @@ function NecklacePage() {
             )}
             {addError && <p className="mt-3 text-center text-xs text-[color:var(--destructive)]">{addError}</p>}
             <p className="mt-4 text-center text-[11px] text-[color:var(--muted-foreground)]">
-              Hand-engraved by a professional · Digital proof before we ship · 30-day guarantee
+              Free digital proof before we engrave · 30-day remake or refund · Every order helps a rescue dog
             </p>
           </div>
         </div>
@@ -837,6 +838,19 @@ function NecklacePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Giving back band */}
+      <section className="bg-[color:var(--sand)]">
+        <div className="container-x py-16 md:py-24 text-center">
+          <h2 className="font-display text-2xl md:text-3xl max-w-xl mx-auto leading-snug">
+            Every necklace helps a dog who wasn't as lucky.
+          </h2>
+          <p className="mt-5 max-w-2xl mx-auto text-sm leading-7 text-[color:var(--muted-foreground)]">
+            10% of every sale goes toward the rescue and care of dogs saved from abuse and neglect.
+            You're buying something for the one you love. It happens to help one who never had anyone.
+          </p>
         </div>
       </section>
 
