@@ -436,16 +436,19 @@ function NecklacePage() {
   const { protection } = useCart();
 
   useEffect(() => {
+    const fallback = tier.displayPrice ?? 0;
+    if (fallback > 0) trackViewContent(variantId, fallback);
     const ids = TIERS.map((t) => t.variantId);
     fetchVariantPrices(ids)
       .then((p) => {
         setPrices(p);
-        const amount = p[variantId]?.amount;
+        const amount = p[variantId]?.amount ?? fallback;
         if (amount) trackViewContent(variantId, amount);
       })
       .catch(() => setPrices({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const active = slots.slice(0, tier.pieces);
   const complete = active.every((s) => s.url && s.name.trim().length > 0);
@@ -488,7 +491,24 @@ function NecklacePage() {
   async function addToCart() {
     setAttempted(true);
     setAddError(null);
-    if (!complete) return;
+    if (active.some((s) => s.uploading)) {
+      setAddError("Your photo is still uploading — one moment.");
+      return;
+    }
+    if (!complete) {
+      const idx = active.findIndex((s) => !s.url || !s.name.trim());
+      setAddError(
+        tier.pieces > 1
+          ? `Add a photo and a name for necklace ${idx + 1} to continue.`
+          : "Add a photo and a name to continue.",
+      );
+      if (typeof document !== "undefined") {
+        document
+          .getElementById(`necklace-slot-${idx}`)
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      return;
+    }
     setAdding(true);
     try {
       const attributes = active.flatMap((s, i) => [
@@ -499,7 +519,7 @@ function NecklacePage() {
       attributes.push({ key: "Fulfillment", value: fulfillmentSummary });
       await cart.addConfigured({ variantId, attributes });
       // Only after a successful cartCreate / cartLinesAdd response
-      const pkgPrice = prices[variantId]?.amount ?? 0;
+      const pkgPrice = prices[variantId]?.amount ?? tier.displayPrice ?? 0;
       trackAddToCart(variantId, pkgPrice + (protection ? 4.99 : 0), tier.pieces);
     } catch (e) {
       setAddError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
@@ -507,6 +527,7 @@ function NecklacePage() {
       setAdding(false);
     }
   }
+
 
   return (
     <div className="bg-[color:var(--bone)]">
@@ -659,7 +680,7 @@ function NecklacePage() {
               </p>
               <div className="mt-5 space-y-4">
                 {active.map((s, i) => (
-                  <div key={i} className="border border-[color:var(--border)] bg-white p-4">
+                  <div key={i} id={`necklace-slot-${i}`} className="scroll-mt-24 border border-[color:var(--border)] bg-white p-4">
                     <div className="caps-label text-[color:var(--muted-foreground)]">Necklace {i + 1}</div>
                     {tier.pieces > 1 && (
                       <div className="mt-3">
