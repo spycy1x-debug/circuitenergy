@@ -680,7 +680,7 @@ function NecklacePage() {
               </p>
               <div className="mt-5 space-y-4">
                 {active.map((s, i) => (
-                  <div key={i} className="border border-[color:var(--border)] bg-white p-4">
+                  <div key={i} id={`necklace-slot-${i}`} className="scroll-mt-24 border border-[color:var(--border)] bg-white p-4">
                     <div className="caps-label text-[color:var(--muted-foreground)]">Necklace {i + 1}</div>
                     {tier.pieces > 1 && (
                       <div className="mt-3">
