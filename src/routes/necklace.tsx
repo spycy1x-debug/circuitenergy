@@ -841,6 +841,19 @@ function NecklacePage() {
         </div>
       </section>
 
+      {/* Giving back band */}
+      <section className="bg-[color:var(--sand)]">
+        <div className="container-x py-16 md:py-24 text-center">
+          <h2 className="font-display text-2xl md:text-3xl max-w-xl mx-auto leading-snug">
+            Every necklace helps a dog who wasn't as lucky.
+          </h2>
+          <p className="mt-5 max-w-2xl mx-auto text-sm leading-7 text-[color:var(--muted-foreground)]">
+            10% of every sale goes toward the rescue and care of dogs saved from abuse and neglect.
+            You're buying something for the one you love. It happens to help one who never had anyone.
+          </p>
+        </div>
+      </section>
+
       {/* 8. Everything else */}
       <section className="container-x py-16 md:py-24">
         <div className="grid gap-12 md:grid-cols-2">
