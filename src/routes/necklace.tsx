@@ -612,6 +612,7 @@ function NecklacePage() {
                                   </span>
                                 </li>
                               )}
+                              <BonusRow label="♥ Helps fund the rescue and care of dogs in need" />
                             </ul>
                           </div>
                         </div>
