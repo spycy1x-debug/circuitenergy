@@ -528,7 +528,7 @@ function NecklacePage() {
               <div className="eyebrow">Choose your set</div>
               <div className="mt-4 space-y-3">
                 {TIERS.map((t) => {
-                  const tPrice = prices[t.variantId]?.amount ?? null;
+                  const tPrice = t.displayPrice ?? prices[t.variantId]?.amount ?? null;
                   const selected = t.id === tierId;
                   const perPiece = tPrice !== null ? tPrice / t.pieces : null;
                   const freePieces = t.pieces - PAID_PIECES[t.id];
