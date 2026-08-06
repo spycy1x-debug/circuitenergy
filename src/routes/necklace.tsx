@@ -436,16 +436,19 @@ function NecklacePage() {
   const { protection } = useCart();
 
   useEffect(() => {
+    const fallback = tier.displayPrice ?? 0;
+    if (fallback > 0) trackViewContent(variantId, fallback);
     const ids = TIERS.map((t) => t.variantId);
     fetchVariantPrices(ids)
       .then((p) => {
         setPrices(p);
-        const amount = p[variantId]?.amount;
+        const amount = p[variantId]?.amount ?? fallback;
         if (amount) trackViewContent(variantId, amount);
       })
       .catch(() => setPrices({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const active = slots.slice(0, tier.pieces);
   const complete = active.every((s) => s.url && s.name.trim().length > 0);
