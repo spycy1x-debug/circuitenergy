@@ -18,24 +18,45 @@ export function eventId() {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}-${Math.random().toString(16).slice(2)}`;
 }
 
-function track(name: string, params: Record<string, unknown>) {
-  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
+function send(name: string, params: Record<string, unknown>) {
   const value = Number(params["value"]);
-  if (!Number.isFinite(value) || value <= 0) return; // Meta can't optimize without a real value
+  if (!Number.isFinite(value) || value <= 0) return false; // Meta can't optimize without a real value
+  if (typeof window === "undefined" || typeof window.fbq !== "function") return false;
   window.fbq("track", name, { ...params, value, currency: "USD" }, { eventID: eventId() });
-}
-
-/** Fires at most once per browser session for a given key (guards reload / back-nav). */
-function oncePerSession(key: string) {
-  if (typeof window === "undefined") return false;
-  try {
-    if (sessionStorage.getItem(key)) return false;
-    sessionStorage.setItem(key, "1");
-  } catch {
-    /* private mode — allow */
-  }
   return true;
 }
+
+/** Fires as soon as fbq exists — retries briefly if the base pixel is still loading. */
+function track(name: string, params: Record<string, unknown>, sessionKey?: string) {
+  if (typeof window === "undefined") return;
+  if (sessionKey && alreadySent(sessionKey)) return;
+  let tries = 0;
+  const attempt = () => {
+    if (send(name, params)) {
+      if (sessionKey) markSent(sessionKey);
+      return;
+    }
+    if (typeof window.fbq !== "function" && tries++ < 40) setTimeout(attempt, 250);
+  };
+  attempt();
+}
+
+function alreadySent(key: string) {
+  try {
+    return !!sessionStorage.getItem(key);
+  } catch {
+    return false;
+  }
+}
+
+function markSent(key: string) {
+  try {
+    sessionStorage.setItem(key, "1");
+  } catch {
+    /* private mode — ignore */
+  }
+}
+
 
 export const PRODUCT_NAME = "Custom Pet Portrait Necklace";
 
