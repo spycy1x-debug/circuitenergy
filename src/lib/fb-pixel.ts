@@ -61,14 +61,18 @@ function markSent(key: string) {
 export const PRODUCT_NAME = "Custom Pet Portrait Necklace";
 
 export function trackViewContent(variantId: string, price: number) {
-  if (!oncePerSession(`fb_vc_${variantId}`)) return;
-  track("ViewContent", {
-    content_type: "product",
-    content_ids: [variantId],
-    content_name: PRODUCT_NAME,
-    value: price,
-  });
+  track(
+    "ViewContent",
+    {
+      content_type: "product",
+      content_ids: [variantId],
+      content_name: PRODUCT_NAME,
+      value: price,
+    },
+    `fb_vc_${variantId}`,
+  );
 }
+
 
 export function trackAddToCart(variantId: string, value: number, numItems: number) {
   track("AddToCart", {
