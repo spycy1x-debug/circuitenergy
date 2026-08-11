@@ -58,10 +58,12 @@ function AccountPage() {
     <section className="container-x py-20 md:py-28">
       <div className="mx-auto max-w-lg text-center">
         <div className="eyebrow">The Seralie list</div>
-        <h1 className="mt-5 font-display text-4xl md:text-5xl">Early access to new pieces.</h1>
+        <h1 className="mt-5 font-display text-4xl md:text-5xl">Offers, first.</h1>
         <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-          A quiet note when a new keepsake is made, and first access before anyone else. No noise.
+          Subscriber-only offers, restock notes and the occasional plain-spoken note on digestion and daily
+          nutrition. No noise.
         </p>
+
 
         <form onSubmit={onSubmit} className="mt-10 space-y-3 text-left" noValidate>
           <label className="block">
