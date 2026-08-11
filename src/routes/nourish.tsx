@@ -193,7 +193,6 @@ function BuyBox() {
                 <span className="block font-display text-lg text-[color:var(--navy)]">{t.label}</span>
                 <span className="block text-xs text-[color:var(--muted-foreground)]">
                   {t.bottles} {t.bottles === 1 ? "bottle" : "bottles"}
-                  {subscribe ? ` · ${t.cadence.toLowerCase()}` : ""}
                 </span>
               </span>
               <span className="shrink-0 text-right">
