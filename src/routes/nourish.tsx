@@ -10,7 +10,7 @@ import {
   PRODUCT_SUBTITLE,
   GUARANTEE_DAYS,
 } from "@/lib/product-config";
-import { cart, fetchVariantPrices, fetchSellingPlans, type PlanAllocation } from "@/lib/shopify-cart";
+import { cart } from "@/lib/shopify-cart";
 import { trackViewContent, trackAddToCart } from "@/lib/fb-pixel";
 import { GALLERY } from "@/lib/gallery";
 import { Reviews } from "@/components/site/Reviews";
@@ -112,39 +112,14 @@ function Accordion({ title, children }: { title: string; children: React.ReactNo
 function BuyBox() {
   const [tierId, setTierId] = useState<TierId>(DEFAULT_TIER);
   const [subscribe, setSubscribe] = useState(true);
-  const [prices, setPrices] = useState<Record<string, { amount: number; compareAt: number | null }>>({});
-  const [plans, setPlans] = useState<Record<string, PlanAllocation>>({});
   const [adding, setAdding] = useState(false);
 
-  useEffect(() => {
-    let alive = true;
-    fetchVariantPrices(TIERS.map((t) => t.variantId))
-      .then((m) => alive && setPrices(m))
-      .catch(() => {});
-    fetchSellingPlans()
-      .then((m) => alive && setPlans(m))
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, []);
-
   const tier = tierById(tierId);
-  const oneTime = prices[tier.variantId]?.amount ?? null;
-  const plan = plans[tier.variantId] ?? null;
-  const subPrice = plan?.price || null;
-  const active = subscribe && subPrice ? subPrice : oneTime;
+  const active = subscribe ? tier.subPrice : tier.oneTimePrice;
 
   useEffect(() => {
-    if (oneTime) trackViewContent(tier.variantId, oneTime);
-  }, [oneTime, tier.variantId]);
-
-  const priceFor = (id: string, bottles: number) => {
-    const ot = prices[id]?.amount ?? null;
-    const sp = plans[id]?.price ?? null;
-    const p = subscribe && sp ? sp : ot;
-    return { p, per: p ? p / bottles : null };
-  };
+    trackViewContent(tier.variantId, tier.oneTimePrice);
+  }, [tier.variantId, tier.oneTimePrice]);
 
   async function addToCart() {
     if (adding) return;
@@ -153,9 +128,10 @@ function BuyBox() {
       await cart.add({
         variantId: tier.variantId,
         quantity: 1,
-        sellingPlanId: subscribe ? plan?.sellingPlanId : null,
+        sellingPlanId: subscribe ? tier.sellingPlanId : null,
+        attributes: subscribe ? [{ key: "Subscription", value: tier.cadence }] : undefined,
       });
-      if (active) trackAddToCart(tier.variantId, active, tier.bottles);
+      trackAddToCart(tier.variantId, active, tier.bottles);
     } catch {
       /* error surfaces in the drawer */
     } finally {
@@ -185,11 +161,12 @@ function BuyBox() {
         ))}
       </ul>
 
-      {/* Tier cards */}
+      {/* Tier cards — per-bottle pricing only */}
       <div className="mt-8 space-y-3">
         {TIERS.map((t) => {
           const sel = t.id === tierId;
-          const { p, per } = priceFor(t.variantId, t.bottles);
+          const per = Math.floor(((subscribe ? t.subPrice : t.oneTimePrice) / t.bottles) * 100) / 100;
+          const perCompare = t.compareAt ? Math.floor((t.compareAt / t.bottles) * 100) / 100 : null;
           return (
             <button
               key={t.id}
@@ -202,7 +179,7 @@ function BuyBox() {
             >
               {t.badge && (
                 <span className="absolute -top-2 right-3 bg-[color:var(--navy)] px-2 py-0.5 text-[9px] uppercase tracking-[0.16em] text-[color:var(--ivory)]">
-                  {t.id === "five" && per ? `${t.badge} · ${money(per)}/bottle` : t.badge}
+                  {t.badge}
                 </span>
               )}
               <span
@@ -216,62 +193,33 @@ function BuyBox() {
                 <span className="block font-display text-lg text-[color:var(--navy)]">{t.label}</span>
                 <span className="block text-xs text-[color:var(--muted-foreground)]">
                   {t.bottles} {t.bottles === 1 ? "bottle" : "bottles"}
-                  {subscribe && plans[t.variantId] ? ` · ${t.cadence.toLowerCase()}` : ""}
+                  {subscribe ? ` · ${t.cadence.toLowerCase()}` : ""}
                 </span>
               </span>
               <span className="shrink-0 text-right">
-                {t.compareAt && (
+                {perCompare && (
                   <span className="block text-xs text-[color:var(--taupe)] line-through tabular-nums">
-                    {money(t.compareAt)}
+                    {money(perCompare)}/bottle
                   </span>
                 )}
                 <span className="block font-display text-xl tabular-nums text-[color:var(--navy)]">
-                  {p ? money(p) : "—"}
+                  {money(per)}
                 </span>
-                {per && (
-                  <span className="block text-[11px] text-[color:var(--muted-foreground)] tabular-nums">
-                    {money(per)}/bottle
-                  </span>
-                )}
+                <span className="block text-[11px] text-[color:var(--muted-foreground)]">
+                  per bottle
+                </span>
               </span>
             </button>
           );
         })}
       </div>
 
-      {/* Subscribe toggle */}
-      <div className="mt-5 flex items-start gap-3 border border-[color:var(--border)] bg-white px-4 py-4">
-        <button
-          role="switch"
-          aria-checked={subscribe}
-          aria-labelledby="sub-label"
-          onClick={() => setSubscribe((v) => !v)}
-          className={`relative mt-0.5 inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${
-            subscribe ? "bg-[color:var(--navy)]" : "bg-[color:var(--border)]"
-          }`}
-        >
-          <span
-            className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
-              subscribe ? "translate-x-[18px]" : "translate-x-[2px]"
-            }`}
-          />
-        </button>
-        <div className="min-w-0">
-          <div id="sub-label" className="text-sm text-[color:var(--navy)]">
-            Subscribe and save 25% — {tier.cadence.toLowerCase()}
-          </div>
-          <p className="mt-1 text-xs text-[color:var(--muted-foreground)]">
-            Skip, pause or cancel anytime.
-          </p>
-        </div>
-      </div>
-
-      <button onClick={addToCart} disabled={adding || !active} className="btn-primary mt-5 w-full">
-        {adding ? "Adding…" : active ? `Add to cart — ${money(active)}` : "Add to cart"}
+      <button onClick={addToCart} disabled={adding} className="btn-primary mt-6 w-full">
+        {adding ? "Adding…" : `Add to cart — ${money(active)}`}
       </button>
 
       <p className="mt-3 text-center text-xs text-[color:var(--muted-foreground)]">
-        Ships from our US facility within 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
+        Free US shipping over $50 · Ships within 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
       </p>
       <p className="mt-2 text-center text-xs text-[color:var(--muted-foreground)]">
         Most people give it 6–8 weeks. That is how long it takes for nutrient levels and daily habits to
@@ -281,9 +229,43 @@ function BuyBox() {
       <div className="mt-6">
         <TrustRow />
       </div>
+
+      {/* Subscribe toggle — small, below the trust row */}
+      <button
+        role="switch"
+        aria-checked={subscribe}
+        onClick={() => setSubscribe((v) => !v)}
+        className="mt-4 flex w-full items-center justify-between gap-3 border border-[color:var(--border)] bg-white px-3 py-2.5 text-left"
+      >
+        <span className="flex items-center gap-2.5">
+          <span
+            className={`relative inline-flex h-4 w-8 shrink-0 items-center rounded-full transition-colors ${
+              subscribe ? "bg-[color:var(--navy)]" : "bg-[color:var(--border)]"
+            }`}
+          >
+            <span
+              className={`inline-block h-3 w-3 transform rounded-full bg-white shadow transition-transform ${
+                subscribe ? "translate-x-[17px]" : "translate-x-[2px]"
+              }`}
+            />
+          </span>
+          <span className="text-xs text-[color:var(--navy)]">
+            {subscribe
+              ? `Subscribing — save 25%, ${tier.cadence.toLowerCase()}`
+              : "Subscribe and save 25%"}
+          </span>
+        </span>
+        <span className="shrink-0 text-[11px] tabular-nums text-[color:var(--muted-foreground)]">
+          {subscribe ? `One-time ${money(tier.oneTimePrice)}` : money(tier.oneTimePrice)}
+        </span>
+      </button>
+      <p className="mt-1.5 text-center text-[11px] text-[color:var(--muted-foreground)]">
+        Skip, pause or cancel anytime.
+      </p>
     </div>
   );
 }
+
 
 function Stage({ n, title, body }: { n: string; title: string; body: string }) {
   return (

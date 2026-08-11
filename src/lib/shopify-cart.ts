@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react";
 import { storefront } from "./storefront.functions";
-import { toGid, PRODUCT_HANDLE } from "./product-config";
+import { toGid } from "./product-config";
 import { trackInitiateCheckout } from "./fb-pixel";
 
 // =====================================================================
@@ -97,8 +97,8 @@ const CART_FIELDS = `
       node {
         id
         quantity
+        cost { totalAmount { amount } amountPerQuantity { amount } }
         attributes { key value }
-        sellingPlanAllocation { sellingPlan { id name } }
         merchandise {
           ... on ProductVariant {
             id
@@ -112,6 +112,7 @@ const CART_FIELDS = `
     }
   }
 `;
+
 
 function formatCheckoutUrl(url: string) {
   try {
@@ -129,18 +130,21 @@ function mapCart(cart: any) {
   state.lines = (cart.lines?.edges || []).map((e: any) => {
     const n = e.node;
     const m = n.merchandise;
+    const attrs = (n.attributes || []).filter((a: any) => a.key && a.value);
+    const planAttr = attrs.find((a: any) => a.key === "Subscription");
     return {
       id: n.id,
       variantId: m.id,
       title: m.product?.title || "",
       subtitle: m.title === "Default Title" ? "" : m.title,
       image: m.image?.url || m.product?.featuredImage?.url || "",
-      unitPrice: parseFloat(m.price?.amount || "0"),
+      unitPrice: parseFloat(n.cost?.amountPerQuantity?.amount || m.price?.amount || "0"),
       quantity: n.quantity,
-      sellingPlanName: n.sellingPlanAllocation?.sellingPlan?.name || null,
-      attributes: (n.attributes || []).filter((a: any) => a.key && a.value),
+      sellingPlanName: planAttr?.value || null,
+      attributes: attrs.filter((a: any) => a.key !== "Subscription"),
     } as CartLine;
   });
+
 }
 
 /** Live prices straight from Shopify — never hardcoded in the UI. */
@@ -172,59 +176,12 @@ export async function fetchVariantPrices(
   return out;
 }
 
-export type PlanAllocation = {
-  /** Full selling plan GID — pass straight to the cart line. */
-  sellingPlanId: string;
-  name: string;
-  /** Subscription price for this variant, from Shopify. */
-  price: number;
-  compareAt: number | null;
-};
-
 /**
- * Selling plans are fetched at runtime — plan IDs change whenever a plan is
- * recreated in Shopify, so they are never hardcoded.
- * Returns a map of numeric variant id -> allocation.
+ * Selling plan IDs are hardcoded in product-config (verified live in Shopify).
+ * The storefront token has no `unauthenticated_read_selling_plans` scope, so
+ * plan data can never be queried at runtime.
  */
-export async function fetchSellingPlans(
-  handle: string = PRODUCT_HANDLE,
-): Promise<Record<string, PlanAllocation>> {
-  const data = await gql<{ product: any }>(
-    `query($handle: String!) {
-      product(handle: $handle) {
-        id
-        variants(first: 20) {
-          nodes {
-            id
-            sellingPlanAllocations(first: 10) {
-              nodes {
-                sellingPlan { id name }
-                priceAdjustments {
-                  price { amount }
-                  compareAtPrice { amount }
-                }
-              }
-            }
-          }
-        }
-      }
-    }`,
-    { handle },
-  );
-  const out: Record<string, PlanAllocation> = {};
-  for (const v of data.product?.variants?.nodes || []) {
-    const alloc = v.sellingPlanAllocations?.nodes?.[0];
-    if (!alloc?.sellingPlan?.id) continue;
-    const adj = alloc.priceAdjustments?.[0];
-    out[String(v.id).split("/").pop()!] = {
-      sellingPlanId: alloc.sellingPlan.id,
-      name: alloc.sellingPlan.name || "Subscription",
-      price: parseFloat(adj?.price?.amount || "0"),
-      compareAt: adj?.compareAtPrice?.amount ? parseFloat(adj.compareAtPrice.amount) : null,
-    };
-  }
-  return out;
-}
+
 
 type LineInput = {
   merchandiseId: string;

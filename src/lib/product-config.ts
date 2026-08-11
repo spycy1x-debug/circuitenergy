@@ -8,6 +8,7 @@ export const PRODUCT_TITLE = "NOURISH™";
 export const PRODUCT_SUBTITLE = "Digestive Support + Daily Essentials";
 
 export const SUBSCRIBE_DISCOUNT = 0.25; // 25% off one-time price
+export const FREE_SHIPPING_THRESHOLD = 50;
 
 export type TierId = "one" | "three" | "five";
 
@@ -21,6 +22,12 @@ export type Tier = {
   cadence: string;
   /** Struck-through reference price (true multiple of the single bottle). */
   compareAt: number | null;
+  /** One-time purchase price, verified in Shopify. */
+  oneTimePrice: number;
+  /** Subscription price for this tier's selling plan. */
+  subPrice: number;
+  /** Full selling plan GID for this variant. */
+  sellingPlanId: string;
 };
 
 export const TIERS: Tier[] = [
@@ -31,6 +38,9 @@ export const TIERS: Tier[] = [
     variantId: "48994580168858",
     cadence: "Delivered every month",
     compareAt: null,
+    oneTimePrice: 39.99,
+    subPrice: 29.99,
+    sellingPlanId: "gid://shopify/SellingPlan/305798512794",
   },
   {
     id: "three",
@@ -40,6 +50,9 @@ export const TIERS: Tier[] = [
     variantId: "48994580201626",
     cadence: "Delivered every 3 months",
     compareAt: 119.97,
+    oneTimePrice: 79.98,
+    subPrice: 59.99,
+    sellingPlanId: "gid://shopify/SellingPlan/305798545562",
   },
   {
     id: "five",
@@ -49,6 +62,9 @@ export const TIERS: Tier[] = [
     variantId: "48994580234394",
     cadence: "Delivered every 5 months",
     compareAt: 199.95,
+    oneTimePrice: 119.97,
+    subPrice: 89.98,
+    sellingPlanId: "gid://shopify/SellingPlan/305798480026",
   },
 ];
 
@@ -57,6 +73,7 @@ export const DEFAULT_TIER: TierId = "five";
 export function tierById(id: TierId): Tier {
   return TIERS.find((t) => t.id === id) ?? TIERS[0]!;
 }
+
 
 export function toGid(variantId: string) {
   return `gid://shopify/ProductVariant/${variantId}`;
