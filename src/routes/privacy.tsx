@@ -56,7 +56,6 @@ function PrivacyPage() {
           </Section>
 
           <Section title="Your rights">
-
             <p>
               You can ask us for a copy of the data we hold about you, ask us to correct it, or ask us to delete
               it. Email support@seralie.com and we will respond within 30 days.
@@ -65,10 +64,11 @@ function PrivacyPage() {
 
           <Section title="Cookies and analytics">
             <p>
-              We use cookies to keep your bag intact between visits and to measure how the site is used. You can
-              block cookies in your browser; the bag may not persist if you do.
+              We use cookies to keep your cart intact between visits and to measure how the site is used. You can
+              block cookies in your browser; the cart may not persist if you do.
             </p>
           </Section>
+
 
           <Section title="Contact">
             <p>Questions about this policy: support@seralie.com.</p>
