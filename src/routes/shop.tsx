@@ -1,57 +1,53 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PhotoSlot } from "@/components/site/PhotoSlot";
-import { PRODUCT_TITLE } from "@/lib/product-config";
+import { GALLERY } from "@/lib/gallery";
 
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — Seralie Keepsake Jewellery" },
+      { title: "Shop — Seralie NOURISH™" },
       {
         name: "description",
-        content: "Shop Seralie keepsake jewellery — photo-engraved pendants made to order in gold, silver, and rose gold.",
+        content:
+          "Shop NOURISH™ — digestive support and daily essentials in one capsule. Free US shipping and a 60-day money-back guarantee.",
       },
-      { property: "og:title", content: "Shop — Seralie Keepsake Jewellery" },
-      { property: "og:description", content: "Photo-engraved pendants, made to order." },
+      { property: "og:title", content: "Shop — Seralie NOURISH™" },
+      {
+        property: "og:description",
+        content: "Digestive support and daily essentials in one capsule.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://seralie.com/shop" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://seralie.com/shop" }],
   }),
   component: ShopPage,
 });
 
 function ShopPage() {
   return (
-    <section className="container-x py-16 md:py-24">
-      <div className="max-w-xl">
-        <div className="eyebrow">The collection</div>
-        <h1 className="mt-4 font-display text-4xl md:text-5xl">Shop</h1>
-        <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-          Each piece is engraved to order from a photo you send us. New pieces are added slowly.
-        </p>
-      </div>
+    <section className="container-x py-14 md:py-20">
+      <div className="eyebrow">Shop</div>
+      <h1 className="mt-3 font-display text-4xl md:text-5xl">Everything we make</h1>
+      <p className="mt-4 max-w-md text-sm leading-7 text-[color:var(--muted-foreground)]">
+        One formula, done properly.
+      </p>
 
-      <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        <Link to="/necklace" className="group block">
-          <PhotoSlot label="Photo Necklace — product image" ratio="4/5" className="transition-opacity group-hover:opacity-90" />
-          <h2 className="mt-5 font-display text-2xl">{PRODUCT_TITLE}</h2>
-          <p className="mt-1 text-sm text-[color:var(--muted-foreground)]">Gold · Silver · Rose Gold</p>
-          <p className="mt-3 caps-label text-[color:var(--charcoal)]">Configure →</p>
-        </Link>
-
-        <div className="border border-dashed border-[color:var(--sand-deep)] p-10 flex flex-col justify-center text-center">
-          <div className="eyebrow">Coming next</div>
-          <p className="mt-4 font-display text-2xl">Portrait pieces</p>
-          <p className="mt-3 text-sm leading-7 text-[color:var(--muted-foreground)]">
-            The same engraving, made for the people you love.
+      <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <Link to="/nourish" className="group block">
+          <div className="overflow-hidden border border-[color:var(--border)] bg-white">
+            <img
+              src={GALLERY[0]!.url}
+              alt={GALLERY[0]!.alt}
+              className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+          </div>
+          <h2 className="mt-5 font-display text-2xl">NOURISH™</h2>
+          <p className="mt-1 text-sm text-[color:var(--muted-foreground)]">
+            Digestive Support + Daily Essentials · 60 capsules
           </p>
-          <Link to="/account" className="btn-outline mt-7 self-center">
-            Be told first
-          </Link>
-        </div>
-
-        <div className="hidden lg:flex flex-col justify-end">
-          <PhotoSlot label="Editorial still life" ratio="4/5" />
-        </div>
+          <span className="mt-3 inline-block caps-label text-[color:var(--navy)]">View product</span>
+        </Link>
       </div>
     </section>
   );
