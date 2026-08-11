@@ -130,6 +130,8 @@ function BuyBox() {
         quantity: 1,
         sellingPlanId: subscribe ? tier.sellingPlanId : null,
         attributes: subscribe ? [{ key: "Subscription", value: tier.cadence }] : undefined,
+        bundleLabel: tier.label,
+        displayPrice: active,
       });
       trackAddToCart(tier.variantId, active, tier.bottles);
     } catch {
