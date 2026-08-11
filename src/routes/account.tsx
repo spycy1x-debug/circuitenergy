@@ -5,17 +5,19 @@ import { Mail } from "lucide-react";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "The Seralie List — Early Access & Proof Notes" },
+      { title: "The Seralie List — Offers & Product Notes" },
       {
         name: "description",
         content:
-          "Join the Seralie list for early access to new keepsake pieces and a quiet note when something new is made.",
+          "Join the Seralie list for restock notes, subscriber offers and occasional guidance on getting the most from NOURISH™.",
       },
       { property: "og:title", content: "The Seralie List" },
-      { property: "og:description", content: "Early access to new keepsake pieces, straight to your inbox." },
+      { property: "og:description", content: "Restock notes and subscriber offers, straight to your inbox." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://seralie.com/account" },
+      { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://seralie.com/account" }],
   }),
   component: AccountPage,
 });
