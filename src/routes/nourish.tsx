@@ -229,35 +229,30 @@ function BuyBox() {
         <TrustRow />
       </div>
 
-      {/* Subscribe toggle — small, below the trust row */}
-      <button
-        role="switch"
-        aria-checked={subscribe}
-        onClick={() => setSubscribe((v) => !v)}
-        className="mt-4 flex w-full items-center justify-between gap-3 border border-[color:var(--border)] bg-white px-3 py-2.5 text-left"
-      >
-        <span className="flex items-center gap-2.5">
+      {/* Subscribe toggle — compact pill */}
+      <div className="mt-4 flex justify-center">
+        <button
+          role="switch"
+          aria-checked={subscribe}
+          onClick={() => setSubscribe((v) => !v)}
+          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-white px-3 py-1.5"
+        >
           <span
-            className={`relative inline-flex h-4 w-8 shrink-0 items-center rounded-full transition-colors ${
+            className={`relative inline-flex h-3.5 w-7 shrink-0 items-center rounded-full transition-colors ${
               subscribe ? "bg-[color:var(--navy)]" : "bg-[color:var(--border)]"
             }`}
           >
             <span
-              className={`inline-block h-3 w-3 transform rounded-full bg-white shadow transition-transform ${
-                subscribe ? "translate-x-[17px]" : "translate-x-[2px]"
+              className={`inline-block h-2.5 w-2.5 transform rounded-full bg-white shadow transition-transform ${
+                subscribe ? "translate-x-[15px]" : "translate-x-[2px]"
               }`}
             />
           </span>
-          <span className="text-xs text-[color:var(--navy)]">
-            {subscribe
-              ? `Subscribing — save 25%, ${tier.cadence.toLowerCase()}`
-              : "Subscribe and save 25%"}
+          <span className="text-[11px] text-[color:var(--navy)]">
+            {subscribe ? "Subscribe & save 25%" : `One-time ${money(tier.oneTimePrice)}`}
           </span>
-        </span>
-        <span className="shrink-0 text-[11px] tabular-nums text-[color:var(--muted-foreground)]">
-          {subscribe ? `One-time ${money(tier.oneTimePrice)}` : money(tier.oneTimePrice)}
-        </span>
-      </button>
+        </button>
+      </div>
       <p className="mt-1.5 text-center text-[11px] text-[color:var(--muted-foreground)]">
         Skip, pause or cancel anytime.
       </p>
