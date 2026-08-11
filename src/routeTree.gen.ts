@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as NecklaceRouteImport } from './routes/necklace'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
@@ -28,11 +27,6 @@ const ShopRoute = ShopRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NecklaceRoute = NecklaceRouteImport.update({
-  id: '/necklace',
-  path: '/necklace',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -78,7 +72,6 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
-  '/necklace': typeof NecklaceRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -90,7 +83,6 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
-  '/necklace': typeof NecklaceRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -103,7 +95,6 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
-  '/necklace': typeof NecklaceRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -117,7 +108,6 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
-    | '/necklace'
     | '/privacy'
     | '/shop'
     | '/admin/analytics'
@@ -129,7 +119,6 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
-    | '/necklace'
     | '/privacy'
     | '/shop'
     | '/admin/analytics'
@@ -141,7 +130,6 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/login'
-    | '/necklace'
     | '/privacy'
     | '/shop'
     | '/admin/analytics'
@@ -154,7 +142,6 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   LoginRoute: typeof LoginRoute
-  NecklaceRoute: typeof NecklaceRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
@@ -175,13 +162,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/necklace': {
-      id: '/necklace'
-      path: '/necklace'
-      fullPath: '/necklace'
-      preLoaderRoute: typeof NecklaceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -242,7 +222,6 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   LoginRoute: LoginRoute,
-  NecklaceRoute: NecklaceRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
@@ -251,13 +230,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
