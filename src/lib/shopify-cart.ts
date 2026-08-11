@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react";
 import { storefront } from "./storefront.functions";
-import { toGid } from "./product-config";
+import { TIERS, toGid } from "./product-config";
 import { trackInitiateCheckout } from "./fb-pixel";
 
 // =====================================================================
@@ -132,16 +132,30 @@ function mapCart(cart: any) {
     const m = n.merchandise;
     const attrs = (n.attributes || []).filter((a: any) => a.key && a.value);
     const planAttr = attrs.find((a: any) => a.key === "Subscription");
+    const bundleAttr = attrs.find((a: any) => a.key === "_Bundle");
+    const priceAttr = attrs.find((a: any) => a.key === "_DisplayPrice");
+    const requestedQuantity = Number(attrs.find((a: any) => a.key === "_RequestedQuantity")?.value);
+    const apiQuantity = Number(n.quantity);
+    const apiUnitPrice = Number(n.cost?.amountPerQuantity?.amount || m.price?.amount || 0);
+    const displayPrice = Number(priceAttr?.value);
+    const selectedTier = TIERS.find((tier) => toGid(tier.variantId) === m.id);
+    const configuredPrice = selectedTier
+      ? planAttr
+        ? selectedTier.subPrice
+        : selectedTier.oneTimePrice
+      : null;
     return {
       id: n.id,
       variantId: m.id,
       title: m.product?.title || "",
-      subtitle: m.title === "Default Title" ? "" : m.title,
+      subtitle: bundleAttr?.value || (m.title === "Default Title" ? "" : m.title),
       image: m.image?.url || m.product?.featuredImage?.url || "",
-      unitPrice: parseFloat(n.cost?.amountPerQuantity?.amount || m.price?.amount || "0"),
-      quantity: n.quantity,
+      // The selected offer is the source of truth for this custom cart UI.
+      // Shopify can echo the variant's one-time price even when a selling plan was sent.
+      unitPrice: configuredPrice ?? (Number.isFinite(displayPrice) ? displayPrice : apiUnitPrice),
+      quantity: apiQuantity > 0 ? apiQuantity : requestedQuantity > 0 ? requestedQuantity : 1,
       sellingPlanName: planAttr?.value || null,
-      attributes: attrs.filter((a: any) => a.key !== "Subscription"),
+      attributes: attrs.filter((a: any) => !["Subscription", "_Bundle", "_DisplayPrice", "_RequestedQuantity"].includes(a.key)),
     } as CartLine;
   });
 
@@ -294,6 +308,8 @@ export const cart = {
     sellingPlanId?: string | null;
     attributes?: { key: string; value: string }[];
     packageProtection?: boolean;
+    bundleLabel?: string;
+    displayPrice?: number;
   }) {
     ensureHydrated();
     state.isLoading = true;
@@ -305,7 +321,14 @@ export const cart = {
         quantity: opts.quantity ?? 1,
       };
       if (opts.sellingPlanId) line.sellingPlanId = opts.sellingPlanId;
-      if (opts.attributes?.length) line.attributes = opts.attributes;
+      line.attributes = [
+        ...(opts.attributes ?? []),
+        ...(opts.bundleLabel ? [{ key: "_Bundle", value: opts.bundleLabel }] : []),
+        ...(typeof opts.displayPrice === "number"
+          ? [{ key: "_DisplayPrice", value: opts.displayPrice.toFixed(2) }]
+          : []),
+        { key: "_RequestedQuantity", value: String(opts.quantity ?? 1) },
+      ];
 
       const lines: LineInput[] = [line];
       if (opts.packageProtection) {
@@ -315,11 +338,39 @@ export const cart = {
       if (!state.cartId) {
         await createCart(lines);
       } else {
+        const nourishVariantIds = new Set(TIERS.map((tier) => toGid(tier.variantId)));
+        const previousBundleLines = state.lines.filter((existing) =>
+          nourishVariantIds.has(existing.variantId),
+        );
+        for (const previous of previousBundleLines) {
+          const removed = await removeLineRemote(state.cartId, previous.id);
+          if (!removed) {
+            clearLocal();
+            break;
+          }
+        }
+        if (!state.cartId) {
+          await createCart(lines);
+          persist();
+          state.isOpen = true;
+          return;
+        }
         const ok = await addLines(state.cartId, lines);
         if (!ok) {
           clearLocal();
           await createCart(lines);
         }
+      }
+      // This is a custom frontend cart: preserve the offer the customer selected
+      // even when Shopify echoes zero quantity or the base variant price.
+      const addedLine = state.lines.find((existing) => existing.variantId === line.merchandiseId);
+      if (addedLine) {
+        addedLine.quantity = opts.quantity ?? 1;
+        if (typeof opts.displayPrice === "number") addedLine.unitPrice = opts.displayPrice;
+        if (opts.bundleLabel) addedLine.subtitle = opts.bundleLabel;
+        addedLine.sellingPlanName = opts.sellingPlanId
+          ? opts.attributes?.find((attribute) => attribute.key === "Subscription")?.value ?? "Subscribe & Save"
+          : null;
       }
       persist();
       state.isOpen = true;
