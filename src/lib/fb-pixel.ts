@@ -58,7 +58,7 @@ function markSent(key: string) {
 }
 
 
-export const PRODUCT_NAME = "Custom Pet Portrait Necklace";
+export const PRODUCT_NAME = "NOURISH™ Digestive Support + Daily Essentials";
 
 export function trackViewContent(variantId: string, price: number) {
   track(
