@@ -8,13 +8,16 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — Seralie" },
       {
         name: "description",
-        content: "Questions about a proof, an order, or an engraving? Email support@seralie.com — we reply within 24 hours.",
+        content:
+          "Questions about an order, a subscription, or the 60-day guarantee? Email support@seralie.com — we reply within 24 hours.",
       },
       { property: "og:title", content: "Contact — Seralie" },
-      { property: "og:description", content: "We reply within 24 hours. 30-day guarantee on every piece." },
+      { property: "og:description", content: "We reply within 24 hours. 60-day guarantee on every order." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://seralie.com/contact" },
+      { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://seralie.com/contact" }],
   }),
   component: ContactPage,
 });
@@ -44,9 +47,10 @@ function ContactPage() {
           <div className="eyebrow">Contact</div>
           <h1 className="mt-4 font-display text-4xl md:text-5xl">We're here.</h1>
           <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-            Questions about a proof, an engraving, or an order already on its way — write to us and a real person
-            will answer.
+            Questions about an order, a subscription, or whether NOURISH™ is right for you — write to us and a
+            real person will answer.
           </p>
+
         </div>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr]">
@@ -59,9 +63,10 @@ function ContactPage() {
             <Info Icon={Clock} title="Response time">
               Within 24 hours, Monday to Friday.
             </Info>
-            <Info Icon={ShieldCheck} title="30-day guarantee">
-              If a piece arrives wrong or isn't what you approved, we remake it or refund you. No argument.
+            <Info Icon={ShieldCheck} title="60-day guarantee">
+              If NOURISH™ isn't right for you, return it within 60 days and we refund you in full.
             </Info>
+
           </div>
 
           <form onSubmit={onSubmit} className="border border-[color:var(--border)] bg-white p-7 space-y-4">
@@ -91,7 +96,7 @@ function ContactPage() {
 }
 
 const inputCls =
-  "mt-2 w-full border border-[color:var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[color:var(--charcoal)]";
+  "mt-2 w-full border border-[color:var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[color:var(--navy)]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

@@ -1,16 +1,13 @@
 import { useSyncExternalStore } from "react";
 import { storefront } from "./storefront.functions";
-import { toGid } from "./product-config";
+import { toGid, PRODUCT_HANDLE } from "./product-config";
 import { trackInitiateCheckout } from "./fb-pixel";
 
 // =====================================================================
 // Seralie cart — Shopify Storefront API
 // =====================================================================
 
-/**
- * Package Protection is a separate Shopify product.
- * Fill in the variant ID (numeric, e.g. "48912345678901") once it's created.
- */
+/** Package Protection — a plain line, never a subscription. */
 export const PACKAGE_PROTECTION_VARIANT_ID = "48890343030938";
 
 const LS_CART_ID = "seralie-cart-id";
@@ -24,6 +21,8 @@ export type CartLine = {
   image: string;
   unitPrice: number;
   quantity: number;
+  /** Subscription cadence name from Shopify, when the line is on a selling plan. */
+  sellingPlanName: string | null;
   attributes: { key: string; value: string }[];
 };
 
@@ -99,6 +98,7 @@ const CART_FIELDS = `
         id
         quantity
         attributes { key value }
+        sellingPlanAllocation { sellingPlan { id name } }
         merchandise {
           ... on ProductVariant {
             id
@@ -137,6 +137,7 @@ function mapCart(cart: any) {
       image: m.image?.url || m.product?.featuredImage?.url || "",
       unitPrice: parseFloat(m.price?.amount || "0"),
       quantity: n.quantity,
+      sellingPlanName: n.sellingPlanAllocation?.sellingPlan?.name || null,
       attributes: (n.attributes || []).filter((a: any) => a.key && a.value),
     } as CartLine;
   });
@@ -171,7 +172,66 @@ export async function fetchVariantPrices(
   return out;
 }
 
-type LineInput = { merchandiseId: string; quantity: number; attributes?: { key: string; value: string }[] };
+export type PlanAllocation = {
+  /** Full selling plan GID — pass straight to the cart line. */
+  sellingPlanId: string;
+  name: string;
+  /** Subscription price for this variant, from Shopify. */
+  price: number;
+  compareAt: number | null;
+};
+
+/**
+ * Selling plans are fetched at runtime — plan IDs change whenever a plan is
+ * recreated in Shopify, so they are never hardcoded.
+ * Returns a map of numeric variant id -> allocation.
+ */
+export async function fetchSellingPlans(
+  handle: string = PRODUCT_HANDLE,
+): Promise<Record<string, PlanAllocation>> {
+  const data = await gql<{ product: any }>(
+    `query($handle: String!) {
+      product(handle: $handle) {
+        id
+        variants(first: 20) {
+          nodes {
+            id
+            sellingPlanAllocations(first: 10) {
+              nodes {
+                sellingPlan { id name }
+                priceAdjustments {
+                  price { amount }
+                  compareAtPrice { amount }
+                }
+              }
+            }
+          }
+        }
+      }
+    }`,
+    { handle },
+  );
+  const out: Record<string, PlanAllocation> = {};
+  for (const v of data.product?.variants?.nodes || []) {
+    const alloc = v.sellingPlanAllocations?.nodes?.[0];
+    if (!alloc?.sellingPlan?.id) continue;
+    const adj = alloc.priceAdjustments?.[0];
+    out[String(v.id).split("/").pop()!] = {
+      sellingPlanId: alloc.sellingPlan.id,
+      name: alloc.sellingPlan.name || "Subscription",
+      price: parseFloat(adj?.price?.amount || "0"),
+      compareAt: adj?.compareAtPrice?.amount ? parseFloat(adj.compareAtPrice.amount) : null,
+    };
+  }
+  return out;
+}
+
+type LineInput = {
+  merchandiseId: string;
+  quantity: number;
+  sellingPlanId?: string;
+  attributes?: { key: string; value: string }[];
+};
 
 async function createCart(lines: LineInput[]) {
   const data = await gql<{ cartCreate: { cart: any; userErrors: any[] } }>(
@@ -268,12 +328,14 @@ export const cart = {
     commit();
   },
   /**
-   * Adds one configured necklace order line (quantity 1) plus optional
-   * package protection. Customer inputs ride along as hidden line attributes.
+   * Adds one bottle-pack line. `sellingPlanId` is included only when the
+   * subscribe toggle is on — without it Shopify silently books a one-time order.
    */
-  async addConfigured(opts: {
+  async add(opts: {
     variantId: string;
-    attributes: { key: string; value: string }[];
+    quantity?: number;
+    sellingPlanId?: string | null;
+    attributes?: { key: string; value: string }[];
     packageProtection?: boolean;
   }) {
     ensureHydrated();
@@ -281,11 +343,17 @@ export const cart = {
     state.error = null;
     commit();
     try {
-      const lines: LineInput[] = [
-        { merchandiseId: toGid(opts.variantId), quantity: 1, attributes: opts.attributes },
-      ];
-      if (opts.packageProtection && PACKAGE_PROTECTION_VARIANT_ID) {
-        lines.push({ merchandiseId: toGid(PACKAGE_PROTECTION_VARIANT_ID), quantity: 1 });
+      const line: LineInput = {
+        merchandiseId: toGid(opts.variantId),
+        quantity: opts.quantity ?? 1,
+      };
+      if (opts.sellingPlanId) line.sellingPlanId = opts.sellingPlanId;
+      if (opts.attributes?.length) line.attributes = opts.attributes;
+
+      const lines: LineInput[] = [line];
+      if (opts.packageProtection) {
+        // Plain line — no selling plan, so it is charged once and never rebilled.
+        lines.push({ merchandiseId: PROTECTION_GID, quantity: 1 });
       }
       if (!state.cartId) {
         await createCart(lines);
@@ -300,7 +368,7 @@ export const cart = {
       state.isOpen = true;
     } catch (err) {
       console.error("Cart add failed", err);
-      state.error = err instanceof Error ? err.message : "Something went wrong adding to your bag.";
+      state.error = err instanceof Error ? err.message : "Something went wrong adding to your cart.";
       throw err;
     } finally {
       state.isLoading = false;
@@ -316,23 +384,19 @@ export const cart = {
 
     state.protectionPending = true;
     state.protectionError = null;
-    // Optimistic flip
     state.protectionOptimistic = on;
     commit();
 
     try {
       if (on) {
-        if (!state.cartId) throw new Error("Add a necklace first.");
-        const ok = await addLines(state.cartId, [
-          { merchandiseId: PROTECTION_GID, quantity: 1 },
-        ]);
-        if (!ok) throw new Error("Your bag expired. Refresh and try again.");
-        // Guard against qty > 1
+        if (!state.cartId) throw new Error("Add NOURISH to your cart first.");
+        const ok = await addLines(state.cartId, [{ merchandiseId: PROTECTION_GID, quantity: 1 }]);
+        if (!ok) throw new Error("Your cart expired. Refresh and try again.");
         const p = protectionLine();
         if (p && p.quantity !== 1) await updateLineRemote(state.cartId, p.id, 1);
       } else if (existing && state.cartId) {
         const ok = await removeLineRemote(state.cartId, existing.id);
-        if (!ok) throw new Error("Your bag expired. Refresh and try again.");
+        if (!ok) throw new Error("Your cart expired. Refresh and try again.");
       }
       persist();
     } catch (err) {
@@ -364,16 +428,10 @@ export const cart = {
     try {
       const ids = state.lines.map((l) => String(l.variantId).split("/").pop()!);
       const total = state.lines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0);
-      const necklaces = state.lines
+      const items = state.lines
         .filter((l) => !isProtectionLine(l))
-        .reduce(
-          (sum, l) =>
-            sum +
-            l.quantity *
-              Math.max(1, l.attributes.filter((a) => /^_necklace_\d+_name$/.test(a.key)).length),
-          0,
-        );
-      trackInitiateCheckout(ids, total, necklaces);
+        .reduce((sum, l) => sum + l.quantity, 0);
+      trackInitiateCheckout(ids, total, items);
     } catch {
       /* never block checkout on tracking */
     }
@@ -398,7 +456,6 @@ export function useCart() {
   const s: State = snap ? JSON.parse(snap) : EMPTY;
   const protection = s.lines.find(isProtectionLine) ?? null;
   const lines = s.lines.filter((l) => !isProtectionLine(l));
-  // Badge counts necklaces only.
   const count = lines.reduce((sum, l) => sum + l.quantity, 0);
   const subtotal = s.lines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0);
   return {
@@ -411,4 +468,3 @@ export function useCart() {
     subtotal,
   };
 }
-

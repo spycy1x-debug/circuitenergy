@@ -5,17 +5,19 @@ import { Mail } from "lucide-react";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "The Seralie List — Early Access & Proof Notes" },
+      { title: "The Seralie List — Offers & Product Notes" },
       {
         name: "description",
         content:
-          "Join the Seralie list for early access to new keepsake pieces and a quiet note when something new is made.",
+          "Join the Seralie list for restock notes, subscriber offers and occasional guidance on getting the most from NOURISH™.",
       },
       { property: "og:title", content: "The Seralie List" },
-      { property: "og:description", content: "Early access to new keepsake pieces, straight to your inbox." },
+      { property: "og:description", content: "Restock notes and subscriber offers, straight to your inbox." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://seralie.com/account" },
+      { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://seralie.com/account" }],
   }),
   component: AccountPage,
 });
@@ -56,10 +58,12 @@ function AccountPage() {
     <section className="container-x py-20 md:py-28">
       <div className="mx-auto max-w-lg text-center">
         <div className="eyebrow">The Seralie list</div>
-        <h1 className="mt-5 font-display text-4xl md:text-5xl">Early access to new pieces.</h1>
+        <h1 className="mt-5 font-display text-4xl md:text-5xl">Offers, first.</h1>
         <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-          A quiet note when a new keepsake is made, and first access before anyone else. No noise.
+          Subscriber-only offers, restock notes and the occasional plain-spoken note on digestion and daily
+          nutrition. No noise.
         </p>
+
 
         <form onSubmit={onSubmit} className="mt-10 space-y-3 text-left" noValidate>
           <label className="block">
@@ -70,7 +74,7 @@ function AccountPage() {
               onChange={(e) => setFirstName(e.target.value)}
               maxLength={80}
               autoComplete="given-name"
-              className="mt-2 w-full border border-[color:var(--border)] bg-white px-4 py-3 text-sm outline-none focus:border-[color:var(--charcoal)]"
+              className="mt-2 w-full border border-[color:var(--border)] bg-white px-4 py-3 text-sm outline-none focus:border-[color:var(--navy)]"
             />
           </label>
           <label className="block">
@@ -85,7 +89,7 @@ function AccountPage() {
                 maxLength={255}
                 placeholder="you@domain.com"
                 autoComplete="email"
-                className="w-full border border-[color:var(--border)] bg-white py-3 pl-11 pr-4 text-sm outline-none focus:border-[color:var(--charcoal)]"
+                className="w-full border border-[color:var(--border)] bg-white py-3 pl-11 pr-4 text-sm outline-none focus:border-[color:var(--navy)]"
               />
             </div>
           </label>
