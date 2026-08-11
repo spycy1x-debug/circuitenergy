@@ -4,8 +4,9 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { cart, useCart } from "@/lib/shopify-cart";
 
 const NAV = [
-  { to: "/necklace", label: "The Necklace" },
-  { to: "/shop", label: "Shop" },
+  { to: "/nourish", label: "Shop" },
+  { to: "/how-it-works", label: "How It Works" },
+  { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -14,22 +15,22 @@ export function Header() {
   const { count } = useCart();
 
   return (
-    <header className="sticky top-0 z-40 bg-[color:var(--bone)]/95 backdrop-blur border-b border-[color:var(--border)]">
-      <div className="container-x flex items-center justify-between h-16 md:h-20">
+    <header className="sticky top-0 z-40 border-b border-[color:var(--border)] bg-[color:var(--ivory)]/95 backdrop-blur">
+      <div className="container-x relative flex h-16 items-center justify-between md:h-20">
         <button
-          className="md:hidden -ml-2 p-2 text-[color:var(--charcoal)]"
+          className="-ml-2 p-2 text-[color:var(--navy)] md:hidden"
           aria-label="Open menu"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
 
-        <nav className="hidden md:flex items-center gap-9">
+        <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              className="caps-label text-[color:var(--muted-foreground)] hover:text-[color:var(--charcoal)] transition-colors"
+              className="caps-label text-[color:var(--taupe)] transition-colors hover:text-[color:var(--navy)]"
             >
               {n.label}
             </Link>
@@ -38,19 +39,19 @@ export function Header() {
 
         <Link
           to="/"
-          className="font-display text-2xl md:text-[28px] tracking-[0.28em] text-[color:var(--charcoal)] md:absolute md:left-1/2 md:-translate-x-1/2"
+          className="wordmark text-xl md:absolute md:left-1/2 md:-translate-x-1/2 md:text-2xl"
         >
           SERALIE
         </Link>
 
         <button
           onClick={() => cart.open()}
-          aria-label="Open bag"
-          className="relative p-2 -mr-2 text-[color:var(--charcoal)]"
+          aria-label="Open cart"
+          className="relative -mr-2 p-2 text-[color:var(--navy)]"
         >
           <ShoppingBag className="h-5 w-5" strokeWidth={1.4} />
           {count > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 h-4 min-w-4 px-1 rounded-full bg-[color:var(--gold)] text-[10px] leading-4 text-white text-center">
+            <span className="absolute -right-0.5 -top-0.5 h-4 min-w-4 rounded-full bg-[color:var(--navy)] px-1 text-center text-[10px] leading-4 text-[color:var(--ivory)]">
               {count}
             </span>
           )}
@@ -58,14 +59,14 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-[color:var(--border)] bg-[color:var(--bone)]">
-          <nav className="container-x py-5 flex flex-col gap-5">
+        <div className="border-t border-[color:var(--border)] bg-[color:var(--ivory)] md:hidden">
+          <nav className="container-x flex flex-col gap-5 py-5">
             {NAV.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className="caps-label text-[color:var(--charcoal)]"
+                className="caps-label text-[color:var(--navy)]"
               >
                 {n.label}
               </Link>
