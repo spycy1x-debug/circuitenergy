@@ -229,32 +229,25 @@ function BuyBox() {
         <TrustRow />
       </div>
 
-      {/* Purchase mode — clickable words, not a switch */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] tracking-[0.06em]">
+      {/* Purchase mode — single clickable switch to the other option */}
+      <div className="mt-4 flex items-center justify-center text-[12px] tracking-[0.06em]">
         <button
           type="button"
-          onClick={() => setSubscribe(false)}
-          className={`uppercase underline underline-offset-4 transition-opacity ${
-            subscribe
-              ? "text-[color:var(--muted-foreground)] opacity-70 hover:opacity-100"
-              : "font-semibold text-[color:var(--navy)]"
-          }`}
+          onClick={() => setSubscribe((s) => !s)}
+          className="font-semibold uppercase text-[color:var(--navy)] underline underline-offset-4 transition-opacity hover:opacity-70"
         >
-          Buy once - no savings <span className="font-bold">{money(tier.oneTimePrice)}</span>
-        </button>
-        <span className="text-[color:var(--border)]">|</span>
-        <button
-          type="button"
-          onClick={() => setSubscribe(true)}
-          className={`uppercase underline underline-offset-4 transition-opacity ${
-            subscribe
-              ? "font-semibold text-[color:var(--navy)]"
-              : "text-[color:var(--muted-foreground)] opacity-70 hover:opacity-100"
-          }`}
-        >
-          Subscribe &amp; save 25% <span className="font-bold">{money(tier.subPrice)}</span>
+          {subscribe ? (
+            <>
+              Buy once - no savings <span className="font-bold">{money(tier.oneTimePrice)}</span>
+            </>
+          ) : (
+            <>
+              Subscribe &amp; save 25% <span className="font-bold">{money(tier.subPrice)}</span>
+            </>
+          )}
         </button>
       </div>
+
       <p className="mt-1.5 text-center text-[11px] text-[color:var(--muted-foreground)]">
         Skip, pause or cancel anytime.
       </p>
