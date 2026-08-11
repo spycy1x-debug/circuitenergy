@@ -66,7 +66,7 @@ const FAQS = [
   },
   {
     q: "When will my order ship?",
-    a: "Free US shipping. Orders ship from our US facility within 24 hours, and tracking arrives by email.",
+    a: "Free US shipping on orders over $50. Orders ship from our US facility within 24 hours, and tracking arrives by email.",
   },
   {
     q: "What if it is not for me?",
