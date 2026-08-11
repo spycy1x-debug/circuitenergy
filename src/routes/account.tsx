@@ -74,7 +74,7 @@ function AccountPage() {
               onChange={(e) => setFirstName(e.target.value)}
               maxLength={80}
               autoComplete="given-name"
-              className="mt-2 w-full border border-[color:var(--border)] bg-white px-4 py-3 text-sm outline-none focus:border-[color:var(--charcoal)]"
+              className="mt-2 w-full border border-[color:var(--border)] bg-white px-4 py-3 text-sm outline-none focus:border-[color:var(--navy)]"
             />
           </label>
           <label className="block">
@@ -89,7 +89,7 @@ function AccountPage() {
                 maxLength={255}
                 placeholder="you@domain.com"
                 autoComplete="email"
-                className="w-full border border-[color:var(--border)] bg-white py-3 pl-11 pr-4 text-sm outline-none focus:border-[color:var(--charcoal)]"
+                className="w-full border border-[color:var(--border)] bg-white py-3 pl-11 pr-4 text-sm outline-none focus:border-[color:var(--navy)]"
               />
             </div>
           </label>

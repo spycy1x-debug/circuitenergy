@@ -96,7 +96,7 @@ function ContactPage() {
 }
 
 const inputCls =
-  "mt-2 w-full border border-[color:var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[color:var(--charcoal)]";
+  "mt-2 w-full border border-[color:var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[color:var(--navy)]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
