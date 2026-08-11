@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as NourishRouteImport } from './routes/nourish'
@@ -32,6 +33,11 @@ const TermsRoute = TermsRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingRoute = ShippingRouteImport.update({
+  id: '/shipping',
+  path: '/shipping',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RefundRoute = RefundRouteImport.update({
@@ -107,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -158,6 +167,7 @@ export interface FileRouteTypes {
     | '/nourish'
     | '/privacy'
     | '/refund'
+    | '/shipping'
     | '/shop'
     | '/terms'
     | '/admin/analytics'
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/nourish'
     | '/privacy'
     | '/refund'
+    | '/shipping'
     | '/shop'
     | '/terms'
     | '/admin/analytics'
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '/nourish'
     | '/privacy'
     | '/refund'
+    | '/shipping'
     | '/shop'
     | '/terms'
     | '/admin/analytics'
@@ -207,6 +219,7 @@ export interface RootRouteChildren {
   NourishRoute: typeof NourishRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
+  ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRoute
   TermsRoute: typeof TermsRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
@@ -227,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping': {
+      id: '/shipping'
+      path: '/shipping'
+      fullPath: '/shipping'
+      preLoaderRoute: typeof ShippingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/refund': {
@@ -327,6 +347,7 @@ const rootRouteChildren: RootRouteChildren = {
   NourishRoute: NourishRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
+  ShippingRoute: ShippingRoute,
   ShopRoute: ShopRoute,
   TermsRoute: TermsRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
