@@ -361,6 +361,17 @@ export const cart = {
           await createCart(lines);
         }
       }
+      // This is a custom frontend cart: preserve the offer the customer selected
+      // even when Shopify echoes zero quantity or the base variant price.
+      const addedLine = state.lines.find((existing) => existing.variantId === line.merchandiseId);
+      if (addedLine) {
+        addedLine.quantity = opts.quantity ?? 1;
+        if (typeof opts.displayPrice === "number") addedLine.unitPrice = opts.displayPrice;
+        if (opts.bundleLabel) addedLine.subtitle = opts.bundleLabel;
+        addedLine.sellingPlanName = opts.sellingPlanId
+          ? opts.attributes?.find((attribute) => attribute.key === "Subscription")?.value ?? "Subscribe & Save"
+          : null;
+      }
       persist();
       state.isOpen = true;
     } catch (err) {
