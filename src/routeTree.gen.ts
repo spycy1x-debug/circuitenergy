@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as NourishRouteImport } from './routes/nourish'
@@ -22,6 +23,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/public/klaviyo-subscribe'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
+  '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
+  '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
+  '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/nourish'
     | '/privacy'
     | '/shop'
+    | '/terms'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesByTo: FileRoutesByTo
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/nourish'
     | '/privacy'
     | '/shop'
+    | '/terms'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   id:
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/nourish'
     | '/privacy'
     | '/shop'
+    | '/terms'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesById: FileRoutesById
@@ -183,12 +195,20 @@ export interface RootRouteChildren {
   NourishRoute: typeof NourishRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
+  TermsRoute: typeof TermsRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   NourishRoute: NourishRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
+  TermsRoute: TermsRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
 }
