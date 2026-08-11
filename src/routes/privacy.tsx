@@ -7,13 +7,15 @@ export const Route = createFileRoute("/privacy")({
       {
         name: "description",
         content:
-          "How Seralie handles your information and the photos you upload for engraving, including storage and deletion on request.",
+          "How Seralie handles your information when you order NOURISH™ or join our email list, including storage and deletion on request.",
       },
       { property: "og:title", content: "Privacy Policy — Seralie" },
-      { property: "og:description", content: "How we handle your data and the photos you upload for engraving." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:description", content: "How we handle your data and your rights over it." },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: "https://seralie.com/privacy" },
+      { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://seralie.com/privacy" }],
   }),
   component: PrivacyPage,
 });
