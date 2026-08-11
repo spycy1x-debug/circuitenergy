@@ -13,6 +13,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as NourishRouteImport } from './routes/nourish'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
@@ -38,6 +39,11 @@ const NourishRoute = NourishRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
   '/privacy': typeof PrivacyRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/faq'
     | '/login'
     | '/nourish'
     | '/privacy'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/faq'
     | '/login'
     | '/nourish'
     | '/privacy'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/contact'
+    | '/faq'
     | '/login'
     | '/nourish'
     | '/privacy'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
   NourishRoute: typeof NourishRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -189,6 +202,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
   NourishRoute: NourishRoute,
   PrivacyRoute: PrivacyRoute,
