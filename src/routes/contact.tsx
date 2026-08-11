@@ -8,13 +8,16 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — Seralie" },
       {
         name: "description",
-        content: "Questions about a proof, an order, or an engraving? Email support@seralie.com — we reply within 24 hours.",
+        content:
+          "Questions about an order, a subscription, or the 60-day guarantee? Email support@seralie.com — we reply within 24 hours.",
       },
       { property: "og:title", content: "Contact — Seralie" },
-      { property: "og:description", content: "We reply within 24 hours. 30-day guarantee on every piece." },
+      { property: "og:description", content: "We reply within 24 hours. 60-day guarantee on every order." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://seralie.com/contact" },
+      { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "https://seralie.com/contact" }],
   }),
   component: ContactPage,
 });
