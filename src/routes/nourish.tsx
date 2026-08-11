@@ -345,8 +345,6 @@ function NourishPage() {
         </div>
       </section>
 
-      {/* C. Social proof */}
-      <Reviews />
 
       {/* D. FAQ */}
       <section className="container-x max-w-3xl py-14 md:py-20">
