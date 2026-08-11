@@ -1,92 +1,120 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { X, ShoppingBag, ArrowRight } from "lucide-react";
+import { ArrowRight, Repeat, X } from "lucide-react";
 import { cart, useCart } from "@/lib/shopify-cart";
+import { TrustRow } from "@/components/site/TrustRow";
+import { TIERS } from "@/lib/product-config";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Bag — Seralie" },
-      { name: "description", content: "Review your Seralie keepsake before checkout." },
-      { property: "og:title", content: "Your Bag — Seralie" },
-      { property: "og:description", content: "Review your Seralie keepsake before checkout." },
+      { title: "Your Cart — Seralie" },
+      { name: "description", content: "Review your NOURISH™ order before checkout." },
+      { property: "og:title", content: "Your Cart — Seralie" },
+      { property: "og:description", content: "Review your NOURISH™ order before checkout." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://seralie.com/cart" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://seralie.com/cart" }],
   }),
   component: CartPage,
 });
 
 function CartPage() {
-  const { lines, subtotal, isLoading, checkoutUrl } = useCart();
+  const { allLines, lines, subtotal, isLoading, checkoutUrl } = useCart();
+
+  const ids = lines.map((l) => String(l.variantId).split("/").pop());
+  const currentIdx = TIERS.findIndex((t) => ids.includes(t.variantId));
+  const upsell = currentIdx > -1 && currentIdx < TIERS.length - 1 ? TIERS[currentIdx + 1]! : null;
 
   return (
-    <section className="container-x py-16 md:py-24">
-      <div className="max-w-3xl mx-auto">
-        <div className="eyebrow">Your bag</div>
-        <h1 className="mt-4 font-display text-4xl md:text-5xl">Bag</h1>
+    <section className="container-x py-14 md:py-20">
+      <h1 className="font-display text-4xl md:text-5xl">Your cart</h1>
 
-        {lines.length === 0 ? (
-          <div className="mt-12 border border-[color:var(--border)] bg-white p-12 text-center">
-            <ShoppingBag className="mx-auto h-6 w-6 text-[color:var(--muted-foreground)]" strokeWidth={1.2} />
-            <p className="mt-4 text-sm text-[color:var(--muted-foreground)]">Nothing here yet.</p>
-            <Link to="/necklace" className="btn-primary mt-8">Begin a keepsake</Link>
-          </div>
-        ) : (
-          <>
-            <ul className="mt-10 divide-y divide-[color:var(--border)] border-y border-[color:var(--border)]">
-              {lines.map((line) => (
-                <li key={line.id} className="py-6 flex gap-5">
-                  <div className="h-24 w-24 shrink-0 bg-[color:var(--sand)] overflow-hidden">
-                    {line.image && <img src={line.image} alt={line.title} className="h-full w-full object-cover" />}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-display text-xl">{line.title}</div>
-                    {line.subtitle && (
-                      <div className="mt-1 text-xs text-[color:var(--muted-foreground)]">{line.subtitle}</div>
-                    )}
-                    <ul className="mt-2 space-y-1">
-                      {line.attributes
-                        .filter((a) => a.key.startsWith("_name_"))
-                        .map((a) => (
-                          <li key={a.key} className="text-xs text-[color:var(--muted-foreground)]">
-                            {a.key.replace("_name_", "Necklace ")}: {a.value}
-                          </li>
-                        ))}
-                    </ul>
-                    <div className="mt-4 flex items-center justify-between">
-                      <span className="text-xs text-[color:var(--muted-foreground)]">Qty {line.quantity}</span>
-                      <span className="tabular-nums">${(line.unitPrice * line.quantity).toFixed(2)}</span>
+      {allLines.length === 0 ? (
+        <div className="mt-10 border border-[color:var(--border)] bg-white px-6 py-16 text-center">
+          <p className="text-sm text-[color:var(--muted-foreground)]">Your cart is empty.</p>
+          <Link to="/nourish" className="btn-primary mt-8">
+            Shop NOURISH
+          </Link>
+        </div>
+      ) : (
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+          <ul className="divide-y divide-[color:var(--border)] border-y border-[color:var(--border)]">
+            {allLines.map((line) => (
+              <li key={line.id} className="flex gap-4 py-6">
+                <div className="h-24 w-24 shrink-0 overflow-hidden border border-[color:var(--border)] bg-white">
+                  {line.image && (
+                    <img src={line.image} alt={line.title} className="h-full w-full object-cover" />
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="font-display text-xl text-[color:var(--navy)]">{line.title}</div>
+                  {line.subtitle && (
+                    <div className="mt-1 text-xs text-[color:var(--muted-foreground)]">
+                      {line.subtitle}
                     </div>
+                  )}
+                  {line.sellingPlanName && (
+                    <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] text-[color:var(--taupe)]">
+                      <Repeat className="h-3 w-3" strokeWidth={1.6} />
+                      {line.sellingPlanName}
+                    </div>
+                  )}
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="text-xs text-[color:var(--muted-foreground)]">
+                      Qty {line.quantity}
+                    </span>
+                    <span className="text-sm tabular-nums">
+                      ${(line.unitPrice * line.quantity).toFixed(2)}
+                    </span>
                   </div>
-                  <button
-                    onClick={() => cart.remove(line.id)}
-                    disabled={isLoading}
-                    aria-label="Remove"
-                    className="self-start p-1 text-[color:var(--muted-foreground)] hover:text-[color:var(--charcoal)]"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </li>
-              ))}
-            </ul>
+                </div>
+                <button
+                  onClick={() => cart.remove(line.id)}
+                  aria-label="Remove"
+                  className="self-start p-1 text-[color:var(--taupe)] hover:text-[color:var(--navy)]"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </li>
+            ))}
+          </ul>
 
-            <div className="mt-8 flex items-center justify-between">
-              <span className="caps-label text-[color:var(--muted-foreground)]">Subtotal</span>
-              <span className="font-display text-2xl tabular-nums">${subtotal.toFixed(2)}</span>
+          <aside>
+            {upsell && (
+              <div className="mb-6 border border-[color:var(--border)] bg-white p-5">
+                <div className="eyebrow">Better value</div>
+                <p className="mt-2 text-sm leading-6 text-[color:var(--muted-foreground)]">
+                  Move up to <span className="text-[color:var(--navy)]">{upsell.label}</span> and pay less
+                  per bottle.
+                </p>
+                <Link to="/nourish" className="btn-outline mt-4 w-full">
+                  See the offer
+                </Link>
+              </div>
+            )}
+
+            <div className="border border-[color:var(--border)] bg-white p-5">
+              <div className="flex items-center justify-between">
+                <span className="caps-label text-[color:var(--taupe)]">Subtotal</span>
+                <span className="font-display text-2xl tabular-nums">${subtotal.toFixed(2)}</span>
+              </div>
+              <button
+                onClick={() => cart.checkout()}
+                disabled={isLoading || !checkoutUrl}
+                className="btn-primary mt-5 w-full gap-2"
+              >
+                Checkout <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+              <div className="mt-5">
+                <TrustRow />
+              </div>
             </div>
-            <button
-              onClick={() => cart.checkout()}
-              disabled={isLoading || !checkoutUrl}
-              className="btn-primary mt-6 w-full gap-2"
-            >
-              Checkout <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-            <p className="mt-4 text-center text-[11px] text-[color:var(--muted-foreground)]">
-              Package protection can be added at checkout · 30-day guarantee
-            </p>
-          </>
-        )}
-      </div>
+          </aside>
+        </div>
+      )}
     </section>
   );
 }
