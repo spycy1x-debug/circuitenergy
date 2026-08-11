@@ -229,28 +229,30 @@ function BuyBox() {
         <TrustRow />
       </div>
 
-      {/* Subscribe toggle — compact pill */}
-      <div className="mt-4 flex justify-center">
+      {/* Purchase mode — clickable words, not a switch */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] tracking-[0.06em]">
         <button
-          role="switch"
-          aria-checked={subscribe}
-          onClick={() => setSubscribe((v) => !v)}
-          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-white px-3 py-1.5"
+          type="button"
+          onClick={() => setSubscribe(false)}
+          className={`uppercase underline underline-offset-4 transition-opacity ${
+            subscribe
+              ? "text-[color:var(--muted-foreground)] opacity-70 hover:opacity-100"
+              : "font-semibold text-[color:var(--navy)]"
+          }`}
         >
-          <span
-            className={`relative inline-flex h-3.5 w-7 shrink-0 items-center rounded-full transition-colors ${
-              subscribe ? "bg-[color:var(--navy)]" : "bg-[color:var(--border)]"
-            }`}
-          >
-            <span
-              className={`inline-block h-2.5 w-2.5 transform rounded-full bg-white shadow transition-transform ${
-                subscribe ? "translate-x-[15px]" : "translate-x-[2px]"
-              }`}
-            />
-          </span>
-          <span className="text-[11px] text-[color:var(--navy)]">
-            {subscribe ? "Subscribe & save 25%" : `One-time ${money(tier.oneTimePrice)}`}
-          </span>
+          Buy once - no savings <span className="font-bold">{money(tier.oneTimePrice)}</span>
+        </button>
+        <span className="text-[color:var(--border)]">|</span>
+        <button
+          type="button"
+          onClick={() => setSubscribe(true)}
+          className={`uppercase underline underline-offset-4 transition-opacity ${
+            subscribe
+              ? "font-semibold text-[color:var(--navy)]"
+              : "text-[color:var(--muted-foreground)] opacity-70 hover:opacity-100"
+          }`}
+        >
+          Subscribe &amp; save 25% <span className="font-bold">{money(tier.subPrice)}</span>
         </button>
       </div>
       <p className="mt-1.5 text-center text-[11px] text-[color:var(--muted-foreground)]">
