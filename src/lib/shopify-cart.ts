@@ -144,7 +144,9 @@ function mapCart(cart: any) {
       title: m.product?.title || "",
       subtitle: bundleAttr?.value || (m.title === "Default Title" ? "" : m.title),
       image: m.image?.url || m.product?.featuredImage?.url || "",
-      unitPrice: apiUnitPrice > 0 ? apiUnitPrice : Number.isFinite(displayPrice) ? displayPrice : 0,
+      // The selected offer is the source of truth for this custom cart UI.
+      // Shopify can echo the variant's one-time price even when a selling plan was sent.
+      unitPrice: Number.isFinite(displayPrice) ? displayPrice : apiUnitPrice,
       quantity: apiQuantity > 0 ? apiQuantity : requestedQuantity > 0 ? requestedQuantity : 1,
       sellingPlanName: planAttr?.value || null,
       attributes: attrs.filter((a: any) => !["Subscription", "_Bundle", "_DisplayPrice", "_RequestedQuantity"].includes(a.key)),
