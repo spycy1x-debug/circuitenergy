@@ -63,9 +63,10 @@ function ContactPage() {
             <Info Icon={Clock} title="Response time">
               Within 24 hours, Monday to Friday.
             </Info>
-            <Info Icon={ShieldCheck} title="30-day guarantee">
-              If a piece arrives wrong or isn't what you approved, we remake it or refund you. No argument.
+            <Info Icon={ShieldCheck} title="60-day guarantee">
+              If NOURISH™ isn't right for you, return it within 60 days and we refund you in full.
             </Info>
+
           </div>
 
           <form onSubmit={onSubmit} className="border border-[color:var(--border)] bg-white p-7 space-y-4">
