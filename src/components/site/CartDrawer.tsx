@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { X, ShoppingBag, ArrowRight, ShieldCheck } from "lucide-react";
+import { X, ShoppingBag, ArrowRight, ShieldCheck, Repeat, Truck, Lock } from "lucide-react";
 import {
   cart,
   useCart,
   fetchVariantPrices,
   PACKAGE_PROTECTION_VARIANT_ID,
 } from "@/lib/shopify-cart";
+import { TIERS, GUARANTEE_DAYS } from "@/lib/product-config";
 import { Link } from "@tanstack/react-router";
 
 function ProtectionRow() {
-  const { protectionOn, protectionPending, protectionError, protection, lines } = useCart();
-  const [price, setPrice] = useState<number | null>(protection?.unitPrice ?? null);
+  const { protectionOn, protectionPending, protectionError, lines } = useCart();
+  const [price, setPrice] = useState<number | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -28,15 +29,12 @@ function ProtectionRow() {
   if (lines.length === 0) return null;
 
   return (
-    <div className="border-t border-[color:var(--border)] px-6 py-4 bg-[color:var(--sand)]/40">
+    <div className="border-t border-[color:var(--border)] bg-white px-5 py-4">
       <div className="flex items-start gap-3">
-        <ShieldCheck
-          className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--muted-foreground)]"
-          strokeWidth={1.4}
-        />
+        <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--taupe)]" strokeWidth={1.4} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-3">
-            <span id="pkg-protect-label" className="text-sm text-[color:var(--charcoal)]">
+            <span id="pkg-protect-label" className="text-sm text-[color:var(--navy)]">
               Package Protection
             </span>
             <div className="flex items-center gap-3">
@@ -49,13 +47,10 @@ function ProtectionRow() {
                 role="switch"
                 aria-checked={protectionOn}
                 aria-labelledby="pkg-protect-label"
-                aria-describedby="pkg-protect-desc"
                 disabled={protectionPending}
                 onClick={() => cart.setProtection(!protectionOn)}
-                className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--charcoal)] focus-visible:ring-offset-2 ${
-                  protectionOn
-                    ? "bg-[color:var(--charcoal)]"
-                    : "bg-[color:var(--border)]"
+                className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors disabled:opacity-50 ${
+                  protectionOn ? "bg-[color:var(--navy)]" : "bg-[color:var(--border)]"
                 }`}
               >
                 <span
@@ -66,11 +61,11 @@ function ProtectionRow() {
               </button>
             </div>
           </div>
-          <p id="pkg-protect-desc" className="mt-1 text-xs leading-relaxed text-[color:var(--muted-foreground)]">
-            Covers loss, theft, and damage in transit. We remake and reship free.
+          <p className="mt-1 text-xs leading-relaxed text-[color:var(--muted-foreground)]">
+            Covers loss, theft and damage in transit. Charged once — never on a rebill.
           </p>
           {protectionError && (
-            <p className="mt-2 text-xs text-[color:var(--muted-foreground)]">{protectionError}</p>
+            <p className="mt-2 text-xs text-[color:var(--destructive)]">{protectionError}</p>
           )}
         </div>
       </div>
@@ -78,72 +73,100 @@ function ProtectionRow() {
   );
 }
 
-export function CartDrawer() {
-  const { isOpen, lines, subtotal, isLoading, checkoutUrl, error } = useCart();
+/** Nudges a smaller pack up to the next tier. */
+function BundleUpgrade() {
+  const { lines } = useCart();
+  const ids = lines.map((l) => String(l.variantId).split("/").pop());
+  const current = TIERS.findIndex((t) => ids.includes(t.variantId));
+  if (current === -1 || current >= TIERS.length - 1) return null;
+  const next = TIERS[current + 1]!;
 
+  return (
+    <div className="border-t border-[color:var(--border)] bg-[color:var(--ivory)] px-5 py-4">
+      <p className="text-xs leading-6 text-[color:var(--muted-foreground)]">
+        Upgrade to <span className="text-[color:var(--navy)]">{next.label}</span> for a lower price per
+        bottle.
+      </p>
+      <Link
+        to="/nourish"
+        onClick={() => cart.close()}
+        className="mt-2 inline-block text-[11px] uppercase tracking-[0.16em] text-[color:var(--navy)] underline underline-offset-4"
+      >
+        See the offer
+      </Link>
+    </div>
+  );
+}
+
+export function CartDrawer() {
+  const { isOpen, lines, allLines, subtotal, isLoading, checkoutUrl, error } = useCart();
 
   return (
     <>
       <div
         onClick={() => cart.close()}
-        className={`fixed inset-0 z-50 bg-black/30 transition-opacity duration-300 ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`fixed inset-0 z-50 bg-[color:var(--navy)]/30 transition-opacity duration-300 ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
         aria-hidden={!isOpen}
       />
       <aside
-        className={`fixed right-0 top-0 z-50 h-full w-full max-w-[420px] bg-[color:var(--bone)] shadow-xl transition-transform duration-300 flex flex-col ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed right-0 top-0 z-50 flex h-full w-full max-w-[420px] flex-col bg-[color:var(--ivory)] shadow-xl transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
         aria-hidden={!isOpen}
       >
-        <div className="flex items-center justify-between px-6 h-16 border-b border-[color:var(--border)]">
-          <span className="caps-label text-[color:var(--charcoal)]">Your bag</span>
-          <button onClick={() => cart.close()} aria-label="Close bag" className="p-2 -mr-2">
+        <div className="flex h-16 items-center justify-between border-b border-[color:var(--border)] px-5">
+          <span className="caps-label text-[color:var(--navy)]">Your cart</span>
+          <button onClick={() => cart.close()} aria-label="Close cart" className="-mr-2 p-2">
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-6">
-          {error && (
-            <p className="mt-4 text-xs text-[color:var(--destructive)]">{error}</p>
-          )}
-          {lines.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center gap-4">
-              <ShoppingBag className="h-6 w-6 text-[color:var(--muted-foreground)]" strokeWidth={1.2} />
-              <p className="text-sm text-[color:var(--muted-foreground)]">Your bag is empty.</p>
-              <Link to="/necklace" onClick={() => cart.close()} className="btn-outline">
-                Begin a keepsake
+        <div className="flex-1 overflow-y-auto px-5">
+          {error && <p className="mt-4 text-xs text-[color:var(--destructive)]">{error}</p>}
+          {allLines.length === 0 ? (
+            <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+              <ShoppingBag className="h-6 w-6 text-[color:var(--taupe)]" strokeWidth={1.2} />
+              <p className="text-sm text-[color:var(--muted-foreground)]">Your cart is empty.</p>
+              <Link to="/nourish" onClick={() => cart.close()} className="btn-outline">
+                Shop NOURISH
               </Link>
             </div>
           ) : (
             <ul className="divide-y divide-[color:var(--border)]">
-              {lines.map((line) => (
-                <li key={line.id} className="py-6 flex gap-4">
-                  <div className="h-20 w-20 shrink-0 bg-[color:var(--sand)] overflow-hidden">
+              {allLines.map((line) => (
+                <li key={line.id} className="flex gap-4 py-5">
+                  <div className="h-20 w-20 shrink-0 overflow-hidden border border-[color:var(--border)] bg-white">
                     {line.image && (
                       <img src={line.image} alt={line.title} className="h-full w-full object-cover" />
                     )}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="font-display text-lg leading-tight text-[color:var(--charcoal)]">{line.title}</div>
+                    <div className="font-display text-lg leading-tight text-[color:var(--navy)]">
+                      {line.title}
+                    </div>
                     {line.subtitle && (
-                      <div className="mt-1 text-xs text-[color:var(--muted-foreground)]">{line.subtitle}</div>
+                      <div className="mt-1 text-xs text-[color:var(--muted-foreground)]">
+                        {line.subtitle}
+                      </div>
                     )}
-                    {line.attributes.filter((a) => a.key.startsWith("_name_")).length > 0 && (
-                      <div className="mt-2 text-xs text-[color:var(--muted-foreground)]">
-                        {line.attributes
-                          .filter((a) => a.key.startsWith("_name_"))
-                          .map((a) => a.value)
-                          .join(" · ")}
+                    {line.sellingPlanName && (
+                      <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] text-[color:var(--taupe)]">
+                        <Repeat className="h-3 w-3" strokeWidth={1.6} />
+                        {line.sellingPlanName}
                       </div>
                     )}
                     <div className="mt-3 flex items-center justify-between">
-                      <span className="text-xs text-[color:var(--muted-foreground)]">Qty {line.quantity}</span>
-                      <span className="text-sm tabular-nums">${(line.unitPrice * line.quantity).toFixed(2)}</span>
+                      <span className="text-xs text-[color:var(--muted-foreground)]">
+                        Qty {line.quantity}
+                      </span>
+                      <span className="text-sm tabular-nums">
+                        ${(line.unitPrice * line.quantity).toFixed(2)}
+                      </span>
                     </div>
                   </div>
                   <button
                     onClick={() => cart.remove(line.id)}
                     disabled={isLoading}
                     aria-label="Remove"
-                    className="self-start p-1 text-[color:var(--muted-foreground)] hover:text-[color:var(--charcoal)]"
+                    className="self-start p-1 text-[color:var(--taupe)] hover:text-[color:var(--navy)]"
                   >
                     <X className="h-3.5 w-3.5" />
                   </button>
@@ -153,12 +176,13 @@ export function CartDrawer() {
           )}
         </div>
 
+        {lines.length > 0 && <BundleUpgrade />}
         <ProtectionRow />
 
-        {lines.length > 0 && (
-          <div className="border-t border-[color:var(--border)] px-6 py-6 space-y-4">
+        {allLines.length > 0 && (
+          <div className="space-y-4 border-t border-[color:var(--border)] px-5 py-5">
             <div className="flex items-center justify-between text-sm">
-              <span className="caps-label text-[color:var(--muted-foreground)]">Subtotal</span>
+              <span className="caps-label text-[color:var(--taupe)]">Subtotal</span>
               <span className="font-display text-xl tabular-nums">${subtotal.toFixed(2)}</span>
             </div>
             <button
@@ -168,9 +192,20 @@ export function CartDrawer() {
             >
               Checkout <ArrowRight className="h-3.5 w-3.5" />
             </button>
-            <p className="text-[11px] text-center text-[color:var(--muted-foreground)]">
-              Package protection can be added at checkout.
-            </p>
+            <ul className="grid grid-cols-3 gap-2 pt-1">
+              {[
+                { icon: ShieldCheck, label: `${GUARANTEE_DAYS}-day guarantee` },
+                { icon: Truck, label: "Ships in 24h" },
+                { icon: Lock, label: "Secure checkout" },
+              ].map(({ icon: Icon, label }) => (
+                <li key={label} className="flex flex-col items-center gap-1.5 text-center">
+                  <Icon className="h-3.5 w-3.5 text-[color:var(--navy)]" strokeWidth={1.4} />
+                  <span className="text-[9px] uppercase tracking-[0.12em] text-[color:var(--taupe)]">
+                    {label}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </aside>
