@@ -8,10 +8,10 @@ export const Route = createFileRoute("/shipping")({
       {
         name: "description",
         content:
-          "Free US shipping on every NOURISH™ order. Ships from our US facility within 24 hours with tracking by email.",
+          "Free US shipping on NOURISH™ orders over $50. Ships from our US facility within 24 hours with tracking by email.",
       },
       { property: "og:title", content: "Shipping — Seralie" },
-      { property: "og:description", content: "Free US shipping, dispatched within 24 hours." },
+      { property: "og:description", content: "Free US shipping over $50, dispatched within 24 hours." },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://seralie.com/shipping" },
       { name: "twitter:card", content: "summary" },
@@ -24,8 +24,8 @@ export const Route = createFileRoute("/shipping")({
 function ShippingPage() {
   const SECTIONS = [
     {
-      h: "Free US shipping",
-      p: "Shipping is free on every US order, one-time or subscription. There is no minimum.",
+      h: "Free US shipping over $50",
+      p: "Shipping is free on US orders over $50, one-time or subscription. Orders under $50 show a flat rate at checkout.",
     },
     {
       h: "Dispatch",
@@ -58,7 +58,7 @@ function ShippingPage() {
       <div className="eyebrow">Support</div>
       <h1 className="mt-3 font-display text-4xl md:text-5xl">Shipping</h1>
       <p className="mt-6 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-        Free US shipping · Ships in 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
+        Free US shipping over $50 · Ships in 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
       </p>
       <div className="mt-10 space-y-8">
         {SECTIONS.map((s) => (
