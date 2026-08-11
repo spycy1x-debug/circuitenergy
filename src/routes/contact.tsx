@@ -47,9 +47,10 @@ function ContactPage() {
           <div className="eyebrow">Contact</div>
           <h1 className="mt-4 font-display text-4xl md:text-5xl">We're here.</h1>
           <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-            Questions about a proof, an engraving, or an order already on its way — write to us and a real person
-            will answer.
+            Questions about an order, a subscription, or whether NOURISH™ is right for you — write to us and a
+            real person will answer.
           </p>
+
         </div>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_1.2fr]">
