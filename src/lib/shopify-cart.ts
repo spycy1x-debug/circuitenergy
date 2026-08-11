@@ -138,6 +138,12 @@ function mapCart(cart: any) {
     const apiQuantity = Number(n.quantity);
     const apiUnitPrice = Number(n.cost?.amountPerQuantity?.amount || m.price?.amount || 0);
     const displayPrice = Number(priceAttr?.value);
+    const selectedTier = TIERS.find((tier) => toGid(tier.variantId) === m.id);
+    const configuredPrice = selectedTier
+      ? planAttr
+        ? selectedTier.subPrice
+        : selectedTier.oneTimePrice
+      : null;
     return {
       id: n.id,
       variantId: m.id,
@@ -146,7 +152,7 @@ function mapCart(cart: any) {
       image: m.image?.url || m.product?.featuredImage?.url || "",
       // The selected offer is the source of truth for this custom cart UI.
       // Shopify can echo the variant's one-time price even when a selling plan was sent.
-      unitPrice: Number.isFinite(displayPrice) ? displayPrice : apiUnitPrice,
+      unitPrice: configuredPrice ?? (Number.isFinite(displayPrice) ? displayPrice : apiUnitPrice),
       quantity: apiQuantity > 0 ? apiQuantity : requestedQuantity > 0 ? requestedQuantity : 1,
       sellingPlanName: planAttr?.value || null,
       attributes: attrs.filter((a: any) => !["Subscription", "_Bundle", "_DisplayPrice", "_RequestedQuantity"].includes(a.key)),
