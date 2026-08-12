@@ -270,7 +270,7 @@ function BuyBox({ copy }: { copy: ProductCopy }) {
         })}
       </div>
 
-      <button onClick={addToCart} disabled={adding} className="btn-primary mt-6 w-full py-7 text-[17px] tracking-[0.12em]">
+      <button onClick={addToCart} disabled={adding} className="btn-primary mt-6 w-full py-7! text-[17px]! tracking-[0.12em]!">
         {adding ? "Adding…" : "Add to cart"}
       </button>
 
