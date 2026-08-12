@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+—import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, ChevronLeft, ChevronRight, Check, Minus, Star } from "lucide-react";
 import {
@@ -270,8 +270,8 @@ function BuyBox({ copy }: { copy: ProductCopy }) {
         })}
       </div>
 
-      <button onClick={addToCart} disabled={adding} className="btn-primary mt-6 w-full py-6 text-[15px] tracking-[0.12em]">
-        {adding ? "Adding…" : `Add to cart — ${money(active)}`}
+      <button onClick={addToCart} disabled={adding} className="btn-primary mt-6 w-full py-7 text-[17px] tracking-[0.12em]">
+        {adding ? "Adding…" : "Add to cart"}
       </button>
 
       <ReviewTicker />
