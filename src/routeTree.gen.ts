@@ -17,6 +17,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as NourishRouteImport } from './routes/nourish'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as Glp1RouteImport } from './routes/glp-1'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
@@ -65,6 +66,11 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Glp1Route = Glp1RouteImport.update({
+  id: '/glp-1',
+  path: '/glp-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/glp-1': typeof Glp1Route
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/glp-1': typeof Glp1Route
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/glp-1': typeof Glp1Route
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/faq'
+    | '/glp-1'
     | '/how-it-works'
     | '/login'
     | '/nourish'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/faq'
+    | '/glp-1'
     | '/how-it-works'
     | '/login'
     | '/nourish'
@@ -196,6 +207,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/contact'
     | '/faq'
+    | '/glp-1'
     | '/how-it-works'
     | '/login'
     | '/nourish'
@@ -214,6 +226,7 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
+  Glp1Route: typeof Glp1Route
   HowItWorksRoute: typeof HowItWorksRoute
   LoginRoute: typeof LoginRoute
   NourishRoute: typeof NourishRoute
@@ -284,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/glp-1': {
+      id: '/glp-1'
+      path: '/glp-1'
+      fullPath: '/glp-1'
+      preLoaderRoute: typeof Glp1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/faq': {
       id: '/faq'
       path: '/faq'
@@ -342,6 +362,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
+  Glp1Route: Glp1Route,
   HowItWorksRoute: HowItWorksRoute,
   LoginRoute: LoginRoute,
   NourishRoute: NourishRoute,
@@ -356,13 +377,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
