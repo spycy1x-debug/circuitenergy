@@ -4,10 +4,10 @@ import { TIERS, toGid } from "./product-config";
 import { trackInitiateCheckout } from "./fb-pixel";
 
 // =====================================================================
-// Seralie cart — Shopify Storefront API
+// Seralie cart ‚Äî Shopify Storefront API
 // =====================================================================
 
-/** Package Protection — a plain line, never a subscription. */
+/** Package Protection ‚Äî a plain line, never a subscription. */
 export const PACKAGE_PROTECTION_VARIANT_ID = "48890343030938";
 
 const LS_CART_ID = "seralie-cart-id";
@@ -124,6 +124,16 @@ function formatCheckoutUrl(url: string) {
   }
 }
 
+/**
+ * Cart thumbnails render at 80x80. Shopify serves product images at full size
+ * (the NOURISH label is a 2048x2048 PNG, ~1.6MB), so ask its CDN for a 200px
+ * copy instead. Non-Shopify hosts are passed through untouched.
+ */
+function thumb(url: string) {
+  if (!url.includes("cdn.shopify.com")) return url;
+  return url + (url.includes("?") ? "&" : "?") + "width=200";
+}
+
 function mapCart(cart: any) {
   state.cartId = cart.id;
   state.checkoutUrl = formatCheckoutUrl(cart.checkoutUrl);
@@ -149,7 +159,7 @@ function mapCart(cart: any) {
       variantId: m.id,
       title: m.product?.title || "",
       subtitle: bundleAttr?.value || (m.title === "Default Title" ? "" : m.title),
-      image: m.image?.url || m.product?.featuredImage?.url || "",
+      image: thumb(m.image?.url || m.product?.featuredImage?.url || ""),
       // The selected offer is the source of truth for this custom cart UI.
       // Shopify can echo the variant's one-time price even when a selling plan was sent.
       unitPrice: configuredPrice ?? (Number.isFinite(displayPrice) ? displayPrice : apiUnitPrice),
@@ -161,7 +171,7 @@ function mapCart(cart: any) {
 
 }
 
-/** Live prices straight from Shopify — never hardcoded in the UI. */
+/** Live prices straight from Shopify ‚Äî never hardcoded in the UI. */
 export async function fetchVariantPrices(
   variantIds: string[],
 ): Promise<Record<string, { amount: number; currencyCode: string; compareAt: number | null }>> {
@@ -269,7 +279,7 @@ function protectionLine() {
   return state.lines.find(isProtectionLine) ?? null;
 }
 
-/** If protection is the only thing left, it can't stand alone — clear the cart. */
+/** If protection is the only thing left, it can't stand alone ‚Äî clear the cart. */
 async function dropOrphanProtection() {
   const others = state.lines.filter((l) => !isProtectionLine(l));
   const prot = protectionLine();
@@ -300,7 +310,7 @@ export const cart = {
   },
   /**
    * Adds one bottle-pack line. `sellingPlanId` is included only when the
-   * subscribe toggle is on — without it Shopify silently books a one-time order.
+   * subscribe toggle is on ‚Äî without it Shopify silently books a one-time order.
    */
   async add(opts: {
     variantId: string;
@@ -332,7 +342,7 @@ export const cart = {
 
       const lines: LineInput[] = [line];
       if (opts.packageProtection) {
-        // Plain line — no selling plan, so it is charged once and never rebilled.
+        // Plain line ‚Äî no selling plan, so it is charged once and never rebilled.
         lines.push({ merchandiseId: PROTECTION_GID, quantity: 1 });
       }
       if (!state.cartId) {
