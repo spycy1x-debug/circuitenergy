@@ -16,6 +16,7 @@ import { Reviews } from "@/components/site/Reviews";
 import { GuaranteeBand } from "@/components/site/GuaranteeBand";
 import { BenefitCircles } from "@/components/site/BenefitCircles";
 import { TrustRow } from "@/components/site/TrustRow";
+import { GuaranteeBadges } from "@/components/site/GuaranteeBadges";
 
 const money = (n: number) => `$${n.toFixed(2)}`;
 
