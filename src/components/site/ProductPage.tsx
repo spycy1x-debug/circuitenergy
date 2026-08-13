@@ -299,9 +299,6 @@ function BuyBox({ copy }: { copy: ProductCopy }) {
         settle in.
       </p>
 
-      <div className="mt-5">
-        <ReviewTicker />
-      </div>
 
       <div className="mt-6">
         <TrustRow />
