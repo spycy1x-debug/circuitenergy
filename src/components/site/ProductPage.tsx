@@ -380,6 +380,10 @@ export function ProductPage({ copy }: { copy: ProductCopy }) {
               24 hours. Tracking arrives by email.
             </p>
           </Accordion>
+
+          <div className="mt-8">
+            <ReviewTicker />
+          </div>
         </div>
       </section>
 
