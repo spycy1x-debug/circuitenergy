@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { X, ShoppingBag, ArrowRight, ShieldCheck, BadgeCheck, Repeat, Truck, Lock } from "lucide-react";
+import { X, ShoppingBag, ArrowRight, ShieldCheck, Repeat, Truck, Lock } from "lucide-react";
+import { GuaranteeBadges } from "@/components/site/GuaranteeBadges";
 import {
   cart,
   useCart,
@@ -192,34 +193,15 @@ export function CartDrawer() {
             >
               Checkout <ArrowRight className="h-3.5 w-3.5" />
             </button>
-            <div className="pt-1 text-center">
-              <div className="flex items-center justify-center gap-2">
-                <BadgeCheck className="h-4 w-4 text-[color:var(--navy)]" strokeWidth={1.6} />
-                <span className="text-[13px] font-semibold text-[color:var(--navy)]">
-                  {GUARANTEE_DAYS}-Day Money-Back Guarantee
-                </span>
-              </div>
-              <ul className="mt-3 flex flex-wrap items-center justify-center gap-1.5">
-                {["AMEX", "Apple Pay", "Discover", "G Pay", "Mastercard", "PayPal", "Shop", "VISA", "Klarna"].map(
-                  (p) => (
-                    <li
-                      key={p}
-                      className="rounded-[5px] border border-[color:var(--border)] bg-white px-2 py-1 text-[8.5px] font-semibold uppercase tracking-[0.06em] text-[color:var(--navy)]"
-                    >
-                      {p}
-                    </li>
-                  ),
-                )}
-              </ul>
-              <ul className="mt-3 flex items-center justify-center gap-4">
-                <li className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.12em] text-[color:var(--taupe)]">
-                  <Truck className="h-3 w-3" strokeWidth={1.4} /> Ships in 24h
-                </li>
-                <li className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.12em] text-[color:var(--taupe)]">
-                  <Lock className="h-3 w-3" strokeWidth={1.4} /> Secure checkout
-                </li>
-              </ul>
-            </div>
+            <GuaranteeBadges className="pt-1" />
+            <ul className="flex items-center justify-center gap-4">
+              <li className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.12em] text-[color:var(--taupe)]">
+                <Truck className="h-3 w-3" strokeWidth={1.4} /> Ships in 24h
+              </li>
+              <li className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.12em] text-[color:var(--taupe)]">
+                <Lock className="h-3 w-3" strokeWidth={1.4} /> Secure checkout
+              </li>
+            </ul>
           </div>
         )}
       </aside>
