@@ -37,7 +37,7 @@ export const TIERS: Tier[] = [
     bottles: 1,
     variantId: "48994580168858",
     cadence: "Delivered every month",
-    compareAt: null,
+    compareAt: 39.99,
     oneTimePrice: 39.99,
     subPrice: 29.99,
     sellingPlanId: "gid://shopify/SellingPlan/305798512794",

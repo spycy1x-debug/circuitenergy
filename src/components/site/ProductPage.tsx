@@ -253,7 +253,7 @@ function BuyBox({ copy }: { copy: ProductCopy }) {
                 </span>
               </span>
               <span className="shrink-0 text-right">
-                {perCompare && (
+                {perCompare && perCompare > per && (
                   <span className="block text-xs text-[color:var(--taupe)] line-through tabular-nums">
                     {money(perCompare)}/bottle
                   </span>
