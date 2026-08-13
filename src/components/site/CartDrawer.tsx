@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X, ShoppingBag, ArrowRight, ShieldCheck, Repeat, Truck, Lock } from "lucide-react";
+import { X, ShoppingBag, ArrowRight, ShieldCheck, BadgeCheck, Repeat, Truck, Lock } from "lucide-react";
 import {
   cart,
   useCart,
