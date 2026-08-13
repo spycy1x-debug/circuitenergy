@@ -274,15 +274,19 @@ function BuyBox({ copy }: { copy: ProductCopy }) {
         {adding ? "Adding…" : "Add to cart"}
       </button>
 
-      <ReviewTicker />
+      <GuaranteeBadges className="mt-5" />
 
-      <p className="mt-3 text-center text-xs text-[color:var(--muted-foreground)]">
+      <p className="mt-4 text-center text-xs text-[color:var(--muted-foreground)]">
         Free US shipping over $50 · Ships within 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
       </p>
       <p className="mt-2 text-center text-xs text-[color:var(--muted-foreground)]">
         Most people give it 6–8 weeks. That is how long it takes for nutrient levels and daily habits to
         settle in.
       </p>
+
+      <div className="mt-5">
+        <ReviewTicker />
+      </div>
 
       <div className="mt-6">
         <TrustRow />
