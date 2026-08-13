@@ -147,7 +147,7 @@ function ReviewTicker() {
   if (!r) return null;
 
   return (
-    <div className="mt-3 w-full border border-[color:var(--border)] bg-white px-4 py-3">
+    <div className="w-full border border-[color:var(--border)] bg-white px-4 py-3">
       <div className="flex items-center justify-center gap-0.5">
         {[1, 2, 3, 4, 5].map((s) => (
           <Star
@@ -164,8 +164,22 @@ function ReviewTicker() {
       >
         &ldquo;{r.title ?? r.body}&rdquo;
       </p>
-      <div className="mt-1 text-center text-[10px] uppercase tracking-[0.14em] text-[color:var(--taupe)]">
-        {r.name} · Verified buyer
+      <div className="mt-2 flex items-center justify-center gap-2">
+        {r.photo ? (
+          <img
+            src={r.photo}
+            alt={r.photoAlt ?? r.name}
+            loading="lazy"
+            className="h-6 w-6 shrink-0 rounded-full object-cover"
+          />
+        ) : (
+          <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[color:var(--ivory)] text-[10px] font-semibold text-[color:var(--taupe)]">
+            {r.name.charAt(0)}
+          </span>
+        )}
+        <span className="text-[10px] uppercase tracking-[0.14em] text-[color:var(--taupe)]">
+          {r.name} · Verified buyer
+        </span>
       </div>
     </div>
   );
