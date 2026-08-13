@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X, ShoppingBag, ArrowRight, ShieldCheck, Repeat, Truck, Lock } from "lucide-react";
+import { X, ShoppingBag, ArrowRight, ShieldCheck, Truck, Lock } from "lucide-react";
 import { GuaranteeBadges } from "@/components/site/GuaranteeBadges";
 import {
   cart,
@@ -63,7 +63,7 @@ function ProtectionRow() {
             </div>
           </div>
           <p className="mt-1 text-xs leading-relaxed text-[color:var(--muted-foreground)]">
-            Covers loss, theft and damage in transit. Charged once — never on a rebill.
+            Covers loss, theft and damage in transit. Charged once ‚Äî never on a rebill.
           </p>
           {protectionError && (
             <p className="mt-2 text-xs text-[color:var(--destructive)]">{protectionError}</p>
@@ -146,12 +146,6 @@ export function CartDrawer() {
                     {line.subtitle && (
                       <div className="mt-1 text-xs text-[color:var(--muted-foreground)]">
                         {line.subtitle}
-                      </div>
-                    )}
-                    {line.sellingPlanName && (
-                      <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] text-[color:var(--taupe)]">
-                        <Repeat className="h-3 w-3" strokeWidth={1.6} />
-                        {line.sellingPlanName}
                       </div>
                     )}
                     <div className="mt-3 flex items-center justify-between">
