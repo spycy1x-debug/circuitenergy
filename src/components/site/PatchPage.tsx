@@ -37,7 +37,7 @@ import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import { VideoCarousel } from "@/components/site/VideoCarousel";
 import ugc1 from "@/assets/ugc-1.mp4.asset.json";
 import ugc2 from "@/assets/ugc-2.mp4.asset.json";
-import ugc3 from "@/assets/ugc-3.mp4.asset.json";
+
 import ugc4 from "@/assets/ugc-4.mp4.asset.json";
 import ugc5 from "@/assets/ugc-5.mp4.asset.json";
 import ugc6 from "@/assets/ugc-6.mp4.asset.json";
