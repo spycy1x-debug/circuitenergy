@@ -34,6 +34,19 @@ import g6 from "@/assets/patch-g6.webp.asset.json";
 import g7 from "@/assets/patch-g7.webp.asset.json";
 import g8 from "@/assets/patch-g8.webp.asset.json";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
+import { VideoCarousel } from "@/components/site/VideoCarousel";
+import ugc1 from "@/assets/ugc-1.mp4.asset.json";
+import ugc2 from "@/assets/ugc-2.mp4.asset.json";
+import ugc3 from "@/assets/ugc-3.mp4.asset.json";
+import ugc4 from "@/assets/ugc-4.mp4.asset.json";
+import ugc5 from "@/assets/ugc-5.mp4.asset.json";
+import ugc6 from "@/assets/ugc-6.mp4.asset.json";
+import ugc7 from "@/assets/ugc-7.mp4.asset.json";
+import ugc8 from "@/assets/ugc-8.mp4.asset.json";
+
+const UGC_VIDEOS = [ugc1, ugc2, ugc3, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
+  src: a.url,
+}));
 
 const money = (n: number) => `$${n.toFixed(2)}`;
 
@@ -326,18 +339,10 @@ export function PatchPage() {
       <section className="border-t border-[color:var(--line)] bg-[#FBFAFF]">
         <div className={`${SECTION} py-14 md:py-20`}>
           <h2 className={H2}>Spot care without the full-face setup</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {[
-              { l: "Video — cleanse and dry", c: "Clean, dry skin. Skip serums on the spot." },
-              { l: "Video — press it on", c: "Hold it down so the edges seal flat." },
-              { l: "Video — peel off in the morning", c: "Six to eight hours, then rinse." },
-            ].map((v) => (
-              <div key={v.l}>
-                <MediaPlaceholder ratio="1/1" label={v.l} dimensions="1000 × 1000" video />
-                <p className="mt-3 text-[14px] leading-6 text-[color:var(--muted-ink)]">{v.c}</p>
-              </div>
-            ))}
+          <div className="mt-8">
+            <VideoCarousel items={UGC_VIDEOS} />
           </div>
+
         </div>
       </section>
 
