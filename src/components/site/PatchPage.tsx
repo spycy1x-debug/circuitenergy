@@ -393,8 +393,26 @@ export function PatchPage() {
         </div>
       </section>
 
-      {/* Reviews placeholder — nothing rendered until real reviews exist */}
+      {/* What it won't do */}
+      <section className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
+        <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">What it won't do</h2>
+        <ul className="mt-8 space-y-4">
+          {[
+            "It won't clear your whole face. It's a spot treatment, not a routine.",
+            "It won't remove a spot completely overnight. It makes it flatter, smaller and less red.",
+            "It won't fix dark marks left behind by old spots.",
+            "If your acne is widespread or cystic, see a dermatologist. This is for individual breakouts.",
+          ].map((t) => (
+            <li key={t} className="flex gap-3 text-[15px] leading-7 text-[color:var(--muted-ink)]">
+              <Minus className="mt-2 h-4 w-4 shrink-0 text-[color:var(--brand)]" />
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section id="reviews" aria-hidden="true" />
+
 
       {/* FAQ */}
       <section className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
