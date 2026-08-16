@@ -6,9 +6,13 @@ import {
   patchTierById,
   GUARANTEE_DAYS,
 } from "@/lib/patch-config";
-import heroImg from "@/assets/patch-hero.jpg";
-import flatlayImg from "@/assets/patch-flatlay.jpg";
-import glowImg from "@/assets/patch-glow.jpg";
+import g1 from "@/assets/patch-g1.webp.asset.json";
+import g2 from "@/assets/patch-g2.webp.asset.json";
+import g4 from "@/assets/patch-g4.webp.asset.json";
+
+const heroImg = g1.url;
+const flatlayImg = g4.url;
+const glowImg = g2.url;
 
 const money = (n: number) => `$${n.toFixed(2)}`;
 const featured = patchTierById(DEFAULT_PATCH_TIER);
