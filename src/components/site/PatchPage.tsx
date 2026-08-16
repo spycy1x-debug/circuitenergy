@@ -23,7 +23,6 @@ import {
 } from "@/lib/patch-config";
 import { cart } from "@/lib/shopify-cart";
 import { trackViewContent, trackAddToCart } from "@/lib/fb-pixel";
-import { MediaPlaceholder } from "@/components/site/MediaPlaceholder";
 import closeupImg from "@/assets/patch-closeup.png.asset.json";
 import crossSectionImg from "@/assets/patch-cross-section.png.asset.json";
 import { PatchGallery, type GalleryItem } from "@/components/site/PatchGallery";
