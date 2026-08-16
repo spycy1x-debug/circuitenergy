@@ -171,30 +171,35 @@ function Gallery() {
 
 const FAQS = [
   {
-    q: "How long do I leave one on?",
-    a: "Overnight, six to eight hours. Put it on clean, dry skin before bed and take it off in the morning.",
+    q: "Will it work on a spot that hasn't come to a head?",
+    a: "Yes — that's the main reason we added light. Hydrocolloid alone needs an opening to draw fluid through. Light doesn't.",
   },
   {
     q: "Does the light actually do anything?",
-    a: "Red and blue light are used in skincare for calming redness and targeting the bacteria involved in breakouts. The patch holds the light right on the spot while the hydrocolloid pulls fluid out.",
+    a: "Blue and red LED phototherapy for acne has been studied in dermatology for over twenty years. Blue light is absorbed by bacteria in the pore; red light reduces inflammation. A patch is lower-powered than a clinic panel — this is an overnight assist, not a medical device.",
+  },
+  {
+    q: "How long do I leave it on?",
+    a: "Six to eight hours. Clean, dry skin before bed.",
   },
   {
     q: "Can I wear makeup over it?",
-    a: "Yes. The patch is thin and matte, so foundation sits over it, but it works best worn overnight without anything on top.",
+    a: "It's designed for overnight. Makeup over the top will lift the edges.",
   },
   {
-    q: "Will it work on a spot that hasn't come to a head?",
-    a: "It helps calm redness on early spots, but the absorbing part works best once there's something to draw out.",
+    q: "How many will I use?",
+    a: "Most people use two or three on the same spot across consecutive nights until it flattens. A 60-pack lasts most people about two months.",
   },
   {
-    q: "How many do I need?",
-    a: "Most people use one to three a week, so a 60-patch box lasts around two months.",
+    q: "Will it irritate my skin?",
+    a: "Hydrocolloid is one of the gentlest options available — it's the same material used in wound dressings. If you get redness that lasts after removal, stop using it.",
   },
   {
     q: "What if it doesn't work for me?",
-    a: `Use the whole box. If your skin isn't clearer, email us for a full refund and keep the patches.`,
+    a: "60 days, full refund, and keep the patches. Email us, nothing to ship back.",
   },
 ];
+
 
 function Faq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -248,76 +253,125 @@ export function PatchPage() {
         </div>
       </section>
 
-      {/* Mechanism */}
+      {/* The problem */}
       <section className="border-y border-[color:var(--line)] bg-[color:var(--wash)]">
-        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
-          <h2 className="max-w-xl text-3xl font-semibold tracking-tight md:text-4xl">
-            Hydrocolloid absorbs it. Light treats it.
+        <div className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+            Why your last patch did nothing
           </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                h: "1. It absorbs",
-                p: "Medical-grade hydrocolloid pulls fluid out of the spot and keeps your fingers off it overnight.",
-              },
-              {
-                h: "2. Red light calms",
-                p: "Red light is used in skincare to soothe the angry, swollen look around a breakout.",
-              },
-              {
-                h: "3. Blue light targets",
-                p: "Blue light targets the acne-causing bacteria sitting in the pore while you sleep.",
-              },
-            ].map((c) => (
-              <div
-                key={c.h}
-                className="rounded-3xl border border-[color:var(--line)] bg-white p-6 shadow-[0_10px_40px_-30px_rgba(76,29,149,0.6)]"
-              >
-                <div className="h-10 w-10 rounded-full bg-[color:var(--brand-soft)]" />
-                <h3 className="mt-4 text-lg font-semibold">{c.h}</h3>
-                <p className="mt-2 text-[15px] leading-7 text-[color:var(--muted-ink)]">{c.p}</p>
-              </div>
-            ))}
+          <div className="mt-6 space-y-5 text-[16px] leading-8 text-[color:var(--muted-ink)]">
+            <p>
+              Hydrocolloid works by drawing fluid out of a spot. That means it needs somewhere for
+              the fluid to go — an opening. Put one on a whitehead and it works. Put one on a deep,
+              sore lump that hasn't surfaced and nothing happens, because there's nothing for it to
+              pull.
+            </p>
+            <p>
+              That's the review you've read a hundred times: "did nothing for me." It's not the
+              patch failing. It's the wrong spot for the mechanism.
+            </p>
+            <p className="text-[color:var(--brand)] font-semibold">Light doesn't need an opening.</p>
           </div>
         </div>
       </section>
 
-      {/* Comparison */}
+      {/* How it works */}
       <section className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
-        <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">How it stacks up</h2>
-        <div className="mt-8 overflow-x-auto rounded-3xl border border-[color:var(--line)]">
-          <table className="w-full min-w-[560px] border-collapse text-left text-sm">
-            <thead>
-              <tr className="bg-[color:var(--wash)]">
-                <th className="p-4 font-medium text-[color:var(--muted-ink)]"> </th>
-                <th className="p-4 font-semibold text-[color:var(--brand)]">Seralie LED patches</th>
-                <th className="p-4 font-medium">Ordinary hydrocolloid</th>
-                <th className="p-4 font-medium">Dermatologist visit</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[color:var(--line)]">
-              <tr>
-                <td className="p-4 font-medium">What it does</td>
-                <td className="p-4">Absorbs the spot and treats it with red and blue light</td>
-                <td className="p-4">Absorbs only</td>
-                <td className="p-4">Prescription plan for your whole face</td>
-              </tr>
-              <tr>
-                <td className="p-4 font-medium">Cost</td>
-                <td className="p-4">From $0.36 a patch</td>
-                <td className="p-4">Around $0.30 a patch</td>
-                <td className="p-4">$150+ per visit, plus scripts</td>
-              </tr>
-              <tr>
-                <td className="p-4 font-medium">Time to work</td>
-                <td className="p-4">Overnight</td>
-                <td className="p-4">Overnight, redness stays</td>
-                <td className="p-4">Weeks to months</td>
-              </tr>
-            </tbody>
-          </table>
+        <h2 className="max-w-xl text-3xl font-semibold tracking-tight md:text-4xl">
+          Three things at once, overnight
+        </h2>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              h: "Hydrocolloid draws it out",
+              p: "Medical-grade hydrocolloid pulls fluid from a spot that's come to a head, and seals it so you physically can't pick at it overnight.",
+            },
+            {
+              h: "Blue light targets the bacteria",
+              p: "Blue light around 415nm is absorbed by porphyrins inside C. acnes, the bacteria involved in breakouts. It reaches the spot whether or not it has a head.",
+            },
+            {
+              h: "Red light calms the swelling",
+              p: "Red light penetrates deeper and is used in dermatology to reduce the inflammatory response — the redness and puffiness that makes a spot obvious from across a room.",
+            },
+          ].map((c) => (
+            <div
+              key={c.h}
+              className="rounded-3xl border border-[color:var(--line)] bg-white p-6 shadow-[0_10px_40px_-30px_rgba(76,29,149,0.6)]"
+            >
+              <div className="h-10 w-10 rounded-full bg-[color:var(--brand-soft)]" />
+              <h3 className="mt-4 text-lg font-semibold">{c.h}</h3>
+              <p className="mt-2 text-[15px] leading-7 text-[color:var(--muted-ink)]">{c.p}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 max-w-2xl text-xs leading-6 text-[color:var(--muted-ink)]">
+          Blue and red LED phototherapy for acne has been studied since Papageorgiou et al., British
+          Journal of Dermatology, 2000. Clinical studies use higher-powered panels than a wearable
+          patch.
+        </p>
+      </section>
+
+      {/* Comparison */}
+      <section className="border-y border-[color:var(--line)] bg-[color:var(--wash)]">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">How it stacks up</h2>
+          <div className="mt-8 overflow-x-auto rounded-3xl border border-[color:var(--line)] bg-white">
+            <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="bg-[color:var(--wash)]">
+                  <th className="p-4 font-medium text-[color:var(--muted-ink)]"> </th>
+                  <th className="p-4 font-semibold text-[color:var(--brand)]">Seralie LED patches</th>
+                  <th className="p-4 font-medium">Ordinary hydrocolloid</th>
+                  <th className="p-4 font-medium">Cortisone shot</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[color:var(--line)]">
+                {[
+                  ["Works on a whitehead", "Yes", "Yes", "Yes"],
+                  ["Works on a spot with no head", "Yes", "No", "Yes"],
+                  ["Reduces redness", "Yes", "No", "Yes"],
+                  ["Stops you picking", "Yes", "Yes", "No"],
+                  ["Needs an appointment", "No", "No", "Yes"],
+                  ["Cost", "$29.99 for 60", "varies", "$75–150 per visit"],
+                ].map((row) => (
+                  <tr key={row[0]}>
+                    <td className="p-4 font-medium">{row[0]}</td>
+                    <td className="p-4">{row[1]}</td>
+                    <td className="p-4">{row[2]}</td>
+                    <td className="p-4">{row[3]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
+
+      {/* When to use */}
+      <section className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+        <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+          The night before something
+        </h2>
+        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+          {[
+            "Something came up on your chin and you have photos tomorrow",
+            "A sore lump that hasn't surfaced and you know picking makes it worse",
+            "The one that always shows up the week of something important",
+          ].map((s) => (
+            <li
+              key={s}
+              className="rounded-2xl border border-[color:var(--line)] bg-white p-5 text-[15px] leading-7 text-[color:var(--muted-ink)]"
+            >
+              {s}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-[16px] leading-8">
+          Put it on clean skin before bed. Six to eight hours. Peel it off in the morning.
+        </p>
+      </section>
+
 
       {/* How to use */}
       <section className="border-y border-[color:var(--line)] bg-[color:var(--wash)]">
@@ -339,8 +393,26 @@ export function PatchPage() {
         </div>
       </section>
 
-      {/* Reviews placeholder — nothing rendered until real reviews exist */}
+      {/* What it won't do */}
+      <section className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
+        <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">What it won't do</h2>
+        <ul className="mt-8 space-y-4">
+          {[
+            "It won't clear your whole face. It's a spot treatment, not a routine.",
+            "It won't remove a spot completely overnight. It makes it flatter, smaller and less red.",
+            "It won't fix dark marks left behind by old spots.",
+            "If your acne is widespread or cystic, see a dermatologist. This is for individual breakouts.",
+          ].map((t) => (
+            <li key={t} className="flex gap-3 text-[15px] leading-7 text-[color:var(--muted-ink)]">
+              <Minus className="mt-2 h-4 w-4 shrink-0 text-[color:var(--brand)]" />
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section id="reviews" aria-hidden="true" />
+
 
       {/* FAQ */}
       <section className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
