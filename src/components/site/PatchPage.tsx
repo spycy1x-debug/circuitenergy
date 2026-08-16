@@ -215,26 +215,24 @@ function BuyBox() {
         {adding ? "Adding…" : "Add to cart"}
       </button>
 
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
-        {["Amex", "Apple Pay", "G Pay", "Mastercard", "PayPal", "Shop Pay", "Visa"].map((p) => (
-          <span
-            key={p}
-            className="rounded-md border border-[color:var(--line)] px-2 py-1 text-[9px] font-semibold uppercase tracking-wide text-[color:var(--muted-ink)]"
-          >
-            {p}
-          </span>
-        ))}
+      <div className="mt-4 flex justify-center">
+        <img
+          src={payBadges.url}
+          alt="Accepted payment methods: Amex, Apple Pay, Discover, Google Pay, Mastercard, PayPal, Shop Pay, Visa, Klarna"
+          className="h-7 w-auto max-w-full object-contain md:h-8"
+          loading="lazy"
+        />
       </div>
 
-      <ul className="mt-5 grid grid-cols-3 gap-2 border-y border-[color:var(--line)] py-4">
+      <ul className="mt-6 grid grid-cols-3 gap-3 border-y border-[color:var(--line)] py-6">
         {[
           { icon: ShieldCheck, label: `${GUARANTEE_DAYS}-Day Guarantee` },
           { icon: Lock, label: "Secure Checkout" },
           { icon: Truck, label: "Free Over $40" },
         ].map(({ icon: Icon, label }) => (
-          <li key={label} className="flex flex-col items-center gap-1.5 text-center">
-            <Icon className="h-4 w-4 text-[color:var(--brand)]" strokeWidth={1.6} />
-            <span className="text-[10px] font-medium uppercase tracking-wide text-[color:var(--muted-ink)]">
+          <li key={label} className="flex flex-col items-center gap-2 text-center">
+            <Icon className="h-7 w-7 text-[color:var(--brand)]" strokeWidth={1.8} />
+            <span className="text-[12px] font-bold leading-tight text-[#111111]">
               {label}
             </span>
           </li>
