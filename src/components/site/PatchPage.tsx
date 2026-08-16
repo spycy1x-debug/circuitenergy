@@ -189,6 +189,10 @@ function BuyBox() {
                     Free shipping
                   </span>
                 )}
+                <span className="mt-1 flex items-center gap-1 text-[12px] font-semibold text-[color:var(--brand)]">
+                  <ShieldCheck className="h-3.5 w-3.5" strokeWidth={2} />
+                  {GUARANTEE_DAYS}-day money-back guarantee
+                </span>
               </span>
 
               <span className="shrink-0 text-right">
