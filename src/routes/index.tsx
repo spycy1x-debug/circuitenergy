@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PatchPage } from "@/components/site/PatchPage";
+import { HomePage } from "@/components/site/HomePage";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Seralie LED Pimple Patches — Absorbs It, Treats It" },
+      { title: "Seralie — Overnight LED Pimple Patches" },
       {
         name: "description",
         content:
@@ -21,5 +21,5 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "https://seralie.com/" }],
   }),
-  component: PatchPage,
+  component: HomePage,
 });
