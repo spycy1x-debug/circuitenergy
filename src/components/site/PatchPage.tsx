@@ -37,14 +37,14 @@ import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import { VideoCarousel } from "@/components/site/VideoCarousel";
 import ugc1 from "@/assets/ugc-1.mp4.asset.json";
 import ugc2 from "@/assets/ugc-2.mp4.asset.json";
-import ugc3 from "@/assets/ugc-3.mp4.asset.json";
+
 import ugc4 from "@/assets/ugc-4.mp4.asset.json";
 import ugc5 from "@/assets/ugc-5.mp4.asset.json";
 import ugc6 from "@/assets/ugc-6.mp4.asset.json";
 import ugc7 from "@/assets/ugc-7.mp4.asset.json";
 import ugc8 from "@/assets/ugc-8.mp4.asset.json";
 
-const UGC_VIDEOS = [ugc1, ugc2, ugc3, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
+const UGC_VIDEOS = [ugc1, ugc2, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
   src: a.url,
 }));
 
