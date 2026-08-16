@@ -4,11 +4,12 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { cart, useCart } from "@/lib/shopify-cart";
 
 const NAV = [
-  { to: "/nourish", label: "Shop" },
+  { to: "/patches", label: "Shop" },
   { to: "/how-it-works", label: "How It Works" },
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ];
+
 
 export function Header() {
   const [open, setOpen] = useState(false);

@@ -35,8 +35,8 @@ export function Footer() {
         <div>
           <div className="wordmark text-xl text-[color:var(--ivory)]">SERALIE</div>
           <p className="mt-5 max-w-sm text-sm leading-7 text-[color:var(--ivory)]/70">
-            NOURISH™ — digestive support and daily essentials in one capsule, made in a GMP-certified US
-            facility.
+            LED pimple patches — hydrocolloid that absorbs the spot while red and blue light treat it,
+            overnight.
           </p>
 
           <form onSubmit={subscribe} className="mt-7 max-w-sm">
@@ -68,7 +68,7 @@ export function Footer() {
         <div>
           <div className="eyebrow text-[color:var(--gold)]">Shop</div>
           <ul className="mt-5 space-y-3 text-sm">
-            <li><Link to="/nourish" className={linkCls}>NOURISH™</Link></li>
+            <li><Link to="/patches" className={linkCls}>LED Pimple Patches</Link></li>
             <li><Link to="/shop" className={linkCls}>All products</Link></li>
             <li><Link to="/cart" className={linkCls}>Your cart</Link></li>
           </ul>

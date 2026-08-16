@@ -14,6 +14,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PatchesRouteImport } from './routes/patches'
 import { Route as NourishRouteImport } from './routes/nourish'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
@@ -49,6 +50,11 @@ const RefundRoute = RefundRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatchesRoute = PatchesRouteImport.update({
+  id: '/patches',
+  path: '/patches',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NourishRoute = NourishRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
+  '/patches': typeof PatchesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/shipping': typeof ShippingRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
+  '/patches': typeof PatchesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/shipping': typeof ShippingRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
   '/nourish': typeof NourishRoute
+  '/patches': typeof PatchesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/shipping': typeof ShippingRoute
@@ -175,6 +184,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/login'
     | '/nourish'
+    | '/patches'
     | '/privacy'
     | '/refund'
     | '/shipping'
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/login'
     | '/nourish'
+    | '/patches'
     | '/privacy'
     | '/refund'
     | '/shipping'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/login'
     | '/nourish'
+    | '/patches'
     | '/privacy'
     | '/refund'
     | '/shipping'
@@ -230,6 +242,7 @@ export interface RootRouteChildren {
   HowItWorksRoute: typeof HowItWorksRoute
   LoginRoute: typeof LoginRoute
   NourishRoute: typeof NourishRoute
+  PatchesRoute: typeof PatchesRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
   ShippingRoute: typeof ShippingRoute
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patches': {
+      id: '/patches'
+      path: '/patches'
+      fullPath: '/patches'
+      preLoaderRoute: typeof PatchesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nourish': {
@@ -366,6 +386,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowItWorksRoute: HowItWorksRoute,
   LoginRoute: LoginRoute,
   NourishRoute: NourishRoute,
+  PatchesRoute: PatchesRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
   ShippingRoute: ShippingRoute,
