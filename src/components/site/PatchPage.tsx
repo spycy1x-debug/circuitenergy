@@ -103,8 +103,17 @@ function BuyBox() {
 
   return (
     <div>
-      {/* a) rating slot — intentionally empty until real reviews exist */}
-      {/* <div>X/5 Customer feedback</div> */}
+      <a href="#reviews" className="mb-4 inline-flex items-center gap-2">
+        <span className="flex gap-0.5">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <Star key={i} className="h-4 w-4 text-[color:var(--brand)]" fill="currentColor" strokeWidth={0} />
+          ))}
+        </span>
+        <span className="text-[13px] font-semibold text-[#111111]">4.8</span>
+        <span className="text-[13px] text-[color:var(--muted-ink)] underline underline-offset-2">
+          3,000+ reviews
+        </span>
+      </a>
 
       <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-ink)]">
         Targeted red + blue light care
