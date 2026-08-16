@@ -38,6 +38,7 @@ import g8 from "@/assets/patch-g8.webp.asset.json";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import { VideoCarousel } from "@/components/site/VideoCarousel";
 import { PatchReviews } from "@/components/site/PatchReviews";
+import { PatchReviewTicker } from "@/components/site/PatchReviewTicker";
 import ugc1 from "@/assets/ugc-1.mp4.asset.json";
 import ugc2 from "@/assets/ugc-2.mp4.asset.json";
 
@@ -240,7 +241,7 @@ function BuyBox() {
       <button
         onClick={add}
         disabled={adding}
-        className="mt-4 w-full rounded-[10px] bg-[color:var(--brand)] px-6 py-5 text-base font-bold uppercase tracking-wide text-white transition-transform active:scale-[0.99] disabled:opacity-60"
+        className="mt-4 w-full rounded-[12px] bg-[color:var(--brand)] px-6 py-6 text-lg font-bold uppercase tracking-wide text-white transition-transform active:scale-[0.99] disabled:opacity-60"
       >
         {adding ? "Adding…" : "Add to cart"}
       </button>
@@ -253,6 +254,8 @@ function BuyBox() {
           loading="lazy"
         />
       </div>
+
+      <PatchReviewTicker />
 
       <ul className="mt-6 grid grid-cols-3 gap-3 border-y border-[color:var(--line)] py-6">
         {[
@@ -435,20 +438,6 @@ export function PatchPage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* 8. REAL RESULTS — empty */}
-      <section className="border-y border-[color:var(--line)] bg-[#FBFAFF]">
-        <div className={`${SECTION} py-14 md:py-20`}>
-          <h2 className={H2}>What people notice after using it</h2>
-          <div className="mt-8">
-            <MediaPlaceholder
-              ratio="16/9"
-              label="Customer photo gallery — awaiting real customers"
-              dimensions="1600 × 900"
-            />
-          </div>
         </div>
       </section>
 
