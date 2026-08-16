@@ -33,6 +33,7 @@ import g5 from "@/assets/patch-g5.webp.asset.json";
 import g6 from "@/assets/patch-g6.webp.asset.json";
 import g7 from "@/assets/patch-g7.webp.asset.json";
 import g8 from "@/assets/patch-g8.webp.asset.json";
+import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 
 const money = (n: number) => `$${n.toFixed(2)}`;
 
