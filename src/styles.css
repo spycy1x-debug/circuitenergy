@@ -85,7 +85,15 @@
   --border: #E4DCCC;
   --input: #E4DCCC;
   --ring: #C9B98A;
+
+  /* Seralie — LED patches: bright, clinical, one violet accent */
+  --brand: #6D3BF5;
+  --brand-soft: #F1ECFF;
+  --line: #E9E6F2;
+  --wash: #FAF9FF;
+  --muted-ink: #5B5670;
 }
+
 
 @layer base {
   * { border-color: var(--color-border); }
