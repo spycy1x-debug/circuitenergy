@@ -35,6 +35,7 @@ import g7 from "@/assets/patch-g7.webp.asset.json";
 import g8 from "@/assets/patch-g8.webp.asset.json";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import { VideoCarousel } from "@/components/site/VideoCarousel";
+import { PatchReviews } from "@/components/site/PatchReviews";
 import ugc1 from "@/assets/ugc-1.mp4.asset.json";
 import ugc2 from "@/assets/ugc-2.mp4.asset.json";
 
@@ -529,50 +530,8 @@ export function PatchPage() {
         </div>
       </section>
 
-      {/* 12. REVIEWS — empty state */}
-      <section id="reviews" className="border-y border-[color:var(--line)] bg-[#FBFAFF]">
-        <div className={`${SECTION} py-14 md:py-20`}>
-          <h2 className={H2}>Reviews</h2>
-          <div className="mt-8 grid gap-8 md:grid-cols-[240px_1fr]">
-            <div className="rounded-2xl border border-[color:var(--line)] bg-white p-6 text-center">
-              <div className="text-4xl font-bold text-[#111111]">—</div>
-              <div className="mt-2 flex justify-center gap-0.5">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star key={i} className="h-4 w-4 text-[color:var(--line)]" fill="currentColor" />
-                ))}
-              </div>
-              <p className="mt-2 text-[12px] text-[color:var(--muted-ink)]">No reviews yet</p>
-            </div>
-
-            <div className="space-y-2">
-              {[5, 4, 3, 2, 1].map((s) => (
-                <div key={s} className="flex items-center gap-3">
-                  <span className="w-8 text-[12px] text-[color:var(--muted-ink)]">{s} ★</span>
-                  <span className="h-2 flex-1 rounded-full bg-[color:var(--brand-soft)]" />
-                  <span className="w-6 text-right text-[12px] text-[color:var(--muted-ink)]">0</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-2">
-            {["All", "5 star", "4 star", "3 star", "2 star", "1 star", "With photos"].map((f) => (
-              <span
-                key={f}
-                className="cursor-default rounded-full border border-[color:var(--line)] bg-white px-3 py-1.5 text-[12px] font-medium text-[color:var(--muted-ink)]"
-              >
-                {f}
-              </span>
-            ))}
-          </div>
-
-          <div className="mt-6 grid place-items-center rounded-2xl border-2 border-dashed border-[color:var(--brand)]/40 bg-white px-6 py-16 text-center">
-            <p className="text-[15px] text-[color:var(--muted-ink)]">
-              Reviews will appear here once customers start leaving them.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 12. REVIEWS */}
+      <PatchReviews />
 
       {/* 13. GUARANTEE BAND */}
       <section className="bg-[color:var(--brand)]">
