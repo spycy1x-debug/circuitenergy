@@ -51,7 +51,7 @@ export function HomePage() {
               </Link>
             </div>
             <p className="mt-4 text-xs text-[color:var(--muted-ink)]">
-              Free shipping · Ships in 24h · {GUARANTEE_DAYS}-day guarantee
+              Free shipping over $40 · Ships in 24h · {GUARANTEE_DAYS}-day guarantee
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export function HomePage() {
             Stick one on tonight.
           </h2>
           <p className="mx-auto mt-4 max-w-md text-[15px] leading-7 text-white/85">
-            Free shipping, ships in 24 hours, and a {GUARANTEE_DAYS}-day guarantee if your skin
+            Free shipping over $40, ships in 24 hours, and a {GUARANTEE_DAYS}-day guarantee if your skin
             doesn't agree.
           </p>
           <Link

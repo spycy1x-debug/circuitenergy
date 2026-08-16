@@ -130,7 +130,7 @@ function BuyBox() {
 
       <div className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-[color:var(--brand)]/40 px-4 py-3 text-[13px] font-medium text-[#111111]">
         <Zap className="h-4 w-4 text-[color:var(--brand)]" strokeWidth={2} />
-        Free US shipping · Ships in 24 hours
+        {tier.freeShipping ? "Free shipping included · Ships in 24 hours" : "Ships in 24 hours · Free shipping over $40"}
       </div>
 
       <div className="mt-7 flex items-center gap-4">
@@ -182,6 +182,12 @@ function BuyBox() {
                 <span className="mt-1 block text-[13px] text-[color:var(--muted-ink)]">
                   {t.patches} patches · about {t.supply}
                 </span>
+                {t.freeShipping && (
+                  <span className="mt-1 flex items-center gap-1 text-[12px] font-semibold text-[color:var(--brand)]">
+                    <Truck className="h-3.5 w-3.5" strokeWidth={2} />
+                    Free shipping
+                  </span>
+                )}
               </span>
 
               <span className="shrink-0 text-right">
@@ -224,7 +230,7 @@ function BuyBox() {
         {[
           { icon: ShieldCheck, label: `${GUARANTEE_DAYS}-Day Guarantee` },
           { icon: Lock, label: "Secure Checkout" },
-          { icon: Truck, label: "Free Shipping" },
+          { icon: Truck, label: "Free Over $40" },
         ].map(({ icon: Icon, label }) => (
           <li key={label} className="flex flex-col items-center gap-1.5 text-center">
             <Icon className="h-4 w-4 text-[color:var(--brand)]" strokeWidth={1.6} />

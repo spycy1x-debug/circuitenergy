@@ -8,7 +8,7 @@ export const Route = createFileRoute("/patches")({
       {
         name: "description",
         content:
-          "Hydrocolloid absorbs it, light treats it. Overnight LED pimple patches with red and blue light. Free shipping, ships in 24h, 60-day guarantee.",
+          "Hydrocolloid absorbs it, light treats it. Overnight LED pimple patches with red and blue light. Free shipping over $40, ships in 24h, 60-day guarantee.",
       },
       { property: "og:title", content: "LED Pimple Patches — Hydrocolloid + Light | Seralie" },
       {
