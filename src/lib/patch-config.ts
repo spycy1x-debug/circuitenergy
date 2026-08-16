@@ -31,7 +31,7 @@ export const PATCH_TIERS: PatchTier[] = [
     supply: "2 months",
     variantId: "49014253551770",
     price: 29.99,
-    compareAt: null,
+    compareAt: 59.98,
   },
   {
     id: "bogo2",
