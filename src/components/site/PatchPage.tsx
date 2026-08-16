@@ -326,18 +326,10 @@ export function PatchPage() {
       <section className="border-t border-[color:var(--line)] bg-[#FBFAFF]">
         <div className={`${SECTION} py-14 md:py-20`}>
           <h2 className={H2}>Spot care without the full-face setup</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {[
-              { l: "Video — cleanse and dry", c: "Clean, dry skin. Skip serums on the spot." },
-              { l: "Video — press it on", c: "Hold it down so the edges seal flat." },
-              { l: "Video — peel off in the morning", c: "Six to eight hours, then rinse." },
-            ].map((v) => (
-              <div key={v.l}>
-                <MediaPlaceholder ratio="1/1" label={v.l} dimensions="1000 × 1000" video />
-                <p className="mt-3 text-[14px] leading-6 text-[color:var(--muted-ink)]">{v.c}</p>
-              </div>
-            ))}
+          <div className="mt-8">
+            <VideoCarousel items={UGC_VIDEOS} />
           </div>
+
         </div>
       </section>
 
