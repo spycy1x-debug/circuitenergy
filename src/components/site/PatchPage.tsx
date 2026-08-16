@@ -303,9 +303,13 @@ export function PatchPage() {
     <div className="bg-white">
       {/* 3. HERO */}
       <section className={`${SECTION} py-8 md:py-14`}>
-        <div className="grid gap-10 lg:grid-cols-[55%_45%] lg:gap-14">
-          <PatchGallery items={PATCH_GALLERY} />
-          <BuyBox />
+        <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,55%)_minmax(0,45%)] lg:gap-14">
+          <div className="min-w-0">
+            <PatchGallery items={PATCH_GALLERY} />
+          </div>
+          <div className="min-w-0">
+            <BuyBox />
+          </div>
         </div>
       </section>
 
