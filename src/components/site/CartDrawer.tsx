@@ -7,7 +7,7 @@ import {
   fetchVariantPrices,
   PACKAGE_PROTECTION_VARIANT_ID,
 } from "@/lib/shopify-cart";
-import { PATCH_PATCH_TIERS } from "@/lib/patch-config";
+import { PATCH_TIERS } from "@/lib/patch-config";
 import { Link } from "@tanstack/react-router";
 
 function ProtectionRow() {
