@@ -8,7 +8,7 @@ export const PRODUCT_TITLE = "LED Pimple Patches";
 export const PRODUCT_SUBTITLE = "Hydrocolloid + red and blue light";
 
 export const GUARANTEE_DAYS = 60;
-export const FREE_SHIPPING_THRESHOLD = 50;
+export const FREE_SHIPPING_THRESHOLD = 40;
 
 export type PatchTierId = "bogo1" | "bogo2" | "bogo3";
 
@@ -20,6 +20,7 @@ export type PatchTier = {
   variantId: string;
   price: number;
   compareAt: number | null;
+  freeShipping?: boolean;
   badge?: string;
 };
 
@@ -41,6 +42,7 @@ export const PATCH_TIERS: PatchTier[] = [
     variantId: "49014253584538",
     price: 49.99,
     compareAt: 59.98,
+    freeShipping: true,
   },
   {
     id: "bogo3",
@@ -50,6 +52,7 @@ export const PATCH_TIERS: PatchTier[] = [
     variantId: "49014253617306",
     price: 64.99,
     compareAt: 89.97,
+    freeShipping: true,
     badge: "Best value",
   },
 ];
