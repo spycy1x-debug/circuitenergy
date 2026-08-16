@@ -4,7 +4,7 @@ import { HomePage } from "@/components/site/HomePage";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Seralie LED Pimple Patches — Absorbs It, Treats It" },
+      { title: "Seralie — Overnight LED Pimple Patches" },
       {
         name: "description",
         content:
