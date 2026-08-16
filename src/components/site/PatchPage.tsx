@@ -44,7 +44,7 @@ import ugc6 from "@/assets/ugc-6.mp4.asset.json";
 import ugc7 from "@/assets/ugc-7.mp4.asset.json";
 import ugc8 from "@/assets/ugc-8.mp4.asset.json";
 
-const UGC_VIDEOS = [ugc1, ugc2, ugc3, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
+const UGC_VIDEOS = [ugc1, ugc2, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
   src: a.url,
 }));
 
