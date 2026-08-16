@@ -1,12 +1,11 @@
 export function AnnouncementBar() {
   return (
     <div className="bg-[color:var(--brand)] text-white">
-      <div className="container-x flex min-h-9 items-center justify-center py-2 text-center">
+      <div className="mx-auto flex min-h-9 max-w-6xl items-center justify-center px-5 py-2 text-center md:px-8">
         <p className="text-[11px] font-medium tracking-wide">
-          Free shipping · Ships in 24 hours · 60-day guarantee
+          Free US shipping · 60-day guarantee · Ships in 24 hours
         </p>
       </div>
     </div>
   );
 }
-
