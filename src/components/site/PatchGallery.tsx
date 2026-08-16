@@ -10,7 +10,7 @@ export function PatchGallery({ items }: { items: GalleryItem[] }) {
   const go = (n: number) => setI((c) => (c + n + items.length) % items.length);
 
   return (
-    <div>
+    <div className="min-w-0">
       <div
         className="relative overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--brand-soft)] p-2"
         onTouchStart={(e) => {
