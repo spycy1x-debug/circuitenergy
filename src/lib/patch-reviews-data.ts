@@ -8,6 +8,10 @@ import p7 from "@/assets/prv-7.webp.asset.json";
 import p8 from "@/assets/prv-8.webp.asset.json";
 import p9 from "@/assets/prv-9.webp.asset.json";
 import p10 from "@/assets/prv-10.webp.asset.json";
+import p11 from "@/assets/prv-11.webp.asset.json";
+import p12 from "@/assets/prv-12.webp.asset.json";
+import p13 from "@/assets/prv-13.webp.asset.json";
+import p14 from "@/assets/prv-14.webp.asset.json";
 
 export type PatchReview = {
   id: string;
@@ -133,7 +137,7 @@ export const PATCH_REVIEWS: PatchReview[] = [
   },
 
   { id: "p11", name: "Tessa W.", rating: 5, date: "Aug 12, 2026", title: "overnight difference", body: "not a miracle but genuinely way faster than just a plain patch. maybe half the time?" },
-  { id: "p12", name: "Nora J.", rating: 5, date: "Aug 11, 2026", body: "the light turning on when you press it is weirdly satisfying. also it doesnt fall off in my sleep which is the whole game" },
+  { id: "p12", name: "Nora J.", rating: 5, date: "Aug 11, 2026", body: "the light turning on when you press it is weirdly satisfying. also it doesnt fall off in my sleep which is the whole game", photo: p11.url, photoAlt: "Customer wearing a glowing patch on her cheek" },
   { id: "p13", name: "Jaden P.", rating: 4, date: "Aug 10, 2026", title: "good, wish there were more per box", body: "works, no complaints on that. i just go through them fast during a bad week" },
   { id: "p14", name: "Aisha M.", rating: 5, date: "Aug 8, 2026", title: "no dark marks", body: "im deeper skinned and every pimple used to leave a mark for months. using these the marks are way lighter, thats the biggest deal for me" },
   { id: "p15", name: "Owen C.", rating: 5, date: "Aug 7, 2026", body: "16, play basketball, sweat a lot. these still stick. put one on after practice and it held all night" },
@@ -148,15 +152,15 @@ export const PATCH_REVIEWS: PatchReview[] = [
   { id: "p24", name: "Nick S.", rating: 3, date: "Jul 25, 2026", title: "ok not amazing", body: "helped a bit. maybe my skin is just stubborn. customer service was nice about it though" },
   { id: "p25", name: "Amara O.", rating: 5, date: "Jul 23, 2026", body: "wore one to bed and my bf didnt even notice till the light caught his eye lol. very thin, doesnt feel like anything" },
   { id: "p26", name: "Chloe D.", rating: 5, date: "Jul 22, 2026", title: "less redness by morning", body: "thats the main thing. the bump might still be there a little but the angry red ring is gone" },
-  { id: "p27", name: "Ethan V.", rating: 5, date: "Jul 20, 2026", body: "17m. my mom bought these. now she keeps stealing them so we ordered more" },
+  { id: "p27", name: "Ethan V.", rating: 5, date: "Jul 20, 2026", body: "17m. my mom bought these. now she keeps stealing them so we ordered more", photo: p13.url, photoAlt: "Customer wearing a patch in his car" },
   { id: "p28", name: "Zoe A.", rating: 5, date: "Jul 19, 2026", body: "wore one all day at work under my mask thing and it stayed put. nobody said anything" },
   { id: "p29", name: "Hannah L.", rating: 4, date: "Jul 17, 2026", body: "solid. only note is take it off gently if you have dry skin, i yanked one and it stung" },
   { id: "p30", name: "Diego M.", rating: 5, date: "Jul 16, 2026", title: "beard area", body: "get ingrowns along my jaw and these calm them fast. sticks fine over short stubble" },
   { id: "p31", name: "Ivy K.", rating: 5, date: "Jul 14, 2026", body: "the fact you can see the gunk it pulled out is disgusting and i love it" },
   { id: "p32", name: "Trevor B.", rating: 5, date: "Jul 13, 2026", body: "no smell, no goop, no waiting for it to dry. just a sticker. perfect" },
-  { id: "p33", name: "Naomi C.", rating: 5, date: "Jul 11, 2026", title: "college dorm essential", body: "stress breakouts during finals were brutal. these got me through. everyone on my floor asked what they were" },
+  { id: "p33", name: "Naomi C.", rating: 5, date: "Jul 11, 2026", title: "college dorm essential", body: "stress breakouts during finals were brutal. these got me through. everyone on my floor asked what they were", photo: p14.url, photoAlt: "Customer smiling while wearing a patch" },
   { id: "p34", name: "Luca F.", rating: 5, date: "Jul 10, 2026", body: "bought the buy 3 get 3 and honestly glad i did, i use one like every other day" },
-  { id: "p35", name: "Priscilla Y.", rating: 5, date: "Jul 8, 2026", body: "asian skin, i scar SO easily. two months in and my cheeks look even for the first time in years" },
+  { id: "p35", name: "Priscilla Y.", rating: 5, date: "Jul 8, 2026", body: "asian skin, i scar SO easily. two months in and my cheeks look even for the first time in years", photo: p12.url, photoAlt: "Customer wearing a patch in her bathroom" },
   { id: "p36", name: "Jonah W.", rating: 4, date: "Jul 7, 2026", body: "good product. wish the light lasted longer per patch but it does the job in the window it has" },
   { id: "p37", name: "Maya S.", rating: 5, date: "Jul 5, 2026", title: "flew with them", body: "brought some on vacation, hotel air always breaks me out. used 3 the whole trip and came back with clear skin somehow" },
   { id: "p38", name: "Ben H.", rating: 5, date: "Jul 4, 2026", body: "my derm said light therapy actually has research behind it so i figured id try the cheap version. works" },
