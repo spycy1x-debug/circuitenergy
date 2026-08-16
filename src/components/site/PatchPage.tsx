@@ -171,30 +171,35 @@ function Gallery() {
 
 const FAQS = [
   {
-    q: "How long do I leave one on?",
-    a: "Overnight, six to eight hours. Put it on clean, dry skin before bed and take it off in the morning.",
+    q: "Will it work on a spot that hasn't come to a head?",
+    a: "Yes — that's the main reason we added light. Hydrocolloid alone needs an opening to draw fluid through. Light doesn't.",
   },
   {
     q: "Does the light actually do anything?",
-    a: "Red and blue light are used in skincare for calming redness and targeting the bacteria involved in breakouts. The patch holds the light right on the spot while the hydrocolloid pulls fluid out.",
+    a: "Blue and red LED phototherapy for acne has been studied in dermatology for over twenty years. Blue light is absorbed by bacteria in the pore; red light reduces inflammation. A patch is lower-powered than a clinic panel — this is an overnight assist, not a medical device.",
+  },
+  {
+    q: "How long do I leave it on?",
+    a: "Six to eight hours. Clean, dry skin before bed.",
   },
   {
     q: "Can I wear makeup over it?",
-    a: "Yes. The patch is thin and matte, so foundation sits over it, but it works best worn overnight without anything on top.",
+    a: "It's designed for overnight. Makeup over the top will lift the edges.",
   },
   {
-    q: "Will it work on a spot that hasn't come to a head?",
-    a: "It helps calm redness on early spots, but the absorbing part works best once there's something to draw out.",
+    q: "How many will I use?",
+    a: "Most people use two or three on the same spot across consecutive nights until it flattens. A 60-pack lasts most people about two months.",
   },
   {
-    q: "How many do I need?",
-    a: "Most people use one to three a week, so a 60-patch box lasts around two months.",
+    q: "Will it irritate my skin?",
+    a: "Hydrocolloid is one of the gentlest options available — it's the same material used in wound dressings. If you get redness that lasts after removal, stop using it.",
   },
   {
     q: "What if it doesn't work for me?",
-    a: `Use the whole box. If your skin isn't clearer, email us for a full refund and keep the patches.`,
+    a: "60 days, full refund, and keep the patches. Email us, nothing to ship back.",
   },
 ];
+
 
 function Faq() {
   const [open, setOpen] = useState<number | null>(0);
