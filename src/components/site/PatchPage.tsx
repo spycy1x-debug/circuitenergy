@@ -24,6 +24,8 @@ import {
 import { cart } from "@/lib/shopify-cart";
 import { trackViewContent, trackAddToCart } from "@/lib/fb-pixel";
 import { MediaPlaceholder } from "@/components/site/MediaPlaceholder";
+import closeupImg from "@/assets/patch-closeup.png.asset.json";
+import crossSectionImg from "@/assets/patch-cross-section.png.asset.json";
 import { PatchGallery, type GalleryItem } from "@/components/site/PatchGallery";
 import g1 from "@/assets/patch-g1.webp.asset.json";
 import g2 from "@/assets/patch-g2.webp.asset.json";
@@ -359,7 +361,12 @@ export function PatchPage() {
       {/* 5. AT A GLANCE */}
       <section className={`${SECTION} py-14 md:py-20`}>
         <div className="grid items-center gap-10 md:grid-cols-2">
-          <MediaPlaceholder ratio="4/5" label="Close-up skin photo" dimensions="1000 × 1250" />
+          <img
+            src={closeupImg.url}
+            alt="Close-up of an LED patch glowing red on a cheek"
+            loading="lazy"
+            className="w-full rounded-2xl border border-[color:var(--line)] object-cover"
+          />
           <div className="space-y-6">
             {[
               { icon: Sun, h: "Blue light", p: "415nm targets the bacteria in the pore" },
@@ -385,10 +392,11 @@ export function PatchPage() {
       <section className="border-y border-[color:var(--line)] bg-[#FBFAFF]">
         <div className={`${SECTION} py-14 md:py-20`}>
           <div className="grid items-center gap-10 md:grid-cols-2">
-            <MediaPlaceholder
-              ratio="1/1"
-              label="Cross-section diagram"
-              dimensions="1000 × 1000"
+            <img
+              src={crossSectionImg.url}
+              alt="Cross-section diagram of a spot showing the blocked pore, bacteria, inflammation and sebaceous gland"
+              loading="lazy"
+              className="w-full rounded-2xl border border-[color:var(--line)] bg-white object-contain"
             />
             <div>
               <h2 className={H2}>Why your last patch did nothing</h2>
