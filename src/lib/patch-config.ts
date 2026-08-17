@@ -57,7 +57,7 @@ export const PATCH_TIERS: PatchTier[] = [
   },
 ];
 
-export const DEFAULT_PATCH_TIER: PatchTierId = "bogo3";
+export const DEFAULT_PATCH_TIER: PatchTierId = "bogo1";
 
 export function patchTierById(id: PatchTierId): PatchTier {
   return PATCH_TIERS.find((t) => t.id === id) ?? PATCH_TIERS[0]!;

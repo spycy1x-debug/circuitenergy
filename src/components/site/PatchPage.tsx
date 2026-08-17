@@ -54,10 +54,10 @@ const UGC_VIDEOS = [ugc1, ugc2, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
 const money = (n: number) => `$${n.toFixed(2)}`;
 
 export const PATCH_GALLERY: GalleryItem[] = [
+  { src: g3.url, alt: "Patch features and what is inside the kit", label: "What's inside" },
   { src: g1.url, alt: "Model applying an LED spot patch to her cheek", label: "On skin" },
   { src: g4.url, alt: "Two clear patches worn on the face", label: "Worn on face" },
   { src: g2.url, alt: "Three LED spot patches glowing", label: "The patches" },
-  { src: g3.url, alt: "Patch features and what is inside the kit", label: "What's inside" },
   { src: g5.url, alt: "Cross-section of how the patch works under the skin", label: "Cross-section" },
   { src: g6.url, alt: "Illustration of the spot over three nights", label: "Timeline" },
   { src: g7.url, alt: "Ordinary hydrocolloid versus Seralie on a spot with no head", label: "Comparison" },
