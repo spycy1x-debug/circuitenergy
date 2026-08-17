@@ -63,7 +63,7 @@ function ProtectionRow() {
             </div>
           </div>
           <p className="mt-1 text-xs leading-relaxed text-[color:var(--muted-foreground)]">
-            Covers loss, theft and damage in transit. Charged once ‚Äî never on a rebill.
+            Covers loss, theft and damage in transit.
           </p>
           {protectionError && (
             <p className="mt-2 text-xs text-[color:var(--destructive)]">{protectionError}</p>
