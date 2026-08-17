@@ -5,13 +5,48 @@ export type VideoItem = { src: string; caption?: string };
 
 export function VideoCarousel({ items }: { items: VideoItem[] }) {
   const [index, setIndex] = useState(0);
+  const [inView, setInView] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
   const touchX = useRef<number | null>(null);
 
   const go = (d: number) =>
     setIndex((i) => (i + d + items.length) % items.length);
 
+  /**
+   * These clips are ~600KB each and were the heaviest thing on the page ‚Äî
+   * mounting all of them pushed first paint past 7 seconds. Nothing is
+   * fetched until the carousel scrolls into view, and even then only the
+   * current slide and its two neighbours get a src.
+   */
   useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  /** Distance around the loop, so the first and last slides are adjacent. */
+  const distance = (i: number) => {
+    const d = Math.abs(i - index);
+    return Math.min(d, items.length - d);
+  };
+
+  useEffect(() => {
+    if (!inView) return;
     refs.current.forEach((v, i) => {
       if (!v) return;
       if (i === index) {
@@ -21,14 +56,14 @@ export function VideoCarousel({ items }: { items: VideoItem[] }) {
         v.currentTime = 0;
       }
     });
-  }, [index]);
+  }, [index, inView]);
 
   const SLIDE = 62; // % of container width
   const GAP = 3;
   const offset = (100 - SLIDE) / 2 - index * (SLIDE + GAP);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={rootRef}>
       <div
         className="overflow-hidden"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
@@ -54,18 +89,21 @@ export function VideoCarousel({ items }: { items: VideoItem[] }) {
               }`}
               aria-label={v.caption ?? `Video ${i + 1}`}
             >
-              <video
-                ref={(el) => {
-                  refs.current[i] = el;
-                }}
-                src={v.src}
-                className="aspect-[9/16] h-full w-full object-cover"
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                autoPlay={i === 0}
-              />
+              {inView && distance(i) <= 1 ? (
+                <video
+                  ref={(el) => {
+                    refs.current[i] = el;
+                  }}
+                  src={v.src}
+                  className="aspect-[9/16] h-full w-full object-cover"
+                  muted
+                  loop
+                  playsInline
+                  preload={i === index ? "metadata" : "none"}
+                />
+              ) : (
+                <div className="aspect-[9/16] h-full w-full bg-black" />
+              )}
             </button>
           ))}
         </div>
