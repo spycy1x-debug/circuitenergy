@@ -18,7 +18,10 @@ export type PatchTier = {
   patches: number;
   supply: string;
   variantId: string;
+  /** Listed price (what shows before the cart discount is claimed). */
   price: number;
+  /** Price after the shopper claims the cart discount. */
+  dealPrice: number;
   compareAt: number | null;
   freeShipping?: boolean;
   badge?: string;
@@ -31,7 +34,8 @@ export const PATCH_TIERS: PatchTier[] = [
     patches: 60,
     supply: "2 months",
     variantId: "49014253551770",
-    price: 29.99,
+    price: 38.99,
+    dealPrice: 29.99,
     compareAt: 59.98,
   },
   {
@@ -40,8 +44,9 @@ export const PATCH_TIERS: PatchTier[] = [
     patches: 120,
     supply: "4 months",
     variantId: "49014253584538",
-    price: 49.99,
-    compareAt: 59.98,
+    price: 58.99,
+    dealPrice: 49.99,
+    compareAt: 69.98,
     freeShipping: true,
   },
   {
@@ -50,7 +55,8 @@ export const PATCH_TIERS: PatchTier[] = [
     patches: 180,
     supply: "6 months",
     variantId: "49014253617306",
-    price: 64.99,
+    price: 73.99,
+    dealPrice: 64.99,
     compareAt: 89.97,
     freeShipping: true,
     badge: "Best value",
