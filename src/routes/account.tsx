@@ -5,11 +5,11 @@ import { Mail } from "lucide-react";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "The Seralie List — Offers & Product Notes" },
+      { title: "The Seralie List — Offers & Skin Notes" },
       {
         name: "description",
         content:
-          "Join the Seralie list for restock notes, subscriber offers and occasional guidance on getting the most from NOURISH™.",
+          "Join the Seralie list for restock notes, subscriber offers and occasional plain-spoken guidance on treating breakouts with LED pimple patches.",
       },
       { property: "og:title", content: "The Seralie List" },
       { property: "og:description", content: "Restock notes and subscriber offers, straight to your inbox." },
@@ -19,6 +19,7 @@ export const Route = createFileRoute("/account")({
     ],
     links: [{ rel: "canonical", href: "https://seralie.com/account" }],
   }),
+
   component: AccountPage,
 });
 
@@ -60,9 +61,10 @@ function AccountPage() {
         <div className="eyebrow">The Seralie list</div>
         <h1 className="mt-5 font-display text-4xl md:text-5xl">Offers, first.</h1>
         <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-          Subscriber-only offers, restock notes and the occasional plain-spoken note on digestion and daily
-          nutrition. No noise.
+          Subscriber-only offers, restock notes and the occasional plain-spoken note on breakouts and
+          treating spots overnight. No noise.
         </p>
+
 
 
         <form onSubmit={onSubmit} className="mt-10 space-y-3 text-left" noValidate>

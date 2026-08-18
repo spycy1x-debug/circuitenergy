@@ -2,15 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Repeat, X } from "lucide-react";
 import { cart, useCart } from "@/lib/shopify-cart";
 import { TrustRow } from "@/components/site/TrustRow";
-import { TIERS } from "@/lib/product-config";
+import { PATCH_TIERS as TIERS } from "@/lib/patch-config";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
       { title: "Your Cart — Seralie" },
-      { name: "description", content: "Review your NOURISH™ order before checkout." },
+      { name: "description", content: "Review your Seralie LED pimple patch order before checkout." },
       { property: "og:title", content: "Your Cart — Seralie" },
-      { property: "og:description", content: "Review your NOURISH™ order before checkout." },
+      { property: "og:description", content: "Review your Seralie LED pimple patch order before checkout." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://seralie.com/cart" },
       { name: "twitter:card", content: "summary" },
@@ -35,8 +35,8 @@ function CartPage() {
       {allLines.length === 0 ? (
         <div className="mt-10 border border-[color:var(--border)] bg-white px-6 py-16 text-center">
           <p className="text-sm text-[color:var(--muted-foreground)]">Your cart is empty.</p>
-          <Link to="/nourish" className="btn-primary mt-8">
-            Shop NOURISH
+          <Link to="/patches" className="btn-primary mt-8">
+            Shop patches
           </Link>
         </div>
       ) : (
@@ -87,10 +87,10 @@ function CartPage() {
               <div className="mb-6 border border-[color:var(--border)] bg-white p-5">
                 <div className="eyebrow">Better value</div>
                 <p className="mt-2 text-sm leading-6 text-[color:var(--muted-foreground)]">
-                  Move up to <span className="text-[color:var(--navy)]">{upsell.label}</span> and pay less
-                  per bottle.
+                  Move up to <span className="text-[color:var(--navy)]">{upsell.label}</span> and get more patches
+                  for less.
                 </p>
-                <Link to="/nourish" className="btn-outline mt-4 w-full">
+                <Link to="/patches" className="btn-outline mt-4 w-full">
                   See the offer
                 </Link>
               </div>

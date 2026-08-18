@@ -51,7 +51,6 @@ const UGC_VIDEOS = [ugc1, ugc2, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
   src: a.url,
 }));
 
-const money = (n: number) => `$${n.toFixed(2)}`;
 
 export const PATCH_GALLERY: GalleryItem[] = [
   { src: g3.url, alt: "Patch features and what is inside the kit", label: "What's inside" },
@@ -98,10 +97,8 @@ function BuyBox() {
     }
   }
 
-  const save =
-    tier.compareAt && tier.compareAt > tier.price
-      ? Math.round((1 - tier.price / tier.compareAt) * 100)
-      : null;
+
+
 
   return (
     <div>
@@ -138,21 +135,8 @@ function BuyBox() {
         ))}
       </ul>
 
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <span className="text-4xl font-bold tracking-tight text-[color:var(--brand)]">
-          {money(tier.price)}
-        </span>
-        {tier.compareAt && (
-          <span className="text-lg text-[color:var(--muted-ink)] line-through">
-            {money(tier.compareAt)}
-          </span>
-        )}
-        {save && (
-          <span className="rounded-full bg-[color:var(--brand)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
-            Save {save}%
-          </span>
-        )}
-      </div>
+
+
 
       <div className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-[color:var(--brand)]/40 px-4 py-3 text-[13px] font-medium text-[#111111]">
         <Zap className="h-4 w-4 text-[color:var(--brand)]" strokeWidth={2} />
@@ -220,14 +204,8 @@ function BuyBox() {
                 </span>
               </span>
 
-              <span className="shrink-0 text-right">
-                <span className="block text-lg font-bold text-[#111111]">{money(t.price)}</span>
-                {t.compareAt && (
-                  <span className="block text-xs text-[color:var(--muted-ink)] line-through">
-                    {money(t.compareAt)}
-                  </span>
-                )}
-              </span>
+
+
             </button>
           );
         })}
