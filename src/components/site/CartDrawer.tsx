@@ -197,8 +197,13 @@ export function CartDrawer() {
                       <span className="text-xs text-[color:var(--muted-foreground)]">
                         Qty {line.quantity}
                       </span>
-                      <span className="text-sm tabular-nums">
-                        ${(line.unitPrice * line.quantity).toFixed(2)}
+                      <span className="flex items-center gap-2 text-sm tabular-nums">
+                        {unitOf(line) < line.unitPrice && (
+                          <span className="text-xs text-[color:var(--muted-ink)] line-through">
+                            ${(line.unitPrice * line.quantity).toFixed(2)}
+                          </span>
+                        )}
+                        <span>${(unitOf(line) * line.quantity).toFixed(2)}</span>
                       </span>
                     </div>
                   </div>
