@@ -7,7 +7,7 @@ export const Route = createFileRoute("/privacy")({
       {
         name: "description",
         content:
-          "How Seralie handles your information when you order NOURISH™ or join our email list, including storage and deletion on request.",
+          "How Seralie handles your information when you order LED pimple patches or join our email list, including storage and deletion on request.",
       },
       { property: "og:title", content: "Privacy Policy — Seralie" },
       { property: "og:description", content: "How we handle your data and your rights over it." },

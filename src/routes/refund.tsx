@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { GUARANTEE_DAYS } from "@/lib/product-config";
+import { GUARANTEE_DAYS } from "@/lib/patch-config";
 
 export const Route = createFileRoute("/refund")({
   head: () => ({
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/refund")({
       { title: "Refund Policy — Seralie" },
       {
         name: "description",
-        content: `NOURISH™ is covered by a ${GUARANTEE_DAYS}-day money-back guarantee. Here is how returns and refunds work.`,
+        content: `Our LED pimple patches are covered by a ${GUARANTEE_DAYS}-day money-back guarantee. Here is how returns and refunds work.`,
       },
       { property: "og:title", content: "Refund Policy — Seralie" },
       { property: "og:description", content: `${GUARANTEE_DAYS}-day money-back guarantee on every order.` },
@@ -24,7 +24,7 @@ function RefundPage() {
   const SECTIONS = [
     {
       h: `${GUARANTEE_DAYS}-day money-back guarantee`,
-      p: `If NOURISH™ is not right for you, contact us within ${GUARANTEE_DAYS} days of delivery for a full refund of the product price. Opened bottles are fine — we ask that you actually give it a fair try.`,
+      p: `If the patches are not right for you, contact us within ${GUARANTEE_DAYS} days of delivery for a full refund of the product price. Opened packs are fine — we ask that you actually give them a fair try.`,
     },
     {
       h: "How to start a refund",
@@ -35,8 +35,8 @@ function RefundPage() {
       p: "Refunds are issued to the original payment method once the return is received or approved, and typically appear within 5–10 business days depending on your bank.",
     },
     {
-      h: "Subscriptions",
-      p: "Cancel or skip anytime before the next renewal. If a renewal charges after you intended to cancel, contact us and we will refund that order.",
+      h: "One-time orders only",
+      p: "Every order is a one-time purchase. There is no subscription and nothing rebills.",
     },
     {
       h: "Damaged or incorrect orders",

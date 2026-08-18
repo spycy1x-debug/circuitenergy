@@ -6,7 +6,7 @@ export const Route = createFileRoute("/terms")({
       { title: "Terms of Service — Seralie" },
       {
         name: "description",
-        content: "The terms that apply when you browse seralie.com or order NOURISH™.",
+        content: "The terms that apply when you browse seralie.com or order Seralie LED pimple patches.",
       },
       { property: "og:title", content: "Terms of Service — Seralie" },
       { property: "og:description", content: "Terms that apply to orders placed with Seralie." },
@@ -38,7 +38,7 @@ const SECTIONS = [
   },
   {
     h: "Health information",
-    p: "Content on this site is for general information only and is not medical advice. Consult your physician before starting any supplement, especially if you are pregnant, nursing, taking medication or managing a medical condition.",
+    p: "Content on this site is for general information only and is not medical advice. Our patches are a cosmetic skincare product, not a medical device. Speak with a clinician about persistent or severe acne, or before use if you have a skin condition or are taking medication.",
   },
   {
     h: "Limitation of liability",

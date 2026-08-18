@@ -9,7 +9,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Questions about an order, a subscription, or the 60-day guarantee? Email support@seralie.com — we reply within 24 hours.",
+          "Questions about an order, your patches, or the 60-day guarantee? Email support@seralie.com — we reply within 24 hours.",
       },
       { property: "og:title", content: "Contact — Seralie" },
       { property: "og:description", content: "We reply within 24 hours. 60-day guarantee on every order." },
@@ -47,7 +47,7 @@ function ContactPage() {
           <div className="eyebrow">Contact</div>
           <h1 className="mt-4 font-display text-4xl md:text-5xl">We're here.</h1>
           <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-            Questions about an order, a subscription, or whether NOURISH™ is right for you — write to us and a
+            Questions about an order, or whether our LED patches are right for your skin — write to us and a
             real person will answer.
           </p>
 
@@ -64,7 +64,7 @@ function ContactPage() {
               Within 24 hours, Monday to Friday.
             </Info>
             <Info Icon={ShieldCheck} title="60-day guarantee">
-              If NOURISH™ isn't right for you, return it within 60 days and we refund you in full.
+              If the patches aren't right for you, return them within 60 days and we refund you in full.
             </Info>
 
           </div>

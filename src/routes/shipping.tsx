@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { GUARANTEE_DAYS } from "@/lib/product-config";
+import { GUARANTEE_DAYS } from "@/lib/patch-config";
 
 export const Route = createFileRoute("/shipping")({
   head: () => ({
@@ -8,10 +8,10 @@ export const Route = createFileRoute("/shipping")({
       {
         name: "description",
         content:
-          "Free US shipping on NOURISH™ orders over $50. Ships from our US facility within 24 hours with tracking by email.",
+          "Free US shipping on orders over $40. Ships from our US facility within 24 hours with tracking by email.",
       },
       { property: "og:title", content: "Shipping — Seralie" },
-      { property: "og:description", content: "Free US shipping over $50, dispatched within 24 hours." },
+      { property: "og:description", content: "Free US shipping over $40, dispatched within 24 hours." },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://seralie.com/shipping" },
       { name: "twitter:card", content: "summary" },
@@ -24,8 +24,8 @@ export const Route = createFileRoute("/shipping")({
 function ShippingPage() {
   const SECTIONS = [
     {
-      h: "Free US shipping over $50",
-      p: "Shipping is free on US orders over $50, one-time or subscription. Orders under $50 show a flat rate at checkout.",
+      h: "Free US shipping over $40",
+      p: "Shipping is free on US orders over $40, and included with the Buy 2 Get 2 and Buy 3 Get 3 sets. Orders under $40 show a flat rate at checkout.",
     },
     {
       h: "Dispatch",
@@ -41,12 +41,9 @@ function ShippingPage() {
     },
     {
       h: "Package Protection",
-      p: "Package Protection is an optional $4.99 add-on at checkout that covers loss, theft and damage in transit. It is charged once and never on a subscription rebill.",
+      p: "Package Protection is an optional $4.99 add-on at checkout that covers loss, theft and damage in transit. It is charged once, on that order only.",
     },
     {
-      h: "Subscription deliveries",
-      p: "Subscription orders ship on the cadence shown at checkout and follow the same free shipping and 24-hour dispatch. Skip or pause anytime.",
-    },
     {
       h: "Address changes",
       p: "Contact us as soon as possible if an address is wrong. Once a parcel has shipped we cannot redirect it, but Package Protection covers a reship.",
@@ -58,7 +55,7 @@ function ShippingPage() {
       <div className="eyebrow">Support</div>
       <h1 className="mt-3 font-display text-4xl md:text-5xl">Shipping</h1>
       <p className="mt-6 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-        Free US shipping over $50 · Ships in 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
+        Free US shipping over $40 · Ships in 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
       </p>
       <div className="mt-10 space-y-8">
         {SECTIONS.map((s) => (

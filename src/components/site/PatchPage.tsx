@@ -51,7 +51,6 @@ const UGC_VIDEOS = [ugc1, ugc2, ugc4, ugc5, ugc6, ugc7, ugc8].map((a) => ({
   src: a.url,
 }));
 
-const money = (n: number) => `$${n.toFixed(2)}`;
 
 export const PATCH_GALLERY: GalleryItem[] = [
   { src: g3.url, alt: "Patch features and what is inside the kit", label: "What's inside" },
