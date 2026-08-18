@@ -44,7 +44,7 @@ function ShippingPage() {
       p: "Package Protection is an optional $4.99 add-on at checkout that covers loss, theft and damage in transit. It is charged once, on that order only.",
     },
     {
-    {
+
       h: "Address changes",
       p: "Contact us as soon as possible if an address is wrong. Once a parcel has shipped we cannot redirect it, but Package Protection covers a reship.",
     },
