@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { X, ShoppingBag, ArrowRight, ShieldCheck, Truck, Lock } from "lucide-react";
+import { X, ShoppingBag, ArrowRight, ShieldCheck, Truck, Lock, Sparkles, Timer } from "lucide-react";
+import { useCartDiscount, discountedUnitPrice } from "@/lib/patch-discount";
 import { GuaranteeBadges } from "@/components/site/GuaranteeBadges";
 import {
   cart,
