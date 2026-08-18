@@ -1,17 +1,52 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { GUARANTEE_DAYS } from "@/lib/product-config";
+import { GUARANTEE_DAYS } from "@/lib/patch-config";
+
+const FAQS = [
+  {
+    q: "How do the LED patches work?",
+    a: "Medical-grade hydrocolloid draws out fluid from the spot while 415nm blue light targets acne bacteria and 630nm red light calms the redness around it.",
+  },
+  {
+    q: "How long do I wear one?",
+    a: "Six to eight hours — put it on before bed and take it off in the morning. Cleanse and dry the area first so the edges seal.",
+  },
+  {
+    q: "Do they work on spots with no head?",
+    a: "That is the point of the light. Ordinary hydrocolloid needs an opening to pull anything out; red and blue light pass through skin, so a blind spot still gets treated.",
+  },
+  {
+    q: "How many patches do I get?",
+    a: "Each set is 60 clear 12mm patches — roughly two months — plus the reusable light case and a carry pouch.",
+  },
+  {
+    q: "Can I wear makeup over them?",
+    a: "They are thin and clear, so light makeup sits over them fine. Most people wear them overnight anyway.",
+  },
+  {
+    q: "Is it safe for sensitive skin?",
+    a: "Hydrocolloid is the same material used in wound dressings and is one of the gentlest options available. Stop use if redness lasts after removal. Not a medical device.",
+  },
+  {
+    q: "When will my order ship?",
+    a: "Free US shipping on orders over $40, and free on the Buy 2 Get 2 and Buy 3 Get 3 sets. Orders ship within 24 hours with tracking by email.",
+  },
+  {
+    q: "What if they don't work for me?",
+    a: `${GUARANTEE_DAYS}-day money-back guarantee. Contact us and we refund you in full.`,
+  },
+];
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — Seralie NOURISH™" },
+      { title: "FAQ — Seralie LED Pimple Patches" },
       {
         name: "description",
         content:
-          "Answers on dosing, timing, subscriptions, shipping and the 60-day money-back guarantee for NOURISH™.",
+          "Answers on wear time, red and blue light, sensitive skin, shipping and the 60-day money-back guarantee on Seralie LED pimple patches.",
       },
-      { property: "og:title", content: "FAQ — Seralie NOURISH™" },
-      { property: "og:description", content: "Dosing, timing, subscriptions, shipping and returns." },
+      { property: "og:title", content: "FAQ — Seralie LED Pimple Patches" },
+      { property: "og:description", content: "How the patches work, wear time, shipping and returns." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://seralie.com/faq" },
       { name: "twitter:card", content: "summary" },
@@ -35,45 +70,6 @@ export const Route = createFileRoute("/faq")({
   component: FaqPage,
 });
 
-const FAQS = [
-  {
-    q: "How do I take NOURISH?",
-    a: "Two capsules once daily in the morning, with food and a full glass of water.",
-  },
-  {
-    q: "How long before I notice anything?",
-    a: "Plan on 6–8 weeks. Digestive comfort is usually the first thing people mention; the nutrient side builds more slowly. Individual experience varies.",
-  },
-  {
-    q: "What is in it?",
-    a: "Magnesium, a LactoSpore® probiotic, ginger, bromelain and DigeZyme enzymes, BioPerine for absorption, plus B12, iron, zinc, D3 and folate. Full amounts are printed on the label.",
-  },
-  {
-    q: "Will it upset my stomach?",
-    a: "The iron and zinc are chelated forms, which are generally gentler than the oxide forms used in cheaper multivitamins. Taking it with food helps.",
-  },
-  {
-    q: "Can I take it with other supplements or medication?",
-    a: "If you take medication, are pregnant or nursing, or have a medical condition, speak with your doctor before starting any supplement.",
-  },
-  {
-    q: "How does the subscription work?",
-    a: "You save 25% and your order arrives on the cadence shown at checkout. Skip, pause or cancel anytime from your account or by emailing support.",
-  },
-  {
-    q: "Is Package Protection charged every time?",
-    a: "No. It is a one-time charge on the first order and is never added to a subscription rebill.",
-  },
-  {
-    q: "When will my order ship?",
-    a: "Free US shipping on orders over $50. Orders ship from our US facility within 24 hours, and tracking arrives by email.",
-  },
-  {
-    q: "What if it is not for me?",
-    a: `${GUARANTEE_DAYS}-day money-back guarantee. Return your order and we refund you in full.`,
-  },
-];
-
 function FaqPage() {
   return (
     <section className="container-x max-w-3xl py-14 md:py-20">
@@ -88,8 +84,8 @@ function FaqPage() {
         ))}
       </dl>
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link to="/nourish" className="btn-primary">
-          Shop NOURISH
+        <Link to="/patches" className="btn-primary">
+          Shop patches
         </Link>
         <Link to="/contact" className="btn-outline">
           Contact us
