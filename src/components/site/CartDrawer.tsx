@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { X, ShoppingBag, ArrowRight, ShieldCheck, Truck, Lock } from "lucide-react";
+import { X, ShoppingBag, ArrowRight, ShieldCheck, Truck, Lock, Sparkles, Timer } from "lucide-react";
+import { useCartDiscount, discountedUnitPrice } from "@/lib/patch-discount";
 import { GuaranteeBadges } from "@/components/site/GuaranteeBadges";
 import {
   cart,
@@ -98,8 +99,53 @@ function BundleUpgrade() {
   );
 }
 
+function DiscountBanner() {
+  const { active, claimed, expired, timeLeft, claim } = useCartDiscount();
+
+  if (expired) return null;
+
+  if (!claimed) {
+    return (
+      <div className="mx-5 mt-4 rounded-2xl border border-[color:var(--brand)]/25 bg-[color:var(--brand)]/[0.06] p-4">
+        <div className="flex items-start gap-2.5">
+          <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--brand)]" strokeWidth={1.6} />
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-[color:var(--brand)]">A discount just for you</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-[color:var(--muted-foreground)]">
+              Unlock $9 off your order. Valid for 10 minutes once claimed.
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={claim}
+          className="mt-3 w-full rounded-full bg-[color:var(--brand)] px-5 py-3 text-sm font-semibold text-white"
+        >
+          Claim discount
+        </button>
+      </div>
+    );
+  }
+
+  if (!active) return null;
+
+  return (
+    <div className="mx-5 mt-4 flex items-center justify-between gap-3 rounded-2xl border border-[color:var(--brand)]/25 bg-[color:var(--brand)]/[0.06] px-4 py-3">
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--brand)]">
+        Discount applied
+      </span>
+      <span className="flex items-center gap-1.5 text-sm tabular-nums text-[color:var(--brand)]">
+        <Timer className="h-3.5 w-3.5" strokeWidth={1.6} /> {timeLeft}
+      </span>
+    </div>
+  );
+}
+
 export function CartDrawer() {
-  const { isOpen, lines, allLines, subtotal, isLoading, checkoutUrl, error } = useCart();
+  const { isOpen, lines, allLines, isLoading, checkoutUrl, error } = useCart();
+  const { active: discountActive } = useCartDiscount();
+  const unitOf = (line: { variantId: string; unitPrice: number }) =>
+    discountedUnitPrice(line.variantId, line.unitPrice, discountActive);
+  const subtotal = allLines.reduce((s, l) => s + unitOf(l) * l.quantity, 0);
 
   return (
     <>
@@ -151,8 +197,13 @@ export function CartDrawer() {
                       <span className="text-xs text-[color:var(--muted-foreground)]">
                         Qty {line.quantity}
                       </span>
-                      <span className="text-sm tabular-nums">
-                        ${(line.unitPrice * line.quantity).toFixed(2)}
+                      <span className="flex items-center gap-2 text-sm tabular-nums">
+                        {unitOf(line) < line.unitPrice && (
+                          <span className="text-xs text-[color:var(--muted-ink)] line-through">
+                            ${(line.unitPrice * line.quantity).toFixed(2)}
+                          </span>
+                        )}
+                        <span>${(unitOf(line) * line.quantity).toFixed(2)}</span>
                       </span>
                     </div>
                   </div>
@@ -170,6 +221,11 @@ export function CartDrawer() {
           )}
         </div>
 
+        {allLines.length > 0 && (
+          <div className="pb-1">
+            <DiscountBanner />
+          </div>
+        )}
         {lines.length > 0 && <BundleUpgrade />}
         <ProtectionRow />
 
