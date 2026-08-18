@@ -123,9 +123,10 @@ function BuyBox() {
 
       <ul className="mt-6 space-y-2.5">
         {[
-          "415nm blue light targets acne bacteria",
-          "630nm red light calms redness",
+          "415nm blue light removes acne bacteria",
+          "630nm red light neutralizes redness",
           "Medical-grade hydrocolloid draws out the spot",
+          "Single-use — one patch per spot, per night",
           "60 patches — about two months",
         ].map((b) => (
           <li key={b} className="flex items-start gap-3 text-[15px] leading-6 text-[#111111]">
