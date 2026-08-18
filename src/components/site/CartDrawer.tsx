@@ -221,6 +221,11 @@ export function CartDrawer() {
           )}
         </div>
 
+        {allLines.length > 0 && (
+          <div className="pb-1">
+            <DiscountBanner />
+          </div>
+        )}
         {lines.length > 0 && <BundleUpgrade />}
         <ProtectionRow />
 
