@@ -1,20 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { GALLERY } from "@/lib/gallery";
-import { BenefitCircles } from "@/components/site/BenefitCircles";
+import { PATCH_GALLERY } from "@/components/site/PatchPage";
+import { GUARANTEE_DAYS } from "@/lib/patch-config";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How NOURISH™ Works — Seralie" },
+      { title: "How Seralie LED Pimple Patches Work" },
       {
         name: "description",
         content:
-          "Smaller portions mean less food to digest and fewer nutrients coming in. Here is how NOURISH™ supports digestive comfort and everyday nutrition.",
+          "Hydrocolloid absorbs the spot while 415nm blue and 630nm red light treat it. Here is what happens under the patch across one night.",
       },
-      { property: "og:title", content: "How NOURISH™ Works — Seralie" },
+      { property: "og:title", content: "How Seralie LED Pimple Patches Work" },
       {
         property: "og:description",
-        content: "Two jobs, one capsule: digestive comfort and the everyday nutrient gaps.",
+        content: "Hydrocolloid absorbs it. Red and blue light treat it. Overnight.",
       },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://seralie.com/how-it-works" },
@@ -27,66 +27,62 @@ export const Route = createFileRoute("/how-it-works")({
 
 const STAGES = [
   {
-    n: "Stage 1",
-    t: "Slower digestion",
-    d: "Meals sit longer than they used to. Bloating after eating becomes the normal end of dinner.",
+    n: "Step 1",
+    t: "Cleanse and dry",
+    d: "Wash the area and pat it dry. Hydrocolloid only seals properly on clean, dry skin.",
   },
   {
-    n: "Stage 2",
-    t: "Running on less",
-    d: "Less food means fewer nutrients coming in. Energy through the afternoon is the first thing to notice it.",
+    n: "Step 2",
+    t: "Press it on",
+    d: "Hold the patch down for a few seconds so the edges seal all the way around the spot.",
   },
   {
-    n: "Stage 3",
-    t: "It starts to show",
-    d: "Hair, nails and stamina all draw on the same everyday nutrition. When intake drops, they tend to be where you see it.",
+    n: "Step 3",
+    t: "Sleep on it",
+    d: "Leave it six to eight hours. The patch does the work while you are not touching your face.",
   },
 ];
 
 const TIMELINE = [
-  { w: "Week 1–2", b: ["Many people find meals sit more comfortably.", "Routine starts to settle."] },
-  { w: "Week 3–4", b: ["Digestion may feel more regular.", "Afternoon energy may steady out."] },
-  { w: "Week 5–8", b: ["Nutrient support builds with consistent use.", "Most people judge it here."] },
-  { w: "Week 9–12+", b: ["Everyday nutrition stays covered.", "Benefits may continue with daily use."] },
+  { w: "Hour 0–1", b: ["The patch seals and goes to work.", "Picking stops — the spot is covered."] },
+  { w: "Hour 2–4", b: ["Hydrocolloid pulls fluid out of the spot.", "Blue light targets acne bacteria."] },
+  { w: "Overnight", b: ["Red light works on the redness around it.", "Inflammation settles as you sleep."] },
+  { w: "Morning", b: ["Peel it off — the spot is flatter and calmer.", "Repeat the next night if needed."] },
 ];
 
 function HowItWorksPage() {
+  const cross = PATCH_GALLERY[4]!;
   return (
     <>
       <section className="container-x max-w-3xl py-14 md:py-20">
         <div className="eyebrow">How it works</div>
-        <h1 className="mt-3 font-display text-4xl md:text-5xl">This isn't a willpower problem.</h1>
+        <h1 className="mt-3 font-display text-4xl md:text-5xl">Your last patch wasn't enough.</h1>
         <p className="mt-6 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-          When you eat less, digestion slows and nutrient intake drops with it. That shows up plainly:
-          bloating after meals, sluggish digestion, low energy, thinning hair, feeling older than you are.
+          Ordinary hydrocolloid only works once a spot has an opening. On a blind, angry spot there is
+          nothing for it to absorb, so it just sits there.
         </p>
         <p className="mt-4 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-          NOURISH™ was built for that gap — one capsule doing two jobs.
+          Ours adds 415nm blue and 630nm red light, which pass through skin — so the spot still gets
+          treated overnight.
         </p>
       </section>
 
-      <section className="border-y border-[color:var(--border)] bg-white">
-        <div className="container-x py-12 md:py-16">
-          <BenefitCircles />
-        </div>
-      </section>
-
-      <section className="container-x py-14 md:py-20">
+      <section className="container-x py-4 md:py-8">
         <div className="grid gap-10 md:grid-cols-2">
           <div className="border border-[color:var(--border)] bg-white p-7">
-            <h2 className="font-display text-2xl">Settles digestion</h2>
+            <h2 className="font-display text-2xl">Absorbs it</h2>
             <ul className="mt-4 space-y-2 text-sm leading-7 text-[color:var(--muted-foreground)]">
-              <li>Magnesium supports regularity and digestive comfort.</li>
-              <li>LactoSpore® probiotic supports gut health.</li>
-              <li>Ginger, traditionally used for occasional nausea.</li>
+              <li>Medical-grade hydrocolloid draws fluid out of the spot.</li>
+              <li>A sealed, moist environment keeps the skin from scabbing.</li>
+              <li>Clear 12mm patches — thin enough to wear anywhere.</li>
             </ul>
           </div>
           <div className="border border-[color:var(--border)] bg-white p-7">
-            <h2 className="font-display text-2xl">Covers the gaps</h2>
+            <h2 className="font-display text-2xl">Treats it</h2>
             <ul className="mt-4 space-y-2 text-sm leading-7 text-[color:var(--muted-foreground)]">
-              <li>B12, iron and zinc support energy and everyday nutrition.</li>
-              <li>D3 and folate round out the daily essentials.</li>
-              <li>Chelated minerals, no artificial fillers.</li>
+              <li>415nm blue light targets the bacteria behind breakouts.</li>
+              <li>630nm red light goes deeper and calms redness.</li>
+              <li>Works on spots that have not surfaced yet.</li>
             </ul>
           </div>
         </div>
@@ -94,7 +90,7 @@ function HowItWorksPage() {
 
       <section className="border-y border-[color:var(--border)] bg-white">
         <div className="container-x py-14 md:py-20">
-          <h2 className="font-display text-3xl md:text-4xl">How it shows up over time</h2>
+          <h2 className="font-display text-3xl md:text-4xl">Three steps, once a night</h2>
           <div className="mt-10 grid gap-8 md:grid-cols-3">
             {STAGES.map((s) => (
               <div key={s.n}>
@@ -108,9 +104,9 @@ function HowItWorksPage() {
       </section>
 
       <section className="container-x py-14 md:py-20">
-        <h2 className="font-display text-3xl md:text-4xl">What to expect</h2>
+        <h2 className="font-display text-3xl md:text-4xl">One night under the patch</h2>
         <p className="mt-3 text-sm text-[color:var(--muted-foreground)]">
-          Give it 6–8 weeks. Individual experience varies.
+          Six to eight hours. Individual results vary.
         </p>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {TIMELINE.map((t) => (
@@ -128,15 +124,18 @@ function HowItWorksPage() {
 
       <section className="container-x pb-16 md:pb-24">
         <img
-          src={GALLERY[5]!.url}
-          alt={GALLERY[5]!.alt}
+          src={cross.src}
+          alt={cross.alt}
           loading="lazy"
           className="mx-auto w-full max-w-3xl border border-[color:var(--border)]"
         />
         <div className="mt-10 text-center">
-          <Link to="/nourish" className="btn-primary">
-            Shop NOURISH
+          <Link to="/patches" className="btn-primary">
+            Shop patches
           </Link>
+          <p className="mt-4 text-xs text-[color:var(--muted-foreground)]">
+            Free shipping over $40 · Ships in 24 hours · {GUARANTEE_DAYS}-day money-back guarantee
+          </p>
         </div>
       </section>
     </>
