@@ -21,6 +21,7 @@ import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as Glp1RouteImport } from './routes/glp-1'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CinchwrapRouteImport } from './routes/cinchwrap'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
@@ -87,6 +88,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CinchwrapRoute = CinchwrapRouteImport.update({
+  id: '/cinchwrap',
+  path: '/cinchwrap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/cinchwrap': typeof CinchwrapRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/cinchwrap': typeof CinchwrapRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/cinchwrap': typeof CinchwrapRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/cinchwrap'
     | '/contact'
     | '/faq'
     | '/glp-1'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/cinchwrap'
     | '/contact'
     | '/faq'
     | '/glp-1'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/cinchwrap'
     | '/contact'
     | '/faq'
     | '/glp-1'
@@ -236,6 +248,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
+  CinchwrapRoute: typeof CinchwrapRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   Glp1Route: typeof Glp1Route
@@ -338,6 +351,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cinchwrap': {
+      id: '/cinchwrap'
+      path: '/cinchwrap'
+      fullPath: '/cinchwrap'
+      preLoaderRoute: typeof CinchwrapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cart': {
       id: '/cart'
       path: '/cart'
@@ -380,6 +400,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
+  CinchwrapRoute: CinchwrapRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   Glp1Route: Glp1Route,

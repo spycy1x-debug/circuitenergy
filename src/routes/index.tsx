@@ -1,19 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HomePage } from "@/components/site/HomePage";
+import { CinchWrap } from "@/components/site/CinchWrap";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Seralie — Overnight LED Pimple Patches" },
+      { title: "CinchWrap™ — The Waist Wrap That Actually Stays Put" },
       {
         name: "description",
         content:
-          "Overnight LED pimple patches. Hydrocolloid absorbs the spot while red and blue light treat it. Free shipping over $40, ships in 24h, 60-day guarantee.",
+          "CinchWrap™ is an adjustable wrap waist trainer — no hooks, no zippers. One size wraps to your exact waist and stays invisible under clothes. 60-day fit guarantee.",
       },
-      { property: "og:title", content: "Seralie LED Pimple Patches — Absorbs It, Treats It" },
+      { property: "og:title", content: "CinchWrap™ — The Adjustable Waist Wrap" },
       {
         property: "og:description",
-        content: "Hydrocolloid absorbs it. Light treats it. Overnight patches for angry spots.",
+        content: "One adjustable band. Wraps to your exact waist. Invisible under clothes.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://seralie.com/" },
@@ -21,5 +21,5 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "https://seralie.com/" }],
   }),
-  component: HomePage,
+  component: CinchWrap,
 });
