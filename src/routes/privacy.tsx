@@ -1,89 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { WWProse } from "@/components/site/WWPage";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Seralie" },
-      {
-        name: "description",
-        content:
-          "How Seralie handles your information when you order LED pimple patches or join our email list, including storage and deletion on request.",
-      },
-      { property: "og:title", content: "Privacy Policy — Seralie" },
-      { property: "og:description", content: "How we handle your data and your rights over it." },
+      { title: "Privacy Policy — WaistWrap™" },
+      { name: "description", content: "How WaistWrap™ handles your information when you place an order or join the email list, including storage and deletion on request." },
+      { property: "og:title", content: "Privacy Policy — WaistWrap™" },
+      { property: "og:description", content: "What we collect, why, and how to have it deleted." },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "https://seralie.com/privacy" },
-      { name: "twitter:card", content: "summary" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://seralie.com/privacy" }],
   }),
-  component: PrivacyPage,
+  component: () => (
+    <WWProse
+      cta={false}
+      eyebrow="Privacy"
+      title="Privacy policy."
+      intro="We collect the minimum needed to ship your order and answer your emails. We do not sell your data."
+      sections={[
+        { h: "What we collect", p: <p>Name, shipping address, email, and order details. Payment card data is handled by our payment processor and never touches our servers.</p> },
+        { h: "Why we collect it", p: <p>To fulfil and support your order, to prevent fraud, and — if you opt in — to send occasional email about restocks and offers.</p> },
+        { h: "Analytics", p: <p>We use standard website analytics and advertising pixels to understand traffic and measure ads. These use cookies and can be blocked in your browser.</p> },
+        { h: "Sharing", p: <p>Only with the providers needed to run the store: payments, shipping carriers, email and analytics. Never sold.</p> },
+        { h: "Your rights", p: <p>Request a copy of your data or ask us to delete it. Email support@waistwrap.com and we respond within 30 days.</p> },
+        { h: "Contact", p: <p>Questions about this policy: support@waistwrap.com.</p> },
+      ]}
+    />
+  ),
 });
-
-function PrivacyPage() {
-  return (
-    <section className="container-x py-16 md:py-24">
-      <div className="mx-auto max-w-2xl">
-        <div className="eyebrow">Legal</div>
-        <h1 className="mt-4 font-display text-4xl md:text-5xl">Privacy Policy</h1>
-        <p className="mt-4 text-xs text-[color:var(--muted-foreground)]">
-          Last updated {new Date().getFullYear()}
-        </p>
-
-        <div className="mt-12 space-y-10">
-          <Section title="What we collect">
-            <p>
-              When you place an order we collect your name, email, shipping address and order details. Payment is
-              processed by Shopify; we never see or store your card details.
-            </p>
-            <p>
-              If you join our email list we collect your email address and, optionally, your first name.
-            </p>
-          </Section>
-
-          <Section title="How we use your information">
-            <p>
-              To process and deliver your order, manage subscription renewals, send shipping updates, answer
-              support requests, handle refunds, and — only if you opted in — send marketing emails.
-            </p>
-          </Section>
-
-          <Section title="Who we share it with">
-            <p>
-              Only the services required to run the store: Shopify (orders, subscriptions and payment), our email
-              provider, shipping carriers, and our US fulfilment facility.
-            </p>
-          </Section>
-
-          <Section title="Your rights">
-            <p>
-              You can ask us for a copy of the data we hold about you, ask us to correct it, or ask us to delete
-              it. Email support@seralie.com and we will respond within 30 days.
-            </p>
-          </Section>
-
-          <Section title="Cookies and analytics">
-            <p>
-              We use cookies to keep your cart intact between visits and to measure how the site is used. You can
-              block cookies in your browser; the cart may not persist if you do.
-            </p>
-          </Section>
-
-
-          <Section title="Contact">
-            <p>Questions about this policy: support@seralie.com.</p>
-          </Section>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <h2 className="font-display text-2xl">{title}</h2>
-      <div className="mt-4 space-y-4 text-sm leading-7 text-[color:var(--muted-foreground)]">{children}</div>
-    </div>
-  );
-}
