@@ -3,21 +3,21 @@ import { WaistWrapShell, Faq, Label, serif, sans } from "@/components/site/Waist
 import { Link } from "@tanstack/react-router";
 
 const FAQS = [
-  { q: "How does WaistWrap™ work?", a: "It is one long compression band you wrap around your waist and secure yourself. You set the tension, so it molds to your exact shape instead of forcing you into a fixed size." },
-  { q: "What size do I order?", a: "One size. WaistWrap adjusts across XS–3XL because you control the wrap. Between sizes? Size up." },
+  { q: "How does Waist Strap work?", a: "It is one long compression band you wrap around your waist and secure yourself. You set the tension, so it molds to your exact shape instead of forcing you into a fixed size." },
+  { q: "What size do I order?", a: "One size. Waist Strap adjusts across XS–3XL because you control the wrap. Between sizes? Size up." },
   { q: "Will it show under clothes?", a: "No. The band is 1.2mm thin with a bonded flat edge — no ridge, no line, even under a bodycon dress." },
   { q: "How long can I wear it?", a: "All day. Start with 4–6 hours if you have never worn a waist piece before, then build up." },
   { q: "How do I wash it?", a: "Cold water, mild soap, hang dry. Never tumble dry — heat kills elastic." },
   { q: "Shipping?", a: "Ships within 24 hours. Free US shipping on orders of 2+ wraps, $4.95 flat on single wraps. Delivery is typically 3–5 business days." },
-  { q: "Returns?", a: "60-day fit guarantee. If it is not right, email support@waistwrap.com and we refund the product price in full." },
+  { q: "Returns?", a: "60-day fit guarantee. If it is not right, email support@seralie.com and we refund the product price in full." },
 ];
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — WaistWrap™ Adjustable Waist Wrap" },
-      { name: "description", content: "Sizing, wear time, washing, shipping and the 60-day fit guarantee for WaistWrap™, the adjustable wrap waist trainer." },
-      { property: "og:title", content: "FAQ — WaistWrap™" },
+      { title: "FAQ — Waist Strap Adjustable Waist Wrap" },
+      { name: "description", content: "Sizing, wear time, washing, shipping and the 60-day fit guarantee for Waist Strap, the adjustable wrap waist trainer." },
+      { property: "og:title", content: "FAQ — Waist Strap" },
       { property: "og:description", content: "Everything about sizing, wear time, washing and returns." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -41,7 +41,7 @@ function FaqPage() {
             style={sans}
             className="inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90"
           >
-            Shop WaistWrap — $39
+            Shop Waist Strap — $39
           </Link>
         </div>
       </section>

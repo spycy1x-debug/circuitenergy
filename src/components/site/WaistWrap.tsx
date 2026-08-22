@@ -22,7 +22,7 @@ const money = (n: number) => `$${n.toFixed(2)}`;
 type Bundle = { id: string; name: string; qty: number; price: number; compareAt: number; tag?: string };
 
 export const BUNDLES: Bundle[] = [
-  { id: "b1", name: "1 WaistWrap", qty: 1, price: 39.0, compareAt: 59.0 },
+  { id: "b1", name: "1 Waist Strap", qty: 1, price: 39.0, compareAt: 59.0 },
   { id: "b2", name: "2 WaistWraps", qty: 2, price: 68.0, compareAt: 118.0, tag: "MOST POPULAR" },
   { id: "b3", name: "3 WaistWraps", qty: 3, price: 89.0, compareAt: 177.0 },
 ];
@@ -78,12 +78,14 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
 
       <header className="sticky top-0 z-40 border-b border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/95 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 md:h-16 md:px-8">
-          <Link to="/" style={serif} className="text-[20px] tracking-tight text-[color:var(--cw-ink)]">
-            WaistWrap<sup className="text-[9px]">™</sup>
+          <Link to="/" className="flex items-baseline gap-2">
+            <span style={serif} className="text-[24px] tracking-[0.14em] text-[color:var(--cw-ink)]">
+              SERALIE
+            </span>
           </Link>
           <nav className="flex items-center gap-5 text-[10px] font-semibold uppercase tracking-[0.2em]">
             <Link to="/waistwrap" className="hidden text-[color:var(--cw-muted)] hover:text-[color:var(--cw-ink)] sm:inline">
-              Product
+              Waist Strap
             </Link>
             <Link to="/faq" className="hidden text-[color:var(--cw-muted)] hover:text-[color:var(--cw-ink)] sm:inline">
               FAQ
@@ -103,17 +105,18 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-3 md:px-8">
           <div>
-            <span style={serif} className="text-[22px]">
-              WaistWrap<sup className="text-[10px]">™</sup>
+            <span style={serif} className="text-[24px] tracking-[0.14em]">
+              SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              One adjustable wrap. Your exact waist, every day — no hooks, no guessing, no compromise.
+              Makers of the Waist Strap — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
             </p>
           </div>
+
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--cw-brand)]">Contact</p>
             <p className="mt-3 text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              support@waistwrap.com
+              support@seralie.com
               <br />
               Mon–Fri, 9am–5pm ET
             </p>
@@ -132,7 +135,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
         </div>
         <div className="border-t border-[color:var(--cw-line)]">
           <p className="mx-auto max-w-6xl px-5 py-5 text-[11px] text-[color:var(--cw-muted)] md:px-8">
-            © {new Date().getFullYear()} WaistWrap™. All rights reserved.
+            © {new Date().getFullYear()} Waist Strap. All rights reserved.
           </p>
         </div>
       </footer>
@@ -161,7 +164,7 @@ export const WW_FAQS = [
   },
   {
     q: "What size do I get?",
-    a: "One WaistWrap adjusts across the full XS–3XL range because you set the tension yourself. Use the size guide to confirm your band length, and if you are between sizes, size up.",
+    a: "One Waist Strap adjusts across the full XS–3XL range because you set the tension yourself. Use the size guide to confirm your band length, and if you are between sizes, size up.",
   },
   {
     q: "What if it doesn't work for me?",
@@ -194,6 +197,80 @@ export function Faq({ items = WW_FAQS }: { items?: { q: string; a: string }[] })
   );
 }
 
+/* ------------------------------ Buy area bits ----------------------------- */
+
+export function Stars({ value = 4.8, size = 13 }: { value?: number; size?: number }) {
+  return (
+    <span className="inline-flex items-center gap-0.5" aria-label={`${value} out of 5 stars`}>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const fill = Math.max(0, Math.min(1, value - i));
+        return (
+          <span key={i} className="relative inline-block leading-none" style={{ fontSize: size }}>
+            <span className="text-[color:var(--cw-line)]">★</span>
+            <span
+              className="absolute left-0 top-0 overflow-hidden text-[color:var(--cw-brand)]"
+              style={{ width: `${fill * 100}%` }}
+            >
+              ★
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+const TICKER = [
+  { n: "Alexis R.", t: "Wore it under a slip dress for 11 hours. Never moved once." },
+  { n: "Danielle P.", t: "First waist piece I haven't had to fix in a bathroom mirror." },
+  { n: "Marisol G.", t: "No hooks digging in. I forget it's on by lunch." },
+  { n: "Tia W.", t: "Two sizes of trainers in my closet and this replaced both." },
+];
+
+function ReviewTicker() {
+  const [i, setI] = useState(0);
+  const r = TICKER[i % TICKER.length];
+  return (
+    <button
+      onClick={() => setI((v) => v + 1)}
+      className="mt-4 flex w-full items-center gap-3 rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/60 px-4 py-3 text-left"
+    >
+      <span
+        style={serif}
+        className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand)] text-[13px] text-white"
+      >
+        {r.n[0]}
+      </span>
+      <span className="min-w-0">
+        <span className="flex items-center gap-2">
+          <Stars size={11} value={5} />
+          <span style={sans} className="text-[11px] font-semibold text-[color:var(--cw-ink)]">{r.n}</span>
+        </span>
+        <span style={sans} className="mt-0.5 block truncate text-[12px] text-[color:var(--cw-muted)]">
+          "{r.t}"
+        </span>
+      </span>
+    </button>
+  );
+}
+
+function TrustRow() {
+  return (
+    <div className="mt-5 grid grid-cols-3 gap-2 text-center">
+      {[
+        ["60-day", "Fit guarantee"],
+        ["Secure", "Encrypted checkout"],
+        ["Free", "Shipping on 2+"],
+      ].map(([a, b]) => (
+        <div key={a} className="rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] px-2 py-3">
+          <p style={serif} className="text-[15px] text-[color:var(--cw-ink)]">{a}</p>
+          <p style={sans} className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">{b}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* -------------------------------- Buy box -------------------------------- */
 
 function BuyBox() {
@@ -202,14 +279,36 @@ function BuyBox() {
 
   return (
     <div>
-      <Label>One size · Wraps to you</Label>
+      <Label>Seralie · Waist Strap</Label>
       <h1 style={serif} className="mt-3 text-[34px] leading-[1.05] text-[color:var(--cw-ink)] md:text-[42px]">
-        WaistWrap™ Adjustable Waist Wrap
+        The Waist Strap
       </h1>
+
+      <a href="#reviews" className="mt-3 inline-flex items-center gap-2">
+        <Stars />
+        <span style={sans} className="text-[12px] text-[color:var(--cw-muted)] underline underline-offset-4">
+          4.8 · 3,000+ reviews
+        </span>
+      </a>
+
       <p style={sans} className="mt-4 text-[15px] leading-7 text-[color:var(--cw-muted)]">
         Instantly takes inches off your silhouette and holds them there all day. No hooks to snap, no
         zipper to fight, no size to guess wrong.
       </p>
+
+      <ul style={sans} className="mt-5 space-y-2 text-[13px] leading-6 text-[color:var(--cw-ink)]">
+        {[
+          "Wraps to your exact waist — one size fits XS–3XL",
+          "1.2mm bonded flat edge — invisible under clothes",
+          "No hooks, no zippers, nothing to pop mid-wear",
+          "Breathable knit — wearable 8+ hours a day",
+        ].map((b) => (
+          <li key={b} className="flex gap-2">
+            <span className="text-[color:var(--cw-brand)]">✓</span>
+            {b}
+          </li>
+        ))}
+      </ul>
 
       <div className="mt-7 space-y-3">
         {BUNDLES.map((b) => {
@@ -219,7 +318,7 @@ function BuyBox() {
               key={b.id}
               onClick={() => setSel(b.id)}
               className={`relative flex w-full items-center gap-4 rounded-2xl border bg-[color:var(--cw-bg)] px-4 py-4 text-left transition-colors ${
-                on ? "border-[color:var(--cw-brand)]" : "border-[color:var(--cw-line)] hover:border-[color:var(--cw-muted)]"
+                on ? "border-[color:var(--cw-brand)] ring-1 ring-[color:var(--cw-brand)]" : "border-[color:var(--cw-line)] hover:border-[color:var(--cw-muted)]"
               }`}
             >
               {b.tag && (
@@ -240,7 +339,7 @@ function BuyBox() {
               <span className="min-w-0 flex-1">
                 <span style={serif} className="block text-[18px] text-[color:var(--cw-ink)]">{b.name}</span>
                 <span style={sans} className="block text-[12px] text-[color:var(--cw-muted)]">
-                  {money(b.price / b.qty)} per wrap
+                  {money(b.price / b.qty)} per strap{b.qty > 1 ? " · free shipping" : ""}
                 </span>
               </span>
               <span className="shrink-0 text-right">
@@ -258,14 +357,10 @@ function BuyBox() {
 
       <button
         style={sans}
-        className="mt-6 w-full rounded-full bg-[color:var(--cw-brand)] px-6 py-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-90"
+        className="mt-6 w-full rounded-full bg-[color:var(--cw-brand)] px-6 py-5 text-[15px] font-semibold uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-90"
       >
         Add to cart — {money(bundle.price)}
       </button>
-
-      <p style={sans} className="mt-4 text-center text-[12px] leading-6 text-[color:var(--cw-muted)]">
-        60-day fit guarantee · Free shipping on 2+ · Ships in 24 hours
-      </p>
 
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
         {["VISA", "MASTERCARD", "AMEX", "PAYPAL", "APPLE PAY", "SHOP PAY"].map((p) => (
@@ -278,9 +373,13 @@ function BuyBox() {
           </span>
         ))}
       </div>
+
+      <ReviewTicker />
+      <TrustRow />
     </div>
   );
 }
+
 
 /* --------------------------------- Data ---------------------------------- */
 
@@ -308,7 +407,7 @@ const SIZES = [
   ["3XL", "45–50 in"],
 ];
 
-function CtaButton({ children = "Shop WaistWrap" }: { children?: React.ReactNode }) {
+function CtaButton({ children = "Shop Waist Strap" }: { children?: React.ReactNode }) {
   return (
     <Link
       to="/waistwrap"
@@ -337,7 +436,7 @@ export function WaistWrapLanding() {
             guess wrong.
           </p>
           <div className="mt-9">
-            <CtaButton>Shop WaistWrap — $39</CtaButton>
+            <CtaButton>Shop Waist Strap — $39</CtaButton>
           </div>
         </div>
         <Placeholder ratio="4 / 5" note="Hero: full-body shot, wrap worn under a fitted dress." />
@@ -380,7 +479,7 @@ export function WaistWrapLanding() {
         <div className="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[34px] leading-[1.08] md:text-[46px]">
-            WaistWrap™ vs. traditional waist trainers.
+            Waist Strap vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
           <div className="mt-10">
@@ -399,7 +498,7 @@ export function WaistWrapLanding() {
           every cent.
         </p>
         <div className="mt-9">
-          <CtaButton>Shop WaistWrap</CtaButton>
+          <CtaButton>Shop Waist Strap</CtaButton>
         </div>
       </section>
     </WaistWrapShell>
@@ -412,7 +511,7 @@ function ComparisonTable() {
       <div className="grid grid-cols-[0.8fr_1.1fr_1fr] border-b border-[color:var(--cw-line)] text-[9px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-muted)]">
         <div className="px-3 py-3 md:px-5" />
         <div className="border-l-2 border-[color:var(--cw-brand)] bg-[color:var(--cw-surface)] px-3 py-3 text-[color:var(--cw-ink)] md:px-5">
-          WaistWrap™
+          Waist Strap
         </div>
         <div className="px-3 py-3 md:px-5">Traditional</div>
       </div>
@@ -431,24 +530,111 @@ function ComparisonTable() {
   );
 }
 
+/* -------------------------------- Gallery -------------------------------- */
+
+const GALLERY = [
+  "Primary product shot: strap on a neutral body, waist crop.",
+  "Flat lay of the full band.",
+  "Close-up of the bonded flat edge.",
+  "Worn under a fitted white tee — no visible line.",
+  "15-second wrap demo.",
+];
+
+function ProductGallery() {
+  const [i, setI] = useState(0);
+  const go = (d: number) => setI((v) => (v + d + GALLERY.length) % GALLERY.length);
+  return (
+    <div>
+      <div className="relative">
+        <Placeholder
+          ratio="4 / 5"
+          label={i === GALLERY.length - 1 ? "VIDEO" : "IMAGE"}
+          note={GALLERY[i]}
+        />
+        <button
+          aria-label="Previous image"
+          onClick={() => go(-1)}
+          className="absolute left-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/90 text-[color:var(--cw-ink)]"
+        >
+          ‹
+        </button>
+        <button
+          aria-label="Next image"
+          onClick={() => go(1)}
+          className="absolute right-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/90 text-[color:var(--cw-ink)]"
+        >
+          ›
+        </button>
+      </div>
+      <div className="mt-3 grid grid-cols-5 gap-2">
+        {GALLERY.map((g, n) => (
+          <button
+            key={g}
+            onClick={() => setI(n)}
+            aria-label={`View image ${n + 1}`}
+            className={`overflow-hidden rounded-xl border ${
+              n === i ? "border-[color:var(--cw-brand)]" : "border-[color:var(--cw-line)]"
+            }`}
+          >
+            <span className="grid aspect-square place-items-center bg-[color:var(--cw-surface)] text-[10px] font-semibold text-[color:var(--cw-brand)]">
+              {n + 1}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ------------------------------ Product page ------------------------------ */
+
+const GLANCE = [
+  { t: "Wraps to you", c: "Set your own tension — one band fits XS through 3XL." },
+  { t: "Invisible", c: "1.2mm bonded flat edge leaves no ridge under clothes." },
+  { t: "Stays put", c: "No hooks or zippers to pop. It holds from morning to night." },
+  { t: "All-day comfort", c: "Breathable knit that doesn't dig into your ribs." },
+];
+
+const USAGE = [
+  { t: "Under a slip dress", c: "Smooths the midsection without a single visible line." },
+  { t: "Workday, 9 to 6", c: "Wrap at your desk in fifteen seconds and forget it." },
+  { t: "Postpartum support", c: "Gentle, adjustable compression as your shape changes." },
+];
+
+const PDP_REVIEWS = [
+  { n: "Alexis R.", r: 5, t: "Wore it under a slip dress for 11 hours and it never moved once. I keep checking in the mirror out of habit." },
+  { n: "Danielle P.", r: 5, t: "First waist piece I haven't had to fix in a bathroom mirror halfway through dinner." },
+  { n: "Marisol G.", r: 5, t: "No hooks digging into my side. Genuinely forget it's on by lunch." },
+  { n: "Tia W.", r: 5, t: "Had two sizes of trainers in my closet, this replaced both of them." },
+  { n: "Jenna K.", r: 4, t: "Took me a couple tries to get the tension right, but once I did it's perfect." },
+  { n: "Priya N.", r: 5, t: "Completely invisible under a white tee. That was the whole test for me." },
+  { n: "Camille B.", r: 5, t: "Washed it a dozen times already and it snaps right back." },
+  { n: "Rosa V.", r: 5, t: "Postpartum and this is the only thing that felt supportive without squeezing." },
+];
 
 export function WaistWrapProduct() {
   return (
     <WaistWrapShell>
       <section id="shop" className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="space-y-3">
-            <Placeholder ratio="4 / 5" note="Primary product shot: wrap on a neutral body, waist crop." />
-            <div className="grid grid-cols-3 gap-3">
-              <Placeholder note="Flat lay of the full band." />
-              <Placeholder note="Close-up of the bonded flat edge." />
-              <Placeholder label="VIDEO" note="15-second wrap demo." />
-            </div>
-          </div>
+          <ProductGallery />
           <BuyBox />
         </div>
       </section>
+
+      {/* At a glance */}
+      <section className="border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/60">
+        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4 md:px-8">
+          {GLANCE.map((g) => (
+            <div key={g.t} className="rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] p-5">
+              <div className="h-px w-8 bg-[color:var(--cw-brand)]" />
+              <h3 style={serif} className="mt-4 text-[19px]">{g.t}</h3>
+              <p style={sans} className="mt-2 text-[13px] leading-6 text-[color:var(--cw-muted)]">{g.c}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
 
       {/* How it wraps */}
       <section className="border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/50">
@@ -476,7 +662,7 @@ export function WaistWrapProduct() {
       <section className="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
         <Label>The difference</Label>
         <h2 style={serif} className="mt-4 text-[34px] leading-[1.08] md:text-[46px]">
-          WaistWrap™ vs. traditional waist trainers.
+          Waist Strap vs. traditional waist trainers.
         </h2>
         <ComparisonTable />
       </section>
@@ -505,6 +691,67 @@ export function WaistWrapProduct() {
         </div>
       </section>
 
+      {/* Where people wear it */}
+      <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <Label>Where people wear it</Label>
+        <h2 style={serif} className="mt-4 max-w-xl text-[34px] leading-[1.08] md:text-[46px]">
+          One strap, every kind of day.
+        </h2>
+        <div className="mt-10 grid gap-8 md:grid-cols-3">
+          {USAGE.map((u) => (
+            <div key={u.t}>
+              <Placeholder note={u.t} />
+              <h3 style={serif} className="mt-5 text-[21px] leading-tight">{u.t}</h3>
+              <p style={sans} className="mt-2 text-[14px] leading-7 text-[color:var(--cw-muted)]">{u.c}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section id="reviews" className="scroll-mt-20 border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/50">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+          <Label>Reviews</Label>
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+            <h2 style={serif} className="text-[34px] leading-[1.08] md:text-[46px]">
+              4.8 out of 5, from 3,000+ people.
+            </h2>
+            <div className="flex items-center gap-2">
+              <Stars size={18} />
+              <span style={sans} className="text-[12px] text-[color:var(--cw-muted)]">3,127 reviews</span>
+            </div>
+          </div>
+          <div className="mt-10 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5">
+            {PDP_REVIEWS.map((r) => (
+              <div
+                key={r.n}
+                className="break-inside-avoid rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] p-5"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    style={serif}
+                    className="grid h-9 w-9 place-items-center rounded-full bg-[color:var(--cw-brand)] text-[13px] text-white"
+                  >
+                    {r.n[0]}
+                  </span>
+                  <div>
+                    <p style={sans} className="text-[12px] font-semibold">{r.n}</p>
+                    <div className="flex items-center gap-2">
+                      <Stars size={11} value={r.r} />
+                      <span style={sans} className="text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-brand)]">
+                        Verified
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p style={sans} className="mt-3 text-[14px] leading-7 text-[color:var(--cw-muted)]">{r.t}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       {/* FAQ */}
       <section className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Label>Questions</Label>
@@ -513,7 +760,7 @@ export function WaistWrapProduct() {
         </h2>
         <Faq />
         <div className="mt-12 text-center">
-          <CtaButton>Shop WaistWrap — $39</CtaButton>
+          <CtaButton>Shop Waist Strap — $39</CtaButton>
         </div>
       </section>
     </WaistWrapShell>
