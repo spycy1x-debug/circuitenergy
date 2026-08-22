@@ -9,25 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WaistwrapRouteImport } from './routes/waistwrap'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PatchesRouteImport } from './routes/patches'
-import { Route as NourishRouteImport } from './routes/nourish'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
-import { Route as Glp1RouteImport } from './routes/glp-1'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CinchwrapRouteImport } from './routes/cinchwrap'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/public/klaviyo-subscribe'
 
+const WaistwrapRoute = WaistwrapRouteImport.update({
+  id: '/waistwrap',
+  path: '/waistwrap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -53,16 +55,6 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PatchesRoute = PatchesRouteImport.update({
-  id: '/patches',
-  path: '/patches',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NourishRoute = NourishRouteImport.update({
-  id: '/nourish',
-  path: '/nourish',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -73,11 +65,6 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Glp1Route = Glp1RouteImport.update({
-  id: '/glp-1',
-  path: '/glp-1',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
@@ -86,11 +73,6 @@ const FaqRoute = FaqRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CinchwrapRoute = CinchwrapRouteImport.update({
-  id: '/cinchwrap',
-  path: '/cinchwrap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -124,19 +106,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
-  '/cinchwrap': typeof CinchwrapRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/glp-1': typeof Glp1Route
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
-  '/nourish': typeof NourishRoute
-  '/patches': typeof PatchesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
+  '/waistwrap': typeof WaistwrapRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -144,19 +123,16 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
-  '/cinchwrap': typeof CinchwrapRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/glp-1': typeof Glp1Route
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
-  '/nourish': typeof NourishRoute
-  '/patches': typeof PatchesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
+  '/waistwrap': typeof WaistwrapRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -165,19 +141,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
-  '/cinchwrap': typeof CinchwrapRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/glp-1': typeof Glp1Route
   '/how-it-works': typeof HowItWorksRoute
   '/login': typeof LoginRoute
-  '/nourish': typeof NourishRoute
-  '/patches': typeof PatchesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/terms': typeof TermsRoute
+  '/waistwrap': typeof WaistwrapRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
 }
@@ -187,19 +160,16 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
-    | '/cinchwrap'
     | '/contact'
     | '/faq'
-    | '/glp-1'
     | '/how-it-works'
     | '/login'
-    | '/nourish'
-    | '/patches'
     | '/privacy'
     | '/refund'
     | '/shipping'
     | '/shop'
     | '/terms'
+    | '/waistwrap'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesByTo: FileRoutesByTo
@@ -207,19 +177,16 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
-    | '/cinchwrap'
     | '/contact'
     | '/faq'
-    | '/glp-1'
     | '/how-it-works'
     | '/login'
-    | '/nourish'
-    | '/patches'
     | '/privacy'
     | '/refund'
     | '/shipping'
     | '/shop'
     | '/terms'
+    | '/waistwrap'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   id:
@@ -227,19 +194,16 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
-    | '/cinchwrap'
     | '/contact'
     | '/faq'
-    | '/glp-1'
     | '/how-it-works'
     | '/login'
-    | '/nourish'
-    | '/patches'
     | '/privacy'
     | '/refund'
     | '/shipping'
     | '/shop'
     | '/terms'
+    | '/waistwrap'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
   fileRoutesById: FileRoutesById
@@ -248,25 +212,29 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
-  CinchwrapRoute: typeof CinchwrapRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  Glp1Route: typeof Glp1Route
   HowItWorksRoute: typeof HowItWorksRoute
   LoginRoute: typeof LoginRoute
-  NourishRoute: typeof NourishRoute
-  PatchesRoute: typeof PatchesRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
   ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRoute
   TermsRoute: typeof TermsRoute
+  WaistwrapRoute: typeof WaistwrapRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/waistwrap': {
+      id: '/waistwrap'
+      path: '/waistwrap'
+      fullPath: '/waistwrap'
+      preLoaderRoute: typeof WaistwrapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -302,20 +270,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/patches': {
-      id: '/patches'
-      path: '/patches'
-      fullPath: '/patches'
-      preLoaderRoute: typeof PatchesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/nourish': {
-      id: '/nourish'
-      path: '/nourish'
-      fullPath: '/nourish'
-      preLoaderRoute: typeof NourishRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -330,13 +284,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/glp-1': {
-      id: '/glp-1'
-      path: '/glp-1'
-      fullPath: '/glp-1'
-      preLoaderRoute: typeof Glp1RouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/faq': {
       id: '/faq'
       path: '/faq'
@@ -349,13 +296,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cinchwrap': {
-      id: '/cinchwrap'
-      path: '/cinchwrap'
-      fullPath: '/cinchwrap'
-      preLoaderRoute: typeof CinchwrapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -400,19 +340,16 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
-  CinchwrapRoute: CinchwrapRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  Glp1Route: Glp1Route,
   HowItWorksRoute: HowItWorksRoute,
   LoginRoute: LoginRoute,
-  NourishRoute: NourishRoute,
-  PatchesRoute: PatchesRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
   ShippingRoute: ShippingRoute,
   ShopRoute: ShopRoute,
   TermsRoute: TermsRoute,
+  WaistwrapRoute: WaistwrapRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
 }

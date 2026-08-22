@@ -4,7 +4,6 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useRouterState,
 
   HeadContent,
   Scripts,
@@ -15,10 +14,6 @@ import {
 import appCss from "../styles.css?url";
 
 import favicon from "@/assets/favicon.png.asset.json";
-import { AnnouncementBar } from "@/components/site/AnnouncementBar";
-import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
-import { CartDrawer } from "@/components/site/CartDrawer";
 
 function NotFoundComponent() {
   return (
@@ -55,13 +50,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Seralie — Overnight LED Pimple Patches" },
-      { name: "description", content: "LED pimple patches: hydrocolloid absorbs the spot while red and blue light treat it overnight. Free shipping over $40, ships in 24 hours, 60-day money-back guarantee." },
-      { property: "og:title", content: "Seralie — Overnight LED Pimple Patches" },
-      { name: "twitter:title", content: "Seralie — Overnight LED Pimple Patches" },
-      { property: "og:description", content: "Hydrocolloid absorbs it. Red and blue light treat it. Overnight." },
-      { name: "twitter:description", content: "Hydrocolloid absorbs it. Red and blue light treat it. Overnight." },
-      { property: "og:site_name", content: "Seralie" },
+      { title: "WaistWrap™ — The Adjustable Waist Wrap" },
+      { name: "description", content: "WaistWrap™ is an adjustable wrap waist trainer — no hooks, no zippers. One size wraps to your exact waist. Free shipping on 2+, 60-day fit guarantee." },
+      { property: "og:title", content: "WaistWrap™ — The Adjustable Waist Wrap" },
+      { name: "twitter:title", content: "WaistWrap™ — The Adjustable Waist Wrap" },
+      { property: "og:description", content: "One adjustable band. Wraps to your exact waist. Invisible under clothes." },
+      { name: "twitter:description", content: "One adjustable band. Wraps to your exact waist. Invisible under clothes." },
+      { property: "og:site_name", content: "WaistWrap" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
     ],
@@ -129,16 +124,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const bare = pathname === "/" || pathname.startsWith("/cinchwrap");
   return (
     <QueryClientProvider client={queryClient}>
-      {!bare && <AnnouncementBar />}
-      {!bare && <Header />}
-      <main><Outlet /></main>
-
-      {!bare && <Footer />}
-      <CartDrawer />
+      <Outlet />
     </QueryClientProvider>
   );
 }
