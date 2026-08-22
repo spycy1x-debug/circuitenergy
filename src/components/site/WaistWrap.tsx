@@ -691,6 +691,67 @@ export function WaistWrapProduct() {
         </div>
       </section>
 
+      {/* Where people wear it */}
+      <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <Label>Where people wear it</Label>
+        <h2 style={serif} className="mt-4 max-w-xl text-[34px] leading-[1.08] md:text-[46px]">
+          One strap, every kind of day.
+        </h2>
+        <div className="mt-10 grid gap-8 md:grid-cols-3">
+          {USAGE.map((u) => (
+            <div key={u.t}>
+              <Placeholder note={u.t} />
+              <h3 style={serif} className="mt-5 text-[21px] leading-tight">{u.t}</h3>
+              <p style={sans} className="mt-2 text-[14px] leading-7 text-[color:var(--cw-muted)]">{u.c}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <section id="reviews" className="scroll-mt-20 border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/50">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+          <Label>Reviews</Label>
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+            <h2 style={serif} className="text-[34px] leading-[1.08] md:text-[46px]">
+              4.8 out of 5, from 3,000+ people.
+            </h2>
+            <div className="flex items-center gap-2">
+              <Stars size={18} />
+              <span style={sans} className="text-[12px] text-[color:var(--cw-muted)]">3,127 reviews</span>
+            </div>
+          </div>
+          <div className="mt-10 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5">
+            {PDP_REVIEWS.map((r) => (
+              <div
+                key={r.n}
+                className="break-inside-avoid rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] p-5"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    style={serif}
+                    className="grid h-9 w-9 place-items-center rounded-full bg-[color:var(--cw-brand)] text-[13px] text-white"
+                  >
+                    {r.n[0]}
+                  </span>
+                  <div>
+                    <p style={sans} className="text-[12px] font-semibold">{r.n}</p>
+                    <div className="flex items-center gap-2">
+                      <Stars size={11} value={r.r} />
+                      <span style={sans} className="text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-brand)]">
+                        Verified
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p style={sans} className="mt-3 text-[14px] leading-7 text-[color:var(--cw-muted)]">{r.t}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       {/* FAQ */}
       <section className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
         <Label>Questions</Label>
