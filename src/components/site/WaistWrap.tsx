@@ -78,12 +78,14 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
 
       <header className="sticky top-0 z-40 border-b border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/95 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 md:h-16 md:px-8">
-          <Link to="/" style={serif} className="text-[20px] tracking-tight text-[color:var(--cw-ink)]">
-            Waist Strap<sup className="text-[9px]">™</sup>
+          <Link to="/" className="flex items-baseline gap-2">
+            <span style={serif} className="text-[24px] tracking-[0.14em] text-[color:var(--cw-ink)]">
+              SERALIE
+            </span>
           </Link>
           <nav className="flex items-center gap-5 text-[10px] font-semibold uppercase tracking-[0.2em]">
             <Link to="/waistwrap" className="hidden text-[color:var(--cw-muted)] hover:text-[color:var(--cw-ink)] sm:inline">
-              Product
+              Waist Strap
             </Link>
             <Link to="/faq" className="hidden text-[color:var(--cw-muted)] hover:text-[color:var(--cw-ink)] sm:inline">
               FAQ
@@ -103,13 +105,14 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-3 md:px-8">
           <div>
-            <span style={serif} className="text-[22px]">
-              Waist Strap<sup className="text-[10px]">™</sup>
+            <span style={serif} className="text-[24px] tracking-[0.14em]">
+              SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              One adjustable wrap. Your exact waist, every day — no hooks, no guessing, no compromise.
+              Makers of the Waist Strap — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
             </p>
           </div>
+
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--cw-brand)]">Contact</p>
             <p className="mt-3 text-[13px] leading-7 text-[color:var(--cw-muted)]">
