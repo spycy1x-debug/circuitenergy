@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { WaistWrapShell, Label, serif, sans } from "@/components/site/WaistWrap";
+import { WaistWrapShell, Label, serif, sans } from "@/components/site/Waist Strap";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Cart — WaistWrap™" },
-      { name: "description", content: "Review your WaistWrap™ order before checkout. Free shipping on 2+ wraps and a 60-day fit guarantee." },
-      { property: "og:title", content: "Your Cart — WaistWrap™" },
-      { property: "og:description", content: "Review your WaistWrap order before checkout." },
+      { title: "Your Cart — Waist Strap" },
+      { name: "description", content: "Review your Waist Strap order before checkout. Free shipping on 2+ wraps and a 60-day fit guarantee." },
+      { property: "og:title", content: "Your Cart — Waist Strap" },
+      { property: "og:description", content: "Review your Waist Strap order before checkout." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -31,7 +31,7 @@ function CartPage() {
           style={sans}
           className="mt-9 inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90"
         >
-          Shop WaistWrap — $39
+          Shop Waist Strap — $39
         </Link>
       </section>
     </WaistWrapShell>

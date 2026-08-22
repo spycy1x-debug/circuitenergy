@@ -16,7 +16,7 @@ import { getShopifyAnalytics } from "@/lib/shopify-admin.functions";
 export const Route = createFileRoute("/admin/analytics")({
   head: () => ({
     meta: [
-      { title: "Analytics — WaistWrap" },
+      { title: "Analytics — Waist Strap" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

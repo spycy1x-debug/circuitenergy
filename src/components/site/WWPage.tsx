@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { WaistWrapShell, Label, serif, sans } from "@/components/site/WaistWrap";
+import { WaistWrapShell, Label, serif, sans } from "@/components/site/Waist Strap";
 
 export function WWProse({
   eyebrow,
@@ -47,7 +47,7 @@ export function WWProse({
               style={sans}
               className="inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white transition-opacity hover:opacity-90"
             >
-              Shop WaistWrap — $39
+              Shop Waist Strap — $39
             </Link>
           </div>
         )}

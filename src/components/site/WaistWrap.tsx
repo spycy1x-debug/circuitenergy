@@ -22,7 +22,7 @@ const money = (n: number) => `$${n.toFixed(2)}`;
 type Bundle = { id: string; name: string; qty: number; price: number; compareAt: number; tag?: string };
 
 export const BUNDLES: Bundle[] = [
-  { id: "b1", name: "1 WaistWrap", qty: 1, price: 39.0, compareAt: 59.0 },
+  { id: "b1", name: "1 Waist Strap", qty: 1, price: 39.0, compareAt: 59.0 },
   { id: "b2", name: "2 WaistWraps", qty: 2, price: 68.0, compareAt: 118.0, tag: "MOST POPULAR" },
   { id: "b3", name: "3 WaistWraps", qty: 3, price: 89.0, compareAt: 177.0 },
 ];
@@ -79,7 +79,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/95 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 md:h-16 md:px-8">
           <Link to="/" style={serif} className="text-[20px] tracking-tight text-[color:var(--cw-ink)]">
-            WaistWrap<sup className="text-[9px]">™</sup>
+            Waist Strap<sup className="text-[9px]">™</sup>
           </Link>
           <nav className="flex items-center gap-5 text-[10px] font-semibold uppercase tracking-[0.2em]">
             <Link to="/waistwrap" className="hidden text-[color:var(--cw-muted)] hover:text-[color:var(--cw-ink)] sm:inline">
@@ -104,7 +104,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-3 md:px-8">
           <div>
             <span style={serif} className="text-[22px]">
-              WaistWrap<sup className="text-[10px]">™</sup>
+              Waist Strap<sup className="text-[10px]">™</sup>
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
               One adjustable wrap. Your exact waist, every day — no hooks, no guessing, no compromise.
@@ -113,7 +113,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--cw-brand)]">Contact</p>
             <p className="mt-3 text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              support@waistwrap.com
+              support@seralie.com
               <br />
               Mon–Fri, 9am–5pm ET
             </p>
@@ -132,7 +132,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
         </div>
         <div className="border-t border-[color:var(--cw-line)]">
           <p className="mx-auto max-w-6xl px-5 py-5 text-[11px] text-[color:var(--cw-muted)] md:px-8">
-            © {new Date().getFullYear()} WaistWrap™. All rights reserved.
+            © {new Date().getFullYear()} Waist Strap. All rights reserved.
           </p>
         </div>
       </footer>
@@ -161,7 +161,7 @@ export const WW_FAQS = [
   },
   {
     q: "What size do I get?",
-    a: "One WaistWrap adjusts across the full XS–3XL range because you set the tension yourself. Use the size guide to confirm your band length, and if you are between sizes, size up.",
+    a: "One Waist Strap adjusts across the full XS–3XL range because you set the tension yourself. Use the size guide to confirm your band length, and if you are between sizes, size up.",
   },
   {
     q: "What if it doesn't work for me?",
@@ -204,7 +204,7 @@ function BuyBox() {
     <div>
       <Label>One size · Wraps to you</Label>
       <h1 style={serif} className="mt-3 text-[34px] leading-[1.05] text-[color:var(--cw-ink)] md:text-[42px]">
-        WaistWrap™ Adjustable Waist Wrap
+        Waist Strap Adjustable Waist Wrap
       </h1>
       <p style={sans} className="mt-4 text-[15px] leading-7 text-[color:var(--cw-muted)]">
         Instantly takes inches off your silhouette and holds them there all day. No hooks to snap, no
@@ -308,7 +308,7 @@ const SIZES = [
   ["3XL", "45–50 in"],
 ];
 
-function CtaButton({ children = "Shop WaistWrap" }: { children?: React.ReactNode }) {
+function CtaButton({ children = "Shop Waist Strap" }: { children?: React.ReactNode }) {
   return (
     <Link
       to="/waistwrap"
@@ -337,7 +337,7 @@ export function WaistWrapLanding() {
             guess wrong.
           </p>
           <div className="mt-9">
-            <CtaButton>Shop WaistWrap — $39</CtaButton>
+            <CtaButton>Shop Waist Strap — $39</CtaButton>
           </div>
         </div>
         <Placeholder ratio="4 / 5" note="Hero: full-body shot, wrap worn under a fitted dress." />
@@ -380,7 +380,7 @@ export function WaistWrapLanding() {
         <div className="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[34px] leading-[1.08] md:text-[46px]">
-            WaistWrap™ vs. traditional waist trainers.
+            Waist Strap vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
           <div className="mt-10">
@@ -399,7 +399,7 @@ export function WaistWrapLanding() {
           every cent.
         </p>
         <div className="mt-9">
-          <CtaButton>Shop WaistWrap</CtaButton>
+          <CtaButton>Shop Waist Strap</CtaButton>
         </div>
       </section>
     </WaistWrapShell>
@@ -412,7 +412,7 @@ function ComparisonTable() {
       <div className="grid grid-cols-[0.8fr_1.1fr_1fr] border-b border-[color:var(--cw-line)] text-[9px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-muted)]">
         <div className="px-3 py-3 md:px-5" />
         <div className="border-l-2 border-[color:var(--cw-brand)] bg-[color:var(--cw-surface)] px-3 py-3 text-[color:var(--cw-ink)] md:px-5">
-          WaistWrap™
+          Waist Strap
         </div>
         <div className="px-3 py-3 md:px-5">Traditional</div>
       </div>
@@ -476,7 +476,7 @@ export function WaistWrapProduct() {
       <section className="mx-auto max-w-4xl px-5 py-16 md:px-8 md:py-24">
         <Label>The difference</Label>
         <h2 style={serif} className="mt-4 text-[34px] leading-[1.08] md:text-[46px]">
-          WaistWrap™ vs. traditional waist trainers.
+          Waist Strap vs. traditional waist trainers.
         </h2>
         <ComparisonTable />
       </section>
@@ -513,7 +513,7 @@ export function WaistWrapProduct() {
         </h2>
         <Faq />
         <div className="mt-12 text-center">
-          <CtaButton>Shop WaistWrap — $39</CtaButton>
+          <CtaButton>Shop Waist Strap — $39</CtaButton>
         </div>
       </section>
     </WaistWrapShell>
