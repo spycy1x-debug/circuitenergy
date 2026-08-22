@@ -530,24 +530,111 @@ function ComparisonTable() {
   );
 }
 
+/* -------------------------------- Gallery -------------------------------- */
+
+const GALLERY = [
+  "Primary product shot: strap on a neutral body, waist crop.",
+  "Flat lay of the full band.",
+  "Close-up of the bonded flat edge.",
+  "Worn under a fitted white tee — no visible line.",
+  "15-second wrap demo.",
+];
+
+function ProductGallery() {
+  const [i, setI] = useState(0);
+  const go = (d: number) => setI((v) => (v + d + GALLERY.length) % GALLERY.length);
+  return (
+    <div>
+      <div className="relative">
+        <Placeholder
+          ratio="4 / 5"
+          label={i === GALLERY.length - 1 ? "VIDEO" : "IMAGE"}
+          note={GALLERY[i]}
+        />
+        <button
+          aria-label="Previous image"
+          onClick={() => go(-1)}
+          className="absolute left-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/90 text-[color:var(--cw-ink)]"
+        >
+          ‹
+        </button>
+        <button
+          aria-label="Next image"
+          onClick={() => go(1)}
+          className="absolute right-3 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/90 text-[color:var(--cw-ink)]"
+        >
+          ›
+        </button>
+      </div>
+      <div className="mt-3 grid grid-cols-5 gap-2">
+        {GALLERY.map((g, n) => (
+          <button
+            key={g}
+            onClick={() => setI(n)}
+            aria-label={`View image ${n + 1}`}
+            className={`overflow-hidden rounded-xl border ${
+              n === i ? "border-[color:var(--cw-brand)]" : "border-[color:var(--cw-line)]"
+            }`}
+          >
+            <span className="grid aspect-square place-items-center bg-[color:var(--cw-surface)] text-[10px] font-semibold text-[color:var(--cw-brand)]">
+              {n + 1}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ------------------------------ Product page ------------------------------ */
+
+const GLANCE = [
+  { t: "Wraps to you", c: "Set your own tension — one band fits XS through 3XL." },
+  { t: "Invisible", c: "1.2mm bonded flat edge leaves no ridge under clothes." },
+  { t: "Stays put", c: "No hooks or zippers to pop. It holds from morning to night." },
+  { t: "All-day comfort", c: "Breathable knit that doesn't dig into your ribs." },
+];
+
+const USAGE = [
+  { t: "Under a slip dress", c: "Smooths the midsection without a single visible line." },
+  { t: "Workday, 9 to 6", c: "Wrap at your desk in fifteen seconds and forget it." },
+  { t: "Postpartum support", c: "Gentle, adjustable compression as your shape changes." },
+];
+
+const PDP_REVIEWS = [
+  { n: "Alexis R.", r: 5, t: "Wore it under a slip dress for 11 hours and it never moved once. I keep checking in the mirror out of habit." },
+  { n: "Danielle P.", r: 5, t: "First waist piece I haven't had to fix in a bathroom mirror halfway through dinner." },
+  { n: "Marisol G.", r: 5, t: "No hooks digging into my side. Genuinely forget it's on by lunch." },
+  { n: "Tia W.", r: 5, t: "Had two sizes of trainers in my closet, this replaced both of them." },
+  { n: "Jenna K.", r: 4, t: "Took me a couple tries to get the tension right, but once I did it's perfect." },
+  { n: "Priya N.", r: 5, t: "Completely invisible under a white tee. That was the whole test for me." },
+  { n: "Camille B.", r: 5, t: "Washed it a dozen times already and it snaps right back." },
+  { n: "Rosa V.", r: 5, t: "Postpartum and this is the only thing that felt supportive without squeezing." },
+];
 
 export function WaistWrapProduct() {
   return (
     <WaistWrapShell>
       <section id="shop" className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="space-y-3">
-            <Placeholder ratio="4 / 5" note="Primary product shot: wrap on a neutral body, waist crop." />
-            <div className="grid grid-cols-3 gap-3">
-              <Placeholder note="Flat lay of the full band." />
-              <Placeholder note="Close-up of the bonded flat edge." />
-              <Placeholder label="VIDEO" note="15-second wrap demo." />
-            </div>
-          </div>
+          <ProductGallery />
           <BuyBox />
         </div>
       </section>
+
+      {/* At a glance */}
+      <section className="border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/60">
+        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4 md:px-8">
+          {GLANCE.map((g) => (
+            <div key={g.t} className="rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] p-5">
+              <div className="h-px w-8 bg-[color:var(--cw-brand)]" />
+              <h3 style={serif} className="mt-4 text-[19px]">{g.t}</h3>
+              <p style={sans} className="mt-2 text-[13px] leading-6 text-[color:var(--cw-muted)]">{g.c}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
 
       {/* How it wraps */}
       <section className="border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/50">
