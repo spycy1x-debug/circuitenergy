@@ -197,6 +197,80 @@ export function Faq({ items = WW_FAQS }: { items?: { q: string; a: string }[] })
   );
 }
 
+/* ------------------------------ Buy area bits ----------------------------- */
+
+export function Stars({ value = 4.8, size = 13 }: { value?: number; size?: number }) {
+  return (
+    <span className="inline-flex items-center gap-0.5" aria-label={`${value} out of 5 stars`}>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const fill = Math.max(0, Math.min(1, value - i));
+        return (
+          <span key={i} className="relative inline-block leading-none" style={{ fontSize: size }}>
+            <span className="text-[color:var(--cw-line)]">★</span>
+            <span
+              className="absolute left-0 top-0 overflow-hidden text-[color:var(--cw-brand)]"
+              style={{ width: `${fill * 100}%` }}
+            >
+              ★
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+const TICKER = [
+  { n: "Alexis R.", t: "Wore it under a slip dress for 11 hours. Never moved once." },
+  { n: "Danielle P.", t: "First waist piece I haven't had to fix in a bathroom mirror." },
+  { n: "Marisol G.", t: "No hooks digging in. I forget it's on by lunch." },
+  { n: "Tia W.", t: "Two sizes of trainers in my closet and this replaced both." },
+];
+
+function ReviewTicker() {
+  const [i, setI] = useState(0);
+  const r = TICKER[i % TICKER.length];
+  return (
+    <button
+      onClick={() => setI((v) => v + 1)}
+      className="mt-4 flex w-full items-center gap-3 rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]/60 px-4 py-3 text-left"
+    >
+      <span
+        style={serif}
+        className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand)] text-[13px] text-white"
+      >
+        {r.n[0]}
+      </span>
+      <span className="min-w-0">
+        <span className="flex items-center gap-2">
+          <Stars size={11} value={5} />
+          <span style={sans} className="text-[11px] font-semibold text-[color:var(--cw-ink)]">{r.n}</span>
+        </span>
+        <span style={sans} className="mt-0.5 block truncate text-[12px] text-[color:var(--cw-muted)]">
+          "{r.t}"
+        </span>
+      </span>
+    </button>
+  );
+}
+
+function TrustRow() {
+  return (
+    <div className="mt-5 grid grid-cols-3 gap-2 text-center">
+      {[
+        ["60-day", "Fit guarantee"],
+        ["Secure", "Encrypted checkout"],
+        ["Free", "Shipping on 2+"],
+      ].map(([a, b]) => (
+        <div key={a} className="rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] px-2 py-3">
+          <p style={serif} className="text-[15px] text-[color:var(--cw-ink)]">{a}</p>
+          <p style={sans} className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">{b}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* -------------------------------- Buy box -------------------------------- */
 
 function BuyBox() {
@@ -205,14 +279,36 @@ function BuyBox() {
 
   return (
     <div>
-      <Label>One size · Wraps to you</Label>
+      <Label>Seralie · Waist Strap</Label>
       <h1 style={serif} className="mt-3 text-[34px] leading-[1.05] text-[color:var(--cw-ink)] md:text-[42px]">
-        Waist Strap Adjustable Waist Wrap
+        The Waist Strap
       </h1>
+
+      <a href="#reviews" className="mt-3 inline-flex items-center gap-2">
+        <Stars />
+        <span style={sans} className="text-[12px] text-[color:var(--cw-muted)] underline underline-offset-4">
+          4.8 · 3,000+ reviews
+        </span>
+      </a>
+
       <p style={sans} className="mt-4 text-[15px] leading-7 text-[color:var(--cw-muted)]">
         Instantly takes inches off your silhouette and holds them there all day. No hooks to snap, no
         zipper to fight, no size to guess wrong.
       </p>
+
+      <ul style={sans} className="mt-5 space-y-2 text-[13px] leading-6 text-[color:var(--cw-ink)]">
+        {[
+          "Wraps to your exact waist — one size fits XS–3XL",
+          "1.2mm bonded flat edge — invisible under clothes",
+          "No hooks, no zippers, nothing to pop mid-wear",
+          "Breathable knit — wearable 8+ hours a day",
+        ].map((b) => (
+          <li key={b} className="flex gap-2">
+            <span className="text-[color:var(--cw-brand)]">✓</span>
+            {b}
+          </li>
+        ))}
+      </ul>
 
       <div className="mt-7 space-y-3">
         {BUNDLES.map((b) => {
@@ -222,7 +318,7 @@ function BuyBox() {
               key={b.id}
               onClick={() => setSel(b.id)}
               className={`relative flex w-full items-center gap-4 rounded-2xl border bg-[color:var(--cw-bg)] px-4 py-4 text-left transition-colors ${
-                on ? "border-[color:var(--cw-brand)]" : "border-[color:var(--cw-line)] hover:border-[color:var(--cw-muted)]"
+                on ? "border-[color:var(--cw-brand)] ring-1 ring-[color:var(--cw-brand)]" : "border-[color:var(--cw-line)] hover:border-[color:var(--cw-muted)]"
               }`}
             >
               {b.tag && (
@@ -243,7 +339,7 @@ function BuyBox() {
               <span className="min-w-0 flex-1">
                 <span style={serif} className="block text-[18px] text-[color:var(--cw-ink)]">{b.name}</span>
                 <span style={sans} className="block text-[12px] text-[color:var(--cw-muted)]">
-                  {money(b.price / b.qty)} per wrap
+                  {money(b.price / b.qty)} per strap{b.qty > 1 ? " · free shipping" : ""}
                 </span>
               </span>
               <span className="shrink-0 text-right">
@@ -261,14 +357,10 @@ function BuyBox() {
 
       <button
         style={sans}
-        className="mt-6 w-full rounded-full bg-[color:var(--cw-brand)] px-6 py-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-90"
+        className="mt-6 w-full rounded-full bg-[color:var(--cw-brand)] px-6 py-5 text-[15px] font-semibold uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-90"
       >
         Add to cart — {money(bundle.price)}
       </button>
-
-      <p style={sans} className="mt-4 text-center text-[12px] leading-6 text-[color:var(--cw-muted)]">
-        60-day fit guarantee · Free shipping on 2+ · Ships in 24 hours
-      </p>
 
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
         {["VISA", "MASTERCARD", "AMEX", "PAYPAL", "APPLE PAY", "SHOP PAY"].map((p) => (
@@ -281,9 +373,13 @@ function BuyBox() {
           </span>
         ))}
       </div>
+
+      <ReviewTicker />
+      <TrustRow />
     </div>
   );
 }
+
 
 /* --------------------------------- Data ---------------------------------- */
 
