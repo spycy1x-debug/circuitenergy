@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { WaistWrapShell, Label, serif, sans } from "@/components/site/Waist Strap";
+import { WaistWrapShell, Label, serif, sans } from "@/components/site/WaistWrap";
 
 export function WWProse({
   eyebrow,

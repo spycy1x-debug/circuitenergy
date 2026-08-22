@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { WaistWrapShell, Faq, Label, serif, sans } from "@/components/site/Waist Strap";
+import { WaistWrapShell, Faq, Label, serif, sans } from "@/components/site/WaistWrap";
 import { Link } from "@tanstack/react-router";
 
 const FAQS = [

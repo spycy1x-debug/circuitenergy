@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { WaistWrapLanding } from "@/components/site/Waist Strap";
+import { WaistWrapLanding } from "@/components/site/WaistWrap";
 
 export const Route = createFileRoute("/")({
   head: () => ({

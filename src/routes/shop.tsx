@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { WaistWrapShell, Label, Placeholder, serif, sans } from "@/components/site/Waist Strap";
+import { WaistWrapShell, Label, Placeholder, serif, sans } from "@/components/site/WaistWrap";
 
 export const Route = createFileRoute("/shop")({
   head: () => ({
