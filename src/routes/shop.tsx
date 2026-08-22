@@ -1,56 +1,46 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PATCH_GALLERY } from "@/components/site/PatchPage";
-import { PRODUCT_TITLE, PRODUCT_SUBTITLE } from "@/lib/patch-config";
+import { WaistWrapShell, Label, Placeholder, serif, sans } from "@/components/site/WaistWrap";
 
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — Seralie LED Pimple Patches" },
-      {
-        name: "description",
-        content:
-          "Shop Seralie LED pimple patches — hydrocolloid plus red and blue light, worn overnight. Free shipping over $40 and a 60-day money-back guarantee.",
-      },
-      { property: "og:title", content: "Shop — Seralie LED Pimple Patches" },
-      {
-        property: "og:description",
-        content: "Hydrocolloid absorbs it. Red and blue light treat it. Overnight.",
-      },
+      { title: "Shop — WaistWrap™ Adjustable Waist Wrap" },
+      { name: "description", content: "Shop WaistWrap™ — one adjustable band that wraps to your exact waist. Free shipping on 2+ and a 60-day fit guarantee." },
+      { property: "og:title", content: "Shop — WaistWrap™" },
+      { property: "og:description", content: "One adjustable wrap. No hooks, no zippers, no guessing." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://seralie.com/shop" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://seralie.com/shop" }],
   }),
   component: ShopPage,
 });
 
 function ShopPage() {
-  const hero = PATCH_GALLERY[0]!;
   return (
-    <section className="container-x py-14 md:py-20">
-      <div className="eyebrow">Shop</div>
-      <h1 className="mt-3 font-display text-4xl md:text-5xl">Everything we make</h1>
-      <p className="mt-4 max-w-md text-sm leading-7 text-[color:var(--muted-foreground)]">
-        One product, done properly.
-      </p>
-
-      <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        <Link to="/patches" className="group block">
-          <div className="overflow-hidden border border-[color:var(--border)] bg-white">
-            <img
-              src={hero.src}
-              alt={hero.alt}
-              className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-          <h2 className="mt-5 font-display text-2xl">{PRODUCT_TITLE}</h2>
-          <p className="mt-1 text-sm text-[color:var(--muted-foreground)]">
-            {PRODUCT_SUBTITLE} · 60 patches
-          </p>
-          <span className="mt-3 inline-block caps-label text-[color:var(--navy)]">View product</span>
-        </Link>
-      </div>
-    </section>
+    <WaistWrapShell>
+      <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+        <Label>Shop</Label>
+        <h1 style={serif} className="mt-4 text-[36px] leading-[1.06] md:text-[52px]">
+          One product, done properly.
+        </h1>
+        <div className="mt-12 max-w-sm">
+          <Link to="/waistwrap" className="group block">
+            <Placeholder ratio="4 / 5" note="WaistWrap product shot." />
+            <h2 style={serif} className="mt-5 text-[24px]">
+              WaistWrap™ Adjustable Waist Wrap
+            </h2>
+            <p style={sans} className="mt-1 text-[13px] text-[color:var(--cw-muted)]">
+              One size · Wraps to you · From $39.00
+            </p>
+            <span
+              style={sans}
+              className="mt-4 inline-block text-[10px] font-semibold uppercase tracking-[0.22em] text-[color:var(--cw-brand)]"
+            >
+              View product
+            </span>
+          </Link>
+        </div>
+      </section>
+    </WaistWrapShell>
   );
 }
