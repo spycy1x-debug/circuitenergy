@@ -5,19 +5,19 @@ import { Mail } from "lucide-react";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "The Seralie List — Offers & Skin Notes" },
+      { title: "The WaistWrap List — Offers & Fit Notes" },
       {
         name: "description",
         content:
-          "Join the Seralie list for restock notes, subscriber offers and occasional plain-spoken guidance on treating breakouts with LED pimple patches.",
+          "Join the WaistWrap™ list for restock notes, subscriber offers and occasional plain-spoken guidance on fit and wear.",
       },
-      { property: "og:title", content: "The Seralie List" },
+      { property: "og:title", content: "The WaistWrap List" },
       { property: "og:description", content: "Restock notes and subscriber offers, straight to your inbox." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://seralie.com/account" },
+      { property: "og:url", content: "https://waistwrap.com/account" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://seralie.com/account" }],
+    links: [{ rel: "canonical", href: "https://waistwrap.com/account" }],
   }),
 
   component: AccountPage,
@@ -58,11 +58,10 @@ function AccountPage() {
   return (
     <section className="container-x py-20 md:py-28">
       <div className="mx-auto max-w-lg text-center">
-        <div className="eyebrow">The Seralie list</div>
+        <div className="eyebrow">The WaistWrap list</div>
         <h1 className="mt-5 font-display text-4xl md:text-5xl">Offers, first.</h1>
         <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
-          Subscriber-only offers, restock notes and the occasional plain-spoken note on breakouts and
-          treating spots overnight. No noise.
+          Subscriber-only offers, restock notes and the occasional plain-spoken note on fit and wear. No noise.
         </p>
 
 
