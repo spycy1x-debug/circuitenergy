@@ -30,7 +30,7 @@ function ShopPage() {
               Waist Strap Adjustable Waist Wrap
             </h2>
             <p style={sans} className="mt-1 text-[13px] text-[color:var(--cw-muted)]">
-              One size · Wraps to you · From $39.00
+              One size · Wraps to you · From $49.99
             </p>
             <span
               style={sans}

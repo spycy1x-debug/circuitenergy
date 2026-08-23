@@ -31,7 +31,7 @@ function CartPage() {
           style={sans}
           className="mt-9 inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90"
         >
-          Shop Waist Strap — $39
+          Shop Waist Strap — $49.99
         </Link>
       </section>
     </WaistWrapShell>
