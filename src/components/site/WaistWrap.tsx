@@ -422,8 +422,9 @@ function BuyBox() {
 
               <div
                 style={sans}
-                className="mx-4 mb-3 rounded-lg bg-[color:var(--cw-brand)]/30 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[color:var(--cw-ink)]"
+                className="mx-4 mb-3 flex items-center gap-2 rounded-lg bg-[color:var(--cw-brand)]/40 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[color:var(--cw-ink)]"
               >
+                <img src={posture.url} alt="" className="h-7 w-7 shrink-0 object-contain" />
                 {b.gift}
               </div>
 
