@@ -145,6 +145,15 @@ export function CartDrawer() {
           {href ? (
             <a
               href={href}
+              onClick={() =>
+                trackInitiateCheckout(
+                  lines
+                    .map((l) => VARIANTS.find((v) => v.color === l.color && v.size === l.size)?.variantId ?? "")
+                    .filter(Boolean),
+                  total,
+                  lines.reduce((n, l) => n + l.qty, 0),
+                )
+              }
               className="mt-4 block w-full rounded-full bg-[color:var(--cw-ink)] px-6 py-4 text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-bg)]"
             >
               Checkout — {money(total)}
