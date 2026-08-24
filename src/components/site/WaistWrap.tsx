@@ -490,15 +490,15 @@ function BuyBox() {
         <button
           onClick={() => cart.add({ qty: bundle.qty, color, size })}
           style={sans}
-          className="mt-6 block w-full rounded-full bg-[color:var(--cw-ink)] px-6 py-5 text-center text-[15px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-bg)] transition-opacity hover:opacity-90"
+          className="mt-8 block w-full rounded-full bg-[color:var(--cw-brand-deep)] px-6 py-6 text-center text-[16px] font-semibold uppercase tracking-[0.14em] text-white shadow-[0_8px_28px_rgba(217,115,137,0.35)] ring-2 ring-[color:var(--cw-brand-deep)] ring-offset-2 ring-offset-[color:var(--cw-bg)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_34px_rgba(217,115,137,0.45)] active:translate-y-0"
         >
-          Add to cart — {money(bundle.price)}
+          Add to Cart
         </button>
       ) : (
         <button
           disabled
           style={sans}
-          className="mt-6 block w-full cursor-not-allowed rounded-full bg-[color:var(--cw-ink)]/40 px-6 py-5 text-center text-[15px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-bg)]"
+          className="mt-8 block w-full cursor-not-allowed rounded-full bg-[color:var(--cw-ink)]/40 px-6 py-6 text-center text-[16px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-bg)]"
         >
           Select your size
         </button>
