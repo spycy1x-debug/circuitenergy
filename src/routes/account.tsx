@@ -14,10 +14,10 @@ export const Route = createFileRoute("/account")({
       { property: "og:title", content: "The WaistSnatch™ List" },
       { property: "og:description", content: "Restock notes and subscriber offers, straight to your inbox." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://waistwrap.com/account" },
+      { property: "og:url", content: "https://seralie.com/account" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://waistwrap.com/account" }],
+    links: [{ rel: "canonical", href: "https://seralie.com/account" }],
   }),
 
   component: AccountPage,
