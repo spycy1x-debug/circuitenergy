@@ -4,9 +4,9 @@ import { WaistWrapShell, Label, Placeholder, serif, sans } from "@/components/si
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — Waist Strap Adjustable Waist Wrap" },
-      { name: "description", content: "Shop Waist Strap — one adjustable band that wraps to your exact waist. Free shipping on 2+ and a 60-day fit guarantee." },
-      { property: "og:title", content: "Shop — Waist Strap" },
+      { title: "Shop — WaistSnatch™ Adjustable WaistSnatch™" },
+      { name: "description", content: "Shop WaistSnatch™ — one adjustable band that wraps to your exact waist. Free shipping on 2+ and a 60-day fit guarantee." },
+      { property: "og:title", content: "Shop — WaistSnatch™" },
       { property: "og:description", content: "One adjustable wrap. No hooks, no zippers, no guessing." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -24,10 +24,10 @@ function ShopPage() {
           One product, done properly.
         </h1>
         <div className="mt-12 max-w-sm">
-          <Link to="/waistwrap" className="group block">
-            <Placeholder ratio="4 / 5" note="Waist Strap product shot." />
+          <Link to="/waistsnatch" className="group block">
+            <Placeholder ratio="4 / 5" note="WaistSnatch™ product shot." />
             <h2 style={serif} className="mt-5 text-[24px]">
-              Waist Strap Adjustable Waist Wrap
+              WaistSnatch™ Adjustable WaistSnatch™
             </h2>
             <p style={sans} className="mt-1 text-[13px] text-[color:var(--cw-muted)]">
               One size · Wraps to you · From $49.99

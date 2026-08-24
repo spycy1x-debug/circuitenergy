@@ -65,7 +65,7 @@ export function CartDrawer() {
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <p style={serif} className="text-[18px] leading-tight">
-                          Waist Strap™ — {b.label}
+                          WaistSnatch™ — {b.label}
                         </p>
                         <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">
                           {l.color} · Size {l.size}

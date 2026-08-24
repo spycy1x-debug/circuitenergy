@@ -132,7 +132,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
               SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              Makers of the Waist Strap™ — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
+              Makers of the WaistSnatch™ — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
             </p>
           </div>
 
@@ -343,9 +343,9 @@ function BuyBox() {
 
   return (
     <div className="min-w-0">
-      <Label>Seralie · Waist Strap™</Label>
+      <Label>Seralie · WaistSnatch™</Label>
       <h1 style={serif} className="mt-3 text-[32px] leading-[1.05] text-[color:var(--cw-ink)] md:text-[42px]">
-        The Waist Strap™
+        The WaistSnatch™
       </h1>
 
       <a href="#reviews" className="mt-3 inline-flex items-center gap-2">
@@ -532,10 +532,10 @@ const ROWS = [
   { k: "Under clothes", ours: "Bonded flat edge — completely invisible", theirs: "Bulk lines through everything you own" },
 ];
 
-function CtaButton({ children = "Shop Waist Strap™" }: { children?: React.ReactNode }) {
+function CtaButton({ children = "Shop WaistSnatch™" }: { children?: React.ReactNode }) {
   return (
     <Link
-      to="/waistwrap"
+      to="/waistsnatch"
       style={sans}
       className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-bg)] transition-opacity hover:opacity-90"
     >
@@ -604,21 +604,21 @@ export function WaistWrapLanding() {
       {/* Hero */}
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-12 md:grid-cols-2 md:gap-16 md:px-8 md:py-24">
         <div className="min-w-0">
-          <Label>Adjustable waist wrap</Label>
+          <Label>Adjustable WaistSnatch™</Label>
           <h1 style={serif} className="mt-5 text-[38px] leading-[1.04] md:text-[64px]">
-            The waist wrap that actually stays put.
+            The WaistSnatch™ that actually stays put.
           </h1>
           <p className="mt-6 max-w-md text-[16px] leading-8 text-[color:var(--cw-muted)]">
             One band wraps to your exact waist and holds it — all day, no hooks, no zippers, no size to
             guess wrong.
           </p>
           <div className="mt-9">
-            <CtaButton>Shop Waist Strap™ — $49.99</CtaButton>
+            <CtaButton>Shop WaistSnatch™ — $49.99</CtaButton>
           </div>
         </div>
         <img
           src={ws2.url}
-          alt="Before and after wearing the Seralie Waist Strap™"
+          alt="Before and after wearing the Seralie WaistSnatch™"
           className="w-full rounded-2xl border border-[color:var(--cw-line)]"
         />
       </section>
@@ -662,7 +662,7 @@ export function WaistWrapLanding() {
         <div className="mx-auto max-w-4xl px-5 py-14 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[30px] leading-[1.1] md:text-[46px]">
-            Waist Strap™ vs. traditional waist trainers.
+            WaistSnatch™ vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
           <div className="mt-10">
@@ -681,7 +681,7 @@ export function WaistWrapLanding() {
           every cent.
         </p>
         <div className="mt-9">
-          <CtaButton>Shop Waist Strap™</CtaButton>
+          <CtaButton>Shop WaistSnatch™</CtaButton>
         </div>
       </section>
     </WaistWrapShell>
@@ -694,7 +694,7 @@ function ComparisonTable() {
       <div className="grid grid-cols-[0.8fr_1.1fr_1fr] border-b border-[color:var(--cw-line)] text-[9px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-muted)]">
         <div className="px-3 py-3 md:px-5" />
         <div className="border-l-2 border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/20 px-3 py-3 text-[color:var(--cw-ink)] md:px-5">
-          Waist Strap™
+          WaistSnatch™
         </div>
         <div className="px-3 py-3 md:px-5">Traditional</div>
       </div>
@@ -716,10 +716,10 @@ function ComparisonTable() {
 /* -------------------------------- Gallery -------------------------------- */
 
 const GALLERY = [
-  { url: ws8.url, alt: "Customer before and after wearing the Waist Strap™" },
+  { url: ws8.url, alt: "Customer before and after wearing the WaistSnatch™" },
   { url: ws1.url, alt: "Engineered for a better fit — construction callouts" },
   { url: ws5.url, alt: "Built for everyday wear — materials and construction detail" },
-  { url: ws2.url, alt: "See the difference — waist definition with and without the Waist Strap™" },
+  { url: ws2.url, alt: "See the difference — waist definition with and without the WaistSnatch™" },
   { url: ws4.url, alt: "Designed to stay secure — reinforced edges and stitching" },
   { url: ws6.url, alt: "Adjustable closure with relaxed, custom and firmer fit" },
   { url: ws3.url, alt: "Create a smoother silhouette under clothing" },
@@ -912,7 +912,7 @@ export function WaistWrapProduct() {
         <div className="mx-auto max-w-4xl px-5 py-14 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[30px] leading-[1.1] md:text-[46px]">
-            Waist Strap™ vs. traditional waist trainers.
+            WaistSnatch™ vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
         </div>
@@ -988,7 +988,7 @@ export function WaistWrapProduct() {
               style={sans}
               className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-bg)]"
             >
-              Shop Waist Strap™ — $49.99
+              Shop WaistSnatch™ — $49.99
             </a>
           </div>
         </div>

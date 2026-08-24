@@ -43,11 +43,11 @@ export function WWProse({
         {cta && (
           <div className="mt-16 border-t border-[color:var(--cw-line)] pt-10">
             <Link
-              to="/waistwrap"
+              to="/waistsnatch"
               style={sans}
               className="inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white transition-opacity hover:opacity-90"
             >
-              Shop Waist Strap — $39
+              Shop WaistSnatch™ — $39
             </Link>
           </div>
         )}
