@@ -5,13 +5,13 @@ import { Mail } from "lucide-react";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "The Waist Strap List — Offers & Fit Notes" },
+      { title: "The WaistSnatch™ List — Offers & Fit Notes" },
       {
         name: "description",
         content:
-          "Join the Waist Strap list for restock notes, subscriber offers and occasional plain-spoken guidance on fit and wear.",
+          "Join the WaistSnatch™ list for restock notes, subscriber offers and occasional plain-spoken guidance on fit and wear.",
       },
-      { property: "og:title", content: "The Waist Strap List" },
+      { property: "og:title", content: "The WaistSnatch™ List" },
       { property: "og:description", content: "Restock notes and subscriber offers, straight to your inbox." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://waistwrap.com/account" },
@@ -58,7 +58,7 @@ function AccountPage() {
   return (
     <section className="container-x py-20 md:py-28">
       <div className="mx-auto max-w-lg text-center">
-        <div className="eyebrow">The Waist Strap list</div>
+        <div className="eyebrow">The WaistSnatch™ list</div>
         <h1 className="mt-5 font-display text-4xl md:text-5xl">Offers, first.</h1>
         <p className="mt-5 text-[15px] leading-8 text-[color:var(--muted-foreground)]">
           Subscriber-only offers, restock notes and the occasional plain-spoken note on fit and wear. No noise.

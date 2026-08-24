@@ -4,9 +4,9 @@ import { WWProse } from "@/components/site/WWPage";
 export const Route = createFileRoute("/shipping")({
   head: () => ({
     meta: [
-      { title: "Shipping — Waist Strap" },
-      { name: "description", content: "Waist Strap ships within 24 hours. Free US shipping on orders of 2+ wraps, $4.95 flat on single wraps, 3–5 business day delivery." },
-      { property: "og:title", content: "Shipping — Waist Strap" },
+      { title: "Shipping — WaistSnatch™" },
+      { name: "description", content: "WaistSnatch™ ships within 24 hours. Free US shipping on orders of 2+ wraps, $4.95 flat on single wraps, 3–5 business day delivery." },
+      { property: "og:title", content: "Shipping — WaistSnatch™" },
       { property: "og:description", content: "Ships in 24 hours. Free shipping on 2+." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },

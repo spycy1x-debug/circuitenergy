@@ -4,13 +4,13 @@ import { WaistWrapLanding } from "@/components/site/WaistWrap";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Waist Strap — The Waist Wrap That Actually Stays Put" },
+      { title: "WaistSnatch™ — The WaistSnatch™ That Actually Stays Put" },
       {
         name: "description",
         content:
-          "Waist Strap is an adjustable wrap waist trainer — no hooks, no zippers. One size wraps to your exact waist and stays invisible under clothes. 60-day fit guarantee.",
+          "WaistSnatch™ is an adjustable wrap waist trainer — no hooks, no zippers. One size wraps to your exact waist and stays invisible under clothes. 60-day fit guarantee.",
       },
-      { property: "og:title", content: "Waist Strap — The Adjustable Waist Wrap" },
+      { property: "og:title", content: "WaistSnatch™ — The Adjustable WaistSnatch™" },
       {
         property: "og:description",
         content: "One adjustable band. Wraps to your exact waist. Invisible under clothes.",

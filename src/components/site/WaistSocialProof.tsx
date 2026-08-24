@@ -96,7 +96,7 @@ export function WaistSocialProof() {
                 <img
                   key={`${i}-${n}`}
                   src={s}
-                  alt="Customer wearing the Waist Strap"
+                  alt="Customer wearing the WaistSnatch™"
                   loading="lazy"
                   className="aspect-[3/4] w-full rounded-2xl border border-[color:var(--cw-line)] object-cover"
                 />

@@ -4,9 +4,9 @@ import { WWProse } from "@/components/site/WWPage";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Waist Strap" },
+      { title: "Contact — WaistSnatch™" },
       { name: "description", content: "Questions about sizing, an order, or the 60-day fit guarantee? Email support@seralie.com — we reply within 24 hours." },
-      { property: "og:title", content: "Contact — Waist Strap" },
+      { property: "og:title", content: "Contact — WaistSnatch™" },
       { property: "og:description", content: "Email support@seralie.com — we reply within 24 hours." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
