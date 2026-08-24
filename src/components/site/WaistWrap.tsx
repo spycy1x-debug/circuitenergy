@@ -625,8 +625,6 @@ export function WaistWrapLanding() {
         />
       </section>
 
-      <WaistSocialProof />
-
       <ObjectionsSection />
 
       {/* Icon bar */}
@@ -873,6 +871,8 @@ export function WaistWrapProduct() {
           <BuyBox />
         </div>
       </section>
+
+      <WaistSocialProof />
 
       <ObjectionsSection />
 
