@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { BUNDLES, COLORS, SIZES, type Bundle } from "@/lib/waistwrap-config";
 
-import ws1 from "@/assets/ws-1.webp.asset.json";
-import ws2 from "@/assets/ws-2.webp.asset.json";
+import ws1 from "@/assets/ws-2.png.asset.json";
+import ws2 from "@/assets/ws-1.webp.asset.json";
 import ws3 from "@/assets/ws-3.webp.asset.json";
 import ws4 from "@/assets/ws-4.webp.asset.json";
 import ws5 from "@/assets/ws-5.webp.asset.json";
@@ -621,7 +621,7 @@ export function WaistWrapLanding() {
           </div>
         </div>
         <img
-          src={ws2.url}
+          src={ws8.url}
           alt="Before and after wearing the Seralie WaistSnatch™"
           className="w-full rounded-2xl border border-[color:var(--cw-line)]"
         />
@@ -723,7 +723,7 @@ const GALLERY = [
   { url: ws8.url, alt: "Customer before and after wearing the WaistSnatch™" },
   { url: ws1.url, alt: "Engineered for a better fit — construction callouts" },
   { url: ws5.url, alt: "Built for everyday wear — materials and construction detail" },
-  { url: ws2.url, alt: "See the difference — waist definition with and without the WaistSnatch™" },
+  { url: ws2.url, alt: "Premium construction and materials detail" },
   { url: ws4.url, alt: "Designed to stay secure — reinforced edges and stitching" },
   { url: ws6.url, alt: "Adjustable closure with relaxed, custom and firmer fit" },
   { url: ws3.url, alt: "Create a smoother silhouette under clothing" },
