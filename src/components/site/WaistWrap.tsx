@@ -470,14 +470,14 @@ function BuyBox() {
         })}
       </div>
 
-      {href ? (
-        <a
-          href={href}
+      {size ? (
+        <button
+          onClick={() => cart.add({ qty: bundle.qty, color, size })}
           style={sans}
           className="mt-6 block w-full rounded-full bg-[color:var(--cw-ink)] px-6 py-5 text-center text-[15px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-bg)] transition-opacity hover:opacity-90"
         >
           Add to cart — {money(bundle.price)}
-        </a>
+        </button>
       ) : (
         <button
           disabled
