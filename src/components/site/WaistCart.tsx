@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { cart, bundleFor, cartTotal, cartCheckoutUrl, type CartLine } from "@/lib/waistwrap-cart";
 import posture from "@/assets/posture-corrector.png.asset.json";
+import payBadges from "@/assets/pay-badges-v2.png.asset.json";
+import { PROTECTION_PRICE } from "@/lib/waistwrap-config";
 
 const serif = { fontFamily: '"Playfair Display", Georgia, "Times New Roman", serif' };
 const sans = { fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' };
@@ -14,13 +16,13 @@ export function useCart() {
       unsub();
     };
   }, []);
-  return { lines: cart.getLines(), open: cart.isOpen() };
+  return { lines: cart.getLines(), open: cart.isOpen(), protection: cart.hasProtection() };
 }
 
 export function CartDrawer() {
-  const { lines, open } = useCart();
-  const total = cartTotal(lines);
-  const href = cartCheckoutUrl(lines);
+  const { lines, open, protection } = useCart();
+  const total = cartTotal(lines, protection);
+  const href = cartCheckoutUrl(lines, protection);
   const freeShipping = lines.some((l) => l.qty > 1) || total >= 50;
 
   useEffect(() => {
@@ -99,6 +101,37 @@ export function CartDrawer() {
           )}
         </div>
 
+        {lines.length > 0 && (
+          <div className="border-t border-[color:var(--cw-line)] px-5 py-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[13px] font-semibold text-[color:var(--cw-ink)]">Shipping Protection</p>
+                <p className="mt-1 text-[11px] leading-5 text-[color:var(--cw-muted)]">
+                  Covers loss, theft and damage in transit.
+                </p>
+              </div>
+              <div className="flex shrink-0 items-center gap-3">
+                <span className="text-[13px] tabular-nums text-[color:var(--cw-muted)]">{money(PROTECTION_PRICE)}</span>
+                <button
+                  role="switch"
+                  aria-checked={protection}
+                  aria-label="Shipping protection"
+                  onClick={() => cart.setProtection(!protection)}
+                  className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${
+                    protection ? "bg-[color:var(--cw-ink)]" : "bg-[color:var(--cw-line)]"
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+                      protection ? "translate-x-[18px]" : "translate-x-[2px]"
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="border-t border-[color:var(--cw-line)] px-5 py-5">
           <div className="flex items-center justify-between">
             <span className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--cw-muted)]">Subtotal</span>
@@ -124,6 +157,7 @@ export function CartDrawer() {
               Checkout
             </button>
           )}
+          <img src={payBadges.url} alt="Accepted payment methods" className="mx-auto mt-4 h-6 w-auto object-contain" />
           <button
             onClick={() => cart.setOpen(false)}
             className="mt-3 w-full text-[11px] uppercase tracking-[0.16em] text-[color:var(--cw-muted)] underline underline-offset-4"
