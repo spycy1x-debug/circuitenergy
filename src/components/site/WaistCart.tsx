@@ -40,7 +40,7 @@ export function CartDrawer() {
       <button
         aria-label="Close cart"
         onClick={() => cart.setOpen(false)}
-        className="absolute inset-0 bg-black/40"
+        className="absolute inset-0 bg-transparent"
       />
       <aside className="absolute right-0 top-0 flex h-full w-full max-w-[420px] flex-col bg-[color:var(--cw-bg)] shadow-2xl">
         <div className="flex items-center justify-between border-b border-[color:var(--cw-line)] px-5 py-4">
