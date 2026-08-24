@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { cart, bundleFor, cartTotal, cartCheckoutUrl, type CartLine } from "@/lib/waistwrap-cart";
 import posture from "@/assets/posture-corrector.png.asset.json";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
-import { PROTECTION_PRICE } from "@/lib/waistwrap-config";
+import { PROTECTION_PRICE, VARIANTS } from "@/lib/waistwrap-config";
+import { trackInitiateCheckout } from "@/lib/fb-pixel";
 
 const serif = { fontFamily: '"Playfair Display", Georgia, "Times New Roman", serif' };
 const sans = { fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' };
@@ -145,6 +146,15 @@ export function CartDrawer() {
           {href ? (
             <a
               href={href}
+              onClick={() =>
+                trackInitiateCheckout(
+                  lines
+                    .map((l) => VARIANTS.find((v) => v.color === l.color && v.size === l.size)?.variantId ?? "")
+                    .filter(Boolean),
+                  total,
+                  lines.reduce((n, l) => n + l.qty, 0),
+                )
+              }
               className="mt-4 block w-full rounded-full bg-[color:var(--cw-ink)] px-6 py-4 text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-bg)]"
             >
               Checkout — {money(total)}
