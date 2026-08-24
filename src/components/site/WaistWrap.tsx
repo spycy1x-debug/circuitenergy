@@ -459,7 +459,11 @@ function BuyBox() {
                     <p style={sans} className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-muted)]">
                       Size
                     </p>
-                    <a href="#size-guide" style={sans} className="text-[11px] underline underline-offset-4 text-[color:var(--cw-muted)]">
+                    <a
+                      href="#size-guide"
+                      style={sans}
+                      className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[color:var(--cw-brand-deep)] underline underline-offset-4"
+                    >
                       Size chart
                     </a>
                   </div>
