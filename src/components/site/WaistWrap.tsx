@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { BUNDLES, COLORS, SIZES, checkoutUrl, type Bundle } from "@/lib/waistwrap-config";
+import { BUNDLES, COLORS, SIZES, type Bundle } from "@/lib/waistwrap-config";
 
 import ws1 from "@/assets/ws-1.webp.asset.json";
 import ws2 from "@/assets/ws-2.webp.asset.json";
@@ -70,6 +70,7 @@ export function Label({ children }: { children: React.ReactNode }) {
   return (
     <div style={sans} className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[color:var(--cw-brand-deep)]">
       {children}
+      <CartDrawer />
     </div>
   );
 }
@@ -130,7 +131,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
               SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              Makers of the Waist Strap — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
+              Makers of the Waist Strap™ — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
             </p>
           </div>
 
@@ -309,13 +310,23 @@ function useCountdown(minutes = 15) {
 function OfferUrgency() {
   const t = useCountdown(15);
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-[color:var(--cw-brand-deep)]/40 bg-[color:var(--cw-brand)]/25 px-4 py-3">
-      <p style={sans} className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-ink)]">
-        Limited time offer · Free posture corrector
-      </p>
-      <p style={sans} className="text-[12px] font-semibold tabular-nums text-[color:var(--cw-brand-deep)]">
-        Ends in {t}
-      </p>
+    <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/30 p-3">
+      <img
+        src={posture.url}
+        alt="Free posture corrector included with every order"
+        className="h-16 w-16 shrink-0 rounded-xl bg-[color:var(--cw-surface)] object-contain p-1"
+      />
+      <div className="min-w-0 flex-1">
+        <p style={sans} className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]">
+          Free gift · $39 value
+        </p>
+        <p style={serif} className="text-[17px] leading-tight text-[color:var(--cw-ink)]">
+          Free posture corrector with every order
+        </p>
+        <p style={sans} className="mt-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--cw-brand-deep)]">
+          Offer ends in {t}
+        </p>
+      </div>
     </div>
   );
 }
@@ -327,13 +338,13 @@ function BuyBox() {
   const [color, setColor] = useState<string>("Black");
   const [size, setSize] = useState<string | null>("M");
   const bundle = BUNDLES.find((b) => b.qty === selQty)!;
-  const href = size ? checkoutUrl(color, size, bundle) : null;
+  
 
   return (
     <div className="min-w-0">
-      <Label>Seralie · Waist Strap</Label>
+      <Label>Seralie · Waist Strap™</Label>
       <h1 style={serif} className="mt-3 text-[32px] leading-[1.05] text-[color:var(--cw-ink)] md:text-[42px]">
-        The Waist Strap
+        The Waist Strap™
       </h1>
 
       <a href="#reviews" className="mt-3 inline-flex items-center gap-2">
@@ -412,8 +423,9 @@ function BuyBox() {
 
               <div
                 style={sans}
-                className="mx-4 mb-3 rounded-lg bg-[color:var(--cw-brand)]/30 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[color:var(--cw-ink)]"
+                className="mx-4 mb-3 flex items-center gap-2 rounded-lg bg-[color:var(--cw-brand)]/40 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[color:var(--cw-ink)]"
               >
+                <img src={posture.url} alt="" className="h-7 w-7 shrink-0 object-contain" />
                 {b.gift}
               </div>
 
@@ -470,14 +482,14 @@ function BuyBox() {
         })}
       </div>
 
-      {href ? (
-        <a
-          href={href}
+      {size ? (
+        <button
+          onClick={() => cart.add({ qty: bundle.qty, color, size })}
           style={sans}
           className="mt-6 block w-full rounded-full bg-[color:var(--cw-ink)] px-6 py-5 text-center text-[15px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-bg)] transition-opacity hover:opacity-90"
         >
           Add to cart — {money(bundle.price)}
-        </a>
+        </button>
       ) : (
         <button
           disabled
@@ -522,7 +534,7 @@ const ROWS = [
   { k: "Under clothes", ours: "Bonded flat edge — completely invisible", theirs: "Bulk lines through everything you own" },
 ];
 
-function CtaButton({ children = "Shop Waist Strap" }: { children?: React.ReactNode }) {
+function CtaButton({ children = "Shop Waist Strap™" }: { children?: React.ReactNode }) {
   return (
     <Link
       to="/waistwrap"
@@ -603,12 +615,12 @@ export function WaistWrapLanding() {
             guess wrong.
           </p>
           <div className="mt-9">
-            <CtaButton>Shop Waist Strap — $49.99</CtaButton>
+            <CtaButton>Shop Waist Strap™ — $49.99</CtaButton>
           </div>
         </div>
         <img
           src={ws2.url}
-          alt="Before and after wearing the Seralie Waist Strap"
+          alt="Before and after wearing the Seralie Waist Strap™"
           className="w-full rounded-2xl border border-[color:var(--cw-line)]"
         />
       </section>
@@ -652,7 +664,7 @@ export function WaistWrapLanding() {
         <div className="mx-auto max-w-4xl px-5 py-14 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[30px] leading-[1.1] md:text-[46px]">
-            Waist Strap vs. traditional waist trainers.
+            Waist Strap™ vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
           <div className="mt-10">
@@ -671,7 +683,7 @@ export function WaistWrapLanding() {
           every cent.
         </p>
         <div className="mt-9">
-          <CtaButton>Shop Waist Strap</CtaButton>
+          <CtaButton>Shop Waist Strap™</CtaButton>
         </div>
       </section>
     </WaistWrapShell>
@@ -684,7 +696,7 @@ function ComparisonTable() {
       <div className="grid grid-cols-[0.8fr_1.1fr_1fr] border-b border-[color:var(--cw-line)] text-[9px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-muted)]">
         <div className="px-3 py-3 md:px-5" />
         <div className="border-l-2 border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/20 px-3 py-3 text-[color:var(--cw-ink)] md:px-5">
-          Waist Strap
+          Waist Strap™
         </div>
         <div className="px-3 py-3 md:px-5">Traditional</div>
       </div>
@@ -706,10 +718,10 @@ function ComparisonTable() {
 /* -------------------------------- Gallery -------------------------------- */
 
 const GALLERY = [
-  { url: ws2.url, alt: "See the difference — waist definition with and without the Waist Strap" },
-  { url: ws8.url, alt: "Customer before and after wearing the Waist Strap" },
-  { url: ws5.url, alt: "Built for everyday wear — materials and construction detail" },
+  { url: ws8.url, alt: "Customer before and after wearing the Waist Strap™" },
   { url: ws1.url, alt: "Engineered for a better fit — construction callouts" },
+  { url: ws5.url, alt: "Built for everyday wear — materials and construction detail" },
+  { url: ws2.url, alt: "See the difference — waist definition with and without the Waist Strap™" },
   { url: ws4.url, alt: "Designed to stay secure — reinforced edges and stitching" },
   { url: ws6.url, alt: "Adjustable closure with relaxed, custom and firmer fit" },
   { url: ws3.url, alt: "Create a smoother silhouette under clothing" },
@@ -771,16 +783,84 @@ const USAGE = [
   { t: "Everyday movement", c: "Sit, bend and move with structured support that flexes.", img: ws6.url },
 ];
 
-const PDP_REVIEWS = [
-  { n: "Alexis R.", r: 5, t: "Wore it under a slip dress for 11 hours and it never moved once. I keep checking in the mirror out of habit." },
-  { n: "Danielle P.", r: 5, t: "First waist piece I haven't had to fix in a bathroom mirror halfway through dinner." },
-  { n: "Marisol G.", r: 5, t: "No hooks digging into my side. Genuinely forget it's on by lunch." },
-  { n: "Tia W.", r: 5, t: "Had two sizes of trainers in my closet, this replaced both of them." },
-  { n: "Jenna K.", r: 4, t: "Took me a couple tries to get the tension right, but once I did it's perfect." },
-  { n: "Priya N.", r: 5, t: "Completely invisible under a white tee. That was the whole test for me." },
-  { n: "Camille B.", r: 5, t: "Washed it a dozen times already and it snaps right back." },
-  { n: "Rosa V.", r: 5, t: "Postpartum and this is the only thing that felt supportive without squeezing." },
-];
+function ReviewWall() {
+  const [shown, setShown] = useState(10);
+  const [box, setBox] = useState<string | null>(null);
+  const list = WW_REVIEWS.slice(0, shown);
+  return (
+    <section id="reviews" className="scroll-mt-20 border-t border-[color:var(--cw-line)]">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-24">
+        <Label>Real customers</Label>
+        <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+          <h2 style={serif} className="text-[30px] leading-[1.1] md:text-[46px]">
+            3,000+ women wear it daily.
+          </h2>
+          <div className="flex items-center gap-2">
+            <Stars size={16} />
+            <span style={sans} className="text-[13px] text-[color:var(--cw-muted)]">
+              4.8 average · 3,000+ reviews
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-10 gap-4 [column-count:1] sm:[column-count:2] lg:[column-count:3]">
+          {list.map((r, i) => (
+            <div
+              key={`${r.n}-${i}`}
+              className="mb-4 break-inside-avoid rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4"
+            >
+              {r.img && (
+                <button onClick={() => setBox(r.img!)} className="mb-3 block w-full overflow-hidden rounded-xl">
+                  <img src={r.img} alt={`Review photo from ${r.n}`} loading="lazy" className="w-full" />
+                </button>
+              )}
+              <div className="flex items-center justify-between gap-3">
+                <span className="flex items-center gap-2">
+                  <span
+                    style={serif}
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand)] text-[12px] text-[color:var(--cw-ink)]"
+                  >
+                    {r.n[0]}
+                  </span>
+                  <span style={sans} className="text-[12px] font-semibold text-[color:var(--cw-ink)]">{r.n}</span>
+                </span>
+                <span style={sans} className="text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+                  {r.d}
+                </span>
+              </div>
+              <div className="mt-2 flex items-center gap-2">
+                <Stars size={11} value={r.r} />
+                <span style={sans} className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]">
+                  Verified buyer
+                </span>
+              </div>
+              <p style={sans} className="mt-2 text-[13px] leading-6 text-[color:var(--cw-muted)]">{r.t}</p>
+            </div>
+          ))}
+        </div>
+
+        {shown < WW_REVIEWS.length && (
+          <div className="mt-8 text-center">
+            <button
+              onClick={() => setShown((v) => v + 10)}
+              style={sans}
+              className="rounded-full border border-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-ink)]"
+            >
+              Load more reviews
+            </button>
+          </div>
+        )}
+      </div>
+
+      {box && (
+        <div className="fixed inset-0 z-[110] grid place-items-center bg-black/85 p-4" onClick={() => setBox(null)}>
+          <img src={box} alt="Customer review photo" className="max-h-[90vh] max-w-full rounded-xl object-contain" />
+        </div>
+      )}
+    </section>
+  );
+}
+
 
 export function WaistWrapProduct() {
   return (
@@ -791,6 +871,8 @@ export function WaistWrapProduct() {
           <BuyBox />
         </div>
       </section>
+
+      <WaistSocialProof />
 
       <ObjectionsSection />
 
@@ -832,7 +914,7 @@ export function WaistWrapProduct() {
         <div className="mx-auto max-w-4xl px-5 py-14 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[30px] leading-[1.1] md:text-[46px]">
-            Waist Strap vs. traditional waist trainers.
+            Waist Strap™ vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
         </div>
@@ -908,7 +990,7 @@ export function WaistWrapProduct() {
               style={sans}
               className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-bg)]"
             >
-              Shop Waist Strap — $49.99
+              Shop Waist Strap™ — $49.99
             </a>
           </div>
         </div>
