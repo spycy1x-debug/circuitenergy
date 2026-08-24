@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { BUNDLES, COLORS, SIZES, type Bundle } from "@/lib/waistwrap-config";
+import { BUNDLES, COLORS, SIZES, VARIANTS, type Bundle } from "@/lib/waistwrap-config";
+import { trackAddToCart } from "@/lib/fb-pixel";
 
 import ws1 from "@/assets/ws-2.png.asset.json";
 import ws2 from "@/assets/ws-1.webp.asset.json";
