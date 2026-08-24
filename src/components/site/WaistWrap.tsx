@@ -507,7 +507,7 @@ function BuyBox() {
           style={sans}
           className="mt-8 block w-full rounded-full bg-[color:var(--cw-brand-deep)] px-6 py-6 text-center text-[16px] font-semibold uppercase tracking-[0.14em] text-white shadow-[0_8px_28px_rgba(217,115,137,0.35)] ring-2 ring-[color:var(--cw-brand-deep)] ring-offset-2 ring-offset-[color:var(--cw-bg)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_34px_rgba(217,115,137,0.45)] active:translate-y-0"
         >
-          Add to Cart
+          Claim Offer
         </button>
       ) : (
         <button
@@ -515,7 +515,7 @@ function BuyBox() {
           style={sans}
           className="mt-8 block w-full cursor-not-allowed rounded-full bg-[color:var(--cw-ink)]/40 px-6 py-6 text-center text-[16px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-bg)]"
         >
-          Select your size
+          Select your size to claim offer
         </button>
       )}
 
