@@ -46,7 +46,7 @@ export const BUNDLES: Bundle[] = [
     compareAt: 99.99,
     discount: "SAVE30",
     tag: "MOST POPULAR",
-    gift: "+ Free Posture Corrector + Free Gift",
+    gift: "+ Free Posture Corrector",
   },
   {
     qty: 3,
