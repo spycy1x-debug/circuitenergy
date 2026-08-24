@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { cart, bundleFor, cartTotal, cartCheckoutUrl, type CartLine } from "@/lib/waistwrap-cart";
 import posture from "@/assets/posture-corrector.png.asset.json";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
-import { PROTECTION_PRICE } from "@/lib/waistwrap-config";
+import { PROTECTION_PRICE, VARIANTS } from "@/lib/waistwrap-config";
+import { trackInitiateCheckout } from "@/lib/fb-pixel";
 
 const serif = { fontFamily: '"Playfair Display", Georgia, "Times New Roman", serif' };
 const sans = { fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' };
