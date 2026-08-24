@@ -309,13 +309,23 @@ function useCountdown(minutes = 15) {
 function OfferUrgency() {
   const t = useCountdown(15);
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-[color:var(--cw-brand-deep)]/40 bg-[color:var(--cw-brand)]/25 px-4 py-3">
-      <p style={sans} className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-ink)]">
-        Limited time offer · Free posture corrector
-      </p>
-      <p style={sans} className="text-[12px] font-semibold tabular-nums text-[color:var(--cw-brand-deep)]">
-        Ends in {t}
-      </p>
+    <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/30 p-3">
+      <img
+        src={posture.url}
+        alt="Free posture corrector included with every order"
+        className="h-16 w-16 shrink-0 rounded-xl bg-[color:var(--cw-surface)] object-contain p-1"
+      />
+      <div className="min-w-0 flex-1">
+        <p style={sans} className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]">
+          Free gift · $39 value
+        </p>
+        <p style={serif} className="text-[17px] leading-tight text-[color:var(--cw-ink)]">
+          Free posture corrector with every order
+        </p>
+        <p style={sans} className="mt-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--cw-brand-deep)]">
+          Offer ends in {t}
+        </p>
+      </div>
     </div>
   );
 }
