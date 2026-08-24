@@ -72,7 +72,7 @@ function markSent(key: string) {
 }
 
 
-export const PRODUCT_NAME = "NOURISH™ Digestive Support + Daily Essentials";
+export const PRODUCT_NAME = "WaistSnatch™ Adjustable Waist Wrap";
 
 export function trackViewContent(variantId: string, price: number) {
   track(
