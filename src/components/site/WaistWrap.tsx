@@ -70,6 +70,7 @@ export function Label({ children }: { children: React.ReactNode }) {
   return (
     <div style={sans} className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[color:var(--cw-brand-deep)]">
       {children}
+      <CartDrawer />
     </div>
   );
 }
@@ -130,7 +131,7 @@ export function WaistWrapShell({ children }: { children: React.ReactNode }) {
               SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              Makers of the Waist Strap — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
+              Makers of the Waist Strap™ — one adjustable band that fits your exact waist, every day. No hooks, no guessing, no compromise.
             </p>
           </div>
 
@@ -341,9 +342,9 @@ function BuyBox() {
 
   return (
     <div className="min-w-0">
-      <Label>Seralie · Waist Strap</Label>
+      <Label>Seralie · Waist Strap™</Label>
       <h1 style={serif} className="mt-3 text-[32px] leading-[1.05] text-[color:var(--cw-ink)] md:text-[42px]">
-        The Waist Strap
+        The Waist Strap™
       </h1>
 
       <a href="#reviews" className="mt-3 inline-flex items-center gap-2">
@@ -533,7 +534,7 @@ const ROWS = [
   { k: "Under clothes", ours: "Bonded flat edge — completely invisible", theirs: "Bulk lines through everything you own" },
 ];
 
-function CtaButton({ children = "Shop Waist Strap" }: { children?: React.ReactNode }) {
+function CtaButton({ children = "Shop Waist Strap™" }: { children?: React.ReactNode }) {
   return (
     <Link
       to="/waistwrap"
@@ -614,15 +615,17 @@ export function WaistWrapLanding() {
             guess wrong.
           </p>
           <div className="mt-9">
-            <CtaButton>Shop Waist Strap — $49.99</CtaButton>
+            <CtaButton>Shop Waist Strap™ — $49.99</CtaButton>
           </div>
         </div>
         <img
           src={ws2.url}
-          alt="Before and after wearing the Seralie Waist Strap"
+          alt="Before and after wearing the Seralie Waist Strap™"
           className="w-full rounded-2xl border border-[color:var(--cw-line)]"
         />
       </section>
+
+      <WaistSocialProof />
 
       <ObjectionsSection />
 
@@ -663,7 +666,7 @@ export function WaistWrapLanding() {
         <div className="mx-auto max-w-4xl px-5 py-14 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[30px] leading-[1.1] md:text-[46px]">
-            Waist Strap vs. traditional waist trainers.
+            Waist Strap™ vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
           <div className="mt-10">
@@ -682,7 +685,7 @@ export function WaistWrapLanding() {
           every cent.
         </p>
         <div className="mt-9">
-          <CtaButton>Shop Waist Strap</CtaButton>
+          <CtaButton>Shop Waist Strap™</CtaButton>
         </div>
       </section>
     </WaistWrapShell>
@@ -695,7 +698,7 @@ function ComparisonTable() {
       <div className="grid grid-cols-[0.8fr_1.1fr_1fr] border-b border-[color:var(--cw-line)] text-[9px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-muted)]">
         <div className="px-3 py-3 md:px-5" />
         <div className="border-l-2 border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/20 px-3 py-3 text-[color:var(--cw-ink)] md:px-5">
-          Waist Strap
+          Waist Strap™
         </div>
         <div className="px-3 py-3 md:px-5">Traditional</div>
       </div>
@@ -911,7 +914,7 @@ export function WaistWrapProduct() {
         <div className="mx-auto max-w-4xl px-5 py-14 md:px-8 md:py-24">
           <Label>The difference</Label>
           <h2 style={serif} className="mt-4 text-[30px] leading-[1.1] md:text-[46px]">
-            Waist Strap vs. traditional waist trainers.
+            Waist Strap™ vs. traditional waist trainers.
           </h2>
           <ComparisonTable />
         </div>
@@ -987,7 +990,7 @@ export function WaistWrapProduct() {
               style={sans}
               className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-bg)]"
             >
-              Shop Waist Strap — $49.99
+              Shop Waist Strap™ — $49.99
             </a>
           </div>
         </div>
