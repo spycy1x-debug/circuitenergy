@@ -11,7 +11,7 @@ const KEY = "ww-cart-v1";
 
 let lines: CartLine[] = [];
 let open = false;
-let protection = true;
+let protection = false;
 const subs = new Set<() => void>();
 
 function load() {
