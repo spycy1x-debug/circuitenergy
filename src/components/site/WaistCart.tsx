@@ -8,7 +8,12 @@ const money = (n: number) => `$${n.toFixed(2)}`;
 
 export function useCart() {
   const [, force] = useState(0);
-  useEffect(() => cart.subscribe(() => force((v) => v + 1)), []);
+  useEffect(() => {
+    const unsub = cart.subscribe(() => force((v) => v + 1));
+    return () => {
+      unsub();
+    };
+  }, []);
   return { lines: cart.getLines(), open: cart.isOpen() };
 }
 
