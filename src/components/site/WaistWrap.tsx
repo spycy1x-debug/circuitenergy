@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { BUNDLES, COLORS, SIZES, type Bundle } from "@/lib/waistwrap-config";
 
-import ws1 from "@/assets/ws-1.webp.asset.json";
-import ws2 from "@/assets/ws-2.png.asset.json";
+import ws1 from "@/assets/ws-2.png.asset.json";
+import ws2 from "@/assets/ws-1.webp.asset.json";
 import ws3 from "@/assets/ws-3.webp.asset.json";
 import ws4 from "@/assets/ws-4.webp.asset.json";
 import ws5 from "@/assets/ws-5.webp.asset.json";
