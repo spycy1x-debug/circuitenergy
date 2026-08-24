@@ -26,10 +26,24 @@ function send(name: string, params: Record<string, unknown>) {
   return true;
 }
 
+// In-memory guard: identical event fired again within 2s (double click, double render,
+// duplicate handler) is dropped so Meta never receives the same action twice.
+const recent = new Map<string, number>();
+function isDuplicate(name: string, params: Record<string, unknown>) {
+  const key = `${name}|${JSON.stringify(params)}`;
+  const now = Date.now();
+  const last = recent.get(key);
+  for (const [k, t] of recent) if (now - t > 10000) recent.delete(k);
+  if (last && now - last < 2000) return true;
+  recent.set(key, now);
+  return false;
+}
+
 /** Fires as soon as fbq exists — retries briefly if the base pixel is still loading. */
 function track(name: string, params: Record<string, unknown>, sessionKey?: string) {
   if (typeof window === "undefined") return;
   if (sessionKey && alreadySent(sessionKey)) return;
+  if (isDuplicate(name, params)) return;
   let tries = 0;
   const attempt = () => {
     if (send(name, params)) {

@@ -493,7 +493,12 @@ function BuyBox() {
 
       {size ? (
         <button
-          onClick={() => {
+          onClick={(e) => {
+            // guard against double-click / duplicate handler firing twice
+            const btn = e.currentTarget as HTMLButtonElement & { dataset: { busy?: string } };
+            if (btn.dataset.busy) return;
+            btn.dataset.busy = "1";
+            setTimeout(() => delete btn.dataset.busy, 1200);
             cart.add({ qty: bundle.qty, color, size });
             const variantId =
               VARIANTS.find((v) => v.color === color && v.size === size)?.variantId ?? "";
