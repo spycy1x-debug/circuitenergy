@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { WaistWrapProduct } from "@/components/site/WaistWrap";
 
-export const Route = createFileRoute("/waistwrap")({
+export const Route = createFileRoute("/waistsnatch")({
   head: () => ({
     meta: [
       { title: "WaistSnatch™ Adjustable WaistSnatch™ — One Size, Wraps to You" },

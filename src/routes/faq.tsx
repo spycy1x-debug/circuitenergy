@@ -37,7 +37,7 @@ function FaqPage() {
         <Faq items={FAQS} />
         <div className="mt-14">
           <Link
-            to="/waistwrap"
+            to="/waistsnatch"
             style={sans}
             className="inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90"
           >

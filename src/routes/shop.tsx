@@ -24,7 +24,7 @@ function ShopPage() {
           One product, done properly.
         </h1>
         <div className="mt-12 max-w-sm">
-          <Link to="/waistwrap" className="group block">
+          <Link to="/waistsnatch" className="group block">
             <Placeholder ratio="4 / 5" note="WaistSnatch™ product shot." />
             <h2 style={serif} className="mt-5 text-[24px]">
               WaistSnatch™ Adjustable WaistSnatch™

@@ -535,7 +535,7 @@ const ROWS = [
 function CtaButton({ children = "Shop WaistSnatch™" }: { children?: React.ReactNode }) {
   return (
     <Link
-      to="/waistwrap"
+      to="/waistsnatch"
       style={sans}
       className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-bg)] transition-opacity hover:opacity-90"
     >
