@@ -9,7 +9,7 @@ import ws4 from "@/assets/ws-4.webp.asset.json";
 import ws5 from "@/assets/ws-5.webp.asset.json";
 import ws6 from "@/assets/ws-6.webp.asset.json";
 import ws7 from "@/assets/ws-7.webp.asset.json";
-import ws8 from "@/assets/ws-8.webp.asset.json";
+import ws8 from "@/assets/ws-8.png.asset.json";
 import posture from "@/assets/posture-corrector.png.asset.json";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import { cart } from "@/lib/waistwrap-cart";
