@@ -706,10 +706,10 @@ function ComparisonTable() {
 /* -------------------------------- Gallery -------------------------------- */
 
 const GALLERY = [
-  { url: ws2.url, alt: "See the difference — waist definition with and without the Waist Strap" },
-  { url: ws8.url, alt: "Customer before and after wearing the Waist Strap" },
-  { url: ws5.url, alt: "Built for everyday wear — materials and construction detail" },
+  { url: ws8.url, alt: "Customer before and after wearing the Waist Strap™" },
   { url: ws1.url, alt: "Engineered for a better fit — construction callouts" },
+  { url: ws5.url, alt: "Built for everyday wear — materials and construction detail" },
+  { url: ws2.url, alt: "See the difference — waist definition with and without the Waist Strap™" },
   { url: ws4.url, alt: "Designed to stay secure — reinforced edges and stitching" },
   { url: ws6.url, alt: "Adjustable closure with relaxed, custom and firmer fit" },
   { url: ws3.url, alt: "Create a smoother silhouette under clothing" },
