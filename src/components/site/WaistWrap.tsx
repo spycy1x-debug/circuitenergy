@@ -621,7 +621,7 @@ export function WaistWrapLanding() {
           </div>
         </div>
         <img
-          src={ws2.url}
+          src={ws8.url}
           alt="Before and after wearing the Seralie WaistSnatch™"
           className="w-full rounded-2xl border border-[color:var(--cw-line)]"
         />
