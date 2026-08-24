@@ -84,4 +84,4 @@ export function checkoutUrl(color: string, size: string, bundle: Bundle) {
 
 /** Shipping / package protection add-on. */
 export const PROTECTION_VARIANT_ID = "48890343030938";
-export const PROTECTION_PRICE = 2.99;
+export const PROTECTION_PRICE = 3.99;
