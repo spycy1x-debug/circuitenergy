@@ -327,7 +327,7 @@ function BuyBox() {
   const [color, setColor] = useState<string>("Black");
   const [size, setSize] = useState<string | null>("M");
   const bundle = BUNDLES.find((b) => b.qty === selQty)!;
-  const href = size ? checkoutUrl(color, size, bundle) : null;
+  
 
   return (
     <div className="min-w-0">
