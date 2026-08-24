@@ -10,6 +10,11 @@ import ws5 from "@/assets/ws-5.webp.asset.json";
 import ws6 from "@/assets/ws-6.webp.asset.json";
 import ws7 from "@/assets/ws-7.webp.asset.json";
 import ws8 from "@/assets/ws-8.webp.asset.json";
+import posture from "@/assets/posture-corrector.png.asset.json";
+import { cart } from "@/lib/waistwrap-cart";
+import { CartDrawer } from "@/components/site/WaistCart";
+import { WaistSocialProof } from "@/components/site/WaistSocialProof";
+import { WW_REVIEWS } from "@/lib/waistwrap-reviews";
 
 /* ------------------------------ Design tokens ----------------------------- */
 
