@@ -771,16 +771,84 @@ const USAGE = [
   { t: "Everyday movement", c: "Sit, bend and move with structured support that flexes.", img: ws6.url },
 ];
 
-const PDP_REVIEWS = [
-  { n: "Alexis R.", r: 5, t: "Wore it under a slip dress for 11 hours and it never moved once. I keep checking in the mirror out of habit." },
-  { n: "Danielle P.", r: 5, t: "First waist piece I haven't had to fix in a bathroom mirror halfway through dinner." },
-  { n: "Marisol G.", r: 5, t: "No hooks digging into my side. Genuinely forget it's on by lunch." },
-  { n: "Tia W.", r: 5, t: "Had two sizes of trainers in my closet, this replaced both of them." },
-  { n: "Jenna K.", r: 4, t: "Took me a couple tries to get the tension right, but once I did it's perfect." },
-  { n: "Priya N.", r: 5, t: "Completely invisible under a white tee. That was the whole test for me." },
-  { n: "Camille B.", r: 5, t: "Washed it a dozen times already and it snaps right back." },
-  { n: "Rosa V.", r: 5, t: "Postpartum and this is the only thing that felt supportive without squeezing." },
-];
+function ReviewWall() {
+  const [shown, setShown] = useState(10);
+  const [box, setBox] = useState<string | null>(null);
+  const list = WW_REVIEWS.slice(0, shown);
+  return (
+    <section id="reviews" className="scroll-mt-20 border-t border-[color:var(--cw-line)]">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-24">
+        <Label>Real customers</Label>
+        <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+          <h2 style={serif} className="text-[30px] leading-[1.1] md:text-[46px]">
+            3,000+ women wear it daily.
+          </h2>
+          <div className="flex items-center gap-2">
+            <Stars size={16} />
+            <span style={sans} className="text-[13px] text-[color:var(--cw-muted)]">
+              4.8 average · 3,000+ reviews
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-10 gap-4 [column-count:1] sm:[column-count:2] lg:[column-count:3]">
+          {list.map((r, i) => (
+            <div
+              key={`${r.n}-${i}`}
+              className="mb-4 break-inside-avoid rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4"
+            >
+              {r.img && (
+                <button onClick={() => setBox(r.img!)} className="mb-3 block w-full overflow-hidden rounded-xl">
+                  <img src={r.img} alt={`Review photo from ${r.n}`} loading="lazy" className="w-full" />
+                </button>
+              )}
+              <div className="flex items-center justify-between gap-3">
+                <span className="flex items-center gap-2">
+                  <span
+                    style={serif}
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand)] text-[12px] text-[color:var(--cw-ink)]"
+                  >
+                    {r.n[0]}
+                  </span>
+                  <span style={sans} className="text-[12px] font-semibold text-[color:var(--cw-ink)]">{r.n}</span>
+                </span>
+                <span style={sans} className="text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+                  {r.d}
+                </span>
+              </div>
+              <div className="mt-2 flex items-center gap-2">
+                <Stars size={11} value={r.r} />
+                <span style={sans} className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]">
+                  Verified buyer
+                </span>
+              </div>
+              <p style={sans} className="mt-2 text-[13px] leading-6 text-[color:var(--cw-muted)]">{r.t}</p>
+            </div>
+          ))}
+        </div>
+
+        {shown < WW_REVIEWS.length && (
+          <div className="mt-8 text-center">
+            <button
+              onClick={() => setShown((v) => v + 10)}
+              style={sans}
+              className="rounded-full border border-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-ink)]"
+            >
+              Load more reviews
+            </button>
+          </div>
+        )}
+      </div>
+
+      {box && (
+        <div className="fixed inset-0 z-[110] grid place-items-center bg-black/85 p-4" onClick={() => setBox(null)}>
+          <img src={box} alt="Customer review photo" className="max-h-[90vh] max-w-full rounded-xl object-contain" />
+        </div>
+      )}
+    </section>
+  );
+}
+
 
 export function WaistWrapProduct() {
   return (
