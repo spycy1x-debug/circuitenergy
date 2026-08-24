@@ -11,6 +11,7 @@ import ws6 from "@/assets/ws-6.webp.asset.json";
 import ws7 from "@/assets/ws-7.webp.asset.json";
 import ws8 from "@/assets/ws-8.webp.asset.json";
 import posture from "@/assets/posture-corrector.png.asset.json";
+import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import { cart } from "@/lib/waistwrap-cart";
 import { CartDrawer } from "@/components/site/WaistCart";
 import { WaistSocialProof } from "@/components/site/WaistSocialProof";
@@ -296,7 +297,7 @@ function TrustRow() {
 
 /* -------------------------------- Countdown ------------------------------- */
 
-function useCountdown(minutes = 15) {
+function useCountdown(minutes = 45) {
   const [left, setLeft] = useState(minutes * 60);
   useEffect(() => {
     const t = setInterval(() => setLeft((v) => (v <= 1 ? minutes * 60 : v - 1)), 1000);
@@ -308,7 +309,7 @@ function useCountdown(minutes = 15) {
 }
 
 function OfferUrgency() {
-  const t = useCountdown(15);
+  const t = useCountdown(45);
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/30 p-3">
       <img
@@ -406,7 +407,7 @@ function BuyBox() {
                 <span className="min-w-0 flex-1">
                   <span style={serif} className="block text-[18px] text-[color:var(--cw-ink)]">{b.label}</span>
                   <span style={sans} className="block text-[12px] text-[color:var(--cw-muted)]">
-                    {money(b.price / b.qty)} per wrap{b.qty > 1 ? " · free shipping" : ""}
+                    {money(b.price)} total{b.qty > 1 ? " · free shipping" : ""}
                   </span>
                 </span>
                 <span className="shrink-0 text-right">
@@ -416,7 +417,10 @@ function BuyBox() {
                     </span>
                   )}
                   <span style={serif} className="block text-[22px] tabular-nums text-[color:var(--cw-ink)]">
-                    {money(b.price)}
+                    {money(b.price / b.qty)}
+                  </span>
+                  <span style={sans} className="block text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+                    per wrap
                   </span>
                 </span>
               </button>
@@ -500,17 +504,11 @@ function BuyBox() {
         </button>
       )}
 
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-        {["VISA", "MASTERCARD", "AMEX", "PAYPAL", "APPLE PAY", "SHOP PAY"].map((p) => (
-          <span
-            key={p}
-            style={sans}
-            className="rounded-md border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-muted)]"
-          >
-            {p}
-          </span>
-        ))}
-      </div>
+      <img
+        src={payBadges.url}
+        alt="Accepted payment methods: Visa, Mastercard, Amex, PayPal, Apple Pay, Shop Pay"
+        className="mx-auto mt-4 h-7 w-auto object-contain"
+      />
 
       <ReviewTicker />
       <TrustRow />

@@ -81,3 +81,7 @@ export function checkoutUrl(color: string, size: string, bundle: Bundle) {
   const base = `${STORE_URL}/cart/${id}:${bundle.qty}`;
   return bundle.discount ? `${base}?discount=${bundle.discount}` : base;
 }
+
+/** Shipping / package protection add-on. */
+export const PROTECTION_VARIANT_ID = "48890343030938";
+export const PROTECTION_PRICE = 2.99;
