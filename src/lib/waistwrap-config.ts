@@ -61,6 +61,9 @@ export const BUNDLES: Bundle[] = [
 
 export const COLORS = ["Black", "Pink"] as const;
 
+/** Sizes currently out of stock. */
+export const SOLD_OUT_SIZES = ["XS", "S"];
+
 export const SIZES = [
   { size: "XS", waist: "21.6–27.5 in", length: "29.1 in / 74 cm", width: "—" },
   { size: "S", waist: "28.3–31.5 in", length: "30.7 in / 78 cm", width: "—" },
