@@ -321,7 +321,7 @@ function OfferUrgency() {
           Low stock
         </p>
         <p style={serif} className="text-[17px] leading-tight text-[color:var(--cw-ink)]">
-          Selling fast — most sizes almost gone
+          8 left in stock across all sizes
         </p>
         <p style={sans} className="mt-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--cw-brand-deep)]">
           Your cart is reserved for {t}
