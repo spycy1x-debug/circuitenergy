@@ -468,7 +468,7 @@ function BuyBox() {
                   </div>
                   <div className="mt-2 grid grid-cols-4 gap-2">
                     {SIZES.map((s) => {
-                      const out = SOLD_OUT_SIZES.includes(s.size);
+                      const out = SOLD_OUT_SIZES[color]?.includes(s.size) ?? false;
                       return (
                         <button
                           key={s.size}
@@ -490,7 +490,7 @@ function BuyBox() {
                     })}
                   </div>
                   <p style={sans} className="mt-2 text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
-                    XS and S are sold out
+                    {color === "Black" ? "XS and S are sold out in Black" : "L and XL are sold out in Pink"}
                   </p>
 
                 </div>
