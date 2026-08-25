@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { BUNDLES, COLORS, SIZES, VARIANTS, type Bundle } from "@/lib/waistwrap-config";
+import { BUNDLES, COLORS, SIZES, SOLD_OUT_SIZES, VARIANTS, type Bundle } from "@/lib/waistwrap-config";
 import { trackAddToCart } from "@/lib/fb-pixel";
 
 import ws1 from "@/assets/ws-2.png.asset.json";
@@ -313,20 +313,18 @@ function OfferUrgency() {
   const t = useCountdown(45);
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/30 p-3">
-      <img
-        src={posture.url}
-        alt="Free posture corrector included with every order"
-        className="h-16 w-16 shrink-0 rounded-xl bg-[color:var(--cw-surface)] object-contain p-1"
-      />
+      <span className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-[color:var(--cw-surface)] text-[26px]">
+        ⚠️
+      </span>
       <div className="min-w-0 flex-1">
         <p style={sans} className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]">
-          Free gift · $39 value
+          Low stock
         </p>
         <p style={serif} className="text-[17px] leading-tight text-[color:var(--cw-ink)]">
-          Free posture corrector with every order
+          Selling fast — most sizes almost gone
         </p>
         <p style={sans} className="mt-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--cw-brand-deep)]">
-          Offer ends in {t}
+          Your cart is reserved for {t}
         </p>
       </div>
     </div>
@@ -469,21 +467,32 @@ function BuyBox() {
                     </a>
                   </div>
                   <div className="mt-2 grid grid-cols-4 gap-2">
-                    {SIZES.map((s) => (
-                      <button
-                        key={s.size}
-                        onClick={() => setSize(s.size)}
-                        style={sans}
-                        className={`rounded-lg border px-1 py-2 text-[11px] font-semibold uppercase tracking-[0.1em] ${
-                          size === s.size
-                            ? "border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/40 text-[color:var(--cw-ink)]"
-                            : "border-[color:var(--cw-line)] text-[color:var(--cw-muted)]"
-                        }`}
-                      >
-                        {s.size}
-                      </button>
-                    ))}
+                    {SIZES.map((s) => {
+                      const out = SOLD_OUT_SIZES.includes(s.size);
+                      return (
+                        <button
+                          key={s.size}
+                          disabled={out}
+                          onClick={() => setSize(s.size)}
+                          style={sans}
+                          title={out ? "Sold out" : undefined}
+                          className={`relative rounded-lg border px-1 py-2 text-[11px] font-semibold uppercase tracking-[0.1em] ${
+                            out
+                              ? "cursor-not-allowed border-[color:var(--cw-line)] text-[color:var(--cw-muted)]/50 line-through opacity-60"
+                              : size === s.size
+                                ? "border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/40 text-[color:var(--cw-ink)]"
+                                : "border-[color:var(--cw-line)] text-[color:var(--cw-muted)]"
+                          }`}
+                        >
+                          {s.size}
+                        </button>
+                      );
+                    })}
                   </div>
+                  <p style={sans} className="mt-2 text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+                    XS and S are sold out
+                  </p>
+
                 </div>
               )}
             </div>
@@ -628,7 +637,7 @@ export function WaistWrapLanding() {
             guess wrong.
           </p>
           <div className="mt-9">
-            <CtaButton>Shop WaistSnatch™ — $49.99</CtaButton>
+            <CtaButton>Shop WaistSnatch™ — $39.99</CtaButton>
           </div>
         </div>
         <img
@@ -1003,7 +1012,7 @@ export function WaistWrapProduct() {
               style={sans}
               className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-bg)]"
             >
-              Shop WaistSnatch™ — $49.99
+              Shop WaistSnatch™ — $39.99
             </a>
           </div>
         </div>
