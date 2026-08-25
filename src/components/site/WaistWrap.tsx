@@ -628,7 +628,7 @@ export function WaistWrapLanding() {
             guess wrong.
           </p>
           <div className="mt-9">
-            <CtaButton>Shop WaistSnatch™ — $49.99</CtaButton>
+            <CtaButton>Shop WaistSnatch™ — $39.99</CtaButton>
           </div>
         </div>
         <img
@@ -1003,7 +1003,7 @@ export function WaistWrapProduct() {
               style={sans}
               className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-bg)]"
             >
-              Shop WaistSnatch™ — $49.99
+              Shop WaistSnatch™ — $39.99
             </a>
           </div>
         </div>

@@ -41,7 +41,7 @@ function FaqPage() {
             style={sans}
             className="inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white hover:opacity-90"
           >
-            Shop WaistSnatch™ — $49.99
+            Shop WaistSnatch™ — $39.99
           </Link>
         </div>
       </section>
