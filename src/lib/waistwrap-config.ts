@@ -33,7 +33,7 @@ export const BUNDLES: Bundle[] = [
   {
     qty: 1,
     label: "1 Wrap",
-    price: 49.99,
+    price: 39.99,
     compareAt: null,
     discount: null,
     tag: null,
@@ -42,8 +42,8 @@ export const BUNDLES: Bundle[] = [
   {
     qty: 2,
     label: "2 Wraps",
-    price: 69.99,
-    compareAt: 99.99,
+    price: 59.99,
+    compareAt: 79.98,
     discount: "SAVE30",
     tag: "MOST POPULAR",
     gift: "+ Free Posture Corrector",
@@ -51,8 +51,8 @@ export const BUNDLES: Bundle[] = [
   {
     qty: 3,
     label: "3 Wraps",
-    price: 99.99,
-    compareAt: 149.99,
+    price: 79.99,
+    compareAt: 119.97,
     discount: "SAVE50",
     tag: "BEST VALUE",
     gift: "+ 2 Free Posture Correctors",
