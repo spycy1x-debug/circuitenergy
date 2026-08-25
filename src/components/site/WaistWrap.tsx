@@ -313,20 +313,18 @@ function OfferUrgency() {
   const t = useCountdown(45);
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/30 p-3">
-      <img
-        src={posture.url}
-        alt="Free posture corrector included with every order"
-        className="h-16 w-16 shrink-0 rounded-xl bg-[color:var(--cw-surface)] object-contain p-1"
-      />
+      <span className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-[color:var(--cw-surface)] text-[26px]">
+        ⚠️
+      </span>
       <div className="min-w-0 flex-1">
         <p style={sans} className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]">
-          Free gift · $39 value
+          Low stock
         </p>
         <p style={serif} className="text-[17px] leading-tight text-[color:var(--cw-ink)]">
-          Free posture corrector with every order
+          Selling fast — most sizes almost gone
         </p>
         <p style={sans} className="mt-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--cw-brand-deep)]">
-          Offer ends in {t}
+          Your cart is reserved for {t}
         </p>
       </div>
     </div>
