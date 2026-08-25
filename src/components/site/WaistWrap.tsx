@@ -467,21 +467,32 @@ function BuyBox() {
                     </a>
                   </div>
                   <div className="mt-2 grid grid-cols-4 gap-2">
-                    {SIZES.map((s) => (
-                      <button
-                        key={s.size}
-                        onClick={() => setSize(s.size)}
-                        style={sans}
-                        className={`rounded-lg border px-1 py-2 text-[11px] font-semibold uppercase tracking-[0.1em] ${
-                          size === s.size
-                            ? "border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/40 text-[color:var(--cw-ink)]"
-                            : "border-[color:var(--cw-line)] text-[color:var(--cw-muted)]"
-                        }`}
-                      >
-                        {s.size}
-                      </button>
-                    ))}
+                    {SIZES.map((s) => {
+                      const out = SOLD_OUT_SIZES.includes(s.size);
+                      return (
+                        <button
+                          key={s.size}
+                          disabled={out}
+                          onClick={() => setSize(s.size)}
+                          style={sans}
+                          title={out ? "Sold out" : undefined}
+                          className={`relative rounded-lg border px-1 py-2 text-[11px] font-semibold uppercase tracking-[0.1em] ${
+                            out
+                              ? "cursor-not-allowed border-[color:var(--cw-line)] text-[color:var(--cw-muted)]/50 line-through opacity-60"
+                              : size === s.size
+                                ? "border-[color:var(--cw-brand-deep)] bg-[color:var(--cw-brand)]/40 text-[color:var(--cw-ink)]"
+                                : "border-[color:var(--cw-line)] text-[color:var(--cw-muted)]"
+                          }`}
+                        >
+                          {s.size}
+                        </button>
+                      );
+                    })}
                   </div>
+                  <p style={sans} className="mt-2 text-[10px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+                    XS and S are sold out
+                  </p>
+
                 </div>
               )}
             </div>
