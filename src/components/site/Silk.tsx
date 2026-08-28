@@ -130,7 +130,7 @@ export function TrustRow({ className = "" }: { className?: string }) {
       className={`flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-muted)] ${className}`}
     >
       <li>✓ Free shipping</li>
-      <li>✓ 30-day money-back guarantee</li>
+      <li>✓ 365-day money-back guarantee</li>
       <li>✓ Secure checkout</li>
     </ul>
   );
@@ -266,7 +266,7 @@ export function CartDrawer() {
               {money(total)}
             </span>
           </div>
-          <p className="mt-1 text-[11px] text-[color:var(--gold-deep)]">Free shipping · 30-day money-back guarantee</p>
+          <p className="mt-1 text-[11px] text-[color:var(--gold-deep)]">Free shipping · 365-day money-back guarantee</p>
           {href ? (
             <a
               href={href}
@@ -313,7 +313,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
     >
       <div className="bg-[color:var(--cw-ink)] text-white">
         <p style={sans} className="px-4 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.2em]">
-          Free shipping · 30-day money-back guarantee
+          Free shipping · 365-day money-back guarantee
         </p>
       </div>
 
@@ -442,7 +442,7 @@ export const SB_FAQS = [
   },
   {
     q: "What if I don't like it?",
-    a: "You're covered by our 30-day money-back guarantee, subject to our return policy.",
+    a: "You're covered by our 365-day money-back guarantee, subject to our return policy.",
   },
 ];
 

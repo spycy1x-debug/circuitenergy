@@ -5,7 +5,7 @@ export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
       { title: "Your Cart — Seralie SilkBrush™" },
-      { name: "description", content: "Review your Seralie SilkBrush™ order before checkout. Free shipping and a 30-day money-back guarantee." },
+      { name: "description", content: "Review your Seralie SilkBrush™ order before checkout. Free shipping and a 365-day money-back guarantee." },
       { property: "og:title", content: "Your Cart — Seralie SilkBrush™" },
       { property: "og:description", content: "Review your SilkBrush™ order before checkout." },
       { property: "og:type", content: "website" },
@@ -24,7 +24,7 @@ function CartPage() {
           Open your cart from the header.
         </h1>
         <p style={sans} className="mx-auto mt-5 max-w-md text-[15px] leading-8 text-[color:var(--cw-muted)]">
-          Free shipping and 30 days to change your mind.
+          Free shipping and 365 days to change your mind.
         </p>
         <Link
           to="/"
