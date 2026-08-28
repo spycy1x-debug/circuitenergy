@@ -36,7 +36,7 @@ export const PROTECTION_PRICE = 3.99;
 
 export const RATING = 4.8;
 /** Set to a real number once reviews are collected. Null hides the count. */
-export const REVIEW_COUNT: number | null = null;
+export const REVIEW_COUNT: number | null = 2348;
 
 export const money = (n: number) => `$${n.toFixed(2)}`;
 
