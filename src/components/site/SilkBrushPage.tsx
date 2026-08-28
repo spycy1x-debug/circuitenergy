@@ -124,7 +124,7 @@ function OfferSection({ id }: { id?: string }) {
       >
         <li>Free shipping</li>
         <li aria-hidden>·</li>
-        <li>30-day guarantee</li>
+        <li>365-day guarantee</li>
         <li aria-hidden>·</li>
         <li>Secure checkout</li>
       </ul>

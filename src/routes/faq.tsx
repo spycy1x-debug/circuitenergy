@@ -5,7 +5,7 @@ export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
       { title: "FAQ — Seralie SilkBrush™" },
-      { name: "description", content: "Answers about the Seralie SilkBrush™ boar-bristle brush: how it works, hair types, care, shipping and our 30-day money-back guarantee." },
+      { name: "description", content: "Answers about the Seralie SilkBrush™ boar-bristle brush: how it works, hair types, care, shipping and our 365-day money-back guarantee." },
       { property: "og:title", content: "FAQ — Seralie SilkBrush™" },
       { property: "og:description", content: "How the SilkBrush™ works, care, shipping and returns." },
       { property: "og:type", content: "article" },
