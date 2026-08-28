@@ -154,12 +154,13 @@ export function StickyBuyBar() {
           <p style={sans} className="truncate text-[12px] font-semibold">
             {PRODUCT_NAME}
           </p>
-          <p style={sans} className="text-[12px] text-[color:var(--cw-muted)]">
-            {money(PRICE)} · Free shipping
+          <p style={sans} className="text-[13px] font-bold tabular-nums">
+            {money(PRICE)}
           </p>
         </div>
-        <BuyButton className="ml-auto max-w-[62%] px-6 py-3.5 text-[13px]">Get Mine</BuyButton>
+        <BuyButton className="ml-auto max-w-[62%] !rounded-none px-6 py-3.5 text-[13px]">Add to Cart</BuyButton>
       </div>
+
     </div>
   );
 }
