@@ -74,13 +74,13 @@ export function Media({
   return (
     <div
       style={{ aspectRatio: ratio }}
-      className={`grid w-full place-items-center rounded-xl border border-dashed border-[color:var(--cw-brand-deep)]/45 bg-[color:var(--cw-surface)] p-5 text-center ${className}`}
+      className={`grid w-full place-items-center overflow-hidden rounded-xl border border-dashed border-[color:var(--cw-brand-deep)]/45 bg-[color:var(--cw-surface)] p-4 text-center sm:p-5 ${className}`}
     >
-      <div>
+      <div className="min-w-0">
         <div style={sans} className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[color:var(--cw-brand-deep)]">
           {label}
         </div>
-        <p style={sans} className="mx-auto mt-2 max-w-[24ch] text-[11px] leading-5 text-[color:var(--cw-muted)]">
+        <p style={sans} className="mx-auto mt-2 max-w-[24ch] break-words text-[11px] leading-5 text-[color:var(--cw-muted)]">
           {note}
         </p>
       </div>
