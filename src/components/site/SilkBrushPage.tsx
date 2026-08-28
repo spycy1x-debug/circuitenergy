@@ -1,50 +1,88 @@
 import { useRef, useState } from "react";
-import { BuyButton, Faq, Label, Media, RatingLine, SilkShell, TrustRow, sans, serif } from "@/components/site/Silk";
+import { addToCart, Media, RatingLine, SilkShell, Faq, sans, serif, Stars } from "@/components/site/Silk";
 import { money, PRICE } from "@/lib/silkbrush-config";
 
-/* ------------------------------ tiny helpers ------------------------------ */
+/* ------------------------------- primitives ------------------------------- */
 
-function H2({ children }: { children: React.ReactNode }) {
+function Cta({ label = "Add to Cart", className = "" }: { label?: string; className?: string }) {
   return (
-    <h2 style={serif} className="text-[28px] leading-[1.1] md:text-[40px]">
-      {children}
-    </h2>
+    <button
+      onClick={() => addToCart(1)}
+      style={sans}
+      className={`w-full bg-[color:var(--cw-ink)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.2em] text-white transition-transform active:scale-[0.99] ${className}`}
+    >
+      {label}
+    </button>
   );
 }
 
-function Sub({ children }: { children: React.ReactNode }) {
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <p style={sans} className="mt-2 text-[15px] leading-7 text-[color:var(--cw-muted)]">
+    <p style={sans} className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[color:var(--cw-brand-deep)]">
       {children}
     </p>
   );
 }
 
-/** Horizontal snap carousel: swipeable on mobile, grid-like on desktop. */
-function SwipeRow({ children }: { children: React.ReactNode[] }) {
+/* --------------------------------- gallery -------------------------------- */
+
+const GALLERY: { label: "IMAGE" | "VIDEO"; note: string }[] = [
+  { label: "IMAGE", note: "PLACEHOLDER: MAIN PRODUCT IMAGE" },
+  { label: "VIDEO", note: "PLACEHOLDER: HERO UGC VIDEO" },
+  { label: "IMAGE", note: "PLACEHOLDER: PRODUCT IMAGE 2" },
+  { label: "IMAGE", note: "PLACEHOLDER: PRODUCT IMAGE 3" },
+  { label: "IMAGE", note: "PLACEHOLDER: PRODUCT IMAGE 4" },
+];
+
+function Gallery() {
+  const [i, setI] = useState(0);
+  const active = GALLERY[i]!;
+  return (
+    <div>
+      <Media label={active.label} note={active.note} ratio="4 / 5" className="!rounded-none" />
+      <div className="mt-3 grid grid-cols-5 gap-2">
+        {GALLERY.map((g, idx) => (
+          <button
+            key={g.note}
+            onClick={() => setI(idx)}
+            aria-label={`View media ${idx + 1}`}
+            className={`grid aspect-square place-items-center border text-[9px] font-semibold uppercase tracking-[0.14em] ${
+              idx === i
+                ? "border-[color:var(--cw-ink)] text-[color:var(--cw-ink)]"
+                : "border-[color:var(--cw-line)] text-[color:var(--cw-muted)]"
+            }`}
+            style={sans}
+          >
+            {g.label === "VIDEO" ? "▶" : idx + 1}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------ ugc carousel ------------------------------ */
+
+function UgcRow() {
   const ref = useRef<HTMLDivElement>(null);
-  const scrollBy = (dir: number) => {
-    const el = ref.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
-  };
+  const by = (d: number) => ref.current?.scrollBy({ left: d * (ref.current.clientWidth * 0.7), behavior: "smooth" });
   return (
     <div className="relative">
       <div
         ref={ref}
-        className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0"
+        className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0"
       >
-        {children.map((c, i) => (
-          <div key={i} className="w-[70%] shrink-0 snap-center md:w-auto">
-            {c}
+        {[1, 2, 3, 4].map((n) => (
+          <div key={n} className="w-[72%] shrink-0 snap-center md:w-auto">
+            <Media label="VIDEO" ratio="9 / 16" note={`PLACEHOLDER: UGC VIDEO ${n}`} className="!rounded-none" />
           </div>
         ))}
       </div>
-      <div className="mt-3 flex justify-center gap-2 md:hidden">
-        <button onClick={() => scrollBy(-1)} aria-label="Previous" className="h-9 w-9 rounded-full border border-[color:var(--cw-line)]">
+      <div className="mt-3 flex gap-2 md:hidden">
+        <button onClick={() => by(-1)} aria-label="Previous" className="h-9 w-9 border border-[color:var(--cw-line)]">
           ‹
         </button>
-        <button onClick={() => scrollBy(1)} aria-label="Next" className="h-9 w-9 rounded-full border border-[color:var(--cw-line)]">
+        <button onClick={() => by(1)} aria-label="Next" className="h-9 w-9 border border-[color:var(--cw-line)]">
           ›
         </button>
       </div>
@@ -52,235 +90,234 @@ function SwipeRow({ children }: { children: React.ReactNode[] }) {
   );
 }
 
-/* --------------------------------- page ---------------------------------- */
+/* ---------------------------------- page ---------------------------------- */
 
 export function SilkBrushPage() {
-  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [openSpec, setOpenSpec] = useState(false);
 
   return (
     <SilkShell sticky>
-      {/* 1 — HERO */}
-      <section className="mx-auto max-w-3xl px-4 pb-10 pt-8 md:px-8 md:pt-12">
-        <h1 style={serif} className="text-center text-[34px] leading-[1.05] md:text-[54px]">
-          Smooth. Straighten. Shine.
-        </h1>
-        <p style={sans} className="mx-auto mt-3 max-w-xl text-center text-[15px] leading-7 text-[color:var(--cw-muted)] md:text-[17px]">
-          Meet the Seralie SilkBrush™ — the boar-bristle brush designed to smooth frizz and create a sleek,
-          straighter-looking finish while you brush.
-        </p>
+      {/* 1 — PRODUCT HERO */}
+      <section className="mx-auto max-w-6xl px-5 pb-14 pt-6 md:px-8 md:pb-20 md:pt-10">
+        <div className="grid gap-8 md:grid-cols-2 md:gap-14">
+          <Gallery />
 
-        <div className="mt-6">
-          <Media label="VIDEO" ratio="4 / 5" note="HERO UGC VIDEO — before → SilkBrush™ → after. Transformation must be obvious in the first 3 seconds." />
-        </div>
-
-        <div className="mt-5 flex flex-col items-center gap-2">
-          <RatingLine />
-          <p style={serif} className="text-[30px] leading-none">
-            {money(PRICE)}
-          </p>
-          <TrustRow className="mt-1" />
-        </div>
-
-        <BuyButton className="mt-5" />
-      </section>
-
-      {/* 2 — TRANSFORMATION */}
-      <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-16">
-          <Label>The transformation</Label>
-          <H2>See The Difference.</H2>
-          <Sub>One side brushed. One side untouched.</Sub>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <Media label="VIDEO" ratio="4 / 5" note="BEFORE/AFTER VIDEO — frizzy → smooth, dull → shiny, unruly → sleek." />
-            <Media label="IMAGE" ratio="4 / 5" note="BEFORE/AFTER IMAGE — split shot, one side brushed." />
-          </div>
-
-          <div className="mx-auto mt-7 max-w-md">
-            <BuyButton />
-          </div>
-        </div>
-      </section>
-
-      {/* 3 — WHY IT WORKS + BENEFITS */}
-      <section className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-16">
-        <Label>Why it works</Label>
-        <H2>One Brush. Three Results.</H2>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {[
-            { t: "Smooth", d: "Helps tame frizz and flyaways for a more polished finish." },
-            {
-              t: "Shine",
-              d: "Boar bristles help distribute your hair's natural oils through the lengths of the hair, helping create a smoother, shinier appearance.",
-            },
-            { t: "Sleek", d: "Helps smooth and lay hair down for a straighter-looking finish." },
-          ].map((b) => (
-            <div key={b.t} className="rounded-xl border border-[color:var(--cw-line)] p-5">
-              <p style={sans} className="text-[12px] font-bold uppercase tracking-[0.2em]">
-                {b.t}
-              </p>
-              <p style={sans} className="mt-2 text-[14px] leading-7 text-[color:var(--cw-muted)]">
-                {b.d}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 grid items-center gap-6 md:grid-cols-2">
-          <div>
-            <h3 style={serif} className="text-[24px] leading-tight md:text-[30px]">
-              Why Boar Bristles?
-            </h3>
-            <p style={sans} className="mt-3 text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              The SilkBrush™ uses boar bristles to help smooth the hair's surface while distributing natural oils
-              through the lengths of the hair. The result is hair that looks smoother, shinier, and more polished.
+          <div className="md:pt-2">
+            <RatingLine />
+            <h1 style={serif} className="mt-3 text-[36px] leading-[1.02] md:text-[52px]">
+              Smooth. Straighten. Shine.
+            </h1>
+            <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
+              Meet the Seralie SilkBrush™. A boar-bristle brush designed to smooth frizz, tame flyaways, and create a
+              sleek, straighter-looking finish while you brush.
             </p>
+
+            <p style={serif} className="mt-6 text-[32px] leading-none">
+              {money(PRICE)}
+            </p>
+            <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-muted)]">
+              Free shipping · 30-day money-back guarantee
+            </p>
+
+            <Cta className="mt-6" />
+
+            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+              <li>✓ Free shipping</li>
+              <li>✓ 30-day money-back guarantee</li>
+              <li>✓ Secure checkout</li>
+            </ul>
           </div>
-          <Media label="IMAGE" ratio="4 / 3" note="CLOSE-UP PRODUCT IMAGE showing the bristles." />
         </div>
       </section>
 
-      {/* 4 — UGC + SOCIAL PROOF */}
+      {/* 2 — PROOF */}
       <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="mx-auto max-w-5xl px-4 py-12 md:px-8 md:py-16">
-          <Label>Social proof</Label>
-          <H2>Watch It Work.</H2>
-          <Sub>Real hair. Real routines.</Sub>
-
-          <div className="mt-6">
-            <SwipeRow>
-              {[1, 2, 3, 4].map((n) => (
-                <Media key={n} label="VIDEO" ratio="9 / 16" note={`UGC VIDEO ${n} — different hook/result. Use the creator's real words as the caption.`} />
-              ))}
-            </SwipeRow>
-          </div>
-
-          <h3 style={serif} className="mt-12 text-[24px] md:text-[30px]">
-            What Customers Are Saying
-          </h3>
-          <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-muted)]">
-            Verified reviews will appear here as they come in.
+        <div className="mx-auto max-w-5xl px-5 py-14 md:px-8 md:py-20">
+          <Eyebrow>The proof</Eyebrow>
+          <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
+            See The Difference.
+          </h2>
+          <p style={sans} className="mt-2 text-[15px] text-[color:var(--cw-muted)]">
+            One side brushed. One side untouched.
           </p>
 
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="rounded-xl border border-dashed border-[color:var(--cw-brand-deep)]/45 bg-[color:var(--cw-bg)] p-5">
-                <div style={sans} className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--cw-brand-deep)]">
-                  Review slot {n}
+          <div className="mt-7">
+            <Media
+              label="VIDEO"
+              ratio="16 / 10"
+              note="PLACEHOLDER: LARGE BEFORE/AFTER VIDEO (or before/after image slider)"
+              className="!rounded-none"
+            />
+          </div>
+
+          <div style={sans} className="mt-6 grid grid-cols-3 border-y border-[color:var(--cw-line)] text-[11px] font-semibold uppercase tracking-[0.18em]">
+            {["Smoother hair", "Less frizz", "More shine"].map((t) => (
+              <p key={t} className="py-4 text-center">
+                {t}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-7 max-w-xs">
+            <Cta label="Shop SilkBrush™" />
+          </div>
+        </div>
+      </section>
+
+      {/* 3 — BENEFITS */}
+      <section id="how" className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+        <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-14">
+          <div>
+            <Eyebrow>Why people want it</Eyebrow>
+            <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
+              Your Hair, Just Better.
+            </h2>
+            <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
+              The SilkBrush™ helps smooth unruly strands while boar bristles distribute natural oils through the hair,
+              leaving it looking smoother, shinier, and more polished.
+            </p>
+
+            <dl className="mt-8 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
+              {[
+                ["Smooth", "Tame frizz and flyaways."],
+                ["Shine", "Bring out a naturally glossy finish."],
+                ["Sleek", "Create a smoother, straighter-looking style."],
+              ].map(([t, d]) => (
+                <div key={t} className="flex gap-6 py-4">
+                  <dt style={sans} className="w-24 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em]">
+                    {t}
+                  </dt>
+                  <dd style={sans} className="text-[14px] leading-6 text-[color:var(--cw-muted)]">
+                    {d}
+                  </dd>
                 </div>
-                <p style={sans} className="mt-2 text-[13px] leading-6 text-[color:var(--cw-muted)]">
-                  Insert real customer review {n} here — name, rating and verified purchase status.
+              ))}
+            </dl>
+          </div>
+
+          <div className="grid gap-3">
+            <Media label="IMAGE" ratio="4 / 3" note="PLACEHOLDER: CLOSE-UP IMAGE OF BRISTLES" className="!rounded-none" />
+            <Media label="IMAGE" ratio="4 / 3" note="PLACEHOLDER: LIFESTYLE IMAGE OF WOMAN USING SILKBRUSH™" className="!rounded-none" />
+          </div>
+        </div>
+      </section>
+
+      {/* 4 — UGC */}
+      <section id="reviews" className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+          <Eyebrow>Social proof</Eyebrow>
+          <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
+            Don't Just Take Our Word For It.
+          </h2>
+          <p style={sans} className="mt-2 max-w-lg text-[15px] text-[color:var(--cw-muted)]">
+            See how people are using the SilkBrush™ in their everyday routines.
+          </p>
+
+          <div className="mt-7">
+            <UgcRow />
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="border border-dashed border-[color:var(--cw-brand-deep)]/45 bg-[color:var(--cw-bg)] p-5">
+                <Stars />
+                <p style={sans} className="mt-2 text-[12px] leading-6 text-[color:var(--cw-muted)]">
+                  PLACEHOLDER: REAL REVIEW {n} — paste a verified customer review here.
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-4">
-            <Media label="IMAGE" ratio="16 / 9" note="CUSTOMER PHOTO / VIDEO — real customer result." />
-          </div>
-
-          <div className="mx-auto mt-7 max-w-md">
-            <BuyButton />
+          <div className="mt-8 max-w-xs">
+            <Cta />
           </div>
         </div>
       </section>
 
       {/* 5 — HOW TO USE + DETAILS */}
-      <section className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-16">
-        <Label>How to use</Label>
-        <H2>Brush. Smooth. Shine. Done.</H2>
+      <section className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+        <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:gap-14">
+          <div>
+            <Eyebrow>How to use</Eyebrow>
+            <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[42px]">
+              Brush. Smooth. Shine. Done.
+            </h2>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {[
-            { n: "01", t: "Start", d: "Use on dry hair." },
-            { n: "02", t: "Brush", d: "Work through small sections of hair." },
-            { n: "03", t: "Finish", d: "Enjoy a smoother, shinier, straighter-looking finish." },
-          ].map((s) => (
-            <div key={s.n} className="rounded-xl bg-[color:var(--cw-surface)] p-5">
-              <p style={sans} className="text-[11px] font-bold tracking-[0.2em] text-[color:var(--cw-brand-deep)]">
-                {s.n} — {s.t.toUpperCase()}
-              </p>
-              <p style={sans} className="mt-2 text-[14px] leading-7 text-[color:var(--cw-muted)]">
-                {s.d}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <Media label="VIDEO" ratio="16 / 9" note="HOW-TO VIDEO — 15s demo of the three steps." />
-        </div>
-
-        <div className="mt-8 rounded-xl border border-[color:var(--cw-line)] p-5">
-          <p style={sans} className="text-[12px] font-bold uppercase tracking-[0.2em]">
-            What's Included
-          </p>
-          <p style={sans} className="mt-2 text-[14px] text-[color:var(--cw-muted)]">
-            1 × Seralie SilkBrush™
-          </p>
-
-          <button
-            onClick={() => setDetailsOpen((v) => !v)}
-            aria-expanded={detailsOpen}
-            style={sans}
-            className="mt-4 flex w-full items-center justify-between border-t border-[color:var(--cw-line)] pt-4 text-left text-[13px] font-semibold uppercase tracking-[0.16em]"
-          >
-            Product details
-            <span className="text-[color:var(--cw-brand-deep)]">{detailsOpen ? "–" : "+"}</span>
-          </button>
-          {detailsOpen && (
-            <dl style={sans} className="mt-3 space-y-2 text-[13px] leading-6 text-[color:var(--cw-muted)]">
+            <ol className="mt-7 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
               {[
-                ["Bristle material", "[INSERT ACTUAL MATERIAL]"],
-                ["Handle material", "[INSERT ACTUAL MATERIAL]"],
-                ["Dimensions", "[INSERT]"],
-                ["Weight", "[INSERT]"],
-                ["Recommended hair types", "[INSERT]"],
-                ["Care instructions", "[INSERT]"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex justify-between gap-4 border-b border-[color:var(--cw-line)] pb-2">
-                  <dt className="font-medium text-[color:var(--cw-ink)]">{k}</dt>
-                  <dd className="text-right">{v}</dd>
-                </div>
+                ["01", "Start", "Use on dry hair according to product instructions."],
+                ["02", "Brush", "Work through small sections of hair."],
+                ["03", "Finish", "Reveal a smoother, shinier, straighter-looking finish."],
+              ].map(([n, t, d]) => (
+                <li key={n} className="flex gap-5 py-4">
+                  <span style={serif} className="w-8 shrink-0 text-[18px] text-[color:var(--cw-brand-deep)]">
+                    {n}
+                  </span>
+                  <span>
+                    <span style={sans} className="block text-[11px] font-bold uppercase tracking-[0.2em]">
+                      {t}
+                    </span>
+                    <span style={sans} className="mt-1 block text-[14px] leading-6 text-[color:var(--cw-muted)]">
+                      {d}
+                    </span>
+                  </span>
+                </li>
               ))}
-            </dl>
-          )}
+            </ol>
+
+            <button
+              onClick={() => setOpenSpec((v) => !v)}
+              aria-expanded={openSpec}
+              style={sans}
+              className="mt-6 flex w-full items-center justify-between border-b border-[color:var(--cw-line)] pb-3 text-left text-[12px] font-bold uppercase tracking-[0.2em]"
+            >
+              Product details
+              <span className="text-[color:var(--cw-brand-deep)]">{openSpec ? "–" : "+"}</span>
+            </button>
+            {openSpec && (
+              <dl style={sans} className="text-[13px] leading-6 text-[color:var(--cw-muted)]">
+                {[
+                  ["What's included", "1 × Seralie SilkBrush™"],
+                  ["Bristle type", "[INSERT ACTUAL BRISTLE TYPE]"],
+                  ["Materials", "[INSERT ACTUAL MATERIALS]"],
+                  ["Dimensions", "[INSERT]"],
+                  ["Care instructions", "[INSERT]"],
+                  ["Recommended hair types", "[INSERT]"],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex justify-between gap-6 border-b border-[color:var(--cw-line)] py-3">
+                    <dt className="font-medium text-[color:var(--cw-ink)]">{k}</dt>
+                    <dd className="text-right">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
+
+          <Media label="VIDEO" ratio="4 / 5" note="PLACEHOLDER: HOW-TO VIDEO" className="!rounded-none" />
         </div>
       </section>
 
-      {/* 6 — GUARANTEE + FAQ + FINAL CTA */}
+      {/* 6 — FINAL PURCHASE + FAQ */}
       <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="mx-auto max-w-3xl px-4 py-12 md:px-8 md:py-16">
-          <Label>Guarantee</Label>
-          <H2>Try It Without The Guesswork.</H2>
-          <Sub>
-            We're confident you'll love the SilkBrush™. If you're not satisfied with your purchase, you're covered by our
-            30-day money-back guarantee, subject to our return policy.
-          </Sub>
-          <TrustRow className="mt-5 justify-start" />
+        <div className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
+          <h2 style={serif} className="text-[32px] leading-[1.05] md:text-[44px]">
+            Ready For Smoother, Shinier Hair?
+          </h2>
+          <p style={serif} className="mt-4 text-[32px] leading-none">
+            {money(PRICE)}
+          </p>
+          <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-muted)]">
+            Free shipping · 30-day money-back guarantee
+          </p>
+          <div className="mt-6 max-w-xs">
+            <Cta />
+          </div>
 
-          <h3 id="faq" style={serif} className="mt-12 text-[24px] md:text-[30px]">
+          <h3 id="faq" style={serif} className="mt-14 text-[24px] md:text-[30px]">
             FAQ
           </h3>
           <div className="mt-4">
             <Faq />
-          </div>
-
-          <div className="mt-12 rounded-2xl bg-[color:var(--cw-bg)] p-6 text-center md:p-8">
-            <h3 style={serif} className="text-[26px] leading-tight md:text-[34px]">
-              Smooth Hair Starts With One Brush.
-            </h3>
-            <p style={serif} className="mt-3 text-[30px] leading-none">
-              {money(PRICE)}
-            </p>
-            <TrustRow className="mt-3" />
-            <div className="mx-auto mt-5 max-w-md">
-              <BuyButton />
-            </div>
-            <div className="mt-6">
-              <Media label="IMAGE" ratio="16 / 9" note="FINAL LIFESTYLE IMAGE — smooth, shiny finished hair with the brush in frame." />
-            </div>
           </div>
         </div>
       </section>

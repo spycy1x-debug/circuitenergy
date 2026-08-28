@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { cart, cartCheckoutUrl, cartTotal } from "@/lib/silkbrush-cart";
-import { money, PRICE, PRODUCT_NAME, RATING, REVIEW_COUNT, VARIANT_ID } from "@/lib/silkbrush-config";
+import { money, PRICE, PRODUCT_NAME, PROTECTION_PRICE, RATING, REVIEW_COUNT, VARIANT_ID } from "@/lib/silkbrush-config";
 import { trackAddToCart, trackInitiateCheckout } from "@/lib/fb-pixel";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 
