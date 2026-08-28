@@ -269,7 +269,7 @@ export function SilkBrushPage() {
               onClick={() => setOpenSpec((v) => !v)}
               aria-expanded={openSpec}
               style={sans}
-              className="mt-6 flex w-full items-center justify-between border-b border-[color:var(--cw-line)] pb-3 text-left text-[12px] font-bold uppercase tracking-[0.2em]"
+              className="mt-6 flex w-full items-center justify-between border-b border-[color:var(--cw-line)] pb-3 text-left text-[12px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]"
             >
               Product details
               <span className="text-[color:var(--cw-brand-deep)]">{openSpec ? "–" : "+"}</span>
@@ -284,9 +284,9 @@ export function SilkBrushPage() {
                   ["Care instructions", "[INSERT]"],
                   ["Recommended hair types", "[INSERT]"],
                 ].map(([k, v]) => (
-                  <div key={k} className="flex justify-between gap-6 border-b border-[color:var(--cw-line)] py-3">
-                    <dt className="font-medium text-[color:var(--cw-ink)]">{k}</dt>
-                    <dd className="text-right">{v}</dd>
+                  <div key={k} className="flex min-w-0 justify-between gap-6 border-b border-[color:var(--cw-line)] py-3">
+                    <dt className="min-w-0 break-words font-medium text-[color:var(--cw-brand-deep)]">{k}</dt>
+                    <dd className="min-w-0 break-words text-right">{v}</dd>
                   </div>
                 ))}
               </dl>
