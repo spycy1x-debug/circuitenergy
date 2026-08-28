@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Media, RatingLine, SilkShell, Faq, sans, serif, Stars } from "@/components/site/Silk";
 import { DEFAULT_TIER, money, TIERS, tierCheckoutUrl, type Tier } from "@/lib/silkbrush-config";
 import { trackInitiateCheckout } from "@/lib/fb-pixel";
+import { SilkReviews } from "@/components/site/SilkReviews";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import img1 from "@/assets/sbx-1.webp.asset.json";
 import img2 from "@/assets/sbx-2.webp.asset.json";
@@ -42,7 +43,7 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
-      className={`relative w-full overflow-hidden rounded-xl text-left transition ${
+      className={`relative w-full rounded-xl text-left transition ${
         selected
           ? "border-2 border-[color:var(--gold-deep)] bg-[color:var(--cw-surface)] shadow-lg shadow-black/10"
           : "border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]"
@@ -100,7 +101,7 @@ function OfferSection({ id }: { id?: string }) {
 
   return (
     <div id={id} className="scroll-mt-20">
-      <div className="space-y-4">
+      <div className="space-y-5 pt-3">
         {TIERS.map((t) => (
           <TierCard key={t.id} tier={t} selected={t.id === tier.id} onSelect={() => setSel(t.id)} />
         ))}
@@ -224,7 +225,7 @@ export function SilkBrushPage() {
       </section>
 
       {/* 2 — SOCIAL PROOF */}
-      <section id="reviews" className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+      <section id="social" className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
           <Eyebrow>Social proof</Eyebrow>
           <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
@@ -291,14 +292,14 @@ export function SilkBrushPage() {
               src={imgCloseup.url}
               alt="Close-up of the SilkBrush™ boar bristles"
               className="w-full border border-[color:var(--cw-line)] object-cover"
-              style={{ aspectRatio: "4 / 3" }}
+              style={{ aspectRatio: "3 / 4" }}
               loading="lazy"
             />
             <img
               src={imgUsing.url}
               alt="Woman brushing her hair with the Seralie SilkBrush™"
               className="w-full border border-[color:var(--cw-line)] object-cover"
-              style={{ aspectRatio: "4 / 3" }}
+              style={{ aspectRatio: "9 / 16" }}
               loading="lazy"
             />
           </div>
@@ -368,17 +369,12 @@ export function SilkBrushPage() {
         </div>
       </section>
 
-      {/* 5 — FINAL PURCHASE + FAQ */}
+      <SilkReviews />
+
+      {/* 5 — FAQ */}
       <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
-          <h2 style={serif} className="text-[32px] leading-[1.05] md:text-[44px]">
-            Ready For Smoother, Shinier Hair?
-          </h2>
-          <div className="mt-7">
-            <OfferSection />
-          </div>
-
-          <h3 id="faq" style={serif} className="mt-14 text-[24px] md:text-[30px]">
+          <h3 id="faq" style={serif} className="text-[24px] md:text-[30px]">
             FAQ
           </h3>
           <div className="mt-4">
