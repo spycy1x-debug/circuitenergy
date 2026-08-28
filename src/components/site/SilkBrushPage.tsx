@@ -115,13 +115,13 @@ export function SilkBrushPage() {
             <p style={serif} className="mt-6 text-[32px] leading-none">
               {money(PRICE)}
             </p>
-            <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-muted)]">
+            <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-brand-deep)]">
               Free shipping · 30-day money-back guarantee
             </p>
 
             <Cta className="mt-6" />
 
-            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--cw-brand-deep)]">
               <li>✓ Free shipping</li>
               <li>✓ 30-day money-back guarantee</li>
               <li>✓ Secure checkout</li>
