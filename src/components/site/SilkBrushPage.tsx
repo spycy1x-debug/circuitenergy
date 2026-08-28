@@ -306,7 +306,7 @@ export function SilkBrushPage() {
           <p style={serif} className="mt-4 text-[32px] leading-none">
             {money(PRICE)}
           </p>
-          <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-muted)]">
+          <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-brand-deep)]">
             Free shipping · 30-day money-back guarantee
           </p>
           <div className="mt-6 max-w-xs">
