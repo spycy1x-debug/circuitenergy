@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { WaistWrapShell, Label, Placeholder, serif, sans } from "@/components/site/WaistWrap";
+import { SilkShell, Label, Media, serif, sans } from "@/components/site/Silk";
 
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — WaistSnatch™ Adjustable WaistSnatch™" },
-      { name: "description", content: "Shop WaistSnatch™ — one adjustable band that wraps to your exact waist. Free shipping on 2+ and a 60-day fit guarantee." },
-      { property: "og:title", content: "Shop — WaistSnatch™" },
-      { property: "og:description", content: "One adjustable wrap. No hooks, no zippers, no guessing." },
+      { title: "Shop — Seralie SilkBrush™" },
+      { name: "description", content: "Shop the Seralie SilkBrush™ — a boar-bristle brush for smoother, shinier, straighter-looking hair. $37.99 with free shipping." },
+      { property: "og:title", content: "Shop — Seralie SilkBrush™" },
+      { property: "og:description", content: "One brush. Smoother, shinier, straighter-looking hair." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -17,30 +17,27 @@ export const Route = createFileRoute("/shop")({
 
 function ShopPage() {
   return (
-    <WaistWrapShell>
-      <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+    <SilkShell>
+      <section className="mx-auto max-w-5xl px-5 py-14 md:px-8 md:py-20">
         <Label>Shop</Label>
-        <h1 style={serif} className="mt-4 text-[36px] leading-[1.06] md:text-[52px]">
+        <h1 style={serif} className="mt-4 text-[34px] leading-[1.06] md:text-[48px]">
           One product, done properly.
         </h1>
-        <div className="mt-12 max-w-sm">
-          <Link to="/waistsnatch" className="group block">
-            <Placeholder ratio="4 / 5" note="WaistSnatch™ product shot." />
+        <div className="mt-10 max-w-sm">
+          <Link to="/" className="group block">
+            <Media label="IMAGE" ratio="4 / 5" note="SilkBrush™ product shot." />
             <h2 style={serif} className="mt-5 text-[24px]">
-              WaistSnatch™ Adjustable WaistSnatch™
+              Seralie SilkBrush™
             </h2>
             <p style={sans} className="mt-1 text-[13px] text-[color:var(--cw-muted)]">
-              One size · Wraps to you · From $39.99
+              Boar-bristle smoothing brush · $37.99
             </p>
-            <span
-              style={sans}
-              className="mt-4 inline-block text-[10px] font-semibold uppercase tracking-[0.22em] text-[color:var(--cw-brand)]"
-            >
+            <span style={sans} className="mt-4 inline-block text-[10px] font-bold uppercase tracking-[0.22em] text-[color:var(--cw-brand-deep)]">
               View product
             </span>
           </Link>
         </div>
       </section>
-    </WaistWrapShell>
+    </SilkShell>
   );
 }

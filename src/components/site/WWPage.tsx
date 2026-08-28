@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { WaistWrapShell, Label, serif, sans } from "@/components/site/WaistWrap";
+import { SilkShell, Label, serif, sans } from "@/components/site/Silk";
 
 export function WWProse({
   eyebrow,
@@ -15,10 +15,10 @@ export function WWProse({
   cta?: boolean;
 }) {
   return (
-    <WaistWrapShell>
-      <section className="mx-auto max-w-3xl px-5 py-16 md:px-8 md:py-24">
+    <SilkShell>
+      <section className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
         <Label>{eyebrow}</Label>
-        <h1 style={serif} className="mt-4 text-[36px] leading-[1.06] md:text-[52px]">
+        <h1 style={serif} className="mt-4 text-[34px] leading-[1.06] md:text-[48px]">
           {title}
         </h1>
         {intro && (
@@ -27,7 +27,7 @@ export function WWProse({
           </p>
         )}
 
-        <div className="mt-12 space-y-10">
+        <div className="mt-10 space-y-9">
           {sections.map((s) => (
             <div key={s.h}>
               <h2 style={serif} className="text-[22px] leading-tight">
@@ -41,17 +41,17 @@ export function WWProse({
         </div>
 
         {cta && (
-          <div className="mt-16 border-t border-[color:var(--cw-line)] pt-10">
+          <div className="mt-14 border-t border-[color:var(--cw-line)] pt-10">
             <Link
-              to="/waistsnatch"
+              to="/"
               style={sans}
-              className="inline-block rounded-full bg-[color:var(--cw-brand)] px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white transition-opacity hover:opacity-90"
+              className="inline-block rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.2em] text-white"
             >
-              Shop WaistSnatch™ — $39
+              Get My SilkBrush™ — $37.99
             </Link>
           </div>
         )}
       </section>
-    </WaistWrapShell>
+    </SilkShell>
   );
 }
