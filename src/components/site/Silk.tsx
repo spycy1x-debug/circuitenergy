@@ -116,7 +116,7 @@ export function BuyButton({
     <button
       onClick={() => addToCart(1)}
       style={sans}
-      className={`block w-full rounded-full bg-[color:var(--cw-ink)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/15 transition-transform active:scale-[0.99] ${className}`}
+      className={`block w-full rounded-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/15 transition hover:bg-[#5C4A35] active:scale-[0.99] ${className}`}
     >
       {children}
     </button>
@@ -266,7 +266,7 @@ export function CartDrawer() {
               {money(total)}
             </span>
           </div>
-          <p className="mt-1 text-[11px] text-[color:var(--cw-brand-deep)]">Free shipping · 30-day money-back guarantee</p>
+          <p className="mt-1 text-[11px] text-[color:var(--gold-deep)]">Free shipping · 30-day money-back guarantee</p>
           {href ? (
             <a
               href={href}

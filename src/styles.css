@@ -36,6 +36,8 @@
   --color-ivory: var(--ivory);
   --color-taupe: var(--taupe);
   --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+
   /* Legacy aliases kept so older utility usages keep resolving. */
   --color-bone: var(--ivory);
   --color-sand: var(--sand);
@@ -58,6 +60,8 @@
   --ink: #171717;
   --gold-soft: #B39A78;
   --gold-hover: #7F6649;
+  --gold-deep: #7F6649;
+
 
   --background: #FAF9F6;
   --foreground: #171717;

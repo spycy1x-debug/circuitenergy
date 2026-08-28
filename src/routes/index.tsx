@@ -28,7 +28,7 @@ function HomePage() {
     <SilkShell>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-5 pt-14 pb-16 text-center sm:pt-20 sm:pb-24">
-        <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#9A8060]">
+        <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-gold-deep">
           Seralie Haircare
         </p>
         <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#171717] sm:text-6xl">
@@ -43,7 +43,7 @@ function HomePage() {
         <div className="mt-8 flex flex-col items-center gap-3">
           <Link
             to="/silkbrush"
-            className="inline-flex h-14 items-center justify-center rounded-full bg-[#9A8060] px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-[#9A8060]/30 transition hover:bg-[#7F6649]"
+            className="inline-flex h-14 items-center justify-center rounded-full bg-gold-deep px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-gold-deep/30 transition hover:bg-[#5C4A35]"
           >
             Meet the SilkBrush™
           </Link>
@@ -58,7 +58,7 @@ function HomePage() {
             [SilkBrush™ Product Photo]
           </div>
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#9A8060]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-gold-deep">
               Our First Release
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#171717] sm:text-4xl">
@@ -112,7 +112,7 @@ function HomePage() {
           </p>
           <Link
             to="/silkbrush"
-            className="mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[#9A8060] px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-[#9A8060]/30 transition hover:bg-[#7F6649]"
+            className="mt-8 inline-flex h-14 items-center justify-center rounded-full bg-gold-deep px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-gold-deep/30 transition hover:bg-[#5C4A35]"
           >
             Get My SilkBrush™ — {money(PRICE)}
           </Link>
