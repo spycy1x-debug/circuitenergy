@@ -8,12 +8,12 @@ import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 /* ------------------------------- tokens ---------------------------------- */
 
 export const SB_VARS = {
-  "--cw-bg": "#FFFFFF",
-  "--cw-surface": "#F7F4F0",
-  "--cw-ink": "#141414",
+  "--cw-bg": "#FAF9F6",
+  "--cw-surface": "#F4F1EC",
+  "--cw-ink": "#171717",
   "--cw-muted": "#6B6660",
-  "--cw-brand": "#141414",
-  "--cw-brand-deep": "#B39A78",
+  "--cw-brand": "#171717",
+  "--cw-brand-deep": "#9A8060",
   "--cw-line": "#E7E2DB",
 } as React.CSSProperties;
 
