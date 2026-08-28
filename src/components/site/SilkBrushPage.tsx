@@ -140,7 +140,21 @@ function Gallery() {
   const [i, setI] = useState(0);
   return (
     <div>
-      <div className="overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+      <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+        <div className="absolute left-3 top-3 z-10">
+          <span
+            style={sans}
+            className="inline-block border border-[color:var(--cw-brand-deep)]/40 bg-[color:var(--cw-bg)]/95 px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]"
+          >
+            Updated Design
+          </span>
+          <span
+            style={sans}
+            className="mt-1 block text-[8px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-muted)]"
+          >
+            New wooden version
+          </span>
+        </div>
         <img
           src={GALLERY[i]!.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}
@@ -220,6 +234,38 @@ export function SilkBrushPage() {
             <div className="mt-8">
               <OfferSection id="offer" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 1b — PRODUCT UPDATE ANNOUNCEMENT */}
+      <section className="mx-auto max-w-6xl px-5 pb-14 md:px-8 md:pb-20">
+        <div className="flex flex-col gap-5 rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-5 md:flex-row md:items-center md:gap-6 md:p-6">
+          <div className="shrink-0 md:w-28">
+            <div className="overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]">
+              <img
+                src={img2.url}
+                alt="Current wooden Seralie SilkBrush™ design"
+                className="aspect-square w-full object-contain"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="text-[color:var(--cw-brand-deep)]">
+                <path d="M12 2L14.09 8.26L20 9.27L15.55 13.14L16.82 19L12 15.77L7.18 19L8.45 13.14L4 9.27L9.91 8.26L12 2Z" fill="currentColor" />
+              </svg>
+              <p style={sans} className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[color:var(--cw-brand-deep)]">
+                Updated SilkBrush™ Design
+              </p>
+            </div>
+            <p style={serif} className="mt-2 text-[20px] leading-snug text-[color:var(--cw-ink)] md:text-[24px]">
+              Now featuring our <span className="text-[color:var(--cw-brand-deep)]">upgraded wooden design</span>.
+            </p>
+            <p style={sans} className="mt-2 max-w-xl text-[13px] leading-6 text-[color:var(--cw-muted)]">
+              We’re always looking for ways to improve the SilkBrush™. Some earlier content features our previous version, but all current orders include the <span className="text-[color:var(--cw-brand-deep)]">newest wooden SilkBrush™ design</span> shown on this page.
+            </p>
           </div>
         </div>
       </section>
