@@ -141,16 +141,16 @@ function Gallery() {
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="absolute left-3 top-3 z-10">
+        <div className="absolute right-3 top-3 z-10">
           <span
             style={sans}
-            className="inline-block border border-[color:var(--cw-brand-deep)]/40 bg-[color:var(--cw-bg)]/95 px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]"
+            className="inline-block rounded-sm border border-[color:var(--cw-brand-deep)]/50 bg-[color:var(--cw-bg)] px-3 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)] shadow-sm"
           >
             Updated Design
           </span>
           <span
             style={sans}
-            className="mt-1 block text-[8px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-muted)]"
+            className="mt-1 block text-right text-[8px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-muted)]"
           >
             New wooden version
           </span>
