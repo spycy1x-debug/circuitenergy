@@ -108,7 +108,7 @@ export function SilkBrushPage() {
               Smooth. Straighten. Shine.
             </h1>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Meet the Seralie SilkBrush™. A boar-bristle brush designed to smooth frizz, tame flyaways, and create a
+              Meet the <strong className="font-bold text-[color:var(--cw-ink)]">Seralie SilkBrush™</strong>. A boar-bristle brush designed to smooth frizz, tame flyaways, and create a
               sleek, straighter-looking finish while you brush.
             </p>
 
