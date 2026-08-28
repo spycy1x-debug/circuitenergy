@@ -104,7 +104,7 @@ export function SilkBrushPage() {
 
           <div className="md:pt-2">
             <RatingLine />
-            <h1 style={serif} className="mt-3 text-[36px] leading-[1.02] md:text-[52px]">
+            <h1 style={serif} className="mt-3 text-[36px] leading-[1.02] text-[color:var(--cw-brand-deep)] md:text-[52px]">
               Smooth. Straighten. Shine.
             </h1>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
