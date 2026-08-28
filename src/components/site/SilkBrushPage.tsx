@@ -104,7 +104,7 @@ export function SilkBrushPage() {
 
           <div className="md:pt-2">
             <RatingLine />
-            <h1 style={serif} className="mt-3 text-[36px] leading-[1.02] md:text-[52px]">
+            <h1 style={serif} className="mt-3 text-[36px] leading-[1.02] text-[color:var(--cw-brand-deep)] md:text-[52px]">
               Smooth. Straighten. Shine.
             </h1>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
@@ -115,13 +115,13 @@ export function SilkBrushPage() {
             <p style={serif} className="mt-6 text-[32px] leading-none">
               {money(PRICE)}
             </p>
-            <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-muted)]">
+            <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-brand-deep)]">
               Free shipping · 30-day money-back guarantee
             </p>
 
             <Cta className="mt-6" />
 
-            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]">
+            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--cw-brand-deep)]">
               <li>✓ Free shipping</li>
               <li>✓ 30-day money-back guarantee</li>
               <li>✓ Secure checkout</li>
@@ -306,7 +306,7 @@ export function SilkBrushPage() {
           <p style={serif} className="mt-4 text-[32px] leading-none">
             {money(PRICE)}
           </p>
-          <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-muted)]">
+          <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-brand-deep)]">
             Free shipping · 30-day money-back guarantee
           </p>
           <div className="mt-6 max-w-xs">

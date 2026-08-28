@@ -266,7 +266,7 @@ export function CartDrawer() {
               {money(total)}
             </span>
           </div>
-          <p className="mt-1 text-[11px] text-[color:var(--cw-muted)]">Free shipping · 30-day money-back guarantee</p>
+          <p className="mt-1 text-[11px] text-[color:var(--cw-brand-deep)]">Free shipping · 30-day money-back guarantee</p>
           {href ? (
             <a
               href={href}
