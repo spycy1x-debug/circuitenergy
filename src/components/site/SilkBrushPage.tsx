@@ -108,7 +108,7 @@ export function SilkBrushPage() {
               Smooth. Straighten. Shine.
             </h1>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Meet the Seralie SilkBrush™. A boar-bristle brush designed to smooth frizz, tame flyaways, and create a
+              Meet the <strong className="font-bold text-[color:var(--cw-ink)]">Seralie SilkBrush™</strong>. A boar-bristle brush designed to smooth frizz, tame flyaways, and create a
               sleek, straighter-looking finish while you brush.
             </p>
 
@@ -150,7 +150,7 @@ export function SilkBrushPage() {
             />
           </div>
 
-          <div style={sans} className="mt-6 grid grid-cols-3 border-y border-[color:var(--cw-line)] text-[11px] font-semibold uppercase tracking-[0.18em]">
+          <div style={sans} className="mt-6 grid grid-cols-3 border-y border-[color:var(--cw-line)] text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-brand-deep)]">
             {["Smoother hair", "Less frizz", "More shine"].map((t) => (
               <p key={t} className="py-4 text-center">
                 {t}
@@ -183,11 +183,11 @@ export function SilkBrushPage() {
                 ["Shine", "Bring out a naturally glossy finish."],
                 ["Sleek", "Create a smoother, straighter-looking style."],
               ].map(([t, d]) => (
-                <div key={t} className="flex gap-6 py-4">
-                  <dt style={sans} className="w-24 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em]">
+                <div key={t} className="flex min-w-0 gap-6 py-4">
+                  <dt style={sans} className="w-20 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)] sm:w-24">
                     {t}
                   </dt>
-                  <dd style={sans} className="text-[14px] leading-6 text-[color:var(--cw-muted)]">
+                  <dd style={sans} className="min-w-0 break-words text-[14px] leading-6 text-[color:var(--cw-muted)]">
                     {d}
                   </dd>
                 </div>
@@ -249,15 +249,15 @@ export function SilkBrushPage() {
                 ["02", "Brush", "Work through small sections of hair."],
                 ["03", "Finish", "Reveal a smoother, shinier, straighter-looking finish."],
               ].map(([n, t, d]) => (
-                <li key={n} className="flex gap-5 py-4">
+                <li key={n} className="flex min-w-0 gap-5 py-4">
                   <span style={serif} className="w-8 shrink-0 text-[18px] text-[color:var(--cw-brand-deep)]">
                     {n}
                   </span>
-                  <span>
-                    <span style={sans} className="block text-[11px] font-bold uppercase tracking-[0.2em]">
+                  <span className="min-w-0">
+                    <span style={sans} className="block text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]">
                       {t}
                     </span>
-                    <span style={sans} className="mt-1 block text-[14px] leading-6 text-[color:var(--cw-muted)]">
+                    <span style={sans} className="mt-1 block break-words text-[14px] leading-6 text-[color:var(--cw-muted)]">
                       {d}
                     </span>
                   </span>
@@ -269,7 +269,7 @@ export function SilkBrushPage() {
               onClick={() => setOpenSpec((v) => !v)}
               aria-expanded={openSpec}
               style={sans}
-              className="mt-6 flex w-full items-center justify-between border-b border-[color:var(--cw-line)] pb-3 text-left text-[12px] font-bold uppercase tracking-[0.2em]"
+              className="mt-6 flex w-full items-center justify-between border-b border-[color:var(--cw-line)] pb-3 text-left text-[12px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]"
             >
               Product details
               <span className="text-[color:var(--cw-brand-deep)]">{openSpec ? "–" : "+"}</span>
@@ -284,9 +284,9 @@ export function SilkBrushPage() {
                   ["Care instructions", "[INSERT]"],
                   ["Recommended hair types", "[INSERT]"],
                 ].map(([k, v]) => (
-                  <div key={k} className="flex justify-between gap-6 border-b border-[color:var(--cw-line)] py-3">
-                    <dt className="font-medium text-[color:var(--cw-ink)]">{k}</dt>
-                    <dd className="text-right">{v}</dd>
+                  <div key={k} className="flex min-w-0 justify-between gap-6 border-b border-[color:var(--cw-line)] py-3">
+                    <dt className="min-w-0 break-words font-medium text-[color:var(--cw-brand-deep)]">{k}</dt>
+                    <dd className="min-w-0 break-words text-right">{v}</dd>
                   </div>
                 ))}
               </dl>
