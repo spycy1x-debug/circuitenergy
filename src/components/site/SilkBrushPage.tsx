@@ -1,20 +1,18 @@
 import { useRef, useState } from "react";
-import { addToCart, Media, RatingLine, SilkShell, Faq, sans, serif, Stars } from "@/components/site/Silk";
-import { money, PRICE } from "@/lib/silkbrush-config";
+import { Media, RatingLine, SilkShell, Faq, sans, serif, Stars } from "@/components/site/Silk";
+import { DEFAULT_TIER, money, TIERS, tierCheckoutUrl, type Tier } from "@/lib/silkbrush-config";
+import { trackInitiateCheckout } from "@/lib/fb-pixel";
+import payBadges from "@/assets/pay-badges-v2.png.asset.json";
+import img1 from "@/assets/sbx-1.webp.asset.json";
+import img2 from "@/assets/sbx-2.webp.asset.json";
+import img3 from "@/assets/sbx-3.webp.asset.json";
+import img4 from "@/assets/sbx-4.webp.asset.json";
+import img5 from "@/assets/sbx-5.webp.asset.json";
+import img6 from "@/assets/sbx-6.webp.asset.json";
+import imgCloseup from "@/assets/sbx-7.webp.asset.json";
+import imgUsing from "@/assets/sbx-8.webp.asset.json";
 
 /* ------------------------------- primitives ------------------------------- */
-
-function Cta({ label = "Add to Cart", className = "" }: { label?: string; className?: string }) {
-  return (
-    <button
-      onClick={() => addToCart(1)}
-      style={sans}
-      className={`w-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#5C4A35] active:scale-[0.99] ${className}`}
-    >
-      {label}
-    </button>
-  );
-}
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -24,36 +22,142 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
+function OfferLink({ label = "Shop SilkBrush™", className = "" }: { label?: string; className?: string }) {
+  return (
+    <a
+      href="#offer"
+      style={sans}
+      className={`block w-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#5C4A35] active:scale-[0.99] ${className}`}
+    >
+      {label}
+    </a>
+  );
+}
+
+/* --------------------------------- offer ---------------------------------- */
+
+function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean; onSelect: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={selected}
+      className={`relative w-full overflow-hidden rounded-xl text-left transition ${
+        selected
+          ? "border-2 border-[color:var(--gold-deep)] bg-[color:var(--cw-surface)] shadow-lg shadow-black/10"
+          : "border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]"
+      }`}
+    >
+      {tier.tag && (
+        <span
+          style={sans}
+          className="absolute right-3 top-0 -translate-y-1/2 rounded-full bg-[color:var(--gold-deep)] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white"
+        >
+          {tier.tag}
+        </span>
+      )}
+
+      <div className="flex items-center gap-4 px-4 py-5 sm:px-5">
+        <span
+          className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border ${
+            selected ? "border-[color:var(--gold-deep)]" : "border-[color:var(--cw-line)]"
+          }`}
+        >
+          {selected && <span className="h-2.5 w-2.5 rounded-full bg-[color:var(--gold-deep)]" />}
+        </span>
+
+        <span className="min-w-0 flex-1">
+          <span style={serif} className="block text-[20px] leading-tight sm:text-[24px]">
+            {tier.label}
+          </span>
+          <span style={sans} className="mt-1 block text-[12px] text-[color:var(--cw-muted)]">
+            {money(tier.price)} total
+            {tier.saves ? ` · save ${money(tier.saves)}` : ""}
+          </span>
+        </span>
+
+        <span className="shrink-0 text-right">
+          {tier.compareAt && (
+            <span style={sans} className="block text-[12px] text-[color:var(--cw-muted)] line-through tabular-nums">
+              {money(tier.compareAt)}
+            </span>
+          )}
+          <span style={sans} className="block text-[20px] font-bold tabular-nums sm:text-[22px]">
+            {money(tier.perUnit)}
+          </span>
+          <span style={sans} className="mt-0.5 block text-[9px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-muted)]">
+            Per brush
+          </span>
+        </span>
+      </div>
+    </button>
+  );
+}
+
+function OfferSection({ id }: { id?: string }) {
+  const [sel, setSel] = useState(DEFAULT_TIER);
+  const tier = TIERS.find((t) => t.id === sel) ?? TIERS[0]!;
+
+  return (
+    <div id={id} className="scroll-mt-20">
+      <div className="space-y-4">
+        {TIERS.map((t) => (
+          <TierCard key={t.id} tier={t} selected={t.id === tier.id} onSelect={() => setSel(t.id)} />
+        ))}
+      </div>
+
+      <a
+        href={tierCheckoutUrl(tier)}
+        onClick={() => trackInitiateCheckout([tier.variantId], tier.price, 1)}
+        style={sans}
+        className="mt-6 block w-full rounded-full bg-[color:var(--gold-deep)] px-8 py-5 text-center text-[15px] font-bold uppercase tracking-[0.18em] text-white shadow-lg shadow-black/15 transition hover:bg-[#5C4A35] active:scale-[0.99]"
+      >
+        Add to Cart — {money(tier.price)}
+      </a>
+
+      <img src={payBadges.url} alt="Accepted payment methods" className="mx-auto mt-4 h-6 w-auto object-contain" loading="lazy" />
+
+      <ul
+        style={sans}
+        className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[color:var(--gold-deep)]"
+      >
+        <li>Free shipping</li>
+        <li aria-hidden>·</li>
+        <li>30-day guarantee</li>
+        <li aria-hidden>·</li>
+        <li>Secure checkout</li>
+      </ul>
+    </div>
+  );
+}
+
 /* --------------------------------- gallery -------------------------------- */
 
-const GALLERY: { label: "IMAGE" | "VIDEO"; note: string }[] = [
-  { label: "IMAGE", note: "PLACEHOLDER: MAIN PRODUCT IMAGE" },
-  { label: "VIDEO", note: "PLACEHOLDER: HERO UGC VIDEO" },
-  { label: "IMAGE", note: "PLACEHOLDER: PRODUCT IMAGE 2" },
-  { label: "IMAGE", note: "PLACEHOLDER: PRODUCT IMAGE 3" },
-  { label: "IMAGE", note: "PLACEHOLDER: PRODUCT IMAGE 4" },
-];
+const GALLERY = [img1, img2, img3, img4, img5, img6];
 
 function Gallery() {
   const [i, setI] = useState(0);
-  const active = GALLERY[i]!;
   return (
     <div>
-      <Media label={active.label} note={active.note} ratio="4 / 5" className="!rounded-none" />
-      <div className="mt-3 grid grid-cols-5 gap-2">
+      <div className="overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+        <img
+          src={GALLERY[i]!.url}
+          alt={`Seralie SilkBrush™ product image ${i + 1}`}
+          className="h-full w-full object-contain"
+          style={{ aspectRatio: "4 / 5" }}
+        />
+      </div>
+      <div className="mt-3 grid grid-cols-6 gap-2">
         {GALLERY.map((g, idx) => (
           <button
-            key={g.note}
+            key={g.url}
             onClick={() => setI(idx)}
-            aria-label={`View media ${idx + 1}`}
-            className={`grid aspect-square place-items-center border text-[9px] font-semibold uppercase tracking-[0.14em] ${
-              idx === i
-                ? "border-[color:var(--cw-ink)] text-[color:var(--cw-ink)]"
-                : "border-[color:var(--cw-line)] text-[color:var(--cw-muted)]"
+            aria-label={`View image ${idx + 1}`}
+            className={`overflow-hidden border ${
+              idx === i ? "border-[color:var(--cw-ink)]" : "border-[color:var(--cw-line)]"
             }`}
-            style={sans}
           >
-            {g.label === "VIDEO" ? "▶" : idx + 1}
+            <img src={g.url} alt="" className="aspect-square w-full object-cover" loading="lazy" />
           </button>
         ))}
       </div>
@@ -96,7 +200,7 @@ export function SilkBrushPage() {
   const [openSpec, setOpenSpec] = useState(false);
 
   return (
-    <SilkShell sticky>
+    <SilkShell>
       {/* 1 — PRODUCT HERO */}
       <section className="mx-auto max-w-6xl px-5 pb-14 pt-6 md:px-8 md:pb-20 md:pt-10">
         <div className="grid gap-8 md:grid-cols-2 md:gap-14">
@@ -112,54 +216,41 @@ export function SilkBrushPage() {
               sleek, straighter-looking finish while you brush.
             </p>
 
-            <p style={serif} className="mt-6 text-[32px] leading-none">
-              {money(PRICE)}
-            </p>
-            <p style={sans} className="mt-2 text-[13px] text-[color:var(--gold-deep)]">
-              Free shipping · 30-day money-back guarantee
-            </p>
-
-            <Cta className="mt-6" />
-
-            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--gold-deep)]">
-              <li>✓ Free shipping</li>
-              <li>✓ 30-day money-back guarantee</li>
-              <li>✓ Secure checkout</li>
-            </ul>
+            <div className="mt-8">
+              <OfferSection id="offer" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2 — PROOF */}
-      <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="mx-auto max-w-5xl px-5 py-14 md:px-8 md:py-20">
-          <Eyebrow>The proof</Eyebrow>
+      {/* 2 — SOCIAL PROOF */}
+      <section id="reviews" className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
+          <Eyebrow>Social proof</Eyebrow>
           <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
-            See The Difference.
+            Don't Just Take Our Word For It.
           </h2>
-          <p style={sans} className="mt-2 text-[15px] text-[color:var(--cw-muted)]">
-            One side brushed. One side untouched.
+          <p style={sans} className="mt-2 max-w-lg text-[15px] text-[color:var(--cw-muted)]">
+            See how people are using the SilkBrush™ in their everyday routines.
           </p>
 
           <div className="mt-7">
-            <Media
-              label="VIDEO"
-              ratio="16 / 10"
-              note="PLACEHOLDER: LARGE BEFORE/AFTER VIDEO (or before/after image slider)"
-              className="!rounded-none"
-            />
+            <UgcRow />
           </div>
 
-          <div style={sans} className="mt-6 grid grid-cols-3 border-y border-[color:var(--cw-line)] text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-brand-deep)]">
-            {["Smoother hair", "Less frizz", "More shine"].map((t) => (
-              <p key={t} className="py-4 text-center">
-                {t}
-              </p>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="border border-dashed border-[color:var(--cw-brand-deep)]/45 bg-[color:var(--cw-bg)] p-5">
+                <Stars />
+                <p style={sans} className="mt-2 text-[12px] leading-6 text-[color:var(--cw-muted)]">
+                  PLACEHOLDER: REAL REVIEW {n} — paste a verified customer review here.
+                </p>
+              </div>
             ))}
           </div>
 
-          <div className="mt-7 max-w-xs">
-            <Cta label="Shop SilkBrush™" />
+          <div className="mt-8 max-w-xs">
+            <OfferLink />
           </div>
         </div>
       </section>
@@ -196,45 +287,25 @@ export function SilkBrushPage() {
           </div>
 
           <div className="grid gap-3">
-            <Media label="IMAGE" ratio="4 / 3" note="PLACEHOLDER: CLOSE-UP IMAGE OF BRISTLES" className="!rounded-none" />
-            <Media label="IMAGE" ratio="4 / 3" note="PLACEHOLDER: LIFESTYLE IMAGE OF WOMAN USING SILKBRUSH™" className="!rounded-none" />
+            <img
+              src={imgCloseup.url}
+              alt="Close-up of the SilkBrush™ boar bristles"
+              className="w-full border border-[color:var(--cw-line)] object-cover"
+              style={{ aspectRatio: "4 / 3" }}
+              loading="lazy"
+            />
+            <img
+              src={imgUsing.url}
+              alt="Woman brushing her hair with the Seralie SilkBrush™"
+              className="w-full border border-[color:var(--cw-line)] object-cover"
+              style={{ aspectRatio: "4 / 3" }}
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
 
-      {/* 4 — UGC */}
-      <section id="reviews" className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
-          <Eyebrow>Social proof</Eyebrow>
-          <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
-            Don't Just Take Our Word For It.
-          </h2>
-          <p style={sans} className="mt-2 max-w-lg text-[15px] text-[color:var(--cw-muted)]">
-            See how people are using the SilkBrush™ in their everyday routines.
-          </p>
-
-          <div className="mt-7">
-            <UgcRow />
-          </div>
-
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="border border-dashed border-[color:var(--cw-brand-deep)]/45 bg-[color:var(--cw-bg)] p-5">
-                <Stars />
-                <p style={sans} className="mt-2 text-[12px] leading-6 text-[color:var(--cw-muted)]">
-                  PLACEHOLDER: REAL REVIEW {n} — paste a verified customer review here.
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 max-w-xs">
-            <Cta />
-          </div>
-        </div>
-      </section>
-
-      {/* 5 — HOW TO USE + DETAILS */}
+      {/* 4 — HOW TO USE + DETAILS */}
       <section className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
         <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:gap-14">
           <div>
@@ -297,20 +368,14 @@ export function SilkBrushPage() {
         </div>
       </section>
 
-      {/* 6 — FINAL PURCHASE + FAQ */}
+      {/* 5 — FINAL PURCHASE + FAQ */}
       <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
           <h2 style={serif} className="text-[32px] leading-[1.05] md:text-[44px]">
             Ready For Smoother, Shinier Hair?
           </h2>
-          <p style={serif} className="mt-4 text-[32px] leading-none">
-            {money(PRICE)}
-          </p>
-          <p style={sans} className="mt-2 text-[13px] text-[color:var(--gold-deep)]">
-            Free shipping · 30-day money-back guarantee
-          </p>
-          <div className="mt-6 max-w-xs">
-            <Cta />
+          <div className="mt-7">
+            <OfferSection />
           </div>
 
           <h3 id="faq" style={serif} className="mt-14 text-[24px] md:text-[30px]">
