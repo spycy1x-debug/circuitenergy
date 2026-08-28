@@ -405,6 +405,10 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
 
 export const SB_FAQS = [
   {
+    q: "Why does the brush in some videos look different?",
+    a: "We’re always looking for ways to improve the SilkBrush™. We recently introduced an upgraded wooden design with a more premium look and feel. Some earlier content features our previous version, but all current orders include the newest SilkBrush™ design shown on this page.",
+  },
+  {
     q: "What is the SilkBrush™?",
     a: "The Seralie SilkBrush™ is a boar-bristle hair brush designed to smooth frizz, tame flyaways, distribute natural oils, and create a smoother, shinier, straighter-looking finish.",
   },
