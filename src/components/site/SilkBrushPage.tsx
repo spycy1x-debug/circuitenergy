@@ -183,11 +183,11 @@ export function SilkBrushPage() {
                 ["Shine", "Bring out a naturally glossy finish."],
                 ["Sleek", "Create a smoother, straighter-looking style."],
               ].map(([t, d]) => (
-                <div key={t} className="flex gap-6 py-4">
-                  <dt style={sans} className="w-24 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em]">
+                <div key={t} className="flex min-w-0 gap-6 py-4">
+                  <dt style={sans} className="w-20 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)] sm:w-24">
                     {t}
                   </dt>
-                  <dd style={sans} className="text-[14px] leading-6 text-[color:var(--cw-muted)]">
+                  <dd style={sans} className="min-w-0 break-words text-[14px] leading-6 text-[color:var(--cw-muted)]">
                     {d}
                   </dd>
                 </div>
