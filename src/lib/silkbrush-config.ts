@@ -9,13 +9,19 @@ export const PRICE = 37.99;
  */
 export const VARIANT_ID = "";
 
+/** Shipping protection add-on (optional, offered in the cart). */
+export const PROTECTION_VARIANT_ID = "48890343030938";
+export const PROTECTION_PRICE = 3.99;
+
 export const RATING = 4.8;
 /** Set to a real number once reviews are collected. Null hides the count. */
 export const REVIEW_COUNT: number | null = null;
 
 export const money = (n: number) => `$${n.toFixed(2)}`;
 
-export function checkoutUrl(qty: number) {
+export function checkoutUrl(qty: number, protection = false) {
   if (!VARIANT_ID) return null;
-  return `${STORE_URL}/cart/${VARIANT_ID}:${Math.max(1, qty)}`;
+  const lines = [`${VARIANT_ID}:${Math.max(1, qty)}`];
+  if (protection) lines.push(`${PROTECTION_VARIANT_ID}:1`);
+  return `${STORE_URL}/cart/${lines.join(",")}`;
 }

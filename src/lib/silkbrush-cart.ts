@@ -1,8 +1,10 @@
-import { checkoutUrl, PRICE } from "./silkbrush-config";
+import { checkoutUrl, PRICE, PROTECTION_PRICE } from "./silkbrush-config";
 
 const KEY = "sb-cart-v1";
+const PKEY = "sb-cart-protection-v1";
 
 let qty = 0;
+let protection = false;
 let open = false;
 const subs = new Set<() => void>();
 
@@ -11,6 +13,7 @@ function load() {
   try {
     const raw = window.localStorage.getItem(KEY);
     if (raw) qty = Math.max(0, parseInt(raw, 10) || 0);
+    protection = window.localStorage.getItem(PKEY) === "1";
   } catch {
     qty = 0;
   }
@@ -21,6 +24,7 @@ function emit(persist = true) {
   if (persist && typeof window !== "undefined") {
     try {
       window.localStorage.setItem(KEY, String(qty));
+      window.localStorage.setItem(PKEY, protection ? "1" : "0");
     } catch {
       /* ignore */
     }
@@ -36,6 +40,11 @@ export const cart = {
     };
   },
   getQty: () => qty,
+  hasProtection: () => protection,
+  setProtection(v: boolean) {
+    protection = v;
+    emit();
+  },
   isOpen: () => open,
   setOpen(v: boolean) {
     open = v;
@@ -52,9 +61,12 @@ export const cart = {
   },
   clear() {
     qty = 0;
+    protection = false;
     emit();
   },
 };
 
-export const cartTotal = (n: number) => n * PRICE;
-export const cartCheckoutUrl = (n: number) => (n > 0 ? checkoutUrl(n) : null);
+export const cartTotal = (n: number, withProtection = false) =>
+  n * PRICE + (withProtection && n > 0 ? PROTECTION_PRICE : 0);
+export const cartCheckoutUrl = (n: number, withProtection = false) =>
+  n > 0 ? checkoutUrl(n, withProtection) : null;
