@@ -374,7 +374,7 @@ export function SilkBrushPage() {
       {/* 5 — FAQ */}
       <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
-          <h3 id="faq" style={serif} className="mt-14 text-[24px] md:text-[30px]">
+          <h3 id="faq" style={serif} className="text-[24px] md:text-[30px]">
             FAQ
           </h3>
           <div className="mt-4">
