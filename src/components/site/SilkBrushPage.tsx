@@ -150,7 +150,7 @@ export function SilkBrushPage() {
             />
           </div>
 
-          <div style={sans} className="mt-6 grid grid-cols-3 border-y border-[color:var(--cw-line)] text-[11px] font-semibold uppercase tracking-[0.18em]">
+          <div style={sans} className="mt-6 grid grid-cols-3 border-y border-[color:var(--cw-line)] text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-brand-deep)]">
             {["Smoother hair", "Less frizz", "More shine"].map((t) => (
               <p key={t} className="py-4 text-center">
                 {t}
