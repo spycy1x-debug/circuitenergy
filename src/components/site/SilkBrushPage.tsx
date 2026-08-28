@@ -4,7 +4,7 @@ import { DEFAULT_TIER, money, TIERS, tierCheckoutUrl, type Tier } from "@/lib/si
 import { trackInitiateCheckout } from "@/lib/fb-pixel";
 import { SilkReviews } from "@/components/site/SilkReviews";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
-import img1 from "@/assets/sbx-1.webp.asset.json";
+import img1 from "@/assets/silkbrush-meet-the-product.png.asset.json";
 import img2 from "@/assets/sbx-2.webp.asset.json";
 import img3 from "@/assets/sbx-3.webp.asset.json";
 import img4 from "@/assets/sbx-4.webp.asset.json";
