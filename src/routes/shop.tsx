@@ -24,7 +24,7 @@ function ShopPage() {
           One product, done properly.
         </h1>
         <div className="mt-10 max-w-sm">
-          <Link to="/" className="group block">
+          <Link to="/silkbrush" className="group block">
             <Media label="IMAGE" ratio="4 / 5" note="SilkBrush™ product shot." />
             <h2 style={serif} className="mt-5 text-[24px]">
               Seralie SilkBrush™
