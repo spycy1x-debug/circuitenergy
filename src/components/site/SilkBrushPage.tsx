@@ -9,7 +9,7 @@ function Cta({ label = "Add to Cart", className = "" }: { label?: string; classN
     <button
       onClick={() => addToCart(1)}
       style={sans}
-      className={`w-full bg-[color:var(--cw-ink)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.2em] text-white transition-transform active:scale-[0.99] ${className}`}
+      className={`w-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#5C4A35] ${className}`}
     >
       {label}
     </button>
@@ -115,13 +115,13 @@ export function SilkBrushPage() {
             <p style={serif} className="mt-6 text-[32px] leading-none">
               {money(PRICE)}
             </p>
-            <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-brand-deep)]">
+            <p style={sans} className="mt-2 text-[13px] text-[color:var(--gold-deep)]">
               Free shipping · 30-day money-back guarantee
             </p>
 
             <Cta className="mt-6" />
 
-            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--cw-brand-deep)]">
+            <ul style={sans} className="mt-4 space-y-1.5 text-[12px] uppercase tracking-[0.14em] text-[color:var(--gold-deep)]">
               <li>✓ Free shipping</li>
               <li>✓ 30-day money-back guarantee</li>
               <li>✓ Secure checkout</li>
@@ -306,7 +306,7 @@ export function SilkBrushPage() {
           <p style={serif} className="mt-4 text-[32px] leading-none">
             {money(PRICE)}
           </p>
-          <p style={sans} className="mt-2 text-[13px] text-[color:var(--cw-brand-deep)]">
+          <p style={sans} className="mt-2 text-[13px] text-[color:var(--gold-deep)]">
             Free shipping · 30-day money-back guarantee
           </p>
           <div className="mt-6 max-w-xs">
