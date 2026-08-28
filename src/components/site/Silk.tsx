@@ -13,7 +13,7 @@ export const SB_VARS = {
   "--cw-ink": "#141414",
   "--cw-muted": "#6B6660",
   "--cw-brand": "#141414",
-  "--cw-brand-deep": "#B07A4E",
+  "--cw-brand-deep": "#B39A78",
   "--cw-line": "#E7E2DB",
 } as React.CSSProperties;
 
