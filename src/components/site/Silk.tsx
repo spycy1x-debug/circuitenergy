@@ -168,8 +168,11 @@ export function StickyBuyBar() {
 
 export function CartDrawer() {
   const { qty, open } = useCart();
-  const total = cartTotal(qty);
-  const href = cartCheckoutUrl(qty);
+  const [, force] = useState(0);
+  useEffect(() => cart.subscribe(() => force((v) => v + 1)), []);
+  const protection = cart.hasProtection();
+  const total = cartTotal(qty, protection);
+  const href = cartCheckoutUrl(qty, protection);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
@@ -196,42 +199,62 @@ export function CartDrawer() {
           {qty === 0 ? (
             <p className="text-[14px] text-[color:var(--cw-muted)]">Your cart is empty.</p>
           ) : (
-            <div className="rounded-2xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p style={serif} className="text-[18px] leading-tight">
-                    {PRODUCT_NAME}
+            <>
+              <div className="border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p style={serif} className="text-[18px] leading-tight">
+                      {PRODUCT_NAME}
+                    </p>
+                    <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">Boar-bristle smoothing brush</p>
+                  </div>
+                  <p style={serif} className="shrink-0 text-[18px] tabular-nums">
+                    {money(PRICE * qty)}
                   </p>
-                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">Boar-bristle smoothing brush</p>
                 </div>
-                <p style={serif} className="shrink-0 text-[18px] tabular-nums">
-                  {money(PRICE * qty)}
-                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <button
+                    onClick={() => cart.setQty(qty - 1)}
+                    aria-label="Decrease quantity"
+                    className="h-8 w-8 border border-[color:var(--cw-line)]"
+                  >
+                    –
+                  </button>
+                  <span className="w-8 text-center text-[14px] tabular-nums">{qty}</span>
+                  <button
+                    onClick={() => cart.setQty(qty + 1)}
+                    aria-label="Increase quantity"
+                    className="h-8 w-8 border border-[color:var(--cw-line)]"
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() => cart.clear()}
+                    className="ml-auto text-[11px] uppercase tracking-[0.16em] text-[color:var(--cw-muted)] underline underline-offset-4"
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-              <div className="mt-4 flex items-center gap-2">
-                <button
-                  onClick={() => cart.setQty(qty - 1)}
-                  aria-label="Decrease quantity"
-                  className="h-8 w-8 rounded-full border border-[color:var(--cw-line)]"
-                >
-                  –
-                </button>
-                <span className="w-8 text-center text-[14px] tabular-nums">{qty}</span>
-                <button
-                  onClick={() => cart.setQty(qty + 1)}
-                  aria-label="Increase quantity"
-                  className="h-8 w-8 rounded-full border border-[color:var(--cw-line)]"
-                >
-                  +
-                </button>
-                <button
-                  onClick={() => cart.clear()}
-                  className="ml-auto text-[11px] uppercase tracking-[0.16em] text-[color:var(--cw-muted)] underline underline-offset-4"
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
+
+              <label className="mt-4 flex cursor-pointer items-start gap-3 border border-[color:var(--cw-line)] p-4">
+                <input
+                  type="checkbox"
+                  checked={protection}
+                  onChange={(e) => cart.setProtection(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 accent-[color:var(--cw-ink)]"
+                />
+                <span className="min-w-0">
+                  <span className="flex items-center justify-between gap-3">
+                    <span className="text-[13px] font-semibold">Shipping protection</span>
+                    <span className="shrink-0 text-[13px] tabular-nums">{money(PROTECTION_PRICE)}</span>
+                  </span>
+                  <span className="mt-1 block text-[12px] leading-5 text-[color:var(--cw-muted)]">
+                    Covers your order against loss, theft, or damage in transit.
+                  </span>
+                </span>
+              </label>
+            </>
           )}
         </div>
 
@@ -247,14 +270,14 @@ export function CartDrawer() {
             <a
               href={href}
               onClick={() => trackInitiateCheckout([VARIANT_ID], total, qty)}
-              className="mt-4 block w-full rounded-full bg-[color:var(--cw-ink)] px-6 py-4 text-center text-[13px] font-bold uppercase tracking-[0.18em] text-white"
+              className="mt-4 block w-full bg-[color:var(--cw-ink)] px-6 py-4 text-center text-[13px] font-bold uppercase tracking-[0.18em] text-white"
             >
               Checkout — {money(total)}
             </a>
           ) : (
             <button
               disabled
-              className="mt-4 block w-full cursor-not-allowed rounded-full bg-[color:var(--cw-ink)]/40 px-6 py-4 text-center text-[13px] font-bold uppercase tracking-[0.18em] text-white"
+              className="mt-4 block w-full cursor-not-allowed bg-[color:var(--cw-ink)]/40 px-6 py-4 text-center text-[13px] font-bold uppercase tracking-[0.18em] text-white"
             >
               Checkout
             </button>
@@ -276,6 +299,12 @@ export function CartDrawer() {
 
 export function SilkShell({ children, sticky = false }: { children: React.ReactNode; sticky?: boolean }) {
   const { qty } = useCart();
+  const nav = [
+    { label: "Shop", to: "/silkbrush" as const, hash: undefined },
+    { label: "How it works", to: "/silkbrush" as const, hash: "how" },
+    { label: "Reviews", to: "/silkbrush" as const, hash: "reviews" },
+    { label: "FAQ", to: "/silkbrush" as const, hash: "faq" },
+  ];
   return (
     <div
       style={{ ...SB_VARS, ...sans }}
@@ -288,12 +317,31 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
       </div>
 
       <header className="sticky top-0 z-40 border-b border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/95 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-6xl items-center px-4 md:h-16 md:px-8">
-          <Link to="/" className="inline-flex items-baseline">
-            <span style={serif} className="text-[22px] tracking-[0.18em] md:text-[26px]">
+        <div className="relative mx-auto flex h-14 max-w-6xl items-center px-4 md:h-16 md:px-8">
+          <nav className="hidden flex-1 items-center gap-6 md:flex">
+            {nav.map((n) => (
+              <Link
+                key={n.label}
+                to={n.to}
+                hash={n.hash}
+                style={sans}
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-muted)] hover:text-[color:var(--cw-ink)]"
+              >
+                {n.label}
+              </Link>
+            ))}
+          </nav>
+
+          <Link
+            to="/"
+            className="absolute left-1/2 -translate-x-1/2 inline-flex items-baseline"
+            aria-label="Seralie home"
+          >
+            <span style={serif} className="text-[22px] tracking-[0.22em] md:text-[26px]">
               SERALIE
             </span>
           </Link>
+
           <button
             onClick={() => cart.setOpen(true)}
             aria-label="Open cart"
@@ -304,6 +352,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
           </button>
         </div>
       </header>
+
 
       {children}
 
