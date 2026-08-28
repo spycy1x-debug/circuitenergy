@@ -72,7 +72,7 @@ function markSent(key: string) {
 }
 
 
-export const PRODUCT_NAME = "WaistSnatch™ Adjustable Waist Wrap";
+export const PRODUCT_NAME = "Seralie SilkBrush™";
 
 export function trackViewContent(variantId: string, price: number) {
   track(

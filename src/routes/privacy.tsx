@@ -4,9 +4,9 @@ import { WWProse } from "@/components/site/WWPage";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — WaistSnatch™" },
-      { name: "description", content: "How WaistSnatch™ handles your information when you place an order or join the email list, including storage and deletion on request." },
-      { property: "og:title", content: "Privacy Policy — WaistSnatch™" },
+      { title: "Privacy Policy — SilkBrush™" },
+      { name: "description", content: "How SilkBrush™ handles your information when you place an order or join the email list, including storage and deletion on request." },
+      { property: "og:title", content: "Privacy Policy — SilkBrush™" },
       { property: "og:description", content: "What we collect, why, and how to have it deleted." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
