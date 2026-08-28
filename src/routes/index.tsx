@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SilkShell, RatingLine } from "@/components/site/Silk";
-import { PRICE, PRICE_FORMATTED } from "@/lib/silkbrush-config";
+import { PRICE, money } from "@/lib/silkbrush-config";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -70,7 +70,7 @@ function HomePage() {
               root to tip — while you brush.
             </p>
             <p className="mt-4 text-lg font-bold text-[#141414]">
-              {PRICE_FORMATTED}
+              {money(PRICE)}
               <span className="ml-2 text-sm font-semibold text-[#6B6660]">
                 · Free shipping
               </span>
@@ -114,7 +114,7 @@ function HomePage() {
             to="/silkbrush"
             className="mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[#B07A4E] px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-[#B07A4E]/30 transition hover:bg-[#9A6A42]"
           >
-            Get My SilkBrush™ — {PRICE_FORMATTED}
+            Get My SilkBrush™ — {money(PRICE)}
           </Link>
           <p className="mt-4 text-xs text-white/50">
             Free shipping · 30-day money-back guarantee
