@@ -249,15 +249,15 @@ export function SilkBrushPage() {
                 ["02", "Brush", "Work through small sections of hair."],
                 ["03", "Finish", "Reveal a smoother, shinier, straighter-looking finish."],
               ].map(([n, t, d]) => (
-                <li key={n} className="flex gap-5 py-4">
+                <li key={n} className="flex min-w-0 gap-5 py-4">
                   <span style={serif} className="w-8 shrink-0 text-[18px] text-[color:var(--cw-brand-deep)]">
                     {n}
                   </span>
-                  <span>
-                    <span style={sans} className="block text-[11px] font-bold uppercase tracking-[0.2em]">
+                  <span className="min-w-0">
+                    <span style={sans} className="block text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)]">
                       {t}
                     </span>
-                    <span style={sans} className="mt-1 block text-[14px] leading-6 text-[color:var(--cw-muted)]">
+                    <span style={sans} className="mt-1 block break-words text-[14px] leading-6 text-[color:var(--cw-muted)]">
                       {d}
                     </span>
                   </span>
