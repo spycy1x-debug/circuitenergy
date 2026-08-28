@@ -9,7 +9,7 @@ function Cta({ label = "Add to Cart", className = "" }: { label?: string; classN
     <button
       onClick={() => addToCart(1)}
       style={sans}
-      className={`w-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#5C4A35] ${className}`}
+      className={`w-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#5C4A35] active:scale-[0.99] ${className}`}
     >
       {label}
     </button>

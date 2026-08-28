@@ -116,7 +116,7 @@ export function BuyButton({
     <button
       onClick={() => addToCart(1)}
       style={sans}
-      className={`block w-full rounded-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/15 transition hover:bg-[#5C4A35] ${className}`}
+      className={`block w-full rounded-full bg-[color:var(--gold-deep)] px-8 py-4 text-center text-[14px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/15 transition hover:bg-[#5C4A35] active:scale-[0.99] ${className}`}
     >
       {children}
     </button>
