@@ -47,44 +47,44 @@
   --radius: 0.25rem;
 
   /* Seralie — NOURISH: quiet-luxury apothecary */
-  --navy: #102A43;
-  --ivory: #F7F3EA;
+  --navy: #171717;
+  --ivory: #FAF9F6;
   --taupe: #A99F8F;
-  --gold: #B39A78;
+  --gold: #9A8060;
 
   --sand: #EFE9DC;
-  --bone: #F7F3EA;
-  --charcoal: #102A43;
-  --ink: #102A43;
-  --gold-soft: #D9C7B1;
-  --gold-hover: #9E815F;
+  --bone: #FAF9F6;
+  --charcoal: #171717;
+  --ink: #171717;
+  --gold-soft: #B39A78;
+  --gold-hover: #7F6649;
 
-  --background: #F7F3EA;
-  --foreground: #102A43;
+  --background: #FAF9F6;
+  --foreground: #171717;
 
-  --primary: #102A43;
-  --primary-foreground: #F7F3EA;
+  --primary: #171717;
+  --primary-foreground: #FAF9F6;
 
   --card: #FFFFFF;
-  --card-foreground: #102A43;
+  --card-foreground: #171717;
   --popover: #FFFFFF;
-  --popover-foreground: #102A43;
+  --popover-foreground: #171717;
 
   --secondary: #EFE9DC;
-  --secondary-foreground: #102A43;
+  --secondary-foreground: #171717;
   --muted: #EFE9DC;
   --muted-foreground: #7C7566;
   --accent: #EFE9DC;
-  --accent-foreground: #102A43;
+  --accent-foreground: #171717;
 
   --destructive: #8E3B2E;
-  --destructive-foreground: #F7F3EA;
+  --destructive-foreground: #FAF9F6;
   --success: #3F5A46;
-  --success-foreground: #F7F3EA;
+  --success-foreground: #FAF9F6;
 
   --border: #E4DCCC;
   --input: #E4DCCC;
-  --ring: #B39A78;
+  --ring: #9A8060;
 
   /* Seralie — LED patches: bright, clinical, one violet accent */
   --brand: #6D3BF5;
@@ -142,7 +142,7 @@
     background: var(--navy);
     color: var(--ivory);
   }
-  .btn-primary:hover { background: #1B3C5C; }
+  .btn-primary:hover { background: #333333; }
   .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
   .btn-outline {
     @apply inline-flex items-center justify-center rounded-none px-8 py-4 text-[11px] font-medium tracking-[0.18em] uppercase transition-colors duration-200;
