@@ -28,10 +28,10 @@ function HomePage() {
     <SilkShell>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-5 pt-14 pb-16 text-center sm:pt-20 sm:pb-24">
-        <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#B07A4E]">
+        <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#9A8060]">
           Seralie Haircare
         </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#141414] sm:text-6xl">
+        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#171717] sm:text-6xl">
           Good hair days,
           <br />
           every day.
@@ -43,7 +43,7 @@ function HomePage() {
         <div className="mt-8 flex flex-col items-center gap-3">
           <Link
             to="/silkbrush"
-            className="inline-flex h-14 items-center justify-center rounded-full bg-[#B07A4E] px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-[#B07A4E]/30 transition hover:bg-[#9A6A42]"
+            className="inline-flex h-14 items-center justify-center rounded-full bg-[#9A8060] px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-[#9A8060]/30 transition hover:bg-[#7F6649]"
           >
             Meet the SilkBrush™
           </Link>
@@ -52,16 +52,16 @@ function HomePage() {
       </section>
 
       {/* Product feature */}
-      <section className="bg-[#F7F4F0]">
+      <section className="bg-[#FAF9F6]">
         <div className="mx-auto grid max-w-5xl gap-10 px-5 py-16 sm:grid-cols-2 sm:items-center sm:py-20">
           <div className="flex aspect-[4/5] items-center justify-center rounded-3xl bg-white text-sm font-semibold text-[#6B6660]">
             [SilkBrush™ Product Photo]
           </div>
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#B07A4E]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#9A8060]">
               Our First Release
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#141414] sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#171717] sm:text-4xl">
               The SilkBrush™
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-[#6B6660]">
@@ -69,7 +69,7 @@ function HomePage() {
               adds natural shine by distributing your hair's own oils from
               root to tip — while you brush.
             </p>
-            <p className="mt-4 text-lg font-bold text-[#141414]">
+            <p className="mt-4 text-lg font-bold text-[#171717]">
               {money(PRICE)}
               <span className="ml-2 text-sm font-semibold text-[#6B6660]">
                 · Free shipping
@@ -77,7 +77,7 @@ function HomePage() {
             </p>
             <Link
               to="/silkbrush"
-              className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-[#141414] px-8 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-black"
+              className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-[#171717] px-8 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-[#333333]"
             >
               See How It Works
             </Link>
@@ -93,8 +93,8 @@ function HomePage() {
             { t: "Straighten", d: "A sleeker, straighter-looking finish — no heat required." },
             { t: "Shine", d: "Distributes natural oils for a healthy, glossy look." },
           ].map((v) => (
-            <div key={v.t} className="rounded-2xl bg-[#F7F4F0] p-6">
-              <h3 className="text-lg font-bold text-[#141414]">{v.t}</h3>
+            <div key={v.t} className="rounded-2xl bg-[#FAF9F6] p-6">
+              <h3 className="text-lg font-bold text-[#171717]">{v.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[#6B6660]">{v.d}</p>
             </div>
           ))}
@@ -102,7 +102,7 @@ function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-[#141414] text-center">
+      <section className="bg-[#171717] text-center">
         <div className="mx-auto max-w-3xl px-5 py-16 sm:py-20">
           <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Smooth. Straighten. Shine.
@@ -112,7 +112,7 @@ function HomePage() {
           </p>
           <Link
             to="/silkbrush"
-            className="mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[#B07A4E] px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-[#B07A4E]/30 transition hover:bg-[#9A6A42]"
+            className="mt-8 inline-flex h-14 items-center justify-center rounded-full bg-[#9A8060] px-10 text-[15px] font-bold uppercase tracking-wide text-white shadow-lg shadow-[#9A8060]/30 transition hover:bg-[#7F6649]"
           >
             Get My SilkBrush™ — {money(PRICE)}
           </Link>
