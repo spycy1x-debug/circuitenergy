@@ -141,19 +141,22 @@ function Gallery() {
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="absolute right-3 top-3 z-10">
-          <span
-            style={sans}
-            className="inline-block rounded-sm border border-[color:var(--cw-brand-deep)]/50 bg-[color:var(--cw-bg)] px-3 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)] shadow-sm"
-          >
-            Updated Design
-          </span>
-          <span
-            style={sans}
-            className="mt-1 block text-right text-[8px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-muted)]"
-          >
-            New wooden version
-          </span>
+        <div className="absolute right-2 top-2 z-20">
+          <div className="relative rounded-lg border border-[color:var(--gold-deep)] bg-[color:var(--cw-ink)] px-3 py-2 text-center shadow-xl shadow-black/25">
+            <span
+              style={sans}
+              className="block text-[9px] font-bold uppercase tracking-[0.14em] text-white"
+            >
+              Updated Design
+            </span>
+            <span
+              style={sans}
+              className="mt-0.5 block text-[8px] font-semibold uppercase tracking-[0.12em] text-white/70"
+            >
+              New wooden version
+            </span>
+            <span className="absolute -bottom-1.5 right-4 h-3 w-3 rotate-45 bg-[color:var(--cw-ink)] border-r border-b border-[color:var(--gold-deep)]" aria-hidden="true" />
+          </div>
         </div>
         <img
           src={GALLERY[i]!.url}
