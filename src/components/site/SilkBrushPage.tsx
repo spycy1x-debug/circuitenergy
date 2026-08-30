@@ -5,6 +5,7 @@ import { trackInitiateCheckout } from "@/lib/fb-pixel";
 import { SilkReviews } from "@/components/site/SilkReviews";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import img1 from "@/assets/silkbrush-meet-the-product.png.asset.json";
+import imgFeatures from "@/assets/silkbrush-features.png.asset.json";
 import img2 from "@/assets/sbx-2.webp.asset.json";
 import img3 from "@/assets/sbx-3.webp.asset.json";
 import img4 from "@/assets/sbx-4.webp.asset.json";
@@ -134,30 +135,13 @@ function OfferSection({ id }: { id?: string }) {
 
 /* --------------------------------- gallery -------------------------------- */
 
-const GALLERY = [img1, img2, img3, img4, img5, img6];
+const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
 
 function Gallery() {
   const [i, setI] = useState(0);
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <div className="absolute right-2 top-2 z-20">
-          <div className="relative rounded-lg border border-[color:var(--gold-deep)] bg-[color:var(--cw-ink)] px-3 py-2 text-center shadow-xl shadow-black/25">
-            <span
-              style={sans}
-              className="block text-[9px] font-bold uppercase tracking-[0.14em] text-white"
-            >
-              Updated Design
-            </span>
-            <span
-              style={sans}
-              className="mt-0.5 block text-[8px] font-semibold uppercase tracking-[0.12em] text-white/70"
-            >
-              New wooden version
-            </span>
-            <span className="absolute -bottom-1.5 right-4 h-3 w-3 rotate-45 bg-[color:var(--cw-ink)] border-r border-b border-[color:var(--gold-deep)]" aria-hidden="true" />
-          </div>
-        </div>
         <img
           src={GALLERY[i]!.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}
