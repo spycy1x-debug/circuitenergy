@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SilkShell, RatingLine } from "@/components/site/Silk";
 import { PRICE, money } from "@/lib/silkbrush-config";
+import heroImg from "@/assets/silkbrush-meet-the-product.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,8 +55,13 @@ function HomePage() {
       {/* Product feature */}
       <section className="bg-[#FAF9F6]">
         <div className="mx-auto grid max-w-5xl gap-10 px-5 py-16 sm:grid-cols-2 sm:items-center sm:py-20">
-          <div className="flex aspect-[4/5] items-center justify-center rounded-3xl bg-white text-sm font-semibold text-[#6B6660]">
-            [SilkBrush™ Product Photo]
+          <div className="overflow-hidden rounded-3xl bg-white">
+            <img
+              src={heroImg.url}
+              alt="Seralie SilkBrush™ boar-bristle brush"
+              className="aspect-[4/5] w-full object-cover"
+              loading="lazy"
+            />
           </div>
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-gold-deep">
