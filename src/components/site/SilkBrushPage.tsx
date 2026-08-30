@@ -146,6 +146,8 @@ const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
 
 function Gallery() {
   const [i, setI] = useState(0);
+  const prev = () => setI((v) => (v === 0 ? GALLERY.length - 1 : v - 1));
+  const next = () => setI((v) => (v === GALLERY.length - 1 ? 0 : v + 1));
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
@@ -155,6 +157,22 @@ function Gallery() {
           className="h-full w-full object-contain"
           style={{ aspectRatio: "4 / 5" }}
         />
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Previous image"
+          className="absolute left-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[18px] text-[color:var(--cw-ink)] shadow-sm transition hover:bg-[color:var(--cw-surface)] active:scale-95 md:left-3"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Next image"
+          className="absolute right-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[18px] text-[color:var(--cw-ink)] shadow-sm transition hover:bg-[color:var(--cw-surface)] active:scale-95 md:right-3"
+        >
+          ›
+        </button>
       </div>
       <div className="mt-3 grid grid-cols-6 gap-2">
         {GALLERY.map((g, idx) => (
