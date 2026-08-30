@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Media, RatingLine, SilkShell, Faq, sans, serif, Stars } from "@/components/site/Silk";
+import { Media, RatingLine, SilkShell, Faq, sans, serif } from "@/components/site/Silk";
 import { DEFAULT_TIER, money, TIERS, tierCheckoutUrl, type Tier } from "@/lib/silkbrush-config";
 import { trackInitiateCheckout } from "@/lib/fb-pixel";
 import { SilkReviews } from "@/components/site/SilkReviews";
