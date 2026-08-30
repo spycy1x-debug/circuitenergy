@@ -290,16 +290,6 @@ export function SilkBrushPage() {
             <UgcRow />
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="border border-dashed border-[color:var(--cw-brand-deep)]/45 bg-[color:var(--cw-bg)] p-5">
-                <Stars />
-                <p style={sans} className="mt-2 text-[12px] leading-6 text-[color:var(--cw-muted)]">
-                  PLACEHOLDER: REAL REVIEW {n} — paste a verified customer review here.
-                </p>
-              </div>
-            ))}
-          </div>
 
           <div className="mt-8 max-w-xs">
             <OfferLink />
