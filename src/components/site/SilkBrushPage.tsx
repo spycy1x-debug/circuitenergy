@@ -161,7 +161,7 @@ function Gallery() {
           type="button"
           onClick={prev}
           aria-label="Previous image"
-          className="absolute left-2 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[14px] text-[color:var(--cw-ink)] shadow-sm transition hover:bg-[color:var(--cw-surface)] active:scale-95 md:left-3"
+          className="absolute left-1.5 top-1/2 grid h-5 w-5 -translate-y-1/2 place-items-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[11px] text-[color:var(--cw-ink)] shadow-sm transition hover:bg-[color:var(--cw-surface)] active:scale-95 md:left-2"
         >
           ‹
         </button>
@@ -169,7 +169,7 @@ function Gallery() {
           type="button"
           onClick={next}
           aria-label="Next image"
-          className="absolute right-2 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[14px] text-[color:var(--cw-ink)] shadow-sm transition hover:bg-[color:var(--cw-surface)] active:scale-95 md:right-3"
+          className="absolute right-1.5 top-1/2 grid h-5 w-5 -translate-y-1/2 place-items-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[11px] text-[color:var(--cw-ink)] shadow-sm transition hover:bg-[color:var(--cw-surface)] active:scale-95 md:right-2"
         >
           ›
         </button>
