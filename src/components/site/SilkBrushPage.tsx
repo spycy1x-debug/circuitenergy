@@ -169,6 +169,8 @@ function Gallery() {
 
 /* ------------------------------ ugc carousel ------------------------------ */
 
+const UGC_VIDEOS = [vid1, vid2, vid3, vid4, vid5, vid6, vid7];
+
 function UgcRow() {
   const ref = useRef<HTMLDivElement>(null);
   const by = (d: number) => ref.current?.scrollBy({ left: d * (ref.current.clientWidth * 0.7), behavior: "smooth" });
@@ -176,15 +178,24 @@ function UgcRow() {
     <div className="relative">
       <div
         ref={ref}
-        className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0"
+        className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:mx-0 md:px-0"
       >
-        {[1, 2, 3, 4].map((n) => (
-          <div key={n} className="w-[72%] shrink-0 snap-center md:w-auto">
-            <Media label="VIDEO" ratio="9 / 16" note={`PLACEHOLDER: UGC VIDEO ${n}`} className="!rounded-none" />
+        {UGC_VIDEOS.map((v) => (
+          <div key={v.url} className="w-[72%] shrink-0 snap-center md:w-[calc((100%-2.25rem)/4)]">
+            <video
+              src={v.url}
+              className="w-full border border-[color:var(--cw-line)] bg-black object-cover"
+              style={{ aspectRatio: "9 / 16" }}
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+            />
           </div>
         ))}
       </div>
-      <div className="mt-3 flex gap-2 md:hidden">
+      <div className="mt-3 flex gap-2">
         <button onClick={() => by(-1)} aria-label="Previous" className="h-9 w-9 border border-[color:var(--cw-line)]">
           ‹
         </button>
