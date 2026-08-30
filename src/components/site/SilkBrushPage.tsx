@@ -406,7 +406,6 @@ export function SilkBrushPage() {
             )}
           </div>
 
-          <Media label="VIDEO" ratio="4 / 5" note="PLACEHOLDER: HOW-TO VIDEO" className="!rounded-none" />
         </div>
       </section>
 
