@@ -190,14 +190,14 @@ function UgcRow() {
         {UGC_VIDEOS.map((v) => (
           <div key={v.url} className="w-[72%] shrink-0 snap-center md:w-[calc((100%-2.25rem)/4)]">
             <video
-              src={v.url}
+              src={`${v.url}#t=0.1`}
               className="w-full border border-[color:var(--cw-line)] bg-black object-cover"
               style={{ aspectRatio: "9 / 16" }}
               muted
               loop
               playsInline
               controls
-              preload="metadata"
+              preload="auto"
             />
           </div>
         ))}
