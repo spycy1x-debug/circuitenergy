@@ -208,10 +208,10 @@ export function CartDrawer() {
                     <p style={serif} className="text-[18px] leading-tight">
                       {PRODUCT_NAME}
                     </p>
-                    <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">Boar-bristle smoothing brush</p>
+                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">{tier.label} · boar-bristle smoothing brush</p>
                   </div>
                   <p style={serif} className="shrink-0 text-[18px] tabular-nums">
-                    {money(PRICE * qty)}
+                    {money(tier.price * qty)}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center gap-2">
