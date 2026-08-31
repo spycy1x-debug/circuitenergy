@@ -171,6 +171,7 @@ export function CartDrawer() {
   const { qty, open } = useCart();
   const [, force] = useState(0);
   useEffect(() => cart.subscribe(() => force((v) => v + 1)), []);
+  const tier = cart.getTier();
   const protection = cart.hasProtection();
   const total = cartTotal(qty, protection);
   const href = cartCheckoutUrl(qty, protection);
