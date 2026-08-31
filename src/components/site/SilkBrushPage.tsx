@@ -14,10 +14,10 @@ import img6 from "@/assets/sbx-6.webp.asset.json";
 import imgCloseup from "@/assets/sbx-7.webp.asset.json";
 import imgUsing from "@/assets/sbx-8.webp.asset.json";
 import vid1 from "@/assets/sbv-1.mp4.asset.json";
-import vid2 from "@/assets/sbv-2.mp4.asset.json";
-import vid3 from "@/assets/sbv-3.mp4.asset.json";
+import vid2 from "@/assets/sbv-2b.mp4.asset.json";
+import vid3 from "@/assets/sbv-3b.mp4.asset.json";
 import vid4 from "@/assets/sbv-4.mp4.asset.json";
-import vid5 from "@/assets/sbv-5.mp4.asset.json";
+import vid5 from "@/assets/sbv-5b.mp4.asset.json";
 import vid6 from "@/assets/sbv-6.mp4.asset.json";
 import vid7 from "@/assets/sbv-7.mp4.asset.json";
 
