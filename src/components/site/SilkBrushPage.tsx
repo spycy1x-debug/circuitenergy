@@ -79,6 +79,11 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
           <span style={serif} className="block text-[20px] leading-tight sm:text-[24px]">
             {tier.label}
           </span>
+          {tier.subLabel && (
+            <span style={sans} className="mt-0.5 block text-[11px] text-[color:var(--cw-muted)]">
+              {tier.subLabel}
+            </span>
+          )}
           <span style={sans} className="mt-1 block text-[12px] text-[color:var(--cw-muted)]">
             {money(tier.price)} total
             {tier.saves ? ` · save ${money(tier.saves)}` : ""}
