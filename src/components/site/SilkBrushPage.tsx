@@ -120,14 +120,18 @@ function OfferSection({ id }: { id?: string }) {
         ))}
       </div>
 
-      <a
-        href={tierCheckoutUrl(tier)}
-        onClick={() => trackInitiateCheckout([tier.variantId], tier.price, 1)}
+      <button
+        type="button"
+        onClick={() => {
+          cart.setQty(0);
+          cart.add(1, tier.id);
+          trackAddToCart(tier.variantId, tier.price, 1);
+        }}
         style={sans}
         className="mt-6 block w-full rounded-full bg-[color:var(--gold-deep)] px-8 py-5 text-center text-[15px] font-bold uppercase tracking-[0.18em] text-white shadow-lg shadow-black/15 transition hover:bg-[#5C4A35] active:scale-[0.99]"
       >
         Add to Cart — {money(tier.price)}
-      </a>
+      </button>
 
       <img src={payBadges.url} alt="Accepted payment methods" className="mx-auto mt-4 h-6 w-auto object-contain" loading="lazy" />
 
