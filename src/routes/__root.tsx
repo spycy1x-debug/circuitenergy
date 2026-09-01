@@ -51,7 +51,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
-      { name: "description", content: "The Seralie SilkBrush™ is a boar-bristle brush designed to smooth frizz and create a sleek, straighter-looking finish while you brush. Free shipping, 365-day money-back guarantee." },
+      { name: "description", content: "The Seralie SilkBrush™ is a boar-bristle brush designed to smooth frizz and create a sleek, straighter-looking finish while you brush. Free shipping on 2+, 365-day money-back guarantee." },
       { property: "og:title", content: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
       { name: "twitter:title", content: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
       { property: "og:description", content: "Boar-bristle brush for smoother, shinier, straighter-looking hair." },
