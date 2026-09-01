@@ -5,7 +5,7 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop — Seralie SilkBrush™" },
-      { name: "description", content: "Shop the Seralie SilkBrush™ — a boar-bristle brush for smoother, shinier, straighter-looking hair. $37.99 with free shipping." },
+      { name: "description", content: "Shop the Seralie SilkBrush™ — a boar-bristle brush for smoother, shinier, straighter-looking hair. $37.99 with free shipping on 2+." },
       { property: "og:title", content: "Shop — Seralie SilkBrush™" },
       { property: "og:description", content: "One brush. Smoother, shinier, straighter-looking hair." },
       { property: "og:type", content: "website" },

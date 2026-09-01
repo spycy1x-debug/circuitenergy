@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Seralie makes thoughtful haircare tools, starting with the SilkBrush™ — a boar-bristle brush that smooths frizz and adds shine while you brush. Free shipping. 365-day guarantee.",
+          "Seralie makes thoughtful haircare tools, starting with the SilkBrush™ — a boar-bristle brush that smooths frizz and adds shine while you brush. Free shipping on 2+. 365-day guarantee.",
       },
       { property: "og:title", content: "Seralie — Haircare, Simplified" },
       {
@@ -78,7 +78,7 @@ function HomePage() {
             <p className="mt-4 text-lg font-bold text-[#171717]">
               {money(PRICE)}
               <span className="ml-2 text-sm font-semibold text-[#6B6660]">
-                · Free shipping
+                · Free shipping on 2+
               </span>
             </p>
             <Link
@@ -123,7 +123,7 @@ function HomePage() {
             Get My SilkBrush™ — {money(PRICE)}
           </Link>
           <p className="mt-4 text-xs text-white/50">
-            Free shipping · 365-day money-back guarantee
+            Free shipping on 2+ · 365-day money-back guarantee
           </p>
         </div>
       </section>

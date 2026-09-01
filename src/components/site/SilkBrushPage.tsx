@@ -140,7 +140,7 @@ function OfferSection({ id }: { id?: string }) {
         style={sans}
         className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[color:var(--gold-deep)]"
       >
-        <li>Free shipping</li>
+        <li>Free shipping on 2+</li>
         <li aria-hidden>·</li>
         <li>365-day guarantee</li>
         <li aria-hidden>·</li>
