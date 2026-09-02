@@ -16,9 +16,9 @@ export type Tier = {
 };
 
 export const TIERS: Tier[] = [
-  { id: "1pk", label: "1 Brush", price: 29.99, compareAt: null, perUnit: 29.99, saves: null, tag: null, variantId: "49137549574298" },
-  { id: "2pk", label: "2 Brushes", subLabel: "One for home, one for your bag.", price: 49.99, compareAt: 59.98, perUnit: 25.0, saves: 9.99, tag: "MOST POPULAR", variantId: "49137550491802" },
-  { id: "3pk", label: "3 Brushes", price: 67.99, compareAt: 89.97, perUnit: 22.66, saves: 21.98, tag: "BEST VALUE", variantId: "49137550524570" },
+  { id: "1pk", label: "1 Brush", price: 29.99, compareAt: 39.99, perUnit: 29.99, saves: 10.0, tag: null, variantId: "49137549574298" },
+  { id: "2pk", label: "2 Brushes", subLabel: "One for home, one for your bag.", price: 49.99, compareAt: 79.98, perUnit: 25.0, saves: 29.99, tag: "MOST POPULAR", variantId: "49137550491802" },
+  { id: "3pk", label: "3 Brushes", price: 67.99, compareAt: 119.97, perUnit: 22.66, saves: 51.98, tag: "BEST VALUE", variantId: "49137550524570" },
 ];
 
 export const DEFAULT_TIER = "2pk";
