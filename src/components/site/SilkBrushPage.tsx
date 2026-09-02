@@ -164,7 +164,7 @@ function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <img
-          src={GALLERY[i]!.url}
+          src={images[i]!.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}
           className="h-full w-full object-contain"
           style={{ aspectRatio: "4 / 5" }}
@@ -187,7 +187,7 @@ function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
         </button>
       </div>
       <div className="mt-3 grid grid-cols-6 gap-2">
-        {GALLERY.map((g, idx) => (
+        {images.map((g, idx) => (
           <button
             key={g.url}
             onClick={() => setI(idx)}
