@@ -154,10 +154,12 @@ function OfferSection({ id }: { id?: string }) {
 
 const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
 
-function Gallery() {
+type GalleryImage = { url: string };
+
+function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
   const [i, setI] = useState(0);
-  const prev = () => setI((v) => (v === 0 ? GALLERY.length - 1 : v - 1));
-  const next = () => setI((v) => (v === GALLERY.length - 1 ? 0 : v + 1));
+  const prev = () => setI((v) => (v === 0 ? images.length - 1 : v - 1));
+  const next = () => setI((v) => (v === images.length - 1 ? 0 : v + 1));
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
