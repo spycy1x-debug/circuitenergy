@@ -272,7 +272,13 @@ function UgcRow() {
 
 /* ---------------------------------- page ---------------------------------- */
 
-export function SilkBrushPage() {
+export function SilkBrushPage({
+  galleryImages,
+  materialSelector = false,
+}: {
+  galleryImages?: GalleryImage[];
+  materialSelector?: boolean;
+}) {
   const [openSpec, setOpenSpec] = useState(false);
 
   return (
@@ -280,7 +286,7 @@ export function SilkBrushPage() {
       {/* 1 — PRODUCT HERO */}
       <section className="mx-auto max-w-6xl px-5 pb-14 pt-6 md:px-8 md:pb-20 md:pt-10">
         <div className="grid gap-8 md:grid-cols-2 md:gap-14">
-          <Gallery />
+          <Gallery images={galleryImages} />
 
           <div className="md:pt-2">
             <RatingLine />
