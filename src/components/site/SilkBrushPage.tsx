@@ -109,12 +109,38 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
   );
 }
 
-function OfferSection({ id }: { id?: string }) {
+function OfferSection({ id, materialSelector = false }: { id?: string; materialSelector?: boolean }) {
   const [sel, setSel] = useState(DEFAULT_TIER);
+  const [material, setMaterial] = useState<"bamboo" | "plastic">("bamboo");
   const tier = TIERS.find((t) => t.id === sel) ?? TIERS[0]!;
 
   return (
     <div id={id} className="scroll-mt-20">
+      {materialSelector && (
+        <div className="pt-3">
+          <p style={sans} className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[color:var(--cw-brand-deep)]">
+            Choose your finish
+          </p>
+          <div className="mt-2 grid grid-cols-2 gap-3">
+            {(["bamboo", "plastic"] as const).map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMaterial(m)}
+                aria-pressed={material === m}
+                style={sans}
+                className={`rounded-xl px-4 py-3 text-[13px] font-bold uppercase tracking-[0.14em] transition ${
+                  material === m
+                    ? "border-2 border-[color:var(--gold-deep)] bg-[color:var(--cw-surface)] text-[color:var(--cw-ink)] shadow-lg shadow-black/10"
+                    : "border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[color:var(--cw-muted)]"
+                }`}
+              >
+                {m === "bamboo" ? "Bamboo" : "Plastic"}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="space-y-5 pt-3">
         {TIERS.map((t) => (
           <TierCard key={t.id} tier={t} selected={t.id === tier.id} onSelect={() => setSel(t.id)} />
@@ -154,15 +180,17 @@ function OfferSection({ id }: { id?: string }) {
 
 const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
 
-function Gallery() {
+type GalleryImage = { url: string };
+
+function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
   const [i, setI] = useState(0);
-  const prev = () => setI((v) => (v === 0 ? GALLERY.length - 1 : v - 1));
-  const next = () => setI((v) => (v === GALLERY.length - 1 ? 0 : v + 1));
+  const prev = () => setI((v) => (v === 0 ? images.length - 1 : v - 1));
+  const next = () => setI((v) => (v === images.length - 1 ? 0 : v + 1));
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <img
-          src={GALLERY[i]!.url}
+          src={images[i]!.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}
           className="h-full w-full object-contain"
           style={{ aspectRatio: "4 / 5" }}
@@ -185,7 +213,7 @@ function Gallery() {
         </button>
       </div>
       <div className="mt-3 grid grid-cols-6 gap-2">
-        {GALLERY.map((g, idx) => (
+        {images.map((g, idx) => (
           <button
             key={g.url}
             onClick={() => setI(idx)}
@@ -244,7 +272,13 @@ function UgcRow() {
 
 /* ---------------------------------- page ---------------------------------- */
 
-export function SilkBrushPage() {
+export function SilkBrushPage({
+  galleryImages,
+  materialSelector = false,
+}: {
+  galleryImages?: GalleryImage[];
+  materialSelector?: boolean;
+}) {
   const [openSpec, setOpenSpec] = useState(false);
 
   return (
@@ -252,7 +286,7 @@ export function SilkBrushPage() {
       {/* 1 — PRODUCT HERO */}
       <section className="mx-auto max-w-6xl px-5 pb-14 pt-6 md:px-8 md:pb-20 md:pt-10">
         <div className="grid gap-8 md:grid-cols-2 md:gap-14">
-          <Gallery />
+          <Gallery images={galleryImages} />
 
           <div className="md:pt-2">
             <RatingLine />
@@ -265,7 +299,7 @@ export function SilkBrushPage() {
             </p>
 
             <div className="mt-8">
-              <OfferSection id="offer" />
+              <OfferSection id="offer" materialSelector={materialSelector} />
             </div>
           </div>
         </div>

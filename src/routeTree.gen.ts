@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as Silkbrush2RouteImport } from './routes/silkbrush-2'
 import { Route as SilkbrushRouteImport } from './routes/silkbrush'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShippingRouteImport } from './routes/shipping'
@@ -28,6 +29,11 @@ import { Route as ApiPublicKlaviyoSubscribeRouteImport } from './routes/api/publ
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Silkbrush2Route = Silkbrush2RouteImport.update({
+  id: '/silkbrush-2',
+  path: '/silkbrush-2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SilkbrushRoute = SilkbrushRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/silkbrush': typeof SilkbrushRoute
+  '/silkbrush-2': typeof Silkbrush2Route
   '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/silkbrush': typeof SilkbrushRoute
+  '/silkbrush-2': typeof Silkbrush2Route
   '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/silkbrush': typeof SilkbrushRoute
+  '/silkbrush-2': typeof Silkbrush2Route
   '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/api/public/klaviyo-subscribe': typeof ApiPublicKlaviyoSubscribeRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/shop'
     | '/silkbrush'
+    | '/silkbrush-2'
     | '/terms'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/shop'
     | '/silkbrush'
+    | '/silkbrush-2'
     | '/terms'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/shop'
     | '/silkbrush'
+    | '/silkbrush-2'
     | '/terms'
     | '/admin/analytics'
     | '/api/public/klaviyo-subscribe'
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRoute
   SilkbrushRoute: typeof SilkbrushRoute
+  Silkbrush2Route: typeof Silkbrush2Route
   TermsRoute: typeof TermsRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   ApiPublicKlaviyoSubscribeRoute: typeof ApiPublicKlaviyoSubscribeRoute
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/silkbrush-2': {
+      id: '/silkbrush-2'
+      path: '/silkbrush-2'
+      fullPath: '/silkbrush-2'
+      preLoaderRoute: typeof Silkbrush2RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/silkbrush': {
@@ -349,6 +369,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShippingRoute: ShippingRoute,
   ShopRoute: ShopRoute,
   SilkbrushRoute: SilkbrushRoute,
+  Silkbrush2Route: Silkbrush2Route,
   TermsRoute: TermsRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   ApiPublicKlaviyoSubscribeRoute: ApiPublicKlaviyoSubscribeRoute,
