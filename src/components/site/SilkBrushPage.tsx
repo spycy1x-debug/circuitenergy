@@ -299,7 +299,7 @@ export function SilkBrushPage({
             </p>
 
             <div className="mt-8">
-              <OfferSection id="offer" />
+              <OfferSection id="offer" materialSelector={materialSelector} />
             </div>
           </div>
         </div>
