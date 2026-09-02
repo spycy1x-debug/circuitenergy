@@ -160,6 +160,15 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
           </div>
         </div>
       )}
+      <div className="rounded-lg border border-[color:var(--gold-deep)] bg-[color:var(--cw-surface)] p-3 text-center shadow-sm">
+        <p style={sans} className="text-[11px] font-bold uppercase tracking-[0.22em] text-[color:var(--gold-deep)]">
+          Labor Day Weekend Sale
+        </p>
+        <p style={sans} className="mt-0.5 text-[12px] text-[color:var(--cw-muted)]">
+          Limited time — prices go back up Tuesday.
+        </p>
+      </div>
+
       <div className="space-y-5 pt-3">
         {TIERS.map((t) => (
           <TierCard key={t.id} tier={t} selected={t.id === tier.id} onSelect={() => setSel(t.id)} />
