@@ -129,13 +129,18 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
                 onClick={() => setMaterial(m)}
                 aria-pressed={material === m}
                 style={sans}
-                className={`rounded-xl px-4 py-3 text-[13px] font-bold uppercase tracking-[0.14em] transition ${
+                className={`relative rounded-xl px-4 py-3 text-[13px] font-bold uppercase tracking-[0.14em] transition ${
                   material === m
                     ? "border-2 border-[color:var(--gold-deep)] bg-[color:var(--cw-surface)] text-[color:var(--cw-ink)] shadow-lg shadow-black/10"
                     : "border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[color:var(--cw-muted)]"
                 }`}
               >
                 {m === "bamboo" ? "Bamboo" : "Plastic"}
+                {m === "bamboo" && (
+                  <span className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-[color:var(--gold-deep)] px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] text-white shadow-sm">
+                    Recommended
+                  </span>
+                )}
               </button>
             ))}
           </div>
