@@ -109,12 +109,38 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
   );
 }
 
-function OfferSection({ id }: { id?: string }) {
+function OfferSection({ id, materialSelector = false }: { id?: string; materialSelector?: boolean }) {
   const [sel, setSel] = useState(DEFAULT_TIER);
+  const [material, setMaterial] = useState<"bamboo" | "plastic">("bamboo");
   const tier = TIERS.find((t) => t.id === sel) ?? TIERS[0]!;
 
   return (
     <div id={id} className="scroll-mt-20">
+      {materialSelector && (
+        <div className="pt-3">
+          <p style={sans} className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[color:var(--cw-brand-deep)]">
+            Choose your finish
+          </p>
+          <div className="mt-2 grid grid-cols-2 gap-3">
+            {(["bamboo", "plastic"] as const).map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMaterial(m)}
+                aria-pressed={material === m}
+                style={sans}
+                className={`rounded-xl px-4 py-3 text-[13px] font-bold uppercase tracking-[0.14em] transition ${
+                  material === m
+                    ? "border-2 border-[color:var(--gold-deep)] bg-[color:var(--cw-surface)] text-[color:var(--cw-ink)] shadow-lg shadow-black/10"
+                    : "border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[color:var(--cw-muted)]"
+                }`}
+              >
+                {m === "bamboo" ? "Bamboo" : "Plastic"}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="space-y-5 pt-3">
         {TIERS.map((t) => (
           <TierCard key={t.id} tier={t} selected={t.id === tier.id} onSelect={() => setSel(t.id)} />
