@@ -32,7 +32,7 @@ export const Route = createFileRoute("/silkbrush")({
   component: SilkBrushProduct,
 });
 
-const GALLERY = [imgFeatures, img2, img3, img4, img5, img6];
+const GALLERY = [imgHero, imgFeatures, img2, img3, img4, img5, img6];
 
 function SilkBrushProduct() {
   useEffect(() => {
