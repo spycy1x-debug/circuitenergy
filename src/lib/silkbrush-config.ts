@@ -33,7 +33,7 @@ export const VARIANT_ID = "";
 
 /** Shipping protection add-on (optional, offered in the cart). */
 export const PROTECTION_VARIANT_ID = "48890343030938";
-export const PROTECTION_PRICE = 3.99;
+export const PROTECTION_PRICE = 3.95;
 
 export const RATING = 4.8;
 /** Set to a real number once reviews are collected. Null hides the count. */
