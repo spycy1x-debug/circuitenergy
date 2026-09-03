@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      ab_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          path: string | null
+          tier_id: string | null
+          value: number | null
+          variant: string
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          path?: string | null
+          tier_id?: string | null
+          value?: number | null
+          variant: string
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          path?: string | null
+          tier_id?: string | null
+          value?: number | null
+          variant?: string
+          visitor_id?: string
+        }
+        Relationships: []
+      }
       product_reviews: {
         Row: {
           body: string

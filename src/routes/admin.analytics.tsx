@@ -11,7 +11,8 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { getShopifyAnalytics } from "@/lib/shopify-admin.functions";
+import { getShopifyAnalytics, getAbPurchases } from "@/lib/shopify-admin.functions";
+import { AB_TEST_ENABLED } from "@/lib/ab-test";
 
 export const Route = createFileRoute("/admin/analytics")({
   head: () => ({
@@ -203,6 +204,10 @@ function AdminAnalytics() {
               </Card>
             </div>
 
+            <div className="mt-10">
+              <AbTestReport />
+            </div>
+
             <p className="mt-10 text-xs text-white/40">
               Live visitor/session counts are tracked inside Shopify Admin →
               Analytics → Live View. Order, revenue, and product data here come
@@ -212,6 +217,85 @@ function AdminAnalytics() {
         )}
       </div>
     </section>
+  );
+}
+
+/* --------------------------- A/B test reporting --------------------------- */
+
+type AbRow = {
+  variant: "A" | "B";
+  visitors: number;
+  addToCarts: number;
+  checkouts: number;
+  purchases: number;
+  revenue: number;
+};
+
+function AbTestReport() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["ab-report"],
+    queryFn: async (): Promise<AbRow[]> => {
+      const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+      const [{ data: events }, purchases] = await Promise.all([
+        supabase.from("ab_events").select("variant,event,visitor_id").gte("created_at", since),
+        getAbPurchases().catch(() => ({ A: { purchases: 0, revenue: 0 }, B: { purchases: 0, revenue: 0 } })),
+      ]);
+      return (["A", "B"] as const).map((v) => {
+        const rows = (events ?? []).filter((e) => e.variant === v);
+        const visitors = new Set(rows.filter((e) => e.event === "view").map((e) => e.visitor_id)).size;
+        return {
+          variant: v,
+          visitors,
+          addToCarts: rows.filter((e) => e.event === "add_to_cart").length,
+          checkouts: rows.filter((e) => e.event === "initiate_checkout").length,
+          purchases: purchases[v].purchases,
+          revenue: purchases[v].revenue,
+        };
+      });
+    },
+    refetchInterval: 60_000,
+  });
+
+  const usd = (n: number) =>
+    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+
+  return (
+    <Card title={`Offer A/B test ${AB_TEST_ENABLED ? "(running)" : "(off)"} — last 30 days`}>
+      {isLoading || !data ? (
+        <Empty text="Loading…" />
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-white/50 text-xs uppercase tracking-[0.14em]">
+              <tr>
+                {["Variant", "Visitors", "Add to cart", "Checkout", "Purchases", "CVR", "AOV", "Revenue", "Rev / visitor"].map((h) => (
+                  <th key={h} className="py-2 pr-4 text-left font-semibold">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((r) => (
+                <tr key={r.variant} className="border-t border-white/10">
+                  <td className="py-3 pr-4 font-semibold">{r.variant === "A" ? "A — current offer" : "B — +free gift"}</td>
+                  <td className="py-3 pr-4 tabular-nums">{r.visitors}</td>
+                  <td className="py-3 pr-4 tabular-nums">{r.addToCarts}</td>
+                  <td className="py-3 pr-4 tabular-nums">{r.checkouts}</td>
+                  <td className="py-3 pr-4 tabular-nums">{r.purchases}</td>
+                  <td className="py-3 pr-4 tabular-nums">{r.visitors ? ((r.purchases / r.visitors) * 100).toFixed(2) : "0.00"}%</td>
+                  <td className="py-3 pr-4 tabular-nums">{usd(r.purchases ? r.revenue / r.purchases : 0)}</td>
+                  <td className="py-3 pr-4 tabular-nums">{usd(r.revenue)}</td>
+                  <td className="py-3 pr-4 tabular-nums font-semibold">{usd(r.visitors ? r.revenue / r.visitors : 0)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="mt-3 text-xs text-white/40">
+            Visitors / add-to-cart / checkout come from first-party page events. Purchases and revenue come from real
+            Shopify orders, matched by offer SKU — no extra Purchase events are fired.
+          </p>
+        </div>
+      )}
+    </Card>
   );
 }
 

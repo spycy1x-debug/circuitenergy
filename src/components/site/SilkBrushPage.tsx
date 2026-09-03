@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Media, RatingLine, SilkShell, Faq, sans, serif } from "@/components/site/Silk";
-import { DEFAULT_TIER, money, TIERS, type Tier } from "@/lib/silkbrush-config";
+import { money, type Tier } from "@/lib/silkbrush-config";
+import { defaultTierFor, logAbEvent, tiersFor, useAbVariant } from "@/lib/ab-test";
 import { cart } from "@/lib/silkbrush-cart";
 import { trackAddToCart } from "@/lib/fb-pixel";
 import { SilkReviews } from "@/components/site/SilkReviews";
@@ -124,9 +125,11 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
 }
 
 function OfferSection({ id, materialSelector = false }: { id?: string; materialSelector?: boolean }) {
-  const [sel, setSel] = useState(DEFAULT_TIER);
+  const variant = useAbVariant();
+  const tiers = tiersFor(variant);
+  const [sel, setSel] = useState<string | null>(null);
   const [material, setMaterial] = useState<"bamboo" | "plastic">("bamboo");
-  const tier = TIERS.find((t) => t.id === sel) ?? TIERS[0]!;
+  const tier = tiers.find((t) => t.id === sel) ?? tiers.find((t) => t.id === defaultTierFor(variant)) ?? tiers[0]!;
 
   return (
     <div id={id} className="scroll-mt-20">
@@ -170,8 +173,11 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
       </div>
 
       <div className="space-y-5 pt-3">
-        {TIERS.map((t) => (
-          <TierCard key={t.id} tier={t} selected={t.id === tier.id} onSelect={() => setSel(t.id)} />
+        {tiers.map((t) => (
+          <TierCard key={t.id} tier={t} selected={t.id === tier.id} onSelect={() => {
+              setSel(t.id);
+              logAbEvent("select", { variant, tierId: t.id, value: t.price });
+            }} />
         ))}
       </div>
 
@@ -180,6 +186,7 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
         onClick={() => {
           cart.setQty(0);
           cart.add(1, tier.id);
+          logAbEvent("add_to_cart", { variant, tierId: tier.id, value: tier.price });
           trackAddToCart(tier.variantId, tier.price, 1);
         }}
         style={sans}

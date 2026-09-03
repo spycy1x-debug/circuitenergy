@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { SilkBrushPage } from "@/components/site/SilkBrushPage";
 import { trackViewContent } from "@/lib/fb-pixel";
+import { getVariant, logAbEvent } from "@/lib/ab-test";
 import { PRICE, VARIANT_ID } from "@/lib/silkbrush-config";
 import img1 from "@/assets/silkbrush-prod-1.png.asset.json";
 import imgFeatures from "@/assets/silkbrush-features.png.asset.json";
@@ -36,6 +37,8 @@ const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
 
 function SilkBrushProduct() {
   useEffect(() => {
+    const variant = getVariant();
+    logAbEvent("view", { variant });
     trackViewContent(VARIANT_ID || "silkbrush", PRICE);
   }, []);
   return <SilkBrushPage galleryImages={GALLERY} />;

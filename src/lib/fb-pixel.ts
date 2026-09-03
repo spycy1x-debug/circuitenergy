@@ -3,6 +3,8 @@
 // Dataset / Pixel ID: 1737097460668836
 // =====================================================================
 
+import { AB_TEST_ENABLED, getVariantCached } from "./ab-test";
+
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
@@ -22,7 +24,8 @@ function send(name: string, params: Record<string, unknown>) {
   const value = Number(params["value"]);
   if (!Number.isFinite(value) || value <= 0) return false; // Meta can't optimize without a real value
   if (typeof window === "undefined" || typeof window.fbq !== "function") return false;
-  window.fbq("track", name, { ...params, value, currency: "USD" }, { eventID: eventId() });
+  const ab = AB_TEST_ENABLED ? { ab_variant: getVariantCached() } : {};
+  window.fbq("track", name, { ...params, ...ab, value, currency: "USD" }, { eventID: eventId() });
   return true;
 }
 

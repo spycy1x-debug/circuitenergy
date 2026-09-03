@@ -102,3 +102,46 @@ export const getShopifyAnalytics = createServerFn({ method: "GET" }).handler(
     };
   },
 );
+
+/* ------------------------- A/B test purchase data -------------------------- */
+
+const AB_SKUS: Record<string, "A" | "B"> = {
+  "SB-1PK": "A",
+  "SB-2PK": "A",
+  "SB-3PK": "A",
+  "SB-1PK-B": "B",
+  "SB-2PK-B-GIFT": "B",
+  "SB-3PK-B-GIFT": "B",
+};
+
+/**
+ * Purchases + revenue per A/B variant, derived from real Shopify orders.
+ * Each offer has its own SKU, so no extra tracking or duplicate events are needed.
+ */
+export const getAbPurchases = createServerFn({ method: "GET" }).handler(async () => {
+  const since = new Date();
+  since.setDate(since.getDate() - 30);
+  const res = await adminFetch(
+    `orders.json?status=any&limit=250&created_at_min=${since.toISOString()}`,
+  );
+  const orders: Array<Order & { line_items: Array<{ sku?: string; title: string; quantity: number; price: string }> }> =
+    res.orders ?? [];
+
+  const totals = {
+    A: { purchases: 0, revenue: 0 },
+    B: { purchases: 0, revenue: 0 },
+  };
+
+  for (const o of orders) {
+    let variant: "A" | "B" | null = null;
+    for (const li of o.line_items || []) {
+      const v = li.sku ? AB_SKUS[li.sku] : undefined;
+      if (v) variant = v;
+    }
+    if (!variant) continue;
+    totals[variant].purchases += 1;
+    totals[variant].revenue += parseFloat(o.total_price || "0");
+  }
+
+  return totals;
+});
