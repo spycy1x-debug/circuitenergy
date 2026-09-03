@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { SilkBrushPage } from "@/components/site/SilkBrushPage";
 import { trackViewContent } from "@/lib/fb-pixel";
 import { PRICE, VARIANT_ID } from "@/lib/silkbrush-config";
-import imgHero from "@/assets/silkbrush-hero.png.asset.json";
+import img1 from "@/assets/silkbrush-prod-1.png.asset.json";
 import imgFeatures from "@/assets/silkbrush-features.png.asset.json";
 import img2 from "@/assets/sbx-2.webp.asset.json";
 import img3 from "@/assets/sbx-3.webp.asset.json";
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/silkbrush")({
   component: SilkBrushProduct,
 });
 
-const GALLERY = [imgHero, imgFeatures, img2, img3, img4, img5, img6];
+const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
 
 function SilkBrushProduct() {
   useEffect(() => {
