@@ -30,15 +30,15 @@ export const GIFT_NAME = "FREE Scalp Scrubber";
 
 /** VARIANT B — higher-priced offer with a free scalp scrubber on the 2- and 3-packs. */
 export const TIERS_B: Tier[] = [
-  { id: "b1pk", label: "1 Brush", price: 34.99, compareAt: 39.99, perUnit: 34.99, saves: 5.0, tag: null, variantId: "49175120150682" },
+  { id: "b1pk", label: "1 Brush", price: 34.99, compareAt: 49.99, perUnit: 34.99, saves: 15.0, tag: null, variantId: "49175120150682" },
   {
     id: "b2pk",
     label: "2 Brushes + FREE GIFT",
     subLabel: "Includes a FREE Scalp Scrubber.",
     price: 54.99,
-    compareAt: 79.98,
+    compareAt: 99.98,
     perUnit: 27.5,
-    saves: 24.99,
+    saves: 44.99,
     tag: "MOST POPULAR",
     variantId: "49175120183450",
     giftVariantId: GIFT_VARIANT_ID,
@@ -48,9 +48,9 @@ export const TIERS_B: Tier[] = [
     label: "3 Brushes + FREE GIFT",
     subLabel: "Includes a FREE Scalp Scrubber.",
     price: 74.99,
-    compareAt: 119.97,
+    compareAt: 139.97,
     perUnit: 25.0,
-    saves: 44.98,
+    saves: 64.98,
     tag: "BEST VALUE",
     variantId: "49175120216218",
     giftVariantId: GIFT_VARIANT_ID,
