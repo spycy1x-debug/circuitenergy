@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { cart, cartCheckoutUrl, cartTotal } from "@/lib/silkbrush-cart";
 import { money, PRICE, PRODUCT_NAME, PROTECTION_PRICE, RATING, REVIEW_COUNT, VARIANT_ID } from "@/lib/silkbrush-config";
 import { trackAddToCart, trackInitiateCheckout } from "@/lib/fb-pixel";
+import { getVariantCached, logAbEvent } from "@/lib/ab-test";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 
 /* ------------------------------- tokens ---------------------------------- */
@@ -92,8 +93,13 @@ export function Media({
 
 export function useCart() {
   const [, force] = useState(0);
-  useEffect(() => cart.subscribe(() => force((v) => v + 1)), []);
-  return { qty: cart.getQty(), open: cart.isOpen() };
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+    return cart.subscribe(() => force((v) => v + 1));
+  }, []);
+  // Cart state comes from localStorage — render empty on the server so hydration matches.
+  return { qty: mounted ? cart.getQty() : 0, open: mounted ? cart.isOpen() : false };
 }
 
 let lock = 0;
@@ -102,6 +108,8 @@ export function addToCart(n = 1) {
   if (now - lock < 1200) return;
   lock = now;
   cart.add(n);
+  const tier = cart.getTier();
+  logAbEvent("add_to_cart", { tierId: tier.id, value: tier.price * n });
   trackAddToCart(VARIANT_ID || "silkbrush", PRICE * n, n);
 }
 
@@ -239,6 +247,13 @@ export function CartDrawer() {
                 </div>
               </div>
 
+              {tier.giftVariantId && (
+                <div className="mt-4 flex items-center justify-between gap-3 border border-[color:var(--cw-line)] p-4">
+                  <span className="text-[13px] font-semibold">FREE Scalp Scrubber</span>
+                  <span className="shrink-0 text-[13px] font-semibold uppercase tracking-[0.12em] text-[color:var(--gold-deep)]">Free</span>
+                </div>
+              )}
+
               <label className="mt-4 flex cursor-pointer items-start gap-3 border border-[color:var(--cw-line)] p-4">
                 <input
                   type="checkbox"
@@ -271,7 +286,10 @@ export function CartDrawer() {
           {href ? (
             <a
               href={href}
-              onClick={() => trackInitiateCheckout([VARIANT_ID], total, qty)}
+              onClick={() => {
+                logAbEvent("initiate_checkout", { tierId: tier.id, value: total });
+                trackInitiateCheckout([VARIANT_ID], total, qty);
+              }}
               className="mt-4 block w-full bg-[color:var(--cw-ink)] px-6 py-4 text-center text-[13px] font-bold uppercase tracking-[0.18em] text-white"
             >
               Checkout — {money(total)}

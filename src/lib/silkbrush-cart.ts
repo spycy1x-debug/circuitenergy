@@ -1,3 +1,4 @@
+import { getVariantCached } from "./ab-test";
 import { ALL_TIERS, DEFAULT_TIER, PROTECTION_PRICE, PROTECTION_VARIANT_ID, STORE_URL, type Tier } from "./silkbrush-config";
 
 const KEY = "sb-cart-v2";
@@ -18,6 +19,7 @@ function load() {
     protection = window.localStorage.getItem(PKEY) === "1";
     const t = window.localStorage.getItem(TKEY);
     if (t && ALL_TIERS.some((x) => x.id === t)) tierId = t;
+    else tierId = getVariantCached() === "B" ? "b2pk" : DEFAULT_TIER;
   } catch {
     qty = 0;
   }
