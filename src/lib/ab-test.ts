@@ -79,6 +79,18 @@ export function useAbVariant(): AbVariant {
 
 type AbEvent = "assign" | "view" | "select" | "add_to_cart" | "initiate_checkout";
 
+// Drops an identical event fired twice in quick succession (double click,
+// StrictMode double-effect, duplicate handler) so the funnel isn't inflated.
+const recentAb = new Map<string, number>();
+function isDupAb(key: string) {
+  const now = Date.now();
+  for (const [k, t] of recentAb) if (now - t > 10000) recentAb.delete(k);
+  const last = recentAb.get(key);
+  if (last && now - last < 2500) return true;
+  recentAb.set(key, now);
+  return false;
+}
+
 /** Fire-and-forget first-party funnel logging. Never blocks or throws. */
 export function logAbEvent(
   event: AbEvent,
@@ -86,6 +98,8 @@ export function logAbEvent(
 ) {
   if (typeof window === "undefined") return;
   const variant = opts.variant ?? getVariantCached();
+  if (isDupAb(`${event}|${variant}|${opts.tierId ?? ""}|${opts.value ?? ""}|${window.location.pathname}`)) return;
+
   try {
     void supabase
       .from("ab_events")

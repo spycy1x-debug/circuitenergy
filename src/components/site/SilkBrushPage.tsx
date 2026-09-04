@@ -117,6 +117,7 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
   );
 }
 
+let offerLock = 0;
 function OfferSection({ id, materialSelector = false }: { id?: string; materialSelector?: boolean }) {
   const variant = useAbVariant();
   const tiers = tiersFor(variant);
@@ -177,11 +178,15 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
       <button
         type="button"
         onClick={() => {
+          const now = Date.now();
+          if (now - offerLock < 1200) return;
+          offerLock = now;
           cart.setQty(0);
           cart.add(1, tier.id);
           logAbEvent("add_to_cart", { variant, tierId: tier.id, value: tier.price });
           trackAddToCart(tier.variantId, tier.price, 1);
         }}
+
         style={sans}
         className="mt-6 block w-full rounded-full bg-[color:var(--gold-deep)] px-8 py-5 text-center text-[15px] font-bold uppercase tracking-[0.18em] text-white shadow-lg shadow-black/15 transition hover:bg-[#5C4A35] active:scale-[0.99]"
       >
