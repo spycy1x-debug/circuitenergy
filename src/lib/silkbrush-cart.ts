@@ -7,7 +7,7 @@ const TKEY = "sb-cart-tier-v1";
 
 let qty = 0;
 let tierId: string = DEFAULT_TIER;
-let protection = false;
+let protection = true;
 let open = false;
 const subs = new Set<() => void>();
 
@@ -16,7 +16,8 @@ function load() {
   try {
     const raw = window.localStorage.getItem(KEY);
     if (raw) qty = Math.max(0, parseInt(raw, 10) || 0);
-    protection = window.localStorage.getItem(PKEY) === "1";
+    const pRaw = window.localStorage.getItem(PKEY);
+    protection = pRaw === null ? true : pRaw === "1";
     const t = window.localStorage.getItem(TKEY);
     if (t && ALL_TIERS.some((x) => x.id === t)) tierId = t;
     else tierId = getVariantCached() === "B" ? "b2pk" : DEFAULT_TIER;
