@@ -15,13 +15,6 @@ import img5 from "@/assets/sbx-5.webp.asset.json";
 import img6 from "@/assets/sbx-6.webp.asset.json";
 import imgCloseup from "@/assets/sbx-7.webp.asset.json";
 import imgUsing from "@/assets/sbx-8.webp.asset.json";
-import vid1 from "@/assets/sbv-1.mp4.asset.json";
-import vid2 from "@/assets/sbv-2b.mp4.asset.json";
-import vid3 from "@/assets/sbv-3b.mp4.asset.json";
-import vid4 from "@/assets/sbv-4.mp4.asset.json";
-import vid5 from "@/assets/sbv-5b.mp4.asset.json";
-import vid6 from "@/assets/sbv-6.mp4.asset.json";
-import vid7 from "@/assets/sbv-7.mp4.asset.json";
 
 /* ------------------------------- primitives ------------------------------- */
 
@@ -228,6 +221,9 @@ function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
           src={images[i]!.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}
           className="h-full w-full object-contain"
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+          {...(i === 0 ? { fetchPriority: "high" as const } : {})}
           style={{ aspectRatio: "4 / 5" }}
         />
         <button
@@ -267,7 +263,7 @@ function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
 
 /* ------------------------------ ugc carousel ------------------------------ */
 
-const UGC_VIDEOS = [vid1, vid2, vid3, vid4, vid5, vid6, vid7];
+const UGC_VIDEOS = [1, 2, 3, 4, 5, 6, 7].map((n) => ({ url: `/ugc/ugc${n}.mp4`, poster: `/ugc/ugc${n}.jpg` }));
 
 function UgcRow() {
   const ref = useRef<HTMLDivElement>(null);
@@ -281,14 +277,15 @@ function UgcRow() {
         {UGC_VIDEOS.map((v) => (
           <div key={v.url} className="w-[72%] shrink-0 snap-center md:w-[calc((100%-2.25rem)/4)]">
             <video
-              src={`${v.url}#t=0.1`}
+              src={v.url}
+              poster={v.poster}
               className="w-full border border-[color:var(--cw-line)] bg-black object-cover"
               style={{ aspectRatio: "9 / 16" }}
               muted
               loop
               playsInline
               controls
-              preload="auto"
+              preload="none"
             />
           </div>
         ))}
