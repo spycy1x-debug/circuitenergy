@@ -117,6 +117,7 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
   );
 }
 
+let offerLock = 0;
 function OfferSection({ id, materialSelector = false }: { id?: string; materialSelector?: boolean }) {
   const variant = useAbVariant();
   const tiers = tiersFor(variant);
