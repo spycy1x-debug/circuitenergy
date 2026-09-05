@@ -388,6 +388,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
 
       <header className="sticky top-0 z-40 border-b border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/95 backdrop-blur">
         <div className="relative mx-auto flex h-14 max-w-6xl items-center px-4 md:h-16 md:px-8">
+          <MobileMenu />
           <nav className="hidden flex-1 items-center gap-6 md:flex">
             {nav.map((n) => (
               <Link
