@@ -34,7 +34,7 @@ export const TIERS_B: Tier[] = [
   {
     id: "b2pk",
     label: "2 Brushes + FREE GIFT",
-    subLabel: "Includes a FREE Scalp Scrubber.",
+    subLabel: "FREE shipping + FREE Scalp Scrubber included.",
     price: 54.99,
     compareAt: 99.98,
     perUnit: 27.5,
@@ -46,7 +46,7 @@ export const TIERS_B: Tier[] = [
   {
     id: "b3pk",
     label: "3 Brushes + FREE GIFT",
-    subLabel: "Includes a FREE Scalp Scrubber.",
+    subLabel: "FREE shipping + FREE Scalp Scrubber included.",
     price: 74.99,
     compareAt: 139.97,
     perUnit: 25.0,
