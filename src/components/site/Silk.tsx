@@ -317,6 +317,56 @@ export function CartDrawer() {
 
 /* -------------------------------- shell ---------------------------------- */
 
+function MobileMenu() {
+  const [open, setOpen] = useState(false);
+  const links = [
+    { label: "Shop", to: "/silkbrush" as const, hash: undefined },
+    { label: "How it works", to: "/silkbrush" as const, hash: "how" },
+    { label: "Reviews", to: "/silkbrush" as const, hash: "reviews" },
+    { label: "FAQ", to: "/silkbrush" as const, hash: "faq" },
+    { label: "Contact", to: "/contact" as const, hash: undefined },
+    { label: "Shipping", to: "/shipping" as const, hash: undefined },
+    { label: "Returns & refunds", to: "/refund" as const, hash: undefined },
+  ];
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        aria-label="Open menu"
+        className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] md:hidden"
+      >
+        <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
+        <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
+        <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
+      </button>
+      {open && (
+        <div className="fixed inset-0 z-[110] md:hidden" style={sans}>
+          <button aria-label="Close menu" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/30" />
+          <aside className="absolute left-0 top-0 flex h-full w-full max-w-[300px] flex-col bg-[color:var(--cw-bg)] shadow-2xl">
+            <div className="flex items-center justify-between border-b border-[color:var(--cw-line)] px-5 py-4">
+              <span style={serif} className="text-[18px] tracking-[0.22em]">SERALIE</span>
+              <button onClick={() => setOpen(false)} aria-label="Close" className="text-2xl leading-none">×</button>
+            </div>
+            <nav className="flex flex-col px-5 py-4">
+              {links.map((l) => (
+                <Link
+                  key={l.label}
+                  to={l.to}
+                  hash={l.hash}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-[color:var(--cw-line)] py-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-ink)]"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+          </aside>
+        </div>
+      )}
+    </>
+  );
+}
+
 export function SilkShell({ children, sticky = false }: { children: React.ReactNode; sticky?: boolean }) {
   const { qty } = useCart();
   const nav = [
