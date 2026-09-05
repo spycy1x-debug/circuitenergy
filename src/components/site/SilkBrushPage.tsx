@@ -89,6 +89,11 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
             {money(tier.price)} total
             {tier.saves ? ` · save ${money(tier.saves)}` : ""}
           </span>
+          {tier.id.endsWith("1pk") && (
+            <span style={sans} className="mt-1 block text-[10px] font-bold uppercase tracking-[0.14em] text-[color:var(--gold-deep)]">
+              + Free shipping
+            </span>
+          )}
         </span>
 
         <span className="shrink-0 text-right">
@@ -199,7 +204,7 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
         style={sans}
         className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[color:var(--gold-deep)]"
       >
-        <li>Free shipping on 2+</li>
+        <li>Free shipping on all orders</li>
         <li aria-hidden>·</li>
         <li>365-day guarantee</li>
         <li aria-hidden>·</li>
