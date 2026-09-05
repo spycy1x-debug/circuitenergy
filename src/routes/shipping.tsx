@@ -15,7 +15,7 @@ export const Route = createFileRoute("/shipping")({
   component: () => (
     <WWProse
       eyebrow="Shipping"
-      title="Free shipping on all orders brushes."
+      title="Free shipping on all orders."
       intro="Orders are processed within 1–2 business days and ship from our US warehouse."
       sections={[
         { h: "Rates", p: <p>Shipping is free on orders of 2+ brushes. Single-brush orders ship at a flat rate.</p> },
