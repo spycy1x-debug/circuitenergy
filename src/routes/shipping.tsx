@@ -5,7 +5,7 @@ export const Route = createFileRoute("/shipping")({
   head: () => ({
     meta: [
       { title: "Shipping — Seralie SilkBrush™" },
-      { name: "description", content: "Free shipping on all orders Seralie SilkBrush™ orders. Processed in 1–2 business days, typically delivered in 3–5 business days within the US." },
+      { name: "description", content: "Free shipping on every Seralie SilkBrush™ order. Processed in 1–2 business days, typically delivered in 3–5 business days within the US." },
       { property: "og:title", content: "Shipping — Seralie SilkBrush™" },
       { property: "og:description", content: "Free shipping on all orders. Processed in 1–2 business days." },
       { property: "og:type", content: "article" },
