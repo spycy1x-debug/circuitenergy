@@ -407,18 +407,19 @@ export function SilkBrushPage({
           <div>
             <Eyebrow>Why people want it</Eyebrow>
             <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
-              Your Hair, Just Better.
+              Stop Hiding Your Hair.
             </h2>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              The SilkBrush™ helps smooth unruly strands while boar bristles distribute natural oils through the hair,
-              leaving it looking smoother, shinier, and more polished.
+              Frizz, flyaways, dull ends — they steal the hair you were born with. The SilkBrush™ takes it back.
+              Boar bristles grab every strand, drag your natural oils from root to tip, and force it into a smooth,
+              glossy, straight-looking finish. No heat. No chemicals. No $200 salon visit. Just 2 minutes of brushing.
             </p>
 
             <dl className="mt-8 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
               {[
-                ["Smooth", "Tame frizz and flyaways."],
-                ["Shine", "Bring out a naturally glossy finish."],
-                ["Sleek", "Create a smoother, straighter-looking style."],
+                ["Smooth", "Crush frizz and flyaways in one pass — even on humid days."],
+                ["Shine", "Your own natural oils become the gloss. Hair that catches the light."],
+                ["Sleek", "A polished, straighter-looking finish without frying your hair with heat."],
               ].map(([t, d]) => (
                 <div key={t} className="flex min-w-0 gap-6 py-4">
                   <dt style={sans} className="w-20 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)] sm:w-24">

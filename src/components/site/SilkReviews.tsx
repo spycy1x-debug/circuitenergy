@@ -88,7 +88,7 @@ export function SilkReviews({ id = "reviews" }: { id?: string }) {
               key={r.name + r.date}
               className="break-inside-avoid overflow-hidden rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]"
             >
-              {r.photo && <img src={r.photo} alt={`Review photo from ${r.name}`} className="w-full object-cover" loading="lazy" />}
+              {r.photo && <img src={r.photo} alt={`Review photo from ${r.name}`} className="h-36 w-full object-cover" loading="lazy" />}
               <div className="p-4">
                 <div className="flex items-center justify-between gap-3">
                   <Stars value={r.rating} size={13} />
