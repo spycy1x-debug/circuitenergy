@@ -5,9 +5,9 @@ export const Route = createFileRoute("/shipping")({
   head: () => ({
     meta: [
       { title: "Shipping — Seralie SilkBrush™" },
-      { name: "description", content: "Free shipping on 2+ Seralie SilkBrush™ orders. Processed in 1–2 business days, typically delivered in 3–5 business days within the US." },
+      { name: "description", content: "Free shipping on all orders Seralie SilkBrush™ orders. Processed in 1–2 business days, typically delivered in 3–5 business days within the US." },
       { property: "og:title", content: "Shipping — Seralie SilkBrush™" },
-      { property: "og:description", content: "Free shipping on 2+. Processed in 1–2 business days." },
+      { property: "og:description", content: "Free shipping on all orders. Processed in 1–2 business days." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/shipping")({
   component: () => (
     <WWProse
       eyebrow="Shipping"
-      title="Free shipping on 2+ brushes."
+      title="Free shipping on all orders brushes."
       intro="Orders are processed within 1–2 business days and ship from our US warehouse."
       sections={[
         { h: "Rates", p: <p>Shipping is free on orders of 2+ brushes. Single-brush orders ship at a flat rate.</p> },
