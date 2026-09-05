@@ -89,6 +89,11 @@ function TierCard({ tier, selected, onSelect }: { tier: Tier; selected: boolean;
             {money(tier.price)} total
             {tier.saves ? ` · save ${money(tier.saves)}` : ""}
           </span>
+          {tier.id.endsWith("1pk") && (
+            <span style={sans} className="mt-1 block text-[10px] font-bold uppercase tracking-[0.14em] text-[color:var(--gold-deep)]">
+              + Free shipping
+            </span>
+          )}
         </span>
 
         <span className="shrink-0 text-right">
