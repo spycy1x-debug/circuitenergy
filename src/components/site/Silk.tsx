@@ -89,6 +89,112 @@ export function Media({
   );
 }
 
+/* ----------------------------- trust badges ------------------------------ */
+
+export function TrustBadges() {
+  return (
+    <div className="grid grid-cols-2 gap-3 pt-2">
+      <div className="group flex flex-col items-center text-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] p-4 transition hover:border-[color:var(--cw-brand-deep)]/50">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="mb-3 text-[color:var(--cw-brand-deep)]"
+        >
+          <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+          <path d="M15 18H9" />
+          <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a2 2 0 0 0-.59-1.41l-2.82-2.82A2 2 0 0 0 17.18 8H15v10Z" />
+          <circle cx="7" cy="18" r="2" />
+          <circle cx="17" cy="18" r="2" />
+        </svg>
+        <p style={serif} className="text-[14px] italic text-[color:var(--cw-ink)]">Complimentary</p>
+        <p style={sans} className="text-[9px] font-semibold uppercase tracking-[0.12em] text-[color:var(--cw-brand-deep)]">
+          Standard Shipping
+        </p>
+      </div>
+
+      <div className="group flex flex-col items-center text-center border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] p-4 transition hover:border-[color:var(--cw-brand-deep)]/50">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="mb-3 text-[color:var(--cw-brand-deep)]"
+        >
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+        <p style={serif} className="text-[14px] italic text-[color:var(--cw-ink)]">365-Day</p>
+        <p style={sans} className="text-[9px] font-semibold uppercase tracking-[0.12em] text-[color:var(--cw-brand-deep)]">
+          Full Guarantee
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export function CartTrustLine() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 py-3">
+      <div className="flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-[color:var(--cw-brand-deep)]"
+        >
+          <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+          <circle cx="7" cy="18" r="2" />
+          <path d="M15 18H9" />
+          <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a2 2 0 0 0-.59-1.41l-2.82-2.82A2 2 0 0 0 17.18 8H15v10Z" />
+          <circle cx="17" cy="18" r="2" />
+        </svg>
+        <span style={sans} className="text-[10px] uppercase tracking-[0.12em] text-[color:var(--cw-ink)]">
+          Free Shipping
+        </span>
+      </div>
+      <span className="hidden h-4 w-px bg-[color:var(--cw-line)] sm:block" aria-hidden="true" />
+      <div className="flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-[color:var(--cw-brand-deep)]"
+        >
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+        <span style={sans} className="text-[10px] uppercase tracking-[0.12em] text-[color:var(--cw-ink)]">
+          365 Guarantee
+        </span>
+      </div>
+    </div>
+  );
+}
+
 /* --------------------------------- CTA ----------------------------------- */
 
 export function useCart() {
@@ -282,7 +388,7 @@ export function CartDrawer() {
               {money(total)}
             </span>
           </div>
-          <p className="mt-1 text-[11px] text-[color:var(--gold-deep)]">Free shipping on all orders · 365-day money-back guarantee</p>
+          <CartTrustLine />
           {href ? (
             <a
               href={href}
