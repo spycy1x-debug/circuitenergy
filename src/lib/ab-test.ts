@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { DEFAULT_TIER, DEFAULT_TIER_B, TIERS, TIERS_B, type Tier } from "./silkbrush-config";
 import { supabase } from "@/integrations/supabase/client";
 
-export const AB_TEST_ENABLED = true;
+export const AB_TEST_ENABLED = false;
 export const AB_DEFAULT_VARIANT: AbVariant = "A";
 
 export type AbVariant = "A" | "B";
