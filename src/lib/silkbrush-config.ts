@@ -19,7 +19,7 @@ export type Tier = {
 
 /** VARIANT A — the original, live offer. Do not change without ending the A/B test. */
 export const TIERS: Tier[] = [
-  { id: "1pk", label: "1 Brush", price: 29.99, compareAt: 39.99, perUnit: 29.99, saves: 10.0, tag: null, variantId: "49137549574298" },
+  { id: "1pk", label: "1 Brush", price: 29.99, compareAt: 39.99, perUnit: 29.99, saves: 10.0, tag: "+ FREE SHIPPING", variantId: "49137549574298" },
   { id: "2pk", label: "2 Brushes", subLabel: "One for home, one for your bag.", price: 49.99, compareAt: 79.98, perUnit: 25.0, saves: 29.99, tag: "MOST POPULAR", variantId: "49137550491802" },
   { id: "3pk", label: "3 Brushes", price: 67.99, compareAt: 119.97, perUnit: 22.66, saves: 51.98, tag: "BEST VALUE", variantId: "49137550524570" },
 ];
@@ -30,7 +30,7 @@ export const GIFT_NAME = "FREE Scalp Scrubber";
 
 /** VARIANT B — higher-priced offer with a free scalp scrubber on the 2- and 3-packs. */
 export const TIERS_B: Tier[] = [
-  { id: "b1pk", label: "1 Brush", price: 34.99, compareAt: 49.99, perUnit: 34.99, saves: 15.0, tag: null, variantId: "49175120150682" },
+  { id: "b1pk", label: "1 Brush", price: 34.99, compareAt: 49.99, perUnit: 34.99, saves: 15.0, tag: "+ FREE SHIPPING", variantId: "49175120150682" },
   {
     id: "b2pk",
     label: "2 Brushes + FREE GIFT",
