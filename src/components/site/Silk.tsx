@@ -388,7 +388,7 @@ export function CartDrawer() {
               {money(total)}
             </span>
           </div>
-          <p className="mt-1 text-[11px] text-[color:var(--gold-deep)]">Free shipping on all orders · 365-day money-back guarantee</p>
+          <CartTrustLine />
           {href ? (
             <a
               href={href}
