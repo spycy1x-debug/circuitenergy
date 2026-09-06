@@ -193,18 +193,9 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
         Add to Cart — {money(tier.price)}
       </button>
 
-      <img src={payBadges.url} alt="Accepted payment methods" className="mx-auto mt-4 h-6 w-auto object-contain" loading="lazy" />
+      <TrustBadges />
 
-      <ul
-        style={sans}
-        className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[color:var(--gold-deep)]"
-      >
-        <li>Free shipping on all orders</li>
-        <li aria-hidden>·</li>
-        <li>365-day guarantee</li>
-        <li aria-hidden>·</li>
-        <li>Secure checkout</li>
-      </ul>
+      <img src={payBadges.url} alt="Accepted payment methods" className="mx-auto mt-4 h-6 w-auto object-contain" loading="lazy" />
     </div>
   );
 }
