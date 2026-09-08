@@ -82,7 +82,7 @@ export const TIERS_B: Tier[] = [
 
 export const ALL_TIERS: Tier[] = [...TIERS, ...TIERS_B];
 
-export const DEFAULT_TIER = "2pk";
+export const DEFAULT_TIER = "1pk";
 export const DEFAULT_TIER_B = "b2pk";
 
 
