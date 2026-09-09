@@ -15,7 +15,7 @@ const PHOTOS = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10].map((p) => p.url);
 
 type Review = { name: string; rating: number; date: string; title: string; body: string; photo?: string };
 
-const REVIEWS: Review[] = [
+export const REVIEWS: Review[] = [
   { name: "Kayla M.", rating: 5, date: "Aug 12, 2026", title: "obsessed ngl", body: "ok so i wasnt expecting much for a brush but my hair legit looks like i blow dried it and i didnt. no frizz halo anymore. i use it every morning now", photo: PHOTOS[0] },
   { name: "Brianna R.", rating: 5, date: "Aug 9, 2026", title: "shiny!!", body: "my hair is so shiny after like a week of using this. my roommate asked what i changed lol. only thing is you gotta clean it every few days but thats every brush", photo: PHOTOS[1] },
   { name: "Sofia G.", rating: 5, date: "Aug 4, 2026", title: "worth it", body: "i keep it in my car cus i always forget to brush before work. dries my hair less crazy then my old one, doesnt pull at all", photo: PHOTOS[2] },
