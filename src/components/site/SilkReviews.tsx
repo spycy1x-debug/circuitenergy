@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sans, serif, Stars } from "@/components/site/Silk";
 import r1 from "@/assets/sbr-1.webp.asset.json";
 import r2 from "@/assets/sbr-2.webp.asset.json";
@@ -15,7 +15,7 @@ const PHOTOS = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10].map((p) => p.url);
 
 type Review = { name: string; rating: number; date: string; title: string; body: string; photo?: string };
 
-const REVIEWS: Review[] = [
+export const REVIEWS: Review[] = [
   { name: "Kayla M.", rating: 5, date: "Aug 12, 2026", title: "obsessed ngl", body: "ok so i wasnt expecting much for a brush but my hair legit looks like i blow dried it and i didnt. no frizz halo anymore. i use it every morning now", photo: PHOTOS[0] },
   { name: "Brianna R.", rating: 5, date: "Aug 9, 2026", title: "shiny!!", body: "my hair is so shiny after like a week of using this. my roommate asked what i changed lol. only thing is you gotta clean it every few days but thats every brush", photo: PHOTOS[1] },
   { name: "Sofia G.", rating: 5, date: "Aug 4, 2026", title: "worth it", body: "i keep it in my car cus i always forget to brush before work. dries my hair less crazy then my old one, doesnt pull at all", photo: PHOTOS[2] },
@@ -59,6 +59,54 @@ const REVIEWS: Review[] = [
 ];
 
 const INITIAL = 12;
+
+const FIVE_STAR = REVIEWS.filter((r) => r.rating === 5);
+
+export function MiniReviewCarousel() {
+  const [i, setI] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setI((v) => (v + 1) % FIVE_STAR.length);
+        setFade(true);
+      }, 250);
+    }, 5000);
+    return () => clearInterval(t);
+  }, []);
+
+  const r = FIVE_STAR[i]!;
+
+  return (
+    <div
+      className={`flex items-start gap-3 rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4 transition-opacity duration-250 ${
+        fade ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {r.photo ? (
+        <img src={r.photo} alt={`${r.name}'s review photo`} className="h-11 w-11 shrink-0 rounded-full object-cover" loading="lazy" />
+      ) : (
+        <span
+          style={serif}
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand-deep)] text-[16px] text-[color:var(--cw-bg)]"
+        >
+          {r.name.charAt(0)}
+        </span>
+      )}
+      <div className="min-w-0 flex-1">
+        <Stars value={5} size={12} />
+        <p style={sans} className="mt-1.5 line-clamp-3 text-[13px] leading-5 text-[color:var(--cw-muted)]">
+          “{r.body}”
+        </p>
+        <p style={sans} className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]">
+          {r.name} · Verified Buyer
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export function SilkReviews({ id = "reviews" }: { id?: string }) {
   const [count, setCount] = useState(INITIAL);
