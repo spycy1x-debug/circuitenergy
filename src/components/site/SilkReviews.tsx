@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sans, serif, Stars } from "@/components/site/Silk";
 import r1 from "@/assets/sbr-1.webp.asset.json";
 import r2 from "@/assets/sbr-2.webp.asset.json";
@@ -59,6 +59,54 @@ export const REVIEWS: Review[] = [
 ];
 
 const INITIAL = 12;
+
+const FIVE_STAR = REVIEWS.filter((r) => r.rating === 5);
+
+export function MiniReviewCarousel() {
+  const [i, setI] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setI((v) => (v + 1) % FIVE_STAR.length);
+        setFade(true);
+      }, 250);
+    }, 5000);
+    return () => clearInterval(t);
+  }, []);
+
+  const r = FIVE_STAR[i]!;
+
+  return (
+    <div
+      className={`flex items-start gap-3 rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4 transition-opacity duration-250 ${
+        fade ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {r.photo ? (
+        <img src={r.photo} alt={`${r.name}'s review photo`} className="h-11 w-11 shrink-0 rounded-full object-cover" loading="lazy" />
+      ) : (
+        <span
+          style={serif}
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand-deep)] text-[16px] text-[color:var(--cw-bg)]"
+        >
+          {r.name.charAt(0)}
+        </span>
+      )}
+      <div className="min-w-0 flex-1">
+        <Stars value={5} size={12} />
+        <p style={sans} className="mt-1.5 line-clamp-3 text-[13px] leading-5 text-[color:var(--cw-muted)]">
+          “{r.body}”
+        </p>
+        <p style={sans} className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]">
+          {r.name} · Verified Buyer
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export function SilkReviews({ id = "reviews" }: { id?: string }) {
   const [count, setCount] = useState(INITIAL);
