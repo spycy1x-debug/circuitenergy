@@ -81,29 +81,29 @@ export function MiniReviewCarousel() {
 
   return (
     <div
-      className={`flex items-start gap-3 rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4 transition-opacity duration-250 ${
+      className={`rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-4 transition-opacity duration-250 ${
         fade ? "opacity-100" : "opacity-0"
       }`}
     >
-      {r.photo ? (
-        <img src={r.photo} alt={`${r.name}'s review photo`} className="h-11 w-11 shrink-0 rounded-full object-cover" loading="lazy" />
-      ) : (
-        <span
-          style={serif}
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand-deep)] text-[16px] text-[color:var(--cw-bg)]"
-        >
-          {r.name.charAt(0)}
-        </span>
-      )}
-      <div className="min-w-0 flex-1">
+      <div className="flex items-center gap-2">
         <Stars value={5} size={12} />
-        <p style={sans} className="mt-1.5 line-clamp-3 text-[13px] leading-5 text-[color:var(--cw-muted)]">
-          “{r.body}”
-        </p>
-        <p style={sans} className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]">
-          {r.name} · Verified Buyer
-        </p>
+        {r.photo ? (
+          <img src={r.photo} alt={`${r.name}'s review photo`} className="h-5 w-5 shrink-0 rounded-full object-cover" loading="lazy" />
+        ) : (
+          <span
+            style={serif}
+            className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[color:var(--cw-brand-deep)] text-[10px] text-[color:var(--cw-bg)]"
+          >
+            {r.name.charAt(0)}
+          </span>
+        )}
       </div>
+      <p style={sans} className="mt-1.5 line-clamp-3 text-[13px] leading-5 text-[color:var(--cw-muted)]">
+        “{r.body}”
+      </p>
+      <p style={sans} className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[color:var(--cw-brand-deep)]">
+        {r.name} · Verified Buyer
+      </p>
     </div>
   );
 }
