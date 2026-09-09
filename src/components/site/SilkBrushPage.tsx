@@ -4,7 +4,7 @@ import { money, type Tier } from "@/lib/silkbrush-config";
 import { defaultTierFor, logAbEvent, tiersFor, useAbVariant } from "@/lib/ab-test";
 import { cart } from "@/lib/silkbrush-cart";
 import { trackAddToCart } from "@/lib/fb-pixel";
-import { SilkReviews } from "@/components/site/SilkReviews";
+import { SilkReviews, MiniReviewCarousel } from "@/components/site/SilkReviews";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import img1 from "@/assets/silkbrush-meet-the-product.png.asset.json";
 import imgFeatures from "@/assets/silkbrush-features.png.asset.json";
@@ -183,6 +183,10 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
       >
         Add to Cart — {money(tier.price)}
       </button>
+
+      <div className="mt-4">
+        <MiniReviewCarousel />
+      </div>
 
       <TrustBadges />
 
