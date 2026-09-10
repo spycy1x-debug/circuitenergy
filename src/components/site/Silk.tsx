@@ -254,7 +254,7 @@ export function TrustRow({ className = "" }: { className?: string }) {
       className={`flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[color:var(--cw-muted)] ${className}`}
     >
       <li>✓ Free shipping on all orders</li>
-      <li>✓ **365-day money-back guarantee**</li>
+      <li>✓ 365-day money-back guarantee</li>
       <li>✓ Secure checkout</li>
     </ul>
   );
@@ -498,7 +498,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
     >
       <div className="bg-[color:var(--cw-ink)] text-white">
         <p style={sans} className="px-4 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.2em]">
-          Free shipping on all orders · **365-day money-back guarantee**
+          Free shipping on all orders · 365-day money-back guarantee
         </p>
       </div>
 
