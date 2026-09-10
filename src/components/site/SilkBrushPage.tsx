@@ -368,7 +368,7 @@ export function SilkBrushPage({
             Don't Just Take Our Word For It.
           </h2>
           <p style={sans} className="mt-2 max-w-lg text-[15px] text-[color:var(--cw-muted)]">
-            See how people are using the SilkBrush™ in their everyday routines.
+            See how <P>real people</P> are using the SilkBrush™ in their <P>everyday routines</P>.
           </p>
 
           <div className="mt-7">
