@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SilkShell, RatingLine } from "@/components/site/Silk";
+import { SilkShell, RatingLine, P } from "@/components/site/Silk";
 import { PRICE, money } from "@/lib/silkbrush-config";
 import heroImg from "@/assets/silkbrush-meet-the-product.png.asset.json";
 
@@ -38,8 +38,8 @@ function HomePage() {
           every day.
         </h1>
         <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-[#6B6660]">
-          One thoughtfully designed brush. Smoother, shinier,
-          straighter-looking hair — no heat, no routine overhaul.
+          One thoughtfully designed brush. <P>Smoother, shinier,
+          straighter-looking hair</P> — <P>no heat</P>, no routine overhaul.
         </p>
         <div className="mt-8 flex flex-col items-center gap-3">
           <Link
@@ -71,9 +71,9 @@ function HomePage() {
               The SilkBrush™
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-[#6B6660]">
-              A boar-bristle brush that smooths frizz, tames flyaways, and
-              adds natural shine by distributing your hair's own oils from
-              root to tip — while you brush.
+              A boar-bristle brush that <P>smooths frizz</P>, <P>tames flyaways</P>, and
+              <P> adds natural shine</P> by distributing your hair's own oils from
+              root to tip — <P>while you brush</P>.
             </p>
             <p className="mt-4 text-lg font-bold text-[#171717]">
               {money(PRICE)}
@@ -95,9 +95,9 @@ function HomePage() {
       <section className="mx-auto max-w-5xl px-5 py-16 sm:py-20">
         <div className="grid gap-6 sm:grid-cols-3">
           {[
-            { t: "Smooth", d: "Boar bristles tame frizz and flyaways with every pass." },
-            { t: "Straighten", d: "A sleeker, straighter-looking finish — no heat required." },
-            { t: "Shine", d: "Distributes natural oils for a healthy, glossy look." },
+            { t: "Smooth", d: <>Boar bristles <P>tame frizz and flyaways</P> with every pass.</> },
+            { t: "Straighten", d: <>A <P>sleeker, straighter-looking finish</P> — <P>no heat required</P>.</> },
+            { t: "Shine", d: <>Distributes natural oils for a <P>healthy, glossy look</P>.</> },
           ].map((v) => (
             <div key={v.t} className="rounded-2xl bg-[#FAF9F6] p-6">
               <h3 className="text-lg font-bold text-[#171717]">{v.t}</h3>
@@ -114,7 +114,8 @@ function HomePage() {
             Smooth. Straighten. Shine.
           </h2>
           <p className="mx-auto mt-4 max-w-md text-[15px] text-white/70">
-            Try the SilkBrush™ risk-free with our 365-day money-back guarantee.
+            Try the SilkBrush™ <strong className="font-bold text-[#D9C3A5]">risk-free</strong> with our{" "}
+            <strong className="font-bold text-[#D9C3A5]">365-day money-back guarantee</strong>.
           </p>
           <Link
             to="/silkbrush"
