@@ -354,7 +354,7 @@ export function SilkBrushPage({
               Now featuring our <span className="text-[color:var(--cw-brand-deep)]">upgraded wooden design</span>.
             </p>
             <p style={sans} className="mt-2 max-w-xl text-[13px] leading-6 text-[color:var(--cw-muted)]">
-              We’re always looking for ways to improve the SilkBrush™. Some earlier content features our previous version, but all current orders include the <span className="text-[color:var(--cw-brand-deep)]">newest wooden SilkBrush™ design</span> shown on this page.
+              We’re always looking for ways to improve the SilkBrush™. Some earlier content features our previous version, but <P>all current orders include the newest wooden SilkBrush™ design</P> shown on this page.
             </p>
           </div>
         </div>
