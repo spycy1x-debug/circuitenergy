@@ -391,17 +391,18 @@ export function SilkBrushPage({
               Stop Hiding Your Hair.
             </h2>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Frizz, flyaways, dull ends — they steal the hair you were born with. The SilkBrush™ takes it back.
-              Boar bristles grab every strand, drag your natural oils from root to tip, and force it into a smooth,
-              glossy, straight-looking finish. No heat. No chemicals. No $200 salon visit. Just 2 minutes of brushing.
+              <P>Frizz, flyaways, dull ends</P> — they steal the hair you were born with. The SilkBrush™ <P>takes it back</P>.
+              Boar bristles grab every strand, drag your natural oils from root to tip, and force it into a{" "}
+              <P>smooth, glossy, straight-looking finish</P>. <P>No heat. No chemicals. No $200 salon visit.</P> Just{" "}
+              <P>2 minutes</P> of brushing.
             </p>
 
             <dl className="mt-8 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
-              {[
-                ["Smooth", "Crush frizz and flyaways in one pass — even on humid days."],
-                ["Shine", "Your own natural oils become the gloss. Hair that catches the light."],
-                ["Sleek", "A polished, straighter-looking finish without frying your hair with heat."],
-              ].map(([t, d]) => (
+              {([
+                ["Smooth", <><P>Crush frizz and flyaways</P> in one pass — <P>even on humid days</P>.</>],
+                ["Shine", <>Your own natural oils become the gloss. <P>Hair that catches the light.</P></>],
+                ["Sleek", <><P>A polished, straighter-looking finish</P> without frying your hair with heat.</>],
+              ] as [string, React.ReactNode][]).map(([t, d]) => (
                 <div key={t} className="flex min-w-0 gap-6 py-4">
                   <dt style={sans} className="w-20 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)] sm:w-24">
                     {t}
