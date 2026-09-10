@@ -254,7 +254,7 @@ function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
 
 /* ------------------------------ ugc carousel ------------------------------ */
 
-const UGC_VIDEOS = [8, 9, 10, 11, 1, 2, 3, 4, 5, 6, 7].map((n) => ({ url: `/ugc/ugc${n}.mp4`, poster: `/ugc/ugc${n}.jpg` }));
+const UGC_VIDEOS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((n) => ({ url: `/ugc/ugc${n}.mp4`, poster: `/ugc/ugc${n}.jpg` }));
 
 function UgcRow() {
   const ref = useRef<HTMLDivElement>(null);
