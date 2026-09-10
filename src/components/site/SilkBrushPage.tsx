@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Media, RatingLine, SilkShell, Faq, TrustBadges, sans, serif } from "@/components/site/Silk";
+import { Media, P, RatingLine, SilkShell, Faq, TrustBadges, sans, serif } from "@/components/site/Silk";
 import { money, type Tier } from "@/lib/silkbrush-config";
 import { defaultTierFor, logAbEvent, tiersFor, useAbVariant } from "@/lib/ab-test";
 import { cart } from "@/lib/silkbrush-cart";
@@ -317,8 +317,8 @@ export function SilkBrushPage({
               Smooth. Straighten. Shine.
             </h1>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Meet the <strong className="font-bold text-[color:var(--cw-ink)]">Seralie SilkBrush™</strong>. A boar-bristle brush designed to smooth frizz, tame flyaways, and create a
-              sleek, straighter-looking finish while you brush.
+              Meet the <P>Seralie SilkBrush™</P>. A boar-bristle brush designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
+              <P>sleek, straighter-looking finish</P> while you brush.
             </p>
 
             <div className="mt-8">
@@ -354,7 +354,7 @@ export function SilkBrushPage({
               Now featuring our <span className="text-[color:var(--cw-brand-deep)]">upgraded wooden design</span>.
             </p>
             <p style={sans} className="mt-2 max-w-xl text-[13px] leading-6 text-[color:var(--cw-muted)]">
-              We’re always looking for ways to improve the SilkBrush™. Some earlier content features our previous version, but all current orders include the <span className="text-[color:var(--cw-brand-deep)]">newest wooden SilkBrush™ design</span> shown on this page.
+              We’re always looking for ways to improve the SilkBrush™. Some earlier content features our previous version, but <P>all current orders include the newest wooden SilkBrush™ design</P> shown on this page.
             </p>
           </div>
         </div>
@@ -368,7 +368,7 @@ export function SilkBrushPage({
             Don't Just Take Our Word For It.
           </h2>
           <p style={sans} className="mt-2 max-w-lg text-[15px] text-[color:var(--cw-muted)]">
-            See how people are using the SilkBrush™ in their everyday routines.
+            See how <P>real people</P> are using the SilkBrush™ in their <P>everyday routines</P>.
           </p>
 
           <div className="mt-7">
@@ -391,17 +391,18 @@ export function SilkBrushPage({
               Stop Hiding Your Hair.
             </h2>
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Frizz, flyaways, dull ends — they steal the hair you were born with. The SilkBrush™ takes it back.
-              Boar bristles grab every strand, drag your natural oils from root to tip, and force it into a smooth,
-              glossy, straight-looking finish. No heat. No chemicals. No $200 salon visit. Just 2 minutes of brushing.
+              <P>Frizz, flyaways, dull ends</P> — they steal the hair you were born with. The SilkBrush™ <P>takes it back</P>.
+              Boar bristles grab every strand, drag your natural oils from root to tip, and force it into a{" "}
+              <P>smooth, glossy, straight-looking finish</P>. <P>No heat. No chemicals. No $200 salon visit.</P> Just{" "}
+              <P>2 minutes</P> of brushing.
             </p>
 
             <dl className="mt-8 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
-              {[
-                ["Smooth", "Crush frizz and flyaways in one pass — even on humid days."],
-                ["Shine", "Your own natural oils become the gloss. Hair that catches the light."],
-                ["Sleek", "A polished, straighter-looking finish without frying your hair with heat."],
-              ].map(([t, d]) => (
+              {([
+                ["Smooth", <><P>Crush frizz and flyaways</P> in one pass — <P>even on humid days</P>.</>],
+                ["Shine", <>Your own natural oils become the gloss. <P>Hair that catches the light.</P></>],
+                ["Sleek", <><P>A polished, straighter-looking finish</P> without frying your hair with heat.</>],
+              ] as [string, React.ReactNode][]).map(([t, d]) => (
                 <div key={t} className="flex min-w-0 gap-6 py-4">
                   <dt style={sans} className="w-20 shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--cw-brand-deep)] sm:w-24">
                     {t}
@@ -443,11 +444,11 @@ export function SilkBrushPage({
             </h2>
 
             <ol className="mt-7 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
-              {[
-                ["01", "Start", "Use on dry hair according to product instructions."],
-                ["02", "Brush", "Work through small sections of hair."],
-                ["03", "Finish", "Reveal a smoother, shinier, straighter-looking finish."],
-              ].map(([n, t, d]) => (
+              {([
+                ["01", "Start", <>Use on <P>dry hair</P> according to product instructions.</>],
+                ["02", "Brush", <>Work through <P>small sections</P> of hair.</>],
+                ["03", "Finish", <>Reveal a <P>smoother, shinier, straighter-looking finish</P>.</>],
+              ] as [string, string, React.ReactNode][]).map(([n, t, d]) => (
                 <li key={n} className="flex min-w-0 gap-5 py-4">
                   <span style={serif} className="w-8 shrink-0 text-[18px] text-[color:var(--cw-brand-deep)]">
                     {n}

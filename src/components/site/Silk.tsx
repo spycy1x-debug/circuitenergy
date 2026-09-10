@@ -31,6 +31,11 @@ export function Label({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Punchy copy highlight — bold, in brand brown. */
+export function P({ children }: { children: React.ReactNode }) {
+  return <strong className="font-bold text-[#5C4A35]">{children}</strong>;
+}
+
 export function Stars({ value = RATING, size = 14 }: { value?: number; size?: number }) {
   return (
     <span className="inline-flex items-center gap-0.5" aria-label={`${value} out of 5 stars`}>
@@ -545,7 +550,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
               SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              Makers of the Seralie SilkBrush™ — a boar-bristle brush for smoother, shinier, straighter-looking hair.
+              Makers of the Seralie SilkBrush™ — a boar-bristle brush for <P>smoother, shinier, straighter-looking hair</P>.
             </p>
           </div>
           <div className="min-w-0">
@@ -595,7 +600,7 @@ export const SB_FAQS = [
   },
   {
     q: "Does the SilkBrush™ actually straighten hair?",
-    a: "The SilkBrush™ is designed to smooth and lay hair down, creating a straighter-looking, more polished finish as you brush. It is not a permanent chemical straightening treatment.",
+    a: "The SilkBrush™ is designed to **smooth and lay hair down**, creating a **straighter-looking, more polished finish** as you brush. It is not a permanent chemical straightening treatment.",
   },
   {
     q: "What type of hair can I use it on?",
@@ -607,11 +612,11 @@ export const SB_FAQS = [
   },
   {
     q: "How do boar bristles help my hair?",
-    a: "Boar bristles can help distribute natural oils from the scalp through the lengths of the hair while smoothing the hair surface, helping hair appear shinier and more polished.",
+    a: "Boar bristles can help distribute natural oils from the scalp through the lengths of the hair while smoothing the hair surface, helping hair appear **shinier and more polished**.",
   },
   {
     q: "Will it eliminate frizz?",
-    a: "The SilkBrush™ is designed to help smooth frizz and flyaways. Results can vary depending on hair type, humidity, and individual hair texture.",
+    a: "The SilkBrush™ is designed to **help smooth frizz and flyaways**. Results can vary depending on hair type, humidity, and individual hair texture.",
   },
   {
     q: "How do I clean the SilkBrush™?",
@@ -619,13 +624,20 @@ export const SB_FAQS = [
   },
   {
     q: "How long does shipping take?",
-    a: "Orders are processed within 1–2 business days. Delivery times are shown at checkout — see our Shipping page for current estimates.",
+    a: "Orders are processed within **1–2 business days**. Delivery times are shown at checkout — see our Shipping page for current estimates.",
   },
   {
     q: "What if I don't like it?",
-    a: "You're covered by our 365-day money-back guarantee, subject to our return policy.",
+    a: "You're covered by our **365-day money-back guarantee**, subject to our return policy.",
   },
 ];
+
+/** Renders **text** segments as bold brown punch copy. */
+export function punchy(text: string): React.ReactNode {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? <P key={i}>{part.slice(2, -2)}</P> : part,
+  );
+}
 
 export function Faq({ items = SB_FAQS }: { items?: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(0);
@@ -647,7 +659,7 @@ export function Faq({ items = SB_FAQS }: { items?: { q: string; a: string }[] })
           </button>
           {open === i && (
             <p style={sans} className="pb-5 pr-8 text-[14px] leading-7 text-[color:var(--cw-muted)]">
-              {f.a}
+              {punchy(f.a)}
             </p>
           )}
         </div>
