@@ -31,6 +31,11 @@ export function Label({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Punchy copy highlight — bold, in brand brown. */
+export function P({ children }: { children: React.ReactNode }) {
+  return <strong className="font-bold text-[#5C4A35]">{children}</strong>;
+}
+
 export function Stars({ value = RATING, size = 14 }: { value?: number; size?: number }) {
   return (
     <span className="inline-flex items-center gap-0.5" aria-label={`${value} out of 5 stars`}>
