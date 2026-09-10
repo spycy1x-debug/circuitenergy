@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Media, RatingLine, SilkShell, Faq, TrustBadges, sans, serif } from "@/components/site/Silk";
+import { Media, P, RatingLine, SilkShell, Faq, TrustBadges, sans, serif } from "@/components/site/Silk";
 import { money, type Tier } from "@/lib/silkbrush-config";
 import { defaultTierFor, logAbEvent, tiersFor, useAbVariant } from "@/lib/ab-test";
 import { cart } from "@/lib/silkbrush-cart";
