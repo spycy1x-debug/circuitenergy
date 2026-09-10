@@ -51,13 +51,18 @@ export function Stars({ value = RATING, size = 14 }: { value?: number; size?: nu
 
 export function RatingLine({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-2 ${className}`} style={sans}>
+    <a
+      href="#reviews"
+      aria-label="Read customer reviews"
+      className={`inline-flex items-center gap-2 transition hover:opacity-80 ${className}`}
+      style={sans}
+    >
       <Stars />
-      <span className="text-[13px] text-[color:var(--cw-muted)]">
+      <span className="text-[13px] text-[color:var(--cw-muted)] underline underline-offset-2">
         {RATING.toFixed(1)}
         {REVIEW_COUNT ? ` · ${REVIEW_COUNT} reviews` : ""}
       </span>
-    </div>
+    </a>
   );
 }
 
