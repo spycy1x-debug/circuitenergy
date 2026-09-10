@@ -444,11 +444,11 @@ export function SilkBrushPage({
             </h2>
 
             <ol className="mt-7 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
-              {[
-                ["01", "Start", "Use on dry hair according to product instructions."],
-                ["02", "Brush", "Work through small sections of hair."],
-                ["03", "Finish", "Reveal a smoother, shinier, straighter-looking finish."],
-              ].map(([n, t, d]) => (
+              {([
+                ["01", "Start", <>Use on <P>dry hair</P> according to product instructions.</>],
+                ["02", "Brush", <>Work through <P>small sections</P> of hair.</>],
+                ["03", "Finish", <>Reveal a <P>smoother, shinier, straighter-looking finish</P>.</>],
+              ] as [string, string, React.ReactNode][]).map(([n, t, d]) => (
                 <li key={n} className="flex min-w-0 gap-5 py-4">
                   <span style={serif} className="w-8 shrink-0 text-[18px] text-[color:var(--cw-brand-deep)]">
                     {n}
