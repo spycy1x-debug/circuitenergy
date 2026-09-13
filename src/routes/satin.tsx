@@ -15,11 +15,9 @@ import {
   SATIN_VARIANT_ID,
 } from "@/lib/silkbrush-config";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
-import satin1 from "@/assets/satin-1-hero.jpg";
-import satin2 from "@/assets/satin-2-texture.jpg";
-import satin3 from "@/assets/satin-3-lifestyle.jpg";
-import satin4 from "@/assets/satin-4-two-pack.jpg";
-import satin5 from "@/assets/satin-5-detail.jpg";
+import satinProductAsset from "@/assets/satin-product.png.asset.json";
+
+const satinProduct = satinProductAsset.url;
 
 export const Route = createFileRoute("/satin")({
   head: () => ({
@@ -43,11 +41,7 @@ export const Route = createFileRoute("/satin")({
 });
 
 const GALLERY: { url: string; alt: string }[] = [
-  { url: satin1, alt: "Two Seralie satin pillowcases displayed on a luxury bed" },
-  { url: satin2, alt: "Close-up of the smooth satin texture" },
-  { url: satin3, alt: "Woman resting on a Seralie satin pillowcase" },
-  { url: satin4, alt: "Both satin pillowcases in the 2-pack set" },
-  { url: satin5, alt: "Detail of the premium finish and stitching" },
+  { url: satinProduct, alt: "Seralie satin pillowcase in gold" },
 ];
 
 const FAQS = [
@@ -99,51 +93,18 @@ function AddButton({ className = "", label }: { className?: string; label?: stri
 }
 
 function Gallery() {
-  const [i, setI] = useState(0);
-  const prev = () => setI((v) => (v === 0 ? GALLERY.length - 1 : v - 1));
-  const next = () => setI((v) => (v === GALLERY.length - 1 ? 0 : v + 1));
-  const active = GALLERY[i]!;
+  const active = GALLERY[0]!;
   return (
-    <div>
-      <div className="relative overflow-hidden rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <img
-          src={active.url}
-          alt={active.alt}
-          className="h-full w-full object-cover"
-          style={{ aspectRatio: "4 / 5" }}
-          loading={i === 0 ? "eager" : "lazy"}
-          decoding="async"
-          {...(i === 0 ? { fetchPriority: "high" as const } : {})}
-        />
-        <button
-          type="button"
-          onClick={prev}
-          aria-label="Previous image"
-          className="absolute left-2 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[13px] shadow-sm"
-        >
-          ‹
-        </button>
-        <button
-          type="button"
-          onClick={next}
-          aria-label="Next image"
-          className="absolute right-2 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] text-[13px] shadow-sm"
-        >
-          ›
-        </button>
-      </div>
-      <div className="mt-3 grid grid-cols-5 gap-2">
-        {GALLERY.map((g, idx) => (
-          <button
-            key={g.url}
-            onClick={() => setI(idx)}
-            aria-label={`View image ${idx + 1}`}
-            className={`overflow-hidden rounded-md border ${idx === i ? "border-[color:var(--cw-ink)]" : "border-[color:var(--cw-line)]"}`}
-          >
-            <img src={g.url} alt="" className="aspect-square w-full object-cover" loading="lazy" />
-          </button>
-        ))}
-      </div>
+    <div className="overflow-hidden rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+      <img
+        src={active.url}
+        alt={active.alt}
+        className="h-full w-full object-contain p-4"
+        style={{ aspectRatio: "4 / 5" }}
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
+      />
     </div>
   );
 }
@@ -288,9 +249,9 @@ function SatinPage() {
             </p>
           </div>
           <img
-            src={satin3}
-            alt="Woman resting on a Seralie satin pillowcase"
-            className="w-full rounded-lg border border-[color:var(--cw-line)] object-cover"
+            src={satinProduct}
+            alt="Seralie satin pillowcase"
+            className="w-full rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] object-contain p-4"
             style={{ aspectRatio: "4 / 5" }}
             loading="lazy"
           />
@@ -369,9 +330,9 @@ function SatinPage() {
       <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-2 md:items-center md:gap-14 md:px-8 md:py-20">
           <img
-            src={satin4}
-            alt="Both satin pillowcases included in the Seralie 2-pack"
-            className="w-full rounded-lg border border-[color:var(--cw-line)] object-cover"
+            src={satinProduct}
+            alt="Seralie satin pillowcase from the 2-pack"
+            className="w-full rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] object-contain p-4"
             style={{ aspectRatio: "4 / 5" }}
             loading="lazy"
           />
@@ -460,9 +421,9 @@ function SatinPage() {
       <section className="border-t border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-2 md:items-center md:gap-14 md:px-8 md:py-24">
           <img
-            src={satin2}
-            alt="Close-up of the smooth satin texture"
-            className="w-full rounded-lg border border-[color:var(--cw-line)] object-cover"
+            src={satinProduct}
+            alt="Seralie satin pillowcase"
+            className="w-full rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] object-contain p-4"
             style={{ aspectRatio: "4 / 5" }}
             loading="lazy"
           />
