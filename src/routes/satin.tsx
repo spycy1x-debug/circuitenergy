@@ -95,12 +95,11 @@ function AddButton({ className = "", label }: { className?: string; label?: stri
 function Gallery() {
   const active = GALLERY[0]!;
   return (
-    <div className="overflow-hidden rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+    <div className="overflow-hidden rounded-lg border border-[color:var(--cw-line)]">
       <img
         src={active.url}
         alt={active.alt}
-        className="h-full w-full object-contain p-4"
-        style={{ aspectRatio: "4 / 5" }}
+        className="block h-auto w-full"
         loading="eager"
         decoding="async"
         fetchPriority="high"
@@ -257,8 +256,7 @@ function SatinPage() {
           <img
             src={satinProduct}
             alt="Seralie satin pillowcase"
-            className="w-full rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] object-contain p-4"
-            style={{ aspectRatio: "4 / 5" }}
+            className="block h-auto w-full rounded-lg border border-[color:var(--cw-line)]"
             loading="lazy"
           />
         </div>
@@ -338,8 +336,7 @@ function SatinPage() {
           <img
             src={satinProduct}
             alt="Seralie satin pillowcase from the 2-pack"
-            className="w-full rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] object-contain p-4"
-            style={{ aspectRatio: "4 / 5" }}
+            className="block h-auto w-full rounded-lg border border-[color:var(--cw-line)]"
             loading="lazy"
           />
           <div>
@@ -429,8 +426,7 @@ function SatinPage() {
           <img
             src={satinProduct}
             alt="Seralie satin pillowcase"
-            className="w-full rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] object-contain p-4"
-            style={{ aspectRatio: "4 / 5" }}
+            className="block h-auto w-full rounded-lg border border-[color:var(--cw-line)]"
             loading="lazy"
           />
           <div>
