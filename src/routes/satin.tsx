@@ -195,6 +195,12 @@ function SatinPage() {
                   </span>
                 )}
               </div>
+              <p
+                style={serif}
+                className="mt-2 text-[22px] italic leading-none text-[color:var(--cw-brand-deep)] md:text-[26px]"
+              >
+                Just For You
+              </p>
 
               <AddButton className="mt-5" />
 

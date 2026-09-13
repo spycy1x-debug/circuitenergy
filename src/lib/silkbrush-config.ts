@@ -87,7 +87,7 @@ export const TIERS_B: Tier[] = [
 /* ------------------------- Seralie Satin Pillowcase ------------------------ */
 
 export const SATIN_NAME = "Seralie Satin Pillowcase Set";
-export const SATIN_PRICE = 39.99;
+export const SATIN_PRICE = 19.99;
 /** Set to a number above SATIN_PRICE to show a strike-through sale price. */
 export const SATIN_COMPARE_AT: number | null = null;
 export const SATIN_VARIANT_ID = "49220091248794";
