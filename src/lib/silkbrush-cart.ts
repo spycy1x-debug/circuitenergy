@@ -16,8 +16,8 @@ function load() {
   try {
     const raw = window.localStorage.getItem(KEY);
     if (raw) qty = Math.max(0, parseInt(raw, 10) || 0);
-    const pRaw = window.localStorage.getItem(PKEY);
-    protection = pRaw === null ? true : pRaw === "1";
+    protection = true;
+
     const t = window.localStorage.getItem(TKEY);
     if (t && ALL_TIERS.some((x) => x.id === t)) tierId = t;
     else tierId = getVariantCached() === "B" ? "b2pk" : DEFAULT_TIER;
@@ -78,7 +78,8 @@ export const cart = {
   },
   clear() {
     qty = 0;
-    protection = false;
+    protection = true;
+
     emit();
   },
 };
