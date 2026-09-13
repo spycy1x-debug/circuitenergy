@@ -15,6 +15,10 @@ export type Tier = {
   variantId: string;
   /** Optional free-gift Shopify variant added as a $0.00 line at checkout. */
   giftVariantId?: string;
+  /** Product name shown in the cart (defaults to the SilkBrush™). */
+  productName?: string;
+  /** Short line shown under the product name in the cart. */
+  desc?: string;
 };
 
 /** Shopify variant for the $0.00 free gift line item. */
@@ -80,7 +84,32 @@ export const TIERS_B: Tier[] = [
   },
 ];
 
-export const ALL_TIERS: Tier[] = [...TIERS, ...TIERS_B];
+/* ------------------------- Seralie Satin Pillowcase ------------------------ */
+
+export const SATIN_NAME = "Seralie Satin Pillowcase Set";
+export const SATIN_PRICE = 39.99;
+/** Set to a number above SATIN_PRICE to show a strike-through sale price. */
+export const SATIN_COMPARE_AT: number | null = null;
+export const SATIN_VARIANT_ID = "49220091248794";
+export const SATIN_RATING = 4.8;
+/** Null hides the review count — no reviews collected yet. */
+export const SATIN_REVIEW_COUNT: number | null = null;
+
+export const SATIN_TIER: Tier = {
+  id: "satin2pk",
+  label: "Satin Pillowcase Set",
+  subLabel: "2 satin pillowcases included.",
+  price: SATIN_PRICE,
+  compareAt: SATIN_COMPARE_AT,
+  perUnit: SATIN_PRICE,
+  saves: SATIN_COMPARE_AT ? +(SATIN_COMPARE_AT - SATIN_PRICE).toFixed(2) : null,
+  tag: "2-PACK",
+  variantId: SATIN_VARIANT_ID,
+  productName: SATIN_NAME,
+  desc: "2-pack · satin pillowcases",
+};
+
+export const ALL_TIERS: Tier[] = [...TIERS, ...TIERS_B, SATIN_TIER];
 
 export const DEFAULT_TIER = "1pk";
 export const DEFAULT_TIER_B = "b2pk";

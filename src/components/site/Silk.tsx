@@ -330,9 +330,9 @@ export function CartDrawer() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <p style={serif} className="text-[18px] leading-tight">
-                      {PRODUCT_NAME}
+                      {tier.productName ?? PRODUCT_NAME}
                     </p>
-                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">{tier.label} · boar-bristle smoothing brush</p>
+                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">{tier.label} · {tier.desc ?? "boar-bristle smoothing brush"}</p>
                   </div>
                   <p style={serif} className="shrink-0 text-[18px] tabular-nums">
                     {money(tier.price * qty)}
@@ -437,6 +437,7 @@ function MobileMenu() {
   const [open, setOpen] = useState(false);
   const links = [
     { label: "Shop", to: "/silkbrush" as const, hash: undefined },
+    { label: "Satin Pillowcases", to: "/satin" as const, hash: undefined },
     { label: "How it works", to: "/silkbrush" as const, hash: "how" },
     { label: "Reviews", to: "/silkbrush" as const, hash: "reviews" },
     { label: "FAQ", to: "/silkbrush" as const, hash: "faq" },
@@ -487,6 +488,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
   const { qty } = useCart();
   const nav = [
     { label: "Shop", to: "/silkbrush" as const, hash: undefined },
+    { label: "Satin", to: "/satin" as const, hash: undefined },
     { label: "How it works", to: "/silkbrush" as const, hash: "how" },
     { label: "Reviews", to: "/silkbrush" as const, hash: "reviews" },
     { label: "FAQ", to: "/silkbrush" as const, hash: "faq" },
