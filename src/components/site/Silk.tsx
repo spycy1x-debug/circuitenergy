@@ -330,9 +330,9 @@ export function CartDrawer() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <p style={serif} className="text-[18px] leading-tight">
-                      {PRODUCT_NAME}
+                      {tier.productName ?? PRODUCT_NAME}
                     </p>
-                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">{tier.label} · boar-bristle smoothing brush</p>
+                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">{tier.label} · {tier.desc ?? "boar-bristle smoothing brush"}</p>
                   </div>
                   <p style={serif} className="shrink-0 text-[18px] tabular-nums">
                     {money(tier.price * qty)}
