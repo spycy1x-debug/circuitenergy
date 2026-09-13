@@ -78,7 +78,8 @@ export const cart = {
   },
   clear() {
     qty = 0;
-    protection = false;
+    protection = true;
+
     emit();
   },
 };
