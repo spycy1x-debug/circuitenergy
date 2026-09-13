@@ -14,6 +14,7 @@ import { Route as Silkbrush2RouteImport } from './routes/silkbrush-2'
 import { Route as SilkbrushRouteImport } from './routes/silkbrush'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ShippingRouteImport } from './routes/shipping'
+import { Route as SatinRouteImport } from './routes/satin'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
@@ -49,6 +50,11 @@ const ShopRoute = ShopRouteImport.update({
 const ShippingRoute = ShippingRouteImport.update({
   id: '/shipping',
   path: '/shipping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SatinRoute = SatinRouteImport.update({
+  id: '/satin',
+  path: '/satin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RefundRoute = RefundRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/satin': typeof SatinRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/silkbrush': typeof SilkbrushRoute
@@ -136,6 +143,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/satin': typeof SatinRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/silkbrush': typeof SilkbrushRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/satin': typeof SatinRoute
   '/shipping': typeof ShippingRoute
   '/shop': typeof ShopRoute
   '/silkbrush': typeof SilkbrushRoute
@@ -175,6 +184,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/privacy'
     | '/refund'
+    | '/satin'
     | '/shipping'
     | '/shop'
     | '/silkbrush'
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/privacy'
     | '/refund'
+    | '/satin'
     | '/shipping'
     | '/shop'
     | '/silkbrush'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/privacy'
     | '/refund'
+    | '/satin'
     | '/shipping'
     | '/shop'
     | '/silkbrush'
@@ -230,6 +242,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
+  SatinRoute: typeof SatinRoute
   ShippingRoute: typeof ShippingRoute
   ShopRoute: typeof ShopRoute
   SilkbrushRoute: typeof SilkbrushRoute
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       path: '/shipping'
       fullPath: '/shipping'
       preLoaderRoute: typeof ShippingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/satin': {
+      id: '/satin'
+      path: '/satin'
+      fullPath: '/satin'
+      preLoaderRoute: typeof SatinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/refund': {
@@ -366,6 +386,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
+  SatinRoute: SatinRoute,
   ShippingRoute: ShippingRoute,
   ShopRoute: ShopRoute,
   SilkbrushRoute: SilkbrushRoute,

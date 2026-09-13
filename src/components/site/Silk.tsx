@@ -437,6 +437,7 @@ function MobileMenu() {
   const [open, setOpen] = useState(false);
   const links = [
     { label: "Shop", to: "/silkbrush" as const, hash: undefined },
+    { label: "Satin Pillowcases", to: "/satin" as const, hash: undefined },
     { label: "How it works", to: "/silkbrush" as const, hash: "how" },
     { label: "Reviews", to: "/silkbrush" as const, hash: "reviews" },
     { label: "FAQ", to: "/silkbrush" as const, hash: "faq" },
@@ -487,6 +488,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
   const { qty } = useCart();
   const nav = [
     { label: "Shop", to: "/silkbrush" as const, hash: undefined },
+    { label: "Satin", to: "/satin" as const, hash: undefined },
     { label: "How it works", to: "/silkbrush" as const, hash: "how" },
     { label: "Reviews", to: "/silkbrush" as const, hash: "reviews" },
     { label: "FAQ", to: "/silkbrush" as const, hash: "faq" },
