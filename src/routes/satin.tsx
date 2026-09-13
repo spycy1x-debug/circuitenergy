@@ -336,8 +336,7 @@ function SatinPage() {
           <img
             src={satinProduct}
             alt="Seralie satin pillowcase from the 2-pack"
-            className="w-full rounded-lg border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] object-contain p-4"
-            style={{ aspectRatio: "4 / 5" }}
+            className="block h-auto w-full rounded-lg border border-[color:var(--cw-line)]"
             loading="lazy"
           />
           <div>
