@@ -64,7 +64,7 @@ export const TIERS_B: Tier[] = [
     subLabel: "FREE shipping + FREE Scalp Scrubber included.",
     price: 59.99,
     compareAt: 99.98,
-    perUnit: 30.0,
+    perUnit: 29.99,
     saves: 39.99,
     tag: "MOST POPULAR",
     variantId: "49175120183450",
