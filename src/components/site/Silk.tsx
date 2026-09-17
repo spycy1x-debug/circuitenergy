@@ -521,13 +521,10 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
               </Link>
             ))}
           </nav>
+          </div>
 
-          <Link
-            to="/"
-            className="absolute left-1/2 -translate-x-1/2 inline-flex items-baseline"
-            aria-label="Seralie home"
-          >
-            <span style={serif} className="text-[22px] tracking-[0.22em] md:text-[26px]">
+          <Link to="/" className="inline-flex items-baseline justify-self-center" aria-label="Seralie home">
+            <span style={serif} className="whitespace-nowrap text-[20px] tracking-[0.22em] md:text-[26px]">
               SERALIE
             </span>
           </Link>
@@ -536,7 +533,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
             onClick={() => cart.setOpen(true)}
             aria-label="Open cart"
             style={sans}
-            className="ml-auto text-[11px] font-semibold uppercase tracking-[0.18em]"
+            className="justify-self-end whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.18em]"
           >
             Cart ({qty})
           </button>
