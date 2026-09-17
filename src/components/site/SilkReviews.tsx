@@ -284,6 +284,7 @@ export function SilkReviews({ id = "reviews" }: { id?: string }) {
               2,348 reviews
             </span>
           </div>
+          <WriteReview onDone={(r) => setAdded((a) => [r, ...a])} />
         </div>
 
         <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
