@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
 import { cart, cartCheckoutUrl, cartTotal } from "@/lib/silkbrush-cart";
 import { money, PRICE, PRODUCT_NAME, PROTECTION_PRICE, RATING, REVIEW_COUNT, VARIANT_ID } from "@/lib/silkbrush-config";
@@ -456,8 +457,8 @@ function MobileMenu() {
         <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
         <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
       </button>
-      {open && (
-        <div className="fixed inset-0 z-[200] lg:hidden" style={sans}>
+      {open && typeof document !== "undefined" && createPortal(
+        <div className="fixed inset-0 z-[200] lg:hidden" style={{ ...SB_VARS, ...sans }}>
           <button aria-label="Close menu" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/70" />
           <aside className="absolute left-0 top-0 flex h-full w-[86%] max-w-[320px] flex-col overflow-y-auto bg-[color:var(--cw-ink)] text-[color:var(--cw-bg)] shadow-[0_0_80px_rgba(0,0,0,0.5)]">
             <div className="flex items-center justify-between border-b border-white/15 px-5 py-4">
@@ -478,7 +479,8 @@ function MobileMenu() {
               ))}
             </nav>
           </aside>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
