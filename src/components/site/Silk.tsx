@@ -457,21 +457,21 @@ function MobileMenu() {
         <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
       </button>
       {open && (
-        <div className="fixed inset-0 z-[110] lg:hidden" style={sans}>
-          <button aria-label="Close menu" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-          <aside className="absolute left-0 top-0 flex h-full w-full max-w-[300px] flex-col border-r border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] shadow-[0_0_60px_rgba(0,0,0,0.35)]">
-            <div className="flex items-center justify-between border-b border-[color:var(--cw-line)] px-5 py-4">
+        <div className="fixed inset-0 z-[200] lg:hidden" style={sans}>
+          <button aria-label="Close menu" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/70" />
+          <aside className="absolute left-0 top-0 flex h-full w-[86%] max-w-[320px] flex-col overflow-y-auto bg-[color:var(--cw-ink)] text-[color:var(--cw-bg)] shadow-[0_0_80px_rgba(0,0,0,0.5)]">
+            <div className="flex items-center justify-between border-b border-white/15 px-5 py-4">
               <span style={serif} className="text-[18px] tracking-[0.22em]">SERALIE</span>
               <button onClick={() => setOpen(false)} aria-label="Close" className="text-2xl leading-none">×</button>
             </div>
-            <nav className="flex flex-col px-5 py-4">
+            <nav className="flex flex-col px-5 py-2">
               {links.map((l) => (
                 <Link
                   key={l.label}
                   to={l.to}
                   hash={l.hash}
                   onClick={() => setOpen(false)}
-                  className="border-b border-[color:var(--cw-line)] py-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-[color:var(--cw-ink)]"
+                  className="border-b border-white/12 py-4 text-[13px] font-semibold uppercase tracking-[0.18em]"
                 >
                   {l.label}
                 </Link>
