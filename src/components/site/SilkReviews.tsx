@@ -315,7 +315,7 @@ export function SilkReviews({ id = "reviews" }: { id?: string }) {
           ))}
         </div>
 
-        {count < REVIEWS.length && (
+        {count < all.length && (
           <button
             onClick={() => setCount((c) => c + 12)}
             style={sans}
