@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { sans, serif, Stars } from "@/components/site/Silk";
+import { supabase } from "@/integrations/supabase/client";
 import r1 from "@/assets/sbr-1.webp.asset.json";
 import r2 from "@/assets/sbr-2.webp.asset.json";
 import r3 from "@/assets/sbr-3.webp.asset.json";
