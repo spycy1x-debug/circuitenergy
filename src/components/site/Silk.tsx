@@ -450,16 +450,16 @@ function MobileMenu() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open menu"
-        className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] md:hidden"
+        className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] lg:hidden"
       >
         <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
         <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
         <span className="block h-px w-5 bg-[color:var(--cw-ink)]" />
       </button>
       {open && (
-        <div className="fixed inset-0 z-[110] md:hidden" style={sans}>
-          <button aria-label="Close menu" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/30" />
-          <aside className="absolute left-0 top-0 flex h-full w-full max-w-[300px] flex-col bg-[color:var(--cw-bg)] shadow-2xl">
+        <div className="fixed inset-0 z-[110] lg:hidden" style={sans}>
+          <button aria-label="Close menu" onClick={() => setOpen(false)} className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <aside className="absolute left-0 top-0 flex h-full w-full max-w-[300px] flex-col border-r border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] shadow-[0_0_60px_rgba(0,0,0,0.35)]">
             <div className="flex items-center justify-between border-b border-[color:var(--cw-line)] px-5 py-4">
               <span style={serif} className="text-[18px] tracking-[0.22em]">SERALIE</span>
               <button onClick={() => setOpen(false)} aria-label="Close" className="text-2xl leading-none">×</button>
@@ -505,9 +505,10 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
       </div>
 
       <header className="sticky top-0 z-40 border-b border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]/95 backdrop-blur">
-        <div className="relative mx-auto flex h-14 max-w-6xl items-center px-4 md:h-16 md:px-8">
+        <div className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 md:h-16 md:px-8">
+          <div className="flex min-w-0 items-center">
           <MobileMenu />
-          <nav className="hidden flex-1 items-center gap-6 md:flex">
+          <nav className="hidden min-w-0 flex-1 items-center gap-5 lg:flex">
             {nav.map((n) => (
               <Link
                 key={n.label}
@@ -520,13 +521,10 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
               </Link>
             ))}
           </nav>
+          </div>
 
-          <Link
-            to="/"
-            className="absolute left-1/2 -translate-x-1/2 inline-flex items-baseline"
-            aria-label="Seralie home"
-          >
-            <span style={serif} className="text-[22px] tracking-[0.22em] md:text-[26px]">
+          <Link to="/" className="inline-flex items-baseline justify-self-center" aria-label="Seralie home">
+            <span style={serif} className="whitespace-nowrap text-[20px] tracking-[0.22em] md:text-[26px]">
               SERALIE
             </span>
           </Link>
@@ -535,7 +533,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
             onClick={() => cart.setOpen(true)}
             aria-label="Open cart"
             style={sans}
-            className="ml-auto text-[11px] font-semibold uppercase tracking-[0.18em]"
+            className="justify-self-end whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.18em]"
           >
             Cart ({qty})
           </button>
