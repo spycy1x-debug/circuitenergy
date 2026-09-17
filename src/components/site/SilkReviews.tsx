@@ -109,9 +109,164 @@ export function MiniReviewCarousel() {
   );
 }
 
+const PRODUCT_ID = "silkbrush";
+
+const fmtDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+function WriteReview({ onDone }: { onDone: (r: Review) => void }) {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [rating, setRating] = useState(5);
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+
+  const inputCls =
+    "w-full rounded-md border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)] px-3 py-2 text-[14px] text-[color:var(--cw-ink)] outline-none focus:border-[color:var(--gold-deep)]";
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setErr(null);
+    if (!name.trim() || !title.trim() || !body.trim()) {
+      setErr("Please fill in your name, a title, and your review.");
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.from("product_reviews").insert({
+      product_id: PRODUCT_ID,
+      name: name.trim().slice(0, 80),
+      title: title.trim().slice(0, 120),
+      body: body.trim().slice(0, 2000),
+      rating,
+    });
+    setBusy(false);
+    if (error) {
+      setErr("Sorry, we couldn't save your review. Please try again.");
+      return;
+    }
+    onDone({
+      name: name.trim(),
+      rating,
+      date: fmtDate(new Date().toISOString()),
+      title: title.trim(),
+      body: body.trim(),
+    });
+    setDone(true);
+    setName("");
+    setTitle("");
+    setBody("");
+    setRating(5);
+  }
+
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        style={sans}
+        className="mt-6 border border-[color:var(--gold-deep)] px-8 py-3 text-[12px] font-bold uppercase tracking-[0.18em] text-[color:var(--gold-deep)] transition hover:bg-[color:var(--gold-deep)] hover:text-white"
+      >
+        Write a review
+      </button>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={submit}
+      className="mt-6 w-full max-w-xl rounded-xl border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] p-5 text-left"
+    >
+      {done && (
+        <p style={sans} className="mb-3 text-[13px] font-semibold text-[color:var(--gold-deep)]">
+          Thank you! Your review has been posted.
+        </p>
+      )}
+      <div className="flex items-center gap-2">
+        {[1, 2, 3, 4, 5].map((n) => (
+          <button
+            key={n}
+            type="button"
+            aria-label={`${n} star${n > 1 ? "s" : ""}`}
+            onClick={() => setRating(n)}
+            className={`text-[22px] leading-none ${n <= rating ? "text-[color:var(--gold-deep)]" : "text-[color:var(--cw-line)]"}`}
+          >
+            ★
+          </button>
+        ))}
+      </div>
+      <div className="mt-3 grid gap-3">
+        <input className={inputCls} placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} maxLength={80} />
+        <input className={inputCls} placeholder="Review title" value={title} onChange={(e) => setTitle(e.target.value)} maxLength={120} />
+        <textarea
+          className={`${inputCls} min-h-24`}
+          placeholder="Tell us about your experience"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          maxLength={2000}
+        />
+      </div>
+      {err && (
+        <p style={sans} className="mt-2 text-[12px] text-red-600">
+          {err}
+        </p>
+      )}
+      <div className="mt-4 flex items-center gap-3">
+        <button
+          type="submit"
+          disabled={busy}
+          style={sans}
+          className="border border-[color:var(--gold-deep)] bg-[color:var(--gold-deep)] px-7 py-2.5 text-[12px] font-bold uppercase tracking-[0.18em] text-white disabled:opacity-60"
+        >
+          {busy ? "Posting…" : "Post review"}
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          style={sans}
+          className="text-[12px] uppercase tracking-[0.14em] text-[color:var(--cw-muted)]"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+}
+
 export function SilkReviews({ id = "reviews" }: { id?: string }) {
   const [count, setCount] = useState(INITIAL);
-  const shown = REVIEWS.slice(0, count);
+  const [added, setAdded] = useState<Review[]>([]);
+
+  useEffect(() => {
+    let alive = true;
+    supabase
+      .from("product_reviews")
+      .select("name,title,body,rating,image_url,created_at")
+      .eq("product_id", PRODUCT_ID)
+      .order("created_at", { ascending: false })
+      .limit(200)
+      .then(({ data }) => {
+        if (!alive || !data) return;
+        setAdded(
+          data.map((r) => ({
+            name: r.name,
+            rating: r.rating,
+            date: fmtDate(r.created_at),
+            title: r.title,
+            body: r.body,
+            photo: r.image_url ?? undefined,
+          })),
+        );
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const all = [...added, ...REVIEWS];
+  const shown = all.slice(0, count);
+
 
   return (
     <section id={id} className="scroll-mt-20 border-t border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]">
