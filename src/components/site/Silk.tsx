@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
 import { cart, cartCheckoutUrl, cartTotal } from "@/lib/silkbrush-cart";
 import { money, PRICE, PRODUCT_NAME, PROTECTION_PRICE, RATING, REVIEW_COUNT, VARIANT_ID } from "@/lib/silkbrush-config";
