@@ -29,18 +29,40 @@ function send(name: string, params: Record<string, unknown>) {
   return true;
 }
 
-// In-memory guard: identical event fired again within 2s (double click, double render,
-// duplicate handler) is dropped so Meta never receives the same action twice.
+// Guard: the same event name fired again within 3s (double click, double render,
+// duplicate handler, back-navigation re-mount) is dropped so Meta never receives
+// the same action twice. Shared across tabs via localStorage.
+const DEDUPE_MS = 3000;
 const recent = new Map<string, number>();
-function isDuplicate(name: string, params: Record<string, unknown>) {
-  const key = `${name}|${JSON.stringify(params)}`;
+
+function lastFiredAcrossTabs(key: string) {
+  try {
+    const v = window.localStorage.getItem(`fbdedupe_${key}`);
+    return v ? parseInt(v, 10) || 0 : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function markFiredAcrossTabs(key: string, now: number) {
+  try {
+    window.localStorage.setItem(`fbdedupe_${key}`, String(now));
+  } catch {
+    /* ignore */
+  }
+}
+
+function isDuplicate(name: string, _params: Record<string, unknown>) {
+  const key = name; // name-level: two clicks on different offers within 3s is still one action
   const now = Date.now();
-  const last = recent.get(key);
   for (const [k, t] of recent) if (now - t > 10000) recent.delete(k);
-  if (last && now - last < 2000) return true;
+  const last = Math.max(recent.get(key) ?? 0, lastFiredAcrossTabs(key));
+  if (last && now - last < DEDUPE_MS) return true;
   recent.set(key, now);
+  markFiredAcrossTabs(key, now);
   return false;
 }
+
 
 /** Fires as soon as fbq exists — retries briefly if the base pixel is still loading. */
 function track(name: string, params: Record<string, unknown>, sessionKey?: string) {
