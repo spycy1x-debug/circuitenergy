@@ -302,7 +302,6 @@ export function SilkBrushPage({
   galleryImages?: GalleryImage[];
   materialSelector?: boolean;
 }) {
-  const [openSpec, setOpenSpec] = useState(false);
 
   return (
     <SilkShell>
