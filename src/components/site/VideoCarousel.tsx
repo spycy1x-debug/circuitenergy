@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 export type VideoItem = { src: string; caption?: string };
 
@@ -48,6 +48,7 @@ export function VideoCarousel({ items }: { items: VideoItem[] }) {
 
   useEffect(() => {
     if (!inView) return;
+    setPaused({});
     refs.current.forEach((v, i) => {
       if (!v) return;
       if (i === index) {
@@ -90,12 +91,13 @@ export function VideoCarousel({ items }: { items: VideoItem[] }) {
                 }
                 const el = refs.current[i];
                 if (!el) return;
-                if (el.paused) {
+                const wasPaused = el.paused;
+                if (wasPaused) {
                   el.play().catch(() => {});
                 } else {
                   el.pause();
                 }
-                setPaused((p) => ({ ...p, [i]: !el.paused }));
+                setPaused((p) => ({ ...p, [i]: !wasPaused }));
               }}
               style={{ flex: `0 0 ${SLIDE}%` }}
               className={`relative overflow-hidden rounded-2xl bg-black transition-all duration-500 ${
@@ -117,6 +119,13 @@ export function VideoCarousel({ items }: { items: VideoItem[] }) {
                 />
               ) : (
                 <div className="aspect-[9/16] h-full w-full bg-black" />
+              )}
+              {i === index && paused[i] && (
+                <span className="pointer-events-none absolute inset-0 grid place-items-center">
+                  <span className="grid h-14 w-14 place-items-center rounded-full bg-white/85 shadow-lg">
+                    <Play className="ml-0.5 h-6 w-6 fill-[#111111] text-[#111111]" />
+                  </span>
+                </span>
               )}
             </button>
           ))}
