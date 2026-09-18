@@ -57,7 +57,7 @@ export const TIERS: Tier[] = [
 
 /** VARIANT B — higher-priced offer with a free scalp scrubber on the 2- and 3-packs. */
 export const TIERS_B: Tier[] = [
-  { id: "b1pk", label: "1 Brush", price: 36.99, compareAt: 49.99, perUnit: 36.99, saves: 13.0, tag: "+ FREE SHIPPING", variantId: "49175120150682" },
+  { id: "b1pk", label: "1 Brush", price: 33.99, compareAt: 49.99, perUnit: 33.99, saves: 16.0, tag: "+ FREE SHIPPING", variantId: "49175120150682" },
   {
     id: "b2pk",
     label: "2 Brushes + FREE GIFT",
