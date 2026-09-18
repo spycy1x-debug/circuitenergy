@@ -6,6 +6,7 @@ export type VideoItem = { src: string; caption?: string };
 export function VideoCarousel({ items }: { items: VideoItem[] }) {
   const [index, setIndex] = useState(0);
   const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState<Record<number, boolean>>({});
   const rootRef = useRef<HTMLDivElement>(null);
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
   const touchX = useRef<number | null>(null);
@@ -82,7 +83,20 @@ export function VideoCarousel({ items }: { items: VideoItem[] }) {
             <button
               key={v.src}
               type="button"
-              onClick={() => setIndex(i)}
+              onClick={() => {
+                if (i !== index) {
+                  setIndex(i);
+                  return;
+                }
+                const el = refs.current[i];
+                if (!el) return;
+                if (el.paused) {
+                  el.play().catch(() => {});
+                } else {
+                  el.pause();
+                }
+                setPaused((p) => ({ ...p, [i]: !el.paused }));
+              }}
               style={{ flex: `0 0 ${SLIDE}%` }}
               className={`relative overflow-hidden rounded-2xl bg-black transition-all duration-500 ${
                 i === index ? "opacity-100 scale-100" : "opacity-60 scale-[0.9]"
