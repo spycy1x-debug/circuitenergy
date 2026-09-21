@@ -115,7 +115,18 @@ export function VideoCarousel({ items }: { items: VideoItem[] }) {
                   muted
                   loop
                   playsInline
-                  preload={i === index ? "metadata" : "none"}
+                  autoPlay={i === index}
+                  preload={i === index ? "auto" : "none"}
+                  onLoadedData={() => {
+                    if (i === index && !paused[i]) {
+                      refs.current[i]?.play().catch(() => {});
+                    }
+                  }}
+                  onCanPlay={() => {
+                    if (i === index && !paused[i]) {
+                      refs.current[i]?.play().catch(() => {});
+                    }
+                  }}
                 />
               ) : (
                 <div className="aspect-[9/16] h-full w-full bg-black" />
