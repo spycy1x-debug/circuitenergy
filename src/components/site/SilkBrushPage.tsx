@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Media, P, RatingLine, SilkShell, Faq, TrustBadges, sans, serif } from "@/components/site/Silk";
 import { money, type Tier } from "@/lib/silkbrush-config";
 import { defaultTierFor, logAbEvent, tiersFor, useAbVariant } from "@/lib/ab-test";
@@ -256,6 +256,61 @@ function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
 
 const UGC_VIDEOS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((n) => ({ url: `/ugc/ugc${n}.mp4`, poster: `/ugc/ugc${n}.jpg` }));
 
+/**
+ * Clips stay unloaded until they scroll into view, then autoplay muted and
+ * pause again once they leave. Tapping toggles play/pause.
+ */
+function UgcClip({ url, poster }: { url: string; poster: string }) {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const vidRef = useRef<HTMLVideoElement>(null);
+  const [load, setLoad] = useState(false);
+
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setLoad(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setLoad(true);
+          vidRef.current?.play().catch(() => {});
+        } else {
+          vidRef.current?.pause();
+        }
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div ref={boxRef} className="w-[72%] shrink-0 snap-center md:w-[calc((100%-2.25rem)/4)]">
+      <video
+        ref={vidRef}
+        src={load ? url : undefined}
+        poster={poster}
+        className="w-full border border-[color:var(--cw-line)] bg-black object-cover"
+        style={{ aspectRatio: "9 / 16" }}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload={load ? "auto" : "none"}
+        onLoadedData={() => vidRef.current?.play().catch(() => {})}
+        onClick={() => {
+          const v = vidRef.current;
+          if (!v) return;
+          if (v.paused) v.play().catch(() => {});
+          else v.pause();
+        }}
+      />
+    </div>
+  );
+}
+
 function UgcRow() {
   const ref = useRef<HTMLDivElement>(null);
   const by = (d: number) => ref.current?.scrollBy({ left: d * (ref.current.clientWidth * 0.7), behavior: "smooth" });
@@ -266,19 +321,7 @@ function UgcRow() {
         className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] md:mx-0 md:px-0"
       >
         {UGC_VIDEOS.map((v) => (
-          <div key={v.url} className="w-[72%] shrink-0 snap-center md:w-[calc((100%-2.25rem)/4)]">
-            <video
-              src={v.url}
-              poster={v.poster}
-              className="w-full border border-[color:var(--cw-line)] bg-black object-cover"
-              style={{ aspectRatio: "9 / 16" }}
-              muted
-              loop
-              playsInline
-              controls
-              preload="none"
-            />
-          </div>
+          <UgcClip key={v.url} url={v.url} poster={v.poster} />
         ))}
       </div>
       <div className="mt-3 flex gap-2">
