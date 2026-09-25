@@ -199,14 +199,14 @@ function Gallery({ images = SILKBRUSH_GALLERY }: { images?: SilkBrushGalleryImag
   const prev = () => setI((v) => (v === 0 ? images.length - 1 : v - 1));
   const next = () => setI((v) => (v === images.length - 1 ? 0 : v + 1));
   return (
-    <div>
+    <div className="relative">
+      <span
+        style={sans}
+        className="absolute -top-3.5 left-4 z-10 rounded-md bg-[color:var(--gold-deep)] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-md md:left-6 md:text-[10px]"
+      >
+        Upgraded bamboo design
+      </span>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
-        <span
-          style={sans}
-          className="absolute left-2 top-2 z-10 rounded-full bg-[color:var(--gold-deep)] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-sm md:left-3 md:top-3 md:text-[10px]"
-        >
-          Upgraded bamboo design
-        </span>
         <img
           src={activeImage.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}
