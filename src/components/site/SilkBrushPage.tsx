@@ -8,6 +8,7 @@ import { SilkReviews, MiniReviewCarousel } from "@/components/site/SilkReviews";
 import { SILKBRUSH_GALLERY, type SilkBrushGalleryImage } from "@/lib/silkbrush-gallery";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
 import imgCloseup from "@/assets/sbx-7.webp.asset.json";
+import imgUsing from "@/assets/sbx-8.webp.asset.json";
 import imgWooden from "@/assets/sbx-2.webp.asset.json";
 
 /* ------------------------------- primitives ------------------------------- */
