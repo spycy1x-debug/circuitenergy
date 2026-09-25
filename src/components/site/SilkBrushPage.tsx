@@ -341,9 +341,11 @@ function UgcRow() {
 export function SilkBrushPage({
   galleryImages,
   materialSelector = false,
+  icp = false,
 }: {
   galleryImages?: GalleryImage[];
   materialSelector?: boolean;
+  icp?: boolean;
 }) {
 
   return (
@@ -356,12 +358,18 @@ export function SilkBrushPage({
           <div className="md:pt-2">
             <RatingLine />
             <h1 style={serif} className="mt-3 text-[36px] leading-[1.02] text-[color:var(--cw-brand-deep)] md:text-[52px]">
-              Smooth. Straighten. Shine.
+              {icp ? "Smooth, Put-Together Hair Without The Daily Fight." : "Smooth. Straighten. Shine."}
             </h1>
+            {icp ? (
+              <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
+                If your hair <P>used to be easy</P> but now feels <P>frizzy, wavy, uneven, or impossible to keep under control</P>, the <P>Seralie SilkBrush™</P> helps smooth unruly sections as you brush for a <P>smoother, straighter-looking, more put-together finish</P>.
+              </p>
+            ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
               Meet the <P>Seralie SilkBrush™</P>. A boar-bristle brush designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
               <P>sleek, straighter-looking finish</P> while you brush.
             </p>
+            )}
 
             <div className="mt-8">
               <OfferSection id="offer" materialSelector={materialSelector} />
