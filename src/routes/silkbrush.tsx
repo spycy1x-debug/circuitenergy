@@ -8,7 +8,7 @@ import { SILKBRUSH_GALLERY_PRELOAD } from "@/lib/silkbrush-gallery";
 
 export const Route = createFileRoute("/silkbrush")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: SILKBRUSH_GALLERY_PRELOAD, fetchpriority: "high" }],
+    links: [{ rel: "preload", as: "image", href: SILKBRUSH_GALLERY_PRELOAD, fetchPriority: "high" }],
     meta: [
       { title: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
       {
