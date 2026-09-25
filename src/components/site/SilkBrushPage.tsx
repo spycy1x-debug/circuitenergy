@@ -201,11 +201,12 @@ function Gallery({ images = SILKBRUSH_GALLERY }: { images?: SilkBrushGalleryImag
   return (
     <div className="relative">
       <span
-        style={sans}
-        className="absolute -top-3.5 left-4 z-10 rounded-md bg-[color:var(--gold-deep)] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-md md:left-6 md:text-[10px]"
+        style={{ ...sans, boxShadow: "0 1px 3px rgba(0,0,0,0.18)" }}
+        className="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-[color:var(--gold-deep)] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white md:text-[10px]"
       >
         Upgraded bamboo design
       </span>
+
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <img
           src={activeImage.url}
