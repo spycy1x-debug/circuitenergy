@@ -374,7 +374,7 @@ export function SilkBrushPage({
           <div className="shrink-0 md:w-28">
             <div className="overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]">
               <img
-                src={img2.url}
+                src={SILKBRUSH_GALLERY[2]?.url}
                 alt="Current wooden Seralie SilkBrush™ design"
                 className="aspect-square w-full object-contain"
                 loading="lazy"
