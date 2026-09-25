@@ -9,7 +9,7 @@ import gallery8 from "@/assets/silkbrush-gallery-new-8.webp.asset.json";
 import gallery9 from "@/assets/silkbrush-gallery-new-9.webp.asset.json";
 import gallery10 from "@/assets/silkbrush-gallery-new-10.png.asset.json";
 import gallery11 from "@/assets/silkbrush-gallery-new-11.png.asset.json";
-import plainBrush from "@/assets/silkbrush-prod-1.png.asset.json";
+import plainBrush from "@/assets/silkbrush-prod-labeled.png.asset.json";
 
 export type SilkBrushGalleryImage = { url: string; aspectRatio?: string };
 
