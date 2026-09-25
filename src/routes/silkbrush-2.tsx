@@ -8,7 +8,7 @@ import { SILKBRUSH_GALLERY_PLASTIC_FIRST, SILKBRUSH_GALLERY_PLASTIC_PRELOAD } fr
 
 export const Route = createFileRoute("/silkbrush-2")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: SILKBRUSH_GALLERY_PRELOAD, fetchPriority: "high" }],
+    links: [{ rel: "preload", as: "image", href: SILKBRUSH_GALLERY_PLASTIC_PRELOAD, fetchPriority: "high" }],
     meta: [
       { title: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
       {
