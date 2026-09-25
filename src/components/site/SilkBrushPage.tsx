@@ -201,6 +201,12 @@ function Gallery({ images = SILKBRUSH_GALLERY }: { images?: SilkBrushGalleryImag
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+        <span
+          style={sans}
+          className="absolute left-2 top-2 z-10 rounded-full bg-[color:var(--gold-deep)] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-sm md:left-3 md:top-3 md:text-[10px]"
+        >
+          Upgraded bamboo design
+        </span>
         <img
           src={activeImage.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}

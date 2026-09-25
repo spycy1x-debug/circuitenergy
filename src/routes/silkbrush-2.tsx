@@ -4,11 +4,11 @@ import { SilkBrushPage } from "@/components/site/SilkBrushPage";
 import { trackViewContent } from "@/lib/fb-pixel";
 import { getVariant, logAbEvent } from "@/lib/ab-test";
 import { PRICE, VARIANT_ID } from "@/lib/silkbrush-config";
-import { SILKBRUSH_GALLERY_PRELOAD } from "@/lib/silkbrush-gallery";
+import { SILKBRUSH_GALLERY_PLASTIC_FIRST, SILKBRUSH_GALLERY_PLASTIC_PRELOAD } from "@/lib/silkbrush-gallery";
 
 export const Route = createFileRoute("/silkbrush-2")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: SILKBRUSH_GALLERY_PRELOAD, fetchPriority: "high" }],
+    links: [{ rel: "preload", as: "image", href: SILKBRUSH_GALLERY_PLASTIC_PRELOAD, fetchPriority: "high" }],
     meta: [
       { title: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
       {
@@ -34,5 +34,5 @@ function SilkBrush2Product() {
     logAbEvent("view", { variant });
     trackViewContent(VARIANT_ID || "silkbrush", PRICE);
   }, []);
-  return <SilkBrushPage materialSelector />;
+  return <SilkBrushPage materialSelector galleryImages={SILKBRUSH_GALLERY_PLASTIC_FIRST} />;
 }

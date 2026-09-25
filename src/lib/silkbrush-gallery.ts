@@ -10,6 +10,7 @@ import gallery9 from "@/assets/silkbrush-gallery-new-9.webp.asset.json";
 import gallery10 from "@/assets/silkbrush-gallery-new-10.png.asset.json";
 import gallery11 from "@/assets/silkbrush-gallery-new-11.png.asset.json";
 import plainBrush from "@/assets/silkbrush-prod-labeled.png.asset.json";
+import plasticBrush from "@/assets/silkbrush-plastic.png.asset.json";
 
 export type SilkBrushGalleryImage = { url: string; aspectRatio?: string };
 
@@ -28,4 +29,11 @@ export const SILKBRUSH_GALLERY: SilkBrushGalleryImage[] = [
   gallery11,
 ];
 
+// SilkBrush 2 leads with the plastic brush (that page offers a bamboo/plastic choice).
+export const SILKBRUSH_GALLERY_PLASTIC_FIRST: SilkBrushGalleryImage[] = [
+  { ...plasticBrush, aspectRatio: "1 / 1" },
+  ...SILKBRUSH_GALLERY.slice(1),
+];
+
 export const SILKBRUSH_GALLERY_PRELOAD = plainBrush.url;
+export const SILKBRUSH_GALLERY_PLASTIC_PRELOAD = plasticBrush.url;
