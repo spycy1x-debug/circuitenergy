@@ -2,7 +2,7 @@
  * Isolated A/B test module for the SilkBrush™ offer selector.
  *
  * Variant A = the original offer (unchanged Shopify variants).
- * Variant B = higher-priced offer with a FREE Scalp Scrubber on the 2- and 3-packs
+ * Variant B = higher-priced offer with a free gift on the 2- and 3-packs
  *             (its own Shopify variants + a $0.00 gift line item).
  *
  * Turn the test off by setting AB_TEST_ENABLED to false — everyone then gets
