@@ -10,21 +10,23 @@ import r6 from "@/assets/silkbrush-customer-6.webp.asset.json";
 import r7 from "@/assets/silkbrush-customer-7.webp.asset.json";
 import r8 from "@/assets/silkbrush-customer-8.webp.asset.json";
 import r9 from "@/assets/silkbrush-customer-9.webp.asset.json";
+import r10 from "@/assets/silkbrush-customer-10.png.asset.json";
+import r11 from "@/assets/silkbrush-customer-11.png.asset.json";
 
-const PHOTOS = [r1, r2, r3, r4, r5, r6, r7, r8, r9].map((p) => p.url);
+const PHOTOS = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11].map((p) => p.url);
 
 type Review = { name: string; rating: number; date: string; title: string; body: string; photo?: string };
 
-export const REVIEWS: Review[] = [
-  { name: "Kayla M.", rating: 5, date: "Aug 12, 2026", title: "So much easier in the morning", body: "I honestly did not expect a brush to make this much difference. My hair looks as though I took time to blow-dry it, but I simply brushed it. The frizz around the top is much calmer now.", photo: PHOTOS[0] },
-  { name: "Brianna R.", rating: 5, date: "Aug 9, 2026", title: "Noticeably shinier", body: "After about a week, my hair looked noticeably shinier and much more polished. Even my husband asked what I had changed. I do clean it every few days, but I would do that with any good brush.", photo: PHOTOS[1] },
-  { name: "Sofia G.", rating: 5, date: "Aug 4, 2026", title: "Worth the purchase", body: "I keep this one in my car for mornings when I am rushing out the door. It smooths my hair without pulling, and I arrive looking much more put together.", photo: PHOTOS[2] },
-  { name: "Maddie T.", rating: 4, date: "Jul 30, 2026", title: "A very good brush", body: "It does exactly what I hoped. My hair is not pin-straight, but it is considerably smoother and much less puffy. I noticed the difference after a few days of regular use.", photo: PHOTOS[3] },
-  { name: "Alina P.", rating: 5, date: "Jul 27, 2026", title: "Finally controls my flyaways", body: "The little flyaway hairs around my part have bothered me for years. This brush lays them down nicely without gel or hairspray, which is exactly what I wanted.", photo: PHOTOS[4] },
-  { name: "Denise W.", rating: 5, date: "Jul 22, 2026", title: "Helpful for dry, colored hair", body: "Years of coloring have left my hair quite dry, especially at the ends. This brush helps move the natural oils through my hair, and the ends no longer look nearly as parched.", photo: PHOTOS[5] },
-  { name: "Priya N.", rating: 5, date: "Jul 18, 2026", title: "Works well on thick hair", body: "My hair is very thick, and many brushes barely get through it. This one reaches through the sections without snagging and leaves my hair looking smooth and glossy.", photo: PHOTOS[6] },
-  { name: "Jess L.", rating: 5, date: "Jul 14, 2026", title: "I use it every day", body: "I do not usually write reviews, but this has become part of my daily routine. My hair feels softer, has less static, and looks neater with very little effort.", photo: PHOTOS[7] },
-  { name: "Emma C.", rating: 5, date: "Jul 9, 2026", title: "Gentler on my hair", body: "Brushing after washing used to leave so much hair caught in my old brush. I am seeing far less pulling with this one, and my hair looks smoother when it dries.", photo: PHOTOS[8] },
+const REVIEW_COPY: Review[] = [
+  { name: "Kayla M.", rating: 5, date: "Aug 12, 2026", title: "So much easier in the morning", body: "I honestly did not expect a brush to make this much difference. My hair looks as though I took time to blow-dry it, but I simply brushed it. The frizz around the top is much calmer now." },
+  { name: "Brianna R.", rating: 5, date: "Aug 9, 2026", title: "Noticeably shinier", body: "After about a week, my hair looked noticeably shinier and much more polished. Even my husband asked what I had changed. I do clean it every few days, but I would do that with any good brush." },
+  { name: "Sofia G.", rating: 5, date: "Aug 4, 2026", title: "Worth the purchase", body: "I keep this one in my car for mornings when I am rushing out the door. It smooths my hair without pulling, and I arrive looking much more put together." },
+  { name: "Maddie T.", rating: 4, date: "Jul 30, 2026", title: "A very good brush", body: "It does exactly what I hoped. My hair is not pin-straight, but it is considerably smoother and much less puffy. I noticed the difference after a few days of regular use." },
+  { name: "Alina P.", rating: 5, date: "Jul 27, 2026", title: "Finally controls my flyaways", body: "The little flyaway hairs around my part have bothered me for years. This brush lays them down nicely without gel or hairspray, which is exactly what I wanted." },
+  { name: "Denise W.", rating: 5, date: "Jul 22, 2026", title: "Helpful for dry, colored hair", body: "Years of coloring have left my hair quite dry, especially at the ends. This brush helps move the natural oils through my hair, and the ends no longer look nearly as parched." },
+  { name: "Priya N.", rating: 5, date: "Jul 18, 2026", title: "Works well on thick hair", body: "My hair is very thick, and many brushes barely get through it. This one reaches through the sections without snagging and leaves my hair looking smooth and glossy." },
+  { name: "Jess L.", rating: 5, date: "Jul 14, 2026", title: "I use it every day", body: "I do not usually write reviews, but this has become part of my daily routine. My hair feels softer, has less static, and looks neater with very little effort." },
+  { name: "Emma C.", rating: 5, date: "Jul 9, 2026", title: "Gentler on my hair", body: "Brushing after washing used to leave so much hair caught in my old brush. I am seeing far less pulling with this one, and my hair looks smoother when it dries." },
   { name: "Nicole B.", rating: 5, date: "Jul 3, 2026", title: "Beautiful shine", body: "My hair has not looked this naturally shiny in years, and I am not adding another product to get the effect. I was pleased enough to order a second brush for my sister." },
   { name: "Hannah S.", rating: 5, date: "Jun 29, 2026", title: "Feels well made", body: "The wooden handle feels solid and comfortable, not flimsy like many brushes I have owned. It has also made a real difference with the static I get in the mornings." },
   { name: "Amber K.", rating: 4, date: "Jun 25, 2026", title: "Pleased with the results", body: "My hair is definitely smoother and easier to manage. I gave four stars only because delivery took a little longer than I expected, but the brush itself is excellent." },
@@ -57,6 +59,11 @@ export const REVIEWS: Review[] = [
   { name: "Lauren F.", rating: 5, date: "Feb 22, 2026", title: "Gentle enough for my daughter", body: "My daughter has very fine hair that tangles easily. She no longer dreads having it brushed, and that alone makes this purchase worthwhile." },
   { name: "Monique T.", rating: 5, date: "Feb 16, 2026", title: "A dependable brush", body: "I have used it for several months, and it still looks nearly new. The bristles have held their shape, and it continues to smooth my hair very well." },
 ];
+
+export const REVIEWS: Review[] = REVIEW_COPY.map((review, index) => {
+  const photo = index % 2 === 0 ? PHOTOS[index / 2] : undefined;
+  return photo ? { ...review, photo } : review;
+});
 
 const INITIAL = 12;
 
