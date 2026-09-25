@@ -4,16 +4,11 @@ import { SilkBrushPage } from "@/components/site/SilkBrushPage";
 import { trackViewContent } from "@/lib/fb-pixel";
 import { getVariant, logAbEvent } from "@/lib/ab-test";
 import { PRICE, VARIANT_ID } from "@/lib/silkbrush-config";
-import imgFeatures from "@/assets/silkbrush-features.png.asset.json";
-import img2 from "@/assets/sbx-2.webp.asset.json";
-import img3 from "@/assets/sbx-3.webp.asset.json";
-import img4 from "@/assets/sbx-4.webp.asset.json";
-import img5 from "@/assets/sbx-5.webp.asset.json";
-import img6 from "@/assets/sbx-6.webp.asset.json";
+import { SILKBRUSH_GALLERY_PRELOAD } from "@/lib/silkbrush-gallery";
 
 export const Route = createFileRoute("/silkbrush")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: "/img/prod-1.webp", fetchpriority: "high" }],
+    links: [{ rel: "preload", as: "image", href: SILKBRUSH_GALLERY_PRELOAD, fetchpriority: "high" }],
     meta: [
       { title: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
       {
@@ -33,15 +28,11 @@ export const Route = createFileRoute("/silkbrush")({
   component: SilkBrushProduct,
 });
 
-const img1 = { url: "/img/prod-1.webp" };
-
-const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
-
 function SilkBrushProduct() {
   useEffect(() => {
     const variant = getVariant();
     logAbEvent("view", { variant });
     trackViewContent(VARIANT_ID || "silkbrush", PRICE);
   }, []);
-  return <SilkBrushPage galleryImages={GALLERY} />;
+  return <SilkBrushPage />;
 }
