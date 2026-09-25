@@ -193,19 +193,21 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
 
 function Gallery({ images = SILKBRUSH_GALLERY }: { images?: SilkBrushGalleryImage[] }) {
   const [i, setI] = useState(0);
+  const activeImage = images[i] ?? images[0];
+  if (!activeImage) return null;
   const prev = () => setI((v) => (v === 0 ? images.length - 1 : v - 1));
   const next = () => setI((v) => (v === images.length - 1 ? 0 : v + 1));
   return (
     <div>
       <div className="relative overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
         <img
-          src={images[i]!.url}
+          src={activeImage.url}
           alt={`Seralie SilkBrush™ product image ${i + 1}`}
           className="h-full w-full object-contain"
           loading={i === 0 ? "eager" : "lazy"}
           decoding="async"
           {...(i === 0 ? { fetchPriority: "high" as const } : {})}
-          style={{ aspectRatio: "4 / 5" }}
+          style={{ aspectRatio: activeImage.aspectRatio ?? "3 / 4" }}
         />
         <button
           type="button"
@@ -234,7 +236,7 @@ function Gallery({ images = SILKBRUSH_GALLERY }: { images?: SilkBrushGalleryImag
               idx === i ? "border-[color:var(--cw-ink)]" : "border-[color:var(--cw-line)]"
             }`}
           >
-            <img src={g.url} alt="" className="aspect-square w-full object-cover" loading="lazy" />
+            <img src={g.url} alt="" className="aspect-square w-full object-contain" loading="lazy" />
           </button>
         ))}
       </div>
