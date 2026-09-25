@@ -34,5 +34,5 @@ function SilkBrush2Product() {
     logAbEvent("view", { variant });
     trackViewContent(VARIANT_ID || "silkbrush", PRICE);
   }, []);
-  return <SilkBrushPage materialSelector />;
+  return <SilkBrushPage materialSelector galleryImages={SILKBRUSH_GALLERY_PLASTIC_FIRST} />;
 }
