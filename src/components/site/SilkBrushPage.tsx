@@ -254,7 +254,7 @@ function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
 
 /* ------------------------------ ugc carousel ------------------------------ */
 
-const UGC_VIDEOS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((n) => ({ url: `/ugc/ugc${n}.mp4`, poster: `/ugc/ugc${n}.jpg` }));
+const UGC_VIDEOS = [4, 1, 10, 11, 6, 2, 3, 5, 7, 8, 9].map((n) => ({ url: `/ugc/ugc${n}.mp4`, poster: `/ugc/ugc${n}.jpg` }));
 
 /**
  * Clips stay unloaded until they scroll into view, then autoplay muted and
