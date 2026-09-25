@@ -12,8 +12,9 @@ import r8 from "@/assets/silkbrush-customer-8.webp.asset.json";
 import r9 from "@/assets/silkbrush-customer-9.webp.asset.json";
 import r10 from "@/assets/silkbrush-customer-10.png.asset.json";
 import r11 from "@/assets/silkbrush-customer-11.png.asset.json";
+import r12 from "@/assets/silkbrush-customer-12.png.asset.json";
 
-const PHOTOS = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11].map((p) => p.url);
+const PHOTOS = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12].map((p) => p.url);
 
 type Review = { name: string; rating: number; date: string; title: string; body: string; photo?: string };
 

@@ -5,14 +5,8 @@ import { defaultTierFor, logAbEvent, tiersFor, useAbVariant } from "@/lib/ab-tes
 import { cart } from "@/lib/silkbrush-cart";
 import { trackAddToCart } from "@/lib/fb-pixel";
 import { SilkReviews, MiniReviewCarousel } from "@/components/site/SilkReviews";
+import { SILKBRUSH_GALLERY, type SilkBrushGalleryImage } from "@/lib/silkbrush-gallery";
 import payBadges from "@/assets/pay-badges-v2.png.asset.json";
-import img1 from "@/assets/silkbrush-meet-the-product.png.asset.json";
-import imgFeatures from "@/assets/silkbrush-features.png.asset.json";
-import img2 from "@/assets/sbx-2.webp.asset.json";
-import img3 from "@/assets/sbx-3.webp.asset.json";
-import img4 from "@/assets/sbx-4.webp.asset.json";
-import img5 from "@/assets/sbx-5.webp.asset.json";
-import img6 from "@/assets/sbx-6.webp.asset.json";
 import imgCloseup from "@/assets/sbx-7.webp.asset.json";
 import imgUsing from "@/assets/sbx-8.webp.asset.json";
 
@@ -197,11 +191,7 @@ function OfferSection({ id, materialSelector = false }: { id?: string; materialS
 
 /* --------------------------------- gallery -------------------------------- */
 
-const GALLERY = [img1, imgFeatures, img2, img3, img4, img5, img6];
-
-type GalleryImage = { url: string };
-
-function Gallery({ images = GALLERY }: { images?: GalleryImage[] }) {
+function Gallery({ images = SILKBRUSH_GALLERY }: { images?: SilkBrushGalleryImage[] }) {
   const [i, setI] = useState(0);
   const prev = () => setI((v) => (v === 0 ? images.length - 1 : v - 1));
   const next = () => setI((v) => (v === images.length - 1 ? 0 : v + 1));
@@ -343,7 +333,7 @@ export function SilkBrushPage({
   materialSelector = false,
   icp = false,
 }: {
-  galleryImages?: GalleryImage[];
+  galleryImages?: SilkBrushGalleryImage[];
   materialSelector?: boolean;
   icp?: boolean;
 }) {
@@ -384,7 +374,7 @@ export function SilkBrushPage({
           <div className="shrink-0 md:w-28">
             <div className="overflow-hidden border border-[color:var(--cw-line)] bg-[color:var(--cw-bg)]">
               <img
-                src={img2.url}
+                src={SILKBRUSH_GALLERY[2]?.url}
                 alt="Current wooden Seralie SilkBrush™ design"
                 className="aspect-square w-full object-contain"
                 loading="lazy"
