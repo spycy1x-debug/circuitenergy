@@ -362,11 +362,11 @@ export function SilkBrushPage({
             </h1>
             {icp ? (
               <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-                If your hair <P>used to cooperate</P> but now turns <P>frizzy, uneven, and impossible to control</P>, stop wasting your morning fighting it. The <P>Seralie SilkBrush™</P> is built on <P>premium boar bristles</P> — dense, natural bristles that <P>grip every strand</P>, press down flyaways, and <P>distribute your hair's own oils</P> from root to end as you brush. That's what smooths the stubborn sections and leaves you with a <P>sleeker, straighter-looking, put-together finish</P> — no heat required.
+                If your hair <P>used to cooperate</P> but now turns <P>frizzy, uneven, and impossible to control</P>, stop wasting your morning fighting it. The <P>Seralie SilkBrush™</P> is built on <P>premium handmade Korean silk-bristles</P> — dense, hand-crafted bristles that <P>grip every strand</P>, press down flyaways, and <P>distribute your hair's own oils</P> from root to end as you brush. That's what smooths the stubborn sections and leaves you with a <P>sleeker, straighter-looking, put-together finish</P> — no heat required.
               </p>
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Meet the <P>Seralie SilkBrush™</P>. A boar-bristle brush designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
+              Meet the <P>Seralie SilkBrush™</P>. A premium handmade Korean silk-bristle brush designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
               <P>sleek, straighter-looking finish</P> while you brush.
             </p>
             )}
@@ -449,7 +449,7 @@ export function SilkBrushPage({
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
               <P>Frizz, flyaways, dull ends</P> — they steal the hair you were born with. The SilkBrush™ <P>takes it back</P>.
-              Boar bristles grab every strand, drag your natural oils from root to tip, and force it into a{" "}
+              Korean silk bristles grab every strand, drag your natural oils from root to tip, and force it into a{" "}
               <P>smooth, glossy, straight-looking finish</P>. <P>No heat. No chemicals. No $200 salon visit.</P> Just{" "}
               <P>2 minutes</P> of brushing.
             </p>
@@ -481,7 +481,7 @@ export function SilkBrushPage({
           <div className="grid gap-3">
             <img
               src={imgCloseup.url}
-              alt="Close-up of the SilkBrush™ boar bristles"
+              alt="Close-up of the SilkBrush™ Korean silk bristles"
               className="w-full border border-[color:var(--cw-line)] object-cover"
               style={{ aspectRatio: "3 / 4" }}
               loading="lazy"
@@ -537,7 +537,7 @@ export function SilkBrushPage({
           <div className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
             <Eyebrow>Why the bristles matter</Eyebrow>
             <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[42px]">
-              How the <P>premium boar bristles</P> help smooth difficult hair
+              How the <P>premium handmade Korean silk-bristles</P> help smooth difficult hair
             </h2>
             <ul className="mt-7 grid gap-5 text-[15px] leading-7 text-[color:var(--cw-muted)]">
               <li><P>Distribute natural oils:</P> The bristles help move oils from the scalp through the lengths, helping dry-looking areas appear shinier and more polished.</li>
