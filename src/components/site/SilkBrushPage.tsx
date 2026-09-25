@@ -358,11 +358,11 @@ export function SilkBrushPage({
           <div className="md:pt-2">
             <RatingLine />
             <h1 style={serif} className="mt-3 text-[36px] leading-[1.02] text-[color:var(--cw-brand-deep)] md:text-[52px]">
-              {icp ? "Smooth, Put-Together Hair Without The Daily Fight." : "Smooth. Straighten. Shine."}
+              {icp ? "Stop Letting Unruly Hair Run Your Morning." : "Smooth. Straighten. Shine."}
             </h1>
             {icp ? (
               <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-                If your hair <P>used to be easy</P> but now feels <P>frizzy, wavy, uneven, or impossible to keep under control</P>, the <P>Seralie SilkBrush™</P> helps smooth unruly sections as you brush for a <P>smoother, straighter-looking, more put-together finish</P>.
+                If your hair <P>used to cooperate</P> but now turns <P>frizzy, uneven, and impossible to control</P>, stop wasting your morning fighting it. The <P>Seralie SilkBrush™</P> helps press down flyaways and smooth stubborn sections as you brush, so you can leave with a <P>sleeker, straighter-looking, put-together finish</P>.
               </p>
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
@@ -415,10 +415,10 @@ export function SilkBrushPage({
         <div className="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-20">
           <Eyebrow>Social proof</Eyebrow>
           <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
-            {icp ? "“My Hair Finally Behaves Again.”" : "Don't Just Take Our Word For It."}
+            {icp ? "“I Finally Stopped Fighting My Hair.”" : "Don't Just Take Our Word For It."}
           </h2>
           <p style={sans} className="mt-2 max-w-lg text-[15px] text-[color:var(--cw-muted)]">
-            {icp ? <>Real women who were <P>tired of fighting with their hair</P> every morning, and what their routine looks like now.</> : <>See how <P>real people</P> are using the SilkBrush™ in their <P>everyday routines</P>.</>}
+            {icp ? <>Real women who were <P>done wasting time on frizz, flyaways, and stubborn sections</P>—and found a faster way to look put together.</> : <>See how <P>real people</P> are using the SilkBrush™ in their <P>everyday routines</P>.</>}
           </p>
 
           <div className="mt-7">
@@ -438,13 +438,13 @@ export function SilkBrushPage({
           <div>
             <Eyebrow>{icp ? "Sound familiar?" : "Why people want it"}</Eyebrow>
             <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[46px]">
-              {icp ? "Your Hair Used To Be Easy." : "Stop Hiding Your Hair."}
+              {icp ? "Your Hair Changed. Your Routine Has To Change Too." : "Stop Hiding Your Hair."}
             </h2>
             {icp ? (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Now one side behaves and the other doesn't. You smooth one section and <P>another one sticks out</P>. You've tried oils, products, different brushes, blow-drying. So you keep <P>reaching for your straightener</P>, going section by section for 20 minutes, just to look presentable, and then humidity ruins it.
+              One side behaves. The other sticks out. You smooth one section and <P>another starts frizzing</P>. You've bought the oils, switched brushes, blow-dried, and still end up <P>reaching for the straightener</P> just to feel presentable. Then one humid afternoon wipes out all that work.
               <br /><br />
-              You don't need perfect hair. You just want it to look <P>smooth, controlled, and put together</P>. The SilkBrush™ helps <P>smooth and tame those difficult sections as you brush</P>, an easier everyday option when you want a <P>smoother, straighter-looking finish</P> without turning your morning into a project.
+              Stop accepting a daily battle as your new normal. The SilkBrush™ helps <P>grab, smooth, and tame difficult sections as you brush</P>, giving you a <P>sleeker, straighter-looking finish</P> without turning every morning into a full styling session.
             </p>
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
@@ -457,10 +457,10 @@ export function SilkBrushPage({
 
             <dl className="mt-8 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
               {(icp ? ([
-                ["Smooth", <>Helps <P>tame frizz, flyaways, and unruly sections</P> as you brush.</>],
-                ["Sleeker", <>Helps create a <P>smoother, more controlled</P>, straighter-looking appearance.</>],
-                ["Simple", <>Brush through <P>the areas that need attention</P> instead of a full styling session.</>],
-                ["Easier", <>The goal isn't perfect hair. It's <P>hair that feels manageable again</P>.</>],
+                ["Control", <><P>Take down frizz, flyaways, and unruly sections</P> as you brush.</>],
+                ["Sleeker", <>Turn a rough, uneven look into a <P>smoother, more controlled finish</P>.</>],
+                ["Faster", <>Target <P>the sections sabotaging your look</P> instead of restyling everything.</>],
+                ["Done", <>Get <P>hair that looks handled</P> and get on with your day.</>],
               ] as [string, React.ReactNode][]) : ([
                 ["Smooth", <><P>Crush frizz and flyaways</P> in one pass — <P>even on humid days</P>.</>],
                 ["Shine", <>Your own natural oils become the gloss. <P>Hair that catches the light.</P></>],
@@ -503,14 +503,14 @@ export function SilkBrushPage({
           <div>
             <Eyebrow>How to use</Eyebrow>
             <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[42px]">
-              {icp ? "Brush It, Smooth It, Get On With Your Day." : "Brush. Smooth. Shine. Done."}
+              {icp ? "Two Minutes. Less Frizz. No Morning Hair Battle." : "Brush. Smooth. Shine. Done."}
             </h2>
 
             <ol className="mt-7 divide-y divide-[color:var(--cw-line)] border-y border-[color:var(--cw-line)]">
               {([
                 ["01", "Start", <>Use on <P>dry hair</P> according to product instructions.</>],
                 ["02", "Brush", <>Work through <P>small sections</P> of hair.</>],
-                ["03", "Finish", icp ? <>A <P>smoother, more put-together look</P>, without the daily fight.</> : <>Reveal a <P>smoother, shinier, straighter-looking finish</P>.</>],
+                ["03", "Finish", icp ? <>Walk out with a <P>smoother, controlled, put-together look</P>—not another unfinished hair day.</> : <>Reveal a <P>smoother, shinier, straighter-looking finish</P>.</>],
               ] as [string, string, React.ReactNode][]).map(([n, t, d]) => (
                 <li key={n} className="flex min-w-0 gap-5 py-4">
                   <span style={serif} className="w-8 shrink-0 text-[18px] text-[color:var(--cw-brand-deep)]">

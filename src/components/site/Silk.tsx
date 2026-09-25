@@ -366,7 +366,7 @@ export function CartDrawer() {
 
               {tier.giftVariantId && (
                 <div className="mt-4 flex items-center justify-between gap-3 border border-[color:var(--cw-line)] p-4">
-                  <span className="text-[13px] font-semibold">FREE Scalp Scrubber</span>
+                  <span className="text-[13px] font-semibold">{tier.giftName ?? "FREE Gift"}</span>
                   <span className="shrink-0 text-[13px] font-semibold uppercase tracking-[0.12em] text-[color:var(--gold-deep)]">Free</span>
                 </div>
               )}

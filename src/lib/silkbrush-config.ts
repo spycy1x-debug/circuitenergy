@@ -15,6 +15,8 @@ export type Tier = {
   variantId: string;
   /** Optional free-gift Shopify variant added as a $0.00 line at checkout. */
   giftVariantId?: string;
+  /** Free-gift label shown in the cart. */
+  giftName?: string;
   /** Product name shown in the cart (defaults to the SilkBrush™). */
   productName?: string;
   /** Short line shown under the product name in the cart. */
@@ -24,6 +26,8 @@ export type Tier = {
 /** Shopify variant for the $0.00 free gift line item. */
 export const GIFT_VARIANT_ID = "49175121428634";
 export const GIFT_NAME = "FREE Scalp Scrubber";
+export const HAIR_OIL_GIFT_VARIANT_ID = "50536033026202";
+export const HAIR_OIL_GIFT_NAME = "FREE Anti-Aging Hair Oil";
 
 /** The live offer. */
 export const TIERS: Tier[] = [
@@ -39,18 +43,20 @@ export const TIERS: Tier[] = [
     tag: "MOST POPULAR",
     variantId: "49137550491802",
     giftVariantId: GIFT_VARIANT_ID,
+    giftName: GIFT_NAME,
   },
   {
     id: "3pk",
     label: "3 Brushes + FREE GIFT",
-    subLabel: "FREE shipping + FREE Scalp Scrubber included.",
+    subLabel: "FREE shipping + FREE Anti-Aging Hair Oil included.",
     price: 67.99,
     compareAt: 119.97,
     perUnit: 22.66,
     saves: 51.98,
     tag: "BEST VALUE",
     variantId: "49137550524570",
-    giftVariantId: GIFT_VARIANT_ID,
+    giftVariantId: HAIR_OIL_GIFT_VARIANT_ID,
+    giftName: HAIR_OIL_GIFT_NAME,
   },
 ];
 
@@ -69,18 +75,20 @@ export const TIERS_B: Tier[] = [
     tag: "MOST POPULAR",
     variantId: "49175120183450",
     giftVariantId: GIFT_VARIANT_ID,
+    giftName: GIFT_NAME,
   },
   {
     id: "b3pk",
     label: "3 Brushes + FREE GIFT",
-    subLabel: "FREE shipping + FREE Scalp Scrubber included.",
+    subLabel: "FREE shipping + FREE Anti-Aging Hair Oil included.",
     price: 73.99,
     compareAt: 149.97,
     perUnit: 24.66,
     saves: 75.98,
     tag: "BEST VALUE",
     variantId: "49175120216218",
-    giftVariantId: GIFT_VARIANT_ID,
+    giftVariantId: HAIR_OIL_GIFT_VARIANT_ID,
+    giftName: HAIR_OIL_GIFT_NAME,
   },
 ];
 
