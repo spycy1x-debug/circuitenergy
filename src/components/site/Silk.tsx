@@ -333,7 +333,7 @@ export function CartDrawer() {
                     <p style={serif} className="text-[18px] leading-tight">
                       {tier.productName ?? PRODUCT_NAME}
                     </p>
-                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">{tier.label} · {tier.desc ?? "boar-bristle smoothing brush"}</p>
+                  <p className="mt-1 text-[12px] text-[color:var(--cw-muted)]">{tier.label} · {tier.desc ?? "silk-bristle smoothing brush"}</p>
                   </div>
                   <p style={serif} className="shrink-0 text-[18px] tabular-nums">
                     {money(tier.price * qty)}
@@ -552,7 +552,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
               SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              Makers of the Seralie SilkBrush™ — a boar-bristle brush for <P>smoother, shinier, straighter-looking hair</P>.
+              Makers of the Seralie SilkBrush™ — a premium handmade Korean silk-bristle brush for <P>smoother, shinier, straighter-looking hair</P>.
             </p>
           </div>
           <div className="min-w-0">
@@ -598,7 +598,7 @@ export const SB_FAQS = [
   },
   {
     q: "What is the SilkBrush™?",
-    a: "The Seralie SilkBrush™ is a boar-bristle hair brush designed to smooth frizz, tame flyaways, distribute natural oils, and create a smoother, shinier, straighter-looking finish.",
+    a: "The Seralie SilkBrush™ is a premium handmade Korean silk-bristle hair brush designed to smooth frizz, tame flyaways, distribute natural oils, and create a smoother, shinier, straighter-looking finish.",
   },
   {
     q: "Does the SilkBrush™ actually straighten hair?",
@@ -613,8 +613,8 @@ export const SB_FAQS = [
     a: "Use the SilkBrush™ on dry hair, according to the manufacturer's instructions.",
   },
   {
-    q: "How do boar bristles help my hair?",
-    a: "Boar bristles can help distribute natural oils from the scalp through the lengths of the hair while smoothing the hair surface, helping hair appear **shinier and more polished**.",
+    q: "How do the Korean silk bristles help my hair?",
+    a: "The handmade Korean silk bristles help distribute natural oils from the scalp through the lengths of the hair while smoothing the hair surface, helping hair appear **shinier and more polished**.",
   },
   {
     q: "Will it eliminate frizz?",
