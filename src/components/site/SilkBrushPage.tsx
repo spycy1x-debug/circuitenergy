@@ -362,7 +362,7 @@ export function SilkBrushPage({
             </h1>
             {icp ? (
               <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-                If your hair <P>used to cooperate</P> but now turns <P>frizzy, uneven, and impossible to control</P>, stop wasting your morning fighting it. The <P>Seralie SilkBrush™</P> helps press down flyaways and smooth stubborn sections as you brush, so you can leave with a <P>sleeker, straighter-looking, put-together finish</P>.
+                If your hair <P>used to cooperate</P> but now turns <P>frizzy, uneven, and impossible to control</P>, stop wasting your morning fighting it. The <P>Seralie SilkBrush™</P> is built on <P>premium boar bristles</P> — dense, natural bristles that <P>grip every strand</P>, press down flyaways, and <P>distribute your hair's own oils</P> from root to end as you brush. That's what smooths the stubborn sections and leaves you with a <P>sleeker, straighter-looking, put-together finish</P> — no heat required.
               </p>
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
