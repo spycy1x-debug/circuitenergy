@@ -4,7 +4,7 @@ import { SilkBrushPage } from "@/components/site/SilkBrushPage";
 import { trackViewContent } from "@/lib/fb-pixel";
 import { getVariant, logAbEvent } from "@/lib/ab-test";
 import { PRICE, VARIANT_ID } from "@/lib/silkbrush-config";
-import { SILKBRUSH_GALLERY_PRELOAD } from "@/lib/silkbrush-gallery";
+import { SILKBRUSH_GALLERY_PLASTIC_FIRST, SILKBRUSH_GALLERY_PLASTIC_PRELOAD } from "@/lib/silkbrush-gallery";
 
 export const Route = createFileRoute("/silkbrush-2")({
   head: () => ({
