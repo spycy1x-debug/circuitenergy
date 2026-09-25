@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Label, P, serif, SilkShell } from "@/components/site/Silk";
+import { Label, serif, SilkShell } from "@/components/site/Silk";
 
 type AdvertorialPageProps = {
   headline: string;
