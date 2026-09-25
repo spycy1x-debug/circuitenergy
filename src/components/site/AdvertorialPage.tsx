@@ -30,7 +30,6 @@ export function AdvertorialPage({ headline, image, imageAlt, story, ctaLabels }:
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
   const firstBreak = Math.max(1, Math.ceil(paragraphs.length * 0.2));
-  const mechanismBreak = Math.max(firstBreak + 1, Math.ceil(paragraphs.length * 0.56));
 
   return (
     <SilkShell>
@@ -53,7 +52,6 @@ export function AdvertorialPage({ headline, image, imageAlt, story, ctaLabels }:
             <div key={`${index}-${paragraph.slice(0, 24)}`}>
               <p className="mb-5 whitespace-pre-line">{paragraph}</p>
               {index + 1 === firstBreak && <StoryCta>{ctaLabels[1]}</StoryCta>}
-              {index + 1 === mechanismBreak && <MechanismSection />}
             </div>
           ))}
         </div>
