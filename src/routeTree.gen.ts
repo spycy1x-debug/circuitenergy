@@ -23,6 +23,9 @@ import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as Advertorial3RouteImport } from './routes/advertorial-3'
+import { Route as Advertorial2RouteImport } from './routes/advertorial-2'
+import { Route as Advertorial1RouteImport } from './routes/advertorial-1'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
@@ -98,6 +101,21 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Advertorial3Route = Advertorial3RouteImport.update({
+  id: '/advertorial-3',
+  path: '/advertorial-3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Advertorial2Route = Advertorial2RouteImport.update({
+  id: '/advertorial-2',
+  path: '/advertorial-2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Advertorial1Route = Advertorial1RouteImport.update({
+  id: '/advertorial-1',
+  path: '/advertorial-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccountRoute = AccountRouteImport.update({
   id: '/account',
   path: '/account',
@@ -123,6 +141,9 @@ const ApiPublicKlaviyoSubscribeRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/advertorial-1': typeof Advertorial1Route
+  '/advertorial-2': typeof Advertorial2Route
+  '/advertorial-3': typeof Advertorial3Route
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -143,6 +164,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/advertorial-1': typeof Advertorial1Route
+  '/advertorial-2': typeof Advertorial2Route
+  '/advertorial-3': typeof Advertorial3Route
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -164,6 +188,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/advertorial-1': typeof Advertorial1Route
+  '/advertorial-2': typeof Advertorial2Route
+  '/advertorial-3': typeof Advertorial3Route
   '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -186,6 +213,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/account'
+    | '/advertorial-1'
+    | '/advertorial-2'
+    | '/advertorial-3'
     | '/cart'
     | '/contact'
     | '/faq'
@@ -206,6 +236,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/account'
+    | '/advertorial-1'
+    | '/advertorial-2'
+    | '/advertorial-3'
     | '/cart'
     | '/contact'
     | '/faq'
@@ -226,6 +259,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/account'
+    | '/advertorial-1'
+    | '/advertorial-2'
+    | '/advertorial-3'
     | '/cart'
     | '/contact'
     | '/faq'
@@ -247,6 +283,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
+  Advertorial1Route: typeof Advertorial1Route
+  Advertorial2Route: typeof Advertorial2Route
+  Advertorial3Route: typeof Advertorial3Route
   CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
@@ -365,6 +404,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/advertorial-3': {
+      id: '/advertorial-3'
+      path: '/advertorial-3'
+      fullPath: '/advertorial-3'
+      preLoaderRoute: typeof Advertorial3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/advertorial-2': {
+      id: '/advertorial-2'
+      path: '/advertorial-2'
+      fullPath: '/advertorial-2'
+      preLoaderRoute: typeof Advertorial2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/advertorial-1': {
+      id: '/advertorial-1'
+      path: '/advertorial-1'
+      fullPath: '/advertorial-1'
+      preLoaderRoute: typeof Advertorial1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/account': {
       id: '/account'
       path: '/account'
@@ -399,6 +459,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
+  Advertorial1Route: Advertorial1Route,
+  Advertorial2Route: Advertorial2Route,
+  Advertorial3Route: Advertorial3Route,
   CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
