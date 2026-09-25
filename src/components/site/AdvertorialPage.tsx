@@ -22,25 +22,6 @@ function StoryCta({ children }: { children: string }) {
   );
 }
 
-function MechanismSection() {
-  return (
-    <aside className="my-11 border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)] px-5 py-8 sm:px-8">
-      <Label>Why the bristles matter</Label>
-      <h2 style={serif} className="mt-3 text-[26px] leading-tight sm:text-[31px]">
-        How the <P>premium boar bristles</P> help smooth difficult hair
-      </h2>
-      <ul className="mt-6 grid gap-5 text-[15px] leading-7 text-[color:var(--cw-muted)]">
-        <li><P>Distribute natural oils:</P> The bristles help move oils from the scalp through the lengths, helping dry-looking areas appear shinier and more polished.</li>
-        <li><P>Smooth the surface:</P> Dense bristles pass over the outer surface of the hair, helping lay down flyaways and create a sleeker, more controlled appearance.</li>
-        <li><P>Work section by section:</P> Brushing smaller sections from root to end gives the bristles more contact with uneven, frizzy areas that need attention.</li>
-        <li><P>No added heat required:</P> SilkBrush™ creates a smoother, straighter-looking finish through brushing rather than functioning as a heated straightener.</li>
-      </ul>
-      <p className="mt-5 text-[12px] leading-6 text-[color:var(--cw-muted)]">
-        Results vary by hair type, texture, and humidity. SilkBrush™ is not a chemical or permanent straightening treatment.
-      </p>
-    </aside>
-  );
-}
 
 export function AdvertorialPage({ headline, image, imageAlt, story, ctaLabels }: AdvertorialPageProps) {
   const paragraphs = story
