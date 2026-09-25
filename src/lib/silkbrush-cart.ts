@@ -93,5 +93,5 @@ export const cartCheckoutUrl = (n: number, withProtection = false) => {
   const lines = [`${tier.variantId}:${Math.max(1, n)}`];
   if (tier.giftVariantId) lines.push(`${tier.giftVariantId}:1`);
   if (withProtection) lines.push(`${PROTECTION_VARIANT_ID}:1`);
-  return `${STORE_URL}/cart/${lines.join(",")}`;
+  return `${STORE_URL}/cart/${lines.join(",")}?channel=online_store`;
 };
