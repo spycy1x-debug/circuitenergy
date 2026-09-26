@@ -14,12 +14,12 @@ export const Route = createFileRoute("/silkbrush-3")({
       {
         name: "description",
         content:
-          "Hair used to be easy and now it fights you? The SilkBrush™ smooths frizzy, uneven, unruly sections as you brush. Free shipping, 365-day money-back guarantee.",
+          "Premium handmade Korean silk-bristles smooth frizzy, uneven, unruly sections as you brush. Free shipping and a 365-day money-back guarantee.",
       },
       { property: "og:title", content: "Seralie SilkBrush™ — Hair That Feels Manageable Again" },
       {
         property: "og:description",
-        content: "Smooth, put-together hair without the daily fight. Free shipping. 365-day money-back guarantee.",
+        content: "Premium handmade Korean silk-bristles for smooth, put-together hair without the daily fight. Free shipping and a 365-day guarantee.",
       },
       { property: "og:type", content: "product" },
       { name: "twitter:card", content: "summary_large_image" },

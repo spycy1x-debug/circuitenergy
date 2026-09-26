@@ -366,7 +366,7 @@ export function SilkBrushPage({
               </p>
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Meet the <P>Seralie SilkBrush™</P>. A smoothing brush designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
+              Meet the <P>Seralie SilkBrush™</P>. Made with <P>premium handmade Korean silk-bristles</P> designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
               <P>sleek, straighter-looking finish</P> while you brush.
             </p>
             )}
@@ -449,7 +449,7 @@ export function SilkBrushPage({
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
               <P>Frizz, flyaways, dull ends</P> — they steal the hair you were born with. The SilkBrush™ <P>takes it back</P>.
-              Dense bristles grab every strand, move your natural oils from root to tip, and help create a{" "}
+              Premium handmade Korean silk-bristles grab every strand, move your natural oils from root to tip, and help create a{" "}
               <P>smooth, glossy, straight-looking finish</P>. <P>No heat. No chemicals. No $200 salon visit.</P> Just{" "}
               <P>2 minutes</P> of brushing.
             </p>
@@ -532,8 +532,7 @@ export function SilkBrushPage({
         </div>
       </section>
 
-      {icp && (
-        <section className="border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
+      <section className="border-y border-[color:var(--cw-line)] bg-[color:var(--cw-surface)]">
           <div className="mx-auto max-w-3xl px-5 py-14 md:px-8 md:py-20">
             <Eyebrow>Why the bristles matter</Eyebrow>
             <h2 style={serif} className="mt-2 text-[32px] leading-[1.05] md:text-[42px]">
@@ -549,8 +548,7 @@ export function SilkBrushPage({
               Results vary by hair type, texture, and humidity. SilkBrush™ is not a chemical or permanent straightening treatment.
             </p>
           </div>
-        </section>
-      )}
+      </section>
 
       <SilkReviews />
 

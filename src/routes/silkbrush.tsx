@@ -14,12 +14,12 @@ export const Route = createFileRoute("/silkbrush")({
       {
         name: "description",
         content:
-          "The Seralie SilkBrush™ is designed to smooth frizz and create a sleek, straighter-looking finish while you brush. $37.99, free shipping on all orders, 365-day money-back guarantee.",
+          "The Seralie SilkBrush™ uses premium handmade Korean silk-bristles to smooth frizz and create a sleek, straighter-looking finish. Free shipping and a 365-day guarantee.",
       },
       { property: "og:title", content: "Seralie SilkBrush™ — Smooth. Straighten. Shine." },
       {
         property: "og:description",
-        content: "A smoothing brush for shinier, straighter-looking hair. Free shipping on all orders. 365-day money-back guarantee.",
+        content: "Premium handmade Korean silk-bristles for shinier, straighter-looking hair. Free shipping and a 365-day money-back guarantee.",
       },
       { property: "og:type", content: "product" },
       { name: "twitter:card", content: "summary_large_image" },
