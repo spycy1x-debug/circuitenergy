@@ -32,7 +32,7 @@ export const Route = createFileRoute("/contact")({
         },
         { h: "Order changes", p: <p>Email within an hour of ordering with your order number and we'll fix the address or cancel before dispatch.</p> },
         { h: "Using the SilkBrush™", p: <p>Use it on dry hair, working through small sections. Email us if you'd like routine tips for your hair type.</p> },
-        { h: "Returns", p: <p>365-day money-back guarantee — email us and we'll start the return the same day.</p> },
+        { h: "Returns", p: <p>We refund within 365 days when the item is unopened or defective. Opened packages can't be refunded — email us and we'll confirm eligibility the same day.</p> },
       ]}
     />
   ),

@@ -630,7 +630,7 @@ export const SB_FAQS = [
   },
   {
     q: "What if I don't like it?",
-    a: "You're covered by our **365-day money-back guarantee**, subject to our return policy.",
+    a: "We refund the product price within 365 days when the brush is **unopened or defective**. Once a package has been opened, it can't be refunded — see our return policy for details.",
   },
 ];
 
