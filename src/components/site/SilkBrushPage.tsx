@@ -366,7 +366,7 @@ export function SilkBrushPage({
               </p>
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
-              Meet the <P>Seralie SilkBrush™</P>. A premium handmade Korean silk-bristle brush designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
+              Meet the <P>Seralie SilkBrush™</P>. A smoothing brush designed to <P>smooth frizz</P>, <P>tame flyaways</P>, and create a{" "}
               <P>sleek, straighter-looking finish</P> while you brush.
             </p>
             )}
@@ -449,7 +449,7 @@ export function SilkBrushPage({
             ) : (
             <p style={sans} className="mt-4 max-w-md text-[15px] leading-7 text-[color:var(--cw-muted)]">
               <P>Frizz, flyaways, dull ends</P> — they steal the hair you were born with. The SilkBrush™ <P>takes it back</P>.
-              Korean silk bristles grab every strand, drag your natural oils from root to tip, and force it into a{" "}
+              Dense bristles grab every strand, move your natural oils from root to tip, and help create a{" "}
               <P>smooth, glossy, straight-looking finish</P>. <P>No heat. No chemicals. No $200 salon visit.</P> Just{" "}
               <P>2 minutes</P> of brushing.
             </p>
@@ -481,7 +481,7 @@ export function SilkBrushPage({
           <div className="grid gap-3">
             <img
               src={imgCloseup.url}
-              alt="Close-up of the SilkBrush™ Korean silk bristles"
+              alt="Close-up of the SilkBrush™ bristles"
               className="w-full border border-[color:var(--cw-line)] object-cover"
               style={{ aspectRatio: "3 / 4" }}
               loading="lazy"
