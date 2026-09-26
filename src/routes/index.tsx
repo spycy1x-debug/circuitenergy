@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Seralie makes thoughtful haircare tools, starting with the SilkBrush™ — a smoothing brush that tames frizz and adds shine while you brush. Free shipping on all orders. 365-day guarantee.",
+          "Meet the SilkBrush™ with premium handmade Korean silk-bristles, designed to tame frizz and add shine while you brush. Free shipping and a 365-day guarantee.",
       },
       { property: "og:title", content: "Seralie — Haircare, Simplified" },
       {
@@ -71,7 +71,7 @@ function HomePage() {
               The SilkBrush™
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-[#6B6660]">
-              A smoothing brush that <P>smooths frizz</P>, <P>tames flyaways</P>, and
+              Premium handmade Korean silk-bristles that <P>smooth frizz</P>, <P>tame flyaways</P>, and
               <P> adds natural shine</P> by distributing your hair's own oils from
               root to tip — <P>while you brush</P>.
             </p>
@@ -95,7 +95,7 @@ function HomePage() {
       <section className="mx-auto max-w-5xl px-5 py-16 sm:py-20">
         <div className="grid gap-6 sm:grid-cols-3">
           {[
-            { t: "Smooth", d: <>Dense bristles <P>tame frizz and flyaways</P> with every pass.</> },
+            { t: "Smooth", d: <>Premium handmade Korean silk-bristles <P>tame frizz and flyaways</P> with every pass.</> },
             { t: "Straighten", d: <>A <P>sleeker, straighter-looking finish</P> — <P>no heat required</P>.</> },
             { t: "Shine", d: <>Distributes natural oils for a <P>healthy, glossy look</P>.</> },
           ].map((v) => (

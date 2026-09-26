@@ -552,7 +552,7 @@ export function SilkShell({ children, sticky = false }: { children: React.ReactN
               SERALIE
             </span>
             <p className="mt-3 max-w-xs text-[13px] leading-7 text-[color:var(--cw-muted)]">
-              Makers of the Seralie SilkBrush™ — a smoothing brush for <P>smoother, shinier, straighter-looking hair</P>.
+              Makers of the Seralie SilkBrush™ — made with <P>premium handmade Korean silk-bristles</P> for smoother, shinier, straighter-looking hair.
             </p>
           </div>
           <div className="min-w-0">
@@ -598,7 +598,7 @@ export const SB_FAQS = [
   },
   {
     q: "What is the SilkBrush™?",
-    a: "The Seralie SilkBrush™ is a hair brush designed to smooth frizz, tame flyaways, distribute natural oils, and create a smoother, shinier, straighter-looking finish.",
+    a: "The Seralie SilkBrush™ is made with **premium handmade Korean silk-bristles** designed to smooth frizz, tame flyaways, distribute natural oils, and create a smoother, shinier, straighter-looking finish.",
   },
   {
     q: "Does the SilkBrush™ actually straighten hair?",
@@ -614,7 +614,7 @@ export const SB_FAQS = [
   },
   {
     q: "How do the bristles help my hair?",
-    a: "The bristles help distribute natural oils from the scalp through the lengths of the hair while smoothing the hair surface, helping hair appear **shinier and more polished**.",
+    a: "The **premium handmade Korean silk-bristles** help distribute natural oils from the scalp through the lengths of the hair while smoothing the hair surface, helping hair appear shinier and more polished.",
   },
   {
     q: "Will it eliminate frizz?",
